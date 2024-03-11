@@ -2,32 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+body::-webkit-scrollbar {
+  width: 8px;
+  height: 10px;
+  border-radius: 10px;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+body::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: transparent;
+}
+body::-webkit-scrollbar-thumb {
+  background: #711f7e;
+  border-radius: 10px;
+}
+.outline_button {
+  @apply focus:outline-none border border-[#711F7E] text-black font-medium rounded-full active:scale-90 transition text-sm md:px-10 px-5 md:py-3 py-2;
+}
+.primary_button {
+  @apply focus:outline-none uppercase bg-[#711F7E] text-white font-medium rounded-full active:scale-90 transition text-sm px-6 py-3;
+}
+.green_button {
+  @apply focus:outline-none uppercase bg-[#0AADA4] text-white px-6 py-3 rounded-full active:scale-90 transition text-sm;
+}
+@layer base {
+  html,
+  body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.title:after,
+.heading:after {
+  background: #711f7e;
+  content: "";
+  display: block;
+  height: 3px;
+  width: 60px;
+  margin-top: 7px;
 }
