@@ -3,7 +3,7 @@ import "./globals.css";
 // import Header from "./Header";
 import dynamic from "next/dynamic";
 const Header = dynamic(() => import("./Header"));
-
+const Footer = dynamic(() => import("./Footer"));
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -13,11 +13,11 @@ export const metadata = {
 };
 
 const roboto = Roboto({
-  weight: ['400', '700'],
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
-  display: 'swap',
-})
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default function RootLayout({ children }) {
   return (
@@ -25,6 +25,9 @@ export default function RootLayout({ children }) {
       <body className={roboto.className}>
         <Header />
         {children}
+        <div className="pt-24">
+          <Footer />
+        </div>
       </body>
     </html>
   );

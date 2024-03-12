@@ -16,18 +16,18 @@ body::-webkit-scrollbar-thumb {
   border-radius: 10px;
 }
 .outline_button {
-  @apply focus:outline-none border border-[#711F7E] text-black font-medium rounded-full active:scale-90 transition text-sm md:px-10 px-5 md:py-3 py-2;
+  @apply focus:outline-none border border-[#711F7E] text-black font-medium rounded-full active:scale-90 transition text-sm md:px-10 px-3 md:py-3 py-2;
 }
 .primary_button {
   @apply focus:outline-none uppercase bg-[#711F7E] text-white font-medium rounded-full active:scale-90 transition text-sm px-6 py-3;
 }
 .green_button {
-  @apply focus:outline-none uppercase bg-[#0AADA4] text-white px-6 py-3 rounded-full active:scale-90 transition text-sm;
+  @apply focus:outline-none uppercase bg-[#0AADA4] text-white font-medium px-6 py-3 rounded-full active:scale-90 transition text-sm;
 }
 @layer base {
   html,
   body {
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -41,4 +41,17 @@ body::-webkit-scrollbar-thumb {
   height: 3px;
   width: 60px;
   margin-top: 7px;
+}
+.footer:after {
+  background: none repeat scroll 0 0 transparent;
+  content: "";
+  display: block;
+  height: 2px;
+  background: #711f7e;
+  transition: width 0.2s ease 0s, left 0.2s ease 0s;
+  width: 0;
+}
+.footer:hover:after {
+  width: 100%;
+  left: 0;
 }

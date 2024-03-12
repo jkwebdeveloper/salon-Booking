@@ -114,7 +114,7 @@ const Pampertree = () => {
           observeParents={true}
           breakpoints={{
             200: {
-              slidesPerView: 1,
+              slidesPerView: 1.7,
               spaceBetween: 10,
             },
             640: {
@@ -159,9 +159,9 @@ const Pampertree = () => {
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <div className="p-2 space-y-3">
+                      <div className="p-2 md:space-y-3 space-y-2">
                         <div className="">
-                          <h1 className="font-semibold text-base">
+                          <h1 className="font-semibold md:text-base text-sm">
                             {item?.title}
                             <span className="font-normal">
                               {item?.titleoption}
@@ -173,15 +173,15 @@ const Pampertree = () => {
                             <MdLocationPin className="text-lg text-primary_color" />
                           </div>
                           <div>
-                            <p>{item?.location}</p>
+                            <p className="md:text-base text-sm">{item?.location}</p>
                           </div>
                         </div>
-                        <div className="flex items-center gap-3">
-                          <div className="flex items-center gap-3">
+                        <div className="flex items-center md:gap-3 gap-2">
+                          <div className="flex items-center md:gap-3 gap-2">
                             <FaStar className="text-lg text-primary_color" />
-                            <p>{item?.rating}</p>
+                            <p className="md:text-base text-sm">{item?.rating}</p>
                           </div>
-                          <div className="flex items-center gap-3">
+                          <div className="flex items-center md:gap-3 gap-2">
                             <div className="bg-[#29AD17] p-2 rounded-full">
                               <FaWhatsapp className="text-lg text-white" />
                             </div>
@@ -208,17 +208,17 @@ const Pampertree = () => {
                             30% OFF
                           </p>
                         </div>
-                        <div className="flex items-center gap-3">
+                        <div className="flex md:flex-row flex-col items-center gap-3">
                           <button
                             type="button"
-                            className="green_button flex items-center gap-2"
+                            className="green_button w-full justify-center flex items-center gap-2"
                           >
                             <IoIosEye className="text-white text-base" />
                             Quick view
                           </button>
                           <button
                             type="button"
-                            className="primary_button flex items-center gap-2"
+                            className="primary_button w-full justify-center flex items-center gap-2"
                           >
                             <GrCart className="text-white text-base" />
                             Book Now

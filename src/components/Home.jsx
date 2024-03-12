@@ -3,14 +3,18 @@ import React from "react";
 const Herosection = dynamic(() => import("@/pages/Home/HeroSection"));
 const Pampertree = dynamic(() => import("@/pages/Home/Pampertree"));
 const Featured = dynamic(() => import("@/pages/Home/Featured"));
+const Treatments = dynamic(() => import("@/pages/Home/Treatments"));
+const Gifts = dynamic(() => import("@/pages/Home/Gifts"));
 
 const Home = () => {
   return (
     <div className="space-y-10">
       <Herosection />
-      <div className="space-y-10 mx-5">
+      <div className="space-y-10 lg:mx-5 mx-2">
         <Pampertree />
         <Featured />
+        <Treatments />
+        <Gifts />
       </div>
     </div>
   );
