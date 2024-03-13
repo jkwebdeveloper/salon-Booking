@@ -53,7 +53,7 @@ const FindNearByForm = () => {
           </div>
           <button
             type="button"
-            className="primary_button px-4 lg:w-full w-1/2 hover:bg-blue_button/80 active:scale-90 transition"
+            className="primary_button px-4 w-full hover:bg-blue_button/80 active:scale-90 transition"
           >
             Search
           </button>

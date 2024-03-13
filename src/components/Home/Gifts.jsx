@@ -50,7 +50,7 @@ const Gifts = () => {
   return (
     <div className="w-full space-y-4">
       <p className="text-black font-semibold uppercase text-2xl title heading">
-        Near by <span className="text-primary_color">Featured salons</span>
+        Buy <span className="text-primary_color">Gifts</span>
       </p>
       <div className="rounded-lg grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
         {ImagesData.map((item) => (

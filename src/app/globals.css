@@ -6,6 +6,7 @@ body::-webkit-scrollbar {
   width: 8px;
   height: 10px;
   border-radius: 10px;
+  scrollbar-width: none;
 }
 body::-webkit-scrollbar-track {
   border-radius: 10px;
@@ -22,7 +23,7 @@ body::-webkit-scrollbar-thumb {
   @apply focus:outline-none uppercase bg-[#711F7E] text-white font-medium rounded-full active:scale-90 transition text-sm px-6 py-3;
 }
 .green_button {
-  @apply focus:outline-none uppercase bg-[#0AADA4] text-white font-medium px-6 py-3 rounded-full active:scale-90 transition text-sm;
+  @apply focus:outline-none uppercase bg-[#0AADA4] text-white font-medium rounded-full active:scale-90 transition text-sm px-6 py-3;
 }
 @layer base {
   html,

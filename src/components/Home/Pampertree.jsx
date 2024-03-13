@@ -211,7 +211,7 @@ const Pampertree = () => {
                         <div className="flex md:flex-row flex-col items-center gap-3">
                           <button
                             type="button"
-                            className="green_button w-full justify-center flex items-center gap-2"
+                            className="green_button w-full justify-center flex items-center gap-1"
                           >
                             <IoIosEye className="text-white text-base" />
                             Quick view
