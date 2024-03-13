@@ -132,7 +132,7 @@ const Pampertree = () => {
           }}
         >
           {boxData.map((item) => (
-            <SwiperSlide key={item?.id}>
+            <SwiperSlide key={item.id}>
               <div className="w-full relative space-y-4">
                 <div
                   onClick={() => setIsFavourite(!isFavourite)}
