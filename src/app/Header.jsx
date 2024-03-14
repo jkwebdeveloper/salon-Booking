@@ -173,7 +173,9 @@ const Header = () => {
       <div className="xl:flex xl:justify-between md:items-center p-3">
         <div className="flex xl:justify-start items-center justify-between md:gap-6">
           <div>
-          <Image src={Logo} alt="logo" loading="lazy" />
+            <Link href="/">
+              <Image src={Logo} alt="logo" loading="lazy" />
+            </Link>
           </div>
           <div className="flex gap-6 items-center">
             <button
@@ -193,12 +195,20 @@ const Header = () => {
         </div>
         <div className="xl:block hidden">
           <div className="flex items-center gap-4">
-            <button type="button" className="outline_button md:px-5 uppercase">
+            <button
+              type="button"
+              className="outline_button hover:bg-primary_color hover:text-white transition-all md:px-5 uppercase"
+            >
               For business
             </button>
-            <button type="button" className="outline_button uppercase">
-              Log in
-            </button>
+            <Link href="/sign-in">
+              <button
+                type="button"
+                className="outline_button hover:bg-primary_color hover:text-white transition-all uppercase"
+              >
+                Log in
+              </button>
+            </Link>
             <GrCart className="text-lg text-primary_color" />
             <GoBell className="text-lg text-primary_color" />
           </div>
