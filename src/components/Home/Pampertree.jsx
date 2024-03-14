@@ -132,8 +132,8 @@ const Pampertree = () => {
           }}
         >
           {boxData.map((item) => (
-            <SwiperSlide key={item.id}>
-              <div className="w-full relative space-y-4">
+            <SwiperSlide>
+              <div className="w-full relative space-y-4" key={item.id}>
                 <div
                   onClick={() => setIsFavourite(!isFavourite)}
                   className={`absolute top-3 right-3 ${
@@ -173,13 +173,17 @@ const Pampertree = () => {
                             <MdLocationPin className="text-lg text-primary_color" />
                           </div>
                           <div>
-                            <p className="md:text-base text-sm">{item?.location}</p>
+                            <p className="md:text-base text-sm">
+                              {item?.location}
+                            </p>
                           </div>
                         </div>
                         <div className="flex items-center md:gap-3 gap-2">
                           <div className="flex items-center md:gap-3 gap-2">
                             <FaStar className="text-lg text-primary_color" />
-                            <p className="md:text-base text-sm">{item?.rating}</p>
+                            <p className="md:text-base text-sm">
+                              {item?.rating}
+                            </p>
                           </div>
                           <div className="flex items-center md:gap-3 gap-2">
                             <div className="bg-[#29AD17] p-2 rounded-full">
