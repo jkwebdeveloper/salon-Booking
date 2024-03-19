@@ -23,6 +23,7 @@ import "swiper/css/pagination";
 // import "swiper/css/scrollbar";
 // const PampertreeBox = dynamic(() => import("./PampertreeBox"));
 import image1 from "../../../public/static/images/spa_life.png";
+import { Button } from "../ui/button";
 
 const boxData = [
   {
@@ -80,10 +81,10 @@ const Pampertree = () => {
 
   return (
     <div className="w-full space-y-4">
-      <p className="text-black font-semibold uppercase text-2xl title heading">
+      <p className="text-2xl font-semibold text-black uppercase title heading">
         Deals On <span className="text-primary_color">Pamper Tree</span>
       </p>
-      <div className="w-full relative">
+      <div className="relative w-full">
         <Swiper
           // style={{
           //   "--swiper-pagination-color": "#FFBA08",
@@ -94,7 +95,7 @@ const Pampertree = () => {
           //   " --swiper-pagination-bottom": "auto",
           //   "--swiper-pagination-top": "100%",
           // }}
-          className="relative h-full"
+          className="relative h-full pb-52"
           modules={[Navigation, Pagination, Autoplay]}
           pagination={{ clickable: true }}
           spaceBetween={30}
@@ -133,7 +134,7 @@ const Pampertree = () => {
         >
           {boxData.map((item) => (
             <SwiperSlide key={item.id}>
-              <div className="w-full relative space-y-4" key={item.id}>
+              <div className="relative w-full space-y-4" key={item.id}>
                 <div
                   onClick={() => setIsFavourite(!isFavourite)}
                   className={`absolute top-3 right-3 ${
@@ -141,13 +142,13 @@ const Pampertree = () => {
                   } rounded-full p-2 cursor-pointer`}
                 >
                   {isFavourite ? (
-                    <RiHeartFill className="text-white text-2xl" />
+                    <RiHeartFill className="text-2xl text-white" />
                   ) : (
-                    <IoHeartOutline className="text-white text-2xl" />
+                    <IoHeartOutline className="text-2xl text-white" />
                   )}
                 </div>
                 <div>
-                  <div className="bg-white shadow-lg rounded-lg" key={item?.id}>
+                  <div className="bg-white rounded-lg shadow-lg" key={item?.id}>
                     <div className="space-y-4">
                       <div>
                         <Image
@@ -156,12 +157,12 @@ const Pampertree = () => {
                           loading="lazy"
                           objectFit="cover"
                           // fill
-                          className="w-full h-full object-cover"
+                          className="object-cover w-full h-full"
                         />
                       </div>
-                      <div className="p-2 md:space-y-3 space-y-2">
+                      <div className="p-2 space-y-2 md:space-y-3">
                         <div className="">
-                          <h1 className="font-semibold md:text-base text-sm">
+                          <h1 className="text-sm font-semibold md:text-base">
                             {item?.title}
                             <span className="font-normal">
                               {item?.titleoption}
@@ -173,19 +174,19 @@ const Pampertree = () => {
                             <MdLocationPin className="text-lg text-primary_color" />
                           </div>
                           <div>
-                            <p className="md:text-base text-sm">
+                            <p className="text-sm md:text-base">
                               {item?.location}
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-center md:gap-3 gap-2">
-                          <div className="flex items-center md:gap-3 gap-2">
+                        <div className="flex items-center gap-2 md:gap-3">
+                          <div className="flex items-center gap-2 md:gap-3">
                             <FaStar className="text-lg text-primary_color" />
-                            <p className="md:text-base text-sm">
+                            <p className="text-sm md:text-base">
                               {item?.rating}
                             </p>
                           </div>
-                          <div className="flex items-center md:gap-3 gap-2">
+                          <div className="flex items-center gap-2 md:gap-3">
                             <div className="bg-[#29AD17] p-2 rounded-full">
                               <FaWhatsapp className="text-lg text-white" />
                             </div>
@@ -201,32 +202,24 @@ const Pampertree = () => {
                           </div>
                         </div>
                         <div className="flex items-center gap-3">
-                          <p className="text-primary_color font-semibold text-2xl">
+                          <p className="text-2xl font-semibold text-primary_color">
                             £249{" "}
                             <span className="line-through text-[#898989] font-normal text-base">
                               £289
                             </span>
                           </p>
-                          <p className="text-green_color font-semibold text-base">
+                          <p className="text-base font-semibold text-green_color">
                             {" "}
                             30% OFF
                           </p>
                         </div>
-                        <div className="flex md:flex-row flex-col items-center gap-3">
-                          <button
-                            type="button"
-                            className="green_button w-full justify-center flex items-center gap-1"
-                          >
-                            <IoIosEye className="text-white text-base" />
-                            Quick view
-                          </button>
-                          <button
-                            type="button"
-                            className="primary_button w-full justify-center flex items-center gap-2"
-                          >
-                            <GrCart className="text-white text-base" />
-                            Book Now
-                          </button>
+                        <div className="flex flex-col items-center gap-3 md:flex-row">
+                          <Button variant="secondary" className="gap-3"> 
+                            <IoIosEye className="text-base text-white" /> Quick view 
+                          </Button>
+                          <Button variant="primary" className="gap-3"> 
+                            <GrCart className="text-base text-white" /> Book Now
+                          </Button>
                         </div>
                       </div>
                     </div>

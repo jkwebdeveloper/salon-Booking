@@ -28,7 +28,7 @@ const PopularSalon = () => {
   const nextRef = useRef(null);
   return (
     <div className="w-full space-y-4">
-      <p className="text-black font-semibold uppercase text-2xl title heading">
+      <p className="text-2xl font-semibold text-black uppercase title heading">
         Popular <span className="text-primary_color">salons</span>
       </p>
       <div className="relative w-full">
@@ -66,8 +66,8 @@ const PopularSalon = () => {
         >
           <SwiperSlide>
             <div className="border border-[#DBDBDB] rounded-lg">
-              <div className="flex xl:flex-row flex-col xl:items-center text-left justify-between p-3 xl:gap-2 gap-1">
-                <div className="relative">
+              <div className="grid grid-cols-1 gap-5 px-2 xl:grid-cols-2">
+                <div className="relative mt-2 ms-2">
                   <Swiper
                     // install Swiper modules
                     modules={[Navigation]}
@@ -78,7 +78,7 @@ const PopularSalon = () => {
                       });
                     }}
                     className="relative h-36"
-                    spaceBetween={30}
+                    spaceBetween={10}
                     slidesPerView={2}
                     navigation={{
                       prevEl: prevRef.current,
@@ -98,10 +98,10 @@ const PopularSalon = () => {
                         loading="lazy"
                         objectFit="cover"
                         // fill
-                        className="w-full h-full object-cover"
+                        className="object-cover w-full h-full"
                       />
                     </SwiperSlide>
-                    {/* <SwiperSlide>
+                    <SwiperSlide>
                       <Image
                         src={moon}
                         height={300}
@@ -110,9 +110,21 @@ const PopularSalon = () => {
                         loading="lazy"
                         objectFit="cover"
                         // fill
-                        className="w-full h-full object-cover"
+                        className="object-cover w-full h-full"
                       />
-                    </SwiperSlide> */}
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <Image
+                        src={moon}
+                        height={300}
+                        width={300}
+                        alt="moon"
+                        loading="lazy"
+                        objectFit="cover"
+                        // fill
+                        className="object-cover w-full h-full"
+                      />
+                    </SwiperSlide>
                   </Swiper>
                   {/* <div
                     ref={prevRef}
@@ -131,8 +143,8 @@ const PopularSalon = () => {
                     <IoIosArrowForward className="text-[#007aff] w-6 h-6" />
                   </div> */}
                 </div>
-                <div className="xl:space-y-3 space-y-2">
-                  <h1 className="font-semibold text-base">Moon Massage</h1>
+                <div className="space-y-2 xl:space-y-3">
+                  <h1 className="text-base font-semibold">Moon Massage</h1>
                   <p className="text-primary_color">Nail Salons</p>
                   <div className="flex items-center gap-3">
                     <div className="bg-[#7f52861a] p-2 rounded-full">
@@ -149,23 +161,23 @@ const PopularSalon = () => {
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="bg-[#29AD17] p-2 rounded-full">
-                        <FaWhatsapp className="text-lg text-white" />
+                        <FaWhatsapp className="text-sm text-white" />
                       </div>
                       <div className="bg-[#4664A0] p-2 rounded-full">
-                        <ImFacebook className="text-lg text-white" />
+                        <ImFacebook className="text-sm text-white" />
                       </div>
                       <div className="bg-[#000] p-2 rounded-full">
-                        <BsTwitterX className="text-lg text-white" />
+                        <BsTwitterX className="text-sm text-white" />
                       </div>
                       <div className="bg-[#A4A4A4] p-2 rounded-full">
-                        <LuBookmark className="text-lg text-white" />
+                        <LuBookmark className="text-sm text-white" />
                       </div>
                     </div>
                   </div>
-                  <div className="flex gap-3 items-center">
+                  <div className="flex items-center gap-3">
                     <button
                       type="button"
-                      className="outline_button flex gap-2 items-center md:px-5 justify-center"
+                      className="flex items-center justify-center gap-2 outline_button md:px-5"
                     >
                       <MdLocationPin className="text-lg text-primary_color" />
                       View All Services
@@ -174,20 +186,20 @@ const PopularSalon = () => {
                 </div>
               </div>
               <hr className="w-full mt-4" />
-              <div className="p-3 flex xl:flex-row flex-col justify-between xl:items-center text-left">
+              <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage 
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
-                    <p className="text-primary_color font-semibold text-2xl">
+                    <p className="text-2xl font-semibold text-primary_color">
                       £18{" "}
                       <span className="line-through text-[#898989] font-normal text-base">
                         £28
                       </span>
                     </p>
-                    <p className="text-green_color font-semibold text-base">
+                    <p className="text-base font-semibold text-green_color">
                       {" "}
                       30% OFF
                     </p>
@@ -203,20 +215,20 @@ const PopularSalon = () => {
                 </div>
               </div>
               <hr className="w-full" />
-              <div className="p-3 flex xl:flex-row flex-col justify-between xl:items-center text-left">
+              <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage 
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
-                    <p className="text-primary_color font-semibold text-2xl">
+                    <p className="text-2xl font-semibold text-primary_color">
                       £18{" "}
                       <span className="line-through text-[#898989] font-normal text-base">
                         £28
                       </span>
                     </p>
-                    <p className="text-green_color font-semibold text-base">
+                    <p className="text-base font-semibold text-green_color">
                       {" "}
                       30% OFF
                     </p>
@@ -235,7 +247,7 @@ const PopularSalon = () => {
           </SwiperSlide>
           <SwiperSlide>
             <div className="border border-[#DBDBDB] rounded-lg">
-              <div className="flex xl:flex-row flex-col xl:items-center text-left justify-between p-3 xl:gap-2 gap-1">
+              <div className="flex flex-col justify-between gap-1 p-3 text-left xl:flex-row xl:items-center xl:gap-2">
                 <div className="relative">
                   <Swiper
                     // install Swiper modules
@@ -267,7 +279,7 @@ const PopularSalon = () => {
                         loading="lazy"
                         objectFit="cover"
                         // fill
-                        className="w-full h-full object-cover"
+                        className="object-cover w-full h-full"
                       />
                     </SwiperSlide>
                     {/* <SwiperSlide>
@@ -279,7 +291,7 @@ const PopularSalon = () => {
                         loading="lazy"
                         objectFit="cover"
                         // fill
-                        className="w-full h-full object-cover"
+                        className="object-cover w-full h-full"
                       />
                     </SwiperSlide> */}
                   </Swiper>
@@ -300,8 +312,8 @@ const PopularSalon = () => {
                     <IoIosArrowForward className="text-[#007aff] w-6 h-6" />
                   </div> */}
                 </div>
-                <div className="xl:space-y-3 space-y-2">
-                  <h1 className="font-semibold text-base">Moon Massage</h1>
+                <div className="space-y-2 xl:space-y-3">
+                  <h1 className="text-base font-semibold">Moon Massage</h1>
                   <p className="text-primary_color">Nail Salons</p>
                   <div className="flex items-center gap-3">
                     <div className="bg-[#7f52861a] p-2 rounded-full">
@@ -331,10 +343,10 @@ const PopularSalon = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex gap-3 items-center">
+                  <div className="flex items-center gap-3">
                     <button
                       type="button"
-                      className="outline_button flex gap-2 items-center md:px-5 justify-center"
+                      className="flex items-center justify-center gap-2 outline_button md:px-5"
                     >
                       <MdLocationPin className="text-lg text-primary_color" />
                       View All Services
@@ -343,20 +355,20 @@ const PopularSalon = () => {
                 </div>
               </div>
               <hr className="w-full mt-4" />
-              <div className="p-3 flex xl:flex-row flex-col justify-between xl:items-center text-left">
+              <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage 
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
-                    <p className="text-primary_color font-semibold text-2xl">
+                    <p className="text-2xl font-semibold text-primary_color">
                       £18{" "}
                       <span className="line-through text-[#898989] font-normal text-base">
                         £28
                       </span>
                     </p>
-                    <p className="text-green_color font-semibold text-base">
+                    <p className="text-base font-semibold text-green_color">
                       {" "}
                       30% OFF
                     </p>
@@ -372,20 +384,20 @@ const PopularSalon = () => {
                 </div>
               </div>
               <hr className="w-full" />
-              <div className="p-3 flex xl:flex-row flex-col justify-between xl:items-center text-left">
+              <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage 
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
-                    <p className="text-primary_color font-semibold text-2xl">
+                    <p className="text-2xl font-semibold text-primary_color">
                       £18{" "}
                       <span className="line-through text-[#898989] font-normal text-base">
                         £28
                       </span>
                     </p>
-                    <p className="text-green_color font-semibold text-base">
+                    <p className="text-base font-semibold text-green_color">
                       {" "}
                       30% OFF
                     </p>
@@ -404,7 +416,7 @@ const PopularSalon = () => {
           </SwiperSlide>
           <SwiperSlide>
             <div className="border border-[#DBDBDB] rounded-lg">
-              <div className="flex xl:flex-row flex-col xl:items-center text-left justify-between p-3 xl:gap-2 gap-1">
+              <div className="flex flex-col justify-between gap-1 p-3 text-left xl:flex-row xl:items-center xl:gap-2">
                 <div className="relative">
                   <Swiper
                     // install Swiper modules
@@ -436,7 +448,7 @@ const PopularSalon = () => {
                         loading="lazy"
                         objectFit="cover"
                         // fill
-                        className="w-full h-full object-cover"
+                        className="object-cover w-full h-full"
                       />
                     </SwiperSlide>
                     {/* <SwiperSlide>
@@ -448,7 +460,7 @@ const PopularSalon = () => {
                         loading="lazy"
                         objectFit="cover"
                         // fill
-                        className="w-full h-full object-cover"
+                        className="object-cover w-full h-full"
                       />
                     </SwiperSlide> */}
                   </Swiper>
@@ -469,8 +481,8 @@ const PopularSalon = () => {
                     <IoIosArrowForward className="text-[#007aff] w-6 h-6" />
                   </div> */}
                 </div>
-                <div className="xl:space-y-3 space-y-2">
-                  <h1 className="font-semibold text-base">Moon Massage</h1>
+                <div className="space-y-2 xl:space-y-3">
+                  <h1 className="text-base font-semibold">Moon Massage</h1>
                   <p className="text-primary_color">Nail Salons</p>
                   <div className="flex items-center gap-3">
                     <div className="bg-[#7f52861a] p-2 rounded-full">
@@ -500,10 +512,10 @@ const PopularSalon = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex gap-3 items-center">
+                  <div className="flex items-center gap-3">
                     <button
                       type="button"
-                      className="outline_button flex gap-2 items-center md:px-5 justify-center"
+                      className="flex items-center justify-center gap-2 outline_button md:px-5"
                     >
                       <MdLocationPin className="text-lg text-primary_color" />
                       View All Services
@@ -512,20 +524,20 @@ const PopularSalon = () => {
                 </div>
               </div>
               <hr className="w-full mt-4" />
-              <div className="p-3 flex xl:flex-row flex-col justify-between xl:items-center text-left">
+              <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage 
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
-                    <p className="text-primary_color font-semibold text-2xl">
+                    <p className="text-2xl font-semibold text-primary_color">
                       £18{" "}
                       <span className="line-through text-[#898989] font-normal text-base">
                         £28
                       </span>
                     </p>
-                    <p className="text-green_color font-semibold text-base">
+                    <p className="text-base font-semibold text-green_color">
                       {" "}
                       30% OFF
                     </p>
@@ -541,20 +553,20 @@ const PopularSalon = () => {
                 </div>
               </div>
               <hr className="w-full" />
-              <div className="p-3 flex xl:flex-row flex-col justify-between xl:items-center text-left">
+              <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage 
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
-                    <p className="text-primary_color font-semibold text-2xl">
+                    <p className="text-2xl font-semibold text-primary_color">
                       £18{" "}
                       <span className="line-through text-[#898989] font-normal text-base">
                         £28
                       </span>
                     </p>
-                    <p className="text-green_color font-semibold text-base">
+                    <p className="text-base font-semibold text-green_color">
                       {" "}
                       30% OFF
                     </p>
