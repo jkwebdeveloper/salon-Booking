@@ -13,7 +13,7 @@ const page = () => {
           loading="lazy"
         //   fill
           alt="signin"
-          objectFit="cover"
+          
           className="h-screen"
         />
       </div>

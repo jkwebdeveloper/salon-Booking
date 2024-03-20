@@ -96,7 +96,7 @@ const Featured = () => {
                         // width={500}
                         alt="moon"
                         loading="lazy"
-                        objectFit="cover"
+                        
                         // fill
                         className="w-full h-full object-cover"
                       />
@@ -108,7 +108,7 @@ const Featured = () => {
                         width={300}
                         alt="moon"
                         loading="lazy"
-                        objectFit="cover"
+                        
                         // fill
                         className="w-full h-full object-cover"
                       />
@@ -265,7 +265,7 @@ const Featured = () => {
                         // width={500}
                         alt="moon"
                         loading="lazy"
-                        objectFit="cover"
+                        
                         // fill
                         className="w-full h-full object-cover"
                       />
@@ -277,7 +277,7 @@ const Featured = () => {
                         width={300}
                         alt="moon"
                         loading="lazy"
-                        objectFit="cover"
+                        
                         // fill
                         className="w-full h-full object-cover"
                       />
@@ -434,7 +434,7 @@ const Featured = () => {
                         // width={500}
                         alt="moon"
                         loading="lazy"
-                        objectFit="cover"
+                        
                         // fill
                         className="w-full h-full object-cover"
                       />
@@ -446,7 +446,7 @@ const Featured = () => {
                         width={300}
                         alt="moon"
                         loading="lazy"
-                        objectFit="cover"
+                        
                         // fill
                         className="w-full h-full object-cover"
                       />

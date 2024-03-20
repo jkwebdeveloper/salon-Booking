@@ -11,7 +11,7 @@ const Herosection = () => {
         <Image
           src={Banner}
           loading="lazy"
-          objectFit="cover"
+          
           // fill
           alt=""
           className="absolute object-cover w-full h-full"

@@ -62,7 +62,7 @@ const Gifts = () => {
               <Image
                 src={item?.image}
                 loading="lazy"
-                objectFit="cover"
+                
                 // fill
                 alt=""
                 className="relative w-full h-full object-cover"

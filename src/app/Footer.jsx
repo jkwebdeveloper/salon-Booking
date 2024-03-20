@@ -51,7 +51,7 @@ const Footer = () => {
   };
   return (
     <div
-      className="w-full"
+      className="container w-full"
       style={{
         backgroundImage: `url(${footer.src})`,
         backgroundRepeat: "no-repeat",
@@ -67,12 +67,12 @@ const Footer = () => {
           src={footer}
           alt=""
           loading="lazy"
-          objectFit="cover"
-          className=" object-cover w-full h-full"
+          
+          className="object-cover w-full h-full "
         />
       </div> */}
       <div className="px-4 pt-20">
-        <div className="md:hidden block">
+        <div className="block md:hidden">
           <div className="space-y-8 text-center">
             <div className="mx-auto">
               <Image src={Logo} alt="logo" loading="lazy" className="mx-auto" />
@@ -90,60 +90,60 @@ const Footer = () => {
                 <Image src={Google} alt="" loading="lazy" />
               </div>
             </div>
-            <div className="flex items-center gap-2 justify-center">
-              <div className="bg-white rounded-full p-2 text-primary_color hover:bg-primary_color hover:text-white cursor-pointer">
+            <div className="flex items-center justify-center gap-2">
+              <div className="p-2 bg-white rounded-full cursor-pointer text-primary_color hover:bg-primary_color hover:text-white">
                 <ImFacebook className="text-lg" />
               </div>
-              <div className="bg-white rounded-full p-2 text-primary_color hover:bg-primary_color hover:text-white cursor-pointer">
+              <div className="p-2 bg-white rounded-full cursor-pointer text-primary_color hover:bg-primary_color hover:text-white">
                 <BsTwitterX className="text-lg" />
               </div>
-              <div className="bg-white rounded-full p-2 text-primary_color hover:bg-primary_color hover:text-white cursor-pointer">
+              <div className="p-2 bg-white rounded-full cursor-pointer text-primary_color hover:bg-primary_color hover:text-white">
                 <FaInstagram className="text-lg" />
               </div>
-              <div className="bg-white rounded-full p-2 text-primary_color hover:bg-primary_color hover:text-white cursor-pointer">
+              <div className="p-2 bg-white rounded-full cursor-pointer text-primary_color hover:bg-primary_color hover:text-white">
                 <ImLinkedin2 className="text-lg" />
               </div>
-              <div className="bg-white rounded-full p-2 text-primary_color hover:bg-primary_color hover:text-white cursor-pointer">
+              <div className="p-2 bg-white rounded-full cursor-pointer text-primary_color hover:bg-primary_color hover:text-white">
                 <FaPinterestP className="text-lg" />
               </div>
             </div>
-            <hr className="w-full bg-primary_color mt-4" />
+            <hr className="w-full mt-4 bg-primary_color" />
             {FooterData.map((item, i) => (
-              <div className="space-y-4 text-black md:hidden block" key={i}>
+              <div className="block space-y-4 text-black md:hidden" key={i}>
                 <div
                   className="flex items-center justify-between cursor-pointer"
                   onClick={() => toggle(i)}
                 >
-                  <p className="text-primary_color text-base uppercase font-semibold">
+                  <p className="text-base font-semibold uppercase text-primary_color">
                     {item?.title}
                   </p>
                   {footerMenu === i ? (
-                    <IoIosArrowUp className="text-primary_color text-lg" />
+                    <IoIosArrowUp className="text-lg text-primary_color" />
                   ) : (
-                    <IoIosArrowDown className="text-primary_color text-lg" />
+                    <IoIosArrowDown className="text-lg text-primary_color" />
                   )}
                 </div>
-                <hr className="bg-primary_color w-full" />
+                <hr className="w-full bg-primary_color" />
                 {footerMenu === i ? (
-                  <div className="transition text-left duration-500 space-y-4">
+                  <div className="space-y-4 text-left transition duration-500">
                     <div className="space-y-3 text-left">
-                      <p className="text-sm cursor-pointer font-light ">
-                        <span className="navcolor inline-block">
+                      <p className="text-sm font-light cursor-pointer ">
+                        <span className="inline-block navcolor">
                           {item?.page1}
                         </span>
                       </p>
-                      <p className="text-sm cursor-pointer font-light ">
-                        <span className="navcolor inline-block">
+                      <p className="text-sm font-light cursor-pointer ">
+                        <span className="inline-block navcolor">
                           {item?.page2}
                         </span>
                       </p>
-                      <p className="text-sm cursor-pointer font-light ">
-                        <span className="navcolor inline-block">
+                      <p className="text-sm font-light cursor-pointer ">
+                        <span className="inline-block navcolor">
                           {item?.page3}
                         </span>
                       </p>
-                      <p className="text-sm cursor-pointer font-light ">
-                        <span className="navcolor inline-block">
+                      <p className="text-sm font-light cursor-pointer ">
+                        <span className="inline-block navcolor">
                           {item?.page4}
                         </span>
                       </p>
@@ -155,18 +155,18 @@ const Footer = () => {
               </div>
             ))}
             <div className="space-y-3">
-              <p className="text-primary_color text-lg font-semibold text-center">
+              <p className="text-lg font-semibold text-center text-primary_color">
                 Join Our Newsletter
               </p>
-              <div className="bg-white mx-auto rounded-full shadow-lg flex">
+              <div className="flex mx-auto bg-white rounded-full shadow-lg">
                 <input
                   type="email"
                   placeholder="Enter Your Email"
-                  className="outline-none w-full rounded-full mx-9"
+                  className="w-full rounded-full outline-none mx-9"
                 />
                 <button
                   type="button"
-                  className="primary_button px-4 w-full hover:bg-blue_button/80 active:scale-90 transition"
+                  className="w-full px-4 transition primary_button hover:bg-blue_button/80 active:scale-90"
                 >
                   Subscribe
                 </button>
@@ -178,62 +178,62 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="top-1/4 justify-center items-center grid md:grid-cols-2 lg:grid-cols-4 lg:px-10 md:pt-16 py-5 px-4">
-        <div className="space-y-4 text-black md:block hidden">
-          <p className="text-primary_color text-base uppercase font-semibold title heading">
+      <div className="grid items-center justify-center px-4 py-5 top-1/4 md:grid-cols-2 lg:grid-cols-4 lg:px-10 md:pt-16">
+        <div className="hidden space-y-4 text-black md:block">
+          <p className="text-base font-semibold uppercase text-primary_color title heading">
             Company
           </p>
-          <p className="text-sm cursor-pointer font-light ">
-            <span className="footer inline-block">Blogs</span>
+          <p className="text-sm font-light cursor-pointer ">
+            <span className="inline-block footer">Blogs</span>
           </p>
-          <p className="text-sm cursor-pointer font-light ">
-            <span className="footer inline-block">About</span>
+          <p className="text-sm font-light cursor-pointer ">
+            <span className="inline-block footer">About</span>
           </p>
-          <p className="text-sm cursor-pointer font-light ">
-            <span className="footer inline-block">Why Us</span>
+          <p className="text-sm font-light cursor-pointer ">
+            <span className="inline-block footer">Why Us</span>
           </p>
-          <p className="text-sm cursor-pointer font-light ">
-            <span className="footer inline-block">Tax Strategy</span>
+          <p className="text-sm font-light cursor-pointer ">
+            <span className="inline-block footer">Tax Strategy</span>
           </p>
         </div>
-        <div className="space-y-4 text-black md:block hidden">
-          <p className="text-primary_color text-base uppercase font-semibold title heading">
+        <div className="hidden space-y-4 text-black md:block">
+          <p className="text-base font-semibold uppercase text-primary_color title heading">
             Legal
           </p>
-          <p className="text-sm cursor-pointer font-light ">
-            <span className="footer inline-block">Terms & Conditions</span>
+          <p className="text-sm font-light cursor-pointer ">
+            <span className="inline-block footer">Terms & Conditions</span>
           </p>
-          <p className="text-sm cursor-pointer font-light ">
-            <span className="footer inline-block">Privacy</span>
+          <p className="text-sm font-light cursor-pointer ">
+            <span className="inline-block footer">Privacy</span>
           </p>
-          <p className="text-sm cursor-pointer font-light ">
-            <span className="footer inline-block">Coockies</span>
+          <p className="text-sm font-light cursor-pointer ">
+            <span className="inline-block footer">Coockies</span>
           </p>
-          <p className="text-sm cursor-pointer font-light ">
-            <span className="footer inline-block">
+          <p className="text-sm font-light cursor-pointer ">
+            <span className="inline-block footer">
               Modern Slavery Statement
             </span>
           </p>
         </div>
-        <div className="space-y-4 text-black md:block hidden">
-          <p className="text-primary_color text-base uppercase font-semibold title heading">
+        <div className="hidden space-y-4 text-black md:block">
+          <p className="text-base font-semibold uppercase text-primary_color title heading">
             USEFUL LINKS
           </p>
-          <p className="text-sm cursor-pointer font-light ">
-            <span className="footer inline-block">Contact Us</span>
+          <p className="text-sm font-light cursor-pointer ">
+            <span className="inline-block footer">Contact Us</span>
           </p>
-          <p className="text-sm cursor-pointer font-light ">
-            <span className="footer inline-block">Business Support</span>
+          <p className="text-sm font-light cursor-pointer ">
+            <span className="inline-block footer">Business Support</span>
           </p>
-          <p className="text-sm cursor-pointer font-light ">
-            <span className="footer inline-block">Faqs</span>
+          <p className="text-sm font-light cursor-pointer ">
+            <span className="inline-block footer">Faqs</span>
           </p>
-          <p className="text-sm cursor-pointer font-light ">
-            <span className="footer inline-block">Careers</span>
+          <p className="text-sm font-light cursor-pointer ">
+            <span className="inline-block footer">Careers</span>
           </p>
         </div>
-        <div className="space-y-4 text-black md:block hidden">
-          <p className="text-primary_color text-base uppercase font-semibold title heading">
+        <div className="hidden space-y-4 text-black md:block">
+          <p className="text-base font-semibold uppercase text-primary_color title heading">
             Join Our Newsletter
           </p>
           <div className="space-y-2">
@@ -241,7 +241,7 @@ const Footer = () => {
             <input
               type="email"
               placeholder="Enter Your Email"
-              className="outline-none w-4/5 bg-white rounded-md p-2"
+              className="w-4/5 p-2 bg-white rounded-md outline-none"
             />
           </div>
           <button type="button" className="primary_button">
@@ -249,26 +249,26 @@ const Footer = () => {
           </button>
         </div>
       </div>
-      <hr className="w-full text-primary_color mt-4" />
-      <div className="md:block hidden">
-        <div className="flex py-5 justify-between items-center mx-2">
+      <hr className="w-full mt-4 text-primary_color" />
+      <div className="hidden md:block">
+        <div className="flex items-center justify-between py-5 mx-2">
           <div>
             <Image src={Logo} alt="logo" loading="lazy" />
           </div>
           <div className="flex items-center gap-4">
-            <div className="bg-white rounded-full p-2 text-primary_color hover:bg-primary_color hover:text-white cursor-pointer">
+            <div className="p-2 bg-white rounded-full cursor-pointer text-primary_color hover:bg-primary_color hover:text-white">
               <ImFacebook className="text-lg" />
             </div>
-            <div className="bg-white rounded-full p-2 text-primary_color hover:bg-primary_color hover:text-white cursor-pointer">
+            <div className="p-2 bg-white rounded-full cursor-pointer text-primary_color hover:bg-primary_color hover:text-white">
               <BsTwitterX className="text-lg" />
             </div>
-            <div className="bg-white rounded-full p-2 text-primary_color hover:bg-primary_color hover:text-white cursor-pointer">
+            <div className="p-2 bg-white rounded-full cursor-pointer text-primary_color hover:bg-primary_color hover:text-white">
               <FaInstagram className="text-lg" />
             </div>
-            <div className="bg-white rounded-full p-2 text-primary_color hover:bg-primary_color hover:text-white cursor-pointer">
+            <div className="p-2 bg-white rounded-full cursor-pointer text-primary_color hover:bg-primary_color hover:text-white">
               <ImLinkedin2 className="text-lg" />
             </div>
-            <div className="bg-white rounded-full p-2 text-primary_color hover:bg-primary_color hover:text-white cursor-pointer">
+            <div className="p-2 bg-white rounded-full cursor-pointer text-primary_color hover:bg-primary_color hover:text-white">
               <FaPinterestP className="text-lg" />
             </div>
           </div>
