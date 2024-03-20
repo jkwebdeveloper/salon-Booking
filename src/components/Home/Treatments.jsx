@@ -63,23 +63,22 @@ const ImagesData = [
 const Treatments = () => {
   return (
     <div className="w-full space-y-4">
-      <p className="text-black font-semibold uppercase text-2xl title heading">
+      <p className="text-2xl font-semibold text-black uppercase title heading">
         Near by <span className="text-primary_color">Featured salons</span>
       </p>
-      <div className="rounded-lg grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 gap-3 rounded-lg md:grid-cols-3 xl:grid-cols-4">
         {ImagesData.map((item) => (
           <div
             key={item?.id}
-            className="relative flex justify-center cursor-pointer items-center text-center"
+            className="relative flex items-center justify-center text-center cursor-pointer"
           >
             <div>
               <Image
                 src={item?.image}
                 loading="lazy"
-                objectFit="cover"
                 // fill
                 alt=""
-                className="relative w-full h-full object-cover"
+                className="relative object-cover w-full h-full"
               />
             </div>
             <p className="absolute uppercase top-[78%] text-center font-bold text-white">

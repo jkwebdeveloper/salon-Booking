@@ -12,7 +12,7 @@ const Business = () => {
           height={300}
           alt=""
           loading="lazy"
-          objectFit="cover"
+          
           className=""
         />
         {/* <Image

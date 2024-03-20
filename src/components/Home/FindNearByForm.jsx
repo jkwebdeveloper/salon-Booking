@@ -6,44 +6,44 @@ import { CiLocationOn } from "react-icons/ci";
 
 const FindNearByForm = () => {
   return (
-    <div className="flex relative justify-center items-center w-full">
+    <div className="relative flex items-center justify-center w-full">
       <div className="space-y-4">
-        <h1 className="md:font-bold md:text-5xl font-semibold text-2xl text-center">
+        <h1 className="text-2xl font-semibold text-center md:font-bold md:text-5xl">
           Find Nearby{" "}
           <span className="text-primary_color">Hair Treatments</span>
         </h1>
         <div className="bg-white mx-auto lg:rounded-full rounded-2xl shadow-lg lg:border-8 lg:border-[#e2e2e2] flex justify-around items-center gap-2 lg:flex-row flex-col md:w-[100%] w-full px-3 py-4">
-          <div className="gap-3 flex items-center w-full">
+          <div className="flex items-center w-full gap-3">
             <FaSearch className="text-2xl" />
             <input
-              datepicker
+              datepicker="true"
               type="text"
               placeholder="Search by Treatment or Salon"
-              className="outline-none w-full"
+              className="w-full outline-none"
             />
           </div>
           <span className="bg-opacity-40 bg-gray-400 lg:h-6 lg:w-[1px] w-full h-[1px] "></span>
-          <div className="gap-3 flex items-center w-full">
+          <div className="flex items-center w-full gap-3">
             {/* <CiCalendarDate className="text-2xl" /> */}
             <input
-              datepicker
+              datepicker="true"
               type="date"
               placeholder="Select date"
-              className="outline-none w-full"
+              className="w-full outline-none"
             />
           </div>
           <span className="bg-opacity-40 bg-gray-400 lg:h-6 lg:w-[1px] w-full h-[1px] "></span>
-          <div className="gap-3 flex items-center w-full">
+          <div className="flex items-center w-full gap-3">
             <IoTimeOutline className="text-2xl" />
             <input
-              datepicker
+              datepicker="true"
               type="time"
               placeholder="Select time"
-              className="outline-none w-full "
+              className="w-full outline-none "
             />
           </div>
           <span className="bg-opacity-40 bg-gray-400 lg:h-6 lg:w-[1px] w-full h-[1px] "></span>
-          <div className="gap-3 flex items-center w-full">
+          <div className="flex items-center w-full gap-3">
             <CiLocationOn className="text-2xl" />
             <input
               type="text"
@@ -53,7 +53,7 @@ const FindNearByForm = () => {
           </div>
           <button
             type="button"
-            className="primary_button px-4 w-full hover:bg-blue_button/80 active:scale-90 transition"
+            className="w-full px-4 transition primary_button hover:bg-blue_button/80 active:scale-90"
           >
             Search
           </button>

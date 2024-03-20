@@ -151,7 +151,7 @@ const Groupon = () => {
                           src={item?.image}
                           alt="spa life"
                           loading="lazy"
-                          objectFit="cover"
+                          
                           // fill
                           className="w-full h-full object-cover"
                         />

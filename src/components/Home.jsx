@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <div className="space-y-10">
       <Herosection />
-      <div className="space-y-10 lg:mx-5 mx-2">
+      <div className="mx-2 space-y-10 lg:mx-5">
         <Pampertree />
         <Featured />
         <Treatments />
