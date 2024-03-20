@@ -53,10 +53,6 @@
     box-sizing: border-box;
   }
 }
-.debug,
-.debug *{
-  box-shadow: 0 0 1px red;
-}
 
 body::-webkit-scrollbar {
   width: 8px;
@@ -118,9 +114,4 @@ body::-webkit-scrollbar-thumb {
 .footer:hover:after {
   width: 100%;
   left: 0;
-}
-
-/* Swiper Slider */
-body .swiper{
-  padding-bottom: 3.5em;
 }

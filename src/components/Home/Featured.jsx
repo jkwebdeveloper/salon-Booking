@@ -18,7 +18,6 @@ import { FaStar, FaWhatsapp } from "react-icons/fa";
 import { ImFacebook } from "react-icons/im";
 import { BsTwitterX } from "react-icons/bs";
 import { LuBookmark } from "react-icons/lu";
-import { Button } from "../ui/button";
 
 const Featured = () => {
   const [beginAndEnd, setBeginAndEnd] = useState({
@@ -29,7 +28,7 @@ const Featured = () => {
   const nextRef = useRef(null);
   return (
     <div className="w-full space-y-4">
-      <p className="text-2xl font-semibold text-black uppercase title heading">
+      <p className="text-black font-semibold uppercase text-2xl title heading">
         Near by <span className="text-primary_color">Featured salons</span>
       </p>
       <div className="relative w-full">
@@ -67,7 +66,7 @@ const Featured = () => {
         >
           <SwiperSlide>
             <div className="border border-[#DBDBDB] rounded-lg">
-              <div className="flex flex-col justify-between gap-1 p-3 text-left xl:flex-row xl:items-center xl:gap-2">
+              <div className="flex xl:flex-row flex-col xl:items-center text-left justify-between p-3 xl:gap-2 gap-1">
                 <div className="relative">
                   <Swiper
                     // install Swiper modules
@@ -99,7 +98,7 @@ const Featured = () => {
                         loading="lazy"
                         objectFit="cover"
                         // fill
-                        className="object-cover w-full h-full"
+                        className="w-full h-full object-cover"
                       />
                     </SwiperSlide>
                     {/* <SwiperSlide>
@@ -111,7 +110,7 @@ const Featured = () => {
                         loading="lazy"
                         objectFit="cover"
                         // fill
-                        className="object-cover w-full h-full"
+                        className="w-full h-full object-cover"
                       />
                     </SwiperSlide> */}
                   </Swiper>
@@ -132,8 +131,8 @@ const Featured = () => {
                     <IoIosArrowForward className="text-[#007aff] w-6 h-6" />
                   </div> */}
                 </div>
-                <div className="space-y-2 xl:space-y-3">
-                  <h1 className="text-base font-semibold">Moon Massage</h1>
+                <div className="xl:space-y-3 space-y-2">
+                  <h1 className="font-semibold text-base">Moon Massage</h1>
                   <p className="text-primary_color">Nail Salons</p>
                   <div className="flex items-center gap-3">
                     <div className="bg-[#7f52861a] p-2 rounded-full">
@@ -163,10 +162,10 @@ const Featured = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex gap-3 items-center">
                     <button
                       type="button"
-                      className="flex items-center justify-center gap-2 outline_button md:px-5"
+                      className="outline_button flex gap-2 items-center md:px-5 justify-center"
                     >
                       <MdLocationPin className="text-lg text-primary_color" />
                       View All Services
@@ -175,60 +174,68 @@ const Featured = () => {
                 </div>
               </div>
               <hr className="w-full mt-4" />
-              <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
+              <div className="p-3 flex xl:flex-row flex-col justify-between xl:items-center text-left">
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage 
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
-                    <p className="text-2xl font-semibold text-primary_color">
+                    <p className="text-primary_color font-semibold text-2xl">
                       £18{" "}
                       <span className="line-through text-[#898989] font-normal text-base">
                         £28
                       </span>
                     </p>
-                    <p className="text-base font-semibold text-green_color">
+                    <p className="text-green_color font-semibold text-base">
                       {" "}
                       30% OFF
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Button variant="primary"> Book Now</Button>
-                  <Button variant="secondary"> Quick view </Button>
+                  <button type="button" className="primary_button">
+                    Book Now
+                  </button>
+                  <button type="button" className="green_button">
+                    Quick view
+                  </button>
                 </div>
               </div>
               <hr className="w-full" />
-              <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
+              <div className="p-3 flex xl:flex-row flex-col justify-between xl:items-center text-left">
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage 
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
-                    <p className="text-2xl font-semibold text-primary_color">
+                    <p className="text-primary_color font-semibold text-2xl">
                       £18{" "}
                       <span className="line-through text-[#898989] font-normal text-base">
                         £28
                       </span>
                     </p>
-                    <p className="text-base font-semibold text-green_color">
+                    <p className="text-green_color font-semibold text-base">
                       {" "}
                       30% OFF
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Button variant="primary"> Book Now</Button>
-                  <Button variant="secondary"> Quick view </Button>
+                  <button type="button" className="primary_button">
+                    Book Now
+                  </button>
+                  <button type="button" className="green_button">
+                    Quick view
+                  </button>
                 </div>
               </div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="border border-[#DBDBDB] rounded-lg">
-              <div className="flex flex-col justify-between gap-1 p-3 text-left xl:flex-row xl:items-center xl:gap-2">
+              <div className="flex xl:flex-row flex-col xl:items-center text-left justify-between p-3 xl:gap-2 gap-1">
                 <div className="relative">
                   <Swiper
                     // install Swiper modules
@@ -260,7 +267,7 @@ const Featured = () => {
                         loading="lazy"
                         objectFit="cover"
                         // fill
-                        className="object-cover w-full h-full"
+                        className="w-full h-full object-cover"
                       />
                     </SwiperSlide>
                     {/* <SwiperSlide>
@@ -272,7 +279,7 @@ const Featured = () => {
                         loading="lazy"
                         objectFit="cover"
                         // fill
-                        className="object-cover w-full h-full"
+                        className="w-full h-full object-cover"
                       />
                     </SwiperSlide> */}
                   </Swiper>
@@ -293,8 +300,8 @@ const Featured = () => {
                     <IoIosArrowForward className="text-[#007aff] w-6 h-6" />
                   </div> */}
                 </div>
-                <div className="space-y-2 xl:space-y-3">
-                  <h1 className="text-base font-semibold">Moon Massage</h1>
+                <div className="xl:space-y-3 space-y-2">
+                  <h1 className="font-semibold text-base">Moon Massage</h1>
                   <p className="text-primary_color">Nail Salons</p>
                   <div className="flex items-center gap-3">
                     <div className="bg-[#7f52861a] p-2 rounded-full">
@@ -324,10 +331,10 @@ const Featured = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex gap-3 items-center">
                     <button
                       type="button"
-                      className="flex items-center justify-center gap-2 outline_button md:px-5"
+                      className="outline_button flex gap-2 items-center md:px-5 justify-center"
                     >
                       <MdLocationPin className="text-lg text-primary_color" />
                       View All Services
@@ -336,60 +343,68 @@ const Featured = () => {
                 </div>
               </div>
               <hr className="w-full mt-4" />
-              <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
+              <div className="p-3 flex xl:flex-row flex-col justify-between xl:items-center text-left">
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage 
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
-                    <p className="text-2xl font-semibold text-primary_color">
+                    <p className="text-primary_color font-semibold text-2xl">
                       £18{" "}
                       <span className="line-through text-[#898989] font-normal text-base">
                         £28
                       </span>
                     </p>
-                    <p className="text-base font-semibold text-green_color">
+                    <p className="text-green_color font-semibold text-base">
                       {" "}
                       30% OFF
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Button variant="primary"> Book Now</Button>
-                  <Button variant="secondary"> Quick view </Button>
+                  <button type="button" className="primary_button">
+                    Book Now
+                  </button>
+                  <button type="button" className="green_button">
+                    Quick view
+                  </button>
                 </div>
               </div>
               <hr className="w-full" />
-              <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
+              <div className="p-3 flex xl:flex-row flex-col justify-between xl:items-center text-left">
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage 
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
-                    <p className="text-2xl font-semibold text-primary_color">
+                    <p className="text-primary_color font-semibold text-2xl">
                       £18{" "}
                       <span className="line-through text-[#898989] font-normal text-base">
                         £28
                       </span>
                     </p>
-                    <p className="text-base font-semibold text-green_color">
+                    <p className="text-green_color font-semibold text-base">
                       {" "}
                       30% OFF
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Button variant="primary"> Book Now</Button>
-                  <Button variant="secondary"> Quick view </Button>
+                  <button type="button" className="primary_button">
+                    Book Now
+                  </button>
+                  <button type="button" className="green_button">
+                    Quick view
+                  </button>
                 </div>
               </div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="border border-[#DBDBDB] rounded-lg">
-              <div className="flex flex-col justify-between gap-1 p-3 text-left xl:flex-row xl:items-center xl:gap-2">
+              <div className="flex xl:flex-row flex-col xl:items-center text-left justify-between p-3 xl:gap-2 gap-1">
                 <div className="relative">
                   <Swiper
                     // install Swiper modules
@@ -421,7 +436,7 @@ const Featured = () => {
                         loading="lazy"
                         objectFit="cover"
                         // fill
-                        className="object-cover w-full h-full"
+                        className="w-full h-full object-cover"
                       />
                     </SwiperSlide>
                     {/* <SwiperSlide>
@@ -433,7 +448,7 @@ const Featured = () => {
                         loading="lazy"
                         objectFit="cover"
                         // fill
-                        className="object-cover w-full h-full"
+                        className="w-full h-full object-cover"
                       />
                     </SwiperSlide> */}
                   </Swiper>
@@ -454,8 +469,8 @@ const Featured = () => {
                     <IoIosArrowForward className="text-[#007aff] w-6 h-6" />
                   </div> */}
                 </div>
-                <div className="space-y-2 xl:space-y-3">
-                  <h1 className="text-base font-semibold">Moon Massage</h1>
+                <div className="xl:space-y-3 space-y-2">
+                  <h1 className="font-semibold text-base">Moon Massage</h1>
                   <p className="text-primary_color">Nail Salons</p>
                   <div className="flex items-center gap-3">
                     <div className="bg-[#7f52861a] p-2 rounded-full">
@@ -485,10 +500,10 @@ const Featured = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex gap-3 items-center">
                     <button
                       type="button"
-                      className="flex items-center justify-center gap-2 outline_button md:px-5"
+                      className="outline_button flex gap-2 items-center md:px-5 justify-center"
                     >
                       <MdLocationPin className="text-lg text-primary_color" />
                       View All Services
@@ -497,53 +512,61 @@ const Featured = () => {
                 </div>
               </div>
               <hr className="w-full mt-4" />
-              <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
+              <div className="p-3 flex xl:flex-row flex-col justify-between xl:items-center text-left">
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage 
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
-                    <p className="text-2xl font-semibold text-primary_color">
+                    <p className="text-primary_color font-semibold text-2xl">
                       £18{" "}
                       <span className="line-through text-[#898989] font-normal text-base">
                         £28
                       </span>
                     </p>
-                    <p className="text-base font-semibold text-green_color">
+                    <p className="text-green_color font-semibold text-base">
                       {" "}
                       30% OFF
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Button variant="primary"> Book Now</Button>
-                  <Button variant="secondary"> Quick view </Button>
+                  <button type="button" className="primary_button">
+                    Book Now
+                  </button>
+                  <button type="button" className="green_button">
+                    Quick view
+                  </button>
                 </div>
               </div>
               <hr className="w-full" />
-              <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
+              <div className="p-3 flex xl:flex-row flex-col justify-between xl:items-center text-left">
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage 
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
-                    <p className="text-2xl font-semibold text-primary_color">
+                    <p className="text-primary_color font-semibold text-2xl">
                       £18{" "}
                       <span className="line-through text-[#898989] font-normal text-base">
                         £28
                       </span>
                     </p>
-                    <p className="text-base font-semibold text-green_color">
+                    <p className="text-green_color font-semibold text-base">
                       {" "}
                       30% OFF
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Button variant="primary"> Book Now</Button>
-                  <Button variant="secondary"> Quick view </Button>
+                  <button type="button" className="primary_button">
+                    Book Now
+                  </button>
+                  <button type="button" className="green_button">
+                    Quick view
+                  </button>
                 </div>
               </div>
             </div>
