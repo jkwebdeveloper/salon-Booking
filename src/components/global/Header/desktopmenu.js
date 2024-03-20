@@ -1,5 +1,6 @@
 import { Fragment, useState } from 'react'
 import { Popover, Transition } from '@headlessui/react'
+import { v4 } from 'uuid';
 
 import {
     RiArrowDownSLine,
@@ -112,6 +113,7 @@ export default function DesktopMenu({ theme, themeMode }) {
                         Array.isArray(menuItems[navItem]) && <Popover.Group
                             onMouseEnter={() => setOpen(index)}
                             onMouseLeave={() => setOpen(null)}
+                            key={v4()}
                             className="hidden py-3 lg:flex lg:gap-x-12">
                             <Popover className="relative menu">
                                 <Popover.Button className={`flex items-center gap-x-1 text-md leading-6 font-medium group/navitem ${index == open && 'text-primary_color' || 'text-neutral-800'}`}>

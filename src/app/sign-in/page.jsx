@@ -13,27 +13,19 @@ const page = () => {
   // const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="w-screen grid lg:grid-cols-2 place-items-center items-center h-screen">
-      <div className="lg:block hidden">
-        <Image
-          src={signin}
-          loading="lazy"
-          //   fill
-          alt="signin"
-          className="h-screen"
-        />
-      </div>
-      <div className="lg:w-full w-screen bg-[#FAFAFA] h-full p-3 relative z-0">
-        <div className="space-y-4">
+    <div className="grid w-screen lg:grid-cols-2">
+      <div className="hidden lg:block bg-[url('/static/images/signin.png')] bg-cover"></div>
+      <div className="lg:w-full bg-[#FAFAFA] p-3 relative z-0 min-h-screen">
+        <div className="flex flex-col items-center justify-center h-full space-y-4">
           <div>
             <Link href="/">
               <Image src={logo} loading="lazy" alt="logo" className="mx-auto" />
             </Link>
           </div>
-          <div className="bg-white xl:w-3/5 w-full rounded-lg shadow-md mx-auto p-4">
+          <div className="w-full p-4 mx-auto bg-white rounded-lg shadow-md xl:w-3/5">
             <div className="space-y-3">
               <p className="text-lg font-semibold">Login</p>
-              <div className="text-left space-y-1 w-full">
+              <div className="w-full space-y-1 text-left">
                 <label htmlFor="country" className="label_text">
                   Email Id
                 </label>
@@ -44,7 +36,7 @@ const page = () => {
                   placeholder="Enter your Email"
                 />
               </div>
-              <div className="text-left relative space-y-1 w-full">
+              <div className="relative w-full space-y-1 text-left">
                 <label htmlFor="country" className="label_text">
                   Password
                 </label>
@@ -62,12 +54,12 @@ const page = () => {
                 {showPassword ? (
                   <BsEyeFill
                     size={24}
-                    className="absolute top-8 cursor-pointer right-3 text-gray-400"
+                    className="absolute text-gray-400 cursor-pointer top-8 right-3"
                   />
                 ) : (
                   <BsEyeSlashFill
                     size={24}
-                    className="absolute top-8 cursor-pointer right-3 text-gray-400"
+                    className="absolute text-gray-400 cursor-pointer top-8 right-3"
                   />
                 )}
               </button> */}
@@ -75,19 +67,19 @@ const page = () => {
               <p className="text-xs">
                 8 characters with a mix of letters, numbers & symbols
               </p>
-              <button type="button" className="primary_button w-full uppercase">
+              <button type="button" className="w-full uppercase primary_button">
                 login
               </button>
               <Link href="/forgot-password">
                 <p className="font-semibold text-center">Forgot password?</p>
               </Link>
               <div className="inline-flex items-center justify-center w-full">
-                <hr className="w-80 h-px my-4 bg-gray-200 border-0 dark:bg-gray-700" />
+                <hr className="h-px my-4 bg-gray-200 border-0 w-80 dark:bg-gray-700" />
                 <span className="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">
                   OR
                 </span>
               </div>
-              <div className="flex items-center gap-5 justify-center">
+              <div className="flex items-center justify-center gap-5">
                 <div className="space-y-3">
                   <div className="border  border-1 border-[#D8DAE5] rounded-full p-3">
                     <FcGoogle className="text-2xl" />
@@ -107,7 +99,7 @@ const page = () => {
                   {/* <p>Instagram</p> */}
                 </div>
                 <div className="space-y-3 text-center">
-                  <div className="bg-black rounded-full p-3">
+                  <div className="p-3 bg-black rounded-full">
                     <FaApple className="text-2xl text-white" />
                   </div>
                   {/* <p>Apple</p> */}
@@ -116,7 +108,7 @@ const page = () => {
               <p className="text-center">
                 Not a member?{" "}
                 <Link href="/register">
-                  <span className="text-primary_color font-semibold">
+                  <span className="font-semibold text-primary_color">
                     Register
                   </span>
                 </Link>

@@ -6,24 +6,16 @@ import Link from "next/link";
 
 const page = () => {
   return (
-    <div className="w-screen grid lg:grid-cols-2 place-items-center items-center h-screen">
-      <div className="lg:block hidden">
-        <Image
-          src={signin}
-          loading="lazy"
-          //   fill
-          alt="signin"
-          className="h-screen"
-        />
-      </div>
-      <div className="lg:w-full w-screen bg-[#FAFAFA] h-full p-3 relative z-0">
-        <div className="space-y-4">
+    <div className="grid w-screen lg:grid-cols-2">
+       <div className="hidden lg:block bg-[url('/static/images/signin.png')] bg-cover"></div>
+      <div className="lg:w-full bg-[#FAFAFA] p-3 relative z-0 min-h-screen">
+        <div className="flex flex-col items-center justify-center h-full space-y-4">
           <div>
             <Link href="/">
               <Image src={logo} loading="lazy" alt="logo" className="mx-auto" />
             </Link>
           </div>
-          <div className="bg-white xl:w-3/5 w-full rounded-lg shadow-md mx-auto p-4">
+          <div className="w-full p-4 mx-auto bg-white rounded-lg shadow-md xl:w-3/5">
             <div className="space-y-3">
               <p className="text-lg font-semibold">
                 Welcome to the{" "}
@@ -33,8 +25,8 @@ const page = () => {
                 Tell us about yourself. The more we know, the better we get for
                 you, and the easier it is to look after your bookings.
               </p>
-              <div className="flex lg:flex-row flex-col w-full gap-3">
-                <div className="text-left space-y-1 w-full lg:w-1/2">
+              <div className="flex flex-col w-full gap-3 lg:flex-row">
+                <div className="w-full space-y-1 text-left lg:w-1/2">
                   <label htmlFor="city" className="label_text">
                     First Name
                   </label>
@@ -45,7 +37,7 @@ const page = () => {
                     placeholder="Enter your Name"
                   />
                 </div>
-                <div className="text-left space-y-1 w-full lg:w-1/2">
+                <div className="w-full space-y-1 text-left lg:w-1/2">
                   <label htmlFor="state" className="label_text">
                     Last Name
                   </label>
@@ -57,8 +49,8 @@ const page = () => {
                   />
                 </div>
               </div>
-              <div className="flex lg:flex-row flex-col w-full gap-3">
-                <div className="text-left space-y-1 w-full lg:w-1/2">
+              <div className="flex flex-col w-full gap-3 lg:flex-row">
+                <div className="w-full space-y-1 text-left lg:w-1/2">
                   <label htmlFor="city" className="label_text">
                     Email
                   </label>
@@ -69,7 +61,7 @@ const page = () => {
                     placeholder="Enter your email"
                   />
                 </div>
-                <div className="text-left space-y-1 w-full lg:w-1/2">
+                <div className="w-full space-y-1 text-left lg:w-1/2">
                   <label htmlFor="state" className="label_text">
                     Phone Number
                   </label>
@@ -81,8 +73,8 @@ const page = () => {
                   />
                 </div>
               </div>
-              <div className="flex lg:flex-row flex-col w-full gap-3">
-                <div className="text-left space-y-1 w-full lg:w-1/2">
+              <div className="flex flex-col w-full gap-3 lg:flex-row">
+                <div className="w-full space-y-1 text-left lg:w-1/2">
                   <label htmlFor="city" className="label_text">
                     Password
                   </label>
@@ -93,7 +85,7 @@ const page = () => {
                     placeholder="Enter your email"
                   />
                 </div>
-                <div className="text-left space-y-1 w-full lg:w-1/2">
+                <div className="w-full space-y-1 text-left lg:w-1/2">
                   <label htmlFor="state" className="label_text">
                     Confirm Password
                   </label>
@@ -105,7 +97,7 @@ const page = () => {
                   />
                 </div>
               </div>
-              <div className="text-left space-y-1 w-full">
+              <div className="w-full space-y-1 text-left">
                 <label htmlFor="country" className="label_text">
                   Address line 1
                 </label>
@@ -116,7 +108,7 @@ const page = () => {
                   placeholder="Enter your state"
                 />
               </div>
-              <div className="text-left space-y-1 w-full">
+              <div className="w-full space-y-1 text-left">
                 <label htmlFor="country" className="label_text">
                   Address line 2
                 </label>
@@ -127,7 +119,7 @@ const page = () => {
                   placeholder="Enter your state"
                 />
               </div>
-              <div className="text-left space-y-1 w-full">
+              <div className="w-full space-y-1 text-left">
                 <label htmlFor="country" className="label_text">
                   Postcode
                 </label>
@@ -144,18 +136,18 @@ const page = () => {
               <div className="flex items-center gap-1">
                 <button
                   type="button"
-                  className="primary_button w-full uppercase"
+                  className="w-full uppercase primary_button"
                 >
                   Female
                 </button>
                 <button
                   type="button"
-                  className="primary_button w-full uppercase"
+                  className="w-full uppercase primary_button"
                 >
                   Male
                 </button>
               </div>
-              <button type="button" className="primary_button w-full uppercase">
+              <button type="button" className="w-full uppercase primary_button">
                 Request
               </button>
             </div>
