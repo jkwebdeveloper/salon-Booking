@@ -75,13 +75,13 @@ body::-webkit-scrollbar-thumb {
   @apply focus:outline-none border border-[#711F7E] text-black font-medium rounded-full active:scale-90 transition text-sm md:px-10 px-3 md:py-3 py-2;
 }
 
-.primary_button {
+/* .primary_button {
   @apply focus:outline-none uppercase bg-[#711F7E] text-white font-medium rounded-full active:scale-90 transition text-sm px-6 py-3;
 }
 
 .green_button {
   @apply focus:outline-none uppercase bg-[#0AADA4] text-white font-medium rounded-full active:scale-90 transition text-sm px-6 py-3;
-}
+} */
 
 .disable_button {
   @apply focus:outline-none uppercase bg-[#E6E6E6] text-black font-medium rounded-full active:scale-90 transition text-sm px-8 py-3;
@@ -114,4 +114,12 @@ body::-webkit-scrollbar-thumb {
 .footer:hover:after {
   width: 100%;
   left: 0;
+}
+
+/* Swiper Slider */
+body .swiper{
+  padding-bottom: 3.5rem;
+}
+body .swiper-pagination-bullet{
+  background-color: #711f7e;
 }

@@ -1,8 +1,6 @@
 import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
-import dynamic from "next/dynamic";
-const Header = dynamic(() => import("./Header"));
-const Footer = dynamic(() => import("./Footer"));
+import Layout from "@/components/global/layout";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -22,11 +20,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <Header />
-        {children}
-        <div className="pt-24">
-          <Footer />
-        </div>
+        <Layout>
+          {children}
+        </Layout>
       </body>
     </html>
   );
