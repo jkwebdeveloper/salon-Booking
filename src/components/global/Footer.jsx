@@ -1,10 +1,6 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import footer from "../../public/static/images/footer_bg.png";
-import Logo from "../../public/static/images/logo.png";
-import App from "../../public/static/images/appstore2.png";
-import Google from "../../public/static/images/playstore.png";
 import { ImFacebook } from "react-icons/im";
 import { BsTwitterX } from "react-icons/bs";
 import { FaInstagram } from "react-icons/fa";
@@ -53,7 +49,7 @@ const Footer = () => {
     <div
       className="w-full"
       style={{
-        backgroundImage: `url(${footer.src})`,
+        backgroundImage: `url('/static/images/footer.png')`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         objectFit: "cover",
@@ -75,7 +71,7 @@ const Footer = () => {
         <div className="md:hidden block">
           <div className="space-y-8 text-center">
             <div className="mx-auto">
-              <Image src={Logo} alt="logo" loading="lazy" className="mx-auto" />
+              <Image src={'/static/images/logo.png'} alt="logo" loading="lazy" className="mx-auto" width={150} height={150} />
             </div>
             <div className="w-full">
               <button type="button" className="primary_button">
@@ -84,10 +80,10 @@ const Footer = () => {
             </div>
             <div className="flex items-center justify-center gap-2">
               <div>
-                <Image src={App} alt="" loading="lazy" />
+                <Image src={'/static/images/appstore2.png'} alt="" loading="lazy" width={150} height={150} />
               </div>
               <div>
-                <Image src={Google} alt="" loading="lazy" />
+                <Image src={'/static/images/playstore.png'} alt="" loading="lazy" width={150} height={150} />
               </div>
             </div>
             <div className="flex items-center gap-2 justify-center">
@@ -253,7 +249,7 @@ const Footer = () => {
       <div className="md:block hidden">
         <div className="flex py-5 justify-between items-center mx-2">
           <div>
-            <Image src={Logo} alt="logo" loading="lazy" />
+            <Image src={'/static/images/logo.png'} alt="logo" loading="lazy" width={150} height={150} />
           </div>
           <div className="flex items-center gap-4">
             <div className="bg-white rounded-full p-2 text-primary_color hover:bg-primary_color hover:text-white cursor-pointer">

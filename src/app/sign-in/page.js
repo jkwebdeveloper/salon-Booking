@@ -6,14 +6,13 @@ import Link from "next/link";
 
 const page = () => {
   return (
-    <div className="w-screen grid lg:grid-cols-2 place-items-center items-center h-screen">
-      <div className="lg:block hidden">
+    <div className="grid items-center w-screen h-screen lg:grid-cols-2 place-items-center">
+      <div className="hidden lg:block">
         <Image
           src={signin}
           loading="lazy"
-        //   fill
+          //   fill
           alt="signin"
-          objectFit="cover"
           className="h-screen"
         />
       </div>
