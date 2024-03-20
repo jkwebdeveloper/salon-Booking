@@ -4,7 +4,7 @@ import React, { useState } from "react";
 const MainMenu = dynamic(() => import("@/components/MyAccount/MainMenu"));
 const MainDetail = dynamic(() => import("@/components/MyAccount/MainDetail"));
 
-const Page = () => {
+const page = () => {
   const [tabMenu, setTabMenu] = useState("Profile");
   return (
     <>
@@ -17,4 +17,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default page;

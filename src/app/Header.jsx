@@ -19,9 +19,17 @@ import { TbUserCheck } from "react-icons/tb";
 import { FaMobileAlt } from "react-icons/fa";
 import { TfiEmail } from "react-icons/tfi";
 import { MdLogout } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
+  const router = useRouter();
+  const isloginPage = router.pathname === "/sign-in";
+  const isRegisterPage = router.pathname === "/register";
   const [openSidebar, setOpenSidebar] = useState(false);
+
+  if (isloginPage || isRegisterPage) {
+    return null;
+  }
 
   return (
     <div className="w-full bg-white shadow-md">
