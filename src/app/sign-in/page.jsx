@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Image from "next/image";
 import React from "react";
 import logo from "../../../public/static/images/logo.png";
@@ -8,7 +8,6 @@ import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa6";
 import { FaApple } from "react-icons/fa";
-import { Button } from "@/components/ui/button";
 import validateInput from "@/lib/validateinput";
 import { POST } from "../api/post";
 import { Button } from "@/components/ui/button";
@@ -20,15 +19,15 @@ const page = () => {
     e.preventDefault();
     const validForm = await validateInput(e.target);
     if (validForm.length > 0) {
-      validForm.forEach(input => {
-        input.classList.add('border-red-500', 'text-red-500');
-        input.addEventListener('input', () => {
-          input.classList.remove('border-red-500', 'text-red-500');
+      validForm.forEach((input) => {
+        input.classList.add("border-red-500", "text-red-500");
+        input.addEventListener("input", () => {
+          input.classList.remove("border-red-500", "text-red-500");
         });
       });
       return;
     }
-    const res = await POST.request({ url: '/login', form: e.target });
+    const res = await POST.request({ url: "/login", form: e.target });
     console.log(res);
   };
 
@@ -45,7 +44,11 @@ const page = () => {
           <div className="flex items-center justify-center w-full p-4 mx-auto bg-white rounded-lg shadow-md xl:w-3/5">
             <div className="space-y-3">
               <p className="text-lg font-semibold">Login</p>
-              <form className="flex flex-col gap-3" noValidate onSubmit={e => signIn(e)}>
+              <form
+                className="flex flex-col gap-3"
+                noValidate
+                onSubmit={(e) => signIn(e)}
+              >
                 <div className="w-full space-y-1 text-left">
                   <label htmlFor="country" className="label_text">
                     Email Id
@@ -55,12 +58,15 @@ const page = () => {
                     name="email"
                     className="input_field"
                     placeholder="Enter your Email"
-                    pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                     required
                   />
                 </div>
                 <div className="relative w-full space-y-1 text-left">
-                  <label htmlFor="country" className="label_text"> Password </label>
+                  <label htmlFor="country" className="label_text">
+                    {" "}
+                    Password{" "}
+                  </label>
                   <input
                     type={showPassword ? "text" : "password"}
                     name="password"
@@ -69,17 +75,44 @@ const page = () => {
                     // pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
                     required
                   />
-                  <input type="hidden" name="device" value={/Mobi/i.test(window.navigator.userAgent) && 2 || 1} />
-                  <button type="button" onClick={() => setShowPassword(!showPassword)} >
-                    {showPassword && <BsEyeFill size={24} className="absolute mt-[0.1rem] text-gray-400 cursor-pointer top-2/4 right-3" /> || <BsEyeSlashFill size={24} className="absolute mt-[0.1rem] text-gray-400 cursor-pointer top-2/4 right-3"
-                    />}
+                  <input
+                    type="hidden"
+                    name="device"
+                    value={(/Mobi/i.test(window.navigator.userAgent) && 2) || 1}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {(showPassword && (
+                      <BsEyeFill
+                        size={24}
+                        className="absolute mt-[0.1rem] text-gray-400 cursor-pointer top-2/4 right-3"
+                      />
+                    )) || (
+                      <BsEyeSlashFill
+                        size={24}
+                        className="absolute mt-[0.1rem] text-gray-400 cursor-pointer top-2/4 right-3"
+                      />
+                    )}
                   </button>
                 </div>
-                <p className="text-xs"> 8 characters with a mix of letters, numbers & symbols </p>
-                <Button variant="primary" className="md:w-full" type="submit">Login</Button>
+                <p className="text-xs">
+                  {" "}
+                  8 characters with a mix of letters, numbers & symbols{" "}
+                </p>
+                <Button variant="primary" className="md:w-full" type="submit">
+                  Login
+                </Button>
               </form>
-              <button type="button" className="w-full uppercase primary_button"> login </button>
-              <Link href="/forgot-password"> <p className="font-semibold text-center">Forgot password?</p></Link>
+              <button type="button" className="w-full uppercase primary_button">
+                {" "}
+                login{" "}
+              </button>
+              <Link href="/forgot-password">
+                {" "}
+                <p className="font-semibold text-center">Forgot password?</p>
+              </Link>
               <div className="w-full space-y-1 text-left">
                 <label htmlFor="country" className="label_text">
                   Email Id

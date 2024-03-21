@@ -4,6 +4,8 @@ import Card from "./Card";
 import Wallet from "./Wallet";
 const Profile = dynamic(() => import("./Profile"));
 const MyBooking = dynamic(() => import("./MyBooking"));
+const ReferFriend = dynamic(() => import("./ReferFriend"));
+const ChangePassword = dynamic(() => import("./ChangePassword"));
 
 const MainDetail = ({ tabMenu }) => {
   return (
@@ -14,8 +16,12 @@ const MainDetail = ({ tabMenu }) => {
         <MyBooking />
       ) : tabMenu === "Card" ? (
         <Card />
-      ) : tabMenu === "Wallet" ?  (
-        <Wallet/>
+      ) : tabMenu === "Wallet" ? (
+        <Wallet />
+      ) : tabMenu === "Friend" ? (
+        <ReferFriend />
+      ) : tabMenu === "Change Password" ? (
+        <ChangePassword />
       ) : null}
     </div>
   );
