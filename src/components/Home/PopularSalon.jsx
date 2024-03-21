@@ -18,6 +18,7 @@ import { FaStar, FaWhatsapp } from "react-icons/fa";
 import { ImFacebook } from "react-icons/im";
 import { BsTwitterX } from "react-icons/bs";
 import { LuBookmark } from "react-icons/lu";
+import { Button } from "../ui/button";
 
 const PopularSalon = () => {
   const [beginAndEnd, setBeginAndEnd] = useState({
@@ -96,7 +97,6 @@ const PopularSalon = () => {
                         // width={500}
                         alt="moon"
                         loading="lazy"
-                        
                         // fill
                         className="object-cover w-full h-full"
                       />
@@ -206,12 +206,8 @@ const PopularSalon = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <button type="button" className="primary_button">
-                    Book Now
-                  </button>
-                  <button type="button" className="green_button">
-                    Quick view
-                  </button>
+                  <Button variant="primary">Book Now</Button>
+                  <Button variant="secondary">Quick view</Button>
                 </div>
               </div>
               <hr className="w-full" />
@@ -235,12 +231,8 @@ const PopularSalon = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <button type="button" className="primary_button">
-                    Book Now
-                  </button>
-                  <button type="button" className="green_button">
-                    Quick view
-                  </button>
+                  <Button variant="primary">Book Now</Button>
+                  <Button variant="secondary">Quick view</Button>
                 </div>
               </div>
             </div>
@@ -277,7 +269,6 @@ const PopularSalon = () => {
                         // width={500}
                         alt="moon"
                         loading="lazy"
-                        
                         // fill
                         className="object-cover w-full h-full"
                       />
@@ -375,12 +366,8 @@ const PopularSalon = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <button type="button" className="primary_button">
-                    Book Now
-                  </button>
-                  <button type="button" className="green_button">
-                    Quick view
-                  </button>
+                  <Button variant="primary">Book Now</Button>
+                  <Button variant="secondary">Quick view</Button>
                 </div>
               </div>
               <hr className="w-full" />
@@ -404,12 +391,8 @@ const PopularSalon = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <button type="button" className="primary_button">
-                    Book Now
-                  </button>
-                  <button type="button" className="green_button">
-                    Quick view
-                  </button>
+                  <Button variant="primary">Book Now</Button>
+                  <Button variant="secondary">Quick view</Button>
                 </div>
               </div>
             </div>
@@ -446,7 +429,6 @@ const PopularSalon = () => {
                         // width={500}
                         alt="moon"
                         loading="lazy"
-                        
                         // fill
                         className="object-cover w-full h-full"
                       />
@@ -544,12 +526,8 @@ const PopularSalon = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <button type="button" className="primary_button">
-                    Book Now
-                  </button>
-                  <button type="button" className="green_button">
-                    Quick view
-                  </button>
+                  <Button variant="primary">Book Now</Button>
+                  <Button variant="secondary">Quick view</Button>
                 </div>
               </div>
               <hr className="w-full" />
@@ -573,12 +551,8 @@ const PopularSalon = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <button type="button" className="primary_button">
-                    Book Now
-                  </button>
-                  <button type="button" className="green_button">
-                    Quick view
-                  </button>
+                  <Button variant="primary">Book Now</Button>
+                  <Button variant="secondary">Quick view</Button>
                 </div>
               </div>
             </div>

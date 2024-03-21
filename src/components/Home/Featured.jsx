@@ -18,6 +18,7 @@ import { FaStar, FaWhatsapp } from "react-icons/fa";
 import { ImFacebook } from "react-icons/im";
 import { BsTwitterX } from "react-icons/bs";
 import { LuBookmark } from "react-icons/lu";
+import { Button } from "../ui/button";
 
 const Featured = () => {
   const [beginAndEnd, setBeginAndEnd] = useState({
@@ -96,7 +97,6 @@ const Featured = () => {
                         // width={500}
                         alt="moon"
                         loading="lazy"
-                        
                         // fill
                         className="w-full h-full object-cover"
                       />
@@ -194,12 +194,8 @@ const Featured = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <button type="button" className="primary_button">
-                    Book Now
-                  </button>
-                  <button type="button" className="green_button">
-                    Quick view
-                  </button>
+                  <Button variant="primary">Book Now</Button>
+                  <Button variant="secondary">Quick view</Button>
                 </div>
               </div>
               <hr className="w-full" />
@@ -223,12 +219,8 @@ const Featured = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <button type="button" className="primary_button">
-                    Book Now
-                  </button>
-                  <button type="button" className="green_button">
-                    Quick view
-                  </button>
+                  <Button variant="primary">Book Now</Button>
+                  <Button variant="secondary">Quick view</Button>
                 </div>
               </div>
             </div>
@@ -265,7 +257,6 @@ const Featured = () => {
                         // width={500}
                         alt="moon"
                         loading="lazy"
-                        
                         // fill
                         className="w-full h-full object-cover"
                       />
@@ -363,12 +354,8 @@ const Featured = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <button type="button" className="primary_button">
-                    Book Now
-                  </button>
-                  <button type="button" className="green_button">
-                    Quick view
-                  </button>
+                  <Button variant="primary">Book Now</Button>
+                  <Button variant="secondary">Quick view</Button>
                 </div>
               </div>
               <hr className="w-full" />
@@ -392,12 +379,8 @@ const Featured = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <button type="button" className="primary_button">
-                    Book Now
-                  </button>
-                  <button type="button" className="green_button">
-                    Quick view
-                  </button>
+                  <Button variant="primary">Book Now</Button>
+                  <Button variant="secondary">Quick view</Button>
                 </div>
               </div>
             </div>
@@ -434,7 +417,6 @@ const Featured = () => {
                         // width={500}
                         alt="moon"
                         loading="lazy"
-                        
                         // fill
                         className="w-full h-full object-cover"
                       />
@@ -532,12 +514,8 @@ const Featured = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <button type="button" className="primary_button">
-                    Book Now
-                  </button>
-                  <button type="button" className="green_button">
-                    Quick view
-                  </button>
+                  <Button variant="primary">Book Now</Button>
+                  <Button variant="secondary">Quick view</Button>
                 </div>
               </div>
               <hr className="w-full" />
@@ -561,12 +539,8 @@ const Featured = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <button type="button" className="primary_button">
-                    Book Now
-                  </button>
-                  <button type="button" className="green_button">
-                    Quick view
-                  </button>
+                  <Button variant="primary">Book Now</Button>
+                  <Button variant="secondary">Quick view</Button>
                 </div>
               </div>
             </div>

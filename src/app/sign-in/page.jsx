@@ -11,6 +11,7 @@ import { FaApple } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import validateInput from "@/lib/validateinput";
 import { POST } from "../api/post";
+import { Button } from "@/components/ui/button";
 
 const page = () => {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -41,7 +42,7 @@ const page = () => {
               <Image src={logo} loading="lazy" alt="logo" className="mx-auto" />
             </Link>
           </div>
-          <div className="w-full p-4 mx-auto bg-white rounded-lg shadow-md xl:w-3/5">
+          <div className="flex items-center justify-center w-full p-4 mx-auto bg-white rounded-lg shadow-md xl:w-3/5">
             <div className="space-y-3">
               <p className="text-lg font-semibold">Login</p>
               <form className="flex flex-col gap-3" noValidate onSubmit={e => signIn(e)}>
@@ -79,6 +80,59 @@ const page = () => {
               </form>
               <button type="button" className="w-full uppercase primary_button"> login </button>
               <Link href="/forgot-password"> <p className="font-semibold text-center">Forgot password?</p></Link>
+              <div className="w-full space-y-1 text-left">
+                <label htmlFor="country" className="label_text">
+                  Email Id
+                </label>
+                <input
+                  type="email"
+                  name="state"
+                  className="input_field"
+                  placeholder="Enter your Email"
+                />
+              </div>
+              <div className="relative w-full space-y-1 text-left">
+                <label htmlFor="country" className="label_text">
+                  Password
+                </label>
+                <input
+                  // type={showPassword ? "text" : "password"}
+                  type="password"
+                  name="state"
+                  className="input_field"
+                  placeholder="Enter your Email"
+                />
+                {/* <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <BsEyeFill
+                    size={24}
+                    className="absolute text-gray-400 cursor-pointer top-8 right-3"
+                  />
+                ) : (
+                  <BsEyeSlashFill
+                    size={24}
+                    className="absolute text-gray-400 cursor-pointer top-8 right-3"
+                  />
+                )}
+              </button> */}
+              </div>
+              <p className="text-xs">
+                8 characters with a mix of letters, numbers & symbols
+              </p>
+              {/* <button type="button" className="w-full uppercase primary_button">
+                login
+              </button> */}
+              <Button variant="primary" className="md:w-full">
+                login
+              </Button>
+              <div>
+                <Link href="/forgot-password">
+                  <p className="font-semibold text-center">Forgot password?</p>
+                </Link>
+              </div>
               <div className="inline-flex items-center justify-center w-full">
                 <hr className="h-px my-4 bg-gray-200 border-0 w-80 dark:bg-gray-700" />
                 <span className="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">

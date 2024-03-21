@@ -26,10 +26,10 @@ export default function Page() {
         <Groupon />
         <PamperTeam />
         <Offers />
-        <PopularSalon/>
-        <DownloadApp/>
-        <Testimonials/>
-        <Business/>
+        <PopularSalon />
+        <DownloadApp />
+        <Testimonials />
+        <Business />
       </div>
     </div>
   );

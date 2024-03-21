@@ -3,6 +3,7 @@ import React from "react";
 import signin from "../../../public/static/images/signin.png";
 import logo from "../../../public/static/images/logo.png";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const page = () => {
   return (
@@ -16,7 +17,7 @@ const page = () => {
           className="h-screen"
         />
       </div>
-      <div className="lg:w-full w-screen bg-[#FAFAFA] h-full p-3 relative z-0">
+      <div className="lg:w-full w-screen flex justify-center items-center bg-[#FAFAFA] h-full p-3 relative z-0">
         <div className="space-y-4">
           <div>
             <Link href="/">
@@ -41,9 +42,9 @@ const page = () => {
                   placeholder="Enter your Email"
                 />
               </div>
-              <button type="button" className="primary_button w-full uppercase">
+              <Button variant="primary" className="md:w-full">
                 Request
-              </button>
+              </Button>
             </div>
           </div>
         </div>
