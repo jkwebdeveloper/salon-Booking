@@ -3,6 +3,7 @@ import { FaSearch } from "react-icons/fa";
 import { CiCalendarDate } from "react-icons/ci";
 import { IoTimeOutline } from "react-icons/io5";
 import { CiLocationOn } from "react-icons/ci";
+import { Button } from "../ui/button";
 
 const FindNearByForm = () => {
   return (
@@ -51,12 +52,7 @@ const FindNearByForm = () => {
               className="outline-none"
             />
           </div>
-          <button
-            type="button"
-            className="w-full px-4 transition primary_button hover:bg-blue_button/80 active:scale-90"
-          >
-            Search
-          </button>
+          <Button variant="primary">Search</Button>
         </div>
       </div>
     </div>

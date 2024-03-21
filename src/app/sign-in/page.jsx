@@ -8,6 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa6";
 import { FaApple } from "react-icons/fa";
+import { Button } from "@/components/ui/button";
 
 const page = () => {
   // const [showPassword, setShowPassword] = useState(false);
@@ -22,7 +23,7 @@ const page = () => {
               <Image src={logo} loading="lazy" alt="logo" className="mx-auto" />
             </Link>
           </div>
-          <div className="w-full p-4 mx-auto bg-white rounded-lg shadow-md xl:w-3/5">
+          <div className="w-full p-4 mx-auto bg-white rounded-lg shadow-md flex justify-center items-center xl:w-3/5">
             <div className="space-y-3">
               <p className="text-lg font-semibold">Login</p>
               <div className="w-full space-y-1 text-left">
@@ -67,12 +68,17 @@ const page = () => {
               <p className="text-xs">
                 8 characters with a mix of letters, numbers & symbols
               </p>
-              <button type="button" className="w-full uppercase primary_button">
+              {/* <button type="button" className="w-full uppercase primary_button">
                 login
-              </button>
-              <Link href="/forgot-password">
-                <p className="font-semibold text-center">Forgot password?</p>
-              </Link>
+              </button> */}
+              <Button variant="primary" className="md:w-full">
+                login
+              </Button>
+              <div>
+                <Link href="/forgot-password">
+                  <p className="font-semibold text-center">Forgot password?</p>
+                </Link>
+              </div>
               <div className="inline-flex items-center justify-center w-full">
                 <hr className="h-px my-4 bg-gray-200 border-0 w-80 dark:bg-gray-700" />
                 <span className="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">

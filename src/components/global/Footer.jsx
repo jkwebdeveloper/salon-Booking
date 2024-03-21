@@ -71,7 +71,14 @@ const Footer = () => {
         <div className="block md:hidden">
           <div className="space-y-8 text-center">
             <div className="mx-auto">
-              <Image src={'/static/images/logo.png'} alt="logo" loading="lazy" className="mx-auto" width={150} height={150} />
+              <Image
+                src={"/static/images/logo.png"}
+                alt="logo"
+                loading="lazy"
+                className="mx-auto"
+                width={150}
+                height={150}
+              />
             </div>
             <div className="w-full">
               <button type="button" className="primary_button">
@@ -80,10 +87,22 @@ const Footer = () => {
             </div>
             <div className="flex items-center justify-center gap-2">
               <div>
-                <Image src={'/static/images/appstore2.png'} alt="" loading="lazy" width={150} height={150} />
+                <Image
+                  src={"/static/images/appstore2.png"}
+                  alt=""
+                  loading="lazy"
+                  width={150}
+                  height={150}
+                />
               </div>
               <div>
-                <Image src={'/static/images/playstore.png'} alt="" loading="lazy" width={150} height={150} />
+                <Image
+                  src={"/static/images/playstore.png"}
+                  alt=""
+                  loading="lazy"
+                  width={150}
+                  height={150}
+                />
               </div>
             </div>
             <div className="flex items-center justify-center gap-2">
@@ -249,7 +268,13 @@ const Footer = () => {
       <div className="hidden md:block">
         <div className="flex items-center justify-between py-5 mx-2">
           <div>
-            <Image src={'/static/images/logo.png'} alt="logo" loading="lazy" width={150} height={150} />
+            <Image
+              src={"/static/images/logo.png"}
+              alt="logo"
+              loading="lazy"
+              width={150}
+              height={150}
+            />
           </div>
           <div className="flex items-center gap-4">
             <div className="p-2 bg-white rounded-full cursor-pointer text-primary_color hover:bg-primary_color hover:text-white">

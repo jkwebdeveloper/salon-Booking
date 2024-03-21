@@ -2,19 +2,13 @@ import Image from "next/image";
 import React from "react";
 import image from "../../../public/static/images/Left-image.png";
 import logo from "../../../public/static/images/logo.png";
+import { Button } from "../ui/button";
 
 const Business = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 justify-center lg:gap-0 gap-5 items-center">
       <div className="mx-auto">
-        <Image
-          src={image}
-          height={300}
-          alt=""
-          loading="lazy"
-          
-          className=""
-        />
+        <Image src={image} height={300} alt="" loading="lazy" className="" />
         {/* <Image
           src={logo}
           alt=""
@@ -33,9 +27,12 @@ const Business = () => {
           posuere in leo ipsum ornare hendrerit. Vitae sollicitudin consectetur
           ultricies nec.{" "}
         </p>
-        <button type="button" className="primary_button">
+        {/* <button type="button" className="primary_button">
           Connect With Us
-        </button>
+        </button> */}
+        <Button variant="primary" className="w-auto">
+          Connect With Us
+        </Button>
       </div>
     </div>
   );

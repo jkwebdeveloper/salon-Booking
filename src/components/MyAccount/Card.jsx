@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MdLocationPin } from "react-icons/md";
 import EditCardModal from "./EditCardModal";
+import { Button } from "../ui/button";
 
 const Card = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -39,9 +40,9 @@ const Card = () => {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <button type="button" className="outline_button_red">
+            <Button type="button" variant="outline" className="">
               remove
-            </button>
+            </Button>
             <button
               type="button"
               className="focus:outline-none uppercase bg-[#711F7E] text-white font-medium rounded-full active:scale-90 transition text-sm px-14 py-3 "
