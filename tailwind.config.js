@@ -75,5 +75,13 @@ module.exports = {
       },
     },
   },
+  safelist: [
+    { pattern: /^border-(red|green)-[^/]+$/, },
+    { pattern: /^text-(red|green)-[^/]+$/, },
+    {
+      pattern: /^bg-(indigo|yellow|red|purple|pink|blue|green)-[^/]+$/,
+      variants: ['hover', 'dark', 'dark:hover', 'group-hover', 'group-hover/navitem', 'group-hover/submenu'],
+    },
+  ],
   plugins: [require("tailwindcss-animate")],
 }

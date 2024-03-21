@@ -92,7 +92,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .input_field {
-  @apply border border-[#C4C4C4] bg-[#FAFAFA] focus:border-primary_color w-full outline-none md:p-2 p-1 rounded-[4px];
+  @apply border bg-[#FAFAFA] focus:border-primary_color w-full outline-none md:p-2 p-1 rounded-[4px];
 }
 
 .title:after,
