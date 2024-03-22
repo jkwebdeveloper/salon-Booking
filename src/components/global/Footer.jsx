@@ -7,6 +7,7 @@ import { FaInstagram } from "react-icons/fa";
 import { ImLinkedin2 } from "react-icons/im";
 import { FaPinterestP } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import Link from "next/link";
 
 const FooterData = [
   {
@@ -198,33 +199,39 @@ const Footer = () => {
           <p className="text-base font-semibold uppercase text-primary_color title heading">
             Company
           </p>
-          <p className="text-sm font-light cursor-pointer ">
+          <p className="text-sm font-light">
             <span className="inline-block footer">Blogs</span>
           </p>
-          <p className="text-sm font-light cursor-pointer ">
+          <p className="text-sm font-light">
             <span className="inline-block footer">About</span>
           </p>
-          <p className="text-sm font-light cursor-pointer ">
-            <span className="inline-block footer">Why Us</span>
+          <p className="text-sm font-light">
+            <Link href="/why-us">
+              <span className="inline-block footer">Why Us</span>
+            </Link>
           </p>
-          <p className="text-sm font-light cursor-pointer ">
-            <span className="inline-block footer">Tax Strategy</span>
+          <p className="text-sm font-light">
+            <Link href="/tax-strategy">
+              <span className="inline-block footer">Tax Strategy</span>
+            </Link>
           </p>
         </div>
         <div className="hidden space-y-4 text-black md:block">
           <p className="text-base font-semibold uppercase text-primary_color title heading">
             Legal
           </p>
-          <p className="text-sm font-light cursor-pointer ">
-            <span className="inline-block footer">Terms & Conditions</span>
+          <p className="text-sm font-light">
+            <Link href="/terms-conditions">
+              <span className="inline-block footer">Terms & Conditions</span>
+            </Link>
           </p>
-          <p className="text-sm font-light cursor-pointer ">
+          <p className="text-sm font-light">
             <span className="inline-block footer">Privacy</span>
           </p>
-          <p className="text-sm font-light cursor-pointer ">
+          <p className="text-sm font-light">
             <span className="inline-block footer">Coockies</span>
           </p>
-          <p className="text-sm font-light cursor-pointer ">
+          <p className="text-sm font-light">
             <span className="inline-block footer">
               Modern Slavery Statement
             </span>
@@ -234,16 +241,18 @@ const Footer = () => {
           <p className="text-base font-semibold uppercase text-primary_color title heading">
             USEFUL LINKS
           </p>
-          <p className="text-sm font-light cursor-pointer ">
-            <span className="inline-block footer">Contact Us</span>
+          <p className="text-sm font-light">
+            <Link href="/contact-us">
+              <span className="inline-block footer">Contact Us</span>
+            </Link>
           </p>
-          <p className="text-sm font-light cursor-pointer ">
+          <p className="text-sm font-light">
             <span className="inline-block footer">Business Support</span>
           </p>
-          <p className="text-sm font-light cursor-pointer ">
+          <p className="text-sm font-light">
             <span className="inline-block footer">Faqs</span>
           </p>
-          <p className="text-sm font-light cursor-pointer ">
+          <p className="text-sm font-light">
             <span className="inline-block footer">Careers</span>
           </p>
         </div>
