@@ -1,12 +1,15 @@
 import React from "react";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 const ReferFriend = () => {
   return (
     <div className="space-y-4 bg-white shadow-lg xl:p-5 p-3">
       <div className="flex justify-between items-center">
         <p className="text-xl text-[#25324B] font-semibold">Referral History</p>
-        <Button variant="primary">Refer a friend</Button>
+        <Link href="/refer-friend">
+          <Button variant="primary">Refer a friend</Button>
+        </Link>
       </div>
       <div className="border inline-block border-[#C4C4C4] overflow-x-auto rounded-xl w-full">
         <table className="w-full overflow-x-auto leading-normal">
