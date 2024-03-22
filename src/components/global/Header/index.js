@@ -53,7 +53,7 @@ const Header = () => {
 
   return (
     <div className="w-full bg-white shadow-md">
-      <div className="container border xl:flex xl:justify-between md:items-center">
+      <div className="container border-b xl:flex xl:justify-between md:items-center">
         <div className="flex items-center justify-between py-2 xl:justify-start md:gap-6">
           <div>
             <Link href="/">
@@ -67,13 +67,9 @@ const Header = () => {
             </Link>
           </div>
           <div className="flex items-center gap-6">
-            <button
-              type="button"
-              className="flex items-center justify-center gap-2 outline_button md:px-5"
-            >
-              <MdLocationPin className="text-lg text-primary_color" />
-              Manchester
-            </button>
+            <Button type="button" variant="outline" size="sm" className="uppercase ps-3 group">
+              <MdLocationPin className="text-lg transition-all text-primary_color group-hover:text-white" /> Manchester
+            </Button>
             <div className="block xl:hidden">
               <BiMenuAltRight
                 className="text-2xl cursor-pointer text-primary_color"
@@ -83,34 +79,18 @@ const Header = () => {
           </div>
         </div>
         <div className="hidden xl:block">
-          <div className="flex items-center gap-4">
-            <button
-              type="button"
-              className="uppercase transition-all outline_button hover:bg-primary_color hover:text-white md:px-5"
-            >
-              For business
-            </button>
-            <Link href="/sign-in">
-              <button
-                type="button"
-                className="uppercase transition-all outline_button hover:bg-primary_color hover:text-white"
-              >
-                Log in
-              </button>
-            </Link>
+          <div className="flex items-center gap-2">
+            <Button type="button" variant="outline" size="sm" className="uppercase">For business</Button>
+            <Link href={'/sign-in'} className="uppercase border-[1px] rounded-full border-black bg-background shadow-sm hover:bg-primary hover:text-white h-8 px-5 text-xs flex items-center">Log in</Link>
             {/* My Account Dropdown Menu */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button
-                  type="button"
-                  className="uppercase transition-all outline_button flex items-center gap-2 hover:bg-primary_color hover:text-white md:px-5"
-                >
-                  My Account
-                  <IoCaretDown />
-                </button>
+                <Button type="button" variant="outline" size="sm" className="uppercase pe-3">
+                  My Account <IoCaretDown />
+                </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56">
-                <DropdownMenuGroup className="mt-2">
+              <DropdownMenuContent className="w-56 mt-2 ring-1 ring-neutral-200">
+                <DropdownMenuGroup>
                   <DropdownMenuItem className="flex items-center gap-2">
                     <TbUserCheck className="text-xl" />
                     Profile
@@ -167,17 +147,17 @@ const Header = () => {
             {/* Cart Dropdown Menu */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="outline-none">
-                  <GrCart className="text-xl text-primary_color cursor-pointer" />
-                </button>
+                <Button type="button" variant="ghost" size="icon" className="uppercase">
+                  <GrCart className="text-xl cursor-pointer text-primary_color" />
+                </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-full">
+              <DropdownMenuContent className="w-full mt-2 -translate-x-1 ring-1 ring-neutral-200">
                 <DropdownMenuLabel className="text-primary_color">
                   My basket
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                  <DropdownMenuItem className="flex justify-between items-center">
+                  <DropdownMenuItem className="flex items-center justify-between">
                     <div className="">
                       <p className="font-semibold">Sports Massage</p>
                       <p className="text-xs">10 Mins</p>
@@ -188,7 +168,7 @@ const Header = () => {
                     </div>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem className="flex justify-between items-center">
+                  <DropdownMenuItem className="flex items-center justify-between">
                     <div className="">
                       <p className="font-semibold">Swedish Massage</p>
                       <p className="text-xs">15 Mins</p>
@@ -199,7 +179,7 @@ const Header = () => {
                     </div>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem className="flex justify-between items-center">
+                  <DropdownMenuItem className="flex items-center justify-between">
                     <div className="">
                       <p className="font-semibold">Couples Massage</p>
                       <p className="text-xs">2 hr</p>
@@ -210,7 +190,7 @@ const Header = () => {
                     </div>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem className="flex justify-between items-center">
+                  <DropdownMenuItem className="flex items-center justify-between">
                     <div className="">
                       <p className="font-semibold">Total:</p>
                     </div>
@@ -220,7 +200,7 @@ const Header = () => {
                       </p>
                     </div>
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="flex  gap-4 justify-between items-center">
+                  <DropdownMenuItem className="flex items-center justify-between gap-4">
                     <Button
                       type="button"
                       // className="uppercase transition-all outline_button hover:bg-primary_color hover:text-white"
@@ -236,11 +216,11 @@ const Header = () => {
             {/* Notifications Dropdown Menu */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="outline-none">
-                  <GoBell className="text-xl text-primary_color cursor-pointer" />
-                </button>
+                <Button type="button" variant="ghost" size="icon" className="uppercase">
+                  <GoBell className="text-xl cursor-pointer text-primary_color" />
+                </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent>
+              <DropdownMenuContent className="w-full mt-2 -translate-x-1 ring-1 ring-neutral-200">
                 <DropdownMenuLabel className="text-primary_color">
                   Notifications
                 </DropdownMenuLabel>

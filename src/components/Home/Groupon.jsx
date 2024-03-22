@@ -74,13 +74,13 @@ const Groupon = () => {
     const [isFavourite, setIsFavourite] = useState(false);
   return (
     <div className="w-full space-y-4">
-      <p className="text-black font-semibold uppercase text-2xl title heading">
+      <p className="text-2xl font-semibold text-black uppercase title heading">
         Top Deals on{" "}
         <span className="bg-gradient-to-r bg-clip-text text-transparent from-[#01A90E]/100 to-[#68EE14]/100">
           groupon
         </span>
       </p>
-      <div className="w-full relative">
+      <div className="relative w-full">
         <Swiper
           // style={{
           //   "--swiper-pagination-color": "#FFBA08",
@@ -120,17 +120,17 @@ const Groupon = () => {
             },
             1024: {
               slidesPerView: 3,
-              spaceBetween: 10,
+              spaceBetween: 15,
             },
             1280: {
               slidesPerView: 4,
-              spaceBetween: 10,
+              spaceBetween: 20,
             },
           }}
         >
           {boxData.map((item) => (
             <SwiperSlide key={item.id}>
-              <div className="w-full relative space-y-4" key={item.id}>
+              <div className="relative w-full space-y-4" key={item.id}>
                 <div
                   onClick={() => setIsFavourite(!isFavourite)}
                   className={`absolute top-3 right-3 ${
@@ -138,13 +138,13 @@ const Groupon = () => {
                   } rounded-full p-2 cursor-pointer`}
                 >
                   {isFavourite ? (
-                    <RiHeartFill className="text-red-500 text-2xl" />
+                    <RiHeartFill className="text-2xl text-red-500" />
                   ) : (
-                    <IoHeartOutline className="text-white text-2xl" />
+                    <IoHeartOutline className="text-2xl text-white" />
                   )}
                 </div>
                 <div>
-                  <div className="bg-white shadow-lg rounded-lg" key={item?.id}>
+                  <div className="mx-2 bg-white rounded-lg shadow-lg" key={item?.id}>
                     <div className="space-y-4">
                       <div>
                         <Image
@@ -153,12 +153,12 @@ const Groupon = () => {
                           loading="lazy"
                           
                           // fill
-                          className="w-full h-full object-cover"
+                          className="object-cover w-full h-full"
                         />
                       </div>
-                      <div className="p-2 md:space-y-3 space-y-2">
+                      <div className="px-4 py-3 space-y-2 md:space-y-3">
                         <div className="">
-                          <h1 className="font-semibold md:text-base text-sm">
+                          <h1 className="text-sm font-semibold md:text-base">
                             {item?.title}
                             <span className="font-normal">
                               {item?.titleoption}
@@ -170,19 +170,19 @@ const Groupon = () => {
                             <MdLocationPin className="text-lg text-primary_color" />
                           </div>
                           <div>
-                            <p className="md:text-base text-sm">
+                            <p className="text-sm md:text-base">
                               {item?.location}
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-center md:gap-3 gap-2">
-                          <div className="flex items-center md:gap-3 gap-2">
+                        <div className="flex items-center gap-2 md:gap-3">
+                          <div className="flex items-center gap-2 md:gap-3">
                             <FaStar className="text-lg text-primary_color" />
-                            <p className="md:text-base text-sm">
+                            <p className="text-sm md:text-base">
                               {item?.rating}
                             </p>
                           </div>
-                          <div className="flex items-center md:gap-3 gap-2">
+                          <div className="flex items-center gap-2 md:gap-3">
                             <div className="bg-[#29AD17] p-2 rounded-full">
                               <FaWhatsapp className="text-lg text-white" />
                             </div>
@@ -198,13 +198,13 @@ const Groupon = () => {
                           </div>
                         </div>
                         <div className="flex items-center gap-3">
-                          <p className="text-primary_color font-semibold text-2xl">
+                          <p className="text-2xl font-semibold text-primary_color">
                             £249{" "}
                             <span className="line-through text-[#898989] font-normal text-base">
                               £289
                             </span>
                           </p>
-                          <p className="text-green_color font-semibold text-base">
+                          <p className="text-base font-semibold text-green_color">
                             {" "}
                             30% OFF
                           </p>

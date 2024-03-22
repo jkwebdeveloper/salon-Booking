@@ -29,7 +29,7 @@ const Featured = () => {
   const nextRef = useRef(null);
   return (
     <div className="w-full space-y-4">
-      <p className="text-black font-semibold uppercase text-2xl title heading">
+      <p className="text-2xl font-semibold text-black uppercase title heading">
         Near by <span className="text-primary_color">Featured salons</span>
       </p>
       <div className="relative w-full">
@@ -67,7 +67,7 @@ const Featured = () => {
         >
           <SwiperSlide>
             <div className="border border-[#DBDBDB] rounded-lg">
-              <div className="flex xl:flex-row flex-col xl:items-center text-left justify-between p-3 xl:gap-2 gap-1">
+              <div className="flex flex-col justify-between gap-1 p-3 text-left xl:flex-row xl:items-center xl:gap-2">
                 <div className="relative">
                   <Swiper
                     // install Swiper modules
@@ -98,7 +98,7 @@ const Featured = () => {
                         alt="moon"
                         loading="lazy"
                         // fill
-                        className="w-full h-full object-cover"
+                        className="object-cover w-full h-full"
                       />
                     </SwiperSlide>
                     {/* <SwiperSlide>
@@ -110,7 +110,7 @@ const Featured = () => {
                         loading="lazy"
                         
                         // fill
-                        className="w-full h-full object-cover"
+                        className="object-cover w-full h-full"
                       />
                     </SwiperSlide> */}
                   </Swiper>
@@ -131,8 +131,8 @@ const Featured = () => {
                     <IoIosArrowForward className="text-[#007aff] w-6 h-6" />
                   </div> */}
                 </div>
-                <div className="xl:space-y-3 space-y-2">
-                  <h1 className="font-semibold text-base">Moon Massage</h1>
+                <div className="space-y-2 xl:space-y-3">
+                  <h1 className="text-base font-semibold">Moon Massage</h1>
                   <p className="text-primary_color">Nail Salons</p>
                   <div className="flex items-center gap-3">
                     <div className="bg-[#7f52861a] p-2 rounded-full">
@@ -162,10 +162,10 @@ const Featured = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex gap-3 items-center">
+                  <div className="flex items-center gap-3">
                     <button
                       type="button"
-                      className="outline_button flex gap-2 items-center md:px-5 justify-center"
+                      className="flex items-center justify-center gap-2 outline_button md:px-5"
                     >
                       <MdLocationPin className="text-lg text-primary_color" />
                       View All Services
@@ -174,20 +174,20 @@ const Featured = () => {
                 </div>
               </div>
               <hr className="w-full mt-4" />
-              <div className="p-3 flex xl:flex-row flex-col justify-between xl:items-center text-left">
+              <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage 
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
-                    <p className="text-primary_color font-semibold text-2xl">
+                    <p className="text-2xl font-semibold text-primary_color">
                       £18{" "}
                       <span className="line-through text-[#898989] font-normal text-base">
                         £28
                       </span>
                     </p>
-                    <p className="text-green_color font-semibold text-base">
+                    <p className="text-base font-semibold text-green_color">
                       {" "}
                       30% OFF
                     </p>
@@ -199,20 +199,20 @@ const Featured = () => {
                 </div>
               </div>
               <hr className="w-full" />
-              <div className="p-3 flex xl:flex-row flex-col justify-between xl:items-center text-left">
+              <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage 
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
-                    <p className="text-primary_color font-semibold text-2xl">
+                    <p className="text-2xl font-semibold text-primary_color">
                       £18{" "}
                       <span className="line-through text-[#898989] font-normal text-base">
                         £28
                       </span>
                     </p>
-                    <p className="text-green_color font-semibold text-base">
+                    <p className="text-base font-semibold text-green_color">
                       {" "}
                       30% OFF
                     </p>
@@ -227,7 +227,7 @@ const Featured = () => {
           </SwiperSlide>
           <SwiperSlide>
             <div className="border border-[#DBDBDB] rounded-lg">
-              <div className="flex xl:flex-row flex-col xl:items-center text-left justify-between p-3 xl:gap-2 gap-1">
+              <div className="flex flex-col justify-between gap-1 p-3 text-left xl:flex-row xl:items-center xl:gap-2">
                 <div className="relative">
                   <Swiper
                     // install Swiper modules
@@ -258,7 +258,7 @@ const Featured = () => {
                         alt="moon"
                         loading="lazy"
                         // fill
-                        className="w-full h-full object-cover"
+                        className="object-cover w-full h-full"
                       />
                     </SwiperSlide>
                     {/* <SwiperSlide>
@@ -270,7 +270,7 @@ const Featured = () => {
                         loading="lazy"
                         
                         // fill
-                        className="w-full h-full object-cover"
+                        className="object-cover w-full h-full"
                       />
                     </SwiperSlide> */}
                   </Swiper>
@@ -291,8 +291,8 @@ const Featured = () => {
                     <IoIosArrowForward className="text-[#007aff] w-6 h-6" />
                   </div> */}
                 </div>
-                <div className="xl:space-y-3 space-y-2">
-                  <h1 className="font-semibold text-base">Moon Massage</h1>
+                <div className="space-y-2 xl:space-y-3">
+                  <h1 className="text-base font-semibold">Moon Massage</h1>
                   <p className="text-primary_color">Nail Salons</p>
                   <div className="flex items-center gap-3">
                     <div className="bg-[#7f52861a] p-2 rounded-full">
@@ -322,10 +322,10 @@ const Featured = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex gap-3 items-center">
+                  <div className="flex items-center gap-3">
                     <button
                       type="button"
-                      className="outline_button flex gap-2 items-center md:px-5 justify-center"
+                      className="flex items-center justify-center gap-2 outline_button md:px-5"
                     >
                       <MdLocationPin className="text-lg text-primary_color" />
                       View All Services
@@ -334,20 +334,20 @@ const Featured = () => {
                 </div>
               </div>
               <hr className="w-full mt-4" />
-              <div className="p-3 flex xl:flex-row flex-col justify-between xl:items-center text-left">
+              <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage 
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
-                    <p className="text-primary_color font-semibold text-2xl">
+                    <p className="text-2xl font-semibold text-primary_color">
                       £18{" "}
                       <span className="line-through text-[#898989] font-normal text-base">
                         £28
                       </span>
                     </p>
-                    <p className="text-green_color font-semibold text-base">
+                    <p className="text-base font-semibold text-green_color">
                       {" "}
                       30% OFF
                     </p>
@@ -359,20 +359,20 @@ const Featured = () => {
                 </div>
               </div>
               <hr className="w-full" />
-              <div className="p-3 flex xl:flex-row flex-col justify-between xl:items-center text-left">
+              <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage 
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
-                    <p className="text-primary_color font-semibold text-2xl">
+                    <p className="text-2xl font-semibold text-primary_color">
                       £18{" "}
                       <span className="line-through text-[#898989] font-normal text-base">
                         £28
                       </span>
                     </p>
-                    <p className="text-green_color font-semibold text-base">
+                    <p className="text-base font-semibold text-green_color">
                       {" "}
                       30% OFF
                     </p>
@@ -387,7 +387,7 @@ const Featured = () => {
           </SwiperSlide>
           <SwiperSlide>
             <div className="border border-[#DBDBDB] rounded-lg">
-              <div className="flex xl:flex-row flex-col xl:items-center text-left justify-between p-3 xl:gap-2 gap-1">
+              <div className="flex flex-col justify-between gap-1 p-3 text-left xl:flex-row xl:items-center xl:gap-2">
                 <div className="relative">
                   <Swiper
                     // install Swiper modules
@@ -418,7 +418,7 @@ const Featured = () => {
                         alt="moon"
                         loading="lazy"
                         // fill
-                        className="w-full h-full object-cover"
+                        className="object-cover w-full h-full"
                       />
                     </SwiperSlide>
                     {/* <SwiperSlide>
@@ -430,7 +430,7 @@ const Featured = () => {
                         loading="lazy"
                         
                         // fill
-                        className="w-full h-full object-cover"
+                        className="object-cover w-full h-full"
                       />
                     </SwiperSlide> */}
                   </Swiper>
@@ -451,8 +451,8 @@ const Featured = () => {
                     <IoIosArrowForward className="text-[#007aff] w-6 h-6" />
                   </div> */}
                 </div>
-                <div className="xl:space-y-3 space-y-2">
-                  <h1 className="font-semibold text-base">Moon Massage</h1>
+                <div className="space-y-2 xl:space-y-3">
+                  <h1 className="text-base font-semibold">Moon Massage</h1>
                   <p className="text-primary_color">Nail Salons</p>
                   <div className="flex items-center gap-3">
                     <div className="bg-[#7f52861a] p-2 rounded-full">
@@ -482,10 +482,10 @@ const Featured = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex gap-3 items-center">
+                  <div className="flex items-center gap-3">
                     <button
                       type="button"
-                      className="outline_button flex gap-2 items-center md:px-5 justify-center"
+                      className="flex items-center justify-center gap-2 outline_button md:px-5"
                     >
                       <MdLocationPin className="text-lg text-primary_color" />
                       View All Services
@@ -494,20 +494,20 @@ const Featured = () => {
                 </div>
               </div>
               <hr className="w-full mt-4" />
-              <div className="p-3 flex xl:flex-row flex-col justify-between xl:items-center text-left">
+              <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage 
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
-                    <p className="text-primary_color font-semibold text-2xl">
+                    <p className="text-2xl font-semibold text-primary_color">
                       £18{" "}
                       <span className="line-through text-[#898989] font-normal text-base">
                         £28
                       </span>
                     </p>
-                    <p className="text-green_color font-semibold text-base">
+                    <p className="text-base font-semibold text-green_color">
                       {" "}
                       30% OFF
                     </p>
@@ -519,20 +519,20 @@ const Featured = () => {
                 </div>
               </div>
               <hr className="w-full" />
-              <div className="p-3 flex xl:flex-row flex-col justify-between xl:items-center text-left">
+              <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage 
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
-                    <p className="text-primary_color font-semibold text-2xl">
+                    <p className="text-2xl font-semibold text-primary_color">
                       £18{" "}
                       <span className="line-through text-[#898989] font-normal text-base">
                         £28
                       </span>
                     </p>
-                    <p className="text-green_color font-semibold text-base">
+                    <p className="text-base font-semibold text-green_color">
                       {" "}
                       30% OFF
                     </p>

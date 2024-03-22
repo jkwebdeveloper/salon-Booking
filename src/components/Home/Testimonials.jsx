@@ -14,7 +14,7 @@ import client from "../../../public/static/images/img.png"
 const Testimonials = () => {
   return (
     <div className="w-full space-y-4">
-      <p className="text-black font-semibold uppercase text-2xl title heading">
+      <p className="text-2xl font-semibold text-black uppercase title heading">
         User’s <span className="text-primary_color">Testimonials</span>
       </p>
       <div className="relative w-full">

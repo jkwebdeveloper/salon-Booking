@@ -15,9 +15,9 @@ const Business = dynamic(() => import("@/components/Home/Business"));
 
 export default function Page() {
   return (
-    <div className="xl:space-y-11 space-y-6">
+    <div className="space-y-6 xl:space-y-11">
       <Herosection />
-      <div className="lg:space-y-24 space-y-20 lg:mx-5 mx-2">
+      <div className="container space-y-20 lg:space-y-14">
         <Pampertree />
         <Featured />
         <Treatments />

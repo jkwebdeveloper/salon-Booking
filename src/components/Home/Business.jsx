@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 
 const Business = () => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 justify-center lg:gap-0 gap-5 items-center">
+    <div className="grid items-center justify-center grid-cols-1 gap-5 pb-20 lg:grid-cols-2 lg:gap-0">
       <div className="mx-auto">
         <Image src={image} height={300} alt="" loading="lazy" className="" />
         {/* <Image
@@ -17,8 +17,8 @@ const Business = () => {
         />
         <div className="relative top-10 bg-black xl:w-[28rem] w-[20rem] h-[17rem] xl:h-[18.5rem] -right-10"></div> */}
       </div>
-      <div className="space-y-4 mx-auto lg:text-left text-center">
-        <p className="text-black font-bold  lg:text-5xl text-3xl">
+      <div className="mx-auto space-y-4 text-center lg:text-left">
+        <p className="text-3xl font-bold text-black lg:text-5xl">
           Pamper Tree for <br />
           <span className="text-primary_color">Business</span>
         </p>

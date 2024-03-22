@@ -13,7 +13,7 @@ module.exports = {
       center: true,
       padding: "1rem",
       screens: {
-        "2xl": "100vw",
+        "2xl": "1800px",
       },
     },
     extend: {
@@ -26,7 +26,7 @@ module.exports = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
+          DEFAULT: "#711F7E",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
