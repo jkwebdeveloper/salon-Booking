@@ -10,7 +10,7 @@ const Card = () => {
     setOpenModal(false);
   };
   return (
-    <div className="space-y-4 bg-white shadow-lg xl:p-5 p-3">
+    <div className="p-3 space-y-4 bg-white rounded-md shadow-lg xl:p-5">
       <p className="text-xl text-[#25324B] font-semibold">Profile</p>
       <div className="flex items-center justify-between">
         <p>Your saved credit and debit cards</p>
@@ -22,10 +22,10 @@ const Card = () => {
           aDD NEW CARD
         </button>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 justify-center gap-5 items-center">
-        <div className="bg-white space-y-3 rounded-lg py-5 px-3 shadow-xl">
-          <h1 className="uppercase font-semibold text-2xl">JOHN ADAM</h1>
-          <div className="flex justify-start items-center gap-7">
+      <div className="grid items-center justify-center grid-cols-1 gap-5 lg:grid-cols-3">
+        <div className="px-3 py-5 space-y-3 bg-white rounded-lg shadow-xl">
+          <h1 className="text-2xl font-semibold uppercase">JOHN ADAM</h1>
+          <div className="flex items-center justify-start gap-7">
             <p className="text-sm">**** **** **** *0357</p>
             <p className="text-sm">Expire on : 12/2029</p>
           </div>
@@ -34,7 +34,7 @@ const Card = () => {
               <MdLocationPin className="text-lg text-primary_color" />
             </div>
             <div>
-              <p className="md:text-base text-sm">
+              <p className="text-sm md:text-base">
                 Barnack, Cambridge 181.2 miles
               </p>
             </div>
@@ -51,9 +51,9 @@ const Card = () => {
             </button>
           </div>
         </div>
-        <div className="bg-white space-y-3 rounded-lg py-5 px-3 shadow-xl">
-          <h1 className="uppercase font-semibold text-2xl">JOHN ADAM</h1>
-          <div className="flex justify-start items-center gap-7">
+        <div className="px-3 py-5 space-y-3 bg-white rounded-lg shadow-xl">
+          <h1 className="text-2xl font-semibold uppercase">JOHN ADAM</h1>
+          <div className="flex items-center justify-start gap-7">
             <p className="text-sm">**** **** **** *0843</p>
             <p className="text-sm">Expire on : 10/2032</p>
           </div>
@@ -62,7 +62,7 @@ const Card = () => {
               <MdLocationPin className="text-lg text-primary_color" />
             </div>
             <div>
-              <p className="md:text-base text-sm">
+              <p className="text-sm md:text-base">
                 Barnack, Cambridge 181.2 miles
               </p>
             </div>

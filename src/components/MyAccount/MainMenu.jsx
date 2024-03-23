@@ -10,14 +10,14 @@ import { MdOutlineNotificationsActive } from "react-icons/md";
 const MainMenu = ({ onTabChange, tabMenu }) => {
   return (
     <div className="md:w-[40%] lg:w-[25%] w-[90%] mx-auto space-y-5">
-      <div className="space-y-2 bg-white shadow-lg xl:py-5 py-3 xl:px-4 px-2">
+      <div className="px-2 py-3 space-y-2 bg-white rounded-md shadow-lg xl:py-5 xl:px-4">
         <p className="text-xl text-[#25324B] font-semibold title heading">
           My Account
         </p>
         {tabMenu === "Profile" ? (
           <div className="bg-[#711F7E1A]  text-primary_color xl:px-4 px-2 cursor-pointer xl:py-3 py-1">
             <div
-              className="flex gap-4 items-center "
+              className="flex items-center gap-4 "
               onClick={() => onTabChange("Profile")}
             >
               <FaRegUserCircle className="text-xl" />
@@ -29,7 +29,7 @@ const MainMenu = ({ onTabChange, tabMenu }) => {
         ) : (
           <div className="hover:bg-[#711F7E1A] hover:text-primary_color xl:px-4 px-2 cursor-pointer xl:py-3 py-1">
             <div
-              className="flex gap-4 items-center "
+              className="flex items-center gap-4 "
               onClick={() => onTabChange("Profile")}
             >
               <FaRegUserCircle className="text-xl" />
@@ -42,7 +42,7 @@ const MainMenu = ({ onTabChange, tabMenu }) => {
         {tabMenu === "Booking" ? (
           <div className="bg-[#711F7E1A]  text-primary_color xl:px-4 px-2 cursor-pointer xl:py-3 py-1">
             <div
-              className="flex gap-4 items-center "
+              className="flex items-center gap-4 "
               onClick={() => onTabChange("Booking")}
             >
               <TbCalendarStats className="text-xl" />
@@ -54,7 +54,7 @@ const MainMenu = ({ onTabChange, tabMenu }) => {
         ) : (
           <div className="hover:bg-[#711F7E1A] hover:text-primary_color xl:px-4 px-2 cursor-pointer xl:py-3 py-1">
             <div
-              className="flex gap-4 items-center "
+              className="flex items-center gap-4 "
               onClick={() => onTabChange("Booking")}
             >
               <TbCalendarStats className="text-xl" />
@@ -67,7 +67,7 @@ const MainMenu = ({ onTabChange, tabMenu }) => {
         {tabMenu === "Card" ? (
           <div className="bg-[#711F7E1A]  text-primary_color xl:px-4 px-2 cursor-pointer xl:py-3 py-1">
             <div
-              className="flex gap-4 items-center "
+              className="flex items-center gap-4 "
               onClick={() => onTabChange("Card")}
             >
               <FaRegCreditCard className="text-xl" />
@@ -79,7 +79,7 @@ const MainMenu = ({ onTabChange, tabMenu }) => {
         ) : (
           <div className="hover:bg-[#711F7E1A] hover:text-primary_color xl:px-4 px-2 cursor-pointer xl:py-3 py-1">
             <div
-              className="flex gap-4 items-center "
+              className="flex items-center gap-4 "
               onClick={() => onTabChange("Card")}
             >
               <FaRegCreditCard className="text-xl" />
@@ -92,7 +92,7 @@ const MainMenu = ({ onTabChange, tabMenu }) => {
         {tabMenu === "Wallet" ? (
           <div className="bg-[#711F7E1A]  text-primary_color xl:px-4 px-2 cursor-pointer xl:py-3 py-1">
             <div
-              className="flex gap-4 items-center "
+              className="flex items-center gap-4 "
               onClick={() => onTabChange("Wallet")}
             >
               <TfiWallet className="text-xl" />
@@ -104,7 +104,7 @@ const MainMenu = ({ onTabChange, tabMenu }) => {
         ) : (
           <div className="hover:bg-[#711F7E1A] hover:text-primary_color xl:px-4 px-2 cursor-pointer xl:py-3 py-1">
             <div
-              className="flex gap-4 items-center "
+              className="flex items-center gap-4 "
               onClick={() => onTabChange("Wallet")}
             >
               <TfiWallet className="text-xl" />
@@ -117,7 +117,7 @@ const MainMenu = ({ onTabChange, tabMenu }) => {
         {tabMenu === "Friend" ? (
           <div className="bg-[#711F7E1A]  text-primary_color xl:px-4 px-2 cursor-pointer xl:py-3 py-1">
             <div
-              className="flex gap-4 items-center "
+              className="flex items-center gap-4 "
               onClick={() => onTabChange("Friend")}
             >
               <TbUserCheck className="text-xl" />
@@ -129,7 +129,7 @@ const MainMenu = ({ onTabChange, tabMenu }) => {
         ) : (
           <div className="hover:bg-[#711F7E1A] hover:text-primary_color xl:px-4 px-2 cursor-pointer xl:py-3 py-1">
             <div
-              className="flex gap-4 items-center "
+              className="flex items-center gap-4 "
               onClick={() => onTabChange("Friend")}
             >
               <TbUserCheck className="text-xl" />
@@ -142,7 +142,7 @@ const MainMenu = ({ onTabChange, tabMenu }) => {
         {tabMenu === "Change Password" ? (
           <div className="bg-[#711F7E1A]  text-primary_color xl:px-4 px-2 cursor-pointer xl:py-3 py-1">
             <div
-              className="flex gap-4 items-center "
+              className="flex items-center gap-4 "
               onClick={() => onTabChange("Change Password")}
             >
               <RiLock2Line className="text-xl" />
@@ -154,7 +154,7 @@ const MainMenu = ({ onTabChange, tabMenu }) => {
         ) : (
           <div className="hover:bg-[#711F7E1A] hover:text-primary_color xl:px-4 px-2 cursor-pointer xl:py-3 py-1">
             <div
-              className="flex gap-4 items-center "
+              className="flex items-center gap-4 "
               onClick={() => onTabChange("Change Password")}
             >
               <RiLock2Line className="text-xl" />
@@ -167,7 +167,7 @@ const MainMenu = ({ onTabChange, tabMenu }) => {
         {tabMenu === "Notification settings" ? (
           <div className="bg-[#711F7E1A]  text-primary_color xl:px-4 px-2 cursor-pointer xl:py-3 py-1">
             <div
-              className="flex gap-4 items-center "
+              className="flex items-center gap-4 "
               onClick={() => onTabChange("Notification settings")}
             >
               <MdOutlineNotificationsActive className="text-xl" />
@@ -179,7 +179,7 @@ const MainMenu = ({ onTabChange, tabMenu }) => {
         ) : (
           <div className="hover:bg-[#711F7E1A] hover:text-primary_color xl:px-4 px-2 cursor-pointer xl:py-3 py-1">
             <div
-              className="flex gap-4 items-center "
+              className="flex items-center gap-4 "
               onClick={() => onTabChange("Notification settings")}
             >
               <MdOutlineNotificationsActive className="text-xl" />
@@ -190,11 +190,11 @@ const MainMenu = ({ onTabChange, tabMenu }) => {
           </div>
         )}
         <div
-          className="xl:px-4 px-2 cursor-pointer xl:py-3 py-1"
+          className="px-2 py-1 cursor-pointer xl:px-4 xl:py-3"
           // onClick={() => setOpenModal(true)}
         >
           <div
-            className="flex gap-3 items-center "
+            className="flex items-center gap-3 "
             onClick={() => dispatch(handleLogout())}
           >
             <FiLogOut className="text-xl text-[#F10000]" />

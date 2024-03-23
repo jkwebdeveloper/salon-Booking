@@ -125,10 +125,9 @@ export default function DesktopMenu({ theme, themeMode }) {
               >
                 <Popover className="relative menu">
                   <Popover.Button
-                    className={`flex items-center gap-x-1 text-md leading-6 font-medium group/navitem ${
-                      (index == open && "text-primary_color") ||
+                    className={`flex items-center gap-x-1 text-md leading-6 font-medium group/navitem ${(index == open && "text-primary_color") ||
                       "text-neutral-800"
-                    }`}
+                      }`}
                   >
                     {navItem}
                     <RiArrowDownSLine
@@ -183,6 +182,7 @@ export default function DesktopMenu({ theme, themeMode }) {
               <Link
                 href={menuItems[navItem].href}
                 className="font-medium hover:text-primary_color"
+                key={v4()}
               >
                 {navItem}
               </Link>

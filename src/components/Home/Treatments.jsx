@@ -8,6 +8,7 @@ import image5 from "../../../public/static/images/Popular Treatment/img5.png";
 import image6 from "../../../public/static/images/Popular Treatment/img6.png";
 import image7 from "../../../public/static/images/Popular Treatment/img7.png";
 import image8 from "../../../public/static/images/Popular Treatment/img8.png";
+import { v4 } from "uuid";
 
 const ImagesData = [
   {
@@ -69,7 +70,7 @@ const Treatments = () => {
       <div className="grid grid-cols-2 gap-3 rounded-lg md:grid-cols-3 xl:grid-cols-4">
         {ImagesData.map((item) => (
           <div
-            key={item?.id}
+            key={v4()}
             className="relative flex items-center justify-center text-center cursor-pointer"
           >
             <div>

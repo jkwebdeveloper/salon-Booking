@@ -1,4 +1,6 @@
+'use client';
 import dynamic from "next/dynamic";
+import { useSelector } from "react-redux";
 const Herosection = dynamic(() => import("@/components/Home/HeroSection"));
 const Pampertree = dynamic(() => import("@/components/Home/Pampertree"));
 const Featured = dynamic(() => import("@/components/Home/Featured"));
@@ -13,7 +15,8 @@ const DownloadApp = dynamic(() => import("@/components/Home/DownloadApp"));
 const Testimonials = dynamic(() => import("@/components/Home/Testimonials"));
 const Business = dynamic(() => import("@/components/Home/Business"));
 
-export default function Page() {
+export default function Home() {
+  const user = useSelector((state) => state.auth.user);
   return (
     <div className="space-y-6 xl:space-y-11">
       <Herosection />

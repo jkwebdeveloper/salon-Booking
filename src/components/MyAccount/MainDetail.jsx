@@ -7,21 +7,21 @@ const MyBooking = dynamic(() => import("./MyBooking"));
 const ReferFriend = dynamic(() => import("./ReferFriend"));
 const ChangePassword = dynamic(() => import("./ChangePassword"));
 
-const MainDetail = ({ tabMenu }) => {
+const MainDetail = ({ tabMenu,user }) => {
   return (
-    <div className="md:w-4/5 w-[90%] mx-auto space-y-5">
+    <div className="md:w-4/5 w-[90%] mx-auto space-y-5 rounded-md">
       {tabMenu === "Profile" ? (
-        <Profile />
+        <Profile user={user} />
       ) : tabMenu === "Booking" ? (
-        <MyBooking />
+        <MyBooking user={user} />
       ) : tabMenu === "Card" ? (
-        <Card />
+        <Card user={user}/>
       ) : tabMenu === "Wallet" ? (
-        <Wallet />
+        <Wallet user={user}/>
       ) : tabMenu === "Friend" ? (
-        <ReferFriend />
+        <ReferFriend user={user}/>
       ) : tabMenu === "Change Password" ? (
-        <ChangePassword />
+        <ChangePassword user={user}/>
       ) : null}
     </div>
   );

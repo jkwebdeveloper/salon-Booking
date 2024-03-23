@@ -6,6 +6,7 @@ import image3 from "../../../public/static/images/Buy gifts/img11.png";
 import image4 from "../../../public/static/images/Buy gifts/img12.png";
 import image5 from "../../../public/static/images/Buy gifts/img13.png";
 import image6 from "../../../public/static/images/Buy gifts/img14.png";
+import { v4 } from "uuid";
 
 const ImagesData = [
   {
@@ -49,14 +50,14 @@ const ImagesData = [
 const Gifts = () => {
   return (
     <div className="w-full space-y-4">
-      <p className="text-black font-semibold uppercase text-2xl title heading">
+      <p className="text-2xl font-semibold text-black uppercase title heading">
         Buy <span className="text-primary_color">Gifts</span>
       </p>
-      <div className="rounded-lg grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 gap-3 rounded-lg md:grid-cols-2 xl:grid-cols-3">
         {ImagesData.map((item) => (
           <div
-            key={item?.id}
-            className="relative flex justify-center cursor-pointer items-center text-center"
+            key={v4()}
+            className="relative flex items-center justify-center text-center cursor-pointer"
           >
             <div>
               <Image
@@ -65,7 +66,7 @@ const Gifts = () => {
                 
                 // fill
                 alt=""
-                className="relative w-full h-full object-cover"
+                className="relative object-cover w-full h-full"
               />
             </div>
             <p className="absolute uppercase top-[78%] text-center font-bold text-white">

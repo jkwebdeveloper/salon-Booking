@@ -24,6 +24,7 @@ import "swiper/css/pagination";
 // const PampertreeBox = dynamic(() => import("./PampertreeBox"));
 import image1 from "../../../public/static/images/spa_life.png";
 import { Button } from "../ui/button";
+import { v4 } from "uuid";
 
 const boxData = [
   {
@@ -133,7 +134,7 @@ const Pampertree = () => {
           }}
         >
           {boxData.map((item) => (
-            <SwiperSlide key={item.id}>
+            <SwiperSlide key={v4()}>
               <div className="relative w-full space-y-4" key={item.id}>
                 <div
                   onClick={() => setIsFavourite(!isFavourite)}

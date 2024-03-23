@@ -10,6 +10,7 @@ import "swiper/css/pagination";
 
 import { Grid, Pagination, Autoplay } from "swiper/modules";
 import { IoIosArrowForward } from "react-icons/io";
+import { v4 } from "uuid";
 
 const locationData = [
   {
@@ -75,7 +76,7 @@ const Location = () => {
   const nextRef = useRef(null);
   return (
     <div className="w-full space-y-6">
-      <p className="text-black font-semibold uppercase text-2xl title heading">
+      <p className="text-2xl font-semibold text-black uppercase title heading">
         Browse By <span className="text-primary_color">Location</span>
       </p>
       <div className="relative w-full">
@@ -118,7 +119,7 @@ const Location = () => {
           }}
         >
           {locationData.map((item) => (
-            <SwiperSlide key={item.id}>
+            <SwiperSlide key={v4()}>
               <div className="space-y-3" key={item.id}>
                 <div className="flex items-center gap-2">
                   <p className="text-[#CDCDCD]">{item.icons}</p>

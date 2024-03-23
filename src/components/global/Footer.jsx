@@ -48,7 +48,7 @@ const Footer = () => {
   };
   return (
     <div
-      className="container w-full"
+      className="w-full"
       style={{
         backgroundImage: `url('/static/images/footer_bg.png')`,
         backgroundRepeat: "no-repeat",

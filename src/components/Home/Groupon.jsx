@@ -26,6 +26,7 @@ import image1 from "../../../public/static/images/groupon1.png";
 import image2 from "../../../public/static/images/groupon2.png";
 import image3 from "../../../public/static/images/groupon3.png";
 import image4 from "../../../public/static/images/groupon4.png";
+import { v4 } from "uuid";
 
 const boxData = [
   {
@@ -129,8 +130,8 @@ const Groupon = () => {
           }}
         >
           {boxData.map((item) => (
-            <SwiperSlide key={item.id}>
-              <div className="relative w-full space-y-4" key={item.id}>
+            <SwiperSlide key={v4()}>
+              <div className="relative w-full space-y-4">
                 <div
                   onClick={() => setIsFavourite(!isFavourite)}
                   className={`absolute top-3 right-3 ${
