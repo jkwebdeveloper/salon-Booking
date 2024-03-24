@@ -1,19 +1,27 @@
 "use client";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 const MainMenu = dynamic(() => import("@/components/MyAccount/MainMenu"));
 const MainDetail = dynamic(() => import("@/components/MyAccount/MainDetail"));
 import bg from "../../../public/static/images/Myaccountbanner.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import PageLoader from "@/components/ui/pageloader";
+import { getUser } from '@/redux/features/authSlice';
 
-const page = () => {
+const MyAccountPage = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [tabMenu, setTabMenu] = useState("Profile");
   const user = useSelector((state) => state.auth.user) || '';
+  // const user = dispatch(getUser());
 
-  if (!user) router.push("/sign-in");
+  useEffect(() => {
+    if (!user) router.push("/sign-in");
+  }, []);
+
+  if (!user) return <PageLoader show={true} width={100} height={100} />;
 
   return (
     <>
@@ -38,4 +46,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default MyAccountPage;

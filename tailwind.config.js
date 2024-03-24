@@ -20,6 +20,7 @@ module.exports = {
       colors: {
         primary_color: "#711F7E",
         primary: "#711F7E",
+        'primary-hover': "#BF27D7",
         green_color: "#29AD17",
       },
       keyframes: {

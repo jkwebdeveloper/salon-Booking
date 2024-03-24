@@ -1,17 +1,11 @@
+import { Button } from "@/components/ui/button";
 import React from "react";
-import { AiOutlineClose } from "react-icons/ai";
 
-const EditCardModal = ({ visible, onClose }) => {
-  if (!visible) return null;
+const EditCardModal = () => {
   return (
-    <form
-      //   onSubmit={handleSubmit(onSubmit)}
-      className="fixed -top-4 inset-0 overflow-y-auto bg-black bg-opacity-30 backdrop-blur-sm z-50"
-    >
-      <div className="bg-white md:w-2/5 w-[90%] overflow-y-visible rounded-2xl relative items-center justify-center xl:top-10 lg:top-5 top-20 mx-auto p-5 space-y-2">
-        <AiOutlineClose onClick={onClose} className="cursor-pointer ml-auto" />
-        <p className="text-xl text-[#25324B] font-semibold">Add new card</p>
-        <div className="text-left space-y-1 w-full">
+    <>
+      <div className="space-y-2">
+        <div className="w-full space-y-1 text-left">
           <label htmlFor="city" className="label_text text-[#000D23] text-sm">
             Card holder name
           </label>
@@ -22,7 +16,7 @@ const EditCardModal = ({ visible, onClose }) => {
             placeholder="Your name"
           />
         </div>
-        <div className="text-left space-y-1 w-full">
+        <div className="w-full space-y-1 text-left">
           <label htmlFor="state" className="label_text text-[#000D23] text-sm">
             Card number
           </label>
@@ -33,8 +27,8 @@ const EditCardModal = ({ visible, onClose }) => {
             placeholder="Card number"
           />
         </div>
-        <div className="flex lg:flex-row flex-col w-full gap-3">
-          <div className="text-left space-y-1 w-full lg:w-1/2">
+        <div className="flex flex-col w-full gap-3 lg:flex-row">
+          <div className="w-full space-y-1 text-left lg:w-1/2">
             <label htmlFor="city" className="label_text text-[#000D23] text-sm">
               Expire on
             </label>
@@ -45,7 +39,7 @@ const EditCardModal = ({ visible, onClose }) => {
               placeholder="MM/YYYY"
             />
           </div>
-          <div className="text-left space-y-1 w-full lg:w-1/2">
+          <div className="w-full space-y-1 text-left lg:w-1/2">
             <label
               htmlFor="state"
               className="label_text text-[#000D23] text-sm"
@@ -60,9 +54,11 @@ const EditCardModal = ({ visible, onClose }) => {
             />
           </div>
         </div>
-        <p className="text-lg text-[#25324B] font-semibold">Billing Address</p>
-        <div className="flex lg:flex-row flex-col w-full gap-3">
-          <div className="text-left space-y-1 w-full lg:w-1/2">
+      </div>
+      <p className="text-lg text-[#25324B] font-semibold mt-4 mb-2">Billing Address</p>
+      <div className="space-y-2">
+        <div className="flex flex-col w-full gap-3 lg:flex-row">
+          <div className="w-full space-y-1 text-left lg:w-1/2">
             <label htmlFor="city" className="label_text text-[#000D23] text-sm">
               First name
             </label>
@@ -73,7 +69,7 @@ const EditCardModal = ({ visible, onClose }) => {
               placeholder="Type here..."
             />
           </div>
-          <div className="text-left space-y-1 w-full lg:w-1/2">
+          <div className="w-full space-y-1 text-left lg:w-1/2">
             <label
               htmlFor="state"
               className="label_text text-[#000D23] text-sm"
@@ -88,10 +84,10 @@ const EditCardModal = ({ visible, onClose }) => {
             />
           </div>
         </div>
-        <div className="flex lg:flex-row flex-col w-full gap-3">
-          <div className="text-left space-y-1 w-full lg:w-1/2">
+        <div className="flex flex-col w-full gap-3 lg:flex-row">
+          <div className="w-full space-y-1 text-left lg:w-1/2">
             <label htmlFor="city" className="label_text text-[#000D23] text-sm">
-             Email
+              Email
             </label>
             <input
               type="email"
@@ -100,7 +96,7 @@ const EditCardModal = ({ visible, onClose }) => {
               placeholder="Type here..."
             />
           </div>
-          <div className="text-left space-y-1 w-full lg:w-1/2">
+          <div className="w-full space-y-1 text-left lg:w-1/2">
             <label
               htmlFor="state"
               className="label_text text-[#000D23] text-sm"
@@ -115,7 +111,7 @@ const EditCardModal = ({ visible, onClose }) => {
             />
           </div>
         </div>
-        <div className="text-left space-y-1 w-full">
+        <div className="w-full space-y-1 text-left">
           <label htmlFor="country" className="label_text">
             Address line 1
           </label>
@@ -126,7 +122,7 @@ const EditCardModal = ({ visible, onClose }) => {
             placeholder="Type here..."
           />
         </div>
-        <div className="text-left space-y-1 w-full">
+        <div className="w-full space-y-1 text-left">
           <label htmlFor="country" className="label_text">
             Address line 2
           </label>
@@ -137,8 +133,8 @@ const EditCardModal = ({ visible, onClose }) => {
             placeholder="Type here..."
           />
         </div>
-        <div className="flex lg:flex-row flex-col w-full gap-3">
-          <div className="text-left space-y-1 w-full lg:w-1/2">
+        <div className="flex flex-col w-full gap-3 lg:flex-row">
+          <div className="w-full space-y-1 text-left lg:w-1/2">
             <label htmlFor="city" className="label_text">
               City
             </label>
@@ -149,7 +145,7 @@ const EditCardModal = ({ visible, onClose }) => {
               placeholder="Enter your city"
             />
           </div>
-          <div className="text-left space-y-1 w-full lg:w-1/2">
+          <div className="w-full space-y-1 text-left lg:w-1/2">
             <label htmlFor="state" className="label_text">
               Postcode
             </label>
@@ -161,13 +157,13 @@ const EditCardModal = ({ visible, onClose }) => {
             />
           </div>
         </div>
-        <div className="mx-auto flex justify-start items-center pt-3">
-          <button type="button" className="uppercase focus:outline-none bg-[#711F7E] text-white font-medium rounded-full active:scale-90 transition text-sm px-16 py-3 mx-auto">
+        <div className="flex items-center justify-start pt-3 mx-auto">
+          <Button variant='primary' className="md:w-full">
             save
-          </button>
+          </Button>
         </div>
       </div>
-    </form>
+    </>
   );
 };
 

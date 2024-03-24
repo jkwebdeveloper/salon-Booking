@@ -1,25 +1,27 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import logo from "../../../public/static/images/logo.png";
 import Link from "next/link";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa6";
 import { FaApple } from "react-icons/fa";
-import validateInput from "@/lib/validateinput";
 import { POST } from "../api/post";
 import { Button } from "@/components/ui/button";
-import { login, logout } from "@/redux/features/authSlice";
+import { login } from "@/redux/features/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import Spinner from "@/components/ui/spinner";
+import { MdOutlineErrorOutline } from "react-icons/md";
 
 const Signin = () => {
   const [showPassword, setShowPassword] = React.useState(false),
     dispatch = useDispatch(),
     router = useRouter(),
-    user = useSelector((state) => state.auth.user);
+    user = useSelector((state) => state.auth.user),
+    [loading, setLoading] = React.useState(false),
+    [error, setError] = React.useState("");
 
   if (user) {
     router.push('/');
@@ -27,20 +29,17 @@ const Signin = () => {
 
   const signIn = async (e) => {
     e.preventDefault();
-    const validForm = await validateInput(e.target);
-    if (validForm.length > 0) {
-      validForm.forEach((input) => {
-        input.classList.add("border-red-500", "text-red-500");
-        input.addEventListener("input", () => {
-          input.classList.remove("border-red-500", "text-red-500");
-        });
-      });
-      return;
-    }
-    const { data } = await POST.request({ url: "/login", form: e.target });
-    if (data.code === 200) {
-      dispatch(login(data.data));
-      router.push("/");
+    setLoading(true);
+    const resp = await POST.request({ url: "/login", form: e.target });
+    console.log(resp);
+    setLoading(false);
+    if (resp) {
+      if (resp.status != 'Error' && Object.keys(resp.data).length > 0) {
+        dispatch(login(resp.data));
+        router.push("/");
+        return
+      }
+      setError(resp.message);
     }
   };
 
@@ -49,8 +48,8 @@ const Signin = () => {
       <div className="hidden lg:block bg-[url('/static/images/signin.png')] bg-cover"></div>
       <div className="lg:w-full bg-[rgb(250,250,250)] p-3 relative z-0 min-h-screen">
         <div className="flex flex-col items-center justify-center h-full space-y-4">
-          <Link href="/" className="mb-5">
-            <Image src={logo} loading="lazy" alt="logo" className="mx-auto" />
+          <Link href="/">
+            <Image src={'/static/images/logo.png'} loading="lazy" alt="logo" className="mx-auto" width={150} height={150} />
           </Link>
           <div className="flex items-center justify-center p-10 mx-auto bg-white rounded-lg shadow-sm ring-1 ring-neutral-300/40">
             <div className="space-y-3">
@@ -71,14 +70,13 @@ const Signin = () => {
                 </div>
                 <div className="relative w-full space-y-1 text-left">
                   <label htmlFor="country" className="label_text">
-                    {" "}
-                    Password{" "}
+                    Password
                   </label>
                   <input
-                    type={showPassword ? "text" : "password"}
-                    name="password"
+                    type={showPassword ? "text" : "password"} name="password"
                     className="input_field"
                     placeholder="Enter your Password"
+                    pattern="[a-zA-Z0-9]{3,}"
                     // pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
                     required
                   />
@@ -108,9 +106,12 @@ const Signin = () => {
                   {" "}
                   8 characters with a mix of letters, numbers & symbols{" "}
                 </p>
-                <Button variant="primary" className="md:w-full" type="submit">
-                  Login
+                <Button variant="primary" className="md:w-full" type="submit" disabled={loading}>
+                  <Spinner show={loading} width='35' height='35' text="Login" />
                 </Button>
+                {error && <div class="px-4 py-2 mb-2 text-sm flex items-center gap-2 text-red-800 rounded-md bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                  <span class="font-medium"><MdOutlineErrorOutline className="text-lg" /></span> {error}
+                </div>}
               </form>
               <Link href="/forgot-password" className="block w-full mt-5 font-semibold text-center">
                 Forgot password?

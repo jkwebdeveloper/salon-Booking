@@ -6,16 +6,20 @@ export const auth = createSlice({
         user: typeof window != 'undefined' && JSON.parse(localStorage.getItem("user")) || null,
     },
     reducers: {
+        getUser: (state, action) => {
+            return state;
+        },
         login: (state, action) => {
-            state.user = action.payload;
             const user = JSON.stringify(action.payload);
             typeof window != 'undefined' && localStorage.setItem("user", user);
+            state.user = action.payload;
         },
         logout: (state) => {
             state.user = null;
+            typeof window != 'undefined' && localStorage.removeItem("user");
         },
     },
 });
 
-export const { login, logout } = auth.actions;
+export const { login, logout, getUser } = auth.actions;
 export default auth.reducer;

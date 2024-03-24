@@ -16,7 +16,6 @@ const Testimonials = dynamic(() => import("@/components/Home/Testimonials"));
 const Business = dynamic(() => import("@/components/Home/Business"));
 
 export default function Home() {
-  const user = useSelector((state) => state.auth.user);
   return (
     <div className="space-y-6 xl:space-y-11">
       <Herosection />

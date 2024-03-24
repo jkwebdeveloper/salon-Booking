@@ -10,13 +10,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { POST } from "../api/post";
 import { MdOutlineErrorOutline } from "react-icons/md";
 import { useRouter } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";
+import Spinner from "@/components/ui/spinner";
 
 const Register = () => {
   const [error, setError] = React.useState("");
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user) || '';
+  const [loading, setLoading] = React.useState(false);
 
   if (user) {
     router.push('/');
@@ -24,23 +25,14 @@ const Register = () => {
 
   const registerUser = async (e) => {
     e.preventDefault();
-    const validForm = await validateInput(e.target);
-    if (validForm.length > 0) {
-      validForm.forEach((input) => {
-        input.classList.add("border-red-500", "text-red-500");
-        input.addEventListener("input", () => {
-          input.classList.remove("border-red-500", "text-red-500");
-        });
-      });
-      return;
-    }
-    console.log("Form is valid");
-    const { data } = await POST.request({ url: "/register", form: e.target });
-    if (data.code === 200 && data?.data) {
-      dispatch(login(data.data));
+    setLoading(true);
+    const resp = await POST.request({ url: "/register", form: e.target });
+    setLoading(false);
+    if (resp.code == 200 && Object.keys(resp.data).length > 0) {
+      dispatch(login(resp.data));
       router.push("/");
     } else {
-      setError(data.message);
+      setError(resp.message);
     }
   };
 
@@ -54,7 +46,7 @@ const Register = () => {
               <Image src={logo} loading="lazy" alt="logo" className="mx-auto" />
             </Link>
           </div>
-          <div className="w-full p-4 mx-auto overflow-x-hidden bg-white rounded-lg shadow-md xl:w-3/5">
+          <div className="w-full p-4 mx-auto overflow-x-hidden bg-white rounded-lg shadow-md max-w-[35rem]">
             <p className="mb-2 text-lg font-semibold">
               Welcome to the{" "}
               <span className="text-primary_color">PamperTree</span>
@@ -131,8 +123,8 @@ const Register = () => {
                 name="device_type"
                 value={typeof window != 'undefined' && (/Mobi/i.test(window.navigator.userAgent) && 2) || 1}
               />
-              <Button type="submit" variant="primary" className="md:w-full">
-                Request
+              <Button type="submit" variant="primary" className="md:w-full" disabled={loading}>
+                <Spinner show={loading} width='35' height='35' text="Request" />
               </Button>
               {error && <div class="px-4 py-2 mb-4 text-sm flex items-center gap-2 text-red-800 rounded-md bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
                 <span class="font-medium"><MdOutlineErrorOutline className="text-lg" /></span> {error}

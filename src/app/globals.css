@@ -47,11 +47,11 @@ body::-webkit-scrollbar-thumb {
 }
 
 .label_text {
-  @apply text-sm font-medium text-neutral-400;
+  @apply text-[0.75rem] font-medium text-neutral-400;
 }
 
 .input_field {
-  @apply border focus:border-primary_color w-full outline-none md:p-2 p-1 rounded-[4px];
+  @apply border focus:border-primary_color disabled:bg-neutral-100 w-full text-[0.8rem] outline-none md:p-2 p-1 rounded-[4px];
 }
 
 .title:after,

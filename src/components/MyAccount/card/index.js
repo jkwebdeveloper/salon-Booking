@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { MdLocationPin } from "react-icons/md";
-import EditCardModal from "./EditCardModal";
-import { Button } from "../ui/button";
+import EditCardModal from "@/components/MyAccount/card/EditCardModal";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 const Card = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -14,16 +20,18 @@ const Card = () => {
       <p className="text-xl text-[#25324B] font-semibold">Profile</p>
       <div className="flex items-center justify-between">
         <p>Your saved credit and debit cards</p>
-        <button
-          type="button"
-          className="uppercase outline_button"
-          onClick={() => setOpenModal(true)}
-        >
-          aDD NEW CARD
-        </button>
+        <Dialog>
+          <DialogTrigger className="flex items-center h-8 px-6 py-3 text-sm font-medium text-white uppercase transition rounded-full focus:outline-none bg-primary hover:bg-primary-hover active:scale-90">
+            Add New Card
+          </DialogTrigger>
+          <DialogContent className="max-h-[90vh]">
+            <DialogTitle>Add new card</DialogTitle>
+            <EditCardModal />
+          </DialogContent>
+        </Dialog>
       </div>
-      <div className="grid items-center justify-center grid-cols-1 gap-5 lg:grid-cols-3">
-        <div className="px-3 py-5 space-y-3 bg-white rounded-lg shadow-xl">
+      <div className="grid items-center justify-center grid-cols-1 gap-5 py-5 lg:grid-cols-2">
+        <div className="px-3 py-5 space-y-3 bg-white rounded-lg shadow-md ring-1 ring-neutral-200/70">
           <h1 className="text-2xl font-semibold uppercase">JOHN ADAM</h1>
           <div className="flex items-center justify-start gap-7">
             <p className="text-sm">**** **** **** *0357</p>
@@ -40,18 +48,13 @@ const Card = () => {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <Button type="button" variant="outline" className="">
+            <Button type="button" variant="outline" className="uppercase">
               remove
             </Button>
-            <button
-              type="button"
-              className="focus:outline-none uppercase bg-[#711F7E] text-white font-medium rounded-full active:scale-90 transition text-sm px-14 py-3 "
-            >
-              edit
-            </button>
+            <Button type="button" variant="primary" className="uppercase">Edit</Button>
           </div>
         </div>
-        <div className="px-3 py-5 space-y-3 bg-white rounded-lg shadow-xl">
+        <div className="px-3 py-5 space-y-3 bg-white rounded-lg shadow-md ring-1 ring-neutral-200/70">
           <h1 className="text-2xl font-semibold uppercase">JOHN ADAM</h1>
           <div className="flex items-center justify-start gap-7">
             <p className="text-sm">**** **** **** *0843</p>
@@ -68,19 +71,13 @@ const Card = () => {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <button type="button" className="outline_button_red">
+            <Button type="button" variant="outline" className="uppercase">
               remove
-            </button>
-            <button
-              type="button"
-              className="focus:outline-none uppercase bg-[#711F7E] text-white font-medium rounded-full active:scale-90 transition text-sm px-14 py-3 "
-            >
-              edit
-            </button>
+            </Button>
+            <Button type="button" variant="primary" className="uppercase">Edit</Button>
           </div>
         </div>
       </div>
-      <EditCardModal onClose={handleOnClose} visible={openModal} />
     </div>
   );
 };
