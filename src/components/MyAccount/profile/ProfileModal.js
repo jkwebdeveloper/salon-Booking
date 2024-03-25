@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { v4 } from "uuid";
 
+import { setUser } from "@/redux/features/authSlice";
 import { Button } from "@/components/ui/button";
 import { MdModeEditOutline } from "react-icons/md";
 import Label from "@/components/ui/form/label";
@@ -10,7 +11,8 @@ import { POST } from "@/app/api/post";
 import Spinner from "@/components/ui/spinner";
 import logout from "@/utils/logout";
 
-const ProfileModal = () => {
+const ProfileModal = ({ setEditProfile }) => {
+  const dispatch = useDispatch();
   const [userImage, setUserImage] = useState({});
   const user = useSelector((state) => state.auth.user) || '';
   const [loading, setLoading] = useState(false);
@@ -27,15 +29,17 @@ const ProfileModal = () => {
     e.preventDefault();
     setLoading(true);
     const res = await POST.request({ url: "/update-profile", form: e.target, token: user?.api_token });
-    if (res && res.code == 404) {
-      logout();
-    };
+    (res && res.code == 401) && logout();
+    if (res && res.code == 200 && Object.keys(res.data).length > 0) {
+      dispatch(setUser(res.data));
+      setEditProfile(false);
+    }
     setLoading(false);
   }
   return (
     <form className="space-y-2" noValidate onSubmit={e => updateProfile(e)}>
       <div className="border relative border-1 border-[#0AADA4] rounded-full p-1 w-[4rem] h-[4rem] mb-2">
-        <Image src={userImage?.path || '/static/images/23.png'} alt="profile" loading="lazy" className="object-cover w-full h-full rounded-full z-1" width={50} height={50} />
+        <Image src={userImage?.path || (process.env.NEXT_PUBLIC_SERVERURL + user?.photo || '/static/images/23.png')} alt="profile" loading="lazy" className="object-cover w-full h-full rounded-full z-1" width={50} height={50} />
         <input type="file" className="absolute top-0 bottom-0 left-0 right-0 mt-2 cursor-pointer rounded-full max-w-[3.5rem] mx-auto opacity-0 z-2" name="photo" onChange={e => handleFile(e)} />
         <MdModeEditOutline className="absolute right-0 p-[4px] text-xl text-white rounded-full bg-primary bottom-0" />
       </div>

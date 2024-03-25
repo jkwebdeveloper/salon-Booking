@@ -13,7 +13,7 @@ import { MdOutlineErrorOutline } from "react-icons/md";
 
 import { login } from "@/redux/features/authSlice";
 import { POST } from "@/app/api/post";
-import { Spinner, Button } from '@/components';
+import { Spinner, Button, Error } from '@/components';
 
 const Signin = () => {
   const [showPassword, setShowPassword] = React.useState(false),
@@ -23,7 +23,7 @@ const Signin = () => {
     [loading, setLoading] = React.useState(false),
     [error, setError] = React.useState("");
 
-  const signIn = async (e) => {
+  const userSignin = async (e) => {
     e.preventDefault();
     setLoading(true);
     const resp = await POST.request({ url: "/login", form: e.target });
@@ -51,7 +51,7 @@ const Signin = () => {
           <div className="flex items-center justify-center p-10 mx-auto bg-white rounded-lg shadow-sm ring-1 ring-neutral-300/40">
             <div className="space-y-3">
               <p className="text-lg font-semibold">Login</p>
-              <form className="flex flex-col gap-3" noValidate onSubmit={(e) => signIn(e)} >
+              <form className="flex flex-col gap-3" noValidate onSubmit={(e) => userSignin(e)} >
                 <div className="space-y-1 text-left ">
                   <label htmlFor="country" className="label_text">
                     Email Id
@@ -106,9 +106,7 @@ const Signin = () => {
                 <Button variant="primary" className="md:w-full" type="submit" disabled={loading}>
                   <Spinner show={loading} width='35' height='35' text="Login" />
                 </Button>
-                {error && <div class="px-4 py-2 mb-2 text-sm flex items-center gap-2 text-red-800 rounded-md bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <span class="font-medium"><MdOutlineErrorOutline className="text-lg" /></span> {error}
-                </div>}
+                {error && <Error error={error} />}
               </form>
               <Link href="/forgot-password" className="block w-full mt-5 font-semibold text-center">
                 Forgot password?

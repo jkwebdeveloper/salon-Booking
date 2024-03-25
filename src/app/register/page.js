@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineErrorOutline } from "react-icons/md";
 import { useRouter } from "next/navigation";
 
-import { Spinner, Button } from '@/components';
+import { Spinner, Button, Error } from '@/components';
 import { login } from "@/redux/features/authSlice";
 import { POST } from "@/app/api/post";
 
@@ -124,9 +124,7 @@ const Register = () => {
               <Button type="submit" variant="primary" className="md:w-full" disabled={loading}>
                 <Spinner show={loading} width='35' height='35' text="Request" />
               </Button>
-              {error && <div class="px-4 py-2 mb-4 text-sm flex items-center gap-2 text-red-800 rounded-md bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                <span class="font-medium"><MdOutlineErrorOutline className="text-lg" /></span> {error}
-              </div>}
+              {error && <Error error={error} />}
             </form>
           </div>
         </div>

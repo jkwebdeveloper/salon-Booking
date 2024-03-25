@@ -4,6 +4,7 @@ let serverURL = process.env.NEXT_PUBLIC_APIURL;
 
 export const POST = {
   request: async ({ token, form, url, header }) => {
+    console.log("POST request");
     let formData;
     if (form && form.tagName == "FORM") {
       const validForm = await validateInput(form);
@@ -32,7 +33,7 @@ export const POST = {
     if (token) {
       requestHeader = {
         ...requestHeader,
-        'access-token': `s${token}`,
+        'access-token': `${token}`,
       };
     }
     if (header) {

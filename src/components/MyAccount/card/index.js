@@ -11,6 +11,7 @@ import {
 
 const Card = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [addCard, setAddCard] = useState(false);
 
   const handleOnClose = () => {
     setOpenModal(false);
@@ -20,13 +21,13 @@ const Card = () => {
       <p className="text-xl text-[#25324B] font-semibold">Profile</p>
       <div className="flex items-center justify-between">
         <p>Your saved credit and debit cards</p>
-        <Dialog>
-          <DialogTrigger className="flex items-center h-8 px-6 py-3 text-sm font-medium text-white uppercase transition rounded-full focus:outline-none bg-primary hover:bg-primary-hover active:scale-90">
+        <Dialog open={addCard}>
+          <DialogTrigger onClick={e => setAddCard(true)} className="flex items-center h-8 px-6 py-3 text-sm font-medium text-white uppercase transition rounded-full focus:outline-none bg-primary hover:bg-primary-hover active:scale-90">
             Add New Card
           </DialogTrigger>
-          <DialogContent className="max-h-[90vh]">
+          <DialogContent className="max-h-[90vh]" onInteractOutside={e => setAddCard(false)} close={setAddCard}>
             <DialogTitle>Add new card</DialogTitle>
-            <EditCardModal />
+            <EditCardModal setAddCard={setAddCard} />
           </DialogContent>
         </Dialog>
       </div>

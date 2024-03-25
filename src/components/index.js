@@ -8,6 +8,8 @@ const Spinner = dynamic(() => import("@/components/ui/spinner"));
 const Button = dynamic(() => import("@/components/ui/button"));
 const Label = dynamic(() => import("@/components/ui/form/label"));
 import Banner from "@/components/global/banner";
+const Error = dynamic(() => import("@/components/ui/form/error"));
+const SuccessPopup = dynamic(() => import("@/components/global/successpopup"));
 
 //Home components
 import Herosection from "@/components/Home/HeroSection";
@@ -35,6 +37,6 @@ const Wallet = dynamic(() => import("@/components/MyAccount/Wallet"), { loading:
 const ReferFriend = dynamic(() => import("@/components/MyAccount/ReferFriend"), { loading: () => loader });
 const ChangePassword = dynamic(() => import("@/components/MyAccount/ChangePassword"), { loading: () => loader });
 
-export { PageLoader, Spinner, Button, Label, Banner };
+export { PageLoader, Spinner, Button, Label, Banner, Error, SuccessPopup };
 
 export { Herosection, Pampertree, Featured, Treatments, Gifts, Location, Groupon, PamperTeam, Offers, PopularSalon, DownloadApp, Testimonials, Business, FindNearByForm, MainDetail, MainMenu, Card, Wallet, Profile, MyBooking, ReferFriend, ChangePassword };

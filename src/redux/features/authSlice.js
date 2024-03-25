@@ -6,6 +6,12 @@ export const auth = createSlice({
         user: null,
     },
     reducers: {
+        setUser: (state, action) => {
+            let user = { ...state.user, ...action.payload };
+            user = JSON.stringify(user);
+            typeof window != 'undefined' && localStorage.setItem("user", user);
+            state.user = { ...action.payload };
+        },
         login: (state, action) => {
             const user = JSON.stringify(action.payload);
             typeof window != 'undefined' && localStorage.setItem("user", user);
@@ -18,5 +24,5 @@ export const auth = createSlice({
     },
 });
 
-export const { login, logout, getUser } = auth.actions;
+export const { setUser, login, logout, getUser } = auth.actions;
 export default auth.reducer;

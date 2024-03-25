@@ -9,7 +9,7 @@ const Logout = () => {
     useEffect(() => {
         dispatch({ type: 'LOGOUT' });
         router.push('/');
-    }, []);
+    }, [dispatch]);
 };
 
 export default Logout;

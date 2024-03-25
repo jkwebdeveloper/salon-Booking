@@ -1,21 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Profile, MyBooking, Card, Wallet, ReferFriend, ChangePassword } from "@/components";
 
-const MainDetail = ({ tabMenu, user }) => {
+const MainDetail = ({ tabMenu, ...props }) => {
   return (
     <>
       {tabMenu === "Profile" ? (
-        <Profile user={user} />
+        <Profile {...props} />
       ) : tabMenu === "Booking" ? (
-        <MyBooking user={user} />
+        <MyBooking {...props} />
       ) : tabMenu === "Card" ? (
-        <Card user={user} />
+        <Card {...props} />
       ) : tabMenu === "Wallet" ? (
-        <Wallet user={user} />
+        <Wallet {...props} />
       ) : tabMenu === "Friend" ? (
-        <ReferFriend user={user} />
+        <ReferFriend {...props} />
       ) : tabMenu === "Change Password" ? (
-        <ChangePassword user={user} />
+        <ChangePassword {...props} />
       ) : null}
     </>
   );

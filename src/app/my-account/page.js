@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
-import { MainMenu, MainDetail, Banner } from "@/components";
-import PageLoader from "@/components/ui/pageloader";
+import { MainMenu, MainDetail, Banner, PageLoader } from "@/components";
 
 const MyAccountPage = () => {
   const router = useRouter();
@@ -21,7 +20,7 @@ const MyAccountPage = () => {
   return (
     <>
       <Banner background={'/static/images/Myaccountbanner.jpg'} />
-      <div className="container flex flex-col min-h-[55dvh] gap-4 px-1 md:flex-row md:px-5 lg:relative xl:-top-8 lg:-top-8 md:-top-8 -top-8">
+      <div className="container flex flex-col min-h-[55dvh] gap-4 px-1 md:flex-row md:px-5 relative mt-[-3rem] z-[2] md:mb-10">
         <div className="shadow-lg rounded-md h-fit min-h-[350px] md:w-[40%] lg:w-[25%] w-[90%] mx-auto space-y-5 z-2 bg-white">
           <MainMenu onTabChange={setTabMenu} tabMenu={tabMenu} />
         </div>

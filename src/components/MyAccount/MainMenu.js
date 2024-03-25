@@ -14,7 +14,7 @@ const MainMenu = ({ onTabChange, tabMenu }) => {
 
   return (
     <div className="px-2 py-3 space-y-2 xl:py-5 xl:px-4">
-      <p className="text-xl text-[#25324B] font-semibold title heading">
+      <p className="text-xl text-[#25324B] font-semibold title heading mb-5">
         My Account
       </p>
       {tabMenu === "Profile" ? (
