@@ -4,8 +4,8 @@ import { Banner } from "@/components";
 const TaxStrategy = () => {
   return (
     <div className="space-y-4 ">
-      <Banner title={'Tax Strategy'} background={'/static/images/Tax Strategy.jpg'} />
-      <div className="container px-5 mx-auto space-y-5 md:px-28">
+      <Banner title={'Tax Strategy'} background={'/static/images/Tax-Strategy.jpg'} />
+      <div className="container px-5 pt-10 pb-20 mx-auto space-y-5 md:px-28">
         <div className="space-y-2">
           <h1 className="text-base font-semibold md:text-xl">
             Ownership And agreement

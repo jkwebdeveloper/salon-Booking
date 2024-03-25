@@ -7,7 +7,7 @@ const loader = <PageLoader show={true} width='35' height='35' text="Request" />;
 const Spinner = dynamic(() => import("@/components/ui/spinner"));
 const Button = dynamic(() => import("@/components/ui/button"));
 const Label = dynamic(() => import("@/components/ui/form/label"));
-const Banner = dynamic(() => import("@/components/global/banner"));
+import Banner from "@/components/global/banner";
 
 //Home components
 import Herosection from "@/components/Home/HeroSection";

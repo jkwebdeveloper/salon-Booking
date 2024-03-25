@@ -9,29 +9,18 @@ import { Banner, Button } from "@/components";
 const ContactUs = () => {
   return (
     <>
-      <Banner title="Contact us" background={'/static/images/Contact us.jpg'} />
-      <div className="relative flex flex-col items-stretch justify-center gap-4 mx-auto md:flex-row xl:-top-8 lg:-top-8 md:-top-8 -top-8">
-        <div className="overflow-hidden bg-white shadow-lg rounded-xl">
+      <Banner title="Contact us" background={'/static/images/Contact-us.jpg'} />
+      <div className="container max-w-[1200px] flex lg:flex-row flex-col gap-6 mx-auto rounded-xl md:mt-[-3rem] mt-3 md:mb-10">
+        <div className="z-[2] overflow-hidden shadow-lg rounded-xl lg:max-w-[40%] mx-auto ring-1 ring-primary/10 w-full">
           <div className="relative">
             <Image
-              src={'/static/images/contact.jpg'}
+              src={'/static/images/contact-us.svg'}
               alt=""
               loading="lazy"
               width={400}
               height={300}
-              className="relative object-cover w-full"
+              className="object-cover object-center w-full "
             />
-            <div className="absolute p-4 mx-auto top-9">
-              <Image
-                src={'/static/images/logowhite.png'}
-                alt=""
-                loading="lazy"
-                width={300}
-                height={300}
-                className="relative w-full"
-                objectFit="cover"
-              />
-            </div>
           </div>
           <div className="space-y-4 p-7">
             <div className="flex items-center gap-2">
@@ -48,12 +37,12 @@ const ContactUs = () => {
             </div>
           </div>
         </div>
-        <div className="p-4 bg-white rounded-lg shadow-lg">
+        <div className="p-6 space-y-4 bg-white rounded-lg shadow-lg ring-1 ring-primary/10 z-[2]">
           <p className="text-2xl font-semibold text-black uppercase title heading">
             Get in touch
           </p>
           <p>Reach out to us for any inquiry</p>
-          <div className="space-y-4">
+          <div className="flex flex-col items-start gap-3">
             <div className="w-full space-y-1 text-left">
               <label htmlFor="country" className="label_text">
                 Address line 1
@@ -100,7 +89,7 @@ const ContactUs = () => {
                 placeholder="Enter your state"
               />
             </div>
-            <Button variant="primary">SUBMIT</Button>
+            <Button variant="primary" className="mt-1">SUBMIT</Button>
           </div>
         </div>
       </div>

@@ -1,13 +1,11 @@
 import React from "react";
-import Image from "next/image";
 
-import banner from "../../../public/static/images/Terms & conditions.jpg";
 import { Banner } from "@/components";
 
 const TermsAndCondition = () => {
   return (
     <div className="space-y-4 ">
-      <Banner title="Terms & conditions" background={'/static/images/Terms & conditions.jpg'} />
+      <Banner title="Terms & conditions" background={'/static/images/Terms-conditions.jpg'} />
       <div className="container px-5 pt-10 pb-20 mx-auto space-y-5 md:px-28">
         <div className="space-y-2">
           <h2 className="text-base font-semibold md:text-2xl">

@@ -1,10 +1,9 @@
 "use client";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
-import { MainMenu, MainDetail } from "@/components";
+import { MainMenu, MainDetail, Banner } from "@/components";
 import PageLoader from "@/components/ui/pageloader";
 
 const MyAccountPage = () => {
@@ -21,17 +20,7 @@ const MyAccountPage = () => {
 
   return (
     <>
-      <div style={{ width: "100%", height: "100%", position: "relative" }}>
-        <Image
-          src={'/static/images/Myaccountbanner.jpg'}
-          alt=""
-          loading="lazy"
-          width={300}
-          height={300}
-          className="relative w-full"
-          objectFit="cover"
-        />
-      </div>
+      <Banner background={'/static/images/Myaccountbanner.jpg'} />
       <div className="container flex flex-col min-h-[55dvh] gap-4 px-1 md:flex-row md:px-5 lg:relative xl:-top-8 lg:-top-8 md:-top-8 -top-8">
         <div className="shadow-lg rounded-md h-fit min-h-[350px] md:w-[40%] lg:w-[25%] w-[90%] mx-auto space-y-5 z-2 bg-white">
           <MainMenu onTabChange={setTabMenu} tabMenu={tabMenu} />
