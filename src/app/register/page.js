@@ -1,16 +1,14 @@
 'use client';
 import Image from "next/image";
 import React from "react";
-import logo from "../../../public/static/images/logo.png";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import validateInput from "@/lib/validateinput";
-import { login, logout } from "@/redux/features/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { POST } from "../api/post";
 import { MdOutlineErrorOutline } from "react-icons/md";
 import { useRouter } from "next/navigation";
-import Spinner from "@/components/ui/spinner";
+
+import { Spinner, Button } from '@/components';
+import { login } from "@/redux/features/authSlice";
+import { POST } from "@/app/api/post";
 
 const Register = () => {
   const [error, setError] = React.useState("");
@@ -43,7 +41,7 @@ const Register = () => {
         <div className="flex flex-col items-center justify-center h-full space-y-4">
           <div>
             <Link href="/">
-              <Image src={logo} loading="lazy" alt="logo" className="mx-auto" />
+              <Image src={'/static/images/logo.png'} loading="lazy" alt="logo" className="mx-auto" width={150} height={75} />
             </Link>
           </div>
           <div className="w-full p-4 mx-auto overflow-x-hidden bg-white rounded-lg shadow-md max-w-[35rem]">
@@ -114,7 +112,7 @@ const Register = () => {
                   </div>
                   <div>
                     <input type="radio" id="male" name="gender" value="male" class="hidden peer" required />
-                    <label htmlFor="male" class="block text-center w-full p-1 text-[#0AADA4] bg-white border border-[#0AADA4] rounded-[7px] cursor-pointer dark:hover:text-white dark:peer-checked:text-white peer-checked:bg-[#0AADA4] peer-checked:text-white  dark:bg-[#9ec7c5] dark:hover:bg-[#0AADA4]"> Male </label>
+                    <label htmlFor="male" class="block text-center w-full p-1 leading-6 text-[#0AADA4] bg-white border border-[#0AADA4] rounded-[7px] cursor-pointer dark:hover:text-white dark:peer-checked:text-white peer-checked:bg-[#0AADA4] peer-checked:text-white  dark:bg-[#9ec7c5] dark:hover:bg-[#0AADA4]"> Male </label>
                   </div>
                 </div>
               </div>

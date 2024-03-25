@@ -7,20 +7,11 @@ import DesktopMenu from "@/components/global/Header/desktopmenu";
 
 import { MdLocationPin } from "react-icons/md";
 import { BiMenuAltRight } from "react-icons/bi";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Topbar from "@/components/global/Header/topbar";
 
 const Header = () => {
-  const router = useRouter();
-  const isloginPage = router.pathname === "/sign-in";
-  const isRegisterPage = router.pathname === "/register";
   const [openSidebar, setOpenSidebar] = useState(false);
-
-  if (isloginPage || isRegisterPage) {
-    return null;
-  }
-
   return (
     <div className="w-full bg-white shadow-md">
       <div className="container border-b xl:flex xl:justify-between md:items-center">
@@ -50,7 +41,9 @@ const Header = () => {
         </div>
         <div className="hidden xl:block">
           <div className="flex items-center gap-2">
-            <Button type="button" variant="outline" size="sm" className="uppercase">For business</Button>
+            <Button type="button" variant="outline" size="sm" className="uppercase" asChild>
+              <Link href={'/my-business'}>For business</Link>
+            </Button>
             <Topbar />
           </div>
         </div>

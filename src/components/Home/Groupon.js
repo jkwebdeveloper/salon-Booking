@@ -9,24 +9,17 @@ import { FaWhatsapp } from "react-icons/fa6";
 import { ImFacebook } from "react-icons/im";
 import { BsTwitterX } from "react-icons/bs";
 import { LuBookmark } from "react-icons/lu";
-import { GrCart } from "react-icons/gr";
-import { IoIosEye } from "react-icons/io";
-// import dynamic from "next/dynamic";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-
 import { Swiper, SwiperSlide } from "swiper/react";
+import { v4 } from "uuid";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-// import "swiper/css/scrollbar";
-// const PampertreeBox = dynamic(() => import("./PampertreeBox"));
 import image1 from "../../../public/static/images/groupon1.png";
 import image2 from "../../../public/static/images/groupon2.png";
 import image3 from "../../../public/static/images/groupon3.png";
 import image4 from "../../../public/static/images/groupon4.png";
-import { v4 } from "uuid";
 
 const boxData = [
   {
@@ -72,7 +65,7 @@ const boxData = [
 ];
 
 const Groupon = () => {
-    const [isFavourite, setIsFavourite] = useState(false);
+  const [isFavourite, setIsFavourite] = useState(false);
   return (
     <div className="w-full space-y-4">
       <p className="text-2xl font-semibold text-black uppercase title heading">
@@ -134,9 +127,8 @@ const Groupon = () => {
               <div className="relative w-full space-y-4">
                 <div
                   onClick={() => setIsFavourite(!isFavourite)}
-                  className={`absolute top-3 right-3 ${
-                    isFavourite 
-                  } rounded-full p-2 cursor-pointer`}
+                  className={`absolute top-3 right-3 ${isFavourite
+                    } rounded-full p-2 cursor-pointer`}
                 >
                   {isFavourite ? (
                     <RiHeartFill className="text-2xl text-red-500" />
@@ -152,7 +144,7 @@ const Groupon = () => {
                           src={item?.image}
                           alt="spa life"
                           loading="lazy"
-                          
+
                           // fill
                           className="object-cover w-full h-full"
                         />

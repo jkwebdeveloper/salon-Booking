@@ -11,20 +11,15 @@ import { BsTwitterX } from "react-icons/bs";
 import { LuBookmark } from "react-icons/lu";
 import { GrCart } from "react-icons/gr";
 import { IoIosEye } from "react-icons/io";
-// import dynamic from "next/dynamic";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-
 import { Swiper, SwiperSlide } from "swiper/react";
+import { v4 } from "uuid";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-// import "swiper/css/scrollbar";
-// const PampertreeBox = dynamic(() => import("./PampertreeBox"));
 import image1 from "../../../public/static/images/spa_life.png";
-import { Button } from "../ui/button";
-import { v4 } from "uuid";
+import { Button } from "@/components";
 
 const boxData = [
   {
@@ -138,9 +133,8 @@ const Pampertree = () => {
               <div className="relative w-full space-y-4" key={item.id}>
                 <div
                   onClick={() => setIsFavourite(!isFavourite)}
-                  className={`absolute top-3 right-3 ${
-                    isFavourite ? "bg-red-500" : "bg-[#b6b6b6]"
-                  } rounded-full p-2 cursor-pointer`}
+                  className={`absolute top-3 right-3 ${isFavourite ? "bg-red-500" : "bg-[#b6b6b6]"
+                    } rounded-full p-2 cursor-pointer`}
                 >
                   {isFavourite ? (
                     <RiHeartFill className="text-2xl text-white" />
@@ -156,7 +150,7 @@ const Pampertree = () => {
                           src={item?.image}
                           alt="spa life"
                           loading="lazy"
-                          
+
                           // fill
                           className="object-cover w-full h-full"
                         />

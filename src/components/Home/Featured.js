@@ -1,24 +1,19 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-// import "swiper/css/scrollbar";
-import { IoIosArrowBack } from "react-icons/io";
-import { IoIosArrowForward } from "react-icons/io";
 import Image from "next/image";
-import moon from "../../../public/static/images/hair.png";
 import { MdLocationPin } from "react-icons/md";
 import { FaStar, FaWhatsapp } from "react-icons/fa";
 import { ImFacebook } from "react-icons/im";
 import { BsTwitterX } from "react-icons/bs";
 import { LuBookmark } from "react-icons/lu";
-import { Button } from "../ui/button";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+import { Button } from "@/components";
 
 const Featured = () => {
   const [beginAndEnd, setBeginAndEnd] = useState({
@@ -86,15 +81,15 @@ const Featured = () => {
                       nextEl: nextRef.current,
                       enabled: true,
                     }}
-                    // observer={true}
-                    // parallax={true}
-                    // observeParents={true}
+                  // observer={true}
+                  // parallax={true}
+                  // observeParents={true}
                   >
                     <SwiperSlide>
                       <Image
-                        src={moon}
-                        // height={500}
-                        // width={500}
+                        src={'/static/images/hair.png'}
+                        height={500}
+                        width={500}
                         alt="moon"
                         loading="lazy"
                         // fill
@@ -103,7 +98,7 @@ const Featured = () => {
                     </SwiperSlide>
                     {/* <SwiperSlide>
                       <Image
-                        src={moon}
+                        src={'/static/images/hair.png'}
                         height={300}
                         width={300}
                         alt="moon"
@@ -177,7 +172,7 @@ const Featured = () => {
               <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
                 <div className="">
                   <p className="font-semibold">
-                    Cupping Massage 
+                    Cupping Massage
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
@@ -202,7 +197,7 @@ const Featured = () => {
               <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
                 <div className="">
                   <p className="font-semibold">
-                    Cupping Massage 
+                    Cupping Massage
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
@@ -246,15 +241,15 @@ const Featured = () => {
                       nextEl: nextRef.current,
                       enabled: true,
                     }}
-                    // observer={true}
-                    // parallax={true}
-                    // observeParents={true}
+                  // observer={true}
+                  // parallax={true}
+                  // observeParents={true}
                   >
                     <SwiperSlide>
                       <Image
-                        src={moon}
-                        // height={500}
-                        // width={500}
+                        src={'/static/images/hair.png'}
+                        height={500}
+                        width={500}
                         alt="moon"
                         loading="lazy"
                         // fill
@@ -263,7 +258,7 @@ const Featured = () => {
                     </SwiperSlide>
                     {/* <SwiperSlide>
                       <Image
-                        src={moon}
+                        src={'/static/images/hair.png'}
                         height={300}
                         width={300}
                         alt="moon"
@@ -337,7 +332,7 @@ const Featured = () => {
               <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
                 <div className="">
                   <p className="font-semibold">
-                    Cupping Massage 
+                    Cupping Massage
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
@@ -362,7 +357,7 @@ const Featured = () => {
               <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
                 <div className="">
                   <p className="font-semibold">
-                    Cupping Massage 
+                    Cupping Massage
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
@@ -406,15 +401,15 @@ const Featured = () => {
                       nextEl: nextRef.current,
                       enabled: true,
                     }}
-                    // observer={true}
-                    // parallax={true}
-                    // observeParents={true}
+                  // observer={true}
+                  // parallax={true}
+                  // observeParents={true}
                   >
                     <SwiperSlide>
                       <Image
-                        src={moon}
-                        // height={500}
-                        // width={500}
+                        src={'/static/images/hair.png'}
+                        height={500}
+                        width={500}
                         alt="moon"
                         loading="lazy"
                         // fill
@@ -423,7 +418,7 @@ const Featured = () => {
                     </SwiperSlide>
                     {/* <SwiperSlide>
                       <Image
-                        src={moon}
+                        src={'/static/images/hair.png'}
                         height={300}
                         width={300}
                         alt="moon"
@@ -497,7 +492,7 @@ const Featured = () => {
               <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
                 <div className="">
                   <p className="font-semibold">
-                    Cupping Massage 
+                    Cupping Massage
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">
@@ -522,7 +517,7 @@ const Featured = () => {
               <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
                 <div className="">
                   <p className="font-semibold">
-                    Cupping Massage 
+                    Cupping Massage
                     <span className="font-normal">(20 Min)</span>
                   </p>
                   <div className="flex items-center gap-3">

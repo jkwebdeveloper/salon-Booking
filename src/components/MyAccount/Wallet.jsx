@@ -3,7 +3,7 @@ import React from "react";
 import walletbg from "../../../public/static/images/wallet-bg.png";
 const Wallet = () => {
   return (
-    <div className="p-3 space-y-4 bg-white rounded-md shadow-lg xl:p-5">
+    <div className="p-3 space-y-4 bg-white rounded-md xl:p-5">
       <p className="text-xl text-[#25324B] font-semibold">Wallet</p>
       <div className="grid grid-cols-1 gap-3 xl:grid-cols-3">
         <div className="relative col-span-2">

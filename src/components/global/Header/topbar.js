@@ -1,15 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuGroup,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
-import { Button } from "@/components/ui/button";
 import { GoBell } from "react-icons/go";
 import { GrCart } from "react-icons/gr";
 import { IoCaretDown, IoHeartOutline, IoCloseOutline } from "react-icons/io5";
@@ -20,24 +9,34 @@ import { FaMobileAlt } from "react-icons/fa";
 import { TfiEmail } from "react-icons/tfi";
 import { MdLogout } from "react-icons/md";
 import { RiCustomerServiceLine } from "react-icons/ri";
-import { login, logout } from "@/redux/features/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
+import { Button } from "@/components";
+import { logout } from "@/redux/features/authSlice";
+
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
 function Topbar() {
     const router = useRouter();
     const user = useSelector((state) => state.auth.user) || '';
-    const [pageLoaded, setPageLoaded] = useState(false);
     const dispatch = useDispatch();
-    useEffect(() => { setPageLoaded(true) }, []);
     return (
         <>
-            {pageLoaded && !user && <Link href={'/sign-in'} className="uppercase border-[1px] rounded-full border-black bg-background shadow-sm hover:bg-primary hover:text-white h-8 px-5 text-xs flex items-center">Log in</Link>}
+            {!user && <Link href={'/sign-in'} className="uppercase border-[1px] rounded-full border-black bg-background shadow-sm hover:bg-primary hover:text-white h-8 px-5 text-xs flex items-center">Log in</Link>}
             {/* My Account Dropdown Menu */}
-            {pageLoaded && user && <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button type="button" variant="outline" size="sm" className="uppercase pe-3">
+            {user && <DropdownMenu>
+                <DropdownMenuTrigger className='focus-visible:outline-none'>
+                    <Button parent={true} type="button" variant="outline" size="sm" className="uppercase pe-3">
                         My Account
                         <IoCaretDown />
                     </Button>
@@ -99,8 +98,8 @@ function Topbar() {
             </DropdownMenu>}
             {/* Cart Dropdown Menu */}
             <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button type="button" variant="ghost" size="icon" className="uppercase">
+                <DropdownMenuTrigger className='focus-visible:outline-none'>
+                    <Button type="button" parent={true} variant="ghost" size="icon" className="uppercase">
                         <GrCart className="text-xl cursor-pointer text-primary_color" />
                     </Button>
                 </DropdownMenuTrigger>
@@ -168,9 +167,9 @@ function Topbar() {
                 </DropdownMenuContent>
             </DropdownMenu>
             {/* Notifications Dropdown Menu */}
-            {pageLoaded && user && <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button type="button" variant="ghost" size="icon" className="uppercase">
+            {user && <DropdownMenu>
+                <DropdownMenuTrigger className='focus-visible:outline-none'>
+                    <Button type="button" parent={true} variant="ghost" size="icon" className="uppercase">
                         <GoBell className="text-xl cursor-pointer text-primary_color" />
                     </Button>
                 </DropdownMenuTrigger>

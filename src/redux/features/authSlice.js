@@ -3,12 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 export const auth = createSlice({
     name: "auth",
     initialState: {
-        user: typeof window != 'undefined' && JSON.parse(localStorage.getItem("user")) || null,
+        user: null,
     },
     reducers: {
-        getUser: (state, action) => {
-            return state;
-        },
         login: (state, action) => {
             const user = JSON.stringify(action.payload);
             typeof window != 'undefined' && localStorage.setItem("user", user);

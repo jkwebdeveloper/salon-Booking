@@ -1,16 +1,13 @@
 "use client";
 import React, { useRef } from "react";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/grid";
-import "swiper/css/pagination";
-
 import { Grid, Pagination, Autoplay } from "swiper/modules";
 import { IoIosArrowForward } from "react-icons/io";
 import { v4 } from "uuid";
+
+import "swiper/css";
+import "swiper/css/grid";
+import "swiper/css/pagination";
 
 const locationData = [
   {

@@ -1,31 +1,13 @@
 import React from "react";
-import banner from "../../../public/static/images/whyUs.jpg";
-import Image from "next/image";
+import { Banner } from "@/components";
 
 const WhyUs = () => {
   return (
     <div className="space-y-4 ">
-      <div className="relative w-full">
-        <Image
-          src={banner}
-          alt=""
-          loading="lazy"
-          // width={300}
-          // height={300}
-          className="relative w-full"
-          // layout="fill"
-          // fill
-          objectFit="cover"
-        />
-        <div className="absolute w-full top-1/2">
-          <h1 className="text-center uppercase text-2xl text-white font-semibold mx-auto flex items-center justify-center">
-            Why us
-          </h1>
-        </div>
-      </div>
-      <div className="space-y-5 container mx-auto md:px-28 px-5">
+      <Banner title="Why us" background={'/static/images/whyUs.jpg'} />
+      <div className="container px-5 pt-10 pb-20 mx-auto space-y-5 md:px-28">
         <div className="space-y-2">
-          <h1 className="font-semibold md:text-xl text-base">Increase Online Visibility</h1>
+          <h1 className="text-base font-semibold md:text-xl">Increase Online Visibility</h1>
           <p className="text-[#666666] text-justify">
             When everyone seems to have more things to achieve in a single day
             than is often possible, it is great to come across a simple solution
@@ -42,7 +24,7 @@ const WhyUs = () => {
           </p>
         </div>
         <div className="space-y-2">
-          <h1 className="font-semibold md:text-xl text-base">
+          <h1 className="text-base font-semibold md:text-xl">
             Reduce No Shows (People who not turn for app)
           </h1>
           <p className="text-[#666666] text-justify">
@@ -59,7 +41,7 @@ const WhyUs = () => {
           </p>
         </div>
         <div className="space-y-2">
-          <h1 className="font-semibold md:md:text-xl text-base">Attract And Retain Clients</h1>
+          <h1 className="text-base font-semibold md:md:text-xl">Attract And Retain Clients</h1>
           <p className="text-[#666666] text-justify">
             When everyone seems to have more things to achieve in a single day
             than is often possible, it is great to come across a simple solution
@@ -76,7 +58,7 @@ const WhyUs = () => {
           </p>
         </div>
         <div className="space-y-2">
-          <h1 className="font-semibold md:text-xl text-base">Fill Up Your Schedule</h1>
+          <h1 className="text-base font-semibold md:text-xl">Fill Up Your Schedule</h1>
           <p className="text-[#666666] text-justify">
             Featuring the latest offers, customer loyalty schemes, late booking
             deals, new salons and the most popular treatments, you will be able

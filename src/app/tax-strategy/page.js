@@ -1,31 +1,13 @@
 import React from "react";
-import banner from "../../../public/static/images/Tax Strategy.jpg";
-import Image from "next/image";
+import { Banner } from "@/components";
 
 const TaxStrategy = () => {
   return (
     <div className="space-y-4 ">
-      <div className="relative w-full">
-        <Image
-          src={banner}
-          alt=""
-          loading="lazy"
-          // width={300}
-          // height={300}
-          className="relative w-full"
-          // layout="fill"
-          // fill
-          objectFit="cover"
-        />
-        <div className="absolute w-full top-1/2">
-          <h1 className="text-center uppercase text-2xl text-white font-semibold mx-auto flex items-center justify-center">
-            Tax Strategy
-          </h1>
-        </div>
-      </div>
-      <div className="space-y-5 container mx-auto md:px-28 px-5">
+      <Banner title={'Tax Strategy'} background={'/static/images/Tax Strategy.jpg'} />
+      <div className="container px-5 mx-auto space-y-5 md:px-28">
         <div className="space-y-2">
-          <h1 className="font-semibold md:text-xl text-base">
+          <h1 className="text-base font-semibold md:text-xl">
             Ownership And agreement
           </h1>
           <p className="text-[#666666] text-justify">
@@ -35,7 +17,7 @@ const TaxStrategy = () => {
           </p>
         </div>
         <div className="space-y-2">
-          <h1 className="font-semibold md:text-xl text-base">Obedience</h1>
+          <h1 className="text-base font-semibold md:text-xl">Obedience</h1>
           <p className="text-[#666666] text-justify">
             This tax strategy of PamperTree Ltd is obedient of the information
             required in the publication of the UK tax strategy, Schedule 19 FA
@@ -43,7 +25,7 @@ const TaxStrategy = () => {
           </p>
         </div>
         <div className="space-y-2">
-          <h1 className="font-semibold md:md:text-xl text-base">Scope</h1>
+          <h1 className="text-base font-semibold md:md:text-xl">Scope</h1>
           <p className="text-[#666666] text-justify">
             PamperTree Ltd is a UK taxpayer. This is clearly acknowledged and
             documented by the tax strategy for the reporting of all tax and
@@ -54,7 +36,7 @@ const TaxStrategy = () => {
           </p>
         </div>
         <div className="space-y-2">
-          <h1 className="font-semibold md:text-xl text-base">
+          <h1 className="text-base font-semibold md:text-xl">
             Our Tax Strategy Declaration
           </h1>
           <p className="text-[#666666] text-justify">
@@ -68,7 +50,7 @@ const TaxStrategy = () => {
           </p>
         </div>
         <div className="space-y-2">
-          <h1 className="font-semibold md:text-xl text-base">Administration</h1>
+          <h1 className="text-base font-semibold md:text-xl">Administration</h1>
           <p className="text-[#666666] text-justify">
             The tax strategy is administered by those with full training and
             guidance who are also fully responsible to make decisions that may

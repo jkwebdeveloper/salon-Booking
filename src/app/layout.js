@@ -1,9 +1,7 @@
-import { Inter, Roboto } from "next/font/google";
-import "./globals.css";
+import { Roboto } from "next/font/google";
+import "@/app/globals.css";
 import Layout from "@/components/global/layout";
 import { ReduxProvider } from "@/redux/provider";
-
-// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Salon Website",

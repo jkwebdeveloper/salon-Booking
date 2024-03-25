@@ -1,23 +1,20 @@
 import Image from "next/image";
-import React from "react";
-import Banner from "../../../public/static/images/banner.jpg";
-import dynamic from "next/dynamic";
-const FindNearByForm = dynamic(() => import("./FindNearByForm"));
+import { FindNearByForm } from "@/components";
 
 const Herosection = () => {
   return (
     <div className="w-full relative h-[80vh] 2xl:h-[75vh]">
       <div>
         <Image
-          src={Banner}
+          src={'/static/images/banner.jpg'}
           loading="lazy"
-          
-          // fill
-          alt=""
+          alt="Hero Banner"
           className="absolute object-cover w-full h-full"
+          width={1920}
+          height={1080}
         />
       </div>
-      <div className="flex justify-center items-center h-full w-full">
+      <div className="flex items-center justify-center w-full h-full">
         <FindNearByForm />
       </div>
     </div>

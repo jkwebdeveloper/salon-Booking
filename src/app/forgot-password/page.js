@@ -1,11 +1,11 @@
 import Image from "next/image";
 import React from "react";
-import signin from "../../../public/static/images/signin.png";
-import logo from "../../../public/static/images/logo.png";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
-const page = () => {
+import logo from "../../../public/static/images/logo.png";
+import { Button } from "@/components";
+
+const ForgotPassword = () => {
   return (
     <div className="grid w-screen lg:grid-cols-2">
       <div className="hidden lg:block bg-[url('/static/images/signin.png')] bg-cover"></div>
@@ -45,4 +45,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ForgotPassword;

@@ -1,15 +1,15 @@
 import React from "react";
+import Image from "next/image";
 import App from "../../../public/static/images/appstore2.png";
 import Google from "../../../public/static/images/playstore.png";
 import mobile from "../../../public/static/images/mobile1.png";
 import mobile1 from "../../../public/static/images/mobile2.png";
-import Image from "next/image";
 
 const DownloadApp = () => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 justify-center items-center">
-      <div className="space-y-4 mx-auto lg:text-left text-center">
-        <p className="text-black font-bold lg:text-5xl text-3xl">
+    <div className="grid items-center justify-center grid-cols-1 lg:grid-cols-2">
+      <div className="mx-auto space-y-4 text-center lg:text-left">
+        <p className="text-3xl font-bold text-black lg:text-5xl">
           Download the <br />
           <span className="text-primary_color">Pamper Tree app</span>
         </p>
@@ -21,7 +21,7 @@ const DownloadApp = () => {
         </div>
       </div>
       <div>
-        <div className="lg:block hidden">
+        <div className="hidden lg:block">
           <div className="flex items-center gap-3">
             <Image
               src={mobile1}

@@ -1,18 +1,18 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import ProfileModal from "@/components/MyAccount/profile/ProfileModal";
-import { Button } from "@/components/ui/button";
 import { useSelector } from "react-redux";
+import { MdModeEditOutline } from "react-icons/md";
+import { useRouter } from "next/navigation";
+import { v4 } from "uuid";
+
+import Label from "@/components/ui/form/label";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { MdModeEditOutline } from "react-icons/md";
-import Label from "@/components/ui/form/label";
-import { useRouter } from "next/navigation";
-import { v4 } from "uuid";
+} from "@/components/ui/dialog";
 
 const Profile = () => {
   const router = useRouter();
@@ -29,11 +29,11 @@ const Profile = () => {
 
   useEffect(() => {
     if (!user) router.push('/sign-in');
-  }, [user]);
+  }, [user, router]);
 
   return (
     <>
-      <div className="p-3 bg-white rounded-md shadow-lg xl:p-5">
+      <div className="flex-grow p-3 bg-white rounded-md xl:p-5">
         <form className="space-y-4">
           <p className="text-xl text-[#25324B] font-semibold">Profile</p>
           <div className="border relative border-1 border-[#0AADA4] rounded-full p-1 w-[4rem] h-[4rem] mb-2">

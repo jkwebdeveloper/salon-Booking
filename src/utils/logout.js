@@ -3,13 +3,13 @@ import { useEffect } from "react";
 const { useRouter } = require("next/navigation");
 const { useDispatch } = require("react-redux");
 
-const logout = () => {
+const Logout = () => {
+    const router = useRouter();
+    const dispatch = useDispatch();
     useEffect(() => {
-        const router = useRouter();
-        const dispatch = useDispatch();
         dispatch({ type: 'LOGOUT' });
         router.push('/');
     }, []);
 };
 
-export default logout;
+export default Logout;

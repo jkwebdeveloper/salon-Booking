@@ -1,5 +1,7 @@
 import Image from "next/image";
 import React from "react";
+import { v4 } from "uuid";
+
 import image1 from "../../../public/static/images/PamperTree/img1.png";
 import image2 from "../../../public/static/images/PamperTree/img2.png";
 import image3 from "../../../public/static/images/PamperTree/img3.png";
@@ -10,7 +12,6 @@ import image7 from "../../../public/static/images/PamperTree/img7.png";
 import image8 from "../../../public/static/images/PamperTree/img8.png";
 import image9 from "../../../public/static/images/PamperTree/img9.png";
 import image10 from "../../../public/static/images/PamperTree/img10.png";
-import { v4 } from "uuid";
 
 const ImagesData = [
   {
@@ -79,7 +80,7 @@ const Offers = () => {
         PamperTree highlights services for beauty, massage and so much more,
         bringing you a life package which can sort out all your requirements
         wherever you are in the country. Of course, major cities like London,
-        Manchester, Leeds, Rochdale, Liverpool, Oldham, Cardiff, Birmingham, 
+        Manchester, Leeds, Rochdale, Liverpool, Oldham, Cardiff, Birmingham,
         Belfast or Edinburgh have so many options that you
         may find you are almost overwhelmed by the choices, but by using the
         drop down menu you can refine the filters to get exactly what you want.
@@ -98,7 +99,7 @@ const Offers = () => {
               <Image
                 src={item?.image}
                 loading="lazy"
-                
+
                 // fill
                 alt=""
                 className="relative object-cover w-full h-full"

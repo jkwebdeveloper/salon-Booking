@@ -1,6 +1,6 @@
 import React from 'react'
 
-const page = () => {
+const MyBussiness = () => {
   return (
     <div>
       For Business
@@ -8,4 +8,4 @@ const page = () => {
   )
 }
 
-export default page
+export default MyBussiness

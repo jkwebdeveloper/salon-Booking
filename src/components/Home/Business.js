@@ -1,14 +1,13 @@
 import Image from "next/image";
 import React from "react";
-import image from "../../../public/static/images/Left-image.png";
-import logo from "../../../public/static/images/logo.png";
-import { Button } from "../ui/button";
+
+import { Button } from "@/components";
 
 const Business = () => {
   return (
     <div className="grid items-center justify-center grid-cols-1 gap-5 pb-20 lg:grid-cols-2 lg:gap-0">
       <div className="mx-auto">
-        <Image src={image} height={300} alt="" loading="lazy" className="" />
+        <Image src={'/images/Left-image.png'} width={300} height={300} alt="" loading="lazy" className="" />
         {/* <Image
           src={logo}
           alt=""

@@ -1,7 +1,6 @@
 import { Fragment, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { v4 } from "uuid";
-
 import {
   RiArrowDownSLine,
   RiPlayCircleFill,
@@ -76,38 +75,36 @@ const menuItems = {
     href: "#",
     icon: RiPlayCircleFill,
   },
-  Beauty: {
-    href: "#",
+  'Why Us': {
+    href: "/why-us",
     icon: RiPlayCircleFill,
   },
-  Body: {
-    href: "#",
+  'Terms & Conditions': {
+    href: "/terms-conditions",
     icon: RiPlayCircleFill,
   },
-  "Short breaks": {
-    href: "#",
+  "Tax Strategy": {
+    href: "/tax-strategy",
     icon: RiPlayCircleFill,
   },
-  "Spa days": {
-    href: "#",
+  "Refer Friend": {
+    href: "/refer-friend",
     icon: RiPlayCircleFill,
   },
-  "Mobile services": {
-    href: "#",
+  "Contact Us": {
+    href: "/contact-us",
     icon: RiPlayCircleFill,
   },
 };
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function DesktopMenu({ theme, themeMode }) {
   const [open, setOpen] = useState();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const updateMenu = ({ state, index }) => {
     setOpen((prev) => [...prev, (prev[index] = state)]);
   };
+
   return (
     <header className={`dark:bg-zinc-800 bg-white container rounded-md`}>
       <nav

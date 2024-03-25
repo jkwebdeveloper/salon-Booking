@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const ReferFriend = () => {
   return (
-    <div className="p-3 space-y-4 bg-white rounded-md shadow-lg xl:p-5">
+    <div className="p-3 space-y-4 bg-white rounded-md xl:p-5">
       <div className="flex items-center justify-between">
         <p className="text-xl text-[#25324B] font-semibold">Referral History</p>
         <Link href="/refer-friend">

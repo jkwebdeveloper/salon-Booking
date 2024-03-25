@@ -1,9 +1,9 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
-import { CiCalendarDate } from "react-icons/ci";
 import { IoTimeOutline } from "react-icons/io5";
 import { CiLocationOn } from "react-icons/ci";
-import { Button } from "../ui/button";
+
+import { Button } from '@/components';
 
 const FindNearByForm = () => {
   return (

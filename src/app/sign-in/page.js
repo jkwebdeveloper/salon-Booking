@@ -1,19 +1,19 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa6";
 import { FaApple } from "react-icons/fa";
-import { POST } from "../api/post";
-import { Button } from "@/components/ui/button";
-import { login } from "@/redux/features/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import Spinner from "@/components/ui/spinner";
 import { MdOutlineErrorOutline } from "react-icons/md";
+
+import { login } from "@/redux/features/authSlice";
+import { POST } from "@/app/api/post";
+import { Spinner, Button } from '@/components';
 
 const Signin = () => {
   const [showPassword, setShowPassword] = React.useState(false),
@@ -23,26 +23,23 @@ const Signin = () => {
     [loading, setLoading] = React.useState(false),
     [error, setError] = React.useState("");
 
-  if (user) {
-    router.push('/');
-  }
-
   const signIn = async (e) => {
     e.preventDefault();
     setLoading(true);
     const resp = await POST.request({ url: "/login", form: e.target });
-    console.log(resp);
     setLoading(false);
     if (resp) {
       if (resp.status != 'Error' && Object.keys(resp.data).length > 0) {
         dispatch(login(resp.data));
-        router.push("/");
-        return
+        return;
       }
       setError(resp.message);
     }
   };
 
+  useEffect(() => {
+    if (user) router.push("/my-account");
+  }, [user, router]);
   return (
     <div className="grid w-screen lg:grid-cols-2">
       <div className="hidden lg:block bg-[url('/static/images/signin.png')] bg-cover"></div>
