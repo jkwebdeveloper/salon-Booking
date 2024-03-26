@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { v4 } from "uuid";
 import {
@@ -105,6 +105,12 @@ export default function DesktopMenu({ theme, themeMode }) {
     setOpen((prev) => [...prev, (prev[index] = state)]);
   };
 
+  useEffect(() => {
+    document.addEventListener("click", (e) => {
+      if (e.target.closest(".menu")) return;
+      setOpen(null);
+    });
+  }, []);
   return (
     <header className={`dark:bg-zinc-800 bg-white container rounded-md`}>
       <nav
@@ -117,6 +123,7 @@ export default function DesktopMenu({ theme, themeMode }) {
               <Popover.Group
                 onMouseEnter={() => setOpen(index)}
                 onMouseLeave={() => setOpen(null)}
+                onMouseOver={() => setOpen(index)}
                 key={v4()}
                 className="hidden py-3 lg:flex lg:gap-x-12"
               >
@@ -143,12 +150,13 @@ export default function DesktopMenu({ theme, themeMode }) {
                     leaveFrom="opacity-100 translate-y-0"
                     leaveTo="opacity-0 translate-y-1"
                   >
-                    <Popover.Panel className="absolute z-10 w-screen max-w-md mt-3 overflow-hidden bg-white shadow-lg -left-8 top-full rounded-3xl dark:bg-zinc-800 ring-1 ring-gray-900/5">
+                    <Popover.Panel className="absolute z-10 w-screen max-w-md mt-[0.77em] overflow-hidden bg-white rounded-lg shadow-lg -left-8 top-full dark:bg-zinc-800 ring-1 ring-gray-900/5">
                       <div className="p-4">
                         {menuItems[navItem].map((item) => (
                           <div
                             key={item.name}
                             className="relative flex items-center p-4 text-sm leading-6 rounded-lg group/submenu gap-x-6 hover:bg-gray-50 dark:hover:bg-zinc-700"
+                            onClick={e => setOpen(null)}
                           >
                             <div className="flex items-center justify-center flex-none bg-gray-100 rounded-lg h-11 w-11 dark:bg-gray-200 ring-1 ring-gray-200 group-hover/submenu:bg-white">
                               <item.icon
@@ -157,13 +165,13 @@ export default function DesktopMenu({ theme, themeMode }) {
                               />
                             </div>
                             <div className="flex-auto">
-                              <a
+                              <Link
                                 href={item.href}
                                 className="block font-semibold text-gray-900 dark:text-white"
                               >
                                 {item.name}
                                 <span className="absolute inset-0" />
-                              </a>
+                              </Link>
                               <p className="mt-1 text-gray-600 dark:text-white">
                                 {item.description}
                               </p>

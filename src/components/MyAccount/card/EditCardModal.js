@@ -74,7 +74,8 @@ const EditCardModal = () => {
               name="card_number"
               className="input_field"
               placeholder="Card number"
-            // pattern="[0-9]{16}"
+              pattern="[0-9]{16}"
+              required
             />
           </div>
           <div className="flex flex-col w-full gap-3 lg:flex-row">
