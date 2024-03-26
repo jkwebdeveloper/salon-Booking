@@ -85,8 +85,8 @@ const EditCardModal = () => {
               </label>
               <div className="flex gap-3 select">
                 <Select onValueChange={value => setMonth({ value, error: false })}>
-                  <SelectTrigger className={`w-[180px] ${(month.error) && 'border-red-500 text-red-500'}`}>
-                    {month.value || <SelectValue placeholder="MM" />}
+                  <SelectTrigger selected={month.value} className={`w-[180px] ${(month.error) && 'border-red-500 text-red-500'}`}>
+                    {month.value || <SelectValue className="text-red-500" placeholder="MM" />}
                   </SelectTrigger>
                   <SelectContent className="text-black bg-white">
                     <SelectGroup>
@@ -96,7 +96,7 @@ const EditCardModal = () => {
                   </SelectContent>
                 </Select>
                 <Select onValueChange={value => setYear({ value, error: false })}>
-                  <SelectTrigger className={`w-[180px] ${(year.error) && 'border-red-500 text-red-500'}`}>
+                  <SelectTrigger selected={year.value} className={`w-[180px] ${(year.error) && 'border-red-500 text-red-500'}`}>
                     {year.value || <SelectValue placeholder="YYYY" />}
                   </SelectTrigger>
                   <SelectContent className="bg-white">

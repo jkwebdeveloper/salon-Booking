@@ -53,6 +53,9 @@ body::-webkit-scrollbar-thumb {
 .input_field {
   @apply border focus:border-primary_color disabled:bg-neutral-100 w-full text-[0.8rem] outline-none md:p-2 p-1 rounded-[4px];
 }
+.input_field.icon {
+  @apply ps-7;
+}
 
 .title:after,
 .heading:after {

@@ -107,12 +107,12 @@ const Register = () => {
                 <label htmlFor="gender" className="block mt-3 mb-2 label_text"> You are </label>
                 <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
                   <div>
-                    <input type="radio" id="female" name="gender" value="female" class="hidden peer" required defaultChecked />
-                    <label htmlFor="female" class="block text-center w-full p-1 text-[#0AADA4] bg-white border border-[#0AADA4] rounded-[7px] cursor-pointer dark:hover:text-white dark:peer-checked:text-white peer-checked:bg-[#0AADA4] peer-checked:text-white  dark:bg-[#9ec7c5] dark:hover:bg-[#0AADA4]"> Female </label>
+                    <input type="radio" id="female" name="gender" value="female" className="hidden peer" required defaultChecked />
+                    <label htmlFor="female" className="block text-center w-full p-1 text-[#0AADA4] bg-white border border-[#0AADA4] rounded-[7px] cursor-pointer dark:hover:text-white dark:peer-checked:text-white peer-checked:bg-[#0AADA4] peer-checked:text-white  dark:bg-[#9ec7c5] dark:hover:bg-[#0AADA4]"> Female </label>
                   </div>
                   <div>
-                    <input type="radio" id="male" name="gender" value="male" class="hidden peer" required />
-                    <label htmlFor="male" class="block text-center w-full p-1 leading-6 text-[#0AADA4] bg-white border border-[#0AADA4] rounded-[7px] cursor-pointer dark:hover:text-white dark:peer-checked:text-white peer-checked:bg-[#0AADA4] peer-checked:text-white  dark:bg-[#9ec7c5] dark:hover:bg-[#0AADA4]"> Male </label>
+                    <input type="radio" id="male" name="gender" value="male" className="hidden peer" required />
+                    <label htmlFor="male" className="block text-center w-full p-1 leading-6 text-[#0AADA4] bg-white border border-[#0AADA4] rounded-[7px] cursor-pointer dark:hover:text-white dark:peer-checked:text-white peer-checked:bg-[#0AADA4] peer-checked:text-white  dark:bg-[#9ec7c5] dark:hover:bg-[#0AADA4]"> Male </label>
                   </div>
                 </div>
               </div>

@@ -1,37 +1,24 @@
 import Image from "next/image";
 import React from "react";
 import walletbg from "../../../public/static/images/wallet-bg.png";
+import { Button } from "@/components";
+import { PiTicket } from "react-icons/pi";
+
 const Wallet = () => {
   return (
     <div className="p-3 space-y-4 bg-white rounded-md xl:p-5">
       <p className="text-xl text-[#25324B] font-semibold">Wallet</p>
-      <div className="grid grid-cols-1 gap-3 xl:grid-cols-3">
-        <div className="relative col-span-2">
-          <div className="relative">
-            <Image
-              src={walletbg}
-              alt=""
-              loading="lazy"
-              className="relative w-full"
-            />
-            <div className="text-center absolute text-white top-[10%] left-36 space-y-4">
-              <p>Toatal Balance</p>
-              <p className="text-5xl font-bold ">£541.00</p>
-              <div className="flex items-center justify-center gap-2">
-                <button
-                  type="button"
-                  className="px-3 py-2 text-sm font-medium text-white uppercase transition border border-white rounded-full focus:outline-none active:scale-90 md:px-10 md:py-3"
-                >
-                  Withdraw
-                </button>
-                <button
-                  type="button"
-                  className="px-3 py-2 text-sm font-medium text-white uppercase transition border border-white rounded-full focus:outline-none active:scale-90 md:px-10 md:py-3"
-                >
-                  + Add money
-                </button>
-              </div>
-            </div>
+      <div className="grid items-stretch grid-cols-1 gap-3 xl:grid-cols-3">
+        <div className="relative h-full col-span-2 bg-cover bg-center rounded-xl bg-[url('/static/images/wallet-bg.png')] text-white flex flex-col items-center justify-center gap-4 py-4">
+          <p>Toatal Balance</p>
+          <p className="text-5xl font-bold ">£541.00</p>
+          <div className="flex items-center justify-center gap-2">
+            <Button variant="outline" className="border-white" >
+              Withdraw
+            </Button>
+            <Button variant="outline" className="border-white" >
+              + Add money
+            </Button>
           </div>
         </div>
         <div className="border rounded-xl border-1 border-[#DBDBDB] p-5">
@@ -44,15 +31,18 @@ const Wallet = () => {
             <label htmlFor="city" className="label_text">
               Enter gift card number
             </label>
-            <input
-              type="test"
-              name="city"
-              className="input_field"
-              placeholder="e.g. 8U95 - Y3E8CQ - 39MPQ"
-            />
-            <button type="button" className="w-full uppercase primary_button">
+            <div className="relative">
+              <input
+                type="test"
+                name="city"
+                className="bg-neutral-50 input_field icon"
+                placeholder="e.g. 8U95 - Y3E8CQ - 39MPQ"
+              />
+              <PiTicket className="absolute top-2/4 -translate-y-2/4 left-[0.3rem]" />
+            </div>
+            <Button variant="primary" className="md:w-full">
               Add to your balance
-            </button>
+            </Button>
           </div>
         </div>
       </div>
