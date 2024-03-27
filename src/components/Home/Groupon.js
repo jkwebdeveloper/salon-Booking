@@ -76,15 +76,15 @@ const Groupon = () => {
       </p>
       <div className="relative w-full">
         <Swiper
-          // style={{
-          //   "--swiper-pagination-color": "#FFBA08",
-          //   "--swiper-pagination-bullet-inactive-color": "#999999",
-          //   "--swiper-pagination-bullet-inactive-opacity": "1",
-          //   "--swiper-pagination-bullet-size": "16px",
-          //   "--swiper-pagination-bullet-horizontal-gap": "6px",
-          //   " --swiper-pagination-bottom": "auto",
-          //   "--swiper-pagination-top": "100%",
-          // }}
+          style={{
+            "--swiper-pagination-color": "#711F7E",
+            "--swiper-pagination-bullet-inactive-color": "#999999",
+            "--swiper-pagination-bullet-inactive-opacity": "1",
+            // "--swiper-pagination-bullet-size": "16px",
+            // "--swiper-pagination-bullet-horizontal-gap": "6px",
+            // " --swiper-pagination-bottom": "auto",
+            // "--swiper-pagination-top": "100%",
+          }}
           className="relative h-full"
           modules={[Navigation, Pagination, Autoplay]}
           pagination={{ clickable: true }}

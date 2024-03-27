@@ -205,7 +205,9 @@ const Footer = () => {
             </Link>
           </p>
           <p className="text-sm font-light">
-            <span className="inline-block footer">About</span>
+            <Link href="/about-us">
+              <span className="inline-block footer">About</span>
+            </Link>
           </p>
           <p className="text-sm font-light">
             <Link href="/why-us">
