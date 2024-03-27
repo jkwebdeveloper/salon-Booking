@@ -21,6 +21,7 @@ const buttonVariants = cva(
           "focus:outline-none uppercase bg-[#711F7E] hover:bg-[#BF27D7] text-white font-medium rounded-full active:scale-90 transition text-sm",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        blog_button: "bg-[#FAFAFA] hover:bg-[#F4E9FF] hover:border-primary border-[1px] border-[#E6E6E6]"
       },
       size: {
         default: "px-6 py-3 h-8",
