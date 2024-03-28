@@ -98,7 +98,7 @@ const Blog = () => {
     <>
       <Banner title="Blog" />
       <div className="space-y-4">
-        <div className="items-center flex justify-center gap-2 container p-10  mx-auto space-y-5">
+        <div className="container flex items-center justify-center gap-2 p-10 mx-auto">
           <Button variant="blog_button">All</Button>
           <Button variant="blog_button">Massage Tips</Button>
           <Button variant="blog_button">Nails Care & Style</Button>

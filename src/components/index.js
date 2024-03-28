@@ -10,6 +10,7 @@ const Label = dynamic(() => import("@/components/ui/form/label"));
 import Banner from "@/components/global/banner";
 const Error = dynamic(() => import("@/components/ui/form/error"));
 const SuccessPopup = dynamic(() => import("@/components/global/successpopup"));
+const Calendar = dynamic(() => import("@/components/ui/calendar"));
 
 //Home components
 import Herosection from "@/components/Home/HeroSection";
@@ -26,6 +27,7 @@ const DownloadApp = dynamic(() => import("@/components/Home/DownloadApp"), { loa
 const Testimonials = dynamic(() => import("@/components/Home/Testimonials"), { loading: () => loader });
 const Business = dynamic(() => import("@/components/Home/Business"), { loading: () => loader });
 const FindNearByForm = dynamic(() => import("@/components/Home/FindNearByForm"), { loading: () => loader });
+import SearchInput from "@/components/Home/FindNearByForm/searchinput";
 
 //My Account components
 const MainDetail = dynamic(() => import("@/components/MyAccount/MainDetail"), { loading: () => loader });
@@ -37,6 +39,6 @@ const Wallet = dynamic(() => import("@/components/MyAccount/Wallet"), { loading:
 const ReferFriend = dynamic(() => import("@/components/MyAccount/ReferFriend"), { loading: () => loader });
 const ChangePassword = dynamic(() => import("@/components/MyAccount/ChangePassword"), { loading: () => loader });
 
-export { PageLoader, Spinner, Button, Label, Banner, Error, SuccessPopup };
+export { PageLoader, Spinner, Button, Label, Banner, Error, SuccessPopup, Calendar };
 
-export { Herosection, Pampertree, Featured, Treatments, Gifts, Location, Groupon, PamperTeam, Offers, PopularSalon, DownloadApp, Testimonials, Business, FindNearByForm, MainDetail, MainMenu, Card, Wallet, Profile, MyBooking, ReferFriend, ChangePassword };
+export { Herosection, Pampertree, Featured, Treatments, Gifts, Location, Groupon, PamperTeam, Offers, PopularSalon, DownloadApp, Testimonials, Business, FindNearByForm, MainDetail, MainMenu, Card, Wallet, Profile, MyBooking, ReferFriend, ChangePassword, SearchInput };
