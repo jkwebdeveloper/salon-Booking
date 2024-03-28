@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ImFacebook } from "react-icons/im";
 import { BsTwitterX } from "react-icons/bs";
 import { FaInstagram } from "react-icons/fa";
@@ -8,6 +8,10 @@ import { ImLinkedin2 } from "react-icons/im";
 import { FaPinterestP } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import Link from "next/link";
+
+import { Button, Error, Spinner } from "@/components";
+import { POST } from "@/app/api/post";
+import { useRouter } from "next/navigation";
 
 const FooterData = [
   {
@@ -37,7 +41,10 @@ const FooterData = [
 ];
 
 const Footer = () => {
+  const router = useRouter();
   const [footerMenu, setfooterMenu] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const toggle = (i) => {
     // console.log(i)
     if (footerMenu === i) {
@@ -46,6 +53,19 @@ const Footer = () => {
 
     setfooterMenu(i);
   };
+  const subscribe = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const res = await POST.request({ url: '/api/subscribe', form: e.target });
+    setLoading(false);
+    if (res && res.code == 200) {
+      return;
+    } else {
+      setError(res.message);
+      setTimeout(() => { setError("") }, 5000);
+    }
+  };
+
   return (
     <div
       className="container w-full"
@@ -260,7 +280,7 @@ const Footer = () => {
             <span className="inline-block footer">Careers</span>
           </p>
         </div>
-        <div className="hidden space-y-4 text-black md:block">
+        <form className="hidden space-y-4 text-black md:block" noValidate onSubmit={e => subscribe(e)}>
           <p className="text-base font-semibold uppercase text-primary_color title heading">
             Join Our Newsletter
           </p>
@@ -268,14 +288,18 @@ const Footer = () => {
             <p>Your Email</p>
             <input
               type="email"
+              name="email"
               placeholder="Enter Your Email"
-              className="w-4/5 p-2 bg-white rounded-md outline-none"
+              className="p-2 bg-white rounded-md outline-none md:w-4/5 text-md input_field"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+              required
             />
           </div>
-          <button type="button" className="primary_button">
-            Subscribe
-          </button>
-        </div>
+          <Button variant="primary" type="submit" disabled={loading} className="min-w-[150px]">
+            <Spinner show={loading} width="25" height="25" text="Subscribe" />
+          </Button>
+          {error && <Error error={error} />}
+        </form>
       </div>
       <hr className="w-full mt-4 text-primary_color" />
       <div className="hidden md:block">

@@ -147,10 +147,11 @@ const Pampertree = () => {
                     <div className="space-y-4">
                       <div>
                         <Image
-                          src={item?.image}
+                          src={'/static/images/spa_life.png'}
                           alt="spa life"
                           loading="lazy"
-
+                          width={400}
+                          height={300}
                           // fill
                           className="object-cover w-full h-full"
                         />

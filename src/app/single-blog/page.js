@@ -49,10 +49,10 @@ const Singleblog = () => {
   return (
     <div className="container">
       <div className="py-6 space-y-4">
-        <h1 className="font-bold text-xl">
+        <h1 className="text-xl font-bold">
           Nail Extensions - Acrylic or Hard Gel - Which One You Should Get?
         </h1>
-        <div className="items-center flex gap-2">
+        <div className="flex items-center gap-2">
           <Image
             src={"/static/images/img.png"}
             width={50}
@@ -65,7 +65,7 @@ const Singleblog = () => {
             <p>Feb 25, 2024 05:15 AM</p>
           </div>
         </div>
-        <div className=" flex flex-col gap-3 md:flex-row md:mb-10">
+        <div className="flex flex-col gap-3 md:flex-row md:mb-10">
           <div className=" md:w-4/5 space-y-4 w-[90%]">
             <Image
               src={"/static/images/blog/blog.png"}
@@ -76,7 +76,7 @@ const Singleblog = () => {
               className="object-cover object-center"
             />
             <div className="space-y-3">
-              <p className="font-bold text-xl">Nail Extension - What is it?</p>
+              <p className="text-xl font-bold">Nail Extension - What is it?</p>
               <p className="text-[#666666] text-sm text-justify">
                 As popular fashion accessories, nail extensions or nail
                 enhancements add length and strength to your natural nails in a
@@ -100,13 +100,13 @@ const Singleblog = () => {
               </p>
             </div>
             <div>
-              <p className="font-bold text-xl">
+              <p className="text-xl font-bold">
                 Comparing Two Popular Nail Extensions: Hard Gel Nails vs.
                 Acrylic Nails
               </p>
             </div>
             <div className="space-y-3">
-              <p className="font-bold text-xl">During the Application</p>
+              <p className="text-xl font-bold">During the Application</p>
               <p className="text-[#666666] text-sm text-justify">
                 Acrylic Nails - Before applying acrylic nail extensions, the
                 nail technician will ask you to finalize the length, shape and
@@ -132,16 +132,6 @@ const Singleblog = () => {
             <p className="text-sm text-[#6D6D6D]">Please share your details</p>
             <form className="space-y-4">
               <div className="w-full space-y-1 text-left">
-                <label htmlFor="" text="Name" />
-                <input
-                  type="text"
-                  name="name"
-                  className="input_field"
-                  placeholder="Enter your Address"
-                  disabled
-                />
-              </div>
-              <div className="w-full space-y-1 text-left">
                 <label htmlFor="" text="Email" />
                 <input
                   type="text"
@@ -151,9 +141,18 @@ const Singleblog = () => {
                 />
               </div>
               <div className="w-full space-y-1 text-left">
-                <label htmlFor="" text="Phone" />
+                <label htmlFor="" text="Name" />
                 <input
                   type="text"
+                  name="address"
+                  className="input_field"
+                  placeholder="Enter your Address"
+                />
+              </div>
+              <div className="w-full space-y-1 text-left">
+                <label htmlFor="" text="Phone" />
+                <input
+                  type="tel"
                   name="phone"
                   className="input_field"
                   placeholder="8947987892"
@@ -161,14 +160,14 @@ const Singleblog = () => {
               </div>
               <div className="w-full space-y-1 text-left">
                 <label htmlFor="" text="Message" />
-                <input
+                <textarea
                   type="text"
                   name="message"
                   className="input_field"
-                  placeholder="type here"
+                  placeholder="Message"
                 />
               </div>
-              <Button variant="primary" className="w-full">
+              <Button type="submit" variant="primary" className="md:w-full">
                 Submit
               </Button>
             </form>

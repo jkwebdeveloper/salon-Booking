@@ -12,9 +12,10 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { v4 } from "uuid";
+import { useSelector } from "react-redux";
 
 const EditCardModal = () => {
-
+  const user = useSelector(state => state.auth.user);
   const currentYear = new Date().getFullYear();
   const [month, setMonth] = React.useState({ value: '', error: false });
   const [year, setYear] = React.useState({ value: '', error: false });
@@ -34,14 +35,14 @@ const EditCardModal = () => {
     (!yearVal) && setYear({ value: '', error: true });
 
     setLoading(true);
-    const userLocal = localStorage.getItem("user");
-    const user = userLocal && JSON.parse(userLocal);
+    console.log(user?.api_token);
     const resp = await POST.request({ url: "/add-card", form: e.target, token: user?.api_token });
     setLoading(false);
     setSubmited(false);
     if (resp) {
       if (resp.status != 'Error' && Object.keys(resp.data).length > 0) {
-        dispatch(login(resp.data));
+        // dispatch(login(resp.data));
+        console.log(resp.data);
         return;
       }
       setError(resp.message);
@@ -79,13 +80,13 @@ const EditCardModal = () => {
             />
           </div>
           <div className="flex flex-col w-full gap-3 lg:flex-row">
-            <div className="w-full space-y-1 text-left lg:w-1/2">
+            <div className="flex-1 w-full space-y-1 text-left">
               <label htmlFor="city" className="label_text text-[#000D23] text-sm">
                 Expire on
               </label>
               <div className="flex gap-3 select">
                 <Select onValueChange={value => setMonth({ value, error: false })}>
-                  <SelectTrigger selected={month.value} className={`w-[180px] ${(month.error) && 'border-red-500 text-red-500'}`}>
+                  <SelectTrigger selected={month.value} className={`w-auto [4.2rem] ${(month.error) && 'border-red-500 text-red-500'}`}>
                     {month.value || <SelectValue className="text-red-500" placeholder="MM" />}
                   </SelectTrigger>
                   <SelectContent className="text-black bg-white">
@@ -96,7 +97,7 @@ const EditCardModal = () => {
                   </SelectContent>
                 </Select>
                 <Select onValueChange={value => setYear({ value, error: false })}>
-                  <SelectTrigger selected={year.value} className={`w-[180px] ${(year.error) && 'border-red-500 text-red-500'}`}>
+                  <SelectTrigger selected={year.value} className={`w-auto ${(year.error) && 'border-red-500 text-red-500'}`}>
                     {year.value || <SelectValue placeholder="YYYY" />}
                   </SelectTrigger>
                   <SelectContent className="bg-white">
@@ -115,7 +116,7 @@ const EditCardModal = () => {
                 required
               />
             </div>
-            <div className="w-full space-y-1 text-left lg:w-1/2">
+            <div className="w-full space-y-1 text-left">
               <label htmlFor="state" className="label_text text-[#000D23] text-sm"> CVV </label>
               <input
                 type="text"
@@ -231,8 +232,9 @@ const EditCardModal = () => {
             </div>
           </div>
           <div className="flex flex-col items-stretch justify-start gap-2 pt-3 mx-auto">
+            <input type="hidden" name="user_id" value={user?.id} />
             <Button type="submit" variant='primary' className="md:w-full" disabled={loading}>
-              <Spinner show={loading} width='35' height='35' text="Login" />
+              <Spinner show={loading} width='35' height='35' text="Save" />
             </Button>
             {error && <Error error={error} />}
           </div>
