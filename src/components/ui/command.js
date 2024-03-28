@@ -80,13 +80,14 @@ const CommandSeparator = React.forwardRef(({ className, ...props }, ref) => (
 ))
 CommandSeparator.displayName = CommandPrimitive.Separator.displayName
 
-const CommandItem = React.forwardRef(({ className, ...props }, ref) => (
+const CommandItem = React.forwardRef(({ className, onClick, ...props }, ref) => (
   <CommandPrimitive.Item
     ref={ref}
     className={cn(
       "select-item relative cursor-pointer flex select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground",
       className
     )}
+    onClick={onClick}
     {...props} />
 ))
 

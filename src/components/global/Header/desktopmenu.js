@@ -4,22 +4,9 @@ import { v4 } from "uuid";
 import {
   RiArrowDownSLine,
   RiPlayCircleFill,
-  RiPhoneFill,
-  RiBarChartGroupedLine,
-  RiFingerprintLine,
 } from "react-icons/ri";
 import Link from "next/link";
 
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-} from "@/components/ui/navigation-menu"
 import Image from "next/image";
 
 
@@ -232,7 +219,7 @@ export default function DesktopMenu({ theme, themeMode }) {
   return (
     <header className={`dark:bg-zinc-800 bg-white container rounded-md`}>
       <nav
-        className="flex items-center justify-center gap-5 mx-auto"
+        className="flex items-center justify-center mx-auto"
         aria-label="Global"
       >
         {Object.keys(menuItems).map((navItem, index) => {
@@ -240,13 +227,13 @@ export default function DesktopMenu({ theme, themeMode }) {
             (Array.isArray(menuItems[navItem]) && (
               <Popover.Group
                 key={v4()}
-                className="hidden lg:flex lg:gap-x-12"
+                className="hidden lg:flex"
               >
                 <Popover className="relative menu">
                   {({ open, close }) => (
                     <>
                       <Popover.Button
-                        className={`flex items-center gap-x-1 text-md leading-6 font-medium group/navitem shadow-none outline-none py-3 ${(index == open && "text-primary_color") ||
+                        className={`flex items-center text-md leading-6 font-medium group/navitem shadow-none outline-none py-3 px-3 hover:bg-primary hover:text-white ${(index == open && "text-primary_color") ||
                           "text-neutral-800"
                           }`}
                         style={{ boxShadow: 'none' }}
@@ -254,7 +241,7 @@ export default function DesktopMenu({ theme, themeMode }) {
                       >
                         {navItem}
                         <RiArrowDownSLine
-                          className={`h-5 w-5 flex-none text-gray-600 dark:text-gray-100 group-hover/navitem:text-${theme}-500`}
+                          className={`h-5 w-5 flex-none text-gray-600 dark:text-gray-100 group-hover/navitem:text-white`}
                           aria-hidden="true"
                         />
                       </Popover.Button>
@@ -275,7 +262,7 @@ export default function DesktopMenu({ theme, themeMode }) {
                           <div className="grid items-start flex-1 grid-cols-3 p-4 gap-x-6 gap-y-3">
                             {menuItems[navItem].map((item, index) => (
                               <div
-                                key={item.name}
+                                key={v4()}
                                 className="relative flex items-center text-sm leading-6 rounded-lg group/submenu gap-x-6"
                                 onClick={e => setOpen(null)}
                               >
@@ -294,7 +281,7 @@ export default function DesktopMenu({ theme, themeMode }) {
                               </div>
                             ))}
                           </div>
-                          <Image src="/static/images/images.png" className="max-w-[30%] object-cover" width={500} height={400} />
+                          <Image src="/static/images/images.png" alt="megamenu image" className="max-w-[30%] object-cover" width={500} height={400} />
                         </Popover.Panel>
                       </Transition>
                     </>
@@ -304,7 +291,7 @@ export default function DesktopMenu({ theme, themeMode }) {
             )) || (
               <Link
                 href={menuItems[navItem].href}
-                className="font-medium hover:text-primary_color"
+                className="px-3 py-3 font-medium hover:text-white hover:bg-primary"
                 key={v4()}
               >
                 {navItem}

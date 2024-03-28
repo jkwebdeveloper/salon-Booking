@@ -1,5 +1,6 @@
-import { Banner } from "@/components";
 import React from "react";
+
+import { Banner } from "@/components";
 
 const Coockies = () => {
   return (
@@ -14,7 +15,7 @@ const Coockies = () => {
             Introduction To Understanding Cookies
           </h2>
           <div className="mx-3">
-            <ul className="list-disc space-y-2 mx-3">
+            <ul className="mx-3 space-y-2 list-disc">
               <li className="text-[#666666] text-justify">
                 {`A "cookie" is the information stored on your computer's hard
                   drive which logs how you navigate between the pages on a
@@ -85,7 +86,7 @@ const Coockies = () => {
             How does PamperTree use cookies?
           </h2>
           <p className="text-[#666666] text-justify">
-           {` We use cookies to understand the way you use our website. This helps
+            {` We use cookies to understand the way you use our website. This helps
             us to understand how users navigate the site and track any patterns
             which evolve in your use of our website. This, in turn, assists us
             in developing and improving our website and ultimately the users’

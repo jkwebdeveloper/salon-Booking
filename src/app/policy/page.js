@@ -1,5 +1,6 @@
-import { Banner } from "@/components";
 import React from "react";
+
+import { Banner } from "@/components";
 
 const Policy = () => {
   return (

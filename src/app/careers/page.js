@@ -1,7 +1,8 @@
-import { Banner } from "@/components";
-import Button from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
+
+import { Banner } from "@/components";
+import Button from "@/components/ui/button";
 
 const CareerData = [
   {
@@ -50,7 +51,7 @@ const WorkWithUs = () => {
         <div className="grid grid-cols-1 gap-3 pb-5 rounded-lg md:grid-cols-2 xl:grid-cols-3">
           {CareerData.map((item) => (
             <div
-              className="bg-white p-5 space-y-3 shadow-md text-center"
+              className="p-5 space-y-3 text-center bg-white shadow-md"
               key={item.id}
             >
               <Image
@@ -69,12 +70,12 @@ const WorkWithUs = () => {
           ))}
         </div>
         <div className="space-y-4">
-          <p className="text-2xl font-semibold text-black text-center uppercase">
+          <p className="text-2xl font-semibold text-center text-black uppercase">
             Open <span className="text-primary_color">positions</span>
           </p>
           <div className="border-solid border-2 border-[#E7E7E7] rounded-lg p-4">
             <div className="space-y-3">
-              <h2 className="text-primary_color font-medium">Sales</h2>
+              <h2 className="font-medium text-primary_color">Sales</h2>
               <p>
                 The sales team is focused on creating and promoting the best
                 possible online industry to increase bookings for all the
@@ -92,7 +93,7 @@ const WorkWithUs = () => {
           </div>
           <div className="border-solid border-2 border-[#E7E7E7] rounded-lg p-4">
             <div className="space-y-3">
-              <h2 className="text-primary_color font-medium">
+              <h2 className="font-medium text-primary_color">
                 Content specialists
               </h2>
               <p>
@@ -108,7 +109,7 @@ const WorkWithUs = () => {
           </div>
           <div className="border-solid border-2 border-[#E7E7E7] rounded-lg p-4">
             <div className="space-y-3">
-              <h2 className="text-primary_color font-medium">
+              <h2 className="font-medium text-primary_color">
                 Customer service
               </h2>
               <p>

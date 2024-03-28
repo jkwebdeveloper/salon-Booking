@@ -1,5 +1,6 @@
-import { Banner } from "@/components";
 import React from "react";
+
+import { Banner } from "@/components";
 
 const ModernStatement = () => {
   return (
@@ -15,7 +16,7 @@ const ModernStatement = () => {
             Limited
           </h2>
           <p className="text-[#666666] text-justify text-sm">
-            PamperTree’s position on slavery
+            {`PamperTree’s position on slavery`}
           </p>
           <h2 className="text-base font-semibold md:text-2xl">Introduction</h2>
           <p>
@@ -51,7 +52,7 @@ const ModernStatement = () => {
             account:`}
           </p>
           <div className="mx-3">
-            <ul className="list-disc space-y-2 mx-3">
+            <ul className="mx-3 space-y-2 list-disc">
               <li className="text-[#666666] text-justify">
                 {`The risk profile of individual countries based on the Global Slavery Index`}
               </li>
@@ -70,7 +71,7 @@ const ModernStatement = () => {
           </p>
           <h2 className="text-base font-semibold md:text-2xl">Policies</h2>
           <div className="mx-3">
-            <ul className="list-disc space-y-2 mx-3">
+            <ul className="mx-3 space-y-2 list-disc">
               <li className="text-[#666666] text-justify">
                 {`PamperTree Ltd operates the following policies for identifying
                 and preventing slavery and human trafficking in our operations:`}
@@ -107,38 +108,38 @@ const ModernStatement = () => {
             policies. This includes:`}
           </p>
           <div className="mx-3">
-            <ul className="list-disc space-y-2 mx-3">
+            <ul className="mx-3 space-y-2 list-disc">
               <li className="text-[#666666] text-justify">
                 Assessing risks in the provision of particular services
               </li>
               <li className="text-[#666666] text-justify">
-                Auditing the suppliers, and their health and safety standards,
-                labour relations and employee contracts
+                {` Auditing the suppliers, and their health and safety standards,
+                labour relations and employee contracts`}
               </li>
               <li className="text-[#666666] text-justify">
-                Requiring improvements to substandard employment practices
+                {`Requiring improvements to substandard employment practices`}
               </li>
               <li className="text-[#666666] text-justify">
-                Sanctioning suppliers that fail to improve their performance in
+                {`Sanctioning suppliers that fail to improve their performance in
                 line with our requirements We require all suppliers to attest
-                that:
+                that:`}
               </li>
               <li className="text-[#666666] text-justify">
-                They don't use any form of forced, compulsory or slave labour •
-                Their employees work voluntarily and are entitled to leave work
+                {`They don't use any form of forced, compulsory or slave labour •
+                Their employees work voluntarily and are entitled to leave work`}
               </li>
               <li className="text-[#666666] text-justify">
-                They provide each employee with an employment contract that
+                {`They provide each employee with an employment contract that
                 contains a reasonable notice period for terminating their
-                employment
+                employment`}
               </li>
               <li className="text-[#666666] text-justify">
-                They don't require employees to post a deposit/bond and don't
-                withhold their salaries for any reasons
+                {` They don't require employees to post a deposit/bond and don't
+                withhold their salaries for any reasons`}
               </li>
               <li className="text-[#666666] text-justify">
-                They don't require employees to surrender their passports or
-                work permits as a condition of employment.
+                {`They don't require employees to surrender their passports or
+                work permits as a condition of employment.`}
               </li>
             </ul>
           </div>
@@ -150,7 +151,7 @@ const ModernStatement = () => {
             explains:
           </p>
           <div className="mx-3">
-            <ul className="list-disc space-y-2 mx-3">
+            <ul className="mx-3 space-y-2 list-disc">
               <li className="text-[#666666] text-justify">
                 Our commitment to the fight against modern slavery
               </li>
@@ -167,8 +168,8 @@ const ModernStatement = () => {
                 that:
               </li>
               <li className="text-[#666666] text-justify">
-                They don't use any form of forced, compulsory or slave labour •
-                Their employees work voluntarily and are entitled to leave work
+                {`They don't use any form of forced, compulsory or slave labour •
+                Their employees work voluntarily and are entitled to leave work`}
               </li>
               <li className="text-[#666666] text-justify">
                 They provide each employee with an employment contract that
@@ -176,12 +177,12 @@ const ModernStatement = () => {
                 employment
               </li>
               <li className="text-[#666666] text-justify">
-                They don't require employees to post a deposit/bond and don't
-                withhold their salaries for any reasons
+                {`They don't require employees to post a deposit/bond and don't
+                withhold their salaries for any reasons`}
               </li>
               <li className="text-[#666666] text-justify">
-                They don't require employees to surrender their passports or
-                work permits as a condition of employment.
+                {` They don't require employees to surrender their passports or
+                work permits as a condition of employment.`}
               </li>
             </ul>
           </div>

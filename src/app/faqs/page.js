@@ -1,5 +1,6 @@
-import { Banner } from "@/components";
 import React from "react";
+
+import { Banner } from "@/components";
 import {
   Accordion,
   AccordionContent,
@@ -94,16 +95,16 @@ const Faqs = () => {
   return (
     <div className="space-y-0">
       <Banner title="faqs" background={"/static/images/FAQS.jpg"} />
-      <div className="container pt-10 pb-20 mx-auto px-5 space-y-5">
+      <div className="container px-5 pt-10 pb-20 mx-auto space-y-5">
         <p className="text-2xl font-semibold text-black uppercase title heading">
           Frequently Asked <span className="text-primary_color">Questions</span>
         </p>
         <Accordion type="single" collapsible className="w-full space-y-3">
           {FaqsData.map((item) => (
             <AccordionItem
-            //   value="item-1"
+              //   value="item-1"
               key={item.id}
-              className="bg-white rounded-md shadow-sm md:px-3 px-1 ring-1 ring-primary/10"
+              className="px-1 bg-white rounded-md shadow-sm md:px-3 ring-1 ring-primary/10"
             >
               <AccordionTrigger>{item.que}</AccordionTrigger>
               <AccordionContent>{item.ans}</AccordionContent>

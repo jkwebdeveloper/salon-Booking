@@ -1,9 +1,11 @@
-import { Banner } from "@/components";
-import Button from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { v4 } from "uuid";
+import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
+
+import { Banner, Button } from "@/components";
 import {
   Pagination,
   PaginationContent,
@@ -13,8 +15,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { IoIosArrowBack } from "react-icons/io";
-import { IoIosArrowForward } from "react-icons/io";
+
 
 const blogData = [
   {
@@ -110,8 +111,8 @@ const Blog = () => {
         </div>
         <div className="container grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {blogData.map((item) => (
-            <Link href="/single-blog">
-              <div className="space-y-3 shadow-lg rounded-xl" key={v4()}>
+            <Link href="/single-blog" key={v4()}>
+              <div className="space-y-3 shadow-lg rounded-xl">
                 <Image
                   alt=""
                   loading="lazy"

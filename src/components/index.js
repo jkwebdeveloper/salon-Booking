@@ -13,7 +13,7 @@ const SuccessPopup = dynamic(() => import("@/components/global/successpopup"));
 const Calendar = dynamic(() => import("@/components/ui/calendar"));
 
 //Home components
-import Herosection from "@/components/Home/HeroSection";
+const Herosection = dynamic(() => import("@/components/Home/HeroSection"), { loading: () => loader });
 const Pampertree = dynamic(() => import("@/components/Home/Pampertree"), { loading: () => loader });
 const Featured = dynamic(() => import("@/components/Home/Featured"), { loading: () => loader });
 const Treatments = dynamic(() => import("@/components/Home/Treatments"), { loading: () => loader });
@@ -27,7 +27,7 @@ const DownloadApp = dynamic(() => import("@/components/Home/DownloadApp"), { loa
 const Testimonials = dynamic(() => import("@/components/Home/Testimonials"), { loading: () => loader });
 const Business = dynamic(() => import("@/components/Home/Business"), { loading: () => loader });
 const FindNearByForm = dynamic(() => import("@/components/Home/FindNearByForm"), { loading: () => loader });
-import SearchInput from "@/components/Home/FindNearByForm/searchinput";
+const SearchInput = dynamic(() => import("@/components/Home/FindNearByForm/searchinput"), { loading: () => loader });
 
 //My Account components
 const MainDetail = dynamic(() => import("@/components/MyAccount/MainDetail"), { loading: () => loader });
