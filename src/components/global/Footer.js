@@ -56,13 +56,15 @@ const Footer = () => {
   const subscribe = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const res = await POST.request({ url: '/api/subscribe', form: e.target });
+    const res = await POST.request({ url: "/api/subscribe", form: e.target });
     setLoading(false);
     if (res && res.code == 200) {
       return;
     } else {
       setError(res.message);
-      setTimeout(() => { setError("") }, 5000);
+      setTimeout(() => {
+        setError("");
+      }, 5000);
     }
   };
 
@@ -250,15 +252,21 @@ const Footer = () => {
             </Link>
           </p>
           <p className="text-sm font-light">
-            <span className="inline-block footer">Privacy</span>
+            <Link href="/policy">
+              <span className="inline-block footer">Privacy</span>
+            </Link>
           </p>
           <p className="text-sm font-light">
-            <span className="inline-block footer">Coockies</span>
+            <Link href="/cookies">
+              <span className="inline-block footer">Coockies</span>
+            </Link>
           </p>
           <p className="text-sm font-light">
-            <span className="inline-block footer">
-              Modern Slavery Statement
-            </span>
+            <Link href="/modern-slavery-statement">
+              <span className="inline-block footer">
+                Modern Slavery Statement
+              </span>
+            </Link>
           </p>
         </div>
         <div className="hidden space-y-4 text-black md:block">
@@ -274,13 +282,21 @@ const Footer = () => {
             <span className="inline-block footer">Business Support</span>
           </p>
           <p className="text-sm font-light">
-            <span className="inline-block footer">Faqs</span>
+            <Link href="/faqs">
+              <span className="inline-block footer">Faqs</span>
+            </Link>
           </p>
           <p className="text-sm font-light">
-            <span className="inline-block footer">Careers</span>
+            <Link href="/careers">
+              <span className="inline-block footer">Careers</span>
+            </Link>
           </p>
         </div>
-        <form className="hidden space-y-4 text-black md:block" noValidate onSubmit={e => subscribe(e)}>
+        <form
+          className="hidden space-y-4 text-black md:block"
+          noValidate
+          onSubmit={(e) => subscribe(e)}
+        >
           <p className="text-base font-semibold uppercase text-primary_color title heading">
             Join Our Newsletter
           </p>
@@ -295,7 +311,12 @@ const Footer = () => {
               required
             />
           </div>
-          <Button variant="primary" type="submit" disabled={loading} className="min-w-[150px]">
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={loading}
+            className="min-w-[150px]"
+          >
             <Spinner show={loading} width="25" height="25" text="Subscribe" />
           </Button>
           {error && <Error error={error} />}
