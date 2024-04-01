@@ -69,7 +69,7 @@ const Card = () => {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <Button type="button" variant="outline" className="text-red-500 uppercase border-red-500">
+              <Button type="button" variant="danger" className="">
                 remove
               </Button>
               <Button type="button" variant="primary" className="px-10 uppercase" onClick={e => setAddCard(true)}>Edit</Button>
@@ -92,7 +92,7 @@ const Card = () => {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <Button type="button" variant="outline" className="text-red-500 uppercase border-red-500">
+              <Button type="button" variant="danger" className="">
                 remove
               </Button>
               <Button type="button" variant="primary" className="px-10 uppercase" onClick={e => setAddCard(true)}>Edit</Button>

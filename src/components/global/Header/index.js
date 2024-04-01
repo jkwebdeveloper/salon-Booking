@@ -14,7 +14,7 @@ const Header = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
   return (
     <div className="w-full bg-white shadow-md">
-      <div className="container border-b xl:flex xl:justify-between md:items-center">
+      <div className="container border-b xl:flex xl:justify-between md:items-center" id="topMenu">
         <div className="flex items-center justify-between py-2 xl:justify-start md:gap-6">
           <div>
             <Link href="/">

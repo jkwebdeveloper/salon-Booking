@@ -14,6 +14,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import { Button } from "@/components";
+import { ServiceSVG } from "@/constants/svg";
 
 const Featured = () => {
   const [beginAndEnd, setBeginAndEnd] = useState({
@@ -126,45 +127,42 @@ const Featured = () => {
                     <IoIosArrowForward className="text-[#007aff] w-6 h-6" />
                   </div> */}
                 </div>
-                <div className="space-y-2 xl:space-y-3">
-                  <h1 className="text-base font-semibold">Moon Massage</h1>
+                <div className="flex flex-col gap-2">
+                  <h1 className="text-xl font-semibold">Moon Massage</h1>
                   <p className="text-primary_color">Nail Salons</p>
                   <div className="flex items-center gap-3">
-                    <div className="bg-[#7f52861a] p-2 rounded-full">
-                      <MdLocationPin className="text-lg text-primary_color" />
+                    <div className="bg-[#7f52861a] p-1 rounded-full">
+                      <MdLocationPin className="text-sm text-primary_color" />
                     </div>
                     <div>
                       <p>Barnack , Cambridge 181.2 miles</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 my-2">
                     <div className="flex items-center gap-3">
-                      <FaStar className="text-lg text-[#FFCC00]" />
+                      <FaStar className="text-[0.7rem] text-[#FFCC00]" />
                       <p>3.0</p>
                     </div>
                     <div className="flex items-center gap-3">
-                      <div className="bg-[#29AD17] p-2 rounded-full">
-                        <FaWhatsapp className="text-lg text-white" />
+                      <div className="bg-[#29AD17] p-1 rounded-full">
+                        <FaWhatsapp className="text-white text-md" />
                       </div>
-                      <div className="bg-[#4664A0] p-2 rounded-full">
-                        <ImFacebook className="text-lg text-white" />
+                      <div className="bg-[#4664A0] p-1 rounded-full">
+                        <ImFacebook className="text-white text-md" />
                       </div>
-                      <div className="bg-[#000] p-2 rounded-full">
-                        <BsTwitterX className="text-lg text-white" />
+                      <div className="bg-[#000] p-1 rounded-full">
+                        <BsTwitterX className="text-white text-md" />
                       </div>
-                      <div className="bg-[#A4A4A4] p-2 rounded-full">
-                        <LuBookmark className="text-lg text-white" />
+                      <div className="bg-[#A4A4A4] p-1 rounded-full">
+                        <LuBookmark className="text-white text-md" />
                       </div>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <button
-                      type="button"
-                      className="flex items-center justify-center gap-2 outline_button md:px-5"
-                    >
-                      <MdLocationPin className="text-lg text-primary_color" />
+                    <Button type="button" variant="outline" size="sm" className="uppercase ps-3 group">
+                      <ServiceSVG pathClass="group-hover:fill-white fill-primary" />
                       View All Services
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -318,13 +316,10 @@ const Featured = () => {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <button
-                      type="button"
-                      className="flex items-center justify-center gap-2 outline_button md:px-5"
-                    >
-                      <MdLocationPin className="text-lg text-primary_color" />
+                    <Button type="button" variant="outline" size="sm" className="uppercase ps-3 group">
+                      <ServiceSVG pathClass="group-hover:fill-white fill-primary" />
                       View All Services
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -478,13 +473,10 @@ const Featured = () => {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <button
-                      type="button"
-                      className="flex items-center justify-center gap-2 outline_button md:px-5"
-                    >
-                      <MdLocationPin className="text-lg text-primary_color" />
+                    <Button type="button" variant="outline" size="sm" className="uppercase ps-3 group">
+                      <ServiceSVG pathClass="group-hover:fill-white fill-primary" />
                       View All Services
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>

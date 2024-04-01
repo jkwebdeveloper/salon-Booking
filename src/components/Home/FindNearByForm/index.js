@@ -19,7 +19,7 @@ const FindNearByForm = () => {
           Find Nearby{" "}
           <span className="text-primary_color">Hair Treatments</span>
         </h1>
-        <form className="bg-white mx-auto lg:rounded-full rounded-2xl shadow-lg lg:border-[0.2rem] lg:border-[#e2e2e2] flex justify-around items-center gap-2 lg:flex-row flex-col w-full px-3 py-1" onSubmit={e => searchNearyBy(e)}>
+        <form className="bg-white mx-auto lg:rounded-full rounded-2xl shadow-lg lg:border-[0.2rem] lg:border-[#e2e2e2] flex justify-around items-center gap-2 lg:flex-row flex-col w-full px-3 py-[0.4rem]" onSubmit={e => searchNearyBy(e)}>
           <SearchInput />
           <div className="flex-grow flex-shrink-0 min-h-[1rem] w-[2px] bg-neutral-400"></div>
           <DatePicker />
