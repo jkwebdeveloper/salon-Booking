@@ -13,21 +13,32 @@ import {
 } from "@/components/ui/accordion";
 import Button from "@/components/ui/button";
 import OurWork from "@/components/detail/OurWork";
+import LookingFor from "@/components/detail/LookingFor";
+import Review from "@/components/detail/Review";
+import About from "@/components/detail/About";
+import MeetTeam from "@/components/detail/MeetTeam";
+import Featured from "@/components/Home/Featured";
+import DownloadApp from "@/components/Home/DownloadApp";
+import Location from "@/components/Home/Location";
 
 const DetailPage = () => {
   return (
-    <div className="container space-y-3">
+    <div className="container space-y-6">
       <h1 className="font-bold text-3xl mt-5">Spa Life & Massage</h1>
-      <div className="flex items-center justify-between gap-2">
-        <div className="flex items-center gap-3">
-          <div className="flex items-center">
-            <FaStar className="text-[#FFCC00]" />
-            <FaStar className="text-[#FFCC00]" />
-            <FaStar className="text-[#FFCC00]" />
-            <FaStar className="text-[#D6D6D6]" />
-            <FaStar className="text-[#D6D6D6]" />
+      <div className="flex flex-col lg:flex-row lg:items-center items-start justify-between gap-2">
+        <div className="flex flex-col md:flex-row lg:items-center items-start gap-3">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center">
+              <FaStar className="text-[#FFCC00]" />
+              <FaStar className="text-[#FFCC00]" />
+              <FaStar className="text-[#FFCC00]" />
+              <FaStar className="text-[#D6D6D6]" />
+              <FaStar className="text-[#D6D6D6]" />
+            </div>
+            <div>
+              <p>3.0 (24)</p>
+            </div>
           </div>
-          <p>3.0 (24)</p>
           <p>Open Today: 9:00 AM - 6:00 PM</p>
           <p>Street 420, Addington, London, EH1 1AE, UK</p>
         </div>
@@ -285,6 +296,27 @@ const DetailPage = () => {
       </div>
       <div>
         <OurWork />
+      </div>
+      <div>
+        <LookingFor />
+      </div>
+      <div>
+        <Review />
+      </div>
+      <div>
+        <About />
+      </div>
+      <div>
+        <MeetTeam />
+      </div>
+      <div>
+        <Featured />
+      </div>
+      <div>
+        <DownloadApp />
+      </div>
+      <div>
+        <Location />
       </div>
     </div>
   );

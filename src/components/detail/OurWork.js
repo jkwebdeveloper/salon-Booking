@@ -10,7 +10,10 @@ import Image from "next/image";
 
 const OurWork = () => {
   return (
-    <div className="w-full">
+    <div className="w-full space-y-6">
+      <p className="text-2xl font-semibold text-black uppercase title heading">
+        oUR <span className="text-primary_color">work</span>
+      </p>
       <Carousel
         opts={{
           align: "start",
@@ -19,20 +22,36 @@ const OurWork = () => {
       >
         <CarouselContent>
           <CarouselItem className="md:basis-1/2 lg:basis-1/4">
-            <Image src={"/static/images/Rectangle 375 (1).png"} width={500} height={500}/>
+            <Image
+              src={"/static/images/Rectangle 375 (1).png"}
+              width={500}
+              height={500}
+            />
           </CarouselItem>
           <CarouselItem className="md:basis-1/2 lg:basis-1/4">
-            <Image src={"/static/images/Rectangle 375 (1).png"} width={500} height={500}/>
+            <Image
+              src={"/static/images/Rectangle 375 (1).png"}
+              width={500}
+              height={500}
+            />
           </CarouselItem>
           <CarouselItem className="md:basis-1/2 lg:basis-1/4">
-            <Image src={"/static/images/Rectangle 375 (1).png"} width={500} height={500}/>
+            <Image
+              src={"/static/images/Rectangle 375 (1).png"}
+              width={500}
+              height={500}
+            />
           </CarouselItem>
           <CarouselItem className="md:basis-1/2 lg:basis-1/4">
-            <Image src={"/static/images/Rectangle 375 (1).png"} width={500} height={500}/>
+            <Image
+              src={"/static/images/Rectangle 375 (1).png"}
+              width={500}
+              height={500}
+            />
           </CarouselItem>
         </CarouselContent>
-        <CarouselPrevious className="mr-24"/>
-        <CarouselNext className="ml-24 "/>
+        <CarouselPrevious />
+        <CarouselNext />
       </Carousel>
     </div>
   );
