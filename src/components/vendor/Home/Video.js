@@ -15,7 +15,7 @@ const Video = () => {
         src={"/static/images/video.png"}
         width={1000}
         height={1000}
-        className="w-full"
+        className="mx-auto"
         alt="video"
         loading="lazy"
       />
