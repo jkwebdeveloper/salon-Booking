@@ -3,16 +3,16 @@ import Image from "next/image";
 import React from "react";
 import { v4 } from "uuid";
 
-import image1 from "../../../public/static/images/PamperTree/img1.png";
-import image2 from "../../../public/static/images/PamperTree/img2.png";
-import image3 from "../../../public/static/images/PamperTree/img3.png";
-import image4 from "../../../public/static/images/PamperTree/img4.png";
-import image5 from "../../../public/static/images/PamperTree/img5.png";
-import image6 from "../../../public/static/images/PamperTree/img6.png";
-import image7 from "../../../public/static/images/PamperTree/img7.png";
-import image8 from "../../../public/static/images/PamperTree/img8.png";
-import image9 from "../../../public/static/images/PamperTree/img9.png";
-import image10 from "../../../public/static/images/PamperTree/img10.png";
+import image1 from "/static/images/PamperTree/img1.png";
+import image2 from "/static/images/PamperTree/img2.png";
+import image3 from "/static/images/PamperTree/img3.png";
+import image4 from "/static/images/PamperTree/img4.png";
+import image5 from "/static/images/PamperTree/img5.png";
+import image6 from "/static/images/PamperTree/img6.png";
+import image7 from "/static/images/PamperTree/img7.png";
+import image8 from "/static/images/PamperTree/img8.png";
+import image9 from "/static/images/PamperTree/img9.png";
+import image10 from "/static/images/PamperTree/img10.png";
 
 const ImagesData = [
   {
@@ -123,7 +123,7 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
-      <div className="w-full container space-y-4">
+      <div className="container w-full space-y-4">
         <p className="text-2xl font-semibold text-center text-black uppercase">
           What we
           <span className="text-primary_color"> OFFER</span>
@@ -183,7 +183,7 @@ const AboutUs = () => {
           ))}
         </div>
       </div>
-      <div className="container text-center px-5 pt-10 pb-20 mx-auto space-y-5 md:px-16">
+      <div className="container px-5 pt-10 pb-20 mx-auto space-y-5 text-center md:px-16">
         <p className="text-2xl font-semibold text-center text-black uppercase">
           Contact
           <span className="text-primary_color"> Information</span>

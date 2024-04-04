@@ -1,9 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import App from "../../../public/static/images/appstore2.png";
-import Google from "../../../public/static/images/playstore.png";
-import mobile from "../../../public/static/images/mobile1.png";
-import mobile1 from "../../../public/static/images/mobile2.png";
 
 const DownloadApp = () => {
   return (
@@ -16,22 +12,22 @@ const DownloadApp = () => {
         <p>Booking, Re-booking or Rescheduling</p>
         <p>Available on</p>
         <div className="flex items-center gap-3">
-          <Image src={App} alt="App" loading="lazy" />
-          <Image src={Google} alt="App" loading="lazy" />
+          <Image src={"/static/images/appstore2.png"} width={200} height={100} alt="App" loading="lazy" />
+          <Image src={"/static/images/playstore.png"} width={200} height={100} alt="App" loading="lazy" />
         </div>
       </div>
       <div>
         <div className="hidden lg:block">
           <div className="flex items-center gap-3">
             <Image
-              src={mobile1}
+              src={"/static/images/mobile1.png"}
               width={200}
               height={200}
               alt="App"
               loading="lazy"
             />
             <Image
-              src={mobile}
+              src={"/static/images/mobile2.png"}
               width={180}
               height={180}
               alt="App"

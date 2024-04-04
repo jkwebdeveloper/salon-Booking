@@ -1,61 +1,53 @@
 import Image from "next/image";
 import React from "react";
-import image1 from "../../../public/static/images/Popular Treatment/img.png";
-import image2 from "../../../public/static/images/Popular Treatment/img2.png";
-import image3 from "../../../public/static/images/Popular Treatment/img3.png";
-import image4 from "../../../public/static/images/Popular Treatment/img4.png";
-import image5 from "../../../public/static/images/Popular Treatment/img5.png";
-import image6 from "../../../public/static/images/Popular Treatment/img6.png";
-import image7 from "../../../public/static/images/Popular Treatment/img7.png";
-import image8 from "../../../public/static/images/Popular Treatment/img8.png";
 import { v4 } from "uuid";
 
 const ImagesData = [
   {
     id: 1,
-    image: image1,
+    image: "/static/images/Popular Treatment/img.png",
     title: "Spa Days",
     des: "12 Listings",
   },
   {
     id: 2,
-    image: image2,
+    image: "/static/images/Popular Treatment/img2.png",
     title: "Body Treatments",
     des: "593 Listings",
   },
   {
     id: 3,
-    image: image3,
+    image: "/static/images/Popular Treatment/img3.png",
     title: "Beauty Salons",
     des: "8 Listings",
   },
   {
     id: 4,
-    image: image4,
+    image: "/static/images/Popular Treatment/img4.png",
     title: "Hair Salons",
     des: "1650 Listings",
   },
   {
     id: 5,
-    image: image5,
+    image: "/static/images/Popular Treatment/img5.png",
     title: "Nail Salons",
     des: "1592 Listings",
   },
   {
     id: 6,
-    image: image6,
+    image: "/static/images/Popular Treatment/img6.png",
     title: "Hair Removal",
     des: "2167 Listings",
   },
   {
     id: 7,
-    image: image7,
+    image: "/static/images/Popular Treatment/img7.png",
     title: "Brows & Lashes",
     des: "2264 Listings",
   },
   {
     id: 8,
-    image: image8,
+    image: "/static/images/Popular Treatment/img8.png",
     title: "Massage",
     des: "1710 Listings",
   },
@@ -78,6 +70,8 @@ const Treatments = () => {
                 src={item?.image}
                 loading="lazy"
                 // fill
+                width={500}
+                height={200}
                 alt=""
                 className="relative object-cover w-full h-full"
               />

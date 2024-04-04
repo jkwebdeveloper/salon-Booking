@@ -158,7 +158,7 @@ const CarouselPrevious = React.forwardRef(({ className, variant = "outline", siz
       variant={variant}
       size={size}
       className={cn("absolute  h-8 w-8 rounded-full", orientation === "horizontal"
-        ? "-left-12 top-1/2 -translate-y-1/2"
+        ? "left-2 bg-white top-1/2 -translate-y-1/2"
         : "-top-12 left-1/2 -translate-x-1/2 rotate-90", className)}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
@@ -179,8 +179,8 @@ const CarouselNext = React.forwardRef(({ className, variant = "outline", size = 
       variant={variant}
       size={size}
       className={cn("absolute h-8 w-8 rounded-full", orientation === "horizontal"
-        ? "-right-12 top-1/2 -translate-y-1/2"
-        : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90", className)}
+        ? "right-2 bg-white top-1/2 -translate-y-1/2"
+        : "-bottom-12 -left-1/2 -translate-x-1/2 rotate-90", className)}
       disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}>
@@ -221,7 +221,7 @@ const CarouselDots = React.forwardRef((props, ref) => {
           <Button
             variant="primary"
             key={i}
-            className={`md:min-w-[1rem] md:h-[0.2rem] mx-1 h-1.5 w-1.5 rounded-full p-0 ${i === currentSlide
+            className={`md:min-w-[0.4rem] md:h-[0.4rem] mx-1 h-1.5 w-1.5 rounded-full p-0 ${i === currentSlide
               ? 'scale-125 transform'
               : 'bg-gray-300'
               }`}
