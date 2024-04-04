@@ -146,7 +146,7 @@ const Profile = ({ user, ...props }) => {
           </div>
         </form>
         <Dialog open={editProfile} >
-          <DialogTrigger onClick={e => setEditProfile(true)} className="flex items-center h-8 px-6 py-3 text-sm font-medium text-white uppercase transition rounded-full focus:outline-none bg-primary hover:bg-primary-hover active:scale-90">
+          <DialogTrigger onClick={e => setEditProfile(true)} className="flex items-center h-8 px-6 py-5 text-sm font-medium text-white uppercase transition rounded-full focus:outline-none bg-primary hover:bg-primary-hover active:scale-90">
             Edit Profile
           </DialogTrigger>
           <DialogContent close={setEditProfile} >

@@ -14,7 +14,7 @@ const ContactUs = () => {
         <div className="z-[2] overflow-hidden shadow-lg rounded-xl lg:max-w-[40%] mx-auto ring-1 ring-primary/10 w-full">
           <div className="relative">
             <Image
-              src={'/static/images/contact-us.svg'}
+              src={'/static/images/Contact-us.svg'}
               alt=""
               loading="lazy"
               width={400}
