@@ -18,7 +18,7 @@ const ProfileModal = ({ setEditProfile }) => {
   const [loading, setLoading] = useState(false);
 
   const handleFile = (e) => {
-    const allowedType = ['image/jpeg', 'image/x-png', 'image/png'];
+    const allowedType = ['image/jpeg', 'image/x-png', 'image/png', 'image/webp'];
     if (allowedType.includes(e.target.files[0].type)) {
       const path = (window.URL || window.webkitURL).createObjectURL(e.target.files[0]);
       setUserImage({ 'id': v4(), 'path': path, 'data': e.target.files[0] });
@@ -38,8 +38,8 @@ const ProfileModal = ({ setEditProfile }) => {
   }
   return (
     <form className="space-y-2" noValidate onSubmit={e => updateProfile(e)}>
-      <div className="border relative border-1 border-[#0AADA4] rounded-full p-1 w-[4rem] h-[4rem] mb-2">
-        <Image src={userImage?.path || (process.env.NEXT_PUBLIC_SERVERURL + user?.photo || '/static/images/23.png')} alt="profile" loading="lazy" className="object-cover w-full h-full rounded-full z-1" width={50} height={50} />
+      <div className="border relative border-1 border-[#0AADA4] rounded-full p-1 w-[3.5rem] h-[3.5rem] mb-4">
+        <Image src={userImage?.path || (user?.photo && process.env.NEXT_PUBLIC_SERVERURL + user?.photo || '/static/images/user.webp')} alt="profile" loading="lazy" className="object-cover w-full h-full rounded-full z-1" width={50} height={50} />
         <input type="file" className="absolute top-0 bottom-0 left-0 right-0 mt-2 cursor-pointer rounded-full max-w-[3.5rem] mx-auto opacity-0 z-2" name="photo" onChange={e => handleFile(e)} />
         <MdModeEditOutline className="absolute right-0 p-[4px] text-xl text-white rounded-full bg-primary bottom-0" />
       </div>
