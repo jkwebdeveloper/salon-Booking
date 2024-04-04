@@ -14,32 +14,32 @@ import "swiper/css/pagination";
 const blogData = [
   {
     id: 1,
-    image: require("/static/images/blog/image.png"),
+    image: "/static/images/blog/image.png",  
     title: "Lorem Ipsum is simply dummy...",
     date: "02 May 2024",
   },
   {
     id: 2,
-    image: require("/static/images/blog/image (2).png"),
+    image: "/static/images/blog/image (2).png",
     title: "Lorem Ipsum is simply dummy...",
     date: "02 May 2024",
   },
 
   {
     id: 3,
-    image: require("/static/images/blog/image (3).png"),
+    image: "/static/images/blog/image (3).png",
     title: "Lorem Ipsum is simply dummy...",
     date: "02 May 2024",
   },
   {
     id: 4,
-    image: require("/static/images/blog/image (4).png"),
+    image: "/static/images/blog/image (4).png",
     title: "Lorem Ipsum is simply dummy...",
     date: "02 May 2024",
   },
   {
     id: 5,
-    image: require("/static/images/blog/image (5).png"),
+    image: "/static/images/blog/image (5).png",
     title: "Lorem Ipsum is simply dummy...",
     date: "02 May 2024",
   },
