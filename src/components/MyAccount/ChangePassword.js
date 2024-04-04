@@ -33,12 +33,13 @@ const ChangePassword = () => {
               Current password
             </label>
             <input
-              type="text"
-              name="cPassword"
+              type="password"
+              name="old_password"
+              id="old_password"
               className="input_field"
               placeholder="Enter your current password"
               pattern="[a-zA-Z0-9]{3,}"
-              // pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
+              // pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'    
               required
             />
           </div>
@@ -47,8 +48,9 @@ const ChangePassword = () => {
               New password
             </label>
             <input
-              type="text"
+              type="password"
               name="password"
+              id="password"
               className="input_field"
               placeholder="Enter your New password"
               pattern="[a-zA-Z0-9]{3,}"
@@ -61,11 +63,11 @@ const ChangePassword = () => {
               Confirm password
             </label>
             <input
-              type="text"
+              type="password"
               name="cpassword"
               className="input_field"
               placeholder="Enter your Confirm password"
-              pattern="[a-zA-Z0-9]{3,}"
+              id="cpassword"
               // pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
               required
             />

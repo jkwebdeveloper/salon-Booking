@@ -1,7 +1,7 @@
 const validateInput = async (form) => {
     const formElements = form.elements;
     let invalidInputs = [];
-    let password = form.querySelector('input[type="password"]');
+    let password = form.querySelector('#password');
     for (let i = 0; i < formElements.length; i++) {
         if (formElements[i].hasAttribute('pattern')) {
             let pattern = new RegExp(formElements[i].getAttribute('pattern'));
@@ -10,7 +10,7 @@ const validateInput = async (form) => {
             }
             // elementwithpattern.push(formElements[i]);
         }
-        if (formElements[i].type === 'password' && formElements[i].value !== password.value) {
+        if (formElements[i].name === 'cpassword' && formElements[i].value !== password.value) {
             invalidInputs.push(formElements[i]);
         }
     }

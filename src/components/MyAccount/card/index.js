@@ -41,7 +41,7 @@ const Card = () => {
       <div className="flex items-center justify-between">
         <p>Your saved credit and debit cards</p>
         <Dialog open={addCard}>
-          <DialogTrigger onClick={e => setAddCard(true)} className="flex items-center h-8 px-6 py-3 text-sm font-medium text-white uppercase transition rounded-full focus:outline-none bg-primary hover:bg-primary-hover active:scale-90">
+          <DialogTrigger onClick={e => setAddCard(true)} className="flex items-center h-8 px-6 py-5 text-sm font-medium text-white uppercase transition rounded-full focus:outline-none bg-primary hover:bg-primary-hover active:scale-90">
             Add New Card
           </DialogTrigger>
           <DialogContent className="max-h-[90vh]" onInteractOutside={e => setAddCard(false)} close={setAddCard}>
