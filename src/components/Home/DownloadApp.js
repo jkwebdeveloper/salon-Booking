@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import App from "../../../public/static/images/appstore2.png";
-import Google from "../../../public/static/images/playstore.png";
-import mobile from "../../../public/static/images/mobile1.png";
-import mobile1 from "../../../public/static/images/mobile2.png";
+import App from "/static/images/appstore2.png";
+import Google from "/static/images/playstore.png";
+import mobile from "/static/images/mobile1.png";
+import mobile1 from "/static/images/mobile2.png";
 
 const DownloadApp = () => {
   return (

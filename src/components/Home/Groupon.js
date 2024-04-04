@@ -16,10 +16,10 @@ import { v4 } from "uuid";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import image1 from "../../../public/static/images/groupon1.png";
-import image2 from "../../../public/static/images/groupon2.png";
-import image3 from "../../../public/static/images/groupon3.png";
-import image4 from "../../../public/static/images/groupon4.png";
+import image1 from "/static/images/groupon1.png";
+import image2 from "/static/images/groupon2.png";
+import image3 from "/static/images/groupon3.png";
+import image4 from "/static/images/groupon4.png";
 
 const boxData = [
   {

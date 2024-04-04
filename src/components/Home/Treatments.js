@@ -1,13 +1,13 @@
 import Image from "next/image";
 import React from "react";
-import image1 from "../../../public/static/images/Popular Treatment/img.png";
-import image2 from "../../../public/static/images/Popular Treatment/img2.png";
-import image3 from "../../../public/static/images/Popular Treatment/img3.png";
-import image4 from "../../../public/static/images/Popular Treatment/img4.png";
-import image5 from "../../../public/static/images/Popular Treatment/img5.png";
-import image6 from "../../../public/static/images/Popular Treatment/img6.png";
-import image7 from "../../../public/static/images/Popular Treatment/img7.png";
-import image8 from "../../../public/static/images/Popular Treatment/img8.png";
+import image1 from "/static/images/Popular Treatment/img.png";
+import image2 from "/static/images/Popular Treatment/img2.png";
+import image3 from "/static/images/Popular Treatment/img3.png";
+import image4 from "/static/images/Popular Treatment/img4.png";
+import image5 from "/static/images/Popular Treatment/img5.png";
+import image6 from "/static/images/Popular Treatment/img6.png";
+import image7 from "/static/images/Popular Treatment/img7.png";
+import image8 from "/static/images/Popular Treatment/img8.png";
 import { v4 } from "uuid";
 
 const ImagesData = [

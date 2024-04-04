@@ -1,11 +1,11 @@
 import Image from "next/image";
 import React from "react";
-import image1 from "../../../public/static/images/Buy gifts/img9.png";
-import image2 from "../../../public/static/images/Buy gifts/10.png";
-import image3 from "../../../public/static/images/Buy gifts/img11.png";
-import image4 from "../../../public/static/images/Buy gifts/img12.png";
-import image5 from "../../../public/static/images/Buy gifts/img13.png";
-import image6 from "../../../public/static/images/Buy gifts/img14.png";
+import image1 from "/static/images/Buy gifts/img9.png";
+import image2 from "/static/images/Buy gifts/10.png";
+import image3 from "/static/images/Buy gifts/img11.png";
+import image4 from "/static/images/Buy gifts/img12.png";
+import image5 from "/static/images/Buy gifts/img13.png";
+import image6 from "/static/images/Buy gifts/img14.png";
 import { v4 } from "uuid";
 
 const ImagesData = [
@@ -63,7 +63,7 @@ const Gifts = () => {
               <Image
                 src={item?.image}
                 loading="lazy"
-                
+
                 // fill
                 alt=""
                 className="relative object-cover w-full h-full"
