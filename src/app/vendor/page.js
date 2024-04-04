@@ -1,3 +1,4 @@
+'use client';
 import Herosection from "@/components/vendor/Home/Herosection";
 import PamperTree from "@/components/vendor/Home/PamperTree";
 import Seller from "@/components/vendor/Home/Seller";

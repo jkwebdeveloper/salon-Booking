@@ -49,7 +49,7 @@ const LookingFor = () => {
       >
         <CarouselContent>
           {ImagesData.map((item) => (
-            <CarouselItem className="md:basis-1/2 lg:basis-1/4">
+            <CarouselItem key={v4()} className="md:basis-1/2 lg:basis-1/4">
               <div
                 key={v4()}
                 className="relative flex items-center justify-center text-center cursor-pointer"
