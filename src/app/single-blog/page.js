@@ -54,7 +54,7 @@ const Singleblog = () => {
         </h1>
         <div className="flex items-center gap-2">
           <Image
-            src={"/static/images/img.png"}
+            src={"/static/images/blog/img.png"}
             width={50}
             height={50}
             alt=""
