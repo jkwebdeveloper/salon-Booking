@@ -44,6 +44,7 @@ const LookingFor = () => {
       <Carousel
         opts={{
           align: "start",
+          loop: true,
         }}
         className="w-full"
       >
@@ -54,17 +55,15 @@ const LookingFor = () => {
                 key={v4()}
                 className="relative flex items-center justify-center text-center cursor-pointer"
               >
-                <div>
-                  <Image
-                    src={item?.image}
-                    loading="lazy"
-                    width={500}
-                    height={500}
-                    // fill
-                    alt=""
-                    className="relative object-cover w-full h-full"
-                  />
-                </div>
+                <Image
+                  src={item?.image}
+                  loading="lazy"
+                  width={300}
+                  height={500}
+                  // fill
+                  alt=""
+                  className="relative object-cover w-full h-full"
+                />
                 <p className="absolute uppercase top-[78%] text-center font-bold text-white">
                   {item?.title}
                 </p>
@@ -75,8 +74,8 @@ const LookingFor = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="mr-24" />
-        <CarouselNext className="ml-24 " />
+        <CarouselPrevious className="-mr-24" />
+        <CarouselNext className="-ml-24 " />
       </Carousel>
     </div>
   );

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import walletbg from "/static/images/wallet-bg.png";
 import { Button } from "@/components";
 import { PiTicket } from "react-icons/pi";
 

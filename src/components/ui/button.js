@@ -23,7 +23,7 @@ const buttonVariants = cva(
         blog_button: "bg-[#FAFAFA] hover:bg-[#F4E9FF] hover:border-primary border-[1px] border-[#E6E6E6]"
       },
       size: {
-        default: "px-6 py-3 h-8",
+        default: "px-6 py-5 h-8",
         sm: "h-8 px-5 text-xs",
         lg: "h-10 px-8",
         icon: "h-8 w-5 px-2",

@@ -11,6 +11,7 @@ import Banner from "@/components/global/banner";
 const Error = dynamic(() => import("@/components/ui/form/error"));
 const SuccessPopup = dynamic(() => import("@/components/global/successpopup"));
 const Calendar = dynamic(() => import("@/components/ui/calendar"));
+const CardMultiServices = dynamic(() => import("@/components/global/card_multiservices"));
 
 //Home components
 const Herosection = dynamic(() => import("@/components/Home/HeroSection"), { loading: () => loader });
@@ -39,6 +40,6 @@ const Wallet = dynamic(() => import("@/components/MyAccount/Wallet"), { loading:
 const ReferFriend = dynamic(() => import("@/components/MyAccount/ReferFriend"), { loading: () => loader });
 const ChangePassword = dynamic(() => import("@/components/MyAccount/ChangePassword"), { loading: () => loader });
 
-export { PageLoader, Spinner, Button, Label, Banner, Error, SuccessPopup, Calendar };
+export { PageLoader, Spinner, Button, Label, Banner, Error, SuccessPopup, Calendar, CardMultiServices };
 
 export { Herosection, Pampertree, Featured, Treatments, Gifts, Location, Groupon, PamperTeam, Offers, PopularSalon, DownloadApp, Testimonials, Business, FindNearByForm, MainDetail, MainMenu, Card, Wallet, Profile, MyBooking, ReferFriend, ChangePassword, SearchInput };

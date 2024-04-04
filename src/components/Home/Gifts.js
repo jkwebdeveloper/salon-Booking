@@ -1,47 +1,41 @@
 import Image from "next/image";
 import React from "react";
-import image1 from "/static/images/Buy gifts/img9.png";
-import image2 from "/static/images/Buy gifts/10.png";
-import image3 from "/static/images/Buy gifts/img11.png";
-import image4 from "/static/images/Buy gifts/img12.png";
-import image5 from "/static/images/Buy gifts/img13.png";
-import image6 from "/static/images/Buy gifts/img14.png";
 import { v4 } from "uuid";
 
 const ImagesData = [
   {
     id: 1,
-    image: image1,
+    image: "/static/images/Buy gifts/img9.png",
     title: "Wedding Gifts",
     des: "View more",
   },
   {
     id: 2,
-    image: image2,
+    image: "/static/images/Buy gifts/10.png",
     title: "Birthday Gifts",
     des: "View more",
   },
   {
     id: 3,
-    image: image3,
+    image: "/static/images/Buy gifts/img11.png",
     title: "Gifts For Children",
     des: "View more",
   },
   {
     id: 4,
-    image: image4,
+    image: "/static/images/Buy gifts/img12.png",
     title: "Gifts For Occasion",
     des: "View more",
   },
   {
     id: 5,
-    image: image5,
+    image: "/static/images/Buy gifts/img13.png",
     title: "Gifts For Her",
     des: "View more",
   },
   {
     id: 6,
-    image: image6,
+    image: "/static/images/Buy gifts/img14.png",
     title: "Gifts For Him",
     des: "View more",
   },
@@ -63,7 +57,8 @@ const Gifts = () => {
               <Image
                 src={item?.image}
                 loading="lazy"
-
+                width={500}
+                height={200}
                 // fill
                 alt=""
                 className="relative object-cover w-full h-full"

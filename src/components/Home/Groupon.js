@@ -16,15 +16,11 @@ import { v4 } from "uuid";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import image1 from "/static/images/groupon1.png";
-import image2 from "/static/images/groupon2.png";
-import image3 from "/static/images/groupon3.png";
-import image4 from "/static/images/groupon4.png";
 
 const boxData = [
   {
     id: 1,
-    image: image1,
+    image: "/static/images/groupon1.png",
     title: "Spa Life & Massage",
     titleoption: "(Couple Massage)",
     location: "Barnack, Cambridge 181.2 miles",
@@ -32,7 +28,7 @@ const boxData = [
   },
   {
     id: 2,
-    image: image2,
+    image: "/static/images/groupon2.png",
     title: "Spa Life & Massage",
     titleoption: "(Couple Massage)",
     location: "Barnack, Cambridge 181.2 miles",
@@ -40,7 +36,7 @@ const boxData = [
   },
   {
     id: 3,
-    image: image3,
+    image: "/static/images/groupon3.png",
     title: "Spa Life & Massage",
     titleoption: "(Couple Massage)",
     location: "Barnack, Cambridge 181.2 miles",
@@ -48,7 +44,7 @@ const boxData = [
   },
   {
     id: 4,
-    image: image4,
+    image: "/static/images/groupon4.png",
     title: "Spa Life & Massage",
     titleoption: "(Couple Massage)",
     location: "Barnack, Cambridge 181.2 miles",
@@ -56,7 +52,7 @@ const boxData = [
   },
   {
     id: 5,
-    image: image1,
+    image: "/static/images/groupon1.png",
     title: "Spa Life & Massage",
     titleoption: "(Couple Massage)",
     location: "Barnack, Cambridge 181.2 miles",
@@ -144,7 +140,8 @@ const Groupon = () => {
                           src={item?.image}
                           alt="spa life"
                           loading="lazy"
-
+                          width={200}
+                          height={200}
                           // fill
                           className="object-cover w-full h-full"
                         />

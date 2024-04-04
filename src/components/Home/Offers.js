@@ -2,66 +2,55 @@ import Image from "next/image";
 import React from "react";
 import { v4 } from "uuid";
 
-import image1 from "/static/images/PamperTree/img1.png";
-import image2 from "/static/images/PamperTree/img2.png";
-import image3 from "/static/images/PamperTree/img3.png";
-import image4 from "/static/images/PamperTree/img4.png";
-import image5 from "/static/images/PamperTree/img5.png";
-import image6 from "/static/images/PamperTree/img6.png";
-import image7 from "/static/images/PamperTree/img7.png";
-import image8 from "/static/images/PamperTree/img8.png";
-import image9 from "/static/images/PamperTree/img9.png";
-import image10 from "/static/images/PamperTree/img10.png";
-
 const ImagesData = [
   {
     id: 1,
-    image: image1,
+    image: "/static/images/PamperTree/img1.png",
     title: "Wedding Gifts",
   },
   {
     id: 2,
-    image: image2,
+    image: "/static/images/PamperTree/img2.png",
     title: "Birthday Gifts",
   },
   {
     id: 3,
-    image: image3,
+    image: "/static/images/PamperTree/img3.png",
     title: "Gifts For Children",
   },
   {
     id: 4,
-    image: image4,
+    image: "/static/images/PamperTree/img4.png",
     title: "Gifts For Occasion",
   },
   {
     id: 5,
-    image: image5,
+    image: "/static/images/PamperTree/img5.png",
     title: "Gifts For Her",
   },
   {
     id: 6,
-    image: image6,
+    image: "/static/images/PamperTree/img6.png",
     title: "Gifts For Him",
   },
   {
     id: 7,
-    image: image7,
+    image: "/static/images/PamperTree/img7.png",
     title: "Gifts For Him",
   },
   {
     id: 8,
-    image: image8,
+    image: "/static/images/PamperTree/img8.png",
     title: "Gifts For Him",
   },
   {
     id: 9,
-    image: image9,
+    image: "/static/images/PamperTree/img9.png",
     title: "Gifts For Him",
   },
   {
     id: 10,
-    image: image10,
+    image: "/static/images/PamperTree/img10.png",
     title: "Gifts For Him",
   },
 ];
@@ -99,7 +88,8 @@ const Offers = () => {
               <Image
                 src={item?.image}
                 loading="lazy"
-
+                width={200}
+                height={200}
                 // fill
                 alt=""
                 className="relative object-cover w-full h-full"
