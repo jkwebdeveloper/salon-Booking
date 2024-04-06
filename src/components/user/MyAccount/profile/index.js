@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import ProfileModal from "@/components/MyAccount/profile/ProfileModal";
+import ProfileModal from "@/components/user/MyAccount/profile/ProfileModal";
 import { MdModeEditOutline } from "react-icons/md";
 import { useRouter } from "next/navigation";
 import { v4 } from "uuid";

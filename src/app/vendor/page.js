@@ -1,5 +1,5 @@
 "use client";
-import DownloadApp from "@/components/Home/DownloadApp";
+import DownloadApp from "@/components/user/Home/DownloadApp";
 import Single_blog_slider from "@/components/global/Single_blog_slider";
 import Counter from "@/components/vendor/Home/Counter";
 import Herosection from "@/components/vendor/Home/Herosection";

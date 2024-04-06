@@ -8,7 +8,7 @@ import VandorHeader from "./VandorHeader";
 
 function Layout({ children }) {
   const pathname = usePathname();
-  const exludePaths = ["/sign-in", "/register", "/forgot-password", "/vendor"];
+  const exludePaths = ["/sign-in", "/register", "/forgot-password"];
   const exludePath = ["/vendor"];
   return (
     <>

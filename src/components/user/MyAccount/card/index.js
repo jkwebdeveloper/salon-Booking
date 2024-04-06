@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MdLocationPin } from "react-icons/md";
-import EditCardModal from "@/components/MyAccount/card/EditCardModal";
+import EditCardModal from "@/components/user/MyAccount/card/EditCardModal";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,

@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
-import PopularSalon from "@/components/Home/PopularSalon";
+import PopularSalon from "@/components/user/Home/PopularSalon";
 
 const ServiceListing = () => {
   return (

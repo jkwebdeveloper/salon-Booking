@@ -1,6 +1,6 @@
-'use client';
-import React, { useState } from 'react'
-import { v4 } from 'uuid';
+"use client";
+import React, { useState } from "react";
+import { v4 } from "uuid";
 import Image from "next/image";
 import { MdLocationPin } from "react-icons/md";
 import { IoHeartOutline } from "react-icons/io5";
@@ -19,10 +19,10 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-  CarouselDots
-} from "@/components/ui/carousel"
-import { Button } from '@/components';
+  CarouselDots,
+} from "@/components/ui/carousel";
 
+import { Button } from "@/components";
 
 function Pampertree() {
   const [isFavourite, setIsFavourite] = useState(false);
@@ -44,8 +44,9 @@ function Pampertree() {
               <div className="relative w-full space-y-4" key={item.id}>
                 <div
                   onClick={() => setIsFavourite(!isFavourite)}
-                  className={`absolute top-3 right-3 ${isFavourite ? "bg-red-500" : "bg-[#b6b6b6]"
-                    } rounded-full p-2 cursor-pointer`}
+                  className={`absolute top-3 right-3 ${
+                    isFavourite ? "bg-red-500" : "bg-[#b6b6b6]"
+                  } rounded-full p-2 cursor-pointer`}
                 >
                   {isFavourite ? (
                     <RiHeartFill className="text-2xl text-white" />
@@ -54,9 +55,12 @@ function Pampertree() {
                   )}
                 </div>
                 <div>
-                  <div className="mx-1 bg-white rounded-lg shadow-lg" key={item?.id}>
+                  <div
+                    className="mx-1 bg-white rounded-lg shadow-lg"
+                    key={item?.id}
+                  >
                     <Image
-                      src={'/static/images/spa_life.png'}
+                      src={"/static/images/spa_life.png"}
                       alt="spa life"
                       loading="lazy"
                       width={400}
@@ -85,9 +89,7 @@ function Pampertree() {
                       <div className="flex items-center gap-2 md:gap-3">
                         <div className="flex items-center gap-2 md:gap-3">
                           <FaStar className="text-sm text-primary_color" />
-                          <p className="text-sm md:text-base">
-                            {item?.rating}
-                          </p>
+                          <p className="text-sm md:text-base">{item?.rating}</p>
                         </div>
                         <div className="flex items-center gap-2 md:gap-3">
                           <div className="bg-[#29AD17] p-2 rounded-full">
@@ -118,8 +120,10 @@ function Pampertree() {
                       </div>
                       <div className="flex flex-col items-center w-full gap-3 md:flex-row">
                         <Button variant="secondary" className="flex-1 px-0">
-                          <IoIosEye className="text-base text-white" /> Quick view
+                          <IoIosEye className="text-base text-white" /> Quick
+                          view
                         </Button>
+
                         <Button variant="primary" className="flex-1 px-0">
                           <GrCart className="text-base text-white" /> Book Now
                         </Button>
@@ -136,15 +140,15 @@ function Pampertree() {
         <CarouselDots className="mx-auto mt-3" />
       </Carousel>
     </div>
-  )
+  );
 }
 
-export default Pampertree
+export default Pampertree;
 
 const boxData = [
   {
     id: 1,
-    image: '/static/images/spa_life.png',
+    image: "/static/images/spa_life.png",
     title: "Spa Life & Massage",
     titleoption: "(Couple Massage)",
     location: "Barnack, Cambridge 181.2 miles",
@@ -152,7 +156,7 @@ const boxData = [
   },
   {
     id: 2,
-    image: '/static/images/spa_life.png',
+    image: "/static/images/spa_life.png",
     title: "Spa Life & Massage",
     titleoption: "(Couple Massage)",
     location: "Barnack, Cambridge 181.2 miles",
@@ -160,7 +164,7 @@ const boxData = [
   },
   {
     id: 3,
-    image: '/static/images/spa_life.png',
+    image: "/static/images/spa_life.png",
     title: "Spa Life & Massage",
     titleoption: "(Couple Massage)",
     location: "Barnack, Cambridge 181.2 miles",
@@ -168,7 +172,7 @@ const boxData = [
   },
   {
     id: 4,
-    image: '/static/images/spa_life.png',
+    image: "/static/images/spa_life.png",
     title: "Spa Life & Massage",
     titleoption: "(Couple Massage)",
     location: "Barnack, Cambridge 181.2 miles",
@@ -176,7 +180,7 @@ const boxData = [
   },
   {
     id: 5,
-    image: '/static/images/spa_life.png',
+    image: "/static/images/spa_life.png",
     title: "Spa Life & Massage",
     titleoption: "(Couple Massage)",
     location: "Barnack, Cambridge 181.2 miles",
@@ -184,7 +188,7 @@ const boxData = [
   },
   {
     id: 6,
-    image: '/static/images/spa_life.png',
+    image: "/static/images/spa_life.png",
     title: "Spa Life & Massage",
     titleoption: "(Couple Massage)",
     location: "Barnack, Cambridge 181.2 miles",

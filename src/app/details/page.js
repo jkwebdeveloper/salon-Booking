@@ -12,14 +12,14 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Button from "@/components/ui/button";
-import OurWork from "@/components/detail/OurWork";
-import LookingFor from "@/components/detail/LookingFor";
-import Review from "@/components/detail/Review";
-import About from "@/components/detail/About";
-import MeetTeam from "@/components/detail/MeetTeam";
-import Featured from "@/components/Home/Featured";
-import DownloadApp from "@/components/Home/DownloadApp";
-import Location from "@/components/Home/Location";
+import OurWork from "@/components/user/detail/OurWork";
+import LookingFor from "@/components/user/detail/LookingFor";
+import Review from "@/components/user/detail/Review";
+import About from "@/components/user/detail/About";
+import MeetTeam from "@/components/user/detail/MeetTeam";
+import Featured from "@/components/user/Home/Featured";
+import DownloadApp from "@/components/user/Home/DownloadApp";
+import Location from "@/components/user/Home/Location";
 
 const DetailPage = () => {
   return (
