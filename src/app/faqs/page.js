@@ -90,7 +90,7 @@ const FaqsData = [
     ans: " A. There are many places to discover the latest offers available from our Associates. First of all, check out the “Offers” link right at the top of the page on the header or on the “Explore Great Offers” towards the bottom of the home page and of course you will also get the latest news on our Newsletter, so make sure you choose to subscribe!",
   },
 ];
-const data = [];
+
 const Faqs = () => {
   return (
     <div className="space-y-0">
