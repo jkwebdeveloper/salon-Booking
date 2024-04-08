@@ -13,7 +13,7 @@ const VandorHeader = () => {
         className="container border-b "
         // id="topMenu"
       >
-        <div className="flex items-center justify-between py-2  md:gap-6">
+        <div className="flex items-center justify-between py-2 md:gap-6">
           <div className="flex items-center gap-4">
             <Link href="/">
               <Image
@@ -42,7 +42,12 @@ const VandorHeader = () => {
               </div>
             </div>
           </div>
-          <p>Already A Partner? <span className="text-primary_color uppercase">Login</span></p>
+          <p>
+            Already A Partner?{" "}
+            <Link href="/vendor/sign-in">
+              <span className="uppercase text-primary_color">Login</span>
+            </Link>{" "}
+          </p>
           <div>
             <Button
               type="button"
@@ -55,15 +60,25 @@ const VandorHeader = () => {
           </div>
         </div>
       </div>
-        <div className="flex justify-center items-center ">
-            <ul className="flex justify-center items-center uppercase gap-5">
-                <li className="px-3 py-3 font-medium hover:text-white hover:bg-primary cursor-pointer">Sell online</li>
-                <li className="px-3 py-3 font-medium hover:text-white hover:bg-primary cursor-pointer">Features</li>
-                <li className="px-3 py-3 font-medium hover:text-white hover:bg-primary cursor-pointer">solutions</li>
-                <li className="px-3 py-3 font-medium hover:text-white hover:bg-primary cursor-pointer">Fees & Pricing</li>
-                <li className="px-3 py-3 font-medium hover:text-white hover:bg-primary cursor-pointer">How it works</li>
-            </ul>
-        </div>
+      <div className="flex items-center justify-center ">
+        <ul className="flex items-center justify-center gap-5 uppercase">
+          <li className="px-3 py-3 font-medium cursor-pointer hover:text-white hover:bg-primary">
+            Sell online
+          </li>
+          <li className="px-3 py-3 font-medium cursor-pointer hover:text-white hover:bg-primary">
+            Features
+          </li>
+          <li className="px-3 py-3 font-medium cursor-pointer hover:text-white hover:bg-primary">
+            solutions
+          </li>
+          <li className="px-3 py-3 font-medium cursor-pointer hover:text-white hover:bg-primary">
+            Fees & Pricing
+          </li>
+          <li className="px-3 py-3 font-medium cursor-pointer hover:text-white hover:bg-primary">
+            How it works
+          </li>
+        </ul>
+      </div>
       {/* <MobileMenu openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
       <DesktopMenu /> */}
     </div>
