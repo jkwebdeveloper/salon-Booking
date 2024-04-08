@@ -334,7 +334,7 @@ const Vouchers = () => {
           <div className="md:w-4/5 w-[90%] mx-auto space-y-5 h-fit min-h-[350px]">
             <div className="grid items-center grid-cols-2 gap-4 xl:grid-cols-3">
               {voucherData.map((item) => (
-                <Link href="/voucher_details">
+                <Link href="/voucher_details" key={item.id}>
                   <div
                     className="mx-1 space-y-3 bg-white shadow-lg rounded-xl"
                     key={item.id}
