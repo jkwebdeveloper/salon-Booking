@@ -15,6 +15,16 @@ import "swiper/css/pagination";
 
 import { Button } from "@/components";
 import { ServiceSVG } from "@/constants/svg";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import QuickModal from "./QuickModal";
 
 const Featured = () => {
   const [beginAndEnd, setBeginAndEnd] = useState({
@@ -82,13 +92,13 @@ const Featured = () => {
                       nextEl: nextRef.current,
                       enabled: true,
                     }}
-                  // observer={true}
-                  // parallax={true}
-                  // observeParents={true}
+                    // observer={true}
+                    // parallax={true}
+                    // observeParents={true}
                   >
                     <SwiperSlide>
                       <Image
-                        src={'/static/images/hair.png'}
+                        src={"/static/images/hair.png"}
                         height={500}
                         width={500}
                         alt="moon"
@@ -159,7 +169,12 @@ const Featured = () => {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Button type="button" variant="outline" size="sm" className="uppercase ps-3 group">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="uppercase ps-3 group"
+                    >
                       <ServiceSVG pathClass="group-hover:fill-white fill-primary" />
                       View All Services
                     </Button>
@@ -188,7 +203,16 @@ const Featured = () => {
                 </div>
                 <div className="flex items-center gap-3">
                   <Button variant="primary">Book Now</Button>
-                  <Button variant="secondary">Quick view</Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="secondary" className="flex-1 px-0">
+                        Quick view
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[825px]">
+                      <QuickModal />
+                    </DialogContent>
+                  </Dialog>
                 </div>
               </div>
               <hr className="w-full" />
@@ -213,7 +237,16 @@ const Featured = () => {
                 </div>
                 <div className="flex items-center gap-3">
                   <Button variant="primary">Book Now</Button>
-                  <Button variant="secondary">Quick view</Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="secondary" className="flex-1 px-0">
+                        Quick view
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[825px]">
+                      <QuickModal />
+                    </DialogContent>
+                  </Dialog>
                 </div>
               </div>
             </div>
@@ -239,13 +272,13 @@ const Featured = () => {
                       nextEl: nextRef.current,
                       enabled: true,
                     }}
-                  // observer={true}
-                  // parallax={true}
-                  // observeParents={true}
+                    // observer={true}
+                    // parallax={true}
+                    // observeParents={true}
                   >
                     <SwiperSlide>
                       <Image
-                        src={'/static/images/hair.png'}
+                        src={"/static/images/hair.png"}
                         height={500}
                         width={500}
                         alt="moon"
@@ -316,7 +349,12 @@ const Featured = () => {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Button type="button" variant="outline" size="sm" className="uppercase ps-3 group">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="uppercase ps-3 group"
+                    >
                       <ServiceSVG pathClass="group-hover:fill-white fill-primary" />
                       View All Services
                     </Button>
@@ -345,7 +383,16 @@ const Featured = () => {
                 </div>
                 <div className="flex items-center gap-3">
                   <Button variant="primary">Book Now</Button>
-                  <Button variant="secondary">Quick view</Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="secondary" className="flex-1 px-0">
+                        Quick view
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[825px]">
+                      <QuickModal />
+                    </DialogContent>
+                  </Dialog>
                 </div>
               </div>
               <hr className="w-full" />
@@ -370,7 +417,16 @@ const Featured = () => {
                 </div>
                 <div className="flex items-center gap-3">
                   <Button variant="primary">Book Now</Button>
-                  <Button variant="secondary">Quick view</Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="secondary" className="flex-1 px-0">
+                        Quick view
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[825px]">
+                      <QuickModal />
+                    </DialogContent>
+                  </Dialog>
                 </div>
               </div>
             </div>
@@ -396,13 +452,13 @@ const Featured = () => {
                       nextEl: nextRef.current,
                       enabled: true,
                     }}
-                  // observer={true}
-                  // parallax={true}
-                  // observeParents={true}
+                    // observer={true}
+                    // parallax={true}
+                    // observeParents={true}
                   >
                     <SwiperSlide>
                       <Image
-                        src={'/static/images/hair.png'}
+                        src={"/static/images/hair.png"}
                         height={500}
                         width={500}
                         alt="moon"
@@ -473,7 +529,12 @@ const Featured = () => {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Button type="button" variant="outline" size="sm" className="uppercase ps-3 group">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="uppercase ps-3 group"
+                    >
                       <ServiceSVG pathClass="group-hover:fill-white fill-primary" />
                       View All Services
                     </Button>
@@ -502,7 +563,16 @@ const Featured = () => {
                 </div>
                 <div className="flex items-center gap-3">
                   <Button variant="primary">Book Now</Button>
-                  <Button variant="secondary">Quick view</Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="secondary" className="flex-1 px-0">
+                        Quick view
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[825px]">
+                      <QuickModal />
+                    </DialogContent>
+                  </Dialog>
                 </div>
               </div>
               <hr className="w-full" />
@@ -527,7 +597,16 @@ const Featured = () => {
                 </div>
                 <div className="flex items-center gap-3">
                   <Button variant="primary">Book Now</Button>
-                  <Button variant="secondary">Quick view</Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="secondary" className="flex-1 px-0">
+                        Quick view
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[825px]">
+                      <QuickModal />
+                    </DialogContent>
+                  </Dialog>
                 </div>
               </div>
             </div>

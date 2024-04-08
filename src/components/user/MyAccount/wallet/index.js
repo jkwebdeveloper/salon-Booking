@@ -1,9 +1,18 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components";
 import { PiTicket } from "react-icons/pi";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import WalletModal from "./WalletModal";
 
 const Wallet = () => {
+  const [withDraw, setWithDraw] = useState(false);
+  const [addMoney, setAddMoney] = useState(false);
   return (
     <div className="p-3 space-y-4 bg-white rounded-md xl:p-5">
       <p className="text-xl text-[#25324B] font-semibold">Wallet</p>
@@ -12,12 +21,42 @@ const Wallet = () => {
           <p>Toatal Balance</p>
           <p className="text-5xl font-bold ">£541.00</p>
           <div className="flex items-center justify-center gap-2">
-            <Button variant="outline" className="border-white" >
+            <Dialog open={withDraw}>
+              <DialogTrigger onClick={(e) => setWithDraw(true)}>
+                <Button variant="outline" className="border-white">
+                  Withdraw
+                </Button>
+              </DialogTrigger>
+              <DialogContent
+                className="max-h-[90vh]"
+                onInteractOutside={(e) => setWithDraw(false)}
+                close={setWithDraw}
+              >
+                <DialogTitle>Withdraw Money</DialogTitle>
+                <WalletModal setWithDraw={setWithDraw} />
+              </DialogContent>
+            </Dialog>
+            <Dialog open={addMoney}>
+              <DialogTrigger onClick={(e) => setAddMoney(true)}>
+                <Button variant="outline" className="border-white">
+                  + Add money
+                </Button>
+              </DialogTrigger>
+              <DialogContent
+                className="max-h-[90vh]"
+                onInteractOutside={(e) => setAddMoney(false)}
+                close={setAddMoney}
+              >
+                <DialogTitle>Add Money to Wallet</DialogTitle>
+                <WalletModal setAddMoney={setAddMoney} />
+              </DialogContent>
+            </Dialog>
+            {/* <Button variant="outline" className="border-white">
               Withdraw
-            </Button>
-            <Button variant="outline" className="border-white" >
+            </Button> */}
+            {/* <Button variant="outline" className="border-white">
               + Add money
-            </Button>
+            </Button> */}
           </div>
         </div>
         <div className="border rounded-xl border-1 border-[#DBDBDB] p-5">

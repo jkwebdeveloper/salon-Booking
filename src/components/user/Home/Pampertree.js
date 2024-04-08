@@ -21,8 +21,18 @@ import {
   CarouselPrevious,
   CarouselDots,
 } from "@/components/ui/carousel";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 import { Button } from "@/components";
+import QuickModal from "./QuickModal";
 
 function Pampertree() {
   const [isFavourite, setIsFavourite] = useState(false);
@@ -119,10 +129,17 @@ function Pampertree() {
                         </p>
                       </div>
                       <div className="flex flex-col items-center w-full gap-3 md:flex-row">
-                        <Button variant="secondary" className="flex-1 px-0">
-                          <IoIosEye className="text-base text-white" /> Quick
-                          view
-                        </Button>
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button variant="secondary" className="flex-1 px-0">
+                              <IoIosEye className="text-base text-white" />{" "}
+                              Quick view
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent className="sm:max-w-[825px]">
+                            <QuickModal />
+                          </DialogContent>
+                        </Dialog>
 
                         <Button variant="primary" className="flex-1 px-0">
                           <GrCart className="text-base text-white" /> Book Now
