@@ -88,14 +88,14 @@ const Offers = () => {
               <Image
                 src={item?.image}
                 loading="lazy"
-                width={200}
+                width={500}
                 height={200}
                 // fill
                 alt=""
                 className="relative object-cover w-full h-full"
               />
               <div className="absolute z-20 flex-col items-center justify-center w-full h-full p-10 space-y-3 text-sm text-white transition-all duration-300 opacity-0 2xl:flex-row rounded-xl lg:p-2 hover:backdrop-blur-sm bg-black/50 -bottom-10 group-hover:bottom-0 group-hover:opacity-100">
-                <p className="text-justify">
+                <p className="p-2 text-justify">
                   The pursuit of beauty is something that the majority of us
                   continually follow in one way or another. Of course, this
                   predates the celebrity culture and social media influencers

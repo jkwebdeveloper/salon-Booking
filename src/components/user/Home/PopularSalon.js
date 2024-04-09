@@ -91,51 +91,10 @@ const PopularSalon = () => {
                         width={500}
                         alt="moon"
                         loading="lazy"
-                        // fill
                         className="object-cover w-full h-full"
                       />
                     </SwiperSlide>
-                    {/* <SwiperSlide>
-                      <Image
-                        src={'/static/images/hair.png'}
-                        height={300}
-                        width={300}
-                        alt="moon"
-                        loading="lazy"
-                        
-                        // fill
-                        className="object-cover w-full h-full"
-                      />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <Image
-                        src={'/static/images/hair.png'}
-                        height={300}
-                        width={300}
-                        alt="moon"
-                        loading="lazy"
-                        
-                        // fill
-                        className="object-cover w-full h-full"
-                      />
-                    </SwiperSlide> */}
                   </Swiper>
-                  {/* <div
-                    ref={prevRef}
-                    className={`swiper-prev-button absolute top-[45%] active:-translate-x-1 transition-all -left-4 bg-white p-3 cursor-pointer shadow-lg rounded-full z-10 ${
-                      beginAndEnd?.isBegin && "scale-0"
-                    } `}
-                  >
-                    <IoIosArrowBack className="text-[#007aff] h-6 w-6" />
-                  </div>
-                  <div
-                    ref={nextRef}
-                    className={` absolute top-[45%] active:translate-x-1 transition-all -right-4 bg-white shadow-xl p-3 cursor-pointer rounded-full z-10 ${
-                      beginAndEnd?.isEnd && "scale-0"
-                    } `}
-                  >
-                    <IoIosArrowForward className="text-[#007aff] w-6 h-6" />
-                  </div> */}
                 </div>
                 <div className="space-y-2 xl:space-y-3">
                   <h1 className="text-base font-semibold">Moon Massage</h1>

@@ -8,14 +8,14 @@ import VandorHeader from "./VandorHeader";
 
 function Layout({ children }) {
   const pathname = usePathname();
-  const exludePaths = ["/sign-in", "/register", "/forgot-password"];
-  const exludePath = ["/vendor"];
+  const userPath = ["/sign-in", "/register", "/forgot-password"];
+  const vendorPath = ["vendor"];
   return (
     <>
-      {exludePaths.includes(pathname) ? null : <Header />}
-      {exludePath.includes(pathname) ? <VandorHeader /> : null}
+      {(userPath.includes(pathname) || pathname.includes(vendorPath)) ? null : <Header />}
+      {pathname.includes(vendorPath) ? <VandorHeader /> : null}
       {children}
-      {exludePaths.includes(pathname) ? null : <Footer />}
+      {userPath.includes(pathname) ? null : <Footer />}
     </>
   );
 }

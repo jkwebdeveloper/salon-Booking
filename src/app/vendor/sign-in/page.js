@@ -1,4 +1,4 @@
-import { Banner } from "@/components";
+import { Banner, Label } from "@/components";
 import React from "react";
 
 const SignIn = () => {
