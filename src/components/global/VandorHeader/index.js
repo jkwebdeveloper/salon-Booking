@@ -44,19 +44,21 @@ const VandorHeader = () => {
           </div>
           <p>
             Already A Partner?{" "}
-            <Link href="/vendor/sign-in">
+            <Link href="/vendor/login">
               <span className="uppercase text-primary_color">Login</span>
             </Link>{" "}
           </p>
           <div>
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              className="uppercase ps-3"
-            >
-              Become a partner
-            </Button>
+            <Link href="/vendor/sign-in">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="uppercase ps-3"
+              >
+                Become a partner
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
