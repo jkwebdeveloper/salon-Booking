@@ -4,7 +4,7 @@ import { SlLocationPin } from "react-icons/sl";
 
 const Sidebar = () => {
   return (
-    <div className="space-y-4">
+    <div className="space-y-7">
       <div className="flex items-center gap-5">
         <LuBellRing className="text-[#717579] text-2xl" />
         <p className="text-[#717579] text-lg">Alerts</p>
