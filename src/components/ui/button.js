@@ -9,6 +9,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        disable:
+          "focus:outline-none uppercase bg-[#E6E6E6] text-black font-medium  active:scale-90 transition text-sm",
         default:
           "bg-primary text-primary-foreground shadow hover:bg-primary/90",
         outline:
@@ -19,8 +21,10 @@ const buttonVariants = cva(
           "focus:outline-none uppercase bg-[#711F7E] hover:bg-[#BF27D7] text-white font-medium  active:scale-90 transition text-sm",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        danger: "text-red-500 uppercase border-red-500 border-[1px] hover:bg-red-500 hover:text-white ",
-        blog_button: "bg-[#FAFAFA] hover:bg-[#F4E9FF] hover:border-primary border-[1px] border-[#E6E6E6]"
+        danger:
+          "text-red-500 uppercase border-red-500 border-[1px] hover:bg-red-500 hover:text-white ",
+        blog_button:
+          "bg-[#FAFAFA] hover:bg-[#F4E9FF] hover:border-primary border-[1px] border-[#E6E6E6]",
       },
       size: {
         default: "px-6 py-5 h-8",
@@ -36,18 +40,33 @@ const buttonVariants = cva(
   }
 );
 
-const Button = React.forwardRef(({ className, variant, size, asChild = false, parent = false, type = "button", onClick, ...props }, ref) => {
-  const Comp = (asChild && Slot) || (parent && "span" || "button")
-  return (
-    (<Comp
-      className={cn(buttonVariants({ variant, size, className }))}
-      ref={ref}
-      type={type}
-      onClick={onClick instanceof Function ? onClick : undefined}
-      {...props} />)
-  );
-})
-Button.displayName = "Button"
+const Button = React.forwardRef(
+  (
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      parent = false,
+      type = "button",
+      onClick,
+      ...props
+    },
+    ref
+  ) => {
+    const Comp = (asChild && Slot) || (parent && "span") || "button";
+    return (
+      <Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        type={type}
+        onClick={onClick instanceof Function ? onClick : undefined}
+        {...props}
+      />
+    );
+  }
+);
+Button.displayName = "Button";
 
 export default Button;
 export { Button, buttonVariants };

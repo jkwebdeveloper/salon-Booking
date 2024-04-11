@@ -2,7 +2,9 @@
 import DashBoardHeader from "@/components/global/DashboardHeader";
 import Sidebar from "@/components/global/DashboardHeader/Sidebar";
 import Customer from "@/components/vendor/Dashboard/Customer";
-import Reviews from "@/components/vendor/Dashboard/Reviews";
+import DashBoardHome from "@/components/vendor/Dashboard/DashboardHome";
+import BusinessReport from "@/components/vendor/Dashboard/Report";
+import Staff from "@/components/vendor/Dashboard/Staff";
 import React, { useState } from "react";
 
 const DashBoard = () => {
@@ -14,8 +16,10 @@ const DashBoard = () => {
           <Sidebar />
         </div>
         <div className="md:w-4/5 w-[90%] mx-auto space-y-5 h-fit min-h-[350px] p-5 bg-[#f4f2f2]">
-          {/* <Reviews /> */}
-          <Customer />
+          {/* <DashBoardHome /> */}
+          {/* <Customer /> */}
+          {/* <BusinessReport /> */}
+          <Staff />
         </div>
       </div>
     </div>

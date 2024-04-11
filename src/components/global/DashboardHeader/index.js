@@ -26,22 +26,22 @@ const DashBoardHeader = () => {
                 <span className="inline-block footer">Dashboard</span>
               </p>
               <p className="cursor-pointer text-[#666666]">
-                <span className="inline-block footer">Dashboard</span>
+                <span className="inline-block footer">Planner</span>
               </p>
               <p className="cursor-pointer text-[#666666]">
-                <span className="inline-block footer">Dashboard</span>
+                <span className="inline-block footer">Customers</span>
               </p>
               <p className="cursor-pointer text-[#666666]">
-                <span className="inline-block footer">Dashboard</span>
+                <span className="inline-block footer">Staff</span>
               </p>
               <p className="cursor-pointer text-[#666666]">
-                <span className="inline-block footer">Dashboard</span>
+                <span className="inline-block footer">Services</span>
               </p>
               <p className="cursor-pointer text-[#666666]">
-                <span className="inline-block footer">Dashboard</span>
+                <span className="inline-block footer">Business Report</span>
               </p>
               <p className="cursor-pointer text-[#666666]">
-                <span className="inline-block footer">Dashboard</span>
+                <span className="inline-block footer">Wallet</span>
               </p>
             </div>
             <div className="flex items-center gap-5">

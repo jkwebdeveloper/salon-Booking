@@ -16,7 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const Reviews = () => {
+const DashBoardHome = () => {
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
@@ -179,4 +179,4 @@ const Reviews = () => {
   );
 };
 
-export default Reviews;
+export default DashBoardHome;
