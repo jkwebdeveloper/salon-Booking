@@ -1,8 +1,10 @@
 "use client";
 import DashBoardHeader from "@/components/global/DashboardHeader";
 import Sidebar from "@/components/global/DashboardHeader/Sidebar";
+import BookingList from "@/components/vendor/Dashboard/BookingList";
 import Customer from "@/components/vendor/Dashboard/Customer";
 import DashBoardHome from "@/components/vendor/Dashboard/DashboardHome";
+import Planner from "@/components/vendor/Dashboard/Planner";
 import BusinessReport from "@/components/vendor/Dashboard/Report";
 import Staff from "@/components/vendor/Dashboard/Staff";
 import React, { useState } from "react";
@@ -19,7 +21,9 @@ const DashBoard = () => {
           {/* <DashBoardHome /> */}
           {/* <Customer /> */}
           {/* <BusinessReport /> */}
-          <Staff />
+          {/* <Staff /> */}
+          {/* <Planner /> */}
+          <BookingList />
         </div>
       </div>
     </div>
