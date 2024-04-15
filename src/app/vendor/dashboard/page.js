@@ -1,12 +1,19 @@
 "use client";
 import DashBoardHeader from "@/components/global/DashboardHeader";
 import Sidebar from "@/components/global/DashboardHeader/Sidebar";
+import AlertSetting from "@/components/vendor/Dashboard/AlertSetting";
 import BookingList from "@/components/vendor/Dashboard/BookingList";
+import ChangePass from "@/components/vendor/Dashboard/ChangePass";
 import Customer from "@/components/vendor/Dashboard/Customer";
 import DashBoardHome from "@/components/vendor/Dashboard/DashboardHome";
+import LocationDetails from "@/components/vendor/Dashboard/LocationDetails";
 import Planner from "@/components/vendor/Dashboard/Planner";
+import Profile from "@/components/vendor/Dashboard/Profile";
 import BusinessReport from "@/components/vendor/Dashboard/Report";
+import SalonDetails from "@/components/vendor/Dashboard/SalonDetails";
+import Services from "@/components/vendor/Dashboard/Services";
 import Staff from "@/components/vendor/Dashboard/Staff";
+import Wallet from "@/components/vendor/Dashboard/Wallet";
 import React, { useState } from "react";
 
 const DashBoard = () => {
@@ -23,7 +30,14 @@ const DashBoard = () => {
           {/* <BusinessReport /> */}
           {/* <Staff /> */}
           {/* <Planner /> */}
-          <BookingList />
+          {/* <BookingList /> */}
+          {/* <Services /> */}
+          {/* <Wallet /> */}
+          {/* <Profile /> */}
+          {/* <ChangePass /> */}
+          {/* <AlertSetting /> */}
+          {/* <SalonDetails /> */}
+          <LocationDetails />
         </div>
       </div>
     </div>

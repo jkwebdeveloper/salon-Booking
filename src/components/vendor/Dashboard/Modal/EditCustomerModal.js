@@ -81,7 +81,7 @@ const EditCustomerModal = () => {
                 type="radio"
                 value=""
                 name="list-radio"
-                class=""
+                className=""
               />
               <label
                 for="list-radio-license"
@@ -98,7 +98,7 @@ const EditCustomerModal = () => {
                 type="radio"
                 value=""
                 name="list-radio"
-                class=""
+                className=""
               />
               <label
                 for="list-radio-license"
@@ -115,7 +115,7 @@ const EditCustomerModal = () => {
                 type="radio"
                 value=""
                 name="list-radio"
-                class=""
+                className=""
               />
               <label
                 for="list-radio-license"
