@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 } from "uuid";
 
-import { setUser } from "@/redux/features/authSlice";
+import { setUser } from "@/redux/features/userAuthSlice";
 import { Button } from "@/components/ui/button";
 import { MdModeEditOutline } from "react-icons/md";
 import Label from "@/components/ui/form/label";
@@ -14,7 +14,7 @@ import logout from "@/utils/logout";
 const ProfileModal = ({ setEditProfile }) => {
   const dispatch = useDispatch();
   const [userImage, setUserImage] = useState({});
-  const user = useSelector((state) => state.auth.user) || '';
+  const user = useSelector((state) => state.userAuth.user) || '';
   const [loading, setLoading] = useState(false);
 
   const handleFile = (e) => {

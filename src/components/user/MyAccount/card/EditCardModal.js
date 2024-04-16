@@ -15,7 +15,7 @@ import { v4 } from "uuid";
 import { useSelector } from "react-redux";
 
 const EditCardModal = () => {
-  const user = useSelector(state => state.auth.user);
+  const user = useSelector(state => state.userAuth.user);
   const currentYear = new Date().getFullYear();
   const [month, setMonth] = React.useState({ value: '', error: false });
   const [year, setYear] = React.useState({ value: '', error: false });

@@ -5,13 +5,14 @@ import React from "react";
 
 import { MdLocationPin } from "react-icons/md";
 import { BiMenuAltRight } from "react-icons/bi";
+import { useSelector } from "react-redux";
 
 const VandorHeader = () => {
+  const vendor = useSelector((state) => state.vendorAuth.vendor);
   return (
     <div className="w-full bg-white shadow-md">
       <div
         className="container border-b "
-        // id="topMenu"
       >
         <div className="flex items-center justify-between py-2 md:gap-6">
           <div className="flex items-center gap-4">
@@ -35,31 +36,27 @@ const VandorHeader = () => {
                 Download pampertree app
               </Button>
               <div className="block xl:hidden">
-                <BiMenuAltRight
-                  className="text-2xl cursor-pointer text-primary_color"
-                  // onClick={() => setOpenSidebar(true)}
-                />
+                <BiMenuAltRight className="text-2xl cursor-pointer text-primary_color" />
               </div>
             </div>
           </div>
-          <p>
+          {!vendor && <p>
             Already A Partner?{" "}
             <Link href="/vendor/login">
               <span className="uppercase text-primary_color">Login</span>
             </Link>{" "}
-          </p>
-          <div>
-            <Link href="/vendor/sign-in">
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                className="uppercase ps-3"
-              >
-                Become a partner
-              </Button>
+          </p>}
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            className="uppercase"
+            asChild
+          >
+            <Link href={vendor && '/vendor/dashboard' || '/vendor/sign-in'}>
+              {vendor && "Dashboard" || "Become a partner"}
             </Link>
-          </div>
+          </Button>
         </div>
       </div>
       <div className="flex items-center justify-center ">
@@ -81,8 +78,6 @@ const VandorHeader = () => {
           </li>
         </ul>
       </div>
-      {/* <MobileMenu openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
-      <DesktopMenu /> */}
     </div>
   );
 };

@@ -5,15 +5,39 @@ import Link from "next/link";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa6";
 import { FaApple } from "react-icons/fa";
+import Button from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { MdOutlineErrorOutline } from "react-icons/md";
-import Button from "@/components/ui/button";
+import { POST } from "@/app/api/post";
+import { login } from "@/redux/features/vendorAuthSlice";
 
 const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false),
+    dispatch = useDispatch(),
+    router = useRouter(),
+    vendor = useSelector((state) => state.vendorAuth.vendor),
+    [loading, setLoading] = React.useState(false),
+    [error, setError] = React.useState("");
+
+  const vendorLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const resp = await POST.request({ url: "/vendor/login", form: e.target });
+    setLoading(false);
+    if (resp) {
+      if (resp.status != 'Error' && Object.keys(resp.data).length > 0) {
+        dispatch(login(resp.data));
+        return;
+      }
+      setError(resp.message);
+    }
+  };
+
+  useEffect(() => {
+    if (vendor) router.push("/vendor/dashboard");
+  }, [vendor, router]);
+
   return (
     <div className="w-screen min-h-screen">
       <div className="bg-[url('/static/images/login.png')] bg-cover"></div>
@@ -31,7 +55,7 @@ const Login = () => {
         <div className="flex items-center justify-center p-6 mx-auto bg-white rounded-lg shadow-sm ring-1 ring-neutral-300/40">
           <div className="space-y-3">
             <p className="text-lg font-semibold">Login</p>
-            <form className="flex flex-col gap-3" noValidate>
+            <form className="flex flex-col gap-3" noValidate onSubmit={e => vendorLogin(e)}>
               <div className="space-y-1 text-left ">
                 <label htmlFor="country" className="label_text">
                   Email Id
@@ -58,7 +82,7 @@ const Login = () => {
                   // pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
                   required
                 />
-                <input type="hidden" name="device_type" />
+                <input type="hidden" name="device_type" defaultValue={typeof window != 'undefined' && (/Mobi/i.test(window.navigator.userAgent) && 2) || 1} />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
@@ -69,44 +93,44 @@ const Login = () => {
                       className="absolute mt-[0.1rem] text-gray-400 cursor-pointer top-2/4 right-3"
                     />
                   )) || (
-                    <BsEyeSlashFill
-                      size={24}
-                      className="absolute mt-[0.1rem] text-gray-400 cursor-pointer top-2/4 right-3"
-                    />
-                  )}
+                      <BsEyeSlashFill
+                        size={24}
+                        className="absolute mt-[0.1rem] text-gray-400 cursor-pointer top-2/4 right-3"
+                      />
+                    )}
                 </button>
               </div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <input
+                    id="list-radio-license"
+                    type="checkbox"
+                    value=""
+                    name="list-radio"
+                    className=""
+                  />
+                  <label
+                    htmlFor="list-radio-license"
+                    className="w-full text-sm font-medium text-gray-900 ms-2 "
+                  >
+                    Keep me log in
+                  </label>
+                </div>
+                <div>
+                  <Link
+                    href="/vendor/reset-password"
+                    className="block w-full font-semibold"
+                  >
+                    Reset your password?
+                  </Link>
+                </div>
+              </div>
+              <div className="w-full mx-auto">
+                <Button type="submit" variant="primary" className="w-full">
+                  Login
+                </Button>
+              </div>
             </form>
-            <div className="flex items-center justify-between">
-              <div class="flex items-center">
-                <input
-                  id="list-radio-license"
-                  type="checkbox"
-                  value=""
-                  name="list-radio"
-                  class=""
-                />
-                <label
-                  for="list-radio-license"
-                  class="w-full ms-2 text-sm font-medium text-gray-900 "
-                >
-                  Keep me log in
-                </label>
-              </div>
-              <div>
-                <Link
-                  href="/vendor/reset-password"
-                  className="block w-full font-semibold"
-                >
-                  Reset your password?
-                </Link>
-              </div>
-            </div>
-            <div className="w-full mx-auto">
-              <Button variant="primary" className="w-full">
-                Login
-              </Button>
-            </div>
             <div className="inline-flex items-center justify-center w-full">
               <hr className="h-px my-4 bg-gray-200 border-0 w-80 dark:bg-gray-700" />
               <span className="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">

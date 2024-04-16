@@ -9,7 +9,7 @@ const MyAccountPage = () => {
   const router = useRouter();
   const [tabMenu, setTabMenu] = useState("Profile");
 
-  const user = useSelector((state) => state.auth.user) || '';
+  const user = useSelector((state) => state.userAuth.user) || '';
 
   useEffect(() => {
     if (!user) router.push("/sign-in");

@@ -14,7 +14,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { Button } from "@/components";
-import { logout } from "@/redux/features/authSlice";
+import { logout } from "@/redux/features/userAuthSlice";
 
 import {
     DropdownMenu,
@@ -28,10 +28,13 @@ import {
 
 function Topbar() {
     const router = useRouter();
-    const user = useSelector((state) => state.auth.user) || '';
+    const user = useSelector((state) => state.userAuth.user) || '';
     const dispatch = useDispatch();
     return (
         <>
+            {!user && <Button type="button" variant="outline" size="sm" className="uppercase" asChild>
+                <Link href={'/vendor'}>For business</Link>
+            </Button>}
             {!user && <Link href={'/sign-in'} className="uppercase border-[1px] rounded-full border-black bg-background shadow-sm hover:bg-primary hover:text-white h-8 px-5 text-xs flex items-center">Log in</Link>}
             {/* My Account Dropdown Menu */}
             {user && <DropdownMenu>

@@ -7,14 +7,14 @@ import { MdOutlineErrorOutline } from "react-icons/md";
 import { useRouter } from "next/navigation";
 
 import { Spinner, Button, Error } from '@/components';
-import { login } from "@/redux/features/authSlice";
+import { login } from "@/redux/features/userAuthSlice";
 import { POST } from "@/app/api/post";
 
 const Register = () => {
   const [error, setError] = React.useState("");
   const router = useRouter();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user) || '';
+  const user = useSelector((state) => state.userAuth.user) || '';
   const [loading, setLoading] = React.useState(false);
 
   if (user) {

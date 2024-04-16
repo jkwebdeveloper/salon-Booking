@@ -41,9 +41,6 @@ const Header = () => {
         </div>
         <div className="hidden xl:block">
           <div className="flex items-center gap-2">
-            <Button type="button" variant="outline" size="sm" className="uppercase" asChild>
-              <Link href={'/vendor'}>For business</Link>
-            </Button>
             <Topbar />
           </div>
         </div>

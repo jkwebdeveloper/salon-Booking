@@ -19,7 +19,7 @@ import React, { useState } from "react";
 const DashBoard = () => {
   return (
     <div className="">
-      <DashBoardHeader />
+      {/* <DashBoardHeader /> */}
       <div className="flex items-start">
         <div className="h-fit min-h-[350px] md:block hidden md:w-[35%] lg:w-[20%] w-[90%] space-y-5 p-5 bg-white">
           <Sidebar />

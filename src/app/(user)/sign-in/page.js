@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { MdOutlineErrorOutline } from "react-icons/md";
 
-import { login } from "@/redux/features/authSlice";
+import { login } from "@/redux/features/userAuthSlice";
 import { POST } from "@/app/api/post";
 import { Spinner, Button, Error } from '@/components';
 
@@ -19,7 +19,7 @@ const Signin = () => {
   const [showPassword, setShowPassword] = React.useState(false),
     dispatch = useDispatch(),
     router = useRouter(),
-    user = useSelector((state) => state.auth.user),
+    user = useSelector((state) => state.userAuth.user),
     [loading, setLoading] = React.useState(false),
     [error, setError] = React.useState("");
 
@@ -80,7 +80,7 @@ const Signin = () => {
                   <input
                     type="hidden"
                     name="device_type"
-                    value={typeof window != 'undefined' && (/Mobi/i.test(window.navigator.userAgent) && 2) || 1}
+                    defaultValue={typeof window != 'undefined' && (/Mobi/i.test(window.navigator.userAgent) && 2) || 1}
                   />
                   <button
                     type="button"

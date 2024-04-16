@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Footer from "@/components/global/Footer";
 import Header from "@/components/global/Header";
 import VandorHeader from "./VandorHeader";
+import DashBoardHeader from "@/components/global/DashboardHeader";
 
 function Layout({ children }) {
   const pathname = usePathname();
@@ -26,10 +27,8 @@ function Layout({ children }) {
   return (
     <>
       {!isUserPath && !isVendorPath && <Header />}
-      {isVendorPath &&
-        !isVendorLogin &&
-        !isVendorResetPassword &&
-        !isDashBoard && <VandorHeader />}
+      {pathname == '/vendor' && <VandorHeader />}
+      {pathname.includes('/vendor/') && <DashBoardHeader />}
       {children}
       {!isUserPath && <Footer />}
     </>

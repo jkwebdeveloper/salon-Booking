@@ -7,7 +7,7 @@ import { RiLock2Line } from "react-icons/ri";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import { useDispatch } from "react-redux";
 
-import { logout } from "@/redux/features/authSlice";
+import { logout } from "@/redux/features/userAuthSlice";
 
 const MainMenu = ({ onTabChange, tabMenu }) => {
   const dispatch = useDispatch();
