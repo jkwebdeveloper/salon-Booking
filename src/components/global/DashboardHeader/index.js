@@ -36,9 +36,11 @@ const DashBoardHeader = () => {
               <p className="font-semibold cursor-pointer">
                 <span className="inline-block footer">Dashboard</span>
               </p>
-              <p className="cursor-pointer text-[#666666]">
-                <span className="inline-block footer">Planner</span>
-              </p>
+              <Link href="/vendor/planner">
+                <p className="cursor-pointer text-[#666666]">
+                  <span className="inline-block footer">Planner</span>
+                </p>
+              </Link>
               <p className="cursor-pointer text-[#666666]">
                 <span className="inline-block footer">Customers</span>
               </p>

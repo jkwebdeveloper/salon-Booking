@@ -25,10 +25,10 @@ const DashBoard = () => {
           <Sidebar />
         </div>
         <div className="md:w-4/5 w-[90%] mx-auto space-y-5 h-fit min-h-[350px] p-5 bg-[#f4f2f2]">
-          {/* <DashBoardHome /> */}
+          <DashBoardHome />
           {/* <Customer /> */}
           {/* <BusinessReport /> */}
-          <Staff />
+          {/* <Staff /> */}
           {/* <Planner /> */}
           {/* <BookingList /> */}
           {/* <Services /> */}
