@@ -33,29 +33,41 @@ const DashBoardHeader = () => {
           <div className="flex items-center justify-between w-full ">
             <div className="flex items-center gap-7">
               <HiMenuAlt2 className="text-2xl" />
-              <p className="font-semibold cursor-pointer">
-                <span className="inline-block footer">Dashboard</span>
-              </p>
+              <Link href="/vendor/dashboard">
+                <p className="font-semibold cursor-pointer">
+                  <span className="inline-block footer">Dashboard</span>
+                </p>
+              </Link>
               <Link href="/vendor/planner">
                 <p className="cursor-pointer text-[#666666]">
                   <span className="inline-block footer">Planner</span>
                 </p>
               </Link>
-              <p className="cursor-pointer text-[#666666]">
-                <span className="inline-block footer">Customers</span>
-              </p>
-              <p className="cursor-pointer text-[#666666]">
-                <span className="inline-block footer">Staff</span>
-              </p>
-              <p className="cursor-pointer text-[#666666]">
-                <span className="inline-block footer">Services</span>
-              </p>
-              <p className="cursor-pointer text-[#666666]">
-                <span className="inline-block footer">Business Report</span>
-              </p>
-              <p className="cursor-pointer text-[#666666]">
-                <span className="inline-block footer">Wallet</span>
-              </p>
+              <Link href="/vendor/customer">
+                <p className="cursor-pointer text-[#666666]">
+                  <span className="inline-block footer">Customers</span>
+                </p>
+              </Link>
+              <Link href="/vendor/staff">
+                <p className="cursor-pointer text-[#666666]">
+                  <span className="inline-block footer">Staff</span>
+                </p>
+              </Link>
+              <Link href="/vendor/service">
+                <p className="cursor-pointer text-[#666666]">
+                  <span className="inline-block footer">Services</span>
+                </p>
+              </Link>
+              <Link href="/vendor/business-report">
+                <p className="cursor-pointer text-[#666666]">
+                  <span className="inline-block footer">Business Report</span>
+                </p>
+              </Link>
+              <Link href="/vendor/wallet">
+                <p className="cursor-pointer text-[#666666]">
+                  <span className="inline-block footer">Wallet</span>
+                </p>
+              </Link>
             </div>
             <div className="flex items-center gap-3">
               {/* Notifications Dropdown Menu */}
