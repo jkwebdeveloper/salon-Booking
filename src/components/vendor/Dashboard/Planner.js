@@ -23,7 +23,10 @@ const Planner = () => {
             >
               Booking list
             </DialogTrigger>
-            <DialogContent close={setAppointmentModal}>
+            <DialogContent
+              close={setAppointmentModal}
+              className="sm:max-w-[725px]"
+            >
               <PlannerModal setAppointmentModal={setAppointmentModal} />
             </DialogContent>
           </Dialog>

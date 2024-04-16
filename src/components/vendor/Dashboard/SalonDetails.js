@@ -1,8 +1,15 @@
 import Button from "@/components/ui/button";
-import React from "react";
+import React, { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
-
+import WorkingHoursModal from "./Modal/WorkingHoursModal";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  DialogTitle,
+} from "@/components/ui/dialog";
 const SalonDetails = () => {
+  const [workingHours, setWorkingHours] = useState(false);
   return (
     <div className="relative w-full space-y-12 bg-white rounded-xl">
       <div className="bg-gradient-to-r  p-3 from-[#711F7E] h-fit to-[#14DBD099] rounded-t-xl">
@@ -69,23 +76,25 @@ const SalonDetails = () => {
             placeholder="Write your thoughts here..."
           ></textarea>
         </div>
-        <div className="w-full lg:w-1/2 bg-[#EDFFFE] p-3 flex cursor-pointer justify-between items-center border rounded-lg border-[#0AADA4]">
+        {/* <div >
           <p className="text-sm text-[#0AADA4]">Shop working hours</p>
           <IoIosArrowForward />
-        </div>
-        {/* <Dialog open={addCustomer} className="w-11/12">
+        </div> */}
+        <Dialog open={workingHours} className="w-11/12">
           <DialogTrigger
-            onClick={(e) => setAddCustomer(true)}
-            className="flex items-center h-8 px-6 py-5 text-sm font-medium text-white uppercase transition rounded-full focus:outline-none bg-primary hover:bg-primary-hover active:scale-90"
+            onClick={(e) => setWorkingHours(true)}
+            className="w-full lg:w-1/2 bg-[#EDFFFE] p-3 flex cursor-pointer justify-between items-center border rounded-lg border-[#0AADA4]"
           >
-            + Add New Treatment
+            <p className="text-sm text-[#0AADA4]">Shop working hours</p>
+            <IoIosArrowForward />
           </DialogTrigger>
-          <DialogContent close={setAddCustomer} className="sm:max-w-[1025px]">
-            <DialogTitle>Add New Treatment</DialogTitle>
-            <NewTreatmentModal setAddCustomer={setAddCustomer} />
-            <ServicesListModal setAddCustomer={setAddCustomer} />
+          <DialogContent close={setWorkingHours} className="sm:max-w-[425px]">
+            <DialogTitle>Shop working hours</DialogTitle>
+            {/* <NewTreatmentModal setAddCustomer={setAddCustomer} />
+            <ServicesListModal setAddCustomer={setAddCustomer} /> */}
+            <WorkingHoursModal setWorkingHours={setWorkingHours} />
           </DialogContent>
-        </Dialog> */}
+        </Dialog>
         <p className="text-xl font-semibold">Social Profiles</p>
         <div className="w-full space-y-1 text-left">
           <label htmlFor="fname" className="label_text">

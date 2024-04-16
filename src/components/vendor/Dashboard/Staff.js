@@ -17,9 +17,11 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import UserModal from "./Modal/StaffModal/UserModal";
+import AddTeam from "./Modal/StaffModal/AddTeam";
 
 const Staff = () => {
   const [userModal, setUserModal] = useState(false);
+  const [addTeam, setAddTeam] = useState(false);
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
@@ -27,7 +29,8 @@ const Staff = () => {
         <Button variant="disable">My Staff</Button>
       </div>
       <div className="w-full p-4 space-y-3 bg-white rounded-xl">
-        <p className="text-2xl font-semibold">Staff Schedule</p>
+        {/* Staff Schedule section  start */}
+        {/* <p className="text-2xl font-semibold">Staff Schedule</p>
         <div className="flex items-end justify-between">
           <div className="border w-max rounded-md border-[#eae9e9]">
             <DatePicker />
@@ -44,7 +47,6 @@ const Staff = () => {
           </Pagination>
         </div>
         <hr />
-
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left rtl:text-center">
             <thead className="text-white bg-primary_color">
@@ -124,7 +126,47 @@ const Staff = () => {
               </tr>
             </tbody>
           </table>
+        </div> */}
+        {/* Staff Schedule section  end */}
+
+        {/* My Staff section  start */}
+        <div className="flex items-center justify-between">
+          <p className="text-2xl font-semibold">Staff List</p>
+          <Dialog open={addTeam}>
+            <DialogTrigger
+              onClick={(e) => setAddTeam(true)}
+              className="flex items-center h-8 px-6 py-5 text-sm font-medium text-white uppercase transition rounded-full focus:outline-none bg-primary hover:bg-primary-hover active:scale-90"
+            >
+              + Add New
+            </DialogTrigger>
+            <DialogContent close={setAddTeam} className="sm:max-w-[900px]">
+              <DialogTitle>Add Team Member</DialogTitle>
+              <AddTeam setAddTeam={setAddTeam} />
+            </DialogContent>
+          </Dialog>
         </div>
+        <hr />
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="flex items-center justify-center py-5 rounded-lg shadow-lg">
+            <div className="space-y-5 text-center">
+              <p className="rounded-full mx-auto w-16 h-16 flex justify-center items-center text-xl bg-[#0AADA4] text-white">
+                NS
+              </p>
+              <p className="text-xl">Nuzami</p>
+              <Button variant="primary">Edit</Button>
+            </div>
+          </div>
+          <div className="flex items-center justify-center py-5 rounded-lg shadow-lg">
+            <div className="space-y-5 text-center">
+              <p className="rounded-full mx-auto w-16 h-16 flex justify-center items-center text-xl bg-[#0AADA4] text-white">
+                JR
+              </p>
+              <p className="text-xl">Jullie</p>
+              <Button variant="primary">Edit</Button>
+            </div>
+          </div>
+        </div>
+        {/* My Staff section  end */}
       </div>
     </div>
   );
