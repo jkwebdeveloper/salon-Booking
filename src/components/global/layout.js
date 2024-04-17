@@ -28,7 +28,7 @@ function Layout({ children }) {
     <>
       {!isUserPath && !isVendorPath && <Header />}
       {pathname == '/vendor' && <VandorHeader />}
-      {pathname.includes('/vendor/') && <DashBoardHeader />}
+      {(pathname.includes('/vendor/') && !userPath.includes(pathname)) && <DashBoardHeader />}
       {children}
       {!isUserPath && <Footer />}
     </>
