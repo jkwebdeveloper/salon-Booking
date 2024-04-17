@@ -102,7 +102,7 @@ const Faqs = () => {
         <Accordion type="single" collapsible className="w-full space-y-3">
           {FaqsData.map((item) => (
             <AccordionItem
-              //   value="item-1"
+              value={item.id}
               key={item.id}
               className="px-1 bg-white rounded-md shadow-sm md:px-3 ring-1 ring-primary/10"
             >

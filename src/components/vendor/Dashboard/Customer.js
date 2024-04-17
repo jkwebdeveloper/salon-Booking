@@ -115,7 +115,10 @@ const Customer = () => {
                   >
                     <FaRegEye className="text-[#8E8EA1] text-xl" />
                   </DialogTrigger>
-                  <DialogContent close={setEyeModal}>
+                  <DialogContent
+                    close={setEyeModal}
+                    className="sm:max-w-[800px]"
+                  >
                     <DialogTitle>John Adam</DialogTitle>
                     <hr />
                     <EyeModal setEyeModal={setEyeModal} />

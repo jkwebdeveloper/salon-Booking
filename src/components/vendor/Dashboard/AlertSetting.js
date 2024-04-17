@@ -1,7 +1,7 @@
 import Button from "@/components/ui/button";
 import React from "react";
 
-const AlertSetting = () => {
+const Alertsetting = () => {
   return (
     <div className="space-y-4">
       <p className="text-2xl font-semibold">Alerts setting</p>
@@ -47,4 +47,4 @@ const AlertSetting = () => {
   );
 };
 
-export default AlertSetting;
+export default Alertsetting;
