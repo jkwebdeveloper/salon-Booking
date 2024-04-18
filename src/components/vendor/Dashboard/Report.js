@@ -10,6 +10,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 const BusinessReport = () => {
   const [saleDetails, setSaleDetails] = useState(false);
   return (
@@ -17,10 +26,231 @@ const BusinessReport = () => {
       <div className="space-y-4">
         {saleDetails === true ? (
           <>
+            {/* <div className="flex items-center justify-between">
+              <p className="text-2xl font-semibold">Customer Bookings</p>
+              <div className="flex items-center gap-3">
+                <DropdownMenu>
+                  <DropdownMenuTrigger>
+                    <Button variant="primary">04/01/2023 - 02/29/2024</Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56 p-0 mt-2 bg-white ring-1 ring-neutral-200">
+                    <DropdownMenuGroup>
+                      <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white">
+                        Today
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white">
+                        Yesterday
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white">
+                        Last 7 days
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white">
+                        Last 30 days
+                      </DropdownMenuItem>
+                    </DropdownMenuGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+                <IoMdClose
+                  className="text-2xl cursor-pointer"
+                  onClick={() => setSaleDetails(false)}
+                />
+              </div>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="min-w-full bg-white rounded-lg">
+                <thead className="border-b-2 whitespace-nowrap">
+                  <tr>
+                    <th className="px-4 py-3 text-sm font-semibold text-left">
+                      S.N.
+                    </th>
+                    <th className="px-4 py-3 text-sm font-semibold text-left">
+                      Appointment Details
+                    </th>
+                    <th className="px-4 py-3 text-sm font-semibold text-left">
+                      Date Booked
+                    </th>
+                    <th className="px-4 py-3 text-sm font-semibold text-left">
+                      Treatment
+                    </th>
+                    <th className="px-4 py-3 text-sm font-semibold text-left">
+                      Customer
+                    </th>
+                    <th className="px-4 py-3 text-sm font-semibold text-left">
+                      Price
+                    </th>
+                    <th className="px-4 py-3 text-sm font-semibold text-left">
+                      Confirmation ID
+                    </th>
+                    <th className="px-4 py-3 text-sm font-semibold text-left">
+                      Employee
+                    </th>
+                    <th className="px-4 py-3 text-sm font-semibold text-left">
+                      Booking Status
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="border-b-2 whitespace-nowrap">
+                  <tr className="">
+                    <td className="px-4 py-4 text-sm">1</td>
+                    <td className="px-4 py-4 text-sm">2024-03-07 06:00 </td>
+                    <td className="px-4 py-4 text-sm">07/03/2024 07:03</td>
+                    <td className="px-4 py-4 text-sm">
+                      One Night Deluxe Spa Break
+                    </td>
+                    <td className="px-4 py-4 text-sm">John Adam</td>
+                    <td className="px-4 py-4 text-sm">£299 </td>
+                    <td className="px-4 py-4 text-sm">PT0001</td>
+                    <td className="px-4 py-4 text-sm">Nuzami</td>
+                    <td className="px-4 py-4 text-sm ">
+                      <p className="bg-[#0AADA4] p-2 rounded-full text-center">
+                        Confirmed
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody className="border-b-2 whitespace-nowrap">
+                  <tr className="">
+                    <td className="px-4 py-4 text-sm">1</td>
+                    <td className="px-4 py-4 text-sm">2024-03-07 06:00 </td>
+                    <td className="px-4 py-4 text-sm">07/03/2024 07:03</td>
+                    <td className="px-4 py-4 text-sm">
+                      One Night Deluxe Spa Break
+                    </td>
+                    <td className="px-4 py-4 text-sm">John Adam</td>
+                    <td className="px-4 py-4 text-sm">£299 </td>
+                    <td className="px-4 py-4 text-sm">PT0001</td>
+                    <td className="px-4 py-4 text-sm">Nuzami</td>
+                    <td className="px-4 py-4 text-sm ">
+                      <p className="bg-[#0AADA4] p-2 rounded-full text-center">
+                        Confirmed
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody className="border-b-2 whitespace-nowrap">
+                  <tr className="">
+                    <td className="px-4 py-4 text-sm">1</td>
+                    <td className="px-4 py-4 text-sm">2024-03-07 06:00 </td>
+                    <td className="px-4 py-4 text-sm">07/03/2024 07:03</td>
+                    <td className="px-4 py-4 text-sm">
+                      One Night Deluxe Spa Break
+                    </td>
+                    <td className="px-4 py-4 text-sm">John Adam</td>
+                    <td className="px-4 py-4 text-sm">£299 </td>
+                    <td className="px-4 py-4 text-sm">PT0001</td>
+                    <td className="px-4 py-4 text-sm">Nuzami</td>
+                    <td className="px-4 py-4 text-sm ">
+                      <p className="bg-[#0AADA4] p-2 rounded-full text-center">
+                        Confirmed
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody className="border-b-2 whitespace-nowrap">
+                  <tr className="">
+                    <td className="px-4 py-4 text-sm">1</td>
+                    <td className="px-4 py-4 text-sm">2024-03-07 06:00 </td>
+                    <td className="px-4 py-4 text-sm">07/03/2024 07:03</td>
+                    <td className="px-4 py-4 text-sm">
+                      One Night Deluxe Spa Break
+                    </td>
+                    <td className="px-4 py-4 text-sm">John Adam</td>
+                    <td className="px-4 py-4 text-sm">£299 </td>
+                    <td className="px-4 py-4 text-sm">PT0001</td>
+                    <td className="px-4 py-4 text-sm">Nuzami</td>
+                    <td className="px-4 py-4 text-sm ">
+                      <p className="bg-[#0AADA4] p-2 rounded-full text-center">
+                        Confirmed
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody className="border-b-2 whitespace-nowrap">
+                  <tr className="">
+                    <td className="px-4 py-4 text-sm">1</td>
+                    <td className="px-4 py-4 text-sm">2024-03-07 06:00 </td>
+                    <td className="px-4 py-4 text-sm">07/03/2024 07:03</td>
+                    <td className="px-4 py-4 text-sm">
+                      One Night Deluxe Spa Break
+                    </td>
+                    <td className="px-4 py-4 text-sm">John Adam</td>
+                    <td className="px-4 py-4 text-sm">£299 </td>
+                    <td className="px-4 py-4 text-sm">PT0001</td>
+                    <td className="px-4 py-4 text-sm">Nuzami</td>
+                    <td className="px-4 py-4 text-sm ">
+                      <p className="bg-[#0AADA4] p-2 rounded-full text-center">
+                        Confirmed
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody className="border-b-2 whitespace-nowrap">
+                  <tr className="">
+                    <td className="px-4 py-4 text-sm">1</td>
+                    <td className="px-4 py-4 text-sm">2024-03-07 06:00 </td>
+                    <td className="px-4 py-4 text-sm">07/03/2024 07:03</td>
+                    <td className="px-4 py-4 text-sm">
+                      One Night Deluxe Spa Break
+                    </td>
+                    <td className="px-4 py-4 text-sm">John Adam</td>
+                    <td className="px-4 py-4 text-sm">£299 </td>
+                    <td className="px-4 py-4 text-sm">PT0001</td>
+                    <td className="px-4 py-4 text-sm">Nuzami</td>
+                    <td className="px-4 py-4 text-sm ">
+                      <p className="bg-[#0AADA4] p-2 rounded-full text-center">
+                        Confirmed
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody className="border-b-2 whitespace-nowrap">
+                  <tr className="">
+                    <td className="px-4 py-4 text-sm">1</td>
+                    <td className="px-4 py-4 text-sm">2024-03-07 06:00 </td>
+                    <td className="px-4 py-4 text-sm">07/03/2024 07:03</td>
+                    <td className="px-4 py-4 text-sm">
+                      One Night Deluxe Spa Break
+                    </td>
+                    <td className="px-4 py-4 text-sm">John Adam</td>
+                    <td className="px-4 py-4 text-sm">£299 </td>
+                    <td className="px-4 py-4 text-sm">PT0001</td>
+                    <td className="px-4 py-4 text-sm">Nuzami</td>
+                    <td className="px-4 py-4 text-sm ">
+                      <p className="bg-[#0AADA4] p-2 rounded-full text-center">
+                        Confirmed
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div> */}
+            {/* Sales per Month section */}
+
             <div className="flex items-center justify-between">
               <p className="text-2xl font-semibold">Sales per Month</p>
               <div className="flex items-center gap-3">
-                <Button variant="primary">04/01/2023 - 02/29/2024</Button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger>
+                    <Button variant="primary">04/01/2023 - 02/29/2024</Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56 p-0 mt-2 bg-white ring-1 ring-neutral-200">
+                    <DropdownMenuGroup>
+                      <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white">
+                        Today
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white">
+                        Yesterday
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white">
+                        Last 7 days
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white">
+                        Last 30 days
+                      </DropdownMenuItem>
+                    </DropdownMenuGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
                 <Button variant="secondary">Print</Button>
                 <Button variant="outline">Download</Button>
                 <IoMdClose
@@ -29,42 +259,182 @@ const BusinessReport = () => {
                 />
               </div>
             </div>
-            <Table>
-              <TableBody>
-                <TableRow>
-                  <TableCell className="font-medium text-sm text-[#757575]">
-                    Current period
-                  </TableCell>
-                  <TableCell className="text-right font-medium text-sm text-[#757575]">
-                    Revenue
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium text-sm text-[#757575]">
-                    Nuzami
-                  </TableCell>
-                  <TableCell className="text-right font-medium text-sm text-[#757575]">
-                    £241
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium text-sm text-[#757575]">
-                    Current period
-                  </TableCell>
-                  <TableCell className="text-right font-medium text-sm text-[#757575]">
-                    Revenue
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium text-sm text-[#757575]">
-                    Nuzami
-                  </TableCell>
-                  <TableCell className="text-right font-medium text-sm text-[#757575]">
-                    £241
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
+            <div className="flex flex-col">
+              <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full text-sm font-light text-center bg-white rounded-lg border-neutral-200 text-surface dark:border-white/10 dark:text-white">
+                      <thead className="font-medium border-b border-neutral-200 dark:border-white/10">
+                        <tr className="font-medium border-b border-neutral-200 dark:border-white/10">
+                          <th
+                            rowspan="2"
+                            className="px-6 py-4 border-e border-neutral-200 dark:border-white/10"
+                          >
+                            Sales Per Date
+                          </th>
+                          <th
+                            colspan="2"
+                            className="px-6 py-4 border-e border-neutral-200 dark:border-white/10"
+                          >
+                            Gift-Vouchers
+                          </th>
+                          <th
+                            colspan="2"
+                            className="px-6 py-4 border-e border-neutral-200 dark:border-white/10"
+                          >
+                            Merchandise
+                          </th>
+                          <th
+                            colspan="2"
+                            className="px-6 py-4 border-e border-neutral-200 dark:border-white/10"
+                          >
+                            treatments
+                          </th>
+                          <th
+                            rowspan="2"
+                            className="px-6 py-4 border-e border-neutral-200 dark:border-white/10"
+                          >
+                            Value GBP
+                          </th>
+                        </tr>
+                        <tr>
+                          <th className="px-6 py-4 border-e border-neutral-200 dark:border-white/10">
+                            Quantity
+                          </th>
+                          <th className="px-6 py-4 border-e border-neutral-200 dark:border-white/10">
+                            Revenue
+                          </th>
+                          <th className="px-6 py-4 border-e border-neutral-200 dark:border-white/10">
+                            Quantity
+                          </th>
+                          <th className="px-6 py-4 border-e border-neutral-200 dark:border-white/10">
+                            Revenue
+                          </th>
+                          <th className="px-6 py-4 border-e border-neutral-200 dark:border-white/10">
+                            Quantity
+                          </th>
+                          <th className="px-6 py-4 border-e border-neutral-200 dark:border-white/10">
+                            Revenue
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="border-b border-neutral-200 dark:border-white/10">
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            April 2023
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            £0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            £0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            £0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            £0
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tbody>
+                        <tr className="border-b border-neutral-200 dark:border-white/10">
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            May 2023
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            £0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            £0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            £0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            £0
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tbody>
+                        <tr className="border-b border-neutral-200 dark:border-white/10">
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            June 2023
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            £0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            £0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            £0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            £0
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tbody>
+                        <tr className="border-b border-neutral-200 dark:border-white/10">
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            July 2023
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            £0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            £0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            £0
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap border-e border-neutral-200 dark:border-white/10">
+                            £0
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
           </>
         ) : (
           <>

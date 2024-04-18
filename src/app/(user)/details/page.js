@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { BsTwitterX } from "react-icons/bs";
 import { FaWhatsapp } from "react-icons/fa";
@@ -20,13 +21,14 @@ import MeetTeam from "@/components/user/detail/MeetTeam";
 import Featured from "@/components/user/Home/Featured";
 import DownloadApp from "@/components/user/Home/DownloadApp";
 import Location from "@/components/user/Home/Location";
+import Link from "next/link";
 
 const DetailPage = () => {
   return (
     <div className="container space-y-6">
-      <h1 className="font-bold text-3xl mt-5">Spa Life & Massage</h1>
-      <div className="flex flex-col lg:flex-row lg:items-center items-start justify-between gap-2">
-        <div className="flex flex-col md:flex-row lg:items-center items-start gap-3">
+      <h1 className="mt-5 text-3xl font-bold">Spa Life & Massage</h1>
+      <div className="flex flex-col items-start justify-between gap-2 lg:flex-row lg:items-center">
+        <div className="flex flex-col items-start gap-3 md:flex-row lg:items-center">
           <div className="flex items-center gap-3">
             <div className="flex items-center">
               <FaStar className="text-[#FFCC00]" />
@@ -57,7 +59,7 @@ const DetailPage = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col mx- gap-3 md:flex-row md:mb-10">
+      <div className="flex flex-col gap-3 mx- md:flex-row md:mb-10">
         <div className="w-4/5">
           <Image
             src={"/static/images/Rectangle 7197.png"}
@@ -65,7 +67,7 @@ const DetailPage = () => {
             height={600}
           />
         </div>
-        <div className=" w-1/2 gap-2">
+        <div className="w-1/2 gap-2 ">
           <Image
             src={"/static/images/Rectangle 7198.png"}
             width={400}
@@ -93,7 +95,7 @@ const DetailPage = () => {
           <p className="mt-4">Services</p>
           <div className="flex flex-col min-h-[55dvh] gap-4 md:flex-row md:mb-10">
             <div className="shadow-lg rounded-md h-fit min-h-[350px] md:w-[40%] lg:w-[25%] w-[90%] mx-auto space-y-5 z-2 bg-white">
-              <div className="space-y-3 p-4">
+              <div className="p-4 space-y-3">
                 <div className="flex items-center justify-between">
                   <p>All Services</p>
                   <p>(408)</p>
@@ -133,11 +135,11 @@ const DetailPage = () => {
               </div>
             </div>
             <div className="md:w-4/5 w-[90%] mx-auto space-y-5 rounded-md shadow-lg h-fit min-h-[350px] z-2 bg-white">
-              <div className="space-y-3 p-4">
+              <div className="p-4 space-y-3">
                 <Accordion type="single" collapsible className="w-full">
                   <AccordionItem value="item-1">
                     <AccordionTrigger>
-                      <div className="flex justify-between items-center">
+                      <div className="flex items-center justify-between">
                         <div>
                           <p>Couples Massage</p>
                           <div className="flex items-center gap-2">
@@ -165,7 +167,9 @@ const DetailPage = () => {
                               <span className="text-[#29AD17]">30% OFF</span>
                             </p>
                           </div>
-                          <Button variant="primary">Book Now</Button>
+                          <Link href="/employee-time">
+                            <Button variant="primary">Book Now</Button>
+                          </Link>
                         </div>
                         <hr />
                         <div className="flex items-center gap-3">
@@ -188,7 +192,7 @@ const DetailPage = () => {
                   </AccordionItem>
                   <AccordionItem value="item-2">
                     <AccordionTrigger>
-                      <div className="flex justify-between items-center">
+                      <div className="flex items-center justify-between">
                         <div>
                           <p>Couples Massage</p>
                           <div className="flex items-center gap-2">
@@ -239,7 +243,7 @@ const DetailPage = () => {
                   </AccordionItem>
                   <AccordionItem value="item-3">
                     <AccordionTrigger>
-                      <div className="flex justify-between items-center">
+                      <div className="flex items-center justify-between">
                         <div>
                           <p>Couples Massage</p>
                           <div className="flex items-center gap-2">

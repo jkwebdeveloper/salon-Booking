@@ -2,6 +2,9 @@ import { Banner } from "@/components";
 import Image from "next/image";
 import React from "react";
 import { v4 } from "uuid";
+import { FiPhone } from "react-icons/fi";
+import { SlLocationPin } from "react-icons/sl";
+import { SiMinutemailer } from "react-icons/si";
 
 // import image1 from "/static/images/PamperTree/img1.png";
 // import image2 from "/static/images/PamperTree/img2.png";
@@ -190,6 +193,26 @@ const AboutUs = () => {
           Contact
           <span className="text-primary_color"> Information</span>
         </p>
+        <div className="bg-gradient-to-r flex justify-around items-center from-[#80258A] py-8 px-4 rounded-xl to-[#C30F19]">
+          <div className="flex items-center gap-20 text-center">
+            <div className="space-y-4 text-center">
+              <FiPhone className="mx-auto text-5xl text-white" />
+              <p className="text-xl font-bold text-white">+44 7702 000707</p>
+            </div>
+            <div className="space-y-4 text-center">
+              <SlLocationPin className="mx-auto text-5xl text-white" />
+              <p className="text-xl font-bold text-white">
+                15 Fulwood Place London
+              </p>
+            </div>
+            <div className="space-y-4 text-center">
+              <SiMinutemailer className="mx-auto text-5xl text-white" />
+              <p className="text-xl font-bold text-white">
+                info@pampertree.co.uk
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

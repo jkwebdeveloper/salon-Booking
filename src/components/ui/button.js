@@ -19,6 +19,8 @@ const buttonVariants = cva(
           "focus:outline-none uppercase bg-[#0AADA4] hover:bg-[#0b645f] text-white font-medium  active:scale-90 transition text-sm",
         primary:
           "focus:outline-none uppercase bg-[#711F7E] hover:bg-[#BF27D7] text-white font-medium  active:scale-90 transition text-sm",
+        yellow:
+          "focus:outline-none uppercase bg-[#FFD814] text-black font-medium  active:scale-90 transition text-sm",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         danger:

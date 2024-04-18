@@ -1,5 +1,13 @@
 import React, { useEffect } from "react";
-import { Profile, MyBooking, Card, Wallet, ReferFriend, ChangePassword } from "@/components";
+import {
+  Profile,
+  MyBooking,
+  Card,
+  Wallet,
+  ReferFriend,
+  ChangePassword,
+} from "@/components";
+import Notification from "./Notification";
 
 const MainDetail = ({ tabMenu, ...props }) => {
   return (
@@ -16,6 +24,8 @@ const MainDetail = ({ tabMenu, ...props }) => {
         <ReferFriend {...props} />
       ) : tabMenu === "Change Password" ? (
         <ChangePassword {...props} />
+      ) : tabMenu === "Notification settings" ? (
+        <Notification {...props} />
       ) : null}
     </>
   );
