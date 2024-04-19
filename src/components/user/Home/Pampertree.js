@@ -111,9 +111,6 @@ function Pampertree() {
                           <div className="bg-[#000] p-2 rounded-full">
                             <BsTwitterX className="text-sm text-white" />
                           </div>
-                          <div className="bg-[#A4A4A4] p-2 rounded-full">
-                            <LuBookmark className="text-sm text-white" />
-                          </div>
                         </div>
                       </div>
                       <div className="flex items-center gap-3">
