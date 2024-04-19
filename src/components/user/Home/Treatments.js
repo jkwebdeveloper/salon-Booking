@@ -57,7 +57,7 @@ const Treatments = () => {
   return (
     <div className="w-full space-y-4">
       <p className="text-2xl font-semibold text-black uppercase title heading">
-        Near by <span className="text-primary_color">Featured salons</span>
+        Popular <span className="text-primary_color">treatments</span>
       </p>
       <div className="grid grid-cols-2 gap-3 rounded-lg md:grid-cols-3 xl:grid-cols-4">
         {ImagesData.map((item) => (
@@ -76,10 +76,10 @@ const Treatments = () => {
                 className="relative object-cover w-full h-full"
               />
             </div>
-            <p className="absolute uppercase top-[78%] text-center font-bold text-white">
+            <p className="absolute text-2xl top-[78%] text-center font-bold text-white">
               {item?.title}
             </p>
-            <p className="absolute uppercase top-[87%] text-center text-white">
+            <p className="absolute top-[88%] text-center text-white">
               {item?.des}
             </p>
           </div>

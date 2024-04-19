@@ -82,6 +82,7 @@ function Pampertree() {
                         <h1 className="text-sm font-semibold md:text-base">
                           {item?.title}
                           <span className="font-normal">
+                            {" "}
                             {item?.titleoption}
                           </span>
                         </h1>
@@ -98,7 +99,7 @@ function Pampertree() {
                       </div>
                       <div className="flex items-center gap-2 md:gap-3">
                         <div className="flex items-center gap-2 md:gap-3">
-                          <FaStar className="text-sm text-primary_color" />
+                          <FaStar className="text-sm text-[#FFCC00]" />
                           <p className="text-sm md:text-base">{item?.rating}</p>
                         </div>
                         <div className="flex items-center gap-2 md:gap-3">

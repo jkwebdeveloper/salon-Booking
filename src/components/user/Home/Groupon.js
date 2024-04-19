@@ -21,40 +21,35 @@ const boxData = [
   {
     id: 1,
     image: "/static/images/groupon1.png",
-    title: "Spa Life & Massage",
-    titleoption: "(Couple Massage)",
+    title: "General Spa Admission at King Spa",
     location: "Barnack, Cambridge 181.2 miles",
     rating: "4.0",
   },
   {
     id: 2,
     image: "/static/images/groupon2.png",
-    title: "Spa Life & Massage",
-    titleoption: "(Couple Massage)",
+    title: "General Spa Admission at King Spa",
     location: "Barnack, Cambridge 181.2 miles",
     rating: "4.0",
   },
   {
     id: 3,
     image: "/static/images/groupon3.png",
-    title: "Spa Life & Massage",
-    titleoption: "(Couple Massage)",
+    title: "General Spa Admission at King Spa",
     location: "Barnack, Cambridge 181.2 miles",
     rating: "4.0",
   },
   {
     id: 4,
     image: "/static/images/groupon4.png",
-    title: "Spa Life & Massage",
-    titleoption: "(Couple Massage)",
+    title: "General Spa Admission at King Spa",
     location: "Barnack, Cambridge 181.2 miles",
     rating: "4.0",
   },
   {
     id: 5,
     image: "/static/images/groupon1.png",
-    title: "Spa Life & Massage",
-    titleoption: "(Couple Massage)",
+    title: "General Spa Admission at King Spa",
     location: "Barnack, Cambridge 181.2 miles",
     rating: "4.0",
   },
@@ -123,8 +118,7 @@ const Groupon = () => {
               <div className="relative w-full space-y-4">
                 <div
                   onClick={() => setIsFavourite(!isFavourite)}
-                  className={`absolute top-3 right-3 ${isFavourite
-                    } rounded-full p-2 cursor-pointer`}
+                  className={`absolute top-3 right-3 ${isFavourite} rounded-full p-2 cursor-pointer`}
                 >
                   {isFavourite ? (
                     <RiHeartFill className="text-2xl text-red-500" />
@@ -133,7 +127,10 @@ const Groupon = () => {
                   )}
                 </div>
                 <div>
-                  <div className="mx-2 bg-white rounded-lg shadow-lg" key={item?.id}>
+                  <div
+                    className="mx-2 bg-white rounded-lg shadow-lg"
+                    key={item?.id}
+                  >
                     <div className="space-y-4">
                       <div>
                         <Image
@@ -150,9 +147,6 @@ const Groupon = () => {
                         <div className="">
                           <h1 className="text-sm font-semibold md:text-base">
                             {item?.title}
-                            <span className="font-normal">
-                              {item?.titleoption}
-                            </span>
                           </h1>
                         </div>
                         <div className="flex items-center gap-3">
@@ -167,7 +161,7 @@ const Groupon = () => {
                         </div>
                         <div className="flex items-center gap-2 md:gap-3">
                           <div className="flex items-center gap-2 md:gap-3">
-                            <FaStar className="text-lg text-primary_color" />
+                            <FaStar className="text-lg text-[#FFCC00]" />
                             <p className="text-sm md:text-base">
                               {item?.rating}
                             </p>
@@ -181,9 +175,6 @@ const Groupon = () => {
                             </div>
                             <div className="bg-[#000] p-2 rounded-full">
                               <BsTwitterX className="text-lg text-white" />
-                            </div>
-                            <div className="bg-[#A4A4A4] p-2 rounded-full">
-                              <LuBookmark className="text-lg text-white" />
                             </div>
                           </div>
                         </div>

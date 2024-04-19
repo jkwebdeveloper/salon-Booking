@@ -8,6 +8,7 @@ import { FaStar, FaWhatsapp } from "react-icons/fa";
 import { ImFacebook } from "react-icons/im";
 import { BsTwitterX } from "react-icons/bs";
 import { LuBookmark } from "react-icons/lu";
+import { IoHeartOutline } from "react-icons/io5";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -80,13 +81,13 @@ const PopularSalon = () => {
                       nextEl: nextRef.current,
                       enabled: true,
                     }}
-                  // observer={true}
-                  // parallax={true}
-                  // observeParents={true}
+                    // observer={true}
+                    // parallax={true}
+                    // observeParents={true}
                   >
                     <SwiperSlide>
                       <Image
-                        src={'/static/images/hair.png'}
+                        src={"/static/images/hair.png"}
                         height={500}
                         width={500}
                         alt="moon"
@@ -123,7 +124,7 @@ const PopularSalon = () => {
                         <BsTwitterX className="text-lg text-white" />
                       </div>
                       <div className="bg-[#A4A4A4] p-2 rounded-full">
-                        <LuBookmark className="text-lg text-white" />
+                        <IoHeartOutline className="text-lg text-white" />
                       </div>
                     </div>
                   </div>
@@ -143,7 +144,10 @@ const PopularSalon = () => {
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage
-                    <span className="font-normal">(20 Min)</span>
+                    <span className="font-normal text-[#808080]">
+                      {" "}
+                      (20 Min)
+                    </span>
                   </p>
                   <div className="flex items-center gap-3">
                     <p className="text-2xl font-semibold text-primary_color">
@@ -168,7 +172,10 @@ const PopularSalon = () => {
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage
-                    <span className="font-normal">(20 Min)</span>
+                    <span className="font-normal text-[#808080]">
+                      {" "}
+                      (20 Min)
+                    </span>
                   </p>
                   <div className="flex items-center gap-3">
                     <p className="text-2xl font-semibold text-primary_color">
@@ -211,13 +218,13 @@ const PopularSalon = () => {
                       nextEl: nextRef.current,
                       enabled: true,
                     }}
-                  // observer={true}
-                  // parallax={true}
-                  // observeParents={true}
+                    // observer={true}
+                    // parallax={true}
+                    // observeParents={true}
                   >
                     <SwiperSlide>
                       <Image
-                        src={'/static/images/hair.png'}
+                        src={"/static/images/hair.png"}
                         height={500}
                         width={500}
                         alt="moon"
@@ -283,7 +290,7 @@ const PopularSalon = () => {
                         <BsTwitterX className="text-lg text-white" />
                       </div>
                       <div className="bg-[#A4A4A4] p-2 rounded-full">
-                        <LuBookmark className="text-lg text-white" />
+                        <IoHeartOutline className="text-lg text-white" />
                       </div>
                     </div>
                   </div>
@@ -303,7 +310,10 @@ const PopularSalon = () => {
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage
-                    <span className="font-normal">(20 Min)</span>
+                    <span className="font-normal text-[#808080]">
+                      {" "}
+                      (20 Min)
+                    </span>
                   </p>
                   <div className="flex items-center gap-3">
                     <p className="text-2xl font-semibold text-primary_color">
@@ -328,7 +338,10 @@ const PopularSalon = () => {
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage
-                    <span className="font-normal">(20 Min)</span>
+                    <span className="font-normal text-[#808080]">
+                      {" "}
+                      (20 Min)
+                    </span>
                   </p>
                   <div className="flex items-center gap-3">
                     <p className="text-2xl font-semibold text-primary_color">
@@ -371,13 +384,13 @@ const PopularSalon = () => {
                       nextEl: nextRef.current,
                       enabled: true,
                     }}
-                  // observer={true}
-                  // parallax={true}
-                  // observeParents={true}
+                    // observer={true}
+                    // parallax={true}
+                    // observeParents={true}
                   >
                     <SwiperSlide>
                       <Image
-                        src={'/static/images/hair.png'}
+                        src={"/static/images/hair.png"}
                         height={500}
                         width={500}
                         alt="moon"
@@ -442,8 +455,8 @@ const PopularSalon = () => {
                       <div className="bg-[#000] p-2 rounded-full">
                         <BsTwitterX className="text-lg text-white" />
                       </div>
-                      <div className="bg-[#A4A4A4] p-2 rounded-full">
-                        <LuBookmark className="text-lg text-white" />
+                      <div className="p-2 bg-transparent rounded-full">
+                        <IoHeartOutline className="text-lg text-white" />
                       </div>
                     </div>
                   </div>
@@ -463,7 +476,10 @@ const PopularSalon = () => {
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage
-                    <span className="font-normal">(20 Min)</span>
+                    <span className="font-normal text-[#808080]">
+                      {" "}
+                      (20 Min)
+                    </span>
                   </p>
                   <div className="flex items-center gap-3">
                     <p className="text-2xl font-semibold text-primary_color">
@@ -488,7 +504,10 @@ const PopularSalon = () => {
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage
-                    <span className="font-normal">(20 Min)</span>
+                    <span className="font-normal text-[#808080]">
+                      {" "}
+                      (20 Min)
+                    </span>
                   </p>
                   <div className="flex items-center gap-3">
                     <p className="text-2xl font-semibold text-primary_color">

@@ -54,7 +54,13 @@ const Testimonials = () => {
                 consectetur ultricies nec.{" "}
               </p>
               <div className="flex items-center gap-3">
-                <Image src={'/static/images/img.png'} alt="testimonial" width={150} height={150} loading="lazy" />
+                <Image
+                  src={"/static/images/img.png"}
+                  alt="testimonial"
+                  width={50}
+                  height={50}
+                  loading="lazy"
+                />
                 <p className="text-[#3E3F3F] font-bold">Katerina Petrova</p>
               </div>
             </div>
@@ -67,7 +73,13 @@ const Testimonials = () => {
                 consectetur ultricies nec.{" "}
               </p>
               <div className="flex items-center gap-3">
-                <Image src={'/static/images/img.png'} width={150} height={150} alt="testimonial" loading="lazy" />
+                <Image
+                  src={"/static/images/img.png"}
+                  width={50}
+                  height={50}
+                  alt="testimonial"
+                  loading="lazy"
+                />
                 <p className="text-[#3E3F3F] font-bold">Katerina Petrova</p>
               </div>
             </div>
@@ -80,7 +92,13 @@ const Testimonials = () => {
                 consectetur ultricies nec.{" "}
               </p>
               <div className="flex items-center gap-3">
-                <Image src={'/static/images/img.png'} width={150} height={150} alt="testimonial" loading="lazy" />
+                <Image
+                  src={"/static/images/img.png"}
+                  width={50}
+                  height={50}
+                  alt="testimonial"
+                  loading="lazy"
+                />
                 <p className="text-[#3E3F3F] font-bold">Katerina Petrova</p>
               </div>
             </div>
@@ -93,7 +111,13 @@ const Testimonials = () => {
                 consectetur ultricies nec.{" "}
               </p>
               <div className="flex items-center gap-3">
-                <Image src={'/static/images/img.png'} width={150} height={150} alt="testimonial" loading="lazy" />
+                <Image
+                  src={"/static/images/img.png"}
+                  width={50}
+                  height={50}
+                  alt="testimonial"
+                  loading="lazy"
+                />
                 <p className="text-[#3E3F3F] font-bold">Katerina Petrova</p>
               </div>
             </div>
@@ -106,7 +130,13 @@ const Testimonials = () => {
                 consectetur ultricies nec.{" "}
               </p>
               <div className="flex items-center gap-3">
-                <Image src={'/static/images/img.png'} width={150} height={150} alt="testimonial" loading="lazy" />
+                <Image
+                  src={"/static/images/img.png"}
+                  width={50}
+                  height={50}
+                  alt="testimonial"
+                  loading="lazy"
+                />
                 <p className="text-[#3E3F3F] font-bold">Katerina Petrova</p>
               </div>
             </div>

@@ -154,7 +154,10 @@ const Featured = () => {
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage
-                    <span className="font-normal">(20 Min)</span>
+                    <span className="font-normal text-[#808080] text-sm">
+                      {" "}
+                      (20 Min)
+                    </span>
                   </p>
                   <div className="flex items-center gap-3">
                     <p className="text-2xl font-semibold text-primary_color">
@@ -173,9 +176,7 @@ const Featured = () => {
                   <Button variant="primary">Book Now</Button>
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="secondary" className="flex-1 px-0">
-                        Quick view
-                      </Button>
+                      <Button variant="secondary">Quick view</Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[825px]">
                       <QuickModal />
@@ -188,7 +189,10 @@ const Featured = () => {
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage
-                    <span className="font-normal">(20 Min)</span>
+                    <span className="font-normal text-[#808080] text-sm">
+                      {" "}
+                      (20 Min)
+                    </span>
                   </p>
                   <div className="flex items-center gap-3">
                     <p className="text-2xl font-semibold text-primary_color">
@@ -207,9 +211,7 @@ const Featured = () => {
                   <Button variant="primary">Book Now</Button>
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="secondary" className="flex-1 px-0">
-                        Quick view
-                      </Button>
+                      <Button variant="secondary">Quick view</Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[825px]">
                       <QuickModal />
@@ -240,9 +242,9 @@ const Featured = () => {
                       nextEl: nextRef.current,
                       enabled: true,
                     }}
-                  // observer={true}
-                  // parallax={true}
-                  // observeParents={true}
+                    // observer={true}
+                    // parallax={true}
+                    // observeParents={true}
                   >
                     <SwiperSlide>
                       <Image
@@ -334,7 +336,10 @@ const Featured = () => {
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage
-                    <span className="font-normal">(20 Min)</span>
+                    <span className="font-normal text-[#808080] text-sm">
+                      {" "}
+                      (20 Min)
+                    </span>
                   </p>
                   <div className="flex items-center gap-3">
                     <p className="text-2xl font-semibold text-primary_color">
@@ -353,9 +358,7 @@ const Featured = () => {
                   <Button variant="primary">Book Now</Button>
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="secondary" className="flex-1 px-0">
-                        Quick view
-                      </Button>
+                      <Button variant="secondary">Quick view</Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[825px]">
                       <QuickModal />
@@ -368,7 +371,10 @@ const Featured = () => {
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage
-                    <span className="font-normal">(20 Min)</span>
+                    <span className="font-normal text-[#808080] text-sm">
+                      {" "}
+                      (20 Min)
+                    </span>
                   </p>
                   <div className="flex items-center gap-3">
                     <p className="text-2xl font-semibold text-primary_color">
@@ -387,9 +393,7 @@ const Featured = () => {
                   <Button variant="primary">Book Now</Button>
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="secondary" className="flex-1 px-0">
-                        Quick view
-                      </Button>
+                      <Button variant="secondary">Quick view</Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[825px]">
                       <QuickModal />
@@ -420,9 +424,9 @@ const Featured = () => {
                       nextEl: nextRef.current,
                       enabled: true,
                     }}
-                  // observer={true}
-                  // parallax={true}
-                  // observeParents={true}
+                    // observer={true}
+                    // parallax={true}
+                    // observeParents={true}
                   >
                     <SwiperSlide>
                       <Image
@@ -514,7 +518,10 @@ const Featured = () => {
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage
-                    <span className="font-normal">(20 Min)</span>
+                    <span className="font-normal text-[#808080] text-sm">
+                      {" "}
+                      (20 Min)
+                    </span>
                   </p>
                   <div className="flex items-center gap-3">
                     <p className="text-2xl font-semibold text-primary_color">
@@ -533,9 +540,7 @@ const Featured = () => {
                   <Button variant="primary">Book Now</Button>
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="secondary" className="flex-1 px-0">
-                        Quick view
-                      </Button>
+                      <Button variant="secondary">Quick view</Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[825px]">
                       <QuickModal />
@@ -548,7 +553,10 @@ const Featured = () => {
                 <div className="">
                   <p className="font-semibold">
                     Cupping Massage
-                    <span className="font-normal">(20 Min)</span>
+                    <span className="font-normal text-[#808080] text-sm">
+                      {" "}
+                      (20 Min)
+                    </span>
                   </p>
                   <div className="flex items-center gap-3">
                     <p className="text-2xl font-semibold text-primary_color">
@@ -567,9 +575,7 @@ const Featured = () => {
                   <Button variant="primary">Book Now</Button>
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="secondary" className="flex-1 px-0">
-                        Quick view
-                      </Button>
+                      <Button variant="secondary">Quick view</Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[825px]">
                       <QuickModal />

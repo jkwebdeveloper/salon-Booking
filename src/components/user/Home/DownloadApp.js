@@ -12,22 +12,34 @@ const DownloadApp = () => {
         <p>Booking, Re-booking or Rescheduling</p>
         <p>Available on</p>
         <div className="flex items-center gap-3">
-          <Image src={"/static/images/appstore2.png"} width={200} height={100} alt="App" loading="lazy" />
-          <Image src={"/static/images/playstore.png"} width={200} height={100} alt="App" loading="lazy" />
+          <Image
+            src={"/static/images/appstore2.png"}
+            width={200}
+            height={100}
+            alt="App"
+            loading="lazy"
+          />
+          <Image
+            src={"/static/images/playstore.png"}
+            width={200}
+            height={100}
+            alt="App"
+            loading="lazy"
+          />
         </div>
       </div>
       <div>
         <div className="hidden lg:block">
           <div className="flex items-center gap-3">
             <Image
-              src={"/static/images/mobile1.png"}
+              src={"/static/images/mobile2.png"}
               width={200}
               height={200}
               alt="App"
               loading="lazy"
             />
             <Image
-              src={"/static/images/mobile2.png"}
+              src={"/static/images/mobile1.png"}
               width={180}
               height={180}
               alt="App"

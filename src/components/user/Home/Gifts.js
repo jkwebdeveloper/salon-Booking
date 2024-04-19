@@ -64,10 +64,10 @@ const Gifts = () => {
                 className="relative object-cover w-full h-full"
               />
             </div>
-            <p className="absolute uppercase top-[78%] text-center font-bold text-white">
+            <p className="absolute text-2xl top-[78%] text-center font-bold text-white">
               {item?.title}
             </p>
-            <p className="absolute uppercase top-[87%] text-center text-white">
+            <p className="absolute top-[88%] text-center text-white">
               {item?.des}
             </p>
           </div>
