@@ -17,18 +17,18 @@ function Layout({ children }) {
     "/vendor/reset-password",
     "/vendor/dashboard",
   ];
+
+  const dashboardHeaderPath = ['/vendor/register', '/vendor/login', '/vendor/reset-password']
   const vendorPath = "/vendor";
 
   const isUserPath = userPath.includes(pathname);
   const isVendorPath = pathname.includes(vendorPath);
-  const isVendorLogin = pathname === `${vendorPath}/login`;
-  const isVendorResetPassword = pathname === `${vendorPath}/reset-password`;
-  const isDashBoard = pathname === `${vendorPath}/dashboard`;
   return (
     <>
       {!isUserPath && !isVendorPath && <Header />}
       {pathname == '/vendor' && <VandorHeader />}
-      {(pathname.includes('/vendor/') && !userPath.includes(pathname)) && <DashBoardHeader />}
+      {!dashboardHeaderPath.includes(pathname) && pathname.includes('/vendor/') && <DashBoardHeader />}
+      {dashboardHeaderPath.includes(pathname) && !userPath.includes(pathname) && <VandorHeader />}
       {children}
       {!isUserPath && <Footer />}
     </>

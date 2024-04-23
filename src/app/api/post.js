@@ -10,9 +10,12 @@ export const POST = {
       const validForm = await validateInput(form);
       if (validForm.length > 0) {
         validForm.forEach((input) => {
-          input.classList.add("border-red-500", "text-red-500");
+          input.classList.add("border-red-500", "text-red-500", 'invalid');
           input.addEventListener("input", () => {
-            input.classList.remove("border-red-500", "text-red-500");
+            input.classList.remove("border-red-500", "text-red-500", 'invalid');
+          });
+          input.addEventListener("change", () => {
+            input.classList.remove("border-red-500", "text-red-500", 'invalid');
           });
         });
         return false;

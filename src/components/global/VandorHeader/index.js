@@ -53,7 +53,7 @@ const VandorHeader = () => {
             className="uppercase"
             asChild
           >
-            <Link href={vendor && '/vendor/dashboard' || '/vendor/sign-in'}>
+            <Link href={vendor && '/vendor/dashboard' || '/vendor/register'}>
               {vendor && "Dashboard" || "Become a partner"}
             </Link>
           </Button>

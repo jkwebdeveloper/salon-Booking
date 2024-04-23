@@ -6,11 +6,12 @@ import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
 import { FaApple } from "react-icons/fa";
-import Button from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+
 import { POST } from "@/app/api/post";
 import { login } from "@/redux/features/vendorAuthSlice";
+import { Error, Spinner, Button } from "@/components";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false),
@@ -125,10 +126,16 @@ const Login = () => {
                   </Link>
                 </div>
               </div>
-              <div className="w-full mx-auto">
-                <Button type="submit" variant="primary" className="w-full">
-                  Login
+              <div className="w-full mx-auto space-y-3">
+                <Button type="submit" variant="primary" className="w-full" disabled={loading}>
+                  <Spinner
+                    show={loading}
+                    width="25"
+                    height="25"
+                    text="Login"
+                  />
                 </Button>
+                {error && <Error error={error} />}
               </div>
             </form>
             <div className="inline-flex items-center justify-center w-full">

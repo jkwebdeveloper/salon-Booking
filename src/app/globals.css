@@ -148,3 +148,8 @@ body .swiper {
         stroke-dashoffset: 900;
     }
 }
+
+
+.invalid + label{
+  color: red;
+}

@@ -8,7 +8,10 @@ const validateInput = async (form) => {
             if (formElements[i].name != 'expried_on' && !pattern.test(formElements[i].value)) {
                 invalidInputs.push(formElements[i]);
             }
-            // elementwithpattern.push(formElements[i]);
+        } else if (formElements[i].type == 'checkbox' && formElements[i].required && formElements[i].checked === false) {
+            invalidInputs.push(formElements[i]);
+        } else if (formElements[i].type == 'date' && formElements[i].required && formElements[i].value === '') {
+            invalidInputs.push(formElements[i]);
         }
         if (formElements[i].name === 'cpassword' && formElements[i].value !== password.value) {
             invalidInputs.push(formElements[i]);
