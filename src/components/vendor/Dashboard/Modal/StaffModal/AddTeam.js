@@ -21,7 +21,11 @@ const AddTeam = () => {
   const addStaff = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const resp = await POST.request({ url: '/vendor/add-new-staffs', form: e.target, token: vendor.api_token });
+    const resp = await POST.request({
+      url: "/vendor/add-new-staffs",
+      form: e.target,
+      token: vendor.api_token,
+    });
     setLoading(false);
     if (resp && resp.code == 200) {
       setStaff(resp.data);
@@ -35,7 +39,10 @@ const AddTeam = () => {
   const updateStaff = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const resp = await POST.request({ url: '/vendor/update-staffssss', form: e.target });
+    const resp = await POST.request({
+      url: "/vendor/update-staffssss",
+      form: e.target,
+    });
     setLoading(false);
     if (resp && resp.code == 200) {
       setStaff(resp.data);
@@ -78,20 +85,20 @@ const AddTeam = () => {
         <Button
           variant={services ? "secondary" : "disable"}
           onClick={handleServicesClick}
-          disabled={Object.keys(staff).length === 0}
+          // disabled={Object.keys(staff).length === 0}
         >
           Services
         </Button>
         <Button
           variant={publicProfile ? "secondary" : "disable"}
           onClick={handleProfileClick}
-          disabled={Object.keys(staff).length === 0}
+          // disabled={Object.keys(staff).length === 0}
         >
           Public Profile
         </Button>
       </div>
       {basic && (
-        <form className="space-y-3" onSubmit={e => addStaff(e)} noValidate>
+        <form className="space-y-3" onSubmit={(e) => addStaff(e)} noValidate>
           <div className="border relative border-1 border-[#0AADA4] rounded-full p-1 w-[3.5rem] h-[3.5rem] mb-2">
             <Image
               src="/static/images/user.webp"
@@ -169,31 +176,24 @@ const AddTeam = () => {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Button variant="disable" disabled={loading}>Cancel</Button>
+            <Button variant="disable" disabled={loading}>
+              Cancel
+            </Button>
             <Button variant="primary" type="submit" disabled={loading}>
-              <Spinner
-                show={loading}
-                width="25"
-                height="25"
-                text="Save"
-              />
+              <Spinner show={loading} width="25" height="25" text="Save" />
             </Button>
           </div>
           {error && <Error error={error} />}
         </form>
       )}
       {services && (
-        <form className="space-y-2" onSubmit={e => updateStaff(e)} noValidate>
+        <form className="space-y-2" onSubmit={(e) => updateStaff(e)} noValidate>
           <p className="text-xl text-[#1D1B23] font-semibold">
             What service can be booked for this employee ?
           </p>
           <li class="w-full list-none">
             <div class="flex items-center">
-              <input
-                id="list-radio-license"
-                type="checkbox"
-                value=""
-              />
+              <input id="list-radio-license" type="checkbox" value="" />
               <label
                 for="list-radio-license"
                 class="w-full ms-2 text-sm font-medium text-gray-900 "
@@ -547,6 +547,11 @@ const AddTeam = () => {
                 className="input_field"
                 placeholder="Enter your Job Bio"
               />
+            </div>
+            <div className="flex items-center gap-3">
+              <Button variant="disable">Cancel</Button>
+              <Button variant="primary">Save</Button>
+              <Button variant="danger">Delete</Button>
             </div>
           </div>
         </>
