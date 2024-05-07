@@ -131,7 +131,7 @@ const DashBoardHeader = () => {
                 <DropdownMenuContent className="w-56 p-0 mt-2 bg-white ring-1 ring-neutral-200">
                   <DropdownMenuGroup>
                     <DropdownMenuItem className="cursor-pointer hover:bg-primary hover:text-white">
-                      <Link href="/vendor/profile" className="flex items-center gap-2 ">
+                      <Link href="/vendor/profile" className="flex items-center w-full gap-2 ">
                         <TbUserCheck className="text-xl" />
                         Profile
                       </Link>

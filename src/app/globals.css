@@ -153,3 +153,34 @@ body .swiper {
 .invalid + label{
   color: red;
 }
+.error{
+  color: red;
+  font-size: 0.75rem;
+  display: none;
+}
+.invalid + .error{
+  display: block;
+}
+
+.list-disc ul{
+  list-style-type: disc !important;
+  margin-left: 1rem;
+}
+
+.timePicker input{
+  border:0px;
+  font-size: inherit;
+}
+
+.timePicker input:focus{
+  outline: none;
+  box-shadow: none;
+}
+
+.rc-time-picker-panel-inner{
+  box-shadow: none !important;
+}
+.rc-time-picker-panel-select-option-selected{
+  background-color: #711f7e !important;
+  color: white !important;
+}

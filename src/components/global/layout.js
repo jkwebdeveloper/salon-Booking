@@ -14,11 +14,11 @@ function Layout({ children }) {
     "/register",
     "/forgot-password",
     "/vendor/login",
-    "/vendor/reset-password",
+    "/vendor/forgot-password",
     "/vendor/dashboard",
   ];
 
-  const dashboardHeaderPath = ['/vendor/register', '/vendor/login', '/vendor/reset-password']
+  const dashboardHeaderPath = ['/vendor/register', '/vendor/login', '/vendor/forgot-password']
   const vendorPath = "/vendor";
 
   const isUserPath = userPath.includes(pathname);

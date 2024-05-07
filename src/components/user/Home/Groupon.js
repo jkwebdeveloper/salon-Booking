@@ -8,7 +8,6 @@ import { FaStar } from "react-icons/fa6";
 import { FaWhatsapp } from "react-icons/fa6";
 import { ImFacebook } from "react-icons/im";
 import { BsTwitterX } from "react-icons/bs";
-import { LuBookmark } from "react-icons/lu";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { v4 } from "uuid";
@@ -16,6 +15,7 @@ import { v4 } from "uuid";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import SingleService from "@/components/ui/cards/singleservice";
 
 const boxData = [
   {
@@ -115,86 +115,7 @@ const Groupon = () => {
         >
           {boxData.map((item) => (
             <SwiperSlide key={v4()}>
-              <div className="relative w-full space-y-4">
-                <div
-                  onClick={() => setIsFavourite(!isFavourite)}
-                  className={`absolute top-3 right-3 ${isFavourite} rounded-full p-2 cursor-pointer`}
-                >
-                  {isFavourite ? (
-                    <RiHeartFill className="text-2xl text-red-500" />
-                  ) : (
-                    <IoHeartOutline className="text-2xl text-white" />
-                  )}
-                </div>
-                <div>
-                  <div
-                    className="mx-2 bg-white rounded-lg shadow-lg"
-                    key={item?.id}
-                  >
-                    <div className="space-y-4">
-                      <div>
-                        <Image
-                          src={item?.image}
-                          alt="spa life"
-                          loading="lazy"
-                          width={200}
-                          height={200}
-                          // fill
-                          className="object-cover w-full h-full"
-                        />
-                      </div>
-                      <div className="px-4 py-3 space-y-2 md:space-y-3">
-                        <div className="">
-                          <h1 className="text-sm font-semibold md:text-base">
-                            {item?.title}
-                          </h1>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <div className="bg-[#7f52861a] p-2 rounded-full">
-                            <MdLocationPin className="text-lg text-primary_color" />
-                          </div>
-                          <div>
-                            <p className="text-sm md:text-base">
-                              {item?.location}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-2 md:gap-3">
-                          <div className="flex items-center gap-2 md:gap-3">
-                            <FaStar className="text-lg text-[#FFCC00]" />
-                            <p className="text-sm md:text-base">
-                              {item?.rating}
-                            </p>
-                          </div>
-                          <div className="flex items-center gap-2 md:gap-3">
-                            <div className="bg-[#29AD17] p-2 rounded-full">
-                              <FaWhatsapp className="text-lg text-white" />
-                            </div>
-                            <div className="bg-[#4664A0] p-2 rounded-full">
-                              <ImFacebook className="text-lg text-white" />
-                            </div>
-                            <div className="bg-[#000] p-2 rounded-full">
-                              <BsTwitterX className="text-lg text-white" />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <p className="text-2xl font-semibold text-primary_color">
-                            £249{" "}
-                            <span className="line-through text-[#898989] font-normal text-base">
-                              £289
-                            </span>
-                          </p>
-                          <p className="text-base font-semibold text-green_color">
-                            {" "}
-                            30% OFF
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <SingleService item={item} />
             </SwiperSlide>
           ))}
         </Swiper>

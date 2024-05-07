@@ -247,15 +247,6 @@ const BusinessReport = () => {
                       <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white">
                         Last 30 days
                       </DropdownMenuItem>
-                      <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white">
-                        This month
-                      </DropdownMenuItem>
-                      <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white">
-                        Last month
-                      </DropdownMenuItem>
-                      <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white">
-                        Custom range
-                      </DropdownMenuItem>
                     </DropdownMenuGroup>
                   </DropdownMenuContent>
                 </DropdownMenu>

@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { v4 } from "uuid";
 import {
@@ -8,6 +8,7 @@ import {
 import Link from "next/link";
 
 import Image from "next/image";
+import { GET } from "@/app/api/get";
 
 
 const menuItems = {
@@ -208,8 +209,17 @@ const menuItems = {
 export default function DesktopMenu({ theme, themeMode }) {
   const [openMenu, setOpen] = useState();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mainCat, setMainCat] = useState();
+
+  const getCategories = useCallback(async () => {
+    const resp = await GET.request({ url: '/get-categories' });
+    if (resp && resp?.code == 200) {
+      setMainCat(resp.data);
+    }
+  }, []);
 
   useEffect(() => {
+    getCategories();
     document.addEventListener("click", (e) => {
       if (e.target.closest(".menu")) return;
       setOpen(null);
@@ -221,12 +231,23 @@ export default function DesktopMenu({ theme, themeMode }) {
   }, []);
 
   return (
-    <header className={`dark:bg-zinc-800 bg-white container rounded-md`}>
+    <header className={`dark:bg-zinc-800 bg-white container rounded-md xl:block hidden`}>
       <nav
         className="flex items-center justify-center mx-auto"
         aria-label="Global"
       >
-        {Object.keys(menuItems).map((navItem, index) => {
+        {mainCat?.map((navItem, index) => {
+          return (
+            <Link
+              href={'/service/' + (navItem.slug_url || '#')}
+              className="px-3 py-3 font-medium hover:text-white hover:bg-primary"
+              key={v4()}
+            >
+              {navItem?.title}
+            </Link>
+          )
+        })}
+        {/* {Object.keys(menuItems).map((navItem, index) => {
           return (
             (Array.isArray(menuItems[navItem]) && (
               <Popover.Group
@@ -299,7 +320,7 @@ export default function DesktopMenu({ theme, themeMode }) {
               </Link>
             )
           );
-        })}
+        })} */}
       </nav>
     </header>
   );

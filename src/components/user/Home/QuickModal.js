@@ -10,16 +10,16 @@ import Button from "@/components/ui/button";
 
 const QuickModal = () => {
   return (
-    <div>
+    <div className="space-y-5">
       <div className="grid grid-cols-1 xl:grid-cols-2 lg:gap-0">
         <Image
-          src={"/static/images/Rectangle 375.png"}
-          // src={"/static/images/spa_life.png"}
+          // src={"/static/images/Rectangle 375.png"}
+          src={"/static/images/spa_life.png"}
           alt=""
           loading="lazy"
           width={300}
           height={300}
-          className="object-cover"
+          className="object-cover h-full rounded-xl"
         />
         <div className="space-y-2">
           <div className="">

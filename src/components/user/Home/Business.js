@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 import { Button } from "@/components";
+import Link from "next/link";
 
 const Business = () => {
   return (
@@ -36,8 +37,8 @@ const Business = () => {
         {/* <button type="button" className="primary_button">
           Connect With Us
         </button> */}
-        <Button variant="primary" className="w-auto">
-          Connect With Us
+        <Button variant="primary" className="w-auto" asChild>
+          <Link href="/contact-us">Connect With Us</Link>
         </Button>
       </div>
     </div>

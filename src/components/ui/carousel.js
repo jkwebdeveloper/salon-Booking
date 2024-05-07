@@ -2,7 +2,7 @@
 import * as React from "react"
 import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons"
 import useEmblaCarousel from "embla-carousel-react";
-
+import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 import { cn } from "@/lib/utils"
 import { Button } from "@/components"
 
@@ -163,7 +163,7 @@ const CarouselPrevious = React.forwardRef(({ className, variant = " ", size = "i
       disabled={!canScrollPrev}
       onClick={scrollPrev}
       {...props}>
-      <ArrowLeftIcon className="w-4 h-4" />
+      <IoChevronBackOutline className="w-4 h-4" />
       <span className="sr-only">Previous slide</span>
     </Button>)
   );
@@ -184,7 +184,7 @@ const CarouselNext = React.forwardRef(({ className, variant = "outline", size = 
       disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}>
-      <ArrowRightIcon className="w-4 h-4" />
+      <IoChevronForwardOutline className="w-4 h-4" />
       <span className="sr-only">Next slide</span>
     </Button>)
   );

@@ -5,6 +5,7 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
 import { Banner, Button } from "@/components";
+import Label from "@/components/ui/form/label";
 
 const ContactUs = () => {
   return (
@@ -45,48 +46,45 @@ const ContactUs = () => {
           <div className="flex flex-col items-start gap-3">
             <div className="w-full space-y-1 text-left">
               <label htmlFor="country" className="label_text">
-                Address line 1
+                Address
               </label>
               <input
                 type="text"
-                name="state"
+                name="address"
                 className="input_field"
-                placeholder="Enter your state"
+                placeholder="Enter your Address"
               />
             </div>
             <div className="flex flex-col w-full gap-3 lg:flex-row">
               <div className="w-full space-y-1 text-left lg:w-1/2">
-                <label htmlFor="city" className="label_text">
-                  Email
-                </label>
+                <Label htmlFor="email" text="Email" />
                 <input
                   type="email"
-                  name="city"
+                  id="email"
+                  name="email"
                   className="input_field"
                   placeholder="Enter your email"
                 />
               </div>
               <div className="w-full space-y-1 text-left lg:w-1/2">
-                <label htmlFor="state" className="label_text">
-                  Phone Number
-                </label>
+                <Label htmlFor="phone_number" text="Phone Number" />
                 <input
                   type="text"
-                  name="state"
+                  id="phone_number"
+                  name="phone_number"
                   className="input_field"
-                  placeholder="Enter your state"
+                  placeholder="Enter your Phone Number"
                 />
               </div>
             </div>
             <div className="w-full space-y-1 text-left">
-              <label htmlFor="country" className="label_text">
-                Address line 1
-              </label>
-              <input
-                type="text"
-                name="state"
+              <Label htmlFor="message" text="Message" />
+              <textarea
+                name="message"
+                id="message"
                 className="input_field"
-                placeholder="Enter your state"
+                placeholder="Enter your Message"
+                rows={5}
               />
             </div>
             <Button variant="primary" className="mt-1">SUBMIT</Button>

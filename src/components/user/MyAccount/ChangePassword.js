@@ -1,26 +1,28 @@
 import React from "react";
 
 import { POST } from "@/app/api/post";
-import { Spinner, Button, Error } from "@/components";
+import { Spinner, Button, Error, Success } from "@/components";
+import { useSelector } from "react-redux";
 
 const ChangePassword = () => {
+  const user = useSelector((state) => state.userAuth.user) || '';
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
+  const [success, setSuccess] = React.useState("");
 
   const updatePass = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const userLocal = localStorage.getItem("user");
-    const user = userLocal && JSON.parse(userLocal);
-    const resp = await POST.request({ url: "/login", form: e.target, token: user?.api_token });
+    const resp = await POST.request({ url: "/change-password", form: e.target, token: user?.api_token });
     setLoading(false);
-    if (resp) {
-      if (resp.status != 'Error' && Object.keys(resp.data).length > 0) {
-        dispatch(login(resp.data));
-        return;
-      }
+    if (resp && resp.status != 'Error') {
+      setSuccess(resp.message);
+      setError("");
+      e.target.reset();
+    } else {
       setError(resp.message);
-    }
+      setSuccess("");
+    };
   };
 
   return (
@@ -42,6 +44,7 @@ const ChangePassword = () => {
               // pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'    
               required
             />
+            <p className="error">Min 3 Character Required</p>
           </div>
           <div className="w-full space-y-1 text-left md:w-1/2">
             <label htmlFor="country" className="label_text">
@@ -57,6 +60,7 @@ const ChangePassword = () => {
               // pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
               required
             />
+            <p className="error">Min 3 Character Required</p>
           </div>
           <div className="w-full space-y-1 text-left md:w-1/2">
             <label htmlFor="country" className="label_text">
@@ -64,18 +68,19 @@ const ChangePassword = () => {
             </label>
             <input
               type="password"
-              name="cpassword"
               className="input_field"
               placeholder="Enter your Confirm password"
               id="cpassword"
               // pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
               required
             />
+            <p className="error">Password not matched</p>
           </div>
           <Button type="submit" variant="primary" disabled={loading}>
             <Spinner show={loading} width='35' height='35' text="Change" />
           </Button>
           {error && <Error error={error} />}
+          {success && <Success message={success} />}
         </form>
       </div>
     </div>

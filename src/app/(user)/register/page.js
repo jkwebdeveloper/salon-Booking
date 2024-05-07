@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineErrorOutline } from "react-icons/md";
 import { useRouter } from "next/navigation";
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 
 import { Spinner, Button, Error } from "@/components";
 import { login } from "@/redux/features/userAuthSlice";
@@ -16,6 +17,8 @@ const Register = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userAuth.user) || "";
   const [loading, setLoading] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
 
   if (user) {
     router.push("/");
@@ -61,7 +64,7 @@ const Register = () => {
               you, and the easier it is to look after your bookings.
             </p>
             <form
-              className="space-y-3"
+              className="space-y-2"
               noValidate
               onSubmit={(e) => registerUser(e)}
             >
@@ -75,10 +78,11 @@ const Register = () => {
                     name="first_name"
                     id="fname"
                     className="input_field"
-                    placeholder="Enter your Name"
+                    placeholder="First Name"
                     pattern="[A-Za-z]{4,20}"
                     required
                   />
+                  <p className="error">Min 4 Character Required</p>
                 </div>
                 <div className="w-full space-y-1 text-left lg:w-1/2">
                   <label htmlFor="lname" className="label_text">
@@ -90,10 +94,11 @@ const Register = () => {
                     name="last_name"
                     id="lname"
                     className="input_field"
-                    placeholder="Enter your name"
+                    placeholder="Last name"
                     pattern="[A-Za-z]{4,20}"
                     required
                   />
+                  <p className="error">Min 4 Character Required</p>
                 </div>
               </div>
               <div className="flex flex-col w-full gap-3 lg:flex-row">
@@ -110,6 +115,7 @@ const Register = () => {
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                     required
                   />
+                  <p className="error">Enter Valid Email id</p>
                 </div>
                 <div className="w-full space-y-1 text-left lg:w-1/2">
                   <label htmlFor="phone" className="label_text">
@@ -123,18 +129,20 @@ const Register = () => {
                     className="input_field"
                     placeholder="Enter Your Phone Number"
                     pattern="[0-9]{10}"
+                    maxLength={10}
                     required
                   />
+                  <p className="error">Enter Valid Phone number</p>
                 </div>
               </div>
               <div className="flex flex-col w-full gap-3 lg:flex-row">
-                <div className="w-full space-y-1 text-left lg:w-1/2">
+                <div className="relative w-full space-y-1 text-left lg:w-1/2">
                   <label htmlFor="password" className="label_text">
                     {" "}
                     Password
                   </label>
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     name="password"
                     id="password"
                     className="input_field"
@@ -143,20 +151,55 @@ const Register = () => {
                     required
                   />
                   {/* pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$' */}
+                  <p className="error">Password should be min 3 Char</p>
+                  <button
+                    type="button"
+                    className="absolute top-[1.85em] right-3"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {(showPassword && (
+                      <BsEyeFill
+                        size={24}
+                        className="text-gray-400 cursor-pointer"
+                      />
+                    )) || (
+                        <BsEyeSlashFill
+                          size={24}
+                          className="text-gray-400 cursor-pointer"
+                        />
+                      )}
+                  </button>
                 </div>
-                <div className="w-full space-y-1 text-left lg:w-1/2">
+                <div className="relative w-full space-y-1 text-left lg:w-1/2">
                   <label htmlFor="cpassword" className="label_text">
                     {" "}
                     Confirm Password{" "}
                   </label>
                   <input
-                    type="password"
-                    name="cpassword"
+                    type={showConfirmPassword ? "text" : "password"}
                     id="cpassword"
                     className="input_field"
                     placeholder="Confirm Your Password"
                     required
                   />
+                  <p className="error">Password not matched</p>
+                  <button
+                    type="button"
+                    className="absolute top-[1.85em] right-3"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  >
+                    {(showConfirmPassword && (
+                      <BsEyeFill
+                        size={24}
+                        className="text-gray-400 cursor-pointer"
+                      />
+                    )) || (
+                        <BsEyeSlashFill
+                          size={24}
+                          className="text-gray-400 cursor-pointer"
+                        />
+                      )}
+                  </button>
                 </div>
               </div>
               <div className="w-full space-y-1 text-left">
@@ -173,6 +216,7 @@ const Register = () => {
                   pattern="[A-Za-z0-9]{3,20}"
                   required
                 />
+                <p className="error">Min 3 Character Required</p>
               </div>
               <div className="w-full space-y-1 text-left">
                 <label htmlFor="address2" className="label_text">
@@ -185,7 +229,6 @@ const Register = () => {
                   id="address2"
                   className="input_field"
                   placeholder="Enter your Address"
-                  required
                 />
               </div>
               <div className="flex flex-col w-full gap-3 lg:flex-row">
@@ -203,6 +246,7 @@ const Register = () => {
                     pattern="[A-Za-z]{3,20}"
                     required
                   />
+                  <p className="error">Min 3 Character Required</p>
                 </div>
                 <div className="w-full space-y-1 text-left lg:w-1/2">
                   <label htmlFor="postcode" className="label_text">
@@ -216,8 +260,10 @@ const Register = () => {
                     className="input_field"
                     placeholder="Postcode"
                     pattern="[0-9]{6}"
+                    maxlength="6"
                     required
                   />
+                  <p className="error">Postcode should be 6 digit</p>
                 </div>
               </div>
               <div>
@@ -280,6 +326,8 @@ const Register = () => {
                   value=""
                   name="list-radio"
                   class=""
+                  required
+                  defaultChecked={''}
                 />
                 <label
                   for="list-radio-license"

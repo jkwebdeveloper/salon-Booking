@@ -1,10 +1,30 @@
 import React from "react";
 import Label from "@/components/ui/form/label";
 import Button from "@/components/ui/button";
+import { POST } from "@/app/api/post";
+import { useSelector } from "react-redux";
+import { Error, Spinner } from "@/components";
 
-const EditCustomerModal = () => {
+const EditCustomerModal = ({ setEditDialog, setEditCustomer, setCustomers, editCustomer, customers }) => {
+  const vendor = useSelector((state) => state.vendorAuth.vendor);
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState('');
+
+  const updateCustomer = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const resp = await POST.request({ url: '/vendor/update-customer', form: e.target, token: vendor?.api_token });
+    setLoading(false);
+    if (resp && resp.code == 200) {
+      const oldCustomers = customers.filter((customer) => customer.id !== editCustomer.id);
+      setCustomers([resp.data, ...oldCustomers]);
+      setEditDialog(false);
+      setEditCustomer('');
+    }
+  };
+
   return (
-    <div className="space-y-3">
+    <form className="space-y-3" onSubmit={e => updateCustomer(e)} noValidate>
       <div className="flex flex-col w-full gap-3 lg:flex-row">
         <div className="w-full space-y-1 text-left lg:w-1/2">
           <Label htmlFor="first_name" text="First Name" />
@@ -14,7 +34,9 @@ const EditCustomerModal = () => {
             className="input_field"
             placeholder="Enter First Name"
             pattern="[A-Za-z]{4,20}"
+            defaultValue={editCustomer.first_name}
           />
+          <p className="error">Min 4 Character Required</p>
         </div>
         <div className="w-full space-y-1 text-left lg:w-1/2">
           <Label htmlFor="last_name" text="Last Name" />
@@ -24,101 +46,103 @@ const EditCustomerModal = () => {
             className="input_field"
             placeholder="Enter Last Name"
             pattern="[A-Za-z]{4,20}"
+            defaultValue={editCustomer.last_name}
           />
+          <p className="error">Min 4 Character Required</p>
         </div>
       </div>
       <div className="flex flex-col w-full gap-3 lg:flex-row">
         <div className="w-full space-y-1 text-left lg:w-1/2">
-          <Label htmlFor="first_name" text="Mobile Number" />
+          <Label htmlFor="phone_number" text="Mobile Number" />
           <input
             type="text"
-            name="first_name"
+            name="phone_number"
             className="input_field"
             placeholder="Enter Mobile Number"
-            pattern="[A-Za-z]{4,20}"
+            pattern="[0-9]{10}"
+            maxLength={10}
+            defaultValue={editCustomer.phone_number}
           />
+          <p className="error">Enter Valid Phone number</p>
         </div>
         <div className="w-full space-y-1 text-left lg:w-1/2">
-          <Label htmlFor="last_name" text="E-mail" />
+          <Label htmlFor="email" text="E-mail" />
           <input
-            type="text"
-            name="last_name"
+            type="email"
+            name="email"
             className="input_field"
             placeholder="Enter E-mail"
-            pattern="[A-Za-z]{4,20}"
+            // pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            defaultValue={editCustomer.email}
           />
+          <p className="error">Enter Valid Email id</p>
         </div>
       </div>
       <div className="flex flex-col w-full gap-3 lg:flex-row">
         <div className="w-full space-y-1 text-left lg:w-1/2">
-          <Label htmlFor="first_name" text="Gender" />
-          <input
-            type="text"
-            name="first_name"
-            className="input_field"
-            placeholder="Enter Gender"
-            pattern="[A-Za-z]{4,20}"
-          />
+          <Label htmlFor="gender" text="Gender" />
+          <select name="gender" className="bg-white h-9 input_field" defaultValue={editCustomer.gender}>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
         </div>
         <div className="w-full space-y-1 text-left lg:w-1/2">
-          <Label htmlFor="last_name" text="Date of Birth" />
+          <Label htmlFor="dob" text="Date of Birth" />
           <input
-            type="text"
-            name="last_name"
+            type="date"
+            name="dob"
             className="input_field"
             placeholder="Enter Date of Birth"
-            pattern="[A-Za-z]{4,20}"
+            defaultValue={editCustomer.dob}
           />
         </div>
       </div>
       <div className="space-y-2">
         <Label htmlFor="first_name" text="Status" />
-        <div className="flex items-center justify-start">
-          <li class="w-full list-none">
+        <div className="flex flex-wrap items-center justify-start gap-5">
+          <li class="list-none">
             <div class="flex items-center">
               <input
-                id="list-radio-license"
                 type="radio"
-                value=""
-                name="list-radio"
-                className=""
+                value="Active"
+                id="active"
+                name="status"
+                defaultChecked
               />
               <label
-                for="list-radio-license"
+                for="active"
                 class="w-full ms-2 text-sm font-medium text-gray-900 "
               >
                 Active
               </label>
             </div>
           </li>
-          <li class="w-full list-none">
+          <li class="list-none">
             <div class="flex items-center">
               <input
-                id="list-radio-license"
+                id="inactive"
                 type="radio"
-                value=""
-                name="list-radio"
-                className=""
+                value="Inactive"
+                name="status"
               />
               <label
-                for="list-radio-license"
+                for="inactive"
                 class="w-full ms-2 text-sm font-medium text-gray-900 "
               >
                 Inactive
               </label>
             </div>
           </li>
-          <li class="w-full list-none">
+          <li class="list-none">
             <div class="flex items-center">
               <input
-                id="list-radio-license"
+                id="pending"
                 type="radio"
-                value=""
-                name="list-radio"
-                className=""
+                value="Pending"
+                name="status"
               />
               <label
-                for="list-radio-license"
+                for="pending"
                 class="w-full ms-2 text-sm font-medium text-gray-900 "
               >
                 Pending
@@ -128,19 +152,27 @@ const EditCustomerModal = () => {
         </div>
       </div>
       <div className="w-full space-y-1 text-left">
-        <Label htmlFor="first_name" text="Comment" />
+        <Label htmlFor="comments" text="Comment" />
         <textarea
           type="textarea"
           rows="4"
-          name="first_name"
+          name="comments"
           className="input_field"
           placeholder="Type here..."
+          defaultValue={editCustomer.comments}
         />
       </div>
-      <Button variant="primary" className="w-full mx-auto">
-        Save
+      <input type="hidden" name="customers_id" value={editCustomer.id} />
+      <Button variant="primary" type="submit" className="w-full mx-auto" disabled={loading}>
+        <Spinner
+          show={loading}
+          width="25"
+          height="25"
+          text="Save"
+        />
       </Button>
-    </div>
+      {error && <Error error={error} />}
+    </form>
   );
 };
 

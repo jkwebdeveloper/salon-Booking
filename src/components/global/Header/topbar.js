@@ -1,3 +1,4 @@
+'use client';
 import React, { useEffect, useState } from "react";
 import { GoBell } from "react-icons/go";
 import { GrCart } from "react-icons/gr";
@@ -25,11 +26,19 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { POST } from "@/app/api/post";
 
 function Topbar() {
   const router = useRouter();
   const user = useSelector((state) => state.userAuth.user) || "";
   const dispatch = useDispatch();
+
+  const logoutUSer = async () => {
+    const resp = await POST.request({ url: '/logout', form: {}, token: user?.api_token });
+    dispatch(logout());
+    router.push("/");
+  };
+
   return (
     <>
       <Button
@@ -66,20 +75,23 @@ function Topbar() {
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56 p-0 mt-2 bg-white ring-1 ring-neutral-200">
             <DropdownMenuGroup className="px-0">
-              <DropdownMenuItem
-                className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white"
-                onClick={(e) => router.push("/my-account")}
-              >
-                <TbUserCheck className="text-xl" />
-                Profile
+              <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white"
+                asChild ><Link href="/my-account">
+                  <TbUserCheck className="text-xl" />
+                  Profile
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white">
-                <IoHeartOutline className="text-xl" />
-                Wishlist
+              <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white" asChild>
+                <Link href="/wishlist">
+                  <IoHeartOutline className="text-xl" />
+                  Wishlist
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white">
-                <CiStar className="text-xl" />
-                Favourite
+              <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white" asChild>
+                <Link href="/wishlist">
+                  <CiStar className="text-xl" />
+                  Favourite
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white">
                 <LuBookmark className="text-xl" />
@@ -89,9 +101,11 @@ function Topbar() {
                 <LuEye className="text-xl" />
                 Recently viewed
               </DropdownMenuItem>
-              <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white">
-                <LuBadgePercent className="text-xl" />
-                Current Offers
+              <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white" asChild>
+                <Link href={'/current-offer'}>
+                  <LuBadgePercent className="text-xl" />
+                  Current Offers
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white">
                 <RiCustomerServiceLine className="text-xl" />
@@ -118,7 +132,7 @@ function Topbar() {
             <DropdownMenuSeparator />
             <DropdownMenuItem
               className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white"
-              onClick={(e) => dispatch(logout())}
+              onClick={(e) => logoutUSer()}
             >
               <MdLogout className="text-xl" />
               Logout

@@ -16,7 +16,7 @@ const VandorHeader = () => {
       >
         <div className="flex items-center justify-between py-2 md:gap-6">
           <div className="flex items-center gap-4">
-            <Link href="/">
+            <Link href="/vendor/">
               <Image
                 src={"/static/images/logo.png"}
                 alt="logo"

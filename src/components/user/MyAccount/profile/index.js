@@ -1,3 +1,4 @@
+'use client';
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import ProfileModal from "@/components/user/MyAccount/profile/ProfileModal";
@@ -37,8 +38,8 @@ const Profile = ({ user, ...props }) => {
           <p className="text-xl text-[#25324B] font-semibold">Profile</p>
           <div className="border relative border-1 border-[#0AADA4] rounded-full p-1 w-[3.5rem] h-[3.5rem] mb-2">
             <Image src={userImage?.path || (user?.photo && process.env.NEXT_PUBLIC_SERVERURL + user?.photo || '/static/images/user.webp')} alt="profile" loading="lazy" className="object-cover w-full h-full rounded-full z-1" width={50} height={50} />
-            <input type="file" className="absolute top-0 bottom-0 left-0 right-0 mt-2 cursor-pointer rounded-full max-w-[3.5rem] mx-auto opacity-0 z-2" name="photo" onChange={e => handleFile(e)} />
-            <MdModeEditOutline className="absolute right-0 p-[4px] text-xl text-white rounded-full bg-primary bottom-0" />
+            {/* <input type="file" className="absolute top-0 bottom-0 left-0 right-0 mt-2 cursor-pointer rounded-full max-w-[3.5rem] mx-auto opacity-0 z-2" name="photo" onChange={e => handleFile(e)} />
+            <MdModeEditOutline className="absolute right-0 p-[4px] text-xl text-white rounded-full bg-primary bottom-0" /> */}
           </div>
           <div className="flex flex-col w-full gap-3 lg:flex-row">
             <div className="w-full space-y-1 text-left lg:w-1/2">

@@ -1,8 +1,29 @@
 import React from "react";
-import Label from "@/components/ui/form/label";
 import Button from "@/components/ui/button";
+import { POST } from "@/app/api/post";
+import { useSelector } from "react-redux";
+import { Error, Spinner } from "@/components";
 
-const EyeModal = () => {
+const EyeModal = ({ hooks, data }) => {
+  const vendor = useSelector((state) => state.vendorAuth.vendor);
+
+  const { setEditDialog, setEditCustomer, setViewCustomer, setCustomers } = hooks;
+  const { viewCustomer, customers } = data;
+
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState('');
+
+  const deleteCustomer = async () => {
+    setLoading(true);
+    const resp = await POST.request({ url: '/vendor/delete-customer', form: { id: viewCustomer.id }, token: vendor?.api_token });
+    setLoading(false);
+    if (resp && resp.code == 200) {
+      setCustomers(customers.filter(c => c.id !== viewCustomer.id));
+      setViewCustomer('');
+      setEditDialog(false);
+    }
+  };
+
   return (
     <div className="space-y-3">
       <table className="w-full space-y-3 text-sm text-left">
@@ -11,7 +32,7 @@ const EyeModal = () => {
             <th scope="row" className="font-medium text-[#676767]">
               Phone :
             </th>
-            <td className="">+1 123456789</td>
+            <td className="">{viewCustomer.phone_number || 'N/A'}</td>
           </tr>
         </tbody>
         <tbody className="space-y-3">
@@ -19,7 +40,7 @@ const EyeModal = () => {
             <th scope="row" className="font-medium text-[#676767]">
               Email:
             </th>
-            <td className="">johnadam68@mail.com</td>
+            <td className="">{viewCustomer.email || 'N/A'}</td>
           </tr>
         </tbody>
         <tbody className="w-full space-y-3">
@@ -27,7 +48,7 @@ const EyeModal = () => {
             <th scope="row" className="font-medium text-[#676767]">
               Gender:
             </th>
-            <td className="">+1 123456789</td>
+            <td className="capitalize">{viewCustomer.gender || 'N/A'}</td>
           </tr>
         </tbody>
         <tbody className="space-y-3">
@@ -35,18 +56,24 @@ const EyeModal = () => {
             <th scope="row" className="font-medium text-[#676767]">
               DOB:
             </th>
-            <td className="">johnadam68@mail.com</td>
+            <td className="">{viewCustomer.dob || 'N/A'}</td>
           </tr>
         </tbody>
       </table>
       <div className="flex items-center gap-3">
-        <Button variant="primary" className="">
+        <Button variant="primary" className="" onClick={e => { setEditCustomer(viewCustomer); setViewCustomer('') }} disabled={loading}>
           Edit Details
         </Button>
-        <Button variant="danger" className="">
-          Delete
+        <Button variant="danger" className="" onClick={e => deleteCustomer()} disabled={loading}>
+          <Spinner
+            show={loading}
+            width="25"
+            height="25"
+            text="Delete"
+          />
         </Button>
       </div>
+      {error && <Error error={error} />}
       <hr />
       <p className="text-xl font-semibold">History</p>
 

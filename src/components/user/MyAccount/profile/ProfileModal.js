@@ -9,7 +9,7 @@ import { MdModeEditOutline } from "react-icons/md";
 import Label from "@/components/ui/form/label";
 import { POST } from "@/app/api/post";
 import Spinner from "@/components/ui/spinner";
-import logout from "@/utils/logout";
+import { logout } from "@/redux/features/userAuthSlice";
 
 const ProfileModal = ({ setEditProfile }) => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const ProfileModal = ({ setEditProfile }) => {
     e.preventDefault();
     setLoading(true);
     const res = await POST.request({ url: "/update-profile", form: e.target, token: user?.api_token });
-    (res && res.code == 401) && logout();
+    (res && res.code == 401) && dispatch(logout());
     if (res && res.code == 200 && Object.keys(res.data).length > 0) {
       dispatch(setUser(res.data));
       setEditProfile(false);
@@ -54,6 +54,7 @@ const ProfileModal = ({ setEditProfile }) => {
             defaultValue={user.first_name}
             pattern="[A-Za-z]{4,20}"
           />
+          <p className="error">Min 4 Character Required</p>
         </div>
         <div className="w-full space-y-1 text-left lg:w-1/2">
           <Label htmlFor="last_name" text="Last Name" />
@@ -65,6 +66,7 @@ const ProfileModal = ({ setEditProfile }) => {
             defaultValue={user.last_name}
             pattern="[A-Za-z]{4,20}"
           />
+          <p className="error">Min 4 Character Required</p>
         </div>
       </div>
       <div className="w-full space-y-1 text-left">
@@ -77,6 +79,7 @@ const ProfileModal = ({ setEditProfile }) => {
           defaultValue={user.email}
           pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
         />
+        <p className="error">Enter Valid Email id</p>
       </div>
       <div className="w-full space-y-1 text-left">
         <Label htmlFor="phone_number" text="Phone Number" />
@@ -88,6 +91,7 @@ const ProfileModal = ({ setEditProfile }) => {
           defaultValue={user.phone_number}
           pattern="[0-9]{10}"
         />
+        <p className="error">Enter Valid Phone number</p>
       </div>
       <div className="w-full space-y-1 text-left">
         <Label htmlFor="address_line_one" text="Address line 1" />
@@ -97,8 +101,9 @@ const ProfileModal = ({ setEditProfile }) => {
           className="input_field"
           placeholder="Enter your Address"
           defaultValue={user.address_line_one}
-          pattern="[A-Za-z0-9]{3,20}"
+          pattern="^[a-zA-Z0-9\s]{5,}$"
         />
+        <p className="error">Min 5 Character Required</p>
       </div>
       <div className="w-full space-y-1 text-left">
         <Label htmlFor="address_line_two" text="Address line 2" />
@@ -121,6 +126,7 @@ const ProfileModal = ({ setEditProfile }) => {
             defaultValue={user.city}
             pattern="[A-Za-z]{3,20}"
           />
+          <p className="error">Min 3 Character Required</p>
         </div>
         <div className="w-full space-y-1 text-left lg:w-1/2">
           <Label htmlFor="postcode" text="Postcode" />
@@ -130,8 +136,10 @@ const ProfileModal = ({ setEditProfile }) => {
             className="input_field"
             placeholder="Postcode"
             defaultValue={user.postcode}
-            pattern="[0-9]{6}"
+            pattern=".{5,6}[0-9]"
+            maxlength="6"
           />
+          <p className="error">Postcode should be 6 digit</p>
         </div>
       </div>
       <div className="w-full mt-4">

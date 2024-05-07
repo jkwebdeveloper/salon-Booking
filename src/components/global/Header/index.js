@@ -14,7 +14,7 @@ const Header = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
   return (
     <div className="w-full bg-white shadow-md">
-      <div className="container border-b xl:flex xl:justify-between md:items-center" id="topMenu">
+      <div className="container border-b md:flex md:justify-between md:items-center" id="topMenu">
         <div className="flex items-center justify-between py-2 xl:justify-start md:gap-6">
           <div>
             <Link href="/">
@@ -31,7 +31,7 @@ const Header = () => {
             <Button type="button" variant="outline" size="sm" className="uppercase ps-3 group">
               <MdLocationPin className="text-lg transition-all text-primary_color group-hover:text-white" /> Manchester
             </Button>
-            <div className="block xl:hidden">
+            <div className="block md:hidden">
               <BiMenuAltRight
                 className="text-2xl cursor-pointer text-primary_color"
                 onClick={() => setOpenSidebar(true)}
@@ -39,8 +39,14 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <div className="hidden xl:block">
+        <div className="hidden md:block">
           <div className="flex items-center gap-2">
+            <div className="block xl:hidden">
+              <BiMenuAltRight
+                className="text-2xl cursor-pointer text-primary_color"
+                onClick={() => setOpenSidebar(true)}
+              />
+            </div>
             <Topbar />
           </div>
         </div>

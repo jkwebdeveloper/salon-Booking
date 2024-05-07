@@ -12,11 +12,11 @@ export const GET = {
     if (token) {
       requestHeader = {
         ...requestHeader,
-        Authorization: `Bearer ${token}`,
+        'access-token': `${token}`,
       };
     }
     try {
-      const data = await axios.get(serverURL + url, { headers: requestHeader });
+      const { data } = await axios.get(serverURL + url, { headers: requestHeader });
       return data;
     } catch (error) {
       console.log(error);

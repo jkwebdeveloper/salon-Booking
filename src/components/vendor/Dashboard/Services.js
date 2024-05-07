@@ -33,132 +33,122 @@ const Services = () => {
       <div className="space-y-4">
         {createVoucher === true ? (
           <>
-            <div className="w-full space-y-3 bg-white rounded-xl">
-              {/* Create Voucher section start */}
-              <div className="p-4 space-y-3">
-                <div className="flex items-center justify-between">
-                  <p className="text-2xl font-semibold">Create Voucher</p>
-                  <IoMdClose
-                    className="text-2xl cursor-pointer"
-                    onClick={() => setCreateVoucher(false)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="first_name" text="Status" />
-                  <div className="flex items-center gap-3">
-                    <li className="list-none">
-                      <div className="flex items-center">
-                        <input
-                          id="list-radio-license"
-                          type="radio"
-                          value=""
-                          name="list-radio"
-                          className=""
-                        />
-                        <label
-                          for="list-radio-license"
-                          className="text-sm font-medium text-gray-900 ms-2 "
-                        >
-                          Active
-                        </label>
-                      </div>
-                    </li>
-                    <li className="list-none">
-                      <div className="flex items-center">
-                        <input
-                          id="list-radio-license"
-                          type="radio"
-                          value=""
-                          name="list-radio"
-                          className=""
-                        />
-                        <label
-                          for="list-radio-license"
-                          className="text-sm font-medium text-gray-900 ms-2 "
-                        >
-                          Inactive
-                        </label>
-                      </div>
-                    </li>
-                    <li className="list-none">
-                      <div className="flex items-center">
-                        <input
-                          id="list-radio-license"
-                          type="radio"
-                          value=""
-                          name="list-radio"
-                          className=""
-                        />
-                        <label
-                          for="list-radio-license"
-                          className="text-sm font-medium text-gray-900 ms-2 "
-                        >
-                          Pending
-                        </label>
-                      </div>
-                    </li>
-                  </div>
-                  <div className="w-full space-y-1 text-left">
-                    <Label htmlFor="first_name" text="Title" />
-                    <input
-                      type="text"
-                      name="first_name"
-                      className="input_field"
-                      placeholder="Enter Title"
-                      pattern="[A-Za-z]{4,20}"
-                    />
-                  </div>
-                  <div className="flex flex-col w-full gap-3 lg:flex-row">
-                    <div className="w-full space-y-1 text-left lg:w-1/2">
-                      <Label htmlFor="first_name" text="Discount Type *" />
-                      <input
-                        type="text"
-                        name="first_name"
-                        className="input_field"
-                        placeholder="Enter Discount Type *"
-                        pattern="[A-Za-z]{4,20}"
-                      />
-                    </div>
-                    <div className="w-full space-y-1 text-left lg:w-1/2">
-                      <Label htmlFor="last_name" text="Amount *" />
-                      <input
-                        type="text"
-                        name="last_name"
-                        className="input_field"
-                        placeholder="Enter Amount *"
-                        pattern="[A-Za-z]{4,20}"
-                      />
-                    </div>
-                    <div className="w-full space-y-1 text-left lg:w-1/2">
-                      <Label htmlFor="last_name" text="Expires at *" />
-                      <input
-                        type="text"
-                        name="last_name"
-                        className="input_field"
-                        placeholder="Enter Expires at *"
-                        pattern="[A-Za-z]{4,20}"
-                      />
-                    </div>
-                  </div>
-                  <Label htmlFor="last_name" text="Description" />
-                  <textarea
-                    id="message"
-                    rows="4"
-                    className="input_field"
-                    placeholder="Write your thoughts here..."
-                  ></textarea>
-                  <Button variant="primary">Create</Button>
-                </div>
-              </div>
-              {/* Create Voucher section End */}
-              {/* <div className="p-4 space-y-3">
-                <p className="text-2xl font-semibold">Edit Voucher</p>
+            <div className="w-full p-4 space-y-3 bg-white rounded-xl">
+              <div className="flex items-center justify-between">
+                <p className="text-2xl font-semibold">Create Voucher</p>
                 <IoMdClose
                   className="text-2xl cursor-pointer"
                   onClick={() => setCreateVoucher(false)}
                 />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="first_name" text="Status" />
+                <div className="flex items-center gap-3">
+                  <li className="list-none">
+                    <div className="flex items-center">
+                      <input
+                        id="list-radio-license"
+                        type="radio"
+                        value=""
+                        name="list-radio"
+                        className=""
+                      />
+                      <label
+                        for="list-radio-license"
+                        className="text-sm font-medium text-gray-900 ms-2 "
+                      >
+                        Active
+                      </label>
+                    </div>
+                  </li>
+                  <li className="list-none">
+                    <div className="flex items-center">
+                      <input
+                        id="list-radio-license"
+                        type="radio"
+                        value=""
+                        name="list-radio"
+                        className=""
+                      />
+                      <label
+                        for="list-radio-license"
+                        className="text-sm font-medium text-gray-900 ms-2 "
+                      >
+                        Inactive
+                      </label>
+                    </div>
+                  </li>
+                  <li className="list-none">
+                    <div className="flex items-center">
+                      <input
+                        id="list-radio-license"
+                        type="radio"
+                        value=""
+                        name="list-radio"
+                        className=""
+                      />
+                      <label
+                        for="list-radio-license"
+                        className="text-sm font-medium text-gray-900 ms-2 "
+                      >
+                        Pending
+                      </label>
+                    </div>
+                  </li>
+                </div>
+                <div className="w-full space-y-1 text-left">
+                  <Label htmlFor="first_name" text="Title" />
+                  <input
+                    type="text"
+                    name="first_name"
+                    className="input_field"
+                    placeholder="Enter Title"
+                    pattern="[A-Za-z]{4,20}"
+                  />
+                </div>
+                <div className="flex flex-col w-full gap-3 lg:flex-row">
+                  <div className="w-full space-y-1 text-left lg:w-1/2">
+                    <Label htmlFor="first_name" text="Discount Type *" />
+                    <input
+                      type="text"
+                      name="first_name"
+                      className="input_field"
+                      placeholder="Enter Discount Type *"
+                      pattern="[A-Za-z]{4,20}"
+                    />
+                  </div>
+                  <div className="w-full space-y-1 text-left lg:w-1/2">
+                    <Label htmlFor="last_name" text="Amount *" />
+                    <input
+                      type="text"
+                      name="last_name"
+                      className="input_field"
+                      placeholder="Enter Amount *"
+                      pattern="[A-Za-z]{4,20}"
+                    />
+                  </div>
+                  <div className="w-full space-y-1 text-left lg:w-1/2">
+                    <Label htmlFor="last_name" text="Expires at *" />
+                    <input
+                      type="text"
+                      name="last_name"
+                      className="input_field"
+                      placeholder="Enter Expires at *"
+                      pattern="[A-Za-z]{4,20}"
+                    />
+                  </div>
+                </div>
 
-              </div> */}
+                <Label htmlFor="last_name" text="Description" />
+                <textarea
+                  id="message"
+                  rows="4"
+                  className="input_field"
+                  placeholder="Write your thoughts here..."
+                ></textarea>
+
+                <Button variant="primary">Create</Button>
+              </div>
             </div>
           </>
         ) : (

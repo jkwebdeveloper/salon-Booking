@@ -2,75 +2,21 @@ import Button from "@/components/ui/button";
 import React, { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import WorkingHoursModal from "./Modal/WorkingHoursModal";
-import Image from "next/image";
-
 import {
   Dialog,
   DialogContent,
   DialogTrigger,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { MdModeEditOutline } from "react-icons/md";
 const SalonDetails = () => {
   const [workingHours, setWorkingHours] = useState(false);
   return (
     <div className="relative w-full space-y-12 bg-white rounded-xl">
-      <div className="bg-gradient-to-r  p-3 from-[#711F7E99] h-fit to-[#14DBD099] rounded-t-xl">
-        <div className="flex items-center ">
-          <div className="relative top-10">
-            <div className="relative rounded-lg p-1 w-[6.5rem] h-[6.5rem] mb-2">
-              <Image
-                src={"/static/images/user.webp"}
-                alt="profile"
-                loading="lazy"
-                className="object-cover w-full h-full rounded-full z-1"
-                width={50}
-                height={50}
-              />
-              <input
-                type="file"
-                className="absolute top-0 bottom-0 left-0 right-0 mt-2 cursor-pointer rounded-full max-w-[3.5rem] mx-auto opacity-0 z-2"
-                name="photo"
-              />
-              <MdModeEditOutline className="absolute top-[50%] left-[50%] -translate-x-2 p-[4px] text-xl text-white rounded-full bg-primary" />
-            </div>
-          </div>
-          <div className="relative top-10">
-            <div className="relative rounded-lg p-1 w-[6.5rem] h-[6.5rem] mb-2">
-              <Image
-                src={"/static/images/user.webp"}
-                alt="profile"
-                loading="lazy"
-                className="object-cover w-full h-full rounded-full z-1"
-                width={50}
-                height={50}
-              />
-              <input
-                type="file"
-                className="absolute top-0 bottom-0 left-0 right-0 mt-2 cursor-pointer rounded-full max-w-[3.5rem] mx-auto opacity-0 z-2"
-                name="photo"
-              />
-              <MdModeEditOutline className="absolute top-[50%] left-[50%] -translate-x-2 p-[4px] text-xl text-white rounded-full bg-primary" />
-            </div>
-          </div>
-          <div className="relative top-10">
-            <div className="relative rounded-lg p-1 w-[6.5rem] h-[6.5rem] mb-2">
-              <Image
-                src={"/static/images/user.webp"}
-                alt="profile"
-                loading="lazy"
-                className="object-cover w-full h-full rounded-full z-1"
-                width={50}
-                height={50}
-              />
-              <input
-                type="file"
-                className="absolute top-0 bottom-0 left-0 right-0 mt-2 cursor-pointer rounded-full max-w-[3.5rem] mx-auto opacity-0 z-2"
-                name="photo"
-              />
-              <MdModeEditOutline className="absolute top-[50%] left-[50%] -translate-x-2 p-[4px] text-xl text-white rounded-full bg-primary" />
-            </div>
-          </div>
+      <div className="bg-gradient-to-r  p-3 from-[#711F7E] h-fit to-[#14DBD099] rounded-t-xl">
+        <div className="relative top-14">
+          <p className="flex  items-center justify-center w-28 h-28 m-3 text-4xl font-bold text-white bg-[#0AADA4] rounded-full">
+            JA
+          </p>
         </div>
       </div>
       <div className="p-3 space-y-4">

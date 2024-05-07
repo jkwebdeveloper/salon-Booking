@@ -14,15 +14,16 @@ import {
 import { v4 } from "uuid";
 import { useSelector } from "react-redux";
 
-const EditCardModal = () => {
+const EditCardModal = ({ setAddCard, setCards, editCard, cards }) => {
   const user = useSelector(state => state.userAuth.user);
-  const currentYear = new Date().getFullYear();
   const [month, setMonth] = React.useState({ value: '', error: false });
   const [year, setYear] = React.useState({ value: '', error: false });
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState('');
   const [submited, setSubmited] = React.useState(false);
 
+  const currentMonth = new Date().getMonth() + 1;
+  const currentYear = new Date().getFullYear();
   const years = Array.from(new Array(10), (val, index) => currentYear + index);
   const months = Array.from(new Array(12), (val, index) => index + 1);
 
@@ -35,19 +36,21 @@ const EditCardModal = () => {
     (!yearVal) && setYear({ value: '', error: true });
 
     setLoading(true);
-    console.log(user?.api_token);
-    const resp = await POST.request({ url: "/add-card", form: e.target, token: user?.api_token });
+    const resp = await POST.request({ url: editCard && "/edit-card" || "/add-card", form: e.target, token: user?.api_token });
     setLoading(false);
     setSubmited(false);
-    if (resp) {
-      if (resp.status != 'Error' && Object.keys(resp.data).length > 0) {
-        // dispatch(login(resp.data));
-        console.log(resp.data);
-        return;
+    if (resp && resp.code == 200) {
+      if (editCard) {
+        const removeOldCard = cards.filter(card => card.id != resp.data.id);
+        setCards([resp.data, ...removeOldCard]);
+      } else {
+        setCards([resp.data, ...cards]);
       }
-      setError(resp.message);
+      setSubmited(true);
+      setAddCard(false);
+      return;
     }
-
+    setError(resp.message);
   };
 
   return (
@@ -64,7 +67,9 @@ const EditCardModal = () => {
               className="input_field"
               placeholder="Your name"
               pattern="[A-Za-z]{4,20}"
+              defaultValue={editCard?.card_holder_name || ''}
             />
+            <p className="error">Min 4 Character Required</p>
           </div>
           <div className="w-full space-y-1 text-left">
             <label htmlFor="state" className="label_text text-[#000D23] text-sm">
@@ -77,7 +82,9 @@ const EditCardModal = () => {
               placeholder="Card number"
               pattern="[0-9]{16}"
               required
+              defaultValue={editCard?.card_number || ''}
             />
+            <p className="error">Enter 16 Digit Card Number</p>
           </div>
           <div className="flex flex-col w-full gap-3 lg:flex-row">
             <div className="flex-1 w-full space-y-1 text-left">
@@ -85,20 +92,40 @@ const EditCardModal = () => {
                 Expire on
               </label>
               <div className="flex gap-3 select">
-                <Select onValueChange={value => setMonth({ value, error: false })}>
-                  <SelectTrigger selected={month.value} className={`w-auto [4.2rem] ${(month.error) && 'border-red-500 text-red-500'}`}>
-                    {month.value || <SelectValue className="text-red-500" placeholder="MM" />}
+                <Select key={month.value} onValueChange={value => {
+                  setMonth({ value, error: false });
+                  document.querySelector('input[name="expried_on"]').dispatchEvent(new Event('change'));
+                }}>
+                  <SelectTrigger
+                    selected={month.value || (editCard && editCard.expried_on && editCard.expried_on.split('/')[0]) || ''} className={`w-auto [4.2rem] ${(month.error) && 'border-red-500 text-red-500'}`}
+                  >
+                    {month.value
+                      || (editCard && editCard.expried_on && editCard.expried_on.split('/')[0])
+                      || <SelectValue className="text-red-500" placeholder="MM" />}
                   </SelectTrigger>
                   <SelectContent className="text-black bg-white">
                     <SelectGroup>
                       <SelectLabel>Select Month</SelectLabel>
-                      {months.map((month) => <SelectItem key={v4()} value={month}>{month}</SelectItem>)}
+                      {months.map((month) => {
+                        return <SelectItem
+                          key={v4()}
+                          value={month}
+                          disabled={year.value == currentYear && (month <= currentMonth) && true || false}>
+                          {month}
+                        </SelectItem>
+                      })}
                     </SelectGroup>
                   </SelectContent>
                 </Select>
-                <Select onValueChange={value => setYear({ value, error: false })}>
-                  <SelectTrigger selected={year.value} className={`w-auto ${(year.error) && 'border-red-500 text-red-500'}`}>
-                    {year.value || <SelectValue placeholder="YYYY" />}
+                <Select onValueChange={value => {
+                  currentYear == value && (month.value <= currentMonth) && setMonth({ value: '', error: true });
+                  setYear({ value, error: false });
+                  document.querySelector('input[name="expried_on"]').dispatchEvent(new Event('change'));
+                }}>
+                  <SelectTrigger selected={year.value || (editCard && editCard.expried_on && editCard.expried_on.split('/')[1]) || ''} className={`w-auto ${(year.error) && 'border-red-500 text-red-500'}`}>
+                    {year.value
+                      || (editCard && editCard.expried_on && editCard.expried_on.split('/')[1])
+                      || <SelectValue placeholder="YYYY" />}
                   </SelectTrigger>
                   <SelectContent className="bg-white">
                     <SelectGroup>
@@ -112,9 +139,11 @@ const EditCardModal = () => {
                 name="expried_on"
                 className="input_field"
                 placeholder="MM/YYYY"
-                defaultValue={month.value && year.value ? `${month.value}/${year.value}` : ""}
+                defaultValue={`${month.value || editCard.expried_on && editCard.expried_on.split('/')[0] || ''}/${year.value || editCard.expried_on && editCard.expried_on.split('/')[1] || ''}`}
+                pattern="\d{1,2}\/\d{2,4}"
                 required
               />
+              <p className="error">Enter Valid Expiry Date</p>
             </div>
             <div className="w-full space-y-1 text-left">
               <label htmlFor="state" className="label_text text-[#000D23] text-sm"> CVV </label>
@@ -125,7 +154,9 @@ const EditCardModal = () => {
                 placeholder="CVV"
                 pattern="[0-9]{3,}"
                 required
+                defaultValue={editCard?.cvv || ''}
               />
+              <p className="error">Enter Valid CVV</p>
             </div>
           </div>
         </div>
@@ -138,10 +169,14 @@ const EditCardModal = () => {
               </label>
               <input
                 type="text"
-                name="firstname"
+                name="first_name"
                 className="input_field"
-                placeholder="Type here..."
+                placeholder="First Name"
+                pattern="[A-Za-z]{4,20}"
+                required
+                defaultValue={editCard?.first_name || ''}
               />
+              <p className="error">Min 4 Character Required</p>
             </div>
             <div className="w-full space-y-1 text-left lg:w-1/2">
               <label
@@ -152,10 +187,14 @@ const EditCardModal = () => {
               </label>
               <input
                 type="text"
-                name="lastname"
+                name="last_name"
                 className="input_field"
-                placeholder="Type here"
+                placeholder="Last Name"
+                pattern="[A-Za-z]{4,20}"
+                required
+                defaultValue={editCard?.last_name || ''}
               />
+              <p className="error">Min 4 Character Required</p>
             </div>
           </div>
           <div className="flex flex-col w-full gap-3 lg:flex-row">
@@ -165,10 +204,14 @@ const EditCardModal = () => {
               </label>
               <input
                 type="email"
-                name="firstname"
+                name="email"
                 className="input_field"
-                placeholder="Type here..."
+                placeholder="Email"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                required
+                defaultValue={editCard?.email || ''}
               />
+              <p className="error">Enter Valid Email id</p>
             </div>
             <div className="w-full space-y-1 text-left lg:w-1/2">
               <label
@@ -179,10 +222,15 @@ const EditCardModal = () => {
               </label>
               <input
                 type="text"
-                name="lastname"
+                name="phone"
                 className="input_field"
-                placeholder="Type here"
+                placeholder="Phone"
+                pattern="[0-9]{10}"
+                maxLength={10}
+                required
+                defaultValue={editCard?.phone || ''}
               />
+              <p className="error">Enter Valid Phone number</p>
             </div>
           </div>
           <div className="w-full space-y-1 text-left">
@@ -191,10 +239,14 @@ const EditCardModal = () => {
             </label>
             <input
               type="text"
-              name="state"
+              name="address_line_one"
               className="input_field"
-              placeholder="Type here..."
+              placeholder="Enter your Address"
+              pattern="^[a-zA-Z0-9\s]{5,}$"
+              required
+              defaultValue={editCard?.address_line_one || ''}
             />
+            <p className="error">Min 5 Character Required</p>
           </div>
           <div className="w-full space-y-1 text-left">
             <label htmlFor="country" className="label_text">
@@ -202,9 +254,10 @@ const EditCardModal = () => {
             </label>
             <input
               type="text"
-              name="state"
+              name="address_line_two"
               className="input_field"
-              placeholder="Type here..."
+              placeholder="Enter your Address"
+              defaultValue={editCard?.address_line_two || ''}
             />
           </div>
           <div className="flex flex-col w-full gap-3 lg:flex-row">
@@ -217,7 +270,11 @@ const EditCardModal = () => {
                 name="city"
                 className="input_field"
                 placeholder="Enter your city"
+                pattern="[A-Za-z]{3,20}"
+                required
+                defaultValue={editCard?.city || ''}
               />
+              <p className="error">Min 3 Character Required</p>
             </div>
             <div className="w-full space-y-1 text-left lg:w-1/2">
               <label htmlFor="state" className="label_text">
@@ -225,14 +282,20 @@ const EditCardModal = () => {
               </label>
               <input
                 type="text"
-                name="state"
+                name="postcode"
                 className="input_field"
-                placeholder="Type here..."
+                placeholder="Postcode"
+                pattern="[0-9]{6}"
+                maxlength="6"
+                required
+                defaultValue={editCard?.postcode || ''}
               />
+              <p className="error">Postcode should be 6 digit</p>
             </div>
           </div>
           <div className="flex flex-col items-stretch justify-start gap-2 pt-3 mx-auto">
             <input type="hidden" name="user_id" value={user?.id} />
+            {editCard && <input type="hidden" name="id" value={editCard?.id} />}
             <Button type="submit" variant='primary' className="md:w-full" disabled={loading}>
               <Spinner show={loading} width='35' height='35' text="Save" />
             </Button>

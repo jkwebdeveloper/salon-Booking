@@ -7,7 +7,7 @@ import SuccessfullModal from "./SuccessfullModal";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { POST } from "@/app/api/post";
 import { useDispatch } from "react-redux";
-import { login } from "@/redux/features/vendorAuthSlice";
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -15,6 +15,8 @@ const Register = () => {
   const [successfull, setSuccessFull] = useState(false);
   const [error, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
 
   const registerVendor = async (e) => {
     e.preventDefault();
@@ -45,6 +47,7 @@ const Register = () => {
               pattern="[A-Za-z]{4,20}"
               required
             />
+            <p className="error">Min 4 Character Required</p>
           </div>
           <div className="flex flex-col w-full gap-3 lg:flex-row">
             <div className="w-full space-y-1 text-left lg:w-1/2">
@@ -57,6 +60,7 @@ const Register = () => {
                 pattern="[A-Za-z]{4,20}"
                 required
               />
+              <p className="error">Min 4 Character Required</p>
             </div>
             <div className="w-full space-y-1 text-left lg:w-1/2">
               <Label htmlFor="last_name" text="Last Name" required={true} />
@@ -68,6 +72,7 @@ const Register = () => {
                 pattern="[A-Za-z]{4,20}"
                 required
               />
+              <p className="error">Min 4 Character Required</p>
             </div>
           </div>
           <div className="w-full space-y-1 text-left">
@@ -77,9 +82,10 @@ const Register = () => {
               name="email"
               className="input_field"
               placeholder="Email"
-              pattern="[A-Za-z]{4,20}"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
               required
             />
+            <p className="error">Enter Valid Email id</p>
           </div>
           <div className="w-full space-y-1 text-left">
             <Label htmlFor="phone_number" text="Phone number" required={true} />
@@ -89,8 +95,10 @@ const Register = () => {
               className="input_field"
               placeholder="Phone Number"
               pattern="[0-9]{10}"
+              maxLength={10}
               required
             />
+            <p className="error">Enter Valid Phone number</p>
           </div>
           <div className="flex flex-col w-full gap-3 lg:flex-row">
             <div className="w-full space-y-1 text-left lg:w-1/2">
@@ -102,8 +110,10 @@ const Register = () => {
                 className="input_field"
                 placeholder="Salon Postcode"
                 pattern="[0-9]{6}"
+                maxlength="6"
                 required
               />
+              <p className="error">Postcode should be 6 digit</p>
             </div>
             <div className="w-full space-y-1 text-left lg:w-1/2">
               <Label htmlFor="type_of_salon" text="What type of salon you have?" required={true} />
@@ -115,13 +125,14 @@ const Register = () => {
                 placeholder="Salon Type"
                 pattern="[A-Za-z]{3,20}"
               />
+              <p className="error">Min 3 Character Required</p>
             </div>
           </div>
           <div className="flex flex-col w-full gap-3 lg:flex-row">
-            <div className="w-full space-y-1 text-left lg:w-1/2">
+            <div className="relative w-full space-y-1 text-left lg:w-1/2">
               <Label htmlFor="password" text="Password" required={true} />
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 id="password"
                 className="input_field"
@@ -129,18 +140,52 @@ const Register = () => {
                 pattern="[A-Za-z0-9]{3,20}"
                 required
               />
+              <p className="error">Password should be min 3 Char</p>
+              <button
+                type="button"
+                className="absolute top-[1.85em] right-3"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {(showPassword && (
+                  <BsEyeFill
+                    size={24}
+                    className="text-gray-400 cursor-pointer"
+                  />
+                )) || (
+                    <BsEyeSlashFill
+                      size={24}
+                      className="text-gray-400 cursor-pointer"
+                    />
+                  )}
+              </button>
             </div>
-            <div className="w-full space-y-1 text-left lg:w-1/2">
+            <div className="relative w-full space-y-1 text-left lg:w-1/2">
               <Label htmlFor="cpassword" text="Confirm password" required={true} />
               <input
-                type="password"
-                name="cpassword"
+                type={showConfirmPassword ? "text" : "password"}
                 id="cpassword"
                 className="input_field"
                 placeholder="Confirm Password"
-                pattern="[A-Za-z0-9]{3,20}"
                 required={true}
               />
+              <p className="error">Password not matched</p>
+              <button
+                type="button"
+                className="absolute top-[1.85em] right-3"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              >
+                {(showConfirmPassword && (
+                  <BsEyeFill
+                    size={24}
+                    className="text-gray-400 cursor-pointer"
+                  />
+                )) || (
+                    <BsEyeSlashFill
+                      size={24}
+                      className="text-gray-400 cursor-pointer"
+                    />
+                  )}
+              </button>
             </div>
           </div>
           <div className="flex items-center">
