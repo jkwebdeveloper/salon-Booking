@@ -3,6 +3,7 @@ import { Spinner } from "@/components";
 import Button from "@/components/ui/button";
 import { login } from "@/redux/features/vendorAuthSlice";
 import React from "react";
+import { MdModeEditOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 
 const Profile = () => {
@@ -16,7 +17,11 @@ const Profile = () => {
   const updateVendor = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const resp = await POST.request({ url: "/vendor/update-profile", form: e.target, token: vendor?.api_token });
+    const resp = await POST.request({
+      url: "/vendor/update-profile",
+      form: e.target,
+      token: vendor?.api_token,
+    });
     setLoading(false);
     if (resp.code == 200 && Object.keys(resp.data).length > 0) {
       setUpdated(true);
@@ -24,17 +29,29 @@ const Profile = () => {
     } else {
       setError(resp.message);
     }
-  }
+  };
   return (
     <div className="relative w-full space-y-12 bg-white rounded-xl">
       <div className="bg-gradient-to-r  p-3 from-[#711F7E] h-fit to-[#14DBD099] rounded-t-xl">
         <div className="relative top-14">
-          <p className="flex  items-center justify-center w-28 h-28 m-3 text-4xl font-bold text-white bg-[#0AADA4] rounded-full">
-            JA
-          </p>
+          <div className="relative rounded-lg p-1 w-[6.5rem] h-[6.5rem] mb-2">
+            <p className="flex  items-center justify-center w-28 h-28 m-3 text-4xl font-bold text-white bg-[#0AADA4] rounded-full">
+              JA
+            </p>
+            <input
+              type="file"
+              className="absolute top-0 bottom-0 left-0 right-0 mt-2 cursor-pointer rounded-full max-w-[3.5rem] mx-auto opacity-0 z-2"
+              name="photo"
+            />
+            <MdModeEditOutline className="absolute -right-5 -bottom-5  -translate-x-2 p-[4px] text-2xl text-white rounded-full bg-primary" />
+          </div>
         </div>
       </div>
-      <form className="p-3 space-y-4" noValidate onSubmit={e => updateVendor(e)}>
+      <form
+        className="p-3 space-y-4"
+        noValidate
+        onSubmit={(e) => updateVendor(e)}
+      >
         <div className="flex flex-col w-full gap-3 lg:flex-row">
           <div className="w-full space-y-1 text-left lg:w-1/2">
             <label htmlFor="first_name" className="label_text">
@@ -107,7 +124,7 @@ const Profile = () => {
             show={loading}
             width="25"
             height="25"
-            text={updated && 'Updated' || 'Update'}
+            text={(updated && "Updated") || "Update"}
           />
         </Button>
       </form>

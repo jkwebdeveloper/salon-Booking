@@ -12,9 +12,14 @@ import Label from "@/components/ui/form/label";
 import { BsPencilFill } from "react-icons/bs";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { IoMdClose } from "react-icons/io";
+import { TbCirclePlus } from "react-icons/tb";
+import EditServiceModal from "./Modal/ServicesModal/EditServiceModal";
 
 const Services = () => {
   const [addCustomer, setAddCustomer] = useState(false);
+  const [addtreatment, setAddtreatment] = useState(false);
+  const [editService, seteditService] = useState(false);
+
   const [treatment, setTreatment] = useState(true);
   const [voucher, setVoucher] = useState(false);
   const [createVoucher, setCreateVoucher] = useState(false);
@@ -180,40 +185,69 @@ const Services = () => {
             <div className="w-full p-4 space-y-3 bg-white rounded-xl">
               <div className="flex items-center justify-between">
                 <p className="text-2xl font-semibold">Treatments</p>
-                <Dialog open={addCustomer} className="w-11/12">
+                <Dialog open={addtreatment} className="w-1/2">
                   <DialogTrigger
-                    onClick={(e) => setAddCustomer(true)}
+                    onClick={(e) => setAddtreatment(true)}
                     className="flex items-center h-8 px-6 py-5 text-sm font-medium text-white uppercase transition rounded-full focus:outline-none bg-primary hover:bg-primary-hover active:scale-90"
                   >
                     + Add New Treatment
                   </DialogTrigger>
                   <DialogContent
-                    close={setAddCustomer}
+                    close={setAddtreatment}
                     className="sm:max-w-[1025px]"
                   >
                     <DialogTitle>Add New Treatment</DialogTitle>
-                    <NewTreatmentModal setAddCustomer={setAddCustomer} />
-                    <ServicesListModal setAddCustomer={setAddCustomer} />
+                    <NewTreatmentModal setAddtreatment={setAddtreatment} />
                   </DialogContent>
                 </Dialog>
               </div>
               {treatment && (
                 <>
-                  <p className="text-xl font-semibold">Massage</p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-xl font-semibold">Massage</p>
+                    <Dialog open={addCustomer} className="w-11/12">
+                      <DialogTrigger onClick={(e) => setAddCustomer(true)}>
+                        <TbCirclePlus className="text-[#0AADA4]" />
+                      </DialogTrigger>
+                      <DialogContent
+                        close={setAddCustomer}
+                        className="sm:max-w-[1025px]"
+                      >
+                        <DialogTitle>Service List</DialogTitle>
+                        <ServicesListModal setAddCustomer={setAddCustomer} />
+                      </DialogContent>
+                    </Dialog>
+                  </div>
                   <div className="grid items-center grid-cols-1 xl:grid-cols-2 lg:gap-4">
-                    <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3">
-                      <p className="font-semibold">Couple Massage</p>
-                      <div className="flex items-center justify-between">
-                        <p className="text-sm">02 h</p>
-                        <p className="text-sm">Couples Massage for 2 hours</p>
-                        <p className="text-sm font-bold">£349 €369</p>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <p className="text-sm">02 h</p>
-                        <p className="text-sm">Couples Massage for 2 hours</p>
-                        <p className="text-sm font-bold">£349 €369</p>
-                      </div>
-                    </div>
+                    <Dialog open={editService} className="w-11/12">
+                      <DialogTrigger onClick={(e) => seteditService(true)}>
+                        <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3">
+                          <p className="font-semibold">Couple Massage</p>
+                          <div className="flex items-center justify-between">
+                            <p className="text-sm">02 h</p>
+                            <p className="text-sm">
+                              Couples Massage for 2 hours
+                            </p>
+                            <p className="text-sm font-bold">£349 €369</p>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <p className="text-sm">02 h</p>
+                            <p className="text-sm">
+                              Couples Massage for 2 hours
+                            </p>
+                            <p className="text-sm font-bold">£349 €369</p>
+                          </div>
+                        </div>
+                      </DialogTrigger>
+                      <DialogContent
+                        close={seteditService}
+                        className="sm:max-w-[725px]"
+                      >
+                        <DialogTitle>Edit Service</DialogTitle>
+                        <EditServiceModal seteditService={seteditService} />
+                      </DialogContent>
+                    </Dialog>
+
                     <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3">
                       <p className="font-semibold">Couple Massage</p>
                       <div className="flex items-center justify-between">
