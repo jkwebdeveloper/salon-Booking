@@ -1,12 +1,10 @@
 import Button from "@/components/ui/button";
 import { DatePicker } from "@/components/user/Home/FindNearByForm/datepicker";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Pagination,
   PaginationContent,
   PaginationItem,
-  PaginationNext,
-  PaginationPrevious,
 } from "@/components/ui/pagination";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
@@ -18,41 +16,55 @@ import {
 } from "@/components/ui/dialog";
 import UserModal from "./Modal/StaffModal/UserModal";
 import AddTeam from "./Modal/StaffModal/AddTeam";
+import { useSelector } from "react-redux";
+import { GET } from "@/app/api/get";
+import { PageLoader } from "@/components";
+import { v4 } from "uuid";
+import Image from "next/image";
 
 const Staff = () => {
+  const vendor = useSelector((state) => state.vendorAuth.vendor);
   const [userModal, setUserModal] = useState(false);
   const [addTeam, setAddTeam] = useState(false);
-  const [myStaff, setMyStaff] = useState(false);
-  const [staffSchedule, setStaffSchedule] = useState(true);
+  const [currentTab, setCurrentTab] = useState("schedule");
+  const [loading, setLoading] = useState(true);
+  const [editStaff, setEditStaff] = useState('');
+  const [staffs, setStaffs] = useState([]);
 
-  const handlemyStaffClick = () => {
-    setMyStaff(true);
-    setStaffSchedule(false);
-  };
+  const changeTab = (tab = 'basic') => setCurrentTab(tab);
 
-  const handlestaffScheduleClick = () => {
-    setMyStaff(false);
-    setStaffSchedule(true);
-  };
+  const getStaff = useCallback(async () => {
+    setLoading(true);
+    const res = await GET.request({ url: '/vendor/get-all-staffs', token: vendor?.api_token });
+    setLoading(false);
+    if (res && res.code == 200) {
+      setStaffs(res.data);
+    }
+  }, []);
+
+  useEffect(() => {
+    currentTab == 'staff' && getStaff();
+  }, [currentTab]);
+
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
         <Button
-          variant={staffSchedule ? "primary" : "disable"}
-          onClick={handlestaffScheduleClick}
+          variant={currentTab == 'schedule' ? "primary" : "disable"}
+          onClick={e => changeTab('schedule')}
         >
           Staff Schedule
         </Button>
         <Button
-          variant={myStaff ? "primary" : "disable"}
-          onClick={handlemyStaffClick}
+          variant={currentTab == 'staff' ? "primary" : "disable"}
+          onClick={e => changeTab('staff')}
         >
           My staff
         </Button>
       </div>
       <div className="w-full p-4 space-y-3 bg-white rounded-xl">
         {/* Staff Schedule section  start */}
-        {staffSchedule && (
+        {currentTab == 'schedule' && (
           <>
             <p className="text-2xl font-semibold">Staff Schedule</p>
             <div className="flex items-end justify-between">
@@ -153,7 +165,7 @@ const Staff = () => {
             </div>
           </>
         )}
-        {myStaff && (
+        {currentTab == 'staff' && (
           <>
             <div className="flex items-center justify-between">
               <p className="text-2xl font-semibold">Staff List</p>
@@ -164,33 +176,36 @@ const Staff = () => {
                 >
                   + Add New
                 </DialogTrigger>
-                <DialogContent close={setAddTeam} className="sm:max-w-[900px]">
+                <DialogContent close={e => {
+                  setAddTeam(false);
+                  setEditStaff('');
+                }} className="sm:max-w-[900px]">
                   <DialogTitle>Add Team Member</DialogTitle>
-                  <AddTeam setAddTeam={setAddTeam} />
+                  <AddTeam setAddTeam={setAddTeam} setStaffs={setStaffs} staffs={staffs} setEditStaff={setEditStaff} editStaff={editStaff} />
                 </DialogContent>
               </Dialog>
             </div>
             <hr />
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              <div className="flex items-center justify-center py-5 rounded-lg shadow-lg">
-                <div className="space-y-5 text-center">
-                  <p className="rounded-full mx-auto w-16 h-16 flex justify-center items-center text-xl bg-[#0AADA4] text-white">
-                    NS
-                  </p>
-                  <p className="text-xl">Nuzami</p>
-                  <Button variant="primary">Edit</Button>
-                </div>
-              </div>
-              <div className="flex items-center justify-center py-5 rounded-lg shadow-lg">
-                <div className="space-y-5 text-center">
-                  <p className="rounded-full mx-auto w-16 h-16 flex justify-center items-center text-xl bg-[#0AADA4] text-white">
-                    JR
-                  </p>
-                  <p className="text-xl">Jullie</p>
-                  <Button variant="primary">Edit</Button>
-                </div>
-              </div>
-            </div>
+            {loading && <PageLoader /> || <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {staffs.length > 0 && staffs.map((staff, index) => {
+                return (
+                  <div key={v4()} className="flex items-center justify-center py-5 rounded-lg shadow-lg">
+                    <div className="space-y-5 text-center">
+                      <div className="flex items-center justify-center w-16 h-16 mx-auto overflow-hidden bg-green-300 rounded-full">
+                        {staff.photo && <Image src={process.env.NEXT_PUBLIC_SERVERURL + staff.photo} width={100} height={100} /> || <p className="text-xl text-white ">
+                          NS
+                        </p>}
+                      </div>
+                      <p className="text-xl">{staff?.first_name} {staff?.last_name}</p>
+                      <Button variant="primary" onClick={e => {
+                        setEditStaff(staff);
+                        setAddTeam(true);
+                      }}>Edit</Button>
+                    </div>
+                  </div>
+                )
+              }) || 'Staff Member Not Found'}
+            </div>}
           </>
         )}
       </div>

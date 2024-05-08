@@ -1,8 +1,15 @@
 import React from "react";
 
 import { Banner } from "@/components";
+import { GET } from "@/app/api/get";
+import { createDOMPurify, JSDOM } from "@/components/other";
 
-const Policy = () => {
+const window = (new JSDOM('')).window;
+const DOMPurify = createDOMPurify(window);
+
+const Policy = async () => {
+  const resp = await GET.request({ url: "/privacy-policy" });
+  const policyData = (resp && resp.code === 200) && resp.data || [];
   return (
     <div className="space-y-4 ">
       <Banner
@@ -14,70 +21,19 @@ const Policy = () => {
           <h2 className="text-base font-semibold md:text-2xl">
             PRIVACY POLICY
           </h2>
-          <p className="text-[#666666] text-justify">
-            Lorem Ipsum is simply dumy text printing.
-          </p>
-          <p className="text-[#666666] text-justify">
-            {`Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged.`}
-          </p>
-          <p className="text-[#666666] text-justify">
-            {`Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged.Lorem Ipsum is simply dummy text of
-            the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, when an unknown
-            printer took a galley of type and scrambled it to make a type
-            specimen book. It has survived not only five centuries, but also the
-            leap into electronic typesetting, remaining essentially
-            unchanged.Lorem Ipsum is simply dummy text of the printing and
-            typesetting industry. Lorem Ipsum has been the industry's standard
-            dummy text ever since the 1500s, when an unknown printer took a
-            galley of type and scrambled it to make a type specimen book. It has
-            survived not only five centuries, but also the leap into electronic
-            typesetting, remaining essentially unchanged.Lorem Ipsum is simply
-            dummy text of the printing and typesetting industry. Lorem Ipsum has
-            been the industry's standard dummy text ever since the 1500s, when
-            an unknown printer took a galley of type and scrambled it to make a
-            type specimen book. It has survived not only five centuries, but
-            also the leap into electronic typesetting, remaining essentially
-            unchanged.`}
-          </p>
-          <p className="text-[#666666] text-justify">
-            {`Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged.`}
-          </p>
-          <p className="text-[#666666] text-justify">
-            {`Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged.`}
-          </p>
-          <p className="text-[#666666] text-justify">
-            {`Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged.`}
-          </p>
+          {policyData.map((item) => (
+            <div key={item.id} className="space-y-2">
+              <h3 className="text-lg font-semibold">{item.title}</h3>
+              <p className="text-sm text-gray-600">
+                {<div className="list-disc" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.description) }} />}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   );
 };
 
-export default Policy;
+export default React.memo(Policy);
+

@@ -2,7 +2,7 @@
 import * as React from "react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
 import useEmblaCarousel from "embla-carousel-react";
-
+import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components";
 

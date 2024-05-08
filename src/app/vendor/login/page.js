@@ -40,10 +40,9 @@ const Login = () => {
   }, [vendor, router]);
 
   return (
-    <div className="w-screen min-h-screen">
-      <div className="bg-[url('/static/images/login.png')] bg-cover"></div>
+    <div className="w-screen min-h-screen bg-[url('/static/images/banner.jpg')] bg-cover">
       <div className="flex flex-col items-center justify-center h-full space-y-4">
-        <Link href="/">
+        <Link href="/vendor/">
           <Image
             src={"/static/images/logo.png"}
             loading="lazy"
@@ -119,10 +118,10 @@ const Login = () => {
                 </div>
                 <div>
                   <Link
-                    href="/vendor/reset-password"
+                    href="/vendor/forgot-password"
                     className="block w-full font-semibold"
                   >
-                    Reset your password?
+                    Forgot password?
                   </Link>
                 </div>
               </div>
@@ -163,7 +162,7 @@ const Login = () => {
             </div>
             <p className="text-center">
               Not a member?{" "}
-              <Link href="/register">
+              <Link href="/vendor/register">
                 <span className="font-semibold text-primary_color">
                   Register
                 </span>

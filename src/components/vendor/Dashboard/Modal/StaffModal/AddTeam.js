@@ -4,104 +4,96 @@ import { FaCamera } from "react-icons/fa";
 
 import Image from "next/image";
 import Label from "@/components/ui/form/label";
-import { DatePicker } from "@/components/user/Home/FindNearByForm/datepicker";
 import { POST } from "@/app/api/post";
 import { Error, Spinner } from "@/components";
 import { useSelector } from "react-redux";
 
-const AddTeam = () => {
-  const [basic, setBasic] = useState(false);
-  const [services, setServices] = useState(true);
-  const [publicProfile, setPublicProfile] = useState(false);
-  const [staff, setStaff] = useState({});
+const AddTeam = ({ setAddTeam, editStaff, staffs, setStaffs, setEditStaff }) => {
+  const vendor = useSelector((state) => state.vendorAuth.vendor);
+  const [staff, setStaff] = useState(editStaff || {});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const vendor = useSelector((state) => state.vendorAuth.vendor);
+  const [currentTab, setCurrentTab] = useState("basic");
+
+  const changeTab = (tab = 'basic') => setCurrentTab(tab);
 
   const addStaff = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const resp = await POST.request({
-      url: "/vendor/add-new-staffs",
-      form: e.target,
-      token: vendor.api_token,
-    });
+    const resp = await POST.request({ url: '/vendor/add-new-staffs', form: e.target, token: vendor.api_token });
     setLoading(false);
     if (resp && resp.code == 200) {
+      const newStaffMember = staffs.filter(staff => staff.id != resp.data.id);
+      setStaffs([...newStaffMember, resp.data]);
       setStaff(resp.data);
-      setBasic(false);
-      setServices(true);
+      changeTab('services');
     } else {
       setError(resp.message);
     }
   };
 
-  const updateStaff = async (e) => {
+  const updateStaff = async ({ e, step }) => {
     e.preventDefault();
     setLoading(true);
-    const resp = await POST.request({
-      url: "/vendor/update-staffssss",
-      form: e.target,
-    });
+    const resp = await POST.request({ url: '/vendor/update-staffs', form: e.target, token: vendor.api_token });
     setLoading(false);
     if (resp && resp.code == 200) {
+      const newStaffMember = staffs.filter(staff => staff.id != resp.data.id);
+      setStaffs([...newStaffMember, resp.data]);
+      if (!step) {
+        setEditStaff('');
+        setAddTeam(false);
+        return;
+      }
       setStaff(resp.data);
-      setBasic(false);
-      setServices(true);
+      changeTab(step);
     } else {
       setError(resp.message);
+      return;
     }
   };
 
-  const handleBasicClick = () => {
-    setBasic(true);
-    setServices(false);
-    setPublicProfile(false);
+  const deleteStaff = async () => {
+    setLoading(true);
+    const res = await POST.request({ url: '/vendor/delete-staffs', form: { staffs_id: staff.id }, token: vendor?.api_token });
+    setLoading(false);
+    if (res && res.code == 200) {
+      const newStaffMember = staffs.filter(deletedStaff => deletedStaff.id != staff.id);
+      setStaffs(newStaffMember);
+      setEditStaff('');
+      setAddTeam(false);
+    }
   };
-
-  const handleServicesClick = () => {
-    setBasic(false);
-    setServices(true);
-    setPublicProfile(false);
-  };
-
-  const handleProfileClick = () => {
-    setBasic(false);
-    setServices(false);
-    setPublicProfile(true);
-  };
-
-  <Button variant="secondary">Basic Info</Button>;
 
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
         <Button
-          variant={basic ? "secondary" : "disable"}
-          onClick={handleBasicClick}
+          variant={(currentTab == 'basic') ? "secondary" : "disable"}
+          onClick={e => changeTab()}
         >
           Basic Info
         </Button>
         <Button
-          variant={services ? "secondary" : "disable"}
-          onClick={handleServicesClick}
-          // disabled={Object.keys(staff).length === 0}
+          variant={currentTab == 'services' ? "secondary" : "disable"}
+          onClick={e => changeTab('services')}
+          disabled={Object.keys(staff).length == 0}
         >
           Services
         </Button>
         <Button
-          variant={publicProfile ? "secondary" : "disable"}
-          onClick={handleProfileClick}
-          // disabled={Object.keys(staff).length === 0}
+          variant={currentTab == 'publicProfile' ? "secondary" : "disable"}
+          onClick={e => changeTab('publicProfile')}
+          disabled={Object.keys(staff).length == 0}
         >
           Public Profile
         </Button>
       </div>
-      {basic && (
-        <form className="space-y-3" onSubmit={(e) => addStaff(e)} noValidate>
+      {currentTab == 'basic' && (
+        <form className="space-y-3" onSubmit={e => Object.keys(staff).length > 0 && updateStaff({ e, step: 'services' }) || addStaff(e)} noValidate>
           <div className="border relative border-1 border-[#0AADA4] rounded-full p-1 w-[3.5rem] h-[3.5rem] mb-2">
             <Image
-              src="/static/images/user.webp"
+              src={staff && (process.env.NEXT_PUBLIC_SERVERURL + staff.photo) || '/images/user.png'}
               alt="profile"
               loading="lazy"
               className="object-cover w-full h-full rounded-full z-1"
@@ -124,8 +116,10 @@ const AddTeam = () => {
                 className="input_field"
                 placeholder="Enter your First name"
                 pattern="[A-Za-z0-9]{3,20}"
+                defaultValue={staff && staff.first_name || ''}
                 required
               />
+              <p className="error">Min 3 Character Required</p>
             </div>
             <div className="w-full space-y-1 text-left lg:w-1/2">
               <Label htmlFor="last_name" text="Last name" />
@@ -135,8 +129,10 @@ const AddTeam = () => {
                 className="input_field"
                 placeholder="Enter your Last name"
                 pattern="[A-Za-z0-9]{3,20}"
+                defaultValue={staff && staff.last_name || ''}
                 required
               />
+              <p className="error">Min 3 Character Required</p>
             </div>
           </div>
           <div className="flex flex-col w-full gap-3 lg:flex-row">
@@ -147,53 +143,73 @@ const AddTeam = () => {
                 name="email"
                 className="input_field"
                 placeholder="Enter your email"
-                pattern="[A-Za-z]{4,20}"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                defaultValue={staff && staff.email || ''}
                 required
               />
+              <p className="error">Enter Valid Email id</p>
             </div>
             <div className="w-full space-y-1 text-left lg:w-1/2">
-              <Label htmlFor="phone_number" text="Phone Number" />
+              <Label htmlFor="mobile" text="Phone Number" />
               <input
                 type="text"
-                name="phone_number"
+                name="mobile"
                 className="input_field"
                 placeholder="Enter your Phone Number"
                 pattern="[0-9]{10}"
+                defaultValue={staff && staff.mobile || ''}
                 required
               />
+              <p className="error">Enter Valid Phone number</p>
             </div>
           </div>
           <div className="space-y-1 ">
             <Label htmlFor="dob" text="Date of Birth" />
-            <div className="w-full rounded-md border-[#eae9e9]">
+            <div className="w-full rounded-md border-[#eae9e9] dateField">
               <input
                 type="date"
                 name="dob"
                 className="w-full input_field sm:max-w-[200px]"
                 placeholder="Enter your Phone Number"
+                defaultValue={staff && staff.dob || ''}
+                pattern="\d{4}-\d{1,2}-\d{1,2}"
+                onInput={e => console.log(e.target.value)}
                 required
               />
+              <p className="error">Enter Valid Birth Date</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Button variant="disable" disabled={loading}>
-              Cancel
-            </Button>
+            {Object.keys(staff).length > 0 && <input type="hidden" name="staffs id" value={staff.id} />}
+            <Button variant="disable" disabled={loading} onClick={e => {
+              setEditStaff('');
+              setAddTeam(false);
+            }}>Cancel</Button>
             <Button variant="primary" type="submit" disabled={loading}>
-              <Spinner show={loading} width="25" height="25" text="Save" />
+              <Spinner
+                show={loading}
+                width="25"
+                height="25"
+                text="Save"
+              />
             </Button>
+            {Object.keys(staff).length > 0 && <Button variant="danger" onClick={e => deleteStaff()} disabled={loading}>Delete</Button>}
           </div>
           {error && <Error error={error} />}
         </form>
       )}
-      {services && (
-        <form className="space-y-2" onSubmit={(e) => updateStaff(e)} noValidate>
+      {currentTab == 'services' && (
+        <form className="space-y-2" onSubmit={e => updateStaff({ e, step: 'publicProfile' })} noValidate>
           <p className="text-xl text-[#1D1B23] font-semibold">
             What service can be booked for this employee ?
           </p>
           <li class="w-full list-none">
             <div class="flex items-center">
-              <input id="list-radio-license" type="checkbox" value="" />
+              <input
+                id="list-radio-license"
+                type="checkbox"
+                value=""
+              />
               <label
                 for="list-radio-license"
                 class="w-full ms-2 text-sm font-medium text-gray-900 "
@@ -521,39 +537,62 @@ const AddTeam = () => {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Button variant="disable">Cancel</Button>
-            <Button variant="primary">Save</Button>
-            <Button variant="danger">Delete</Button>
+            {Object.keys(staff).length > 0 && <input type="hidden" name="staffs id" value={staff.id} />}
+            <Button variant="disable" disabled={loading} onClick={e => {
+              setEditStaff('');
+              setAddTeam(false);
+            }}>Cancel</Button>
+            <Button variant="primary" type="submit">Save</Button>
+            <Button variant="danger" onClick={e => deleteStaff()} disabled={loading}>Delete</Button>
           </div>
         </form>
       )}
-      {publicProfile && (
+      {currentTab == 'publicProfile' && (
         <>
-          <div className="space-y-4">
+          <form className="space-y-4" onSubmit={e => updateStaff({ e, step: '' })} noValidate>
             <div className="w-full space-y-1 text-left">
-              <Label htmlFor="email" text="Job Title" />
+              <Label htmlFor="job_title" text="Job Title" />
               <input
                 type="text"
-                name="Job Title"
+                name="job_title"
+                id="job_title"
                 className="input_field"
                 placeholder="Enter your Job Title"
+                pattern="[A-Za-z0-9]{3,20}"
+                defaultValue={staff && staff.job_title || ''}
+                required
               />
+              <p className="error">Min 3 Character Required</p>
             </div>
             <div className="w-full space-y-1 text-left lg:w-1/2">
-              <Label htmlFor="phone_number" text="Job Bio" />
+              <Label htmlFor="job_bio" text="Job Bio" />
               <input
                 type="text"
-                name="phone_number"
+                name="job_bio"
+                id="job_bio"
                 className="input_field"
                 placeholder="Enter your Job Bio"
+                defaultValue={staff && staff.job_bio || ''}
               />
             </div>
             <div className="flex items-center gap-3">
-              <Button variant="disable">Cancel</Button>
-              <Button variant="primary">Save</Button>
-              <Button variant="danger">Delete</Button>
+              {Object.keys(staff).length > 0 && <input type="hidden" name="staffs id" value={staff.id} />}
+              <Button variant="disable" disabled={loading} onClick={e => {
+                setEditStaff('');
+                setAddTeam(false);
+              }}>Cancel</Button>
+              <Button variant="primary" type="submit" disabled={loading}>
+                <Spinner
+                  show={loading}
+                  width="25"
+                  height="25"
+                  text="Save"
+                />
+              </Button>
+              <Button variant="danger" onClick={e => deleteStaff()} disabled={loading}>Delete</Button>
             </div>
-          </div>
+            {error && <Error error={error} />}
+          </form>
         </>
       )}
     </div>

@@ -1,4 +1,3 @@
-import { Banner } from "@/components";
 import Image from "next/image";
 import React from "react";
 import { v4 } from "uuid";
@@ -6,16 +5,12 @@ import { FiPhone } from "react-icons/fi";
 import { SlLocationPin } from "react-icons/sl";
 import { SiMinutemailer } from "react-icons/si";
 
-// import image1 from "/static/images/PamperTree/img1.png";
-// import image2 from "/static/images/PamperTree/img2.png";
-// import image3 from "/static/images/PamperTree/img3.png";
-// import image4 from "/static/images/PamperTree/img4.png";
-// import image5 from "/static/images/PamperTree/img5.png";
-// import image6 from "/static/images/PamperTree/img6.png";
-// import image7 from "/static/images/PamperTree/img7.png";
-// import image8 from "/static/images/PamperTree/img8.png";
-// import image9 from "/static/images/PamperTree/img9.png";
-// import image10 from "/static/images/PamperTree/img10.png";
+import { GET } from "@/app/api/get";
+import { Banner } from "@/components";
+import { createDOMPurify, JSDOM } from "@/components/other";
+
+const window = (new JSDOM('')).window;
+const DOMPurify = createDOMPurify(window);
 
 const ImagesData = [
   {
@@ -70,7 +65,9 @@ const ImagesData = [
   },
 ];
 
-const AboutUs = () => {
+const AboutUs = async () => {
+  const resp = await GET.request({ url: "/about-us" });
+  const aboutusData = (resp && resp.code === 200) && resp.data || [];
   return (
     <div className="space-y-4">
       <Banner
@@ -78,7 +75,7 @@ const AboutUs = () => {
         background={"/static/images/Terms-conditions.jpg"}
       />
       <div className="container px-5 pt-10 pb-20 mx-auto space-y-5 md:px-16">
-        <div className="grid items-center grid-cols-1 xl:grid-cols-2 lg:gap-0">
+        <div className="grid items-start grid-cols-1 xl:grid-cols-2 lg:gap-0">
           <div>
             <Image
               src={"/static/images/Group.png"}
@@ -89,40 +86,14 @@ const AboutUs = () => {
             />
           </div>
           <div className="space-y-2">
-            <p className="text-[#333333] text-sm text-justify">
-              With our own experience in the beauty and massage industry, there
-              is no better company to understand the needs of both clients and
-              providers across the full range of beauty and therapy services
-              than PamperTree. Understanding both sides of the industry is
-              essential when acting as the booking platform for clients and
-              salons.
-            </p>
-            <p className="text-[#333333] text-sm text-justify">
-              For clients, creating the easiest way to make their reservations
-              at different salons, using our simple booking process saves so
-              much time and is available when you have the opportunity to manage
-              your personal calendar, 24/7. Need to change the time or date due
-              to unforeseen circumstances? No problem! We have designed
-              PamperTree to give you the best prices, the top-rated salons and
-              the flexibility to keep you looking and feeling exceptional!
-            </p>
-            <p className="text-[#333333] text-sm text-justify">
-              For salon managers, at PamperTree we increase your exposure to
-              clients, attract new customers and give you the opportunity to
-              show them what makes your business unique.
-            </p>
-            <p className="text-[#333333] text-sm text-justify">
-              Connecting clients with the hair and beauty professionals and
-              massage therapists they seek 24 hours a day, means that you, as a
-              salon, are always “available” for them.
-            </p>
-            <p className="text-[#333333] text-sm text-justify">
-              As the management at PamperTree, we have seen both sides of the
-              business ourselves and realised that creating this online platform
-              was the way to make everything easier, more efficient and simple,
-              the finest way to be organised in this important part of everyday
-              life, keeping you beautiful and healthy.
-            </p>
+
+            {aboutusData.map((item) => (
+              <div key={item.id} className="space-y-2">
+                <p className="text-sm text-gray-600">
+                  {<p className="text-[#333333] text-sm text-justify" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.description) }} />}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>

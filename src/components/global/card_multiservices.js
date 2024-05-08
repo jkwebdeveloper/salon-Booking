@@ -8,6 +8,15 @@ import { ImFacebook } from "react-icons/im";
 import { BsTwitterX } from "react-icons/bs";
 import { LuBookmark } from "react-icons/lu";
 import { Button } from '@/components';
+import Link from 'next/link';
+
+import QuickModal from "@/components/user/Home/QuickModal";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 function CardMultiServices() {
   return (
@@ -76,8 +85,19 @@ function CardMultiServices() {
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="primary">Book Now</Button>
-          <Button variant="secondary">Quick view</Button>
+          <Button variant="primary" asChild>
+            <Link href={'/details/span-massage/2'}>Book Now</Link>
+          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="secondary">
+                Quick view
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[825px]">
+              <QuickModal />
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
       <hr className="w-full" />
@@ -101,8 +121,19 @@ function CardMultiServices() {
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="primary">Book Now</Button>
-          <Button variant="secondary">Quick view</Button>
+          <Button variant="primary" asChild>
+            <Link href={'/details/span-massage/2'}>Book Now</Link>
+          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="secondary">
+                Quick view
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[825px]">
+              <QuickModal />
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </div>

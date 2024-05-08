@@ -2,14 +2,13 @@ import React from "react";
 import { IoTimeOutline } from "react-icons/io5";
 import { CiLocationOn } from "react-icons/ci";
 
-import { Button, SearchInput } from '@/components';
+import { Button, SearchInput, TimePickerInput } from '@/components';
 import { DatePicker } from "./datepicker";
 
 const FindNearByForm = () => {
   const searchNearyBy = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
-    console.log(form);
     console.log('searching nearby');
   }
   return (
@@ -24,14 +23,15 @@ const FindNearByForm = () => {
           <div className="flex-grow flex-shrink-0 min-h-[1rem] w-[2px] bg-neutral-400"></div>
           <DatePicker />
           <div className="flex-grow flex-shrink-0 min-h-[1rem] w-[2px] bg-neutral-400"></div>
-          <div className="flex items-center w-full gap-3">
-            <IoTimeOutline className="text-2xl" />
-            <input
+          <div className="flex items-center w-full gap-1">
+            <IoTimeOutline className="text-xl" />
+            {/* <input
               datepicker="true"
               type="time"
               placeholder="Select time"
               className="w-full outline-none "
-            />
+            /> */}
+            <TimePickerInput />
           </div>
           <span className="bg-opacity-40 bg-gray-400 lg:h-6 lg:w-[1px] w-full h-[1px] "></span>
           <div className="flex items-center w-full gap-3">

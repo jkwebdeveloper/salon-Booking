@@ -1,3 +1,4 @@
+'use client';
 import { Button, CardMultiServices, Herosection } from "@/components";
 import React from "react";
 import {
@@ -7,20 +8,20 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Slider } from "@/components/ui/slider";
-import { cn } from "@/lib/utils";
 import PopularSalon from "@/components/user/Home/PopularSalon";
+import Vendor from "@/components/ui/cards/vendor";
 
 const ServiceListing = () => {
   return (
-    <div className="space-y-8">
+    <div className="mb-20 space-y-8">
       <Herosection />
       <div className="container space-y-8">
         <p className="text-2xl font-semibold text-black uppercase title heading">
           Search result{" "}
           <span className="text-primary_color">Massage Services</span>
         </p>
-        <div className="flex flex-col min-h-[55dvh] gap-4 px-1 md:flex-row md:px-5 md:mb-10">
-          <div className="shadow-lg rounded-md h-fit md:w-[40%] lg:w-[25%] w-[90%] mx-auto space-y-3 p-4 bg-white">
+        <div className="flex flex-col min-h-[55dvh] xl:gap-10 gap-3 md:flex-row md:mb-10">
+          <div className="shadow-lg md:sticky top-5 rounded-md h-fit md:w-[40%] lg:w-[25%] w-[90%] mx-auto space-y-3 p-4 bg-white">
             <div className="flex items-center justify-between">
               <p className="font-bold">Filters</p>
               <p className="text-sm uppercase">Clear all</p>
@@ -240,7 +241,11 @@ const ServiceListing = () => {
           </div>
           <div className="md:w-4/5 w-[90%] mx-auto space-y-5 h-fit min-h-[350px]">
             <div className="grid items-center grid-cols-1 gap-4 xl:grid-cols-2">
-              <CardMultiServices />
+              <Vendor />
+              <Vendor />
+              <Vendor />
+              <Vendor />
+              <Vendor />
             </div>
           </div>
         </div>

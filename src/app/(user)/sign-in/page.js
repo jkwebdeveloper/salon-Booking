@@ -38,7 +38,7 @@ const Signin = () => {
   };
 
   useEffect(() => {
-    if (user) router.push("/my-account");
+    if (user) router.push("/");
   }, [user, router]);
   return (
     <div className="grid w-screen lg:grid-cols-2">
@@ -77,11 +77,6 @@ const Signin = () => {
                     // pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
                     required
                   />
-                  <input
-                    type="hidden"
-                    name="device_type"
-                    defaultValue={typeof window != 'undefined' && (/Mobi/i.test(window.navigator.userAgent) && 2) || 1}
-                  />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
@@ -98,6 +93,11 @@ const Signin = () => {
                         />
                       )}
                   </button>
+                  <input
+                    type="hidden"
+                    name="device_type"
+                    defaultValue={typeof window != 'undefined' && (/Mobi/i.test(window.navigator.userAgent) && 2) || 1}
+                  />
                 </div>
                 <p className="mb-3 text-xs text-neutral-400">
                   {" "}
