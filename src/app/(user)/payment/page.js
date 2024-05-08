@@ -90,7 +90,7 @@ const PaymentMethod = () => {
             </div>
           </div>
         </div>
-        <div className="md:w-4/5 w-[90%] mx-auto space-y-5 h-fit min-h-[350px] z-2 ">
+        <div className="md:w-[95%] w-[90%] mx-auto space-y-5 h-fit min-h-[350px] z-2 ">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <p className="text-2xl font-semibold">Secure checkout</p>
@@ -197,51 +197,274 @@ const PaymentMethod = () => {
                       <p className="text-[#666666] text-sm">Pay in advance</p>
                     </div>
                   </div>
-                  <div>
+                  <div className="flex items-center gap-2">
                     <Image
-                      src={"/static/images/payment.png"}
+                      src={"/static/images/visacard.png"}
                       alt=""
                       loading="lazy"
                       width={50}
                       height={50}
-                      className="object-cover object-center w-full "
+                      className="object-cover border border-bg-[#B3B3B3] p-1 rounded-lg"
+                    />
+                    <Image
+                      src={"/static/images/mastercard.png"}
+                      alt=""
+                      loading="lazy"
+                      width={50}
+                      height={50}
+                      className="object-cover border border-bg-[#B3B3B3] p-1 rounded-lg"
+                    />
+                    <Image
+                      src={"/static/images/americancard.png"}
+                      alt=""
+                      loading="lazy"
+                      width={50}
+                      height={50}
+                      className="object-cover border border-bg-[#B3B3B3] p-1 rounded-lg"
                     />
                   </div>
                 </div>
               </div>
               <div className="flex w-full py-5 px-2 items-center border border-bg-[#E6E6E6] rounded-lg bg-[#FAFAFA] gap-2">
                 <div className="flex items-center justify-between gap-3">
-                  <input
-                    id="list-radio-license"
-                    type="radio"
-                    value=""
-                    name="list-radio"
-                    class=""
-                  />
+                  <div className="flex items-center gap-3">
+                    <input
+                      id="list-radio-license"
+                      type="radio"
+                      value=""
+                      name="list-radio"
+                      class=""
+                    />
+                    <div>
+                      <p>Pay with PayPal</p>
+                      <p className="text-[#666666] text-sm">Pay in advance</p>
+                    </div>
+                  </div>
                   <div>
-                    <p>Pay with PayPal</p>
-                    <p className="text-[#666666] text-sm">Pay in advance</p>
+                    <Image
+                      src={"/static/images/paypalcard.png"}
+                      alt=""
+                      loading="lazy"
+                      width={50}
+                      height={50}
+                      className="object-cover border border-bg-[#B3B3B3] p-1 rounded-lg"
+                    />
                   </div>
                 </div>
               </div>
               <div className="flex w-full py-5 px-2 items-center border border-bg-[#E6E6E6] rounded-lg bg-[#FAFAFA] gap-2">
                 <div className="flex items-center justify-between gap-3">
-                  <input
-                    id="list-radio-license"
-                    type="radio"
-                    value=""
-                    name="list-radio"
-                    class=""
-                  />
-                  <div>
-                    <p>Pay with wallet balance</p>
-                    <p className="text-[#666666] text-sm">
-                      Your balance : £541.00
-                    </p>
+                  <div className="flex items-center gap-3">
+                    <input
+                      id="list-radio-license"
+                      type="radio"
+                      value=""
+                      name="list-radio"
+                      class=""
+                    />
+                    <div>
+                      <p>Pay with wallet balance</p>
+                      <p className="text-[#666666] text-sm">
+                        Your balance : £541.00
+                      </p>
+                    </div>
                   </div>
+                  <Image
+                    src={"/static/images/walleticon.png"}
+                    alt=""
+                    loading="lazy"
+                    width={50}
+                    height={50}
+                    className="object-cover border border-bg-[#B3B3B3] p-1 rounded-lg"
+                  />
                 </div>
               </div>
             </div>
+            <p className="text-xl">Card details</p>
+            <div className="flex flex-col w-full gap-3 lg:flex-row">
+              <div className="w-full space-y-1 text-left lg:w-1/2">
+                <label htmlFor="fname" className="label_text">
+                  Card Number
+                </label>
+                <input
+                  type="text"
+                  name="first_name"
+                  id="fname"
+                  className="input_field"
+                  placeholder="Card Number"
+                  pattern="[A-Za-z]{4,20}"
+                />
+                <p className="error">Min 4 Character Required</p>
+              </div>
+              <div className="w-full space-y-1 text-left lg:w-1/2">
+                <label htmlFor="lname" className="label_text">
+                  Expires(MM)
+                </label>
+                <input
+                  type="text"
+                  name="last_name"
+                  id="lname"
+                  className="input_field"
+                  placeholder="Month"
+                  pattern="[A-Za-z]{4,20}"
+                />
+                <p className="error">Min 4 Character Required</p>
+              </div>
+              <div className="w-full space-y-1 text-left lg:w-1/2">
+                <label htmlFor="fname" className="label_text">
+                  Expires(YYYY)
+                </label>
+                <input
+                  type="text"
+                  name="first_name"
+                  id="fname"
+                  className="input_field"
+                  placeholder="Year"
+                  pattern="[A-Za-z]{4,20}"
+                />
+                <p className="error">Min 4 Character Required</p>
+              </div>
+              <div className="w-full space-y-1 text-left lg:w-1/2">
+                <label htmlFor="lname" className="label_text">
+                  CVV/CVV2
+                </label>
+                <input
+                  type="text"
+                  name="last_name"
+                  id="lname"
+                  className="input_field"
+                  placeholder="ex. 311"
+                  pattern="[A-Za-z]{4,20}"
+                />
+                <p className="error">Min 4 Character Required</p>
+              </div>
+            </div>
+            <p className="text-xl">Billing Address</p>
+            <div className="flex flex-col w-full gap-3 lg:flex-row">
+              <div className="w-full space-y-1 text-left lg:w-1/2">
+                <label htmlFor="email" className="label_text">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  className="input_field"
+                  placeholder="Enter your email"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                />
+                <p className="error">Enter Valid Email id</p>
+              </div>
+              <div className="w-full space-y-1 text-left lg:w-1/2">
+                <label htmlFor="phone" className="label_text">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  name="phone_number"
+                  id="phone"
+                  className="input_field"
+                  placeholder="Enter Your Phone Number"
+                  pattern="[0-9]{10}"
+                  maxLength={10}
+                />
+                <p className="error">Enter Valid Phone number</p>
+              </div>
+            </div>
+            <div className="flex flex-col w-full gap-3 lg:flex-row">
+              <div className="w-full space-y-1 text-left lg:w-1/2">
+                <label htmlFor="email" className="label_text">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  className="input_field"
+                  placeholder="Enter your email"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                />
+                <p className="error">Enter Valid Email id</p>
+              </div>
+              <div className="w-full space-y-1 text-left lg:w-1/2">
+                <label htmlFor="phone" className="label_text">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  name="phone_number"
+                  id="phone"
+                  className="input_field"
+                  placeholder="Enter Your Phone Number"
+                  pattern="[0-9]{10}"
+                  maxLength={10}
+                />
+                <p className="error">Enter Valid Phone number</p>
+              </div>
+            </div>
+            <div className="w-full space-y-1 text-left">
+              <label htmlFor="phone" className="label_text">
+                Address line 1
+              </label>
+              <input
+                type="tel"
+                name="phone_number"
+                id="phone"
+                className="input_field"
+                placeholder="Enter Your Address line 1"
+                pattern="[0-9]{10}"
+                maxLength={10}
+              />
+              <p className="error">Enter Valid Address line 1</p>
+            </div>
+            <div className="flex flex-col w-full gap-3 lg:flex-row">
+              <div className="w-full space-y-1 text-left lg:w-1/2">
+                <label htmlFor="email" className="label_text">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  className="input_field"
+                  placeholder="Enter your email"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                />
+                <p className="error">Enter Valid Email id</p>
+              </div>
+              <div className="w-full space-y-1 text-left lg:w-1/2">
+                <label htmlFor="phone" className="label_text">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  name="phone_number"
+                  id="phone"
+                  className="input_field"
+                  placeholder="Enter Your Phone Number"
+                  pattern="[0-9]{10}"
+                  maxLength={10}
+                />
+                <p className="error">Enter Valid Phone number</p>
+              </div>
+            </div>
+            <p>By continuing you agree to our Booking Terms.</p>
+            <Button variant="primary">Pay Now</Button>
+            <p className="font-medium">Venue Policies</p>
+            <p className="text-[#EA2C6D]">
+              Right now, if you need to cancel you will receive a full refund
+            </p>
+            <p>Reschedule policy</p>
+            <p className="text-[#666666]">
+              If your plans change, you can reschedule your booking up to 1 hour
+              before your appointment.
+            </p>
+            <p>Cancellation policy</p>
+            <p cclassName="text-[#666666]">
+              If you need to, you can cancel your booking up to 48 hours before
+              your appointment and receive a full refund to your original
+              payment method.
+            </p>
           </div>
         </div>
       </div>
