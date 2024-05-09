@@ -28,14 +28,17 @@ const Staff = () => {
   const [addTeam, setAddTeam] = useState(false);
   const [currentTab, setCurrentTab] = useState("schedule");
   const [loading, setLoading] = useState(true);
-  const [editStaff, setEditStaff] = useState('');
+  const [editStaff, setEditStaff] = useState("");
   const [staffs, setStaffs] = useState([]);
 
-  const changeTab = (tab = 'basic') => setCurrentTab(tab);
+  const changeTab = (tab = "basic") => setCurrentTab(tab);
 
   const getStaff = useCallback(async () => {
     setLoading(true);
-    const res = await GET.request({ url: '/vendor/get-all-staffs', token: vendor?.api_token });
+    const res = await GET.request({
+      url: "/vendor/get-all-staffs",
+      token: vendor?.api_token,
+    });
     setLoading(false);
     if (res && res.code == 200) {
       setStaffs(res.data);
@@ -43,28 +46,28 @@ const Staff = () => {
   }, []);
 
   useEffect(() => {
-    currentTab == 'staff' && getStaff();
+    currentTab == "staff" && getStaff();
   }, [currentTab]);
 
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
         <Button
-          variant={currentTab == 'schedule' ? "primary" : "disable"}
-          onClick={e => changeTab('schedule')}
+          variant={currentTab == "schedule" ? "primary" : "disable"}
+          onClick={(e) => changeTab("schedule")}
         >
           Staff Schedule
         </Button>
         <Button
-          variant={currentTab == 'staff' ? "primary" : "disable"}
-          onClick={e => changeTab('staff')}
+          variant={currentTab == "staff" ? "primary" : "disable"}
+          onClick={(e) => changeTab("staff")}
         >
           My staff
         </Button>
       </div>
       <div className="w-full p-4 space-y-3 bg-white rounded-xl">
         {/* Staff Schedule section  start */}
-        {currentTab == 'schedule' && (
+        {currentTab == "schedule" && (
           <>
             <p className="text-2xl font-semibold">Staff Schedule</p>
             <div className="flex items-end justify-between">
@@ -123,7 +126,7 @@ const Staff = () => {
                     <Dialog open={userModal}>
                       <DialogTrigger
                         onClick={(e) => setUserModal(true)}
-                        className="text-[#8E8EA1] text-xl"
+                        className="text-[#8E8EA1] text-lg"
                       >
                         <th
                           scope="row"
@@ -165,7 +168,7 @@ const Staff = () => {
             </div>
           </>
         )}
-        {currentTab == 'staff' && (
+        {currentTab == "staff" && (
           <>
             <div className="flex items-center justify-between">
               <p className="text-2xl font-semibold">Staff List</p>
@@ -176,36 +179,66 @@ const Staff = () => {
                 >
                   + Add New
                 </DialogTrigger>
-                <DialogContent close={e => {
-                  setAddTeam(false);
-                  setEditStaff('');
-                }} className="sm:max-w-[900px]">
+                <DialogContent
+                  close={(e) => {
+                    setAddTeam(false);
+                    setEditStaff("");
+                  }}
+                  className="sm:max-w-[900px]"
+                >
                   <DialogTitle>Add Team Member</DialogTitle>
-                  <AddTeam setAddTeam={setAddTeam} setStaffs={setStaffs} staffs={staffs} setEditStaff={setEditStaff} editStaff={editStaff} />
+                  <AddTeam
+                    setAddTeam={setAddTeam}
+                    setStaffs={setStaffs}
+                    staffs={staffs}
+                    setEditStaff={setEditStaff}
+                    editStaff={editStaff}
+                  />
                 </DialogContent>
               </Dialog>
             </div>
             <hr />
-            {loading && <PageLoader /> || <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {staffs.length > 0 && staffs.map((staff, index) => {
-                return (
-                  <div key={v4()} className="flex items-center justify-center py-5 rounded-lg shadow-lg">
-                    <div className="space-y-5 text-center">
-                      <div className="flex items-center justify-center w-16 h-16 mx-auto overflow-hidden bg-green-300 rounded-full">
-                        {staff.photo && <Image src={process.env.NEXT_PUBLIC_SERVERURL + staff.photo} width={100} height={100} /> || <p className="text-xl text-white ">
-                          NS
-                        </p>}
+            {(loading && <PageLoader />) || (
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {(staffs.length > 0 &&
+                  staffs.map((staff, index) => {
+                    return (
+                      <div
+                        key={v4()}
+                        className="flex items-center justify-center py-5 rounded-lg shadow-lg"
+                      >
+                        <div className="space-y-5 text-center">
+                          <div className="flex items-center justify-center w-16 h-16 mx-auto overflow-hidden bg-green-300 rounded-full">
+                            {(staff.photo && (
+                              <Image
+                                src={
+                                  process.env.NEXT_PUBLIC_SERVERURL +
+                                  staff.photo
+                                }
+                                width={100}
+                                height={100}
+                              />
+                            )) || <p className="text-xl text-white ">NS</p>}
+                          </div>
+                          <p className="text-xl">
+                            {staff?.first_name} {staff?.last_name}
+                          </p>
+                          <Button
+                            variant="primary"
+                            onClick={(e) => {
+                              setEditStaff(staff);
+                              setAddTeam(true);
+                            }}
+                          >
+                            Edit
+                          </Button>
+                        </div>
                       </div>
-                      <p className="text-xl">{staff?.first_name} {staff?.last_name}</p>
-                      <Button variant="primary" onClick={e => {
-                        setEditStaff(staff);
-                        setAddTeam(true);
-                      }}>Edit</Button>
-                    </div>
-                  </div>
-                )
-              }) || 'Staff Member Not Found'}
-            </div>}
+                    );
+                  })) ||
+                  "Staff Member Not Found"}
+              </div>
+            )}
           </>
         )}
       </div>
