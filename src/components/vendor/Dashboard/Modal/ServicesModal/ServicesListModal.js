@@ -1,7 +1,24 @@
 import Button from "@/components/ui/button";
-import React from "react";
+import React, { useState } from "react";
 
 const ServicesListModal = () => {
+  const [pricingInputs1, setPricingInputs1] = useState([
+    { firstName: "", lastName: "" },
+  ]);
+  const [pricingInputs2, setPricingInputs2] = useState([
+    { firstName: "", lastName: "" },
+  ]);
+
+  const addPricingInput = (inputs, setInputs) => {
+    setInputs([...inputs, { firstName: "", lastName: "" }]);
+  };
+
+  const handleInputChange = (index, inputs, setInputs, event) => {
+    const { name, value } = event.target;
+    const updatedInputs = [...inputs];
+    updatedInputs[index][name] = value;
+    setInputs(updatedInputs);
+  };
   return (
     <div className="space-y-3">
       <div className="flex items-start w-full gap-4">
@@ -113,150 +130,131 @@ const ServicesListModal = () => {
           <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3">
             <p>Nail Extensions</p>
             <hr />
-            <div className="flex flex-col w-full gap-3 lg:flex-row">
-              <div className="w-full space-y-1 text-left lg:w-1/2">
-                <input
-                  type="text"
-                  name="first_name"
-                  id="fname"
-                  className="input_field"
-                  placeholder="Enter your Name"
-                  pattern="[A-Za-z]{4,20}"
-                  required
-                />
+            {pricingInputs1.map((input, index) => (
+              <div
+                key={index}
+                className="flex flex-col w-full gap-3 lg:flex-row"
+              >
+                <div className="w-full space-y-1 text-left lg:w-1/2">
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={input.firstName}
+                    onChange={(e) =>
+                      handleInputChange(
+                        index,
+                        pricingInputs1,
+                        setPricingInputs1,
+                        e
+                      )
+                    }
+                    className="input_field"
+                    placeholder="Enter your Name"
+                    pattern="[A-Za-z]{4,20}"
+                    required
+                  />
+                </div>
+                <div className="w-full space-y-1 text-left lg:w-1/2">
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={input.lastName}
+                    onChange={(e) =>
+                      handleInputChange(
+                        index,
+                        pricingInputs1,
+                        setPricingInputs1,
+                        e
+                      )
+                    }
+                    className="input_field"
+                    placeholder="Enter your name"
+                    pattern="[A-Za-z]{4,20}"
+                    required
+                  />
+                </div>
               </div>
-              <div className="w-full space-y-1 text-left lg:w-1/2">
-                <input
-                  type="text"
-                  name="last_name"
-                  id="lname"
-                  className="input_field"
-                  placeholder="Enter your name"
-                  pattern="[A-Za-z]{4,20}"
-                  required
-                />
-              </div>
-              <div className="w-full space-y-1 text-left lg:w-1/2">
-                <input
-                  type="text"
-                  name="last_name"
-                  id="lname"
-                  className="input_field"
-                  placeholder="Enter your name"
-                  pattern="[A-Za-z]{4,20}"
-                  required
-                />
-              </div>
-            </div>
-            <div className="flex flex-col w-full gap-3 lg:flex-row">
-              <div className="w-full space-y-1 text-left lg:w-1/2">
-                <input
-                  type="text"
-                  name="first_name"
-                  id="fname"
-                  className="input_field"
-                  placeholder="Enter your Name"
-                  pattern="[A-Za-z]{4,20}"
-                  required
-                />
-              </div>
-              <div className="w-full space-y-1 text-left lg:w-1/2">
-                <input
-                  type="text"
-                  name="last_name"
-                  id="lname"
-                  className="input_field"
-                  placeholder="Enter your name"
-                  pattern="[A-Za-z]{4,20}"
-                  required
-                />
-              </div>
-              <div className="w-full space-y-1 text-left lg:w-1/2">
-                <input
-                  type="text"
-                  name="last_name"
-                  id="lname"
-                  className="input_field"
-                  placeholder="Enter your name"
-                  pattern="[A-Za-z]{4,20}"
-                  required
-                />
-              </div>
-            </div>
+            ))}
+            <p
+              className="underline text-[#0AADA4] font-semibold text-right cursor-pointer"
+              onClick={() => addPricingInput(pricingInputs1, setPricingInputs1)}
+            >
+              Add more pricing
+            </p>
           </div>
           <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3">
-            <p>Nail Extensions</p>
+            <p>Nails Manicure</p>
             <hr />
-            <div className="flex flex-col w-full gap-3 lg:flex-row">
-              <div className="w-full space-y-1 text-left lg:w-1/2">
-                <input
-                  type="text"
-                  name="first_name"
-                  id="fname"
-                  className="input_field"
-                  placeholder="Enter your Name"
-                  pattern="[A-Za-z]{4,20}"
-                  required
-                />
+            {pricingInputs2.map((input, index) => (
+              <div
+                key={index}
+                className="flex flex-col w-full gap-3 lg:flex-row"
+              >
+                <div className="w-full space-y-1 text-left lg:w-1/2">
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={input.firstName}
+                    onChange={(e) =>
+                      handleInputChange(
+                        index,
+                        pricingInputs2,
+                        setPricingInputs2,
+                        e
+                      )
+                    }
+                    className="input_field"
+                    placeholder="Enter your Name"
+                    pattern="[A-Za-z]{4,20}"
+                    required
+                  />
+                </div>
+                <div className="w-full space-y-1 text-left lg:w-1/2">
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={input.lastName}
+                    onChange={(e) =>
+                      handleInputChange(
+                        index,
+                        pricingInputs2,
+                        setPricingInputs2,
+                        e
+                      )
+                    }
+                    className="input_field"
+                    placeholder="Enter your name"
+                    pattern="[A-Za-z]{4,20}"
+                    required
+                  />
+                </div>
+                <div className="w-full space-y-1 text-left lg:w-1/2">
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={input.lastName}
+                    onChange={(e) =>
+                      handleInputChange(
+                        index,
+                        pricingInputs2,
+                        setPricingInputs2,
+                        e
+                      )
+                    }
+                    className="input_field"
+                    placeholder="Enter your name"
+                    pattern="[A-Za-z]{4,20}"
+                    required
+                  />
+                </div>
               </div>
-              <div className="w-full space-y-1 text-left lg:w-1/2">
-                <input
-                  type="text"
-                  name="last_name"
-                  id="lname"
-                  className="input_field"
-                  placeholder="Enter your name"
-                  pattern="[A-Za-z]{4,20}"
-                  required
-                />
-              </div>
-              <div className="w-full space-y-1 text-left lg:w-1/2">
-                <input
-                  type="text"
-                  name="last_name"
-                  id="lname"
-                  className="input_field"
-                  placeholder="Enter your name"
-                  pattern="[A-Za-z]{4,20}"
-                  required
-                />
-              </div>
-            </div>
-            <div className="flex flex-col w-full gap-3 lg:flex-row">
-              <div className="w-full space-y-1 text-left lg:w-1/2">
-                <input
-                  type="text"
-                  name="first_name"
-                  id="fname"
-                  className="input_field"
-                  placeholder="Enter your Name"
-                  pattern="[A-Za-z]{4,20}"
-                  required
-                />
-              </div>
-              <div className="w-full space-y-1 text-left lg:w-1/2">
-                <input
-                  type="text"
-                  name="last_name"
-                  id="lname"
-                  className="input_field"
-                  placeholder="Enter your name"
-                  pattern="[A-Za-z]{4,20}"
-                  required
-                />
-              </div>
-              <div className="w-full space-y-1 text-left lg:w-1/2">
-                <input
-                  type="text"
-                  name="last_name"
-                  id="lname"
-                  className="input_field"
-                  placeholder="Enter your name"
-                  pattern="[A-Za-z]{4,20}"
-                  required
-                />
-              </div>
-            </div>
+            ))}
+            <p
+              className="underline text-[#0AADA4] font-semibold text-right cursor-pointer"
+              onClick={() => addPricingInput(pricingInputs2, setPricingInputs2)}
+            >
+              Add more pricing
+            </p>
           </div>
           <div className="flex items-center gap-3">
             <Button variant="primary">Treatments</Button>
