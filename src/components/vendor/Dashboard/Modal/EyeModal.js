@@ -15,7 +15,7 @@ const EyeModal = ({ hooks, data }) => {
 
   const deleteCustomer = async () => {
     setLoading(true);
-    const resp = await POST.request({ url: '/vendor/delete-customer', form: { id: viewCustomer.id }, token: vendor?.api_token });
+    const resp = await POST.request({ url: '/vendor/delete-customer', form: { customers_id: viewCustomer.id }, token: vendor?.api_token });
     setLoading(false);
     if (resp && resp.code == 200) {
       setCustomers(customers.filter(c => c.id !== viewCustomer.id));

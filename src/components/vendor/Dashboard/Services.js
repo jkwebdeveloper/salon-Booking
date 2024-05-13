@@ -190,7 +190,7 @@ const Services = () => {
           <>
             <div className="w-full space-y-3 bg-white rounded-xl">
               {/* Create Voucher section start */}
-              <div className="p-4 space-y-3">
+              <form className="p-4 space-y-3">
                 <div className="flex items-center justify-between">
                   <p className="text-2xl font-semibold">Create Voucher</p>
                   <IoMdClose
@@ -302,18 +302,9 @@ const Services = () => {
                     className="input_field"
                     placeholder="Write your thoughts here..."
                   ></textarea>
-                  <Button variant="primary">Create</Button>
+                  <Button variant="primary" type="submit">Create</Button>
                 </div>
-              </div>
-              {/* Create Voucher section End */}
-              {/* <div className="p-4 space-y-3">
-                <p className="text-2xl font-semibold">Edit Voucher</p>
-                <IoMdClose
-                  className="text-2xl cursor-pointer"
-                  onClick={() => setCreateVoucher(false)}
-                />
-
-              </div> */}
+              </form>
             </div>
           </>
         ) : (
