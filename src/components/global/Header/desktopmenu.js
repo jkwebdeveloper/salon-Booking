@@ -9,6 +9,7 @@ import Link from "next/link";
 
 import Image from "next/image";
 import { GET } from "@/app/api/get";
+import useCategory from "@/hooks/usecategory";
 
 
 const menuItems = {
@@ -207,27 +208,17 @@ const menuItems = {
 };
 
 export default function DesktopMenu({ theme, themeMode }) {
-  const [openMenu, setOpen] = useState();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mainCat, setMainCat] = useState();
-
-  const getCategories = useCallback(async () => {
-    const resp = await GET.request({ url: '/get-categories' });
-    if (resp && resp?.code == 200) {
-      setMainCat(resp.data);
-    }
-  }, []);
-
+  const mainCat = useCategory();
+  // const [openMenu, setOpen] = useState();
   useEffect(() => {
-    getCategories();
-    document.addEventListener("click", (e) => {
-      if (e.target.closest(".menu")) return;
-      setOpen(null);
-    });
-    const topMenu = document.querySelector('#topMenu');
-    topMenu.addEventListener("mouseover", (e) => {
-      setOpen(null);
-    });
+    // document.addEventListener("click", (e) => {
+    //   if (e.target.closest(".menu")) return;
+    //   setOpen(null);
+    // });
+    // const topMenu = document.querySelector('#topMenu');
+    // topMenu.addEventListener("mouseover", (e) => {
+    //   setOpen(null);
+    // });
   }, []);
 
   return (

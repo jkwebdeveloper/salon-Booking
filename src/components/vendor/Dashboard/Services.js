@@ -16,11 +16,29 @@ import {
 } from "@/components/ui/dialog";
 import ServicesListModal from "./Modal/ServicesModal/ServicesListModal";
 import Label from "@/components/ui/form/label";
+import useCategory from "@/hooks/usecategory";
 
 const Services = () => {
-  const [addCustomer, setAddCustomer] = useState(false);
+  const mainCat = useCategory();
+  const [serviceGroup, setServiceGroup] = useState([
+    {
+      "service_group_id": "11",
+      "categories_id": "1",
+      "sub_categories_id": "2",
+      "service_title": "service groupid1cat1sub2",
+      "duration": "30",
+      "price": "20"
+    },
+    {
+      "service_group_id": "1",
+      "categories_id": "2",
+      "sub_categories_id": "1",
+      "service_title": "service groupid1cat2sub1",
+      "duration": "40",
+      "price": "60"
+    }
+  ]);
   const [addtreatment, setAddtreatment] = useState(false);
-  const [editService, seteditService] = useState(false);
 
   const [treatment, setTreatment] = useState(true);
   const [voucher, setVoucher] = useState(false);
@@ -324,11 +342,11 @@ const Services = () => {
                 Gift Voucher
               </Button>
             </div>
-            {treatment && (
-              <>
-                <div className="w-full p-4 space-y-3 bg-white rounded-xl">
+            {treatment &&
+              <div className="w-full p-4 space-y-5 bg-white rounded-xl">
+                <div className="flex justify-between gap-5">
+                  <p className="text-2xl font-semibold">Treatments</p>
                   <div className="flex items-center justify-between">
-                    <p className="text-2xl font-semibold">Treatments</p>
                     <Dialog open={addtreatment} className="w-1/2">
                       <DialogTrigger
                         onClick={(e) => setAddtreatment(true)}
@@ -345,81 +363,111 @@ const Services = () => {
                       </DialogContent>
                     </Dialog>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <p className="text-xl font-semibold">Massage</p>
-                    <Dialog open={addCustomer} className="w-11/12">
-                      <DialogTrigger onClick={(e) => setAddCustomer(true)}>
-                        <TbCirclePlus className="text-[#0AADA4]" />
-                      </DialogTrigger>
-                      <DialogContent
-                        close={setAddCustomer}
-                        className="sm:max-w-[1025px]"
-                      >
-                        <DialogTitle>Service List</DialogTitle>
-                        <ServicesListModal setAddCustomer={setAddCustomer} />
-                      </DialogContent>
-                    </Dialog>
-                  </div>
-                  <div className="grid items-center grid-cols-1 xl:grid-cols-2 lg:gap-4">
-                    <Dialog open={editService} className="w-11/12">
-                      <DialogTrigger onClick={(e) => seteditService(true)}>
-                        <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3">
-                          <p className="font-semibold">Couple Massage</p>
-                          <div className="flex items-center justify-between">
-                            <p className="text-sm">02 h</p>
-                            <p className="text-sm">
-                              Couples Massage for 2 hours
-                            </p>
-                            <p className="text-sm font-bold">£349 €369</p>
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <p className="text-sm">02 h</p>
-                            <p className="text-sm">
-                              Couples Massage for 2 hours
-                            </p>
-                            <p className="text-sm font-bold">£349 €369</p>
-                          </div>
-                        </div>
-                      </DialogTrigger>
-                      <DialogContent
-                        close={seteditService}
-                        className="sm:max-w-[725px]"
-                      >
-                        <DialogTitle>Edit Service</DialogTitle>
-                        <EditServiceModal seteditService={seteditService} />
-                      </DialogContent>
-                    </Dialog>
-
-                    <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3">
-                      <p className="font-semibold">Couple Massage</p>
-                      <div className="flex items-center justify-between">
-                        <p className="text-sm">02 h</p>
-                        <p className="text-sm">Couples Massage for 2 hours</p>
-                        <p className="text-sm font-bold">£349 €369</p>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <p className="text-sm">02 h</p>
-                        <p className="text-sm">Couples Massage for 2 hours</p>
-                        <p className="text-sm font-bold">£349 €369</p>
-                      </div>
-                    </div>
-                    <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3">
-                      <p className="font-semibold">Couple Massage</p>
-                      <div className="flex items-center justify-between">
-                        <p className="text-sm">02 h</p>
-                        <p className="text-sm">Couples Massage for 2 hours</p>
-                        <p className="text-sm font-bold">£349 €369</p>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <p className="text-sm">02 h</p>
-                        <p className="text-sm">Couples Massage for 2 hours</p>
-                        <p className="text-sm font-bold">£349 €369</p>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-              </>
-            )}
+                {serviceGroup.map((service) => {
+                  const category = !mainCat?.loading && mainCat.data.filter((cat) => +cat.id === +service.service_group_id)[0];
+                  return <div className="w-full space-y-2 bg-white rounded-xl">
+                    <div className="flex items-center gap-2">
+                      <p className="text-xl font-semibold">{category?.title}</p>
+                      <Dialog className="w-11/12">
+                        <DialogTrigger>
+                          <TbCirclePlus className="text-[#0AADA4]" />
+                        </DialogTrigger>
+                        <DialogContent
+                          className="sm:max-w-[1025px]"
+                        >
+                          <DialogTitle>Service List</DialogTitle>
+                          <ServicesListModal service={service} />
+                        </DialogContent>
+                      </Dialog>
+                    </div>
+                    <div className="grid items-center grid-cols-1 gap-4 xl:grid-cols-2">
+                      <Dialog className="w-11/12">
+                        <DialogTrigger>
+                          <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3">
+                            <p className="font-semibold text-start">Couple Massage</p>
+                            <div className="flex items-center justify-between">
+                              <p className="text-sm">02 h</p>
+                              <p className="text-sm">
+                                Couples Massage for 2 hours
+                              </p>
+                              <p className="text-sm font-bold">£349 €369</p>
+                            </div>
+                            <div className="flex items-center justify-between">
+                              <p className="text-sm">02 h</p>
+                              <p className="text-sm">
+                                Couples Massage for 2 hours
+                              </p>
+                              <p className="text-sm font-bold">£349 €369</p>
+                            </div>
+                          </div>
+                        </DialogTrigger>
+                        <DialogContent
+                          className="sm:max-w-[725px]"
+                        >
+                          <DialogTitle>Edit Service</DialogTitle>
+                          <EditServiceModal />
+                        </DialogContent>
+                      </Dialog>
+                      <Dialog className="w-11/12">
+                        <DialogTrigger>
+                          <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3">
+                            <p className="font-semibold text-start">Couple Massage</p>
+                            <div className="flex items-center justify-between">
+                              <p className="text-sm">02 h</p>
+                              <p className="text-sm">
+                                Couples Massage for 2 hours
+                              </p>
+                              <p className="text-sm font-bold">£349 €369</p>
+                            </div>
+                            <div className="flex items-center justify-between">
+                              <p className="text-sm">02 h</p>
+                              <p className="text-sm">
+                                Couples Massage for 2 hours
+                              </p>
+                              <p className="text-sm font-bold">£349 €369</p>
+                            </div>
+                          </div>
+                        </DialogTrigger>
+                        <DialogContent
+                          className="sm:max-w-[725px]"
+                        >
+                          <DialogTitle>Edit Service</DialogTitle>
+                          <EditServiceModal />
+                        </DialogContent>
+                      </Dialog>
+                      <Dialog className="w-11/12">
+                        <DialogTrigger>
+                          <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3">
+                            <p className="font-semibold text-start">Couple Massage</p>
+                            <div className="flex items-center justify-between">
+                              <p className="text-sm">02 h</p>
+                              <p className="text-sm">
+                                Couples Massage for 2 hours
+                              </p>
+                              <p className="text-sm font-bold">£349 €369</p>
+                            </div>
+                            <div className="flex items-center justify-between">
+                              <p className="text-sm">02 h</p>
+                              <p className="text-sm">
+                                Couples Massage for 2 hours
+                              </p>
+                              <p className="text-sm font-bold">£349 €369</p>
+                            </div>
+                          </div>
+                        </DialogTrigger>
+                        <DialogContent
+                          className="sm:max-w-[725px]"
+                        >
+                          <DialogTitle>Edit Service</DialogTitle>
+                          <EditServiceModal />
+                        </DialogContent>
+                      </Dialog>
+                    </div>
+                  </div>
+                })}
+              </div>
+            }
             {voucher && (
               <>
                 <div className="flex items-center justify-between">

@@ -184,3 +184,9 @@ body .swiper {
   background-color: #711f7e !important;
   color: white !important;
 }
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
