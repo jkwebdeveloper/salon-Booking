@@ -50,10 +50,11 @@ const EditServiceModal = () => {
           />
         </div>
       </div>
-      <p className="text-sm">Pricing level name *</p>
+
       {pricingInputs2.map((input, index) => (
         <div key={index} className="flex flex-col w-full gap-3 lg:flex-row">
           <div className="w-full space-y-1 text-left lg:w-1/2">
+            <p className="text-sm">Pricing level name *</p>
             <input
               type="text"
               name="firstName"
@@ -68,6 +69,37 @@ const EditServiceModal = () => {
             />
           </div>
           <div className="w-full space-y-1 text-left lg:w-1/2">
+            <p className="text-sm">Duration *</p>
+            {/* <input
+              type="text"
+              name="lastName"
+              value={input.lastName}
+              onChange={(e) =>
+                handleInputChange(index, pricingInputs2, setPricingInputs2, e)
+              }
+              className="input_field"
+              placeholder="Enter your name"
+              pattern="[A-Za-z]{4,20}"
+              required
+            /> */}
+            <Select>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select a fruit" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Fruits</SelectLabel>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="w-full space-y-1 text-left lg:w-1/2">
+            <p className="text-sm">Price *</p>
             <input
               type="text"
               name="lastName"
@@ -82,20 +114,7 @@ const EditServiceModal = () => {
             />
           </div>
           <div className="w-full space-y-1 text-left lg:w-1/2">
-            <input
-              type="text"
-              name="lastName"
-              value={input.lastName}
-              onChange={(e) =>
-                handleInputChange(index, pricingInputs2, setPricingInputs2, e)
-              }
-              className="input_field"
-              placeholder="Enter your name"
-              pattern="[A-Za-z]{4,20}"
-              required
-            />
-          </div>
-          <div className="w-full space-y-1 text-left lg:w-1/2">
+            <p className="text-sm">Sale Price *</p>
             <input
               type="text"
               name="lastName"
