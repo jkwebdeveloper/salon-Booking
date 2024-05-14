@@ -1,5 +1,12 @@
 import Button from "@/components/ui/button";
 import React, { useState } from "react";
+import { BsPencilFill } from "react-icons/bs";
+import { RiDeleteBin5Line } from "react-icons/ri";
+import { IoMdClose } from "react-icons/io";
+import { TbCirclePlus } from "react-icons/tb";
+import EditServiceModal from "./Modal/ServicesModal/EditServiceModal";
+import Image from "next/image";
+
 import NewTreatmentModal from "./Modal/ServicesModal/NewTreatmentModal";
 import {
   Dialog,
@@ -9,12 +16,6 @@ import {
 } from "@/components/ui/dialog";
 import ServicesListModal from "./Modal/ServicesModal/ServicesListModal";
 import Label from "@/components/ui/form/label";
-import { BsPencilFill } from "react-icons/bs";
-import { RiDeleteBin5Line } from "react-icons/ri";
-import { IoMdClose } from "react-icons/io";
-import { TbCirclePlus } from "react-icons/tb";
-import EditServiceModal from "./Modal/ServicesModal/EditServiceModal";
-import Image from "next/image";
 
 const Services = () => {
   const [addCustomer, setAddCustomer] = useState(false);
