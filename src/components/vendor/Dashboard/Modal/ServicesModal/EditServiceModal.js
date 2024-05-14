@@ -13,22 +13,27 @@ import {
 
 const EditServiceModal = () => {
   const [pricingInputs2, setPricingInputs2] = useState([
-    { firstName: "", lastName: "" },
+    { levelname: "", duration: "", price: "", saleprice: "" },
   ]);
-  const [pricingInputs, setPricingInputs] = useState([{ firstName: "" }]);
 
   const addPricingInput = (inputs, setInputs) => {
-    setInputs([...inputs, { firstName: "", lastName: "" }]);
+    setInputs([...inputs, { levelname: "", duration: "", price: "", saleprice: "" }]);
   };
 
   const handleInputChange = (index, inputs, setInputs, event) => {
-    const { name, value } = event.target;
+    const { name, value } = event.target || event;
     const updatedInputs = [...inputs];
     updatedInputs[index][name] = value;
     setInputs(updatedInputs);
   };
+
+  const editService = async (e) => {
+    e.preventDefault();
+    console.log("Service edited", new FormData(e.target));
+  };
+
   return (
-    <div className="w-full space-y-4">
+    <form className="w-full space-y-4" noValidate onSubmit={e => editService(e)}>
       <div className="flex flex-col w-full gap-3 lg:flex-row">
         <div className="w-full space-y-1 text-left ">
           <Label htmlFor="first_name" text="Treatment" />
@@ -58,8 +63,8 @@ const EditServiceModal = () => {
             <p className="text-sm">Pricing level name *</p>
             <input
               type="text"
-              name="firstName"
-              value={input.firstName.price}
+              name="levelname"
+              value={input.levelname}
               onChange={(e) =>
                 handleInputChange(index, pricingInputs2, setPricingInputs2, e)
               }
@@ -73,8 +78,8 @@ const EditServiceModal = () => {
             <p className="text-sm">Duration *</p>
             {/* <input
               type="text"
-              name="lastName"
-              value={input.lastName}
+              name="price"
+              value={input.price}
               onChange={(e) =>
                 handleInputChange(index, pricingInputs2, setPricingInputs2, e)
               }
@@ -83,7 +88,7 @@ const EditServiceModal = () => {
               pattern="[A-Za-z]{4,20}"
               required
             /> */}
-            <Select>
+            <Select onValueChange={e => handleInputChange(index, pricingInputs2, setPricingInputs2, { duration: e })}>
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select a fruit" />
               </SelectTrigger>
@@ -103,8 +108,8 @@ const EditServiceModal = () => {
             <p className="text-sm">Price *</p>
             <input
               type="text"
-              name="fristname"
-              value={input.firstName.price}
+              name="price"
+              value={input.price}
               onChange={(e) =>
                 handleInputChange(index, pricingInputs2, setPricingInputs2, e)
               }
@@ -118,9 +123,10 @@ const EditServiceModal = () => {
             <p className="text-sm">Sale Price *</p>
             <input
               type="text"
-              name="lastName"
+              name="saleprice"
+              value={input.saleprice}
               onChange={(e) =>
-                handleInputChange(index, pricingInputs, setPricingInputs, e)
+                handleInputChange(index, pricingInputs2, setPricingInputs2, e)
               }
               className="input_field"
               placeholder="Enter your name"
@@ -147,9 +153,9 @@ const EditServiceModal = () => {
       </div>
       <div className="flex items-center justify-center gap-3">
         <Button variant="disable">Cancel</Button>
-        <Button variant="primary">Save</Button>
+        <Button type="submit" variant="primary">Save</Button>
       </div>
-    </div>
+    </form>
   );
 };
 
