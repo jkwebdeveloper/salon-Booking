@@ -227,7 +227,7 @@ export default function DesktopMenu({ theme, themeMode }) {
         className="flex items-center justify-center mx-auto"
         aria-label="Global"
       >
-        {mainCat?.map((navItem, index) => {
+        {!mainCat?.loading && mainCat.data?.map((navItem, index) => {
           return (
             <Link
               href={'/service/' + (navItem.slug_url || '#')}
