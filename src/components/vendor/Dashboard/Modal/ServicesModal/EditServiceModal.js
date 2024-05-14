@@ -15,6 +15,7 @@ const EditServiceModal = () => {
   const [pricingInputs2, setPricingInputs2] = useState([
     { firstName: "", lastName: "" },
   ]);
+  const [pricingInputs, setPricingInputs] = useState([{ firstName: "" }]);
 
   const addPricingInput = (inputs, setInputs) => {
     setInputs([...inputs, { firstName: "", lastName: "" }]);
@@ -58,7 +59,7 @@ const EditServiceModal = () => {
             <input
               type="text"
               name="firstName"
-              value={input.firstName}
+              value={input.firstName.price}
               onChange={(e) =>
                 handleInputChange(index, pricingInputs2, setPricingInputs2, e)
               }
@@ -102,8 +103,8 @@ const EditServiceModal = () => {
             <p className="text-sm">Price *</p>
             <input
               type="text"
-              name="lastName"
-              value={input.lastName}
+              name="fristname"
+              value={input.firstName.price}
               onChange={(e) =>
                 handleInputChange(index, pricingInputs2, setPricingInputs2, e)
               }
@@ -118,9 +119,8 @@ const EditServiceModal = () => {
             <input
               type="text"
               name="lastName"
-              value={input.lastName}
               onChange={(e) =>
-                handleInputChange(index, pricingInputs2, setPricingInputs2, e)
+                handleInputChange(index, pricingInputs, setPricingInputs, e)
               }
               className="input_field"
               placeholder="Enter your name"
