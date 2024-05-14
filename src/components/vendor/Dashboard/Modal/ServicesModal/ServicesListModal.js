@@ -11,14 +11,15 @@ import {
 } from "@/components/ui/select";
 const ServicesListModal = () => {
   const [pricingInputs1, setPricingInputs1] = useState([
-    { firstName: "", lastName: "", price: "" },
+    { firstName: "", lastName: "" },
   ]);
   const [pricingInputs2, setPricingInputs2] = useState([
     { firstName: "", lastName: "" },
   ]);
+  const [pricingInputs3, setPricingInputs3] = useState([{ price: "" }]);
 
   const addPricingInput = (inputs, setInputs) => {
-    setInputs([...inputs, { firstName: "", lastName: "" }]);
+    setInputs([...inputs, { firstName: "", lastName: "", price: "" }]);
   };
 
   const handleInputChange = (index, inputs, setInputs, event) => {
@@ -196,6 +197,25 @@ const ServicesListModal = () => {
                         index,
                         pricingInputs1,
                         setPricingInputs1,
+                        e
+                      )
+                    }
+                    className="input_field"
+                    placeholder="Enter your name"
+                    pattern="[A-Za-z]{4,20}"
+                    required
+                  />
+                </div>
+                <div className="w-full space-y-1 text-left lg:w-1/2">
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={input.price}
+                    onChange={(e) =>
+                      handleInputChange(
+                        index,
+                        pricingInputs3,
+                        setPricingInputs3,
                         e
                       )
                     }
