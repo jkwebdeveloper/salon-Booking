@@ -1,10 +1,13 @@
 import Image from 'next/image'
 import React from 'react'
 
-function Spinner({ show, text, width, height }) {
+function Spinner({ show, text, width, height, children }) {
     if (!show) return text
     return (
-        <Image src="/static/icons/spinner.svg" alt="spinner" width={width} height={height} />
+        <>
+            <Image src="/static/icons/spinner.svg" alt="spinner" width={width} height={height} />
+            {children}
+        </>
     )
 }
 

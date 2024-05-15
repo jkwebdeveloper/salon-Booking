@@ -7,8 +7,8 @@ import {
     SelectTrigger,
 } from "@/components/ui/select";
 
-function InputGroup({ defaultValue, service_group_id, categories_id, sub_categories_id }) {
-    const [inputValue, setInputValue] = useState({ service_group_id, categories_id, sub_categories_id, service_title: '', duration: 0.5, price: 0, saleprice: 0 });
+function InputGroup({ defaultValue, categories_id, service_group_id, sub_categories_id }) {
+    const [inputValue, setInputValue] = useState({ categories_id, service_group_id, sub_categories_id, service_title: '', duration: 0.5, price: 0, sale_price: 0 });
     return (
         <div className="flex flex-col w-full gap-3 lg:flex-row">
             <div className="w-full space-y-1 text-left lg:w-1/2">
@@ -60,7 +60,7 @@ function InputGroup({ defaultValue, service_group_id, categories_id, sub_categor
                     pattern="[0-9]+([\.,][0-9]+)?"
                     step={0.5}
                     required
-                    onChange={(e) => setInputValue({ ...inputValue, saleprice: e.target.value })}
+                    onChange={(e) => setInputValue({ ...inputValue, sale_price: e.target.value })}
                 />
                 <p className="error">Enter Valid Sales Price</p>
             </div>

@@ -1,3 +1,4 @@
+'use client';
 import validateInput from "@/lib/validateinput";
 import axios from "axios";
 let serverURL = process.env.NEXT_PUBLIC_APIURL;
@@ -5,7 +6,6 @@ let serverURL = process.env.NEXT_PUBLIC_APIURL;
 export const POST = {
   validateForm: async ({ form }) => {
     const validForm = await validateInput(form);
-    console.log(validForm);
     if (validForm.length > 0) {
       validForm.forEach((input) => {
         input.classList.add("border-red-500", "text-red-500", 'invalid');
@@ -20,23 +20,12 @@ export const POST = {
     }
     return true;
   },
-  request: async ({ token, form, url, header }) => {
-    console.log("POST request");
+  request: async ({ token, form, url, header, formState = null, setFormState }) => {
     let formData;
     if (form && form.tagName == "FORM") {
-      const validForm = await validateInput(form);
-      if (validForm.length > 0) {
-        validForm.forEach((input) => {
-          input.classList.add("border-red-500", "text-red-500", 'invalid');
-          input.addEventListener("input", () => {
-            input.classList.remove("border-red-500", "text-red-500", 'invalid');
-          });
-          input.addEventListener("change", () => {
-            input.classList.remove("border-red-500", "text-red-500", 'invalid');
-          });
-        });
-        return false;
-      }
+      const valideData = await POST.validateForm({ form });
+      if (!valideData) return false;
+
       formData = new FormData(form);
       for (const key of formData.keys()) formData.get(key).size == 0 && formData.delete(key);
     } else if (!Array.isArray(form)) {
@@ -46,33 +35,27 @@ export const POST = {
       formData = form;
     }
 
-    let requestHeader = {
-      "Cache-Control": "no-cache",
-      Pragma: "no-cache",
-      Expires: "0",
-    };
+    let requestHeader = { "Cache-Control": "no-cache", Pragma: "no-cache", Expires: "0" };
 
-    if (token) {
-      requestHeader = {
-        ...requestHeader,
-        'access-token': `${token}`,
-      };
-    }
-    if (header) {
-      requestHeader = {
-        ...requestHeader,
-        ...header,
-      };
-    }
+    if (token) requestHeader = { ...requestHeader, 'access-token': `${token}` };
+
+    if (header) requestHeader = { ...requestHeader, ...header };
+
     // return false;
+    formState && setFormState({ ...formState, loading: true });
     try {
       const { data } = await axios.post(serverURL + url, formData, {
         headers: requestHeader,
       });
+      formState && (
+        data?.code == 200
+        && setFormState({ ...formState, loading: false, success: data?.message })
+        || setFormState({ ...formState, loading: false, error: data?.message })
+      );
       return data;
     } catch (error) {
       const { data } = error.response;
-      // console.log(error);
+      formState && ((data?.code) && setFormState({ ...formState, loading: false, error: data?.message }));
       return data;
     }
   },

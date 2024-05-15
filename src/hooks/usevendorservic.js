@@ -2,9 +2,8 @@ import { POST } from '@/app/api/post';
 import React, { useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux';
 
-const useVendorServices = ({ }) => {
+const useVendorServices = () => {
     const vendor = useSelector((state) => state.vendorAuth.vendor);
-
     const [vendorServices, setVendorServices] = React.useState({ data: [], loading: true });
 
     const getServices = async () => {

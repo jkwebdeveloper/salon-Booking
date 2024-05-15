@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { GoBell } from "react-icons/go";
 import { GrCart } from "react-icons/gr";
 import { IoCaretDown, IoHeartOutline, IoCloseOutline } from "react-icons/io5";
@@ -10,12 +10,10 @@ import { FaMobileAlt } from "react-icons/fa";
 import { TfiEmail } from "react-icons/tfi";
 import { MdLogout } from "react-icons/md";
 import { RiCustomerServiceLine } from "react-icons/ri";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 import { Button } from "@/components";
-import { logout } from "@/redux/features/userAuthSlice";
 
 import {
   DropdownMenu,
@@ -27,18 +25,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { POST } from "@/app/api/post";
+import uselogout from "@/hooks/uselogout";
 
 function Topbar() {
-  const router = useRouter();
+  const [logoutUser] = uselogout();
   const user = useSelector((state) => state.userAuth.user) || "";
-  const dispatch = useDispatch();
-
-  const logoutUSer = async () => {
-    const resp = await POST.request({ url: '/logout', form: {}, token: user?.api_token });
-    dispatch(logout());
-    router.push("/");
-  };
-
   return (
     <>
       <Button
@@ -132,7 +123,7 @@ function Topbar() {
             <DropdownMenuSeparator />
             <DropdownMenuItem
               className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white"
-              onClick={(e) => logoutUSer()}
+              onClick={(e) => logoutUser({ api_token: user?.api_token, type: 'user' })}
             >
               <MdLogout className="text-xl" />
               Logout

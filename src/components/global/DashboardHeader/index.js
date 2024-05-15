@@ -16,23 +16,14 @@ import {
 import { TbUserCheck } from "react-icons/tb";
 import { MdLogout } from "react-icons/md";
 import Button from "@/components/ui/button";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "@/redux/features/vendorAuthSlice";
+import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { POST } from "@/app/api/post";
+import uselogout from "@/hooks/uselogout";
 
 const DashBoardHeader = () => {
-  const dispatch = useDispatch();
+  const [logoutUser] = uselogout();
   const router = useRouter();
   const vendor = useSelector((state) => state.vendorAuth.vendor);
-
-  const vendorLogout = async () => {
-    const resp = await POST.request({ url: "/vendor/logout", token: vendor?.api_token });
-    if (resp.code === 200) {
-      dispatch(logout());
-      router.push("/vendor/login");
-    }
-  }
 
   if (!vendor) {
     router.push("/vendor/login");
@@ -136,7 +127,7 @@ const DashBoardHeader = () => {
                         Profile
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white" onClick={e => vendorLogout()}>
+                    <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white" onClick={e => logoutUser({ api_token: vendor?.api_token, type: 'vendor' })}>
                       <MdLogout className="text-xl text-red-500 hover:text-white" />
                       Logout
                     </DropdownMenuItem>

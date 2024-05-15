@@ -1,25 +1,33 @@
-import Button from "@/components/ui/button";
-import React, { useState } from "react";
+'use client';
+import React, { useEffect, useState } from "react";
 import { BsPencilFill } from "react-icons/bs";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { IoMdClose } from "react-icons/io";
 import { TbCirclePlus } from "react-icons/tb";
 import EditServiceModal from "./Modal/ServicesModal/EditServiceModal";
 import Image from "next/image";
+import { useSelector } from "react-redux";
 
-import NewTreatmentModal from "./Modal/ServicesModal/NewTreatmentModal";
 import {
   Dialog,
   DialogContent,
   DialogTrigger,
   DialogTitle,
 } from "@/components/ui/dialog";
+import NewTreatmentModal from "./Modal/ServicesModal/NewTreatmentModal";
 import ServicesListModal from "./Modal/ServicesModal/ServicesListModal";
-import Label from "@/components/ui/form/label";
-import useCategory from "@/hooks/usecategory";
+import { Spinner, Label, Button, Error } from "@/components";
+import { useVendorServices, useCategory } from "@/hooks";
+import { POST } from "@/app/api/post";
+import { GET } from "@/app/api/get";
 
 const Services = () => {
+  const vendor = useSelector((state) => state.vendorAuth.vendor);
+  const vendorServices = useVendorServices();
   const mainCat = useCategory();
+  const [formState, setFormState] = React.useState({ loading: false, error: "", success: "" });
+  const [discountType, setDiscountType] = useState("percentage");
+  const [voucherList, setVoucherList] = useState(false);
   const [serviceGroup, setServiceGroup] = useState([
     {
       "service_group_id": "11",
@@ -39,19 +47,26 @@ const Services = () => {
     }
   ]);
   const [addtreatment, setAddtreatment] = useState(false);
-
   const [treatment, setTreatment] = useState(true);
   const [voucher, setVoucher] = useState(false);
   const [createVoucher, setCreateVoucher] = useState(false);
   const [editVoucher, setEditVoucher] = useState(false);
 
+
+  const getVouchers = async () => {
+    const resp = await GET.request({ url: '/vendor/get-all-giftvouchers', token: vendor?.api_token });
+    (resp && resp.code == 200) ? setVoucherList(resp.data) : setVoucherList([]);
+  }
+  const [currentTab, setCurrentTab] = ('service');
   const handleTreatmentClick = () => {
     setTreatment(true);
     setVoucher(false);
   };
+
   const handleVoucherClick = () => {
     setTreatment(false);
     setVoucher(true);
+    getVouchers();
   };
 
   const handleEditVoucherClick = () => {
@@ -60,6 +75,19 @@ const Services = () => {
     setVoucher(false);
     setTreatment(false);
   };
+
+  const addNewVoucher = async (e) => {
+    e.preventDefault();
+    const resp = await POST.request({ url: '/vendor/add-new-giftvouchers', form: e.target, token: vendor?.api_token, formState, setFormState });
+    if (resp?.code == 200) {
+      setVoucher(true);
+      setCreateVoucher(false);
+    }
+  }
+
+  useEffect(() => {
+    return setFormState({ loading: false, error: "", success: "" });
+  }, [addtreatment, treatment, voucher, createVoucher, editVoucher]);
 
   return (
     <>
@@ -209,7 +237,7 @@ const Services = () => {
           <>
             <div className="w-full space-y-3 bg-white rounded-xl">
               {/* Create Voucher section start */}
-              <form className="p-4 space-y-3">
+              <form className="p-4 space-y-3" noValidate onSubmit={e => addNewVoucher(e)}>
                 <div className="flex items-center justify-between">
                   <p className="text-2xl font-semibold">Create Voucher</p>
                   <IoMdClose
@@ -217,20 +245,20 @@ const Services = () => {
                     onClick={() => setCreateVoucher(false)}
                   />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <Label htmlFor="first_name" text="Status" />
                   <div className="flex items-center gap-3">
                     <li className="list-none">
                       <div className="flex items-center">
                         <input
-                          id="list-radio-license"
+                          id="active"
                           type="radio"
-                          value=""
-                          name="list-radio"
+                          value="1"
+                          name="status"
                           className=""
                         />
                         <label
-                          for="list-radio-license"
+                          for="active"
                           className="text-sm font-medium text-gray-900 ms-2 "
                         >
                           Active
@@ -240,14 +268,14 @@ const Services = () => {
                     <li className="list-none">
                       <div className="flex items-center">
                         <input
-                          id="list-radio-license"
+                          id="inactive"
                           type="radio"
-                          value=""
-                          name="list-radio"
+                          value="2"
+                          name="status"
                           className=""
                         />
                         <label
-                          for="list-radio-license"
+                          for="inactive"
                           className="text-sm font-medium text-gray-900 ms-2 "
                         >
                           Inactive
@@ -257,14 +285,15 @@ const Services = () => {
                     <li className="list-none">
                       <div className="flex items-center">
                         <input
-                          id="list-radio-license"
+                          id="pending"
                           type="radio"
-                          value=""
-                          name="list-radio"
+                          value="0"
+                          name="status"
                           className=""
+                          defaultChecked={true}
                         />
                         <label
-                          for="list-radio-license"
+                          for="pending"
                           className="text-sm font-medium text-gray-900 ms-2 "
                         >
                           Pending
@@ -272,56 +301,72 @@ const Services = () => {
                       </div>
                     </li>
                   </div>
+                  <input type="file" name="voucher_image" />
                   <div className="w-full space-y-1 text-left">
-                    <Label htmlFor="first_name" text="Title" />
+                    <Label htmlFor="title" text="Title" required={true} />
                     <input
                       type="text"
-                      name="first_name"
+                      name="title"
                       className="input_field"
                       placeholder="Enter Title"
-                      pattern="[A-Za-z]{4,20}"
+                      pattern="^[a-zA-Z0-9\s]{4,}$"
+                      required
                     />
+                    <p className="error">Min 4 Character Required</p>
                   </div>
                   <div className="flex flex-col w-full gap-3 lg:flex-row">
                     <div className="w-full space-y-1 text-left lg:w-1/2">
-                      <Label htmlFor="first_name" text="Discount Type *" />
-                      <input
-                        type="text"
-                        name="first_name"
-                        className="input_field"
-                        placeholder="Enter Discount Type *"
-                        pattern="[A-Za-z]{4,20}"
-                      />
+                      <Label htmlFor="first_name" text="Discount Type" required={true} />
+                      <select className="w-full p-2 bg-transparent border rounded-md" required onChange={e => setDiscountType(e.target.value)}>
+                        <option value="percentage">Percentage</option>
+                        <option value="fixed">Fixed</option>
+                      </select>
                     </div>
                     <div className="w-full space-y-1 text-left lg:w-1/2">
-                      <Label htmlFor="last_name" text="Amount *" />
+                      <Label htmlFor="amount" text="Amount" required={true} />
                       <input
                         type="text"
-                        name="last_name"
+                        name="amount"
                         className="input_field"
                         placeholder="Enter Amount *"
-                        pattern="[A-Za-z]{4,20}"
+                        pattern={discountType == "percentage" ? "[0-9]{0,2}" : "[0-9]{1,}"}
+                        maxLength={discountType == "percentage" ? 2 : ''}
+                        step="0.1"
+                        required
                       />
+                      <p className="error">Enter Valid Amount </p>
                     </div>
                     <div className="w-full space-y-1 text-left lg:w-1/2">
-                      <Label htmlFor="last_name" text="Expires at *" />
+                      <Label htmlFor="expried_at" text="Expires at" required={true} />
                       <input
-                        type="text"
-                        name="last_name"
+                        type="date"
+                        name="expried_at"
                         className="input_field"
-                        placeholder="Enter Expires at *"
-                        pattern="[A-Za-z]{4,20}"
+                        placeholder="Enter Expires at"
+                        pattern="\d{4}-\d{1,2}-\d{1,2}"
+                        required
+                        min={new Date().toISOString().split('T')[0]}
                       />
+                      <p className="error">Enter Valid Expiry Date</p>
                     </div>
                   </div>
-                  <Label htmlFor="last_name" text="Description" />
+                  <Label htmlFor="message" text="Description" />
                   <textarea
                     id="message"
                     rows="4"
+                    name="description"
                     className="input_field"
                     placeholder="Write your thoughts here..."
                   ></textarea>
-                  <Button variant="primary" type="submit">Create</Button>
+                  <Button variant="primary" type="submit" disabled={formState?.loading}>
+                    <Spinner
+                      show={formState?.loading}
+                      width="25"
+                      height="25"
+                      text="Create"
+                    />
+                  </Button>
+                  {formState?.error && <Error error={formState?.error} />}
                 </div>
               </form>
             </div>
@@ -359,13 +404,63 @@ const Services = () => {
                         className="sm:max-w-[1025px]"
                       >
                         <DialogTitle>Add New Treatment</DialogTitle>
-                        <NewTreatmentModal setAddtreatment={setAddtreatment} />
+                        <NewTreatmentModal setAddtreatment={setAddtreatment} vendorServices={vendorServices} />
                       </DialogContent>
                     </Dialog>
                   </div>
                 </div>
-                {serviceGroup.map((service) => {
-                  const category = !mainCat?.loading && mainCat.data.filter((cat) => +cat.id === +service.service_group_id)[0];
+                {!vendorServices?.loading && vendorServices.data.map((service) => (
+                  <div className="w-full space-y-2 bg-white rounded-xl">
+                    <div className="flex items-center gap-2">
+                      {console.log(service)}
+                      <p className="text-xl font-semibold">{service?.categories?.title}</p>
+                      <Dialog className="w-11/12">
+                        <DialogTrigger>
+                          <TbCirclePlus className="text-[#0AADA4]" />
+                        </DialogTrigger>
+                        <DialogContent
+                          className="sm:max-w-[1025px]"
+                        >
+                          <DialogTitle>Service List</DialogTitle>
+                          <ServicesListModal service={service} />
+                        </DialogContent>
+                      </Dialog>
+                    </div>
+                    {service?.group_service_list.map(service_group => (
+                      <div className="grid items-center grid-cols-1 gap-4 xl:grid-cols-2">
+                        <Dialog className="w-11/12">
+                          <DialogTrigger>
+                            <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3">
+                              <p className="font-semibold text-start">{service_group?.service_title}</p>
+                              <div className="flex items-center justify-between">
+                                <p className="text-sm">{service_group?.duration}</p>
+                                <p className="text-sm">
+                                  {service_group?.service_title}
+                                </p>
+                                <p className="text-sm font-bold">£{service_group?.price} €{service_group?.sales_price}</p>
+                              </div>
+                              {/* <div className="flex items-center justify-between">
+                                <p className="text-sm">02 h</p>
+                                <p className="text-sm">
+                                  Couples Massage for 2 hours
+                                </p>
+                                <p className="text-sm font-bold">£349 €369</p>
+                              </div> */}
+                            </div>
+                          </DialogTrigger>
+                          <DialogContent
+                            className="sm:max-w-[725px]"
+                          >
+                            <DialogTitle>Edit Service</DialogTitle>
+                            <EditServiceModal service={service} />
+                          </DialogContent>
+                        </Dialog>
+                      </div>
+                    ))}
+                  </div>
+                )) || <div className="center min-h-[300px] w-full"><Spinner show={vendorServices?.loading} width={50} height={50} /></div>}
+                {/* {!mainCat?.loading && serviceGroup.map((service) => {
+                  const category = mainCat.data.filter((cat) => +cat.id === +service.service_group_id)[0];
                   return <div className="w-full space-y-2 bg-white rounded-xl">
                     <div className="flex items-center gap-2">
                       <p className="text-xl font-semibold">{category?.title}</p>
@@ -465,7 +560,7 @@ const Services = () => {
                       </Dialog>
                     </div>
                   </div>
-                })}
+                }) || <div className="center min-h-[300px] w-full"><Spinner show={mainCat?.loading} width={50} height={50} /></div>} */}
               </div>
             }
             {voucher && (
@@ -481,7 +576,7 @@ const Services = () => {
                 </div>
                 <div className="w-full p-4 space-y-3 bg-white rounded-xl">
                   <div className="overflow-x-auto">
-                    <table className="min-w-full bg-white rounded-lg font-[sans-serif]">
+                    {voucherList && <table className="min-w-full font-[sans-serif]">
                       <thead className="border-b-2 whitespace-nowrap">
                         <tr>
                           <th className="px-4 py-3 text-sm font-semibold text-left">
@@ -506,50 +601,33 @@ const Services = () => {
                         </tr>
                       </thead>
                       <tbody className="border-b-2 whitespace-nowrap">
-                        <tr className="">
-                          <td className="px-4 py-4 text-sm">
-                            20% OFF ON Any Salon service booking
-                          </td>
-                          <td className="px-4 py-4 text-sm">£119.00</td>
-                          <td className="px-4 py-4 text-sm">£99.00</td>
-                          <td className="px-4 py-4 text-sm">12 April 2024</td>
-                          <td className="px-4 py-4 text-sm ">
-                            <p className="bg-[#EABB00] p-2 rounded-full text-center">
-                              Active
-                            </p>
-                          </td>
-                          <td className="flex gap-4 px-4 py-6">
-                            <BsPencilFill
-                              className="text-[#0AADA4] text-xl cursor-pointer"
-                              onClick={handleEditVoucherClick}
-                            />
-                            <RiDeleteBin5Line className="text-[#FF0000] text-xl" />
-                          </td>
-                        </tr>
+                        {voucherList.map(voucher => (
+                          <tr className="">
+                            <td className="px-4 py-4 text-sm">
+                              {voucher.title}
+                            </td>
+                            <td className="px-4 py-4 text-sm">£{voucher?.amount || 'N/A'}</td>
+                            <td className="px-4 py-4 text-sm">£{voucher?.sales_price || 'N/A'}0</td>
+                            <td className="px-4 py-4 text-sm">{voucher?.expried_at || 'N/A'}</td>
+                            <td className="px-4 py-4 text-sm ">
+                              <p className={`${voucher.status == 0 && 'bg-yellow-500' || vendor.status == 1 && 'bg-green-700' || 'bg-red-700'} p-2 rounded-full text-center`}>
+                                {voucher.status == 0 && 'Pending' || vendor.status == 1 && 'Active' || 'Inactive'}
+                              </p>
+                            </td>
+                            <td className="flex gap-4 px-4 py-6">
+                              <BsPencilFill
+                                className="text-[#0AADA4] text-xl cursor-pointer"
+                                onClick={handleEditVoucherClick}
+                              />
+                              <RiDeleteBin5Line className="text-[#FF0000] text-xl" />
+                            </td>
+                          </tr>
+                        ))}
                       </tbody>
-                      <tbody className=" whitespace-nowrap">
-                        <tr className="">
-                          <td className="px-4 py-4 text-sm">
-                            20% OFF ON Any Salon service booking
-                          </td>
-                          <td className="px-4 py-4 text-sm">£119.00</td>
-                          <td className="px-4 py-4 text-sm">£99.00</td>
-                          <td className="px-4 py-4 text-sm">12 April 2024</td>
-                          <td className="px-4 py-4 text-sm ">
-                            <p className="bg-[#EABB00] p-2 rounded-full text-center">
-                              Active
-                            </p>
-                          </td>
-                          <td className="flex gap-4 px-4 py-6">
-                            <BsPencilFill
-                              className="text-[#0AADA4] text-xl cursor-pointer"
-                              onClick={handleEditVoucherClick}
-                            />
-                            <RiDeleteBin5Line className="text-[#FF0000] text-xl" />
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    </table>}
+                    {!voucherList && <div className="w-full min-h-[300px] center">
+                      <Spinner show={true} width={50} height={50} />
+                    </div>}
                   </div>
                 </div>
               </>

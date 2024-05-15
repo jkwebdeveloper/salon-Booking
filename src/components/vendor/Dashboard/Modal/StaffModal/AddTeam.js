@@ -173,7 +173,6 @@ const AddTeam = ({ setAddTeam, editStaff, staffs, setStaffs, setEditStaff }) => 
                 placeholder="Enter your Phone Number"
                 defaultValue={staff && staff.dob || ''}
                 pattern="\d{4}-\d{1,2}-\d{1,2}"
-                onInput={e => console.log(e.target.value)}
                 required
               />
               <p className="error">Enter Valid Birth Date</p>
