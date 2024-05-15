@@ -22,6 +22,9 @@ import { POST } from "@/app/api/post";
 import { GET } from "@/app/api/get";
 
 const Services = () => {
+  const [addService, setAddService] = useState(false);
+  const [currentService, setCurrentService] = useState(null);
+
   const vendor = useSelector((state) => state.vendorAuth.vendor);
   const vendorServices = useVendorServices();
   const mainCat = useCategory();
@@ -412,19 +415,12 @@ const Services = () => {
                 {!vendorServices?.loading && vendorServices.data.map((service) => (
                   <div className="w-full space-y-2 bg-white rounded-xl">
                     <div className="flex items-center gap-2">
-                      {console.log(service)}
                       <p className="text-xl font-semibold">{service?.categories?.title}</p>
-                      <Dialog className="w-11/12">
-                        <DialogTrigger>
-                          <TbCirclePlus className="text-[#0AADA4]" />
-                        </DialogTrigger>
-                        <DialogContent
-                          className="sm:max-w-[1025px]"
-                        >
-                          <DialogTitle>Service List</DialogTitle>
-                          <ServicesListModal service={service} />
-                        </DialogContent>
-                      </Dialog>
+                      {/* Add Service Group Dialog */}
+                      <TbCirclePlus className="text-[#0AADA4]" onClick={e => {
+                        setAddService(true);
+                        setCurrentService(service);
+                      }} />
                     </div>
                     {service?.group_service_list.map(service_group => (
                       <div className="grid items-center grid-cols-1 gap-4 xl:grid-cols-2">
@@ -459,6 +455,17 @@ const Services = () => {
                     ))}
                   </div>
                 )) || <div className="center min-h-[300px] w-full"><Spinner show={vendorServices?.loading} width={50} height={50} /></div>}
+                <Dialog className="w-11/12" open={addService} onOpenChange={e => setAddService(e)}>
+                  {/* <DialogTrigger>
+                      <TbCirclePlus className="text-[#0AADA4]" />
+                    </DialogTrigger> */}
+                  <DialogContent
+                    className="sm:max-w-[1025px]"
+                  >
+                    <DialogTitle>Service List</DialogTitle>
+                    <ServicesListModal service={currentService} setAddService={setAddService} />
+                  </DialogContent>
+                </Dialog>
                 {/* {!mainCat?.loading && serviceGroup.map((service) => {
                   const category = mainCat.data.filter((cat) => +cat.id === +service.service_group_id)[0];
                   return <div className="w-full space-y-2 bg-white rounded-xl">

@@ -48,14 +48,14 @@ export const POST = {
         headers: requestHeader,
       });
       formState && (
-        data?.code == 200
-        && setFormState({ ...formState, loading: false, success: data?.message })
-        || setFormState({ ...formState, loading: false, error: data?.message })
+        (data?.code == 200)
+          ? setFormState({ ...formState, loading: false, success: data?.message })
+          : setFormState({ ...formState, loading: false, error: data?.message })
       );
       return data;
     } catch (error) {
       const { data } = error.response;
-      formState && ((data?.code) && setFormState({ ...formState, loading: false, error: data?.message }));
+      formState && ((data?.code) && setFormState({ ...formState, loading: false, error: data?.message, ffew: 'wefwe' }));
       return data;
     }
   },

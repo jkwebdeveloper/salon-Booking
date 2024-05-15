@@ -1,16 +1,17 @@
 import Button from "@/components/ui/button";
 import React, { Fragment, useState } from "react";
 import useSubCategory from "@/hooks/usesubcategory";
-import { Spinner } from "@/components";
+import { Error, Spinner } from "@/components";
 import { v4 } from "uuid";
 import { POST } from "@/app/api/post";
 import { useSelector } from "react-redux";
 import InputGroup from "./inputgroup";
 
-const ServicesListModal = ({ service }) => {
+const ServicesListModal = ({ service, setAddService }) => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);
   const subCategories = useSubCategory({ id: service?.categories_id });
   const [selectedCategory, setSelectedCategory] = useState([]);
+  const [formState, setFormState] = React.useState({ loading: false, error: "", success: "" });
   const defaultInputs = [{ service_title: '', duration: 0.5, price: 0, sale_price: 0 }];
   const [inputValue, setInputValue] = useState([]);
 
@@ -37,14 +38,15 @@ const ServicesListModal = ({ service }) => {
     // formData = Object.keys(formData).map(key => ({ 'category_id': key, data: formData[key] }));
     const valideData = await POST.validateForm({ form: e.target });
     if (valideData) {
-      const response = await POST.request({ url: "/vendor/save-new-service", form: formData, token: vendor?.api_token });
-      console.log(response);
+      const resp = await POST.request({ url: "/vendor/save-new-service", form: formData, token: vendor?.api_token, formState, setFormState });
+      if (resp && resp.code == 200) {
+        setAddService(false);
+      }
     }
   }
 
   return (
     <div className="space-y-3">
-
       {(!subCategories.loading && subCategories.data.length > 0)
         && (
           <div className="flex items-start w-full h-full md:gap-10">
@@ -113,8 +115,17 @@ const ServicesListModal = ({ service }) => {
                 ))} */}
                   </div>
                   <div className="flex items-center gap-3">
-                    <Button variant="primary" type="submit">Save</Button>
+                    <Button variant="primary" type="submit" disabled={formState.loading}>
+                      <Spinner
+                        show={formState.loading}
+                        width="25"
+                        height="25"
+                        text="Save"
+                      />
+                    </Button>
+                    {console.log(formState)}
                     <Button variant="disable">Gift Voucher</Button>
+                    {formState?.error && <Error error={formState?.error} />}
                   </div>
                 </>}
             </form>
