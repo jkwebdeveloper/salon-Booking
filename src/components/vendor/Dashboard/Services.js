@@ -22,37 +22,19 @@ import { POST } from "@/app/api/post";
 import { GET } from "@/app/api/get";
 
 const Services = () => {
-  const [addService, setAddService] = useState(false);
-  const [currentService, setCurrentService] = useState(null);
-
   const vendor = useSelector((state) => state.vendorAuth.vendor);
   const vendorServices = useVendorServices();
-  const mainCat = useCategory();
+
   const [formState, setFormState] = React.useState({ loading: false, error: "", success: "" });
-  const [discountType, setDiscountType] = useState("percentage");
-  const [voucherList, setVoucherList] = useState(false);
-  const [serviceGroup, setServiceGroup] = useState([
-    {
-      "service_group_id": "11",
-      "categories_id": "1",
-      "sub_categories_id": "2",
-      "service_title": "service groupid1cat1sub2",
-      "duration": "30",
-      "price": "20"
-    },
-    {
-      "service_group_id": "1",
-      "categories_id": "2",
-      "sub_categories_id": "1",
-      "service_title": "service groupid1cat2sub1",
-      "duration": "40",
-      "price": "60"
-    }
-  ]);
+  const [addService, setAddService] = useState(false);
+  const [currentService, setCurrentService] = useState(null);
   const [addtreatment, setAddtreatment] = useState(false);
   const [treatment, setTreatment] = useState(true);
-  const [voucher, setVoucher] = useState(false);
+
   const [createVoucher, setCreateVoucher] = useState(false);
+  const [discountType, setDiscountType] = useState("percentage");
+  const [voucherList, setVoucherList] = useState(false);
+  const [voucher, setVoucher] = useState(false);
   const [editVoucher, setEditVoucher] = useState(false);
 
 
@@ -98,7 +80,6 @@ const Services = () => {
         {editVoucher && (
           <>
             <div className="w-full space-y-3 bg-white rounded-xl">
-              {/* Create Voucher section start */}
               <div className="p-4 space-y-3">
                 <div className="flex items-center justify-between">
                   <p className="text-2xl font-semibold">Edit Voucher</p>
@@ -224,22 +205,12 @@ const Services = () => {
                   <Button variant="primary">Create</Button>
                 </div>
               </div>
-              {/* Create Voucher section End */}
-              {/* <div className="p-4 space-y-3">
-              <p className="text-2xl font-semibold">Edit Voucher</p>
-              <IoMdClose
-                className="text-2xl cursor-pointer"
-                onClick={() => setCreateVoucher(false)}
-              />
-
-            </div> */}
             </div>
           </>
         )}
         {createVoucher === true ? (
           <>
             <div className="w-full space-y-3 bg-white rounded-xl">
-              {/* Create Voucher section start */}
               <form className="p-4 space-y-3" noValidate onSubmit={e => addNewVoucher(e)}>
                 <div className="flex items-center justify-between">
                   <p className="text-2xl font-semibold">Create Voucher</p>
@@ -435,13 +406,6 @@ const Services = () => {
                                 </p>
                                 <p className="text-sm font-bold">£{service_group?.price} €{service_group?.sales_price}</p>
                               </div>
-                              {/* <div className="flex items-center justify-between">
-                                <p className="text-sm">02 h</p>
-                                <p className="text-sm">
-                                  Couples Massage for 2 hours
-                                </p>
-                                <p className="text-sm font-bold">£349 €369</p>
-                              </div> */}
                             </div>
                           </DialogTrigger>
                           <DialogContent
@@ -456,9 +420,6 @@ const Services = () => {
                   </div>
                 )) || <div className="center min-h-[300px] w-full"><Spinner show={vendorServices?.loading} width={50} height={50} /></div>}
                 <Dialog className="w-11/12" open={addService} onOpenChange={e => setAddService(e)}>
-                  {/* <DialogTrigger>
-                      <TbCirclePlus className="text-[#0AADA4]" />
-                    </DialogTrigger> */}
                   <DialogContent
                     className="sm:max-w-[1025px]"
                   >
@@ -466,108 +427,6 @@ const Services = () => {
                     <ServicesListModal service={currentService} setAddService={setAddService} />
                   </DialogContent>
                 </Dialog>
-                {/* {!mainCat?.loading && serviceGroup.map((service) => {
-                  const category = mainCat.data.filter((cat) => +cat.id === +service.service_group_id)[0];
-                  return <div className="w-full space-y-2 bg-white rounded-xl">
-                    <div className="flex items-center gap-2">
-                      <p className="text-xl font-semibold">{category?.title}</p>
-                      <Dialog className="w-11/12">
-                        <DialogTrigger>
-                          <TbCirclePlus className="text-[#0AADA4]" />
-                        </DialogTrigger>
-                        <DialogContent
-                          className="sm:max-w-[1025px]"
-                        >
-                          <DialogTitle>Service List</DialogTitle>
-                          <ServicesListModal service={service} />
-                        </DialogContent>
-                      </Dialog>
-                    </div>
-                    <div className="grid items-center grid-cols-1 gap-4 xl:grid-cols-2">
-                      <Dialog className="w-11/12">
-                        <DialogTrigger>
-                          <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3">
-                            <p className="font-semibold text-start">Couple Massage</p>
-                            <div className="flex items-center justify-between">
-                              <p className="text-sm">02 h</p>
-                              <p className="text-sm">
-                                Couples Massage for 2 hours
-                              </p>
-                              <p className="text-sm font-bold">£349 €369</p>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <p className="text-sm">02 h</p>
-                              <p className="text-sm">
-                                Couples Massage for 2 hours
-                              </p>
-                              <p className="text-sm font-bold">£349 €369</p>
-                            </div>
-                          </div>
-                        </DialogTrigger>
-                        <DialogContent
-                          className="sm:max-w-[725px]"
-                        >
-                          <DialogTitle>Edit Service</DialogTitle>
-                          <EditServiceModal service={service} />
-                        </DialogContent>
-                      </Dialog>
-                      <Dialog className="w-11/12">
-                        <DialogTrigger>
-                          <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3">
-                            <p className="font-semibold text-start">Couple Massage</p>
-                            <div className="flex items-center justify-between">
-                              <p className="text-sm">02 h</p>
-                              <p className="text-sm">
-                                Couples Massage for 2 hours
-                              </p>
-                              <p className="text-sm font-bold">£349 €369</p>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <p className="text-sm">02 h</p>
-                              <p className="text-sm">
-                                Couples Massage for 2 hours
-                              </p>
-                              <p className="text-sm font-bold">£349 €369</p>
-                            </div>
-                          </div>
-                        </DialogTrigger>
-                        <DialogContent
-                          className="sm:max-w-[725px]"
-                        >
-                          <DialogTitle>Edit Service</DialogTitle>
-                          <EditServiceModal />
-                        </DialogContent>
-                      </Dialog>
-                      <Dialog className="w-11/12">
-                        <DialogTrigger>
-                          <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3">
-                            <p className="font-semibold text-start">Couple Massage</p>
-                            <div className="flex items-center justify-between">
-                              <p className="text-sm">02 h</p>
-                              <p className="text-sm">
-                                Couples Massage for 2 hours
-                              </p>
-                              <p className="text-sm font-bold">£349 €369</p>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <p className="text-sm">02 h</p>
-                              <p className="text-sm">
-                                Couples Massage for 2 hours
-                              </p>
-                              <p className="text-sm font-bold">£349 €369</p>
-                            </div>
-                          </div>
-                        </DialogTrigger>
-                        <DialogContent
-                          className="sm:max-w-[725px]"
-                        >
-                          <DialogTitle>Edit Service</DialogTitle>
-                          <EditServiceModal />
-                        </DialogContent>
-                      </Dialog>
-                    </div>
-                  </div>
-                }) || <div className="center min-h-[300px] w-full"><Spinner show={mainCat?.loading} width={50} height={50} /></div>} */}
               </div>
             }
             {voucher && (
