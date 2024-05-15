@@ -406,7 +406,7 @@ const Services = () => {
                           className="sm:max-w-[725px]"
                         >
                           <DialogTitle>Edit Service</DialogTitle>
-                          <EditServiceModal />
+                          <EditServiceModal service={service} />
                         </DialogContent>
                       </Dialog>
                       <Dialog className="w-11/12">

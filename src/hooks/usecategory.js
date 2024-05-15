@@ -4,15 +4,15 @@ import React, { useCallback, useEffect } from 'react'
 const useCategory = () => {
     const [mainCat, setMainCat] = React.useState({ data: [], loading: true });
 
-    const getCategories = useCallback(async () => {
+    const getCategories = async () => {
         const resp = await GET.request({ url: '/get-categories' });
         (resp && resp?.code == 200) ? setMainCat({ data: resp.data, loading: false })
             : setMainCat({ data: [], loading: false });
-    }, []);
+    };
 
     useEffect(() => {
         getCategories();
-    }, getCategories);
+    }, []);
 
     return mainCat;
 }

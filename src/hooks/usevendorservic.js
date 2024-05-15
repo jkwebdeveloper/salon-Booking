@@ -7,15 +7,15 @@ const useVendorServices = ({ }) => {
 
     const [vendorServices, setVendorServices] = React.useState({ data: [], loading: true });
 
-    const getServices = useCallback(async () => {
+    const getServices = async () => {
         const resp = await POST.request({ url: '/vendor/get-vendor-all-services', token: vendor?.api_token });
         (resp && resp?.code == 200) ? setVendorServices({ data: resp.data, loading: false })
             : setVendorServices({ data: [], loading: false });
-    }, []);
+    };
 
     useEffect(() => {
         getServices();
-    }, getServices);
+    }, []);
 
     return vendorServices;
 }
