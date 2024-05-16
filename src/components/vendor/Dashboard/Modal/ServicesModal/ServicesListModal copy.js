@@ -39,7 +39,7 @@ const ServicesListModal = ({ service }) => {
       {!subCategories.loading && <div className="flex items-start w-full h-full md:gap-10">
         <div className="space-y-3">
           {subCategories.data.map((subCategory) => (
-            <div className="flex items-center">
+            <div className="flex items-center" key={v4()}>
               <input
                 id={'subCategory' + subCategory.id}
                 type="checkbox"

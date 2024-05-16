@@ -52,7 +52,7 @@ const ServicesListModal = ({ service, setAddService }) => {
           <div className="flex items-start w-full h-full md:gap-10">
             <div className="space-y-3">
               {subCategories.data.map((subCategory) => (
-                <div className="flex items-center">
+                <div className="flex items-center" key={v4()}>
                   <input
                     id={'subCategory' + subCategory.id}
                     type="checkbox"
@@ -79,11 +79,11 @@ const ServicesListModal = ({ service, setAddService }) => {
                   <div className="flex-grow flex-shrink-0 space-y-4">
                     {selectedCategory.map((category, index) => {
                       return (
-                        <div className="flex flex-col gap-4 p-4 border rounded-xl">
+                        <div className="flex flex-col gap-4 p-4 border rounded-xl" key={v4()}>
                           <p>{category.name}</p>
                           {category.defaultInputs.map((group, i) => {
                             return (
-                              <InputGroup defaultValue={group} service_group_id={service.id} categories_id={service?.categories_id} sub_categories_id={category.id} />
+                              <InputGroup key={v4()} defaultValue={group} service_group_id={service.id} categories_id={service?.categories_id} sub_categories_id={category.id} />
                             )
                           })}
                           <Button

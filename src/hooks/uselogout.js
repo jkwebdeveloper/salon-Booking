@@ -4,7 +4,7 @@ import { logout as logoutVendor } from '@/redux/features/vendorAuthSlice';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 
-function uselogout() {
+function useLogout() {
     const router = useRouter();
     const dispatch = useDispatch();
 
@@ -22,4 +22,4 @@ function uselogout() {
     return [logoutUser]
 }
 
-export default uselogout
+export default useLogout

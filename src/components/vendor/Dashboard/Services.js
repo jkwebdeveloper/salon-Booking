@@ -20,6 +20,7 @@ import { Spinner, Label, Button, Error } from "@/components";
 import { useVendorServices, useCategory } from "@/hooks";
 import { POST } from "@/app/api/post";
 import { GET } from "@/app/api/get";
+import { v4 } from "uuid";
 
 const Services = () => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);
@@ -384,7 +385,7 @@ const Services = () => {
                   </div>
                 </div>
                 {!vendorServices?.loading && vendorServices.data.map((service) => (
-                  <div className="w-full space-y-2 bg-white rounded-xl">
+                  <div className="w-full space-y-2 bg-white rounded-xl" key={v4()}>
                     <div className="flex items-center gap-2">
                       <p className="text-xl font-semibold">{service?.categories?.title}</p>
                       {/* Add Service Group Dialog */}
@@ -394,7 +395,7 @@ const Services = () => {
                       }} />
                     </div>
                     {service?.group_service_list.map(service_group => (
-                      <div className="grid items-center grid-cols-1 gap-4 xl:grid-cols-2">
+                      <div className="grid items-center grid-cols-1 gap-4 xl:grid-cols-2" key={v4()}>
                         <Dialog className="w-11/12">
                           <DialogTrigger>
                             <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3">
@@ -468,7 +469,7 @@ const Services = () => {
                       </thead>
                       <tbody className="border-b-2 whitespace-nowrap">
                         {voucherList.map(voucher => (
-                          <tr className="">
+                          <tr className="" key={v4()}>
                             <td className="px-4 py-4 text-sm">
                               {voucher.title}
                             </td>

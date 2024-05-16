@@ -178,8 +178,8 @@ const PaymentMethod = () => {
             </p>
             <hr />
             <p className="text-[#EA2C6D]">
-              Pay for your Pampertree in advance so that you won't have to
-              handle cash at the venue.
+              {`Pay for your Pampertree in advance so that you won't have to
+              handle cash at the venue.`}
             </p>
             <div className="flex items-center w-full gap-2">
               <div className="flex w-full py-5 px-2 items-center border border-bg-[#E6E6E6] rounded-lg bg-[#FAFAFA] gap-2">

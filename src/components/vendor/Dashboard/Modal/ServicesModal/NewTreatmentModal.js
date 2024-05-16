@@ -6,11 +6,11 @@ import Button from "@/components/ui/button";
 import Label from "@/components/ui/form/label";
 import useCategory from "@/hooks/usecategory";
 import { useSelector } from "react-redux";
-import uselogout from "@/hooks/uselogout";
+import useLogout from "@/hooks/uselogout";
 
 const NewTreatmentModal = ({ setAddtreatment, vendorServices }) => {
   const existingCats = vendorServices.data.map(service => service?.categories_id);
-  const [logoutUser] = uselogout();
+  const [logoutUser] = useLogout();
   const [formState, setFormState] = React.useState({ loading: false, error: "", success: "" });
   const mainCat = useCategory();
   const vendor = useSelector((state) => state.vendorAuth.vendor);

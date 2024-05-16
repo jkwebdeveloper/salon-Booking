@@ -1,6 +1,6 @@
 import useCategory from "@/hooks/usecategory";
-import uselogout from "@/hooks/uselogout";
+import useLogout from "@/hooks/uselogout";
 import useSubCategory from "@/hooks/usesubcategory";
 import useVendorServices from "@/hooks/usevendorservic";
 
-export { useCategory, uselogout, useSubCategory, useVendorServices };
+export { useCategory, useLogout, useSubCategory, useVendorServices };

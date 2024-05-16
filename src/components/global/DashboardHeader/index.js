@@ -18,10 +18,10 @@ import { MdLogout } from "react-icons/md";
 import Button from "@/components/ui/button";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import uselogout from "@/hooks/uselogout";
+import useLogout from "@/hooks/uselogout";
 
 const DashBoardHeader = () => {
-  const [logoutUser] = uselogout();
+  const [logoutUser] = useLogout();
   const router = useRouter();
   const vendor = useSelector((state) => state.vendorAuth.vendor);
 

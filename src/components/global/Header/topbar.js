@@ -25,10 +25,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { POST } from "@/app/api/post";
-import uselogout from "@/hooks/uselogout";
+import useLogout from "@/hooks/uselogout";
 
 function Topbar() {
-  const [logoutUser] = uselogout();
+  const [logoutUser] = useLogout();
   const user = useSelector((state) => state.userAuth.user) || "";
   return (
     <>
