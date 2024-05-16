@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import InputGroup from "./inputgroup";
 
 const ServicesListModal = ({ service }) => {
+  console.log('wfwef', service)
   const vendor = useSelector((state) => state.vendorAuth.vendor);
   const subCategories = useSubCategory({ id: service?.service_group_id });
   const [selectedCategory, setSelectedCategory] = useState({});

@@ -83,7 +83,7 @@ const ServicesListModal = ({ service, setAddService }) => {
                           <p>{category.name}</p>
                           {category.defaultInputs.map((group, i) => {
                             return (
-                              <InputGroup defaultValue={group} service_group_id={category.id} categories_id={service?.categories_id} sub_categories_id={category.id} />
+                              <InputGroup defaultValue={group} service_group_id={service.id} categories_id={service?.categories_id} sub_categories_id={category.id} />
                             )
                           })}
                           <Button
