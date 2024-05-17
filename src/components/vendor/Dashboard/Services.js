@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React, { useEffect, useState } from "react";
 import { BsPencilFill } from "react-icons/bs";
 import { RiDeleteBin5Line } from "react-icons/ri";
@@ -26,7 +26,11 @@ const Services = () => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);
   const vendorServices = useVendorServices();
 
-  const [formState, setFormState] = React.useState({ loading: false, error: "", success: "" });
+  const [formState, setFormState] = React.useState({
+    loading: false,
+    error: "",
+    success: "",
+  });
   const [addService, setAddService] = useState(false);
   const [currentService, setCurrentService] = useState(null);
   const [addtreatment, setAddtreatment] = useState(false);
@@ -38,12 +42,14 @@ const Services = () => {
   const [voucher, setVoucher] = useState(false);
   const [editVoucher, setEditVoucher] = useState(false);
 
-
   const getVouchers = async () => {
-    const resp = await GET.request({ url: '/vendor/get-all-giftvouchers', token: vendor?.api_token });
-    (resp && resp.code == 200) ? setVoucherList(resp.data) : setVoucherList([]);
-  }
-  const [currentTab, setCurrentTab] = ('service');
+    const resp = await GET.request({
+      url: "/vendor/get-all-giftvouchers",
+      token: vendor?.api_token,
+    });
+    resp && resp.code == 200 ? setVoucherList(resp.data) : setVoucherList([]);
+  };
+  const [currentTab, setCurrentTab] = "service";
   const handleTreatmentClick = () => {
     setTreatment(true);
     setVoucher(false);
@@ -64,12 +70,18 @@ const Services = () => {
 
   const addNewVoucher = async (e) => {
     e.preventDefault();
-    const resp = await POST.request({ url: '/vendor/add-new-giftvouchers', form: e.target, token: vendor?.api_token, formState, setFormState });
+    const resp = await POST.request({
+      url: "/vendor/add-new-giftvouchers",
+      form: e.target,
+      token: vendor?.api_token,
+      formState,
+      setFormState,
+    });
     if (resp?.code == 200) {
       setVoucher(true);
       setCreateVoucher(false);
     }
-  }
+  };
 
   useEffect(() => {
     return setFormState({ loading: false, error: "", success: "" });
@@ -212,7 +224,11 @@ const Services = () => {
         {createVoucher === true ? (
           <>
             <div className="w-full space-y-3 bg-white rounded-xl">
-              <form className="p-4 space-y-3" noValidate onSubmit={e => addNewVoucher(e)}>
+              <form
+                className="p-4 space-y-3"
+                noValidate
+                onSubmit={(e) => addNewVoucher(e)}
+              >
                 <div className="flex items-center justify-between">
                   <p className="text-2xl font-semibold">Create Voucher</p>
                   <IoMdClose
@@ -291,8 +307,16 @@ const Services = () => {
                   </div>
                   <div className="flex flex-col w-full gap-3 lg:flex-row">
                     <div className="w-full space-y-1 text-left lg:w-1/2">
-                      <Label htmlFor="first_name" text="Discount Type" required={true} />
-                      <select className="w-full p-2 bg-transparent border rounded-md" required onChange={e => setDiscountType(e.target.value)}>
+                      <Label
+                        htmlFor="first_name"
+                        text="Discount Type"
+                        required={true}
+                      />
+                      <select
+                        className="w-full p-2 bg-transparent border rounded-md"
+                        required
+                        onChange={(e) => setDiscountType(e.target.value)}
+                      >
                         <option value="percentage">Percentage</option>
                         <option value="fixed">Fixed</option>
                       </select>
@@ -304,15 +328,23 @@ const Services = () => {
                         name="amount"
                         className="input_field"
                         placeholder="Enter Amount *"
-                        pattern={discountType == "percentage" ? "[0-9]{0,2}" : "[0-9]{1,}"}
-                        maxLength={discountType == "percentage" ? 2 : ''}
+                        pattern={
+                          discountType == "percentage"
+                            ? "[0-9]{0,2}"
+                            : "[0-9]{1,}"
+                        }
+                        maxLength={discountType == "percentage" ? 2 : ""}
                         step="0.1"
                         required
                       />
                       <p className="error">Enter Valid Amount </p>
                     </div>
                     <div className="w-full space-y-1 text-left lg:w-1/2">
-                      <Label htmlFor="expried_at" text="Expires at" required={true} />
+                      <Label
+                        htmlFor="expried_at"
+                        text="Expires at"
+                        required={true}
+                      />
                       <input
                         type="date"
                         name="expried_at"
@@ -320,7 +352,7 @@ const Services = () => {
                         placeholder="Enter Expires at"
                         pattern="\d{4}-\d{1,2}-\d{1,2}"
                         required
-                        min={new Date().toISOString().split('T')[0]}
+                        min={new Date().toISOString().split("T")[0]}
                       />
                       <p className="error">Enter Valid Expiry Date</p>
                     </div>
@@ -333,7 +365,11 @@ const Services = () => {
                     className="input_field"
                     placeholder="Write your thoughts here..."
                   ></textarea>
-                  <Button variant="primary" type="submit" disabled={formState?.loading}>
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    disabled={formState?.loading}
+                  >
                     <Spinner
                       show={formState?.loading}
                       width="25"
@@ -362,7 +398,7 @@ const Services = () => {
                 Gift Voucher
               </Button>
             </div>
-            {treatment &&
+            {treatment && (
               <div className="w-full p-4 space-y-5 bg-white rounded-xl">
                 <div className="flex justify-between gap-5">
                   <p className="text-2xl font-semibold">Treatments</p>
@@ -379,57 +415,96 @@ const Services = () => {
                         className="sm:max-w-[1025px]"
                       >
                         <DialogTitle>Add New Treatment</DialogTitle>
-                        <NewTreatmentModal setAddtreatment={setAddtreatment} vendorServices={vendorServices} />
+                        <NewTreatmentModal
+                          setAddtreatment={setAddtreatment}
+                          vendorServices={vendorServices}
+                        />
                       </DialogContent>
                     </Dialog>
                   </div>
                 </div>
-                {!vendorServices?.loading && vendorServices.data.map((service) => (
-                  <div className="w-full space-y-2 bg-white rounded-xl" key={v4()}>
-                    <div className="flex items-center gap-2">
-                      <p className="text-xl font-semibold">{service?.categories?.title}</p>
-                      {/* Add Service Group Dialog */}
-                      <TbCirclePlus className="text-[#0AADA4]" onClick={e => {
-                        setAddService(true);
-                        setCurrentService(service);
-                      }} />
-                    </div>
-                    {service?.group_service_list.map(service_group => (
-                      <div className="grid items-center grid-cols-1 gap-4 xl:grid-cols-2" key={v4()}>
-                        <Dialog className="w-11/12">
-                          <DialogTrigger>
-                            <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3">
-                              <p className="font-semibold text-start">{service_group?.service_title}</p>
-                              <div className="flex items-center justify-between">
-                                <p className="text-sm">{service_group?.duration}</p>
-                                <p className="text-sm">
-                                  {service_group?.service_title}
-                                </p>
-                                <p className="text-sm font-bold">£{service_group?.price} €{service_group?.sales_price}</p>
-                              </div>
-                            </div>
-                          </DialogTrigger>
-                          <DialogContent
-                            className="sm:max-w-[725px]"
-                          >
-                            <DialogTitle>Edit Service</DialogTitle>
-                            <EditServiceModal service={service} />
-                          </DialogContent>
-                        </Dialog>
+                {(!vendorServices?.loading &&
+                  vendorServices.data.map((service) => (
+                    <div
+                      className="w-full space-y-2 bg-white rounded-xl"
+                      key={v4()}
+                    >
+                      <div className="flex items-center gap-2">
+                        <p className="text-xl font-semibold">
+                          {service?.categories?.title}
+                        </p>
+                        {/* Add Service Group Dialog */}
+                        <TbCirclePlus
+                          className="text-[#0AADA4] cursor-pointer"
+                          onClick={(e) => {
+                            setAddService(true);
+                            setCurrentService(service);
+                          }}
+                        />
                       </div>
-                    ))}
+                      {service?.group_service_list.map((service_group) => (
+                        <div
+                          className="grid items-center grid-cols-1 gap-4 xl:grid-cols-2"
+                          key={v4()}
+                        >
+                          <Dialog className="w-11/12">
+                            <DialogTrigger>
+                              <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3">
+                                <div className="flex items-center justify-between">
+                                  <p className="font-semibold text-start">
+                                    {service_group?.service_title}
+                                  </p>
+                                  <div className="flex items-center gap-2">
+                                    <BsPencilFill className=" text-primary_color" />
+                                    <RiDeleteBin5Line className="text-[#FF0000]" />
+                                  </div>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                  <p className="text-sm">
+                                    {service_group?.duration}
+                                  </p>
+                                  <p className="text-sm">
+                                    {service_group?.service_title}
+                                  </p>
+                                  <p className="text-sm font-bold">
+                                    £{service_group?.price} €
+                                    {service_group?.sales_price}
+                                  </p>
+                                </div>
+                              </div>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-[725px]">
+                              <DialogTitle>Edit Service</DialogTitle>
+                              <EditServiceModal service={service} />
+                            </DialogContent>
+                          </Dialog>
+                        </div>
+                      ))}
+                    </div>
+                  ))) || (
+                  <div className="center min-h-[300px] w-full">
+                    <Spinner
+                      show={vendorServices?.loading}
+                      width={50}
+                      height={50}
+                    />
                   </div>
-                )) || <div className="center min-h-[300px] w-full"><Spinner show={vendorServices?.loading} width={50} height={50} /></div>}
-                <Dialog className="w-11/12" open={addService} onOpenChange={e => setAddService(e)}>
-                  <DialogContent
-                    className="sm:max-w-[1025px]"
-                  >
+                )}
+                <Dialog
+                  className="w-11/12"
+                  open={addService}
+                  onOpenChange={(e) => setAddService(e)}
+                >
+                  <DialogContent className="sm:max-w-[1025px]">
                     <DialogTitle>Service List</DialogTitle>
-                    <ServicesListModal service={currentService} setAddService={setAddService} />
+                    <ServicesListModal
+                      service={currentService}
+                      setAddService={setAddService}
+                    />
                   </DialogContent>
                 </Dialog>
               </div>
-            }
+            )}
             {voucher && (
               <>
                 <div className="flex items-center justify-between">
@@ -443,58 +518,76 @@ const Services = () => {
                 </div>
                 <div className="w-full p-4 space-y-3 bg-white rounded-xl">
                   <div className="overflow-x-auto">
-                    {voucherList && <table className="min-w-full font-[sans-serif]">
-                      <thead className="border-b-2 whitespace-nowrap">
-                        <tr>
-                          <th className="px-4 py-3 text-sm font-semibold text-left">
-                            Title
-                          </th>
-                          <th className="px-4 py-3 text-sm font-semibold text-left">
-                            Price
-                          </th>
+                    {voucherList && (
+                      <table className="min-w-full font-[sans-serif]">
+                        <thead className="border-b-2 whitespace-nowrap">
+                          <tr>
+                            <th className="px-4 py-3 text-sm font-semibold text-left">
+                              Title
+                            </th>
+                            <th className="px-4 py-3 text-sm font-semibold text-left">
+                              Price
+                            </th>
 
-                          <th className="px-4 py-3 text-sm font-semibold text-left">
-                            Off Price
-                          </th>
-                          <th className="px-4 py-3 text-sm font-semibold text-left">
-                            Expires at
-                          </th>
-                          <th className="px-4 py-3 text-sm font-semibold text-left">
-                            Status
-                          </th>
-                          <th className="px-4 py-3 text-sm font-semibold text-left">
-                            Action
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody className="border-b-2 whitespace-nowrap">
-                        {voucherList.map(voucher => (
-                          <tr className="" key={v4()}>
-                            <td className="px-4 py-4 text-sm">
-                              {voucher.title}
-                            </td>
-                            <td className="px-4 py-4 text-sm">£{voucher?.amount || 'N/A'}</td>
-                            <td className="px-4 py-4 text-sm">£{voucher?.sales_price || 'N/A'}0</td>
-                            <td className="px-4 py-4 text-sm">{voucher?.expried_at || 'N/A'}</td>
-                            <td className="px-4 py-4 text-sm ">
-                              <p className={`${voucher.status == 0 && 'bg-yellow-500' || vendor.status == 1 && 'bg-green-700' || 'bg-red-700'} p-2 rounded-full text-center`}>
-                                {voucher.status == 0 && 'Pending' || vendor.status == 1 && 'Active' || 'Inactive'}
-                              </p>
-                            </td>
-                            <td className="flex gap-4 px-4 py-6">
-                              <BsPencilFill
-                                className="text-[#0AADA4] text-xl cursor-pointer"
-                                onClick={handleEditVoucherClick}
-                              />
-                              <RiDeleteBin5Line className="text-[#FF0000] text-xl" />
-                            </td>
+                            <th className="px-4 py-3 text-sm font-semibold text-left">
+                              Off Price
+                            </th>
+                            <th className="px-4 py-3 text-sm font-semibold text-left">
+                              Expires at
+                            </th>
+                            <th className="px-4 py-3 text-sm font-semibold text-left">
+                              Status
+                            </th>
+                            <th className="px-4 py-3 text-sm font-semibold text-left">
+                              Action
+                            </th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>}
-                    {!voucherList && <div className="w-full min-h-[300px] center">
-                      <Spinner show={true} width={50} height={50} />
-                    </div>}
+                        </thead>
+                        <tbody className="border-b-2 whitespace-nowrap">
+                          {voucherList.map((voucher) => (
+                            <tr className="" key={v4()}>
+                              <td className="px-4 py-4 text-sm">
+                                {voucher.title}
+                              </td>
+                              <td className="px-4 py-4 text-sm">
+                                £{voucher?.amount || "N/A"}
+                              </td>
+                              <td className="px-4 py-4 text-sm">
+                                £{voucher?.sales_price || "N/A"}0
+                              </td>
+                              <td className="px-4 py-4 text-sm">
+                                {voucher?.expried_at || "N/A"}
+                              </td>
+                              <td className="px-4 py-4 text-sm ">
+                                <p
+                                  className={`${
+                                    (voucher.status == 0 && "bg-yellow-500") ||
+                                    (vendor.status == 1 && "bg-green-700") ||
+                                    "bg-red-700"
+                                  } p-2 rounded-full text-center`}
+                                >
+                                  {(voucher.status == 0 && "Pending") ||
+                                    (vendor.status == 1 && "Active") ||
+                                    "Inactive"}
+                                </p>
+                              </td>
+                              <td className="flex gap-4 px-4 py-6">
+                                <BsPencilFill
+                                  className="text-[#0AADA4] text-xl cursor-pointer"
+                                  onClick={handleEditVoucherClick}
+                                />
+                                <RiDeleteBin5Line className="text-[#FF0000] text-xl" />
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    )}
+                    {!voucherList && (
+                      <div className="w-full min-h-[300px] center">
+                        <Spinner show={true} width={50} height={50} />
+                      </div>
+                    )}
                   </div>
                 </div>
               </>
