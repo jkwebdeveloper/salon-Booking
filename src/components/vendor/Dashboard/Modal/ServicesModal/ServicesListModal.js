@@ -49,14 +49,13 @@ const ServicesListModal = ({ service, setAddService }) => {
 
   return (
     <div className="space-y-3">
-      {console.log(subCategories)}
       {(!subCategories.loading && subCategories.data.length > 0)
         && (
           <div className="flex items-start w-full h-full md:gap-10">
             <div className="space-y-3">
               {subCategories.data.map((subCategory) => {
                 return (
-                  <div className="flex items-center">
+                  <div className="flex items-center" key={'subCategory' + subCategory.id}>
                     <input
                       id={'subCategory' + subCategory.id}
                       type="checkbox"
@@ -101,22 +100,6 @@ const ServicesListModal = ({ service, setAddService }) => {
 
                       )
                     })}
-                    {/* {Object.keys(selectedCategory).map((category, index) => (
-                  <div className="border border-[#D9D9D9] flex flex-col gap-3 p-3 rounded-lg" key={v4()}>
-                    <p>{category}</p>
-                    {JSON.stringify(selectedCategory[category].defaultInputs)}
-                    {selectedCategory[category].defaultInputs.map((group, i) => (
-                      <InputGroup handleInputChange={handleInputChange} category={category} groupIndex={i} defaultInputs={group} key={v4()} sub_categories_id={selectedCategory[category].id} categories_id={category.id} service_group_id={service?.service_group_id} />
-                    ))}
-                    <Button
-                      variant="link"
-                      className="border-b border-[#0AADA4]  text-[#0AADA4] font-semibold text-right cursor-pointer p-0 ms-auto block h-6 rounded-none hover:no-underline"
-                      onClick={() => repeatInput(category)}
-                    >
-                      Add more pricing
-                    </Button>
-                  </div>
-                ))} */}
                   </div>
                   <div className="flex items-center gap-3">
                     <Button variant="primary" type="submit" disabled={formState.loading}>
