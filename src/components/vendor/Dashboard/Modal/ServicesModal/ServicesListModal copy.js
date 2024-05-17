@@ -11,6 +11,7 @@ const ServicesListModal = ({ service }) => {
   console.log('wfwef', service)
   const vendor = useSelector((state) => state.vendorAuth.vendor);
   const subCategories = useSubCategory({ id: service?.service_group_id });
+
   const [selectedCategory, setSelectedCategory] = useState({});
   const defaultInputs = [{ service_title: '', duration: 0.5, price: 0, saleprice: 0 }];
   const [inputValue, setInputValue] = useState([]);
@@ -38,6 +39,7 @@ const ServicesListModal = ({ service }) => {
 
       {!subCategories.loading && <div className="flex items-start w-full h-full md:gap-10">
         <div className="space-y-3">
+          {console.log('selectedCategory', selectedCategory)}
           {subCategories.data.map((subCategory) => (
             <div className="flex items-center" key={v4()}>
               <input

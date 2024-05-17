@@ -31,6 +31,9 @@ const Services = () => {
     error: "",
     success: "",
   });
+
+  const [services, setServices] = useState([]);
+
   const [addService, setAddService] = useState(false);
   const [currentService, setCurrentService] = useState(null);
   const [addtreatment, setAddtreatment] = useState(false);
@@ -87,6 +90,9 @@ const Services = () => {
     return setFormState({ loading: false, error: "", success: "" });
   }, [addtreatment, treatment, voucher, createVoucher, editVoucher]);
 
+  useEffect(() => {
+    setServices(vendorServices?.data);
+  }, [vendorServices?.loading]);
   return (
     <>
       <div className="space-y-4">
@@ -417,14 +423,15 @@ const Services = () => {
                         <DialogTitle>Add New Treatment</DialogTitle>
                         <NewTreatmentModal
                           setAddtreatment={setAddtreatment}
-                          vendorServices={vendorServices}
+                          services={services}
+                          setServices={setServices}
                         />
                       </DialogContent>
                     </Dialog>
                   </div>
                 </div>
                 {(!vendorServices?.loading &&
-                  vendorServices.data.map((service) => (
+                  services.map((service) => (
                     <div
                       className="w-full space-y-2 bg-white rounded-xl"
                       key={v4()}
@@ -482,14 +489,14 @@ const Services = () => {
                       ))}
                     </div>
                   ))) || (
-                  <div className="center min-h-[300px] w-full">
-                    <Spinner
-                      show={vendorServices?.loading}
-                      width={50}
-                      height={50}
-                    />
-                  </div>
-                )}
+                    <div className="center min-h-[300px] w-full">
+                      <Spinner
+                        show={vendorServices?.loading}
+                        width={50}
+                        height={50}
+                      />
+                    </div>
+                  )}
                 <Dialog
                   className="w-11/12"
                   open={addService}
@@ -560,11 +567,10 @@ const Services = () => {
                               </td>
                               <td className="px-4 py-4 text-sm ">
                                 <p
-                                  className={`${
-                                    (voucher.status == 0 && "bg-yellow-500") ||
+                                  className={`${(voucher.status == 0 && "bg-yellow-500") ||
                                     (vendor.status == 1 && "bg-green-700") ||
                                     "bg-red-700"
-                                  } p-2 rounded-full text-center`}
+                                    } p-2 rounded-full text-center`}
                                 >
                                   {(voucher.status == 0 && "Pending") ||
                                     (vendor.status == 1 && "Active") ||

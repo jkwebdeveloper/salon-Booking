@@ -8,8 +8,8 @@ import useCategory from "@/hooks/usecategory";
 import { useSelector } from "react-redux";
 import useLogout from "@/hooks/uselogout";
 
-const NewTreatmentModal = ({ setAddtreatment, vendorServices }) => {
-  const existingCats = vendorServices.data.map(service => service?.categories_id);
+const NewTreatmentModal = ({ setAddtreatment, services, setServices }) => {
+  const existingCats = services.map(service => service?.categories_id);
   const [logoutUser] = useLogout();
   const [formState, setFormState] = React.useState({ loading: false, error: "", success: "" });
   const mainCat = useCategory();
@@ -20,6 +20,7 @@ const NewTreatmentModal = ({ setAddtreatment, vendorServices }) => {
     const resp = await POST.request({ url: '/vendor/add-service-group', form: e.target, token: vendor?.api_token, formState, setFormState });
     if (resp && resp?.code == 200) {
       setAddtreatment(false);
+      setServices([...services, resp?.data]);
     } else if (resp && resp?.code == 401) {
       logoutUser({ api_token: vendor?.api_token, type: 'vendor' });
     }

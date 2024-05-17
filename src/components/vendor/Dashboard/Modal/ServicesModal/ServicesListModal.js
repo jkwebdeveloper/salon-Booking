@@ -27,6 +27,10 @@ const ServicesListModal = ({ service, setAddService }) => {
     setSelectedCategory(updatedCategory);
   }
 
+  const addServiceItems = (e, subCategory) => {
+    e.target.checked ? setSelectedCategory(prev => ([...prev, { id: subCategory.id, name: subCategory.title, defaultInputs }])) : setSelectedCategory(prev => prev.filter(category => category.id !== subCategory.id));
+  }
+
   const addService = async (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
@@ -34,8 +38,6 @@ const ServicesListModal = ({ service, setAddService }) => {
     for (let [key, value] of data.entries()) {
       formData.push(JSON.parse(value));
     }
-    // formData = Object.groupBy(formData, ({ sub_categories_id }) => sub_categories_id);
-    // formData = Object.keys(formData).map(key => ({ 'category_id': key, data: formData[key] }));
     const valideData = await POST.validateForm({ form: e.target });
     if (valideData) {
       const resp = await POST.request({ url: "/vendor/save-new-service", form: formData, token: vendor?.api_token, formState, setFormState });
@@ -47,28 +49,30 @@ const ServicesListModal = ({ service, setAddService }) => {
 
   return (
     <div className="space-y-3">
+      {console.log(subCategories)}
       {(!subCategories.loading && subCategories.data.length > 0)
         && (
           <div className="flex items-start w-full h-full md:gap-10">
             <div className="space-y-3">
-              {subCategories.data.map((subCategory) => (
-                <div className="flex items-center" key={v4()}>
-                  <input
-                    id={'subCategory' + subCategory.id}
-                    type="checkbox"
-                    onChange={e => {
-                      e.target.checked ? setSelectedCategory(prev => ([...prev, { id: subCategory.id, name: subCategory.title, defaultInputs }])) : setSelectedCategory(prev => prev.filter(category => category.id !== subCategory.id));
-                    }
-                    }
-                  />
-                  <label
-                    htmlFor={'subCategory' + subCategory.id}
-                    className="w-full text-sm font-medium text-gray-900 ms-2 "
-                  >
-                    {subCategory.title}
-                  </label>
-                </div>
-              ))}
+              {subCategories.data.map((subCategory) => {
+                return (
+                  <div className="flex items-center">
+                    <input
+                      id={'subCategory' + subCategory.id}
+                      type="checkbox"
+                      onChange={e => {
+                        addServiceItems(e, subCategory);
+                      }}
+                    />
+                    <label
+                      htmlFor={'subCategory' + subCategory.id}
+                      className="w-full text-sm font-medium text-gray-900 ms-2 "
+                    >
+                      {subCategory.title}
+                    </label>
+                  </div>
+                )
+              })}
             </div>
             <form className="flex flex-col flex-grow h-full space-y-3" noValidate onSubmit={e => addService(e)}>
               {Object.keys(selectedCategory).length == 0
@@ -123,7 +127,6 @@ const ServicesListModal = ({ service, setAddService }) => {
                         text="Save"
                       />
                     </Button>
-                    {console.log(formState)}
                     <Button variant="disable">Gift Voucher</Button>
                     {formState?.error && <Error error={formState?.error} />}
                   </div>
