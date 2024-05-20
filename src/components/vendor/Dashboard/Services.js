@@ -575,7 +575,7 @@ const Services = () => {
                                 £{voucher?.amount || "N/A"}
                               </td>
                               <td className="px-4 py-4 text-sm">
-                                £{voucher?.sales_price || "N/A"}0
+                                {(voucher?.sales_price && '£' + voucher?.sales_price) || "N/A"}
                               </td>
                               <td className="px-4 py-4 text-sm">
                                 {voucher?.expried_at || "N/A"}
