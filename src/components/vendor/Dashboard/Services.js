@@ -24,16 +24,14 @@ import { v4 } from "uuid";
 
 const Services = () => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);
-  const vendorServices = useVendorServices();
-
+  const [getServices, vendorServices] = useVendorServices();
   const [formState, setFormState] = React.useState({
     loading: false,
     error: "",
     success: "",
   });
-
+  const [refreshServices, setRefreshServices] = useState(v4());
   const [services, setServices] = useState([]);
-
   const [addService, setAddService] = useState(false);
   const [editService, setEditService] = useState(false);
   const [currentEditService, setCurrentEditService] = useState(null);
@@ -100,8 +98,13 @@ const Services = () => {
   }
 
   useEffect(() => {
+    getServices().then((data) => setServices(data.data));
+  }, [refreshServices]);
+
+  useEffect(() => {
     setServices(vendorServices?.data);
   }, [vendorServices?.loading]);
+
   return (
     <>
       <div className="space-y-4">
@@ -315,7 +318,7 @@ const Services = () => {
                       name="title"
                       className="input_field"
                       placeholder="Enter Title"
-                      pattern="^[a-zA-Z0-9\s]{4,}$"
+                      pattern="^[a-zA-Z0-9\s]{1,}$"
                       required
                     />
                     <p className="error">Min 4 Character Required</p>
@@ -449,7 +452,7 @@ const Services = () => {
                       >
                         <div className="flex items-center gap-2">
                           <p className="text-xl font-semibold">
-                            {service?.categories?.title} <span className="font-bold">{' id: '}</span>{service?.id}
+                            {service?.categories?.title}
                           </p>
                           {/* Add Service Group Dialog */}
                           <TbCirclePlus
@@ -473,15 +476,14 @@ const Services = () => {
                                     setCurrentEditService({ mainServiceID: service.id, sub_categories_id: services[0]?.sub_categories_id, serviceGroupID: services[0]?.service_group_id, service: services });
                                   }}>
                                     <div className="flex items-center justify-between">
-                                      {console.log(services)}
                                       <p className="font-semibold text-start">
-                                        {services[0]?.sub_categories?.title}<span className="font-bold">{' id: '}</span>{services[0]?.sub_categories_id}
+                                        {services[0]?.sub_categories?.title}
                                       </p>
                                     </div>
                                     {services.map(service_group => (
                                       <div className="flex items-center justify-between" key={v4()}>
                                         <p className="text-sm">
-                                          {service_group?.service_title}<span className="font-bold">{' id: '}</span>{service_group?.id}
+                                          {service_group?.service_title}
                                         </p>
                                         <p className="text-sm">
                                           {service_group?.duration == 0.5 ? "30 Min" : service_group?.duration == 1 ? "1 Hour" : service_group?.duration == 1.5 ? "1 Hour 30 Min" : service_group?.duration == 2 ? "2 Hour" : "2 Hour 30 Min"}
@@ -521,6 +523,7 @@ const Services = () => {
                     <ServicesListModal
                       service={currentService}
                       setAddService={setAddService}
+                      setRefreshServices={setRefreshServices}
                     />
                   </DialogContent>
                 </Dialog>
@@ -531,7 +534,7 @@ const Services = () => {
                 >
                   <DialogContent className="sm:max-w-[1025px]">
                     <DialogTitle>Edit Service</DialogTitle>
-                    <EditServiceModal editServiceData={currentEditService} setEditService={setEditService} />
+                    <EditServiceModal editServiceData={currentEditService} setEditService={setEditService} setRefreshServices={setRefreshServices} />
                   </DialogContent>
                 </Dialog>
               </div>

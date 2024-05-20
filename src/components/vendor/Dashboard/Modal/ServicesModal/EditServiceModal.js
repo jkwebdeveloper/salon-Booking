@@ -4,8 +4,9 @@ import React, { useState } from "react";
 import Inputgroup from "./inputgroup";
 import { POST } from "@/app/api/post";
 import { useSelector } from "react-redux";
+import { Spinner } from "@/components";
 
-const EditServiceModal = ({ editServiceData, setEditService }) => {
+const EditServiceModal = ({ editServiceData, setEditService, setRefreshServices }) => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);
   const [formState, setFormState] = React.useState({
     loading: false,
@@ -39,6 +40,7 @@ const EditServiceModal = ({ editServiceData, setEditService }) => {
     setPricingInputs2([...newPricingInputs]);
     if (id) {
       const resp = await POST.request({ url: '/vendor/delete-vendor-services', form: { id, sub_categories_id: 0 }, token: vendor?.api_token });
+      setRefreshServices();
     }
   };
 
@@ -51,10 +53,10 @@ const EditServiceModal = ({ editServiceData, setEditService }) => {
     }
     const valideData = await POST.validateForm({ form: e.target });
     if (valideData) {
-      console.log(formData);
-      const resp = await POST.request({ url: "/vendor/save-new-service", form: formData, token: vendor?.api_token, formState, setFormState });
+      const resp = await POST.request({ url: "/vendor/edit-vendor-services", form: formData, token: vendor?.api_token, formState, setFormState });
       if (resp && resp.code == 200) {
-        setEditService(false);
+        setRefreshServices();
+        setTimeout(() => setEditService(false), 1000);
       }
     }
   };
@@ -98,8 +100,13 @@ const EditServiceModal = ({ editServiceData, setEditService }) => {
       </p>
       <div className="flex items-center justify-center gap-3">
         <Button variant="disable">Cancel</Button>
-        <Button type="submit" variant="primary">
-          Save
+        <Button variant="primary" type="submit" disabled={formState.loading}>
+          <Spinner
+            show={formState.loading}
+            width="25"
+            height="25"
+            text="Save"
+          />
         </Button>
       </div>
     </form>

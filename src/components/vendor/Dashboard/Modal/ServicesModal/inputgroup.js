@@ -25,12 +25,12 @@ function InputGroup({ defaultValue, categories_id, service_group_id, sub_categor
                 <input type="text"
                     className="input_field"
                     placeholder="Enter your Name"
-                    pattern="^[a-zA-Z0-9\s]{4,}$"
+                    pattern="^[a-zA-Z0-9\s]{1,}$"
                     defaultValue={defaultValue.service_title}
                     onChange={(e) => setInputValue({ ...inputValue, service_title: e.target.value })}
                     required
                 />
-                <p className="error">Minimum 4 Char Required.</p>
+                <p className="error">Name Required.</p>
             </div>
             <Select
                 value={+inputValue.duration}

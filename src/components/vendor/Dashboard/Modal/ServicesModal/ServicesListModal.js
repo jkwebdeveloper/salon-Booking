@@ -7,7 +7,9 @@ import { POST } from "@/app/api/post";
 import { useSelector } from "react-redux";
 import InputGroup from "./inputgroup";
 
-const ServicesListModal = ({ service, setAddService }) => {
+const ServicesListModal = ({ service, setAddService, setRefreshServices }) => {
+  const existingServices = service.group_service_list.map((item) => item.sub_categories_id);
+  console.log(existingServices, 'existingServices');
   const vendor = useSelector((state) => state.vendorAuth.vendor);
   const subCategories = useSubCategory({ id: service?.categories_id });
   const [selectedCategory, setSelectedCategory] = useState([]);
@@ -43,6 +45,7 @@ const ServicesListModal = ({ service, setAddService }) => {
       const resp = await POST.request({ url: "/vendor/save-new-service", form: formData, token: vendor?.api_token, formState, setFormState });
       if (resp && resp.code == 200) {
         setAddService(false);
+        setRefreshServices(v4());
       }
     }
   }
@@ -62,10 +65,12 @@ const ServicesListModal = ({ service, setAddService }) => {
                       onChange={e => {
                         addServiceItems(e, subCategory);
                       }}
+                      disabled={existingServices.includes(subCategory.id)}
                     />
                     <label
                       htmlFor={'subCategory' + subCategory.id}
                       className="w-full text-sm font-medium text-gray-900 ms-2 "
+                      disabled={existingServices.includes(subCategory.id)}
                     >
                       {subCategory.title}
                     </label>

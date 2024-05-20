@@ -8,15 +8,18 @@ const useVendorServices = () => {
 
     const getServices = async () => {
         const resp = await GET.request({ url: '/vendor/get-vendor-all-services', token: vendor?.api_token });
-        (resp && resp?.code == 200) ? setVendorServices({ data: resp.data, loading: false })
-            : setVendorServices({ data: [], loading: false });
+        if (resp && resp?.code == 200) {
+            return { data: resp.data, loading: false }
+        } else {
+            return { data: [], loading: false };
+        }
     };
 
     useEffect(() => {
-        getServices();
+        getServices().then(data => setVendorServices(data));
     }, []);
 
-    return vendorServices;
+    return [getServices, vendorServices];
 }
 
 export default useVendorServices;
