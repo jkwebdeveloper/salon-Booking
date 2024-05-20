@@ -10,6 +10,15 @@ import {
   DialogTrigger,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { MdModeEditOutline } from "react-icons/md";
 const SalonDetails = () => {
   const [workingHours, setWorkingHours] = useState(false);
@@ -134,7 +143,7 @@ const SalonDetails = () => {
           <p className="text-sm text-[#0AADA4]">Shop working hours</p>
           <IoIosArrowForward />
         </div> */}
-        <Dialog open={workingHours} className="w-11/12">
+        {/* <Dialog open={workingHours} className="w-11/12">
           <DialogTrigger
             onClick={(e) => setWorkingHours(true)}
             className="w-full lg:w-1/2 bg-[#EDFFFE] p-3 flex cursor-pointer justify-between items-center border rounded-lg border-[#0AADA4]"
@@ -144,11 +153,368 @@ const SalonDetails = () => {
           </DialogTrigger>
           <DialogContent close={setWorkingHours} className="sm:max-w-[425px]">
             <DialogTitle>Shop working hours</DialogTitle>
-            {/* <NewTreatmentModal setAddCustomer={setAddCustomer} />
-            <ServicesListModal setAddCustomer={setAddCustomer} /> */}
             <WorkingHoursModal setWorkingHours={setWorkingHours} />
           </DialogContent>
-        </Dialog>
+        </Dialog> */}
+        <div className="w-full space-y-3 lg:w-1/2">
+          <div className="flex items-center gap-10">
+            <li class="w-full list-none">
+              <div class="flex items-center">
+                <input
+                  id="list-radio-license"
+                  type="checkbox"
+                  value=""
+                  name="list-radio"
+                  class=""
+                />
+                <label
+                  for="list-radio-license"
+                  class="w-full ms-2 text-sm font-medium text-gray-900 "
+                >
+                  Monday
+                </label>
+              </div>
+            </li>
+            <div className="flex items-center gap-3">
+              <Select>
+                <SelectTrigger className="">
+                  <SelectValue placeholder="09:00" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Fruits</SelectLabel>
+                    <SelectItem value="apple">Apple</SelectItem>
+                    <SelectItem value="banana">Banana</SelectItem>
+                    <SelectItem value="blueberry">Blueberry</SelectItem>
+                    <SelectItem value="grapes">Grapes</SelectItem>
+                    <SelectItem value="pineapple">Pineapple</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              <Select>
+                <SelectTrigger className="">
+                  <SelectValue placeholder="23:30" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Fruits</SelectLabel>
+                    <SelectItem value="apple">Apple</SelectItem>
+                    <SelectItem value="banana">Banana</SelectItem>
+                    <SelectItem value="blueberry">Blueberry</SelectItem>
+                    <SelectItem value="grapes">Grapes</SelectItem>
+                    <SelectItem value="pineapple">Pineapple</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <div className="flex items-center gap-10">
+            <li class="w-full list-none">
+              <div class="flex items-center">
+                <input
+                  id="list-radio-license"
+                  type="checkbox"
+                  value=""
+                  name="list-radio"
+                  class=""
+                />
+                <label
+                  for="list-radio-license"
+                  class="w-full ms-2 text-sm font-medium text-gray-900 "
+                >
+                  Tuesday
+                </label>
+              </div>
+            </li>
+            <div className="flex items-center gap-3">
+              <Select>
+                <SelectTrigger className="">
+                  <SelectValue placeholder="09:00" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Fruits</SelectLabel>
+                    <SelectItem value="apple">Apple</SelectItem>
+                    <SelectItem value="banana">Banana</SelectItem>
+                    <SelectItem value="blueberry">Blueberry</SelectItem>
+                    <SelectItem value="grapes">Grapes</SelectItem>
+                    <SelectItem value="pineapple">Pineapple</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              <Select>
+                <SelectTrigger className="">
+                  <SelectValue placeholder="23:30" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Fruits</SelectLabel>
+                    <SelectItem value="apple">Apple</SelectItem>
+                    <SelectItem value="banana">Banana</SelectItem>
+                    <SelectItem value="blueberry">Blueberry</SelectItem>
+                    <SelectItem value="grapes">Grapes</SelectItem>
+                    <SelectItem value="pineapple">Pineapple</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <div className="flex items-center gap-10">
+            <li class="w-full list-none">
+              <div class="flex items-center">
+                <input
+                  id="list-radio-license"
+                  type="checkbox"
+                  value=""
+                  name="list-radio"
+                  class=""
+                />
+                <label
+                  for="list-radio-license"
+                  class="w-full ms-2 text-sm font-medium text-gray-900 "
+                >
+                  Wednesday
+                </label>
+              </div>
+            </li>
+            <div className="flex items-center gap-3">
+              <Select>
+                <SelectTrigger className="">
+                  <SelectValue placeholder="09:00" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Fruits</SelectLabel>
+                    <SelectItem value="apple">Apple</SelectItem>
+                    <SelectItem value="banana">Banana</SelectItem>
+                    <SelectItem value="blueberry">Blueberry</SelectItem>
+                    <SelectItem value="grapes">Grapes</SelectItem>
+                    <SelectItem value="pineapple">Pineapple</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              <Select>
+                <SelectTrigger className="">
+                  <SelectValue placeholder="23:30" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Fruits</SelectLabel>
+                    <SelectItem value="apple">Apple</SelectItem>
+                    <SelectItem value="banana">Banana</SelectItem>
+                    <SelectItem value="blueberry">Blueberry</SelectItem>
+                    <SelectItem value="grapes">Grapes</SelectItem>
+                    <SelectItem value="pineapple">Pineapple</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <div className="flex items-center gap-10">
+            <li class="w-full list-none">
+              <div class="flex items-center">
+                <input
+                  id="list-radio-license"
+                  type="checkbox"
+                  value=""
+                  name="list-radio"
+                  class=""
+                />
+                <label
+                  for="list-radio-license"
+                  class="w-full ms-2 text-sm font-medium text-gray-900 "
+                >
+                  Thursday
+                </label>
+              </div>
+            </li>
+            <div className="flex items-center gap-3">
+              <Select>
+                <SelectTrigger className="">
+                  <SelectValue placeholder="09:00" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Fruits</SelectLabel>
+                    <SelectItem value="apple">Apple</SelectItem>
+                    <SelectItem value="banana">Banana</SelectItem>
+                    <SelectItem value="blueberry">Blueberry</SelectItem>
+                    <SelectItem value="grapes">Grapes</SelectItem>
+                    <SelectItem value="pineapple">Pineapple</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              <Select>
+                <SelectTrigger className="">
+                  <SelectValue placeholder="23:30" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Fruits</SelectLabel>
+                    <SelectItem value="apple">Apple</SelectItem>
+                    <SelectItem value="banana">Banana</SelectItem>
+                    <SelectItem value="blueberry">Blueberry</SelectItem>
+                    <SelectItem value="grapes">Grapes</SelectItem>
+                    <SelectItem value="pineapple">Pineapple</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <div className="flex items-center gap-10">
+            <li class="w-full list-none">
+              <div class="flex items-center">
+                <input
+                  id="list-radio-license"
+                  type="checkbox"
+                  value=""
+                  name="list-radio"
+                  class=""
+                />
+                <label
+                  for="list-radio-license"
+                  class="w-full ms-2 text-sm font-medium text-gray-900 "
+                >
+                  Friday
+                </label>
+              </div>
+            </li>
+            <div className="flex items-center gap-3">
+              <Select>
+                <SelectTrigger className="">
+                  <SelectValue placeholder="09:00" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Fruits</SelectLabel>
+                    <SelectItem value="apple">Apple</SelectItem>
+                    <SelectItem value="banana">Banana</SelectItem>
+                    <SelectItem value="blueberry">Blueberry</SelectItem>
+                    <SelectItem value="grapes">Grapes</SelectItem>
+                    <SelectItem value="pineapple">Pineapple</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              <Select>
+                <SelectTrigger className="">
+                  <SelectValue placeholder="23:30" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Fruits</SelectLabel>
+                    <SelectItem value="apple">Apple</SelectItem>
+                    <SelectItem value="banana">Banana</SelectItem>
+                    <SelectItem value="blueberry">Blueberry</SelectItem>
+                    <SelectItem value="grapes">Grapes</SelectItem>
+                    <SelectItem value="pineapple">Pineapple</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <div className="flex items-center gap-10">
+            <li class="w-full list-none">
+              <div class="flex items-center">
+                <input
+                  id="list-radio-license"
+                  type="checkbox"
+                  value=""
+                  name="list-radio"
+                  class=""
+                />
+                <label
+                  for="list-radio-license"
+                  class="w-full ms-2 text-sm font-medium text-gray-900 "
+                >
+                  Saturday
+                </label>
+              </div>
+            </li>
+            <div className="flex items-center gap-3">
+              <Select>
+                <SelectTrigger className="">
+                  <SelectValue placeholder="09:00" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Fruits</SelectLabel>
+                    <SelectItem value="apple">Apple</SelectItem>
+                    <SelectItem value="banana">Banana</SelectItem>
+                    <SelectItem value="blueberry">Blueberry</SelectItem>
+                    <SelectItem value="grapes">Grapes</SelectItem>
+                    <SelectItem value="pineapple">Pineapple</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              <Select>
+                <SelectTrigger className="">
+                  <SelectValue placeholder="23:30" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Fruits</SelectLabel>
+                    <SelectItem value="apple">Apple</SelectItem>
+                    <SelectItem value="banana">Banana</SelectItem>
+                    <SelectItem value="blueberry">Blueberry</SelectItem>
+                    <SelectItem value="grapes">Grapes</SelectItem>
+                    <SelectItem value="pineapple">Pineapple</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <div className="flex items-center gap-10">
+            <li class="w-full list-none">
+              <div class="flex items-center">
+                <input
+                  id="list-radio-license"
+                  type="checkbox"
+                  value=""
+                  name="list-radio"
+                  class=""
+                />
+                <label
+                  for="list-radio-license"
+                  class="w-full ms-2 text-sm font-medium text-gray-900 "
+                >
+                  Sunday
+                </label>
+              </div>
+            </li>
+            <div className="flex items-center gap-3">
+              <Select>
+                <SelectTrigger className="">
+                  <SelectValue placeholder="09:00" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Fruits</SelectLabel>
+                    <SelectItem value="apple">Apple</SelectItem>
+                    <SelectItem value="banana">Banana</SelectItem>
+                    <SelectItem value="blueberry">Blueberry</SelectItem>
+                    <SelectItem value="grapes">Grapes</SelectItem>
+                    <SelectItem value="pineapple">Pineapple</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              <Select>
+                <SelectTrigger className="">
+                  <SelectValue placeholder="23:30" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Fruits</SelectLabel>
+                    <SelectItem value="apple">Apple</SelectItem>
+                    <SelectItem value="banana">Banana</SelectItem>
+                    <SelectItem value="blueberry">Blueberry</SelectItem>
+                    <SelectItem value="grapes">Grapes</SelectItem>
+                    <SelectItem value="pineapple">Pineapple</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
         <p className="text-xl font-semibold">Social Profiles</p>
         <div className="w-full space-y-1 text-left">
           <label htmlFor="fname" className="label_text">
