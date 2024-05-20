@@ -25,7 +25,6 @@ function InputGroup({ defaultValue, categories_id, service_group_id, sub_categor
             <Select
                 value={+inputValue.duration}
                 onValueChange={(value) => setInputValue({ ...inputValue, duration: +value })}
-            // onValueChange={(value) => setInputValue({ ...defaultValue, duration: value })}
             >
                 <SelectTrigger className="w-[180px]">
                     {+inputValue.duration === 0.5 ? "30 Min" : +inputValue.duration === 1 ? "1 Hour" : +inputValue.duration === 1.5 ? "1 Hour 30 Min" : +inputValue.duration === 2 ? "2 Hour" : "2 Hour 30 Min"}

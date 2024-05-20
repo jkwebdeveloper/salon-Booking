@@ -67,7 +67,14 @@ const Customer = () => {
           <table className="min-w-full rounded-lg font-[sans-serif]">
             <thead className="border-b-2 whitespace-nowrap">
               <tr>
-                <th className="w-8 pl-6">
+                <th className="w-8 pl-6" onClick={e => {
+                  const checked = e.target.closest('th').querySelector('input').checked;
+                  e.target.closest('th').querySelector('input').checked = !checked;
+                  const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+                  allCheckboxes.forEach(checkbox => {
+                    checkbox.checked = !checked;
+                  });
+                }}>
                   <input id="checkbox" type="checkbox" className="hidden peer" />
                   <label
                     htmlFor="checkbox"
@@ -109,11 +116,14 @@ const Customer = () => {
             <tbody className="border-b-2 whitespace-nowrap">
               {customers?.length > 0 && customers?.map((customer) => {
                 return (
-                  <tr className="" key={v4()}>
+                  <tr className="" key={v4()} onClick={e => {
+                    const checked = e.target.closest('tr').querySelector('input').checked;
+                    e.target.closest('tr').querySelector('input').checked = !checked;
+                  }}>
                     <td className="w-8 pl-6">
-                      <input id="checkbox1" type="checkbox" className="hidden peer" />
+                      <input id={customer.id} type="checkbox" className="hidden peer" />
                       <label
-                        htmlFor="checkbox1"
+                        htmlFor={customer.id}
                         className="relative flex items-center justify-center p-0.5 peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-5 h-5 cursor-pointer bg-primary_color border border-gray-400 rounded overflow-hidden"
                       >
                         <svg

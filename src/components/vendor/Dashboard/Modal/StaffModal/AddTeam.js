@@ -77,14 +77,14 @@ const AddTeam = ({ setAddTeam, editStaff, staffs, setStaffs, setEditStaff }) => 
         <Button
           variant={currentTab == 'services' ? "secondary" : "disable"}
           onClick={e => changeTab('services')}
-          disabled={Object.keys(staff).length == 0}
+        // disabled={Object.keys(staff).length == 0}
         >
           Services
         </Button>
         <Button
           variant={currentTab == 'publicProfile' ? "secondary" : "disable"}
           onClick={e => changeTab('publicProfile')}
-          disabled={Object.keys(staff).length == 0}
+        // disabled={Object.keys(staff).length == 0}
         >
           Public Profile
         </Button>

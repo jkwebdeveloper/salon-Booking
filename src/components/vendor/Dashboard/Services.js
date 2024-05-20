@@ -234,7 +234,6 @@ const Services = () => {
             </div>
           </>
         )}
-        {console.log(services)}
         {createVoucher === true ? (
           <>
             <div className="w-full space-y-3 bg-white rounded-xl">
@@ -459,48 +458,50 @@ const Services = () => {
                             }}
                           />
                         </div>
-                        {group_service_list && Object.values(group_service_list).map(services => (
-                          (
-                            <div
-                              className="grid items-center grid-cols-1 gap-4 xl:grid-cols-2"
-                              key={v4()}
-                            >
-                              <div className="relative w-full serviceBox">
-                                <Dialog className="w-full">
-                                  <DialogTrigger className="w-full">
-                                    <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3">
-                                      <div className="flex items-center justify-between">
-                                        <p className="font-semibold text-start">
-                                          {services[0]?.sub_categories?.title}
-                                        </p>
-                                      </div>
-                                      {services.map(service_group => (
+                        <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+                          {group_service_list && Object.values(group_service_list).map(services => (
+                            (
+                              <div
+                                className=""
+                                key={v4()}
+                              >
+                                <div className="relative w-full serviceBox">
+                                  <Dialog className="w-full">
+                                    <DialogTrigger className="w-full">
+                                      <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3">
                                         <div className="flex items-center justify-between">
-                                          <p className="text-sm">
-                                            {service_group?.duration}
-                                          </p>
-                                          <p className="text-sm">
-                                            {service_group?.service_title}
-                                          </p>
-                                          <p className="text-sm font-bold">
-                                            £{service_group?.price} €
-                                            {service_group?.sales_price}
+                                          <p className="font-semibold text-start">
+                                            {services[0]?.sub_categories?.title}
                                           </p>
                                         </div>
-                                      ))}
-                                    </div>
-                                  </DialogTrigger>
-                                  <DialogContent className="sm:max-w-[725px]">
-                                    <DialogTitle>Edit Service</DialogTitle>
-                                    <EditServiceModal service={service} />
-                                  </DialogContent>
-                                </Dialog>
-                                <RiDeleteBin5Line className="text-[#FF0000] absolute top-[1rem] right-[1rem] z-20 cursor-pointer" onClick={e => deleteGroup({ e: e, id: services[0]?.service_group_id })} />
-                                <BsPencilFill className=" text-primary_color absolute top-[1rem] right-[3rem]" />
+                                        {services.map(service_group => (
+                                          <div className="flex items-center justify-between" key={v4()}>
+                                            <p className="text-sm">
+                                              {service_group?.service_title}
+                                            </p>
+                                            <p className="text-sm">
+                                              {service_group?.duration == 0.5 ? "30 Min" : service_group?.duration == 1 ? "1 Hour" : service_group?.duration == 1.5 ? "1 Hour 30 Min" : service_group?.duration == 2 ? "2 Hour" : "2 Hour 30 Min"}
+                                            </p>
+                                            <p className="text-sm font-bold">
+                                              {service_group?.price && '£' + service_group?.price}
+                                              {service_group?.sales_price && '£' + service_group?.sales_price}
+                                            </p>
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </DialogTrigger>
+                                    <DialogContent className="sm:max-w-[725px]">
+                                      <DialogTitle>Edit Service</DialogTitle>
+                                      <EditServiceModal service={services} />
+                                    </DialogContent>
+                                  </Dialog>
+                                  <RiDeleteBin5Line className="text-[#FF0000] absolute top-[1rem] right-[1rem] z-20 cursor-pointer" onClick={e => deleteGroup({ e: e, id: services[0]?.service_group_id })} />
+                                  <BsPencilFill className=" text-primary_color absolute top-[1rem] right-[3rem]" />
+                                </div>
                               </div>
-                            </div>
-                          )
-                        ))}
+                            )
+                          ))}
+                        </div>
                       </div>
                     )
                   })) || (

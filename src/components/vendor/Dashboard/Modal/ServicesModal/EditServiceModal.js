@@ -11,10 +11,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const EditServiceModal = () => {
-  const [pricingInputs2, setPricingInputs2] = useState([
-    { levelname: "", duration: "", price: "", saleprice: "" },
-  ]);
+const EditServiceModal = ({ service }) => {
+  console.log("Service", service);
+  // const [pricingInputs2, setPricingInputs2] = useState([
+  //   { levelname: "", duration: "", price: "", saleprice: "" },
+  // ]);
+  const inputValues = service.map(item => {
+    return { levelname: item.service_title, duration: item.duration, price: item.price, saleprice: item.sale_price }
+  });
+  const [pricingInputs2, setPricingInputs2] = useState([...inputValues]);
 
   const addPricingInput = (inputs, setInputs) => {
     setInputs([...inputs, { levelname: "", duration: "", price: "", saleprice: "" }]);
@@ -43,9 +48,11 @@ const EditServiceModal = () => {
             className="input_field"
             placeholder="Enter Mobile Number"
             pattern="[A-Za-z]{4,20}"
+            defaultValue={service[0].sub_categories.title}
+            disabled
           />
         </div>
-        <div className="w-full space-y-1 text-left ">
+        {/* <div className="w-full space-y-1 text-left ">
           <Label htmlFor="last_name" text="Service Title" />
           <input
             type="text"
@@ -54,9 +61,9 @@ const EditServiceModal = () => {
             placeholder="Enter Service Title"
             pattern="[A-Za-z]{4,20}"
           />
-        </div>
+        </div> */}
       </div>
-
+      {console.log("Pricing Inputs", pricingInputs2)}
       {pricingInputs2.map((input, index) => (
         <div key={index} className="flex flex-col w-full gap-3 lg:flex-row">
           <div className="w-full space-y-1 text-left lg:w-1/2">
@@ -88,18 +95,20 @@ const EditServiceModal = () => {
               pattern="[A-Za-z]{4,20}"
               required
             /> */}
-            <Select onValueChange={e => handleInputChange(index, pricingInputs2, setPricingInputs2, { duration: e })}>
+            <Select
+              value={+input.duration}
+              onValueChange={(value) => handleInputChange(index, pricingInputs2, setPricingInputs2, { duration: value })}
+            >
               <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select a fruit" />
+                {+input.duration === 0.5 ? "30 Min" : +input.duration === 1 ? "1 Hour" : +input.duration === 1.5 ? "1 Hour 30 Min" : +input.duration === 2 ? "2 Hour" : "2 Hour 30 Min"}
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white">
                 <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                  <SelectItem value={0.5}>30 Min</SelectItem>
+                  <SelectItem value={1}>1 Hour</SelectItem>
+                  <SelectItem value={1.5}>1 Hour 30 Min</SelectItem>
+                  <SelectItem value={2}>2 Hour</SelectItem>
+                  <SelectItem value={2.5}>2 Hour 30 Min</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
