@@ -135,7 +135,10 @@ const Staff = () => {
                           Jullie
                         </th>
                       </DialogTrigger>
-                      <DialogContent close={setUserModal}>
+                      <DialogContent
+                        close={setUserModal}
+                        className="sm:max-w-[550px]"
+                      >
                         <UserModal setUserModal={setUserModal} />
                       </DialogContent>
                     </Dialog>

@@ -12,15 +12,389 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { DatePicker } from "@/components/user/Home/FindNearByForm/datepicker";
 
 const UserModal = () => {
   const [editDay, setEditDay] = useState(false);
   const [addTime, setAddTime] = useState(false);
   return (
     <div className="w-full space-y-3">
+      {/* Add Time Off Dialog */}
       {/* <div className="space-y-4">
-          <p>Add time off</p>
-        </div> */}
+        <p>Add time off</p>
+        <div className="flex flex-col w-full gap-3 lg:flex-row">
+          <div className="border w-max rounded-md border-[#eae9e9]">
+            <DatePicker />
+          </div>
+          <div className="border w-max rounded-md border-[#eae9e9]">
+            <DatePicker />
+          </div>
+        </div>
+      </div> */}
+
+      {/* New Schedule Dialog */}
+      {/* <div className="w-full space-y-3 lg:w-1/2">
+        <div className="flex items-center gap-10">
+          <li className="w-full list-none">
+            <div className="flex items-center">
+              <input
+                id="list-radio-license"
+                type="checkbox"
+                value=""
+                name="list-radio"
+                className=""
+              />
+              <label
+                htmlFor="list-radio-license"
+                className="w-full text-sm font-medium text-gray-900 ms-2 "
+              >
+                Monday
+              </label>
+            </div>
+          </li>
+          <div className="flex items-center gap-3">
+            <Select>
+              <SelectTrigger className="">
+                <SelectValue placeholder="09:00" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Fruits</SelectLabel>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <Select>
+              <SelectTrigger className="">
+                <SelectValue placeholder="23:30" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Fruits</SelectLabel>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+        <div className="flex items-center gap-10">
+          <li className="w-full list-none">
+            <div className="flex items-center">
+              <input
+                id="list-radio-license"
+                type="checkbox"
+                value=""
+                name="list-radio"
+                className=""
+              />
+              <label
+                htmlFor="list-radio-license"
+                className="w-full text-sm font-medium text-gray-900 ms-2 "
+              >
+                Tuesday
+              </label>
+            </div>
+          </li>
+          <div className="flex items-center gap-3">
+            <Select>
+              <SelectTrigger className="">
+                <SelectValue placeholder="09:00" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Fruits</SelectLabel>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <Select>
+              <SelectTrigger className="">
+                <SelectValue placeholder="23:30" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Fruits</SelectLabel>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+        <div className="flex items-center gap-10">
+          <li className="w-full list-none">
+            <div className="flex items-center">
+              <input
+                id="list-radio-license"
+                type="checkbox"
+                value=""
+                name="list-radio"
+                className=""
+              />
+              <label
+                htmlFor="list-radio-license"
+                className="w-full text-sm font-medium text-gray-900 ms-2 "
+              >
+                Wednesday
+              </label>
+            </div>
+          </li>
+          <div className="flex items-center gap-3">
+            <Select>
+              <SelectTrigger className="">
+                <SelectValue placeholder="09:00" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Fruits</SelectLabel>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <Select>
+              <SelectTrigger className="">
+                <SelectValue placeholder="23:30" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Fruits</SelectLabel>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+        <div className="flex items-center gap-10">
+          <li className="w-full list-none">
+            <div className="flex items-center">
+              <input
+                id="list-radio-license"
+                type="checkbox"
+                value=""
+                name="list-radio"
+                className=""
+              />
+              <label
+                htmlFor="list-radio-license"
+                className="w-full text-sm font-medium text-gray-900 ms-2 "
+              >
+                Thursday
+              </label>
+            </div>
+          </li>
+          <div className="flex items-center gap-3">
+            <Select>
+              <SelectTrigger className="">
+                <SelectValue placeholder="09:00" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Fruits</SelectLabel>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <Select>
+              <SelectTrigger className="">
+                <SelectValue placeholder="23:30" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Fruits</SelectLabel>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+        <div className="flex items-center gap-10">
+          <li className="w-full list-none">
+            <div className="flex items-center">
+              <input
+                id="list-radio-license"
+                type="checkbox"
+                value=""
+                name="list-radio"
+                className=""
+              />
+              <label
+                htmlFor="list-radio-license"
+                className="w-full text-sm font-medium text-gray-900 ms-2 "
+              >
+                Friday
+              </label>
+            </div>
+          </li>
+          <div className="flex items-center gap-3">
+            <Select>
+              <SelectTrigger className="">
+                <SelectValue placeholder="09:00" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Fruits</SelectLabel>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <Select>
+              <SelectTrigger className="">
+                <SelectValue placeholder="23:30" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Fruits</SelectLabel>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+        <div className="flex items-center gap-10">
+          <li className="w-full list-none">
+            <div className="flex items-center">
+              <input
+                id="list-radio-license"
+                type="checkbox"
+                value=""
+                name="list-radio"
+                className=""
+              />
+              <label
+                htmlFor="list-radio-license"
+                className="w-full text-sm font-medium text-gray-900 ms-2 "
+              >
+                Saturday
+              </label>
+            </div>
+          </li>
+          <div className="flex items-center gap-3">
+            <Select>
+              <SelectTrigger className="">
+                <SelectValue placeholder="09:00" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Fruits</SelectLabel>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <Select>
+              <SelectTrigger className="">
+                <SelectValue placeholder="23:30" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Fruits</SelectLabel>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+        <div className="flex items-center gap-10">
+          <li className="w-full list-none">
+            <div className="flex items-center">
+              <input
+                id="list-radio-license"
+                type="checkbox"
+                value=""
+                name="list-radio"
+                className=""
+              />
+              <label
+                htmlFor="list-radio-license"
+                className="w-full text-sm font-medium text-gray-900 ms-2 "
+              >
+                Sunday
+              </label>
+            </div>
+          </li>
+          <div className="flex items-center gap-3">
+            <Select>
+              <SelectTrigger className="">
+                <SelectValue placeholder="09:00" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Fruits</SelectLabel>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <Select>
+              <SelectTrigger className="">
+                <SelectValue placeholder="23:30" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Fruits</SelectLabel>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+      </div>
+      <Button variant="primary" className="w-full mx-auto">
+        Save
+      </Button> */}
 
       {editDay === true ? (
         <div className="space-y-4">
