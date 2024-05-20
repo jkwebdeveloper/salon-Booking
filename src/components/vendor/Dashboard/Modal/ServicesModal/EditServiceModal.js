@@ -1,49 +1,62 @@
 import Button from "@/components/ui/button";
 import Label from "@/components/ui/form/label";
 import React, { useState } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { RiDeleteBin5Line } from "react-icons/ri";
+import Inputgroup from "./inputgroup";
+import { POST } from "@/app/api/post";
+import { useSelector } from "react-redux";
 
-const EditServiceModal = ({ service }) => {
-  console.log("Service", service);
-  // const [pricingInputs2, setPricingInputs2] = useState([
-  //   { levelname: "", duration: "", price: "", saleprice: "" },
-  // ]);
+const EditServiceModal = ({ editServiceData, setEditService }) => {
+  const vendor = useSelector((state) => state.vendorAuth.vendor);
+  const [formState, setFormState] = React.useState({
+    loading: false,
+    error: "",
+    success: "",
+  });
+
+  const { mainServiceID, serviceGroupID, sub_categories_id, service = [] } = editServiceData || {};
   const inputValues = service.map((item) => {
     return {
-      levelname: item.service_title,
+      service_title: item.service_title,
       duration: item.duration,
       price: item.price,
-      saleprice: item.sale_price,
+      sale_price: item.sale_price,
+      id: item.id || 0,
     };
   });
+
   const [pricingInputs2, setPricingInputs2] = useState([...inputValues]);
 
-  const addPricingInput = (inputs, setInputs) => {
-    setInputs([
-      ...inputs,
-      { levelname: "", duration: "", price: "", saleprice: "" },
+  const addPricingInput = () => {
+    setPricingInputs2([
+      ...pricingInputs2,
+      { service_title: "", duration: "", price: "", sale_price: "", id: 0 },
     ]);
   };
 
-  const handleInputChange = (index, inputs, setInputs, event) => {
-    const { name, value } = event.target || event;
-    const updatedInputs = [...inputs];
-    updatedInputs[index][name] = value;
-    setInputs(updatedInputs);
+  const deleteService = async ({ id, index }) => {
+    console.log(id);
+    const newPricingInputs = pricingInputs2.filter((_, i) => i !== index);
+    setPricingInputs2([...newPricingInputs]);
+    if (id) {
+      const resp = await POST.request({ url: '/vendor/delete-vendor-services', form: { id, sub_categories_id: 0 }, token: vendor?.api_token });
+    }
   };
 
   const editService = async (e) => {
     e.preventDefault();
-    console.log("Service edited", new FormData(e.target));
+    const data = new FormData(e.target);
+    let formData = [];
+    for (let [key, value] of data.entries()) {
+      formData.push(JSON.parse(value));
+    }
+    const valideData = await POST.validateForm({ form: e.target });
+    if (valideData) {
+      console.log(formData);
+      const resp = await POST.request({ url: "/vendor/save-new-service", form: formData, token: vendor?.api_token, formState, setFormState });
+      if (resp && resp.code == 200) {
+        setEditService(false);
+      }
+    }
   };
 
   return (
@@ -60,134 +73,29 @@ const EditServiceModal = ({ service }) => {
             name="first_name"
             className="input_field"
             placeholder="Enter Mobile Number"
-            pattern="[A-Za-z]{4,20}"
-            defaultValue={service[0].sub_categories.title}
+            defaultValue={service.length > 0 && service[0].sub_categories.title}
             disabled
           />
         </div>
-        {/* <div className="w-full space-y-1 text-left ">
-          <Label htmlFor="last_name" text="Service Title" />
-          <input
-            type="text"
-            name="last_name"
-            className="input_field"
-            placeholder="Enter Service Title"
-            pattern="[A-Za-z]{4,20}"
-          />
-        </div> */}
       </div>
-      {console.log("Pricing Inputs", pricingInputs2)}
+      {console.log(pricingInputs2)}
       {pricingInputs2.map((input, index) => (
-        <div key={index} className="flex flex-col w-full gap-3 lg:flex-row">
-          <div className="w-full space-y-1 text-left lg:w-1/2">
-            <p className="text-sm">Pricing level name *</p>
-            <input
-              type="text"
-              name="levelname"
-              value={input.levelname}
-              onChange={(e) =>
-                handleInputChange(index, pricingInputs2, setPricingInputs2, e)
-              }
-              className="input_field"
-              placeholder="Enter your Name"
-              pattern="[A-Za-z]{4,20}"
-              required
-            />
-          </div>
-          <div className="w-full space-y-1 text-left lg:w-1/2">
-            <p className="text-sm">Duration *</p>
-            {/* <input
-              type="text"
-              name="price"
-              value={input.price}
-              onChange={(e) =>
-                handleInputChange(index, pricingInputs2, setPricingInputs2, e)
-              }
-              className="input_field"
-              placeholder="Enter your name"
-              pattern="[A-Za-z]{4,20}"
-              required
-            /> */}
-            <Select
-              value={+input.duration}
-              onValueChange={(value) =>
-                handleInputChange(index, pricingInputs2, setPricingInputs2, {
-                  duration: value,
-                })
-              }
-            >
-              <SelectTrigger className="w-[180px]">
-                {+input.duration === 0.5
-                  ? "30 Min"
-                  : +input.duration === 1
-                  ? "1 Hour"
-                  : +input.duration === 1.5
-                  ? "1 Hour 30 Min"
-                  : +input.duration === 2
-                  ? "2 Hour"
-                  : "2 Hour 30 Min"}
-              </SelectTrigger>
-              <SelectContent className="bg-white">
-                <SelectGroup>
-                  <SelectItem value={0.5}>30 Min</SelectItem>
-                  <SelectItem value={1}>1 Hour</SelectItem>
-                  <SelectItem value={1.5}>1 Hour 30 Min</SelectItem>
-                  <SelectItem value={2}>2 Hour</SelectItem>
-                  <SelectItem value={2.5}>2 Hour 30 Min</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="w-full space-y-1 text-left lg:w-1/2">
-            <p className="text-sm">Price *</p>
-            <input
-              type="text"
-              name="price"
-              value={input.price}
-              onChange={(e) =>
-                handleInputChange(index, pricingInputs2, setPricingInputs2, e)
-              }
-              className="input_field"
-              placeholder="Enter your name"
-              pattern="[A-Za-z]{4,20}"
-              required
-            />
-          </div>
-          <div className="w-full space-y-1 text-left lg:w-1/2">
-            <p className="text-sm">Sale Price *</p>
-            <input
-              type="text"
-              name="saleprice"
-              value={input.saleprice}
-              onChange={(e) =>
-                handleInputChange(index, pricingInputs2, setPricingInputs2, e)
-              }
-              className="input_field"
-              placeholder="Enter your name"
-              pattern="[A-Za-z]{4,20}"
-              required
-            />
-          </div>
-          <div>
-            <RiDeleteBin5Line className="text-[#FF0000] cursor-pointer" />
-          </div>
-        </div>
+        <Inputgroup
+          key={index}
+          index={index}
+          defaultValue={{ ...input }}
+          categories_id={mainServiceID}
+          service_group_id={serviceGroupID}
+          sub_categories_id={sub_categories_id}
+          deleteService={deleteService}
+        />
       ))}
       <p
         className="underline text-[#0AADA4] font-semibold text-right cursor-pointer"
-        onClick={() => addPricingInput(pricingInputs2, setPricingInputs2)}
+        onClick={() => addPricingInput()}
       >
         Add more pricing
       </p>
-      <div>
-        <Label htmlFor="first_name" text="Add a note (Optional)" />
-        <textarea
-          id="message"
-          rows="4"
-          className="input_field"
-          placeholder="Write your thoughts here..."
-        ></textarea>
-      </div>
       <div className="flex items-center justify-center gap-3">
         <Button variant="disable">Cancel</Button>
         <Button type="submit" variant="primary">

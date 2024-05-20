@@ -35,6 +35,8 @@ const Services = () => {
   const [services, setServices] = useState([]);
 
   const [addService, setAddService] = useState(false);
+  const [editService, setEditService] = useState(false);
+  const [currentEditService, setCurrentEditService] = useState(null);
   const [currentService, setCurrentService] = useState(null);
   const [addtreatment, setAddtreatment] = useState(false);
   const [treatment, setTreatment] = useState(true);
@@ -90,8 +92,8 @@ const Services = () => {
     return setFormState({ loading: false, error: "", success: "" });
   }, [addtreatment, treatment, voucher, createVoucher, editVoucher]);
 
-  const deleteGroup = async ({ e, id }) => {
-    const resp = await POST.request({ url: '/vendor/delete-vendor-services', form: { id }, token: vendor?.api_token });
+  const deleteGroup = async ({ e, id, sub_categories_id }) => {
+    const resp = await POST.request({ url: '/vendor/delete-vendor-services', form: { id, sub_categories_id }, token: vendor?.api_token });
     if (resp && resp?.code == 200) {
       e.target.closest('.serviceBox').remove();
     }
@@ -447,7 +449,7 @@ const Services = () => {
                       >
                         <div className="flex items-center gap-2">
                           <p className="text-xl font-semibold">
-                            {service?.categories?.title}
+                            {service?.categories?.title} <span className="font-bold">{' id: '}</span>{service?.id}
                           </p>
                           {/* Add Service Group Dialog */}
                           <TbCirclePlus
@@ -462,40 +464,36 @@ const Services = () => {
                           {group_service_list && Object.values(group_service_list).map(services => (
                             (
                               <div
-                                className=""
+                                className="serviceBox"
                                 key={v4()}
                               >
-                                <div className="relative w-full serviceBox">
-                                  <Dialog className="w-full">
-                                    <DialogTrigger className="w-full">
-                                      <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3">
-                                        <div className="flex items-center justify-between">
-                                          <p className="font-semibold text-start">
-                                            {services[0]?.sub_categories?.title}
-                                          </p>
-                                        </div>
-                                        {services.map(service_group => (
-                                          <div className="flex items-center justify-between" key={v4()}>
-                                            <p className="text-sm">
-                                              {service_group?.service_title}
-                                            </p>
-                                            <p className="text-sm">
-                                              {service_group?.duration == 0.5 ? "30 Min" : service_group?.duration == 1 ? "1 Hour" : service_group?.duration == 1.5 ? "1 Hour 30 Min" : service_group?.duration == 2 ? "2 Hour" : "2 Hour 30 Min"}
-                                            </p>
-                                            <p className="text-sm font-bold">
-                                              {service_group?.price && '£' + service_group?.price}
-                                              {service_group?.sales_price && '£' + service_group?.sales_price}
-                                            </p>
-                                          </div>
-                                        ))}
+                                <div className="relative w-full">
+                                  <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3" onClick={e => {
+                                    setEditService(true);
+                                    setCurrentEditService({ mainServiceID: service.id, sub_categories_id: services[0]?.sub_categories_id, serviceGroupID: services[0]?.service_group_id, service: services });
+                                  }}>
+                                    <div className="flex items-center justify-between">
+                                      {console.log(services)}
+                                      <p className="font-semibold text-start">
+                                        {services[0]?.sub_categories?.title}<span className="font-bold">{' id: '}</span>{services[0]?.sub_categories_id}
+                                      </p>
+                                    </div>
+                                    {services.map(service_group => (
+                                      <div className="flex items-center justify-between" key={v4()}>
+                                        <p className="text-sm">
+                                          {service_group?.service_title}<span className="font-bold">{' id: '}</span>{service_group?.id}
+                                        </p>
+                                        <p className="text-sm">
+                                          {service_group?.duration == 0.5 ? "30 Min" : service_group?.duration == 1 ? "1 Hour" : service_group?.duration == 1.5 ? "1 Hour 30 Min" : service_group?.duration == 2 ? "2 Hour" : "2 Hour 30 Min"}
+                                        </p>
+                                        <p className="text-sm font-bold">
+                                          {service_group?.price && '£' + service_group?.price}
+                                          {service_group?.sales_price && '£' + service_group?.sales_price}
+                                        </p>
                                       </div>
-                                    </DialogTrigger>
-                                    <DialogContent className="sm:max-w-[725px]">
-                                      <DialogTitle>Edit Service</DialogTitle>
-                                      <EditServiceModal service={services} />
-                                    </DialogContent>
-                                  </Dialog>
-                                  <RiDeleteBin5Line className="text-[#FF0000] absolute top-[1rem] right-[1rem] z-20 cursor-pointer" onClick={e => deleteGroup({ e: e, id: services[0]?.service_group_id })} />
+                                    ))}
+                                  </div>
+                                  <RiDeleteBin5Line className="text-[#FF0000] absolute top-[1rem] right-[1rem] z-20 cursor-pointer" onClick={e => deleteGroup({ e: e, id: services[0]?.service_group_id, sub_categories_id: services[0]?.sub_categories_id })} />
                                   <BsPencilFill className=" text-primary_color absolute top-[1rem] right-[3rem]" />
                                 </div>
                               </div>
@@ -524,6 +522,16 @@ const Services = () => {
                       service={currentService}
                       setAddService={setAddService}
                     />
+                  </DialogContent>
+                </Dialog>
+                <Dialog
+                  className="w-11/12"
+                  open={editService}
+                  onOpenChange={(e) => setEditService(e)}
+                >
+                  <DialogContent className="sm:max-w-[1025px]">
+                    <DialogTitle>Edit Service</DialogTitle>
+                    <EditServiceModal editServiceData={currentEditService} setEditService={setEditService} />
                   </DialogContent>
                 </Dialog>
               </div>

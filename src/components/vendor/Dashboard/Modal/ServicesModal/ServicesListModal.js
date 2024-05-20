@@ -82,11 +82,11 @@ const ServicesListModal = ({ service, setAddService }) => {
                   <div className="flex-grow flex-shrink-0 space-y-4">
                     {selectedCategory.map((category, index) => {
                       return (
-                        <div className="flex flex-col gap-4 p-4 border rounded-xl" key={v4()}>
+                        <div className="flex flex-col gap-4 p-4 border rounded-xl" key={index}>
                           <p>{category.name}</p>
                           {category.defaultInputs.map((group, i) => {
                             return (
-                              <InputGroup key={v4()} defaultValue={group} service_group_id={service.id} categories_id={service?.categories_id} sub_categories_id={category.id} />
+                              <InputGroup key={i} defaultValue={group} service_group_id={service.id} categories_id={service?.categories_id} sub_categories_id={category.id} />
                             )
                           })}
                           <Button
