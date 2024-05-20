@@ -1,13 +1,13 @@
 import Button from "@/components/ui/button";
 import { DatePicker } from "@/components/user/Home/FindNearByForm/datepicker";
 import React, { useCallback, useEffect, useState } from "react";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-} from "@/components/ui/pagination";
-import { IoIosArrowForward } from "react-icons/io";
-import { IoIosArrowBack } from "react-icons/io";
+// import {
+//   Pagination,
+//   PaginationContent,
+//   PaginationItem,
+// } from "@/components/ui/pagination";
+// import { IoIosArrowForward } from "react-icons/io";
+// import { IoIosArrowBack } from "react-icons/io";
 import {
   Dialog,
   DialogContent,
@@ -74,7 +74,7 @@ const Staff = () => {
               <div className="border w-max rounded-md border-[#eae9e9]">
                 <DatePicker />
               </div>
-              <Pagination className="w-0 mx-10">
+              {/* <Pagination className="w-0 mx-10">
                 <PaginationContent>
                   <PaginationItem className="bg-[#FBE4FF] rounded-md p-3">
                     <IoIosArrowBack />
@@ -83,7 +83,7 @@ const Staff = () => {
                     <IoIosArrowForward />
                   </PaginationItem>
                 </PaginationContent>
-              </Pagination>
+              </Pagination> */}
             </div>
             <hr />
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

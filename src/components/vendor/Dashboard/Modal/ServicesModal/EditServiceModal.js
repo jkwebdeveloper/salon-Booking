@@ -10,19 +10,28 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { RiDeleteBin5Line } from "react-icons/ri";
 
 const EditServiceModal = ({ service }) => {
   console.log("Service", service);
   // const [pricingInputs2, setPricingInputs2] = useState([
   //   { levelname: "", duration: "", price: "", saleprice: "" },
   // ]);
-  const inputValues = service.map(item => {
-    return { levelname: item.service_title, duration: item.duration, price: item.price, saleprice: item.sale_price }
+  const inputValues = service.map((item) => {
+    return {
+      levelname: item.service_title,
+      duration: item.duration,
+      price: item.price,
+      saleprice: item.sale_price,
+    };
   });
   const [pricingInputs2, setPricingInputs2] = useState([...inputValues]);
 
   const addPricingInput = (inputs, setInputs) => {
-    setInputs([...inputs, { levelname: "", duration: "", price: "", saleprice: "" }]);
+    setInputs([
+      ...inputs,
+      { levelname: "", duration: "", price: "", saleprice: "" },
+    ]);
   };
 
   const handleInputChange = (index, inputs, setInputs, event) => {
@@ -38,7 +47,11 @@ const EditServiceModal = ({ service }) => {
   };
 
   return (
-    <form className="w-full space-y-4" noValidate onSubmit={e => editService(e)}>
+    <form
+      className="w-full space-y-4"
+      noValidate
+      onSubmit={(e) => editService(e)}
+    >
       <div className="flex flex-col w-full gap-3 lg:flex-row">
         <div className="w-full space-y-1 text-left ">
           <Label htmlFor="first_name" text="Treatment" />
@@ -97,10 +110,22 @@ const EditServiceModal = ({ service }) => {
             /> */}
             <Select
               value={+input.duration}
-              onValueChange={(value) => handleInputChange(index, pricingInputs2, setPricingInputs2, { duration: value })}
+              onValueChange={(value) =>
+                handleInputChange(index, pricingInputs2, setPricingInputs2, {
+                  duration: value,
+                })
+              }
             >
               <SelectTrigger className="w-[180px]">
-                {+input.duration === 0.5 ? "30 Min" : +input.duration === 1 ? "1 Hour" : +input.duration === 1.5 ? "1 Hour 30 Min" : +input.duration === 2 ? "2 Hour" : "2 Hour 30 Min"}
+                {+input.duration === 0.5
+                  ? "30 Min"
+                  : +input.duration === 1
+                  ? "1 Hour"
+                  : +input.duration === 1.5
+                  ? "1 Hour 30 Min"
+                  : +input.duration === 2
+                  ? "2 Hour"
+                  : "2 Hour 30 Min"}
               </SelectTrigger>
               <SelectContent className="bg-white">
                 <SelectGroup>
@@ -143,6 +168,9 @@ const EditServiceModal = ({ service }) => {
               required
             />
           </div>
+          <div>
+            <RiDeleteBin5Line className="text-[#FF0000] cursor-pointer" />
+          </div>
         </div>
       ))}
       <p
@@ -162,7 +190,9 @@ const EditServiceModal = ({ service }) => {
       </div>
       <div className="flex items-center justify-center gap-3">
         <Button variant="disable">Cancel</Button>
-        <Button type="submit" variant="primary">Save</Button>
+        <Button type="submit" variant="primary">
+          Save
+        </Button>
       </div>
     </form>
   );

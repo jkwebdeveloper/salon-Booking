@@ -3,6 +3,15 @@ import Label from "@/components/ui/form/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import React, { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const UserModal = () => {
   const [editDay, setEditDay] = useState(false);
@@ -32,24 +41,44 @@ const UserModal = () => {
           </RadioGroup>
           <div className="flex flex-col w-full gap-3 lg:flex-row">
             <div className="w-full space-y-1 text-left lg:w-1/2">
-              <Label htmlFor="first_name" text="From" />
-              <input
-                type="text"
-                name="first_name"
-                className="input_field"
-                placeholder="Enter From"
-                pattern="[A-Za-z]{4,20}"
-              />
+              <Select>
+                <label className="w-full text-sm font-medium text-gray-900 ms-2 ">
+                  From
+                </label>
+                <SelectTrigger className="">
+                  <SelectValue placeholder="09:00" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Fruits</SelectLabel>
+                    <SelectItem value="apple">Apple</SelectItem>
+                    <SelectItem value="banana">Banana</SelectItem>
+                    <SelectItem value="blueberry">Blueberry</SelectItem>
+                    <SelectItem value="grapes">Grapes</SelectItem>
+                    <SelectItem value="pineapple">Pineapple</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
             </div>
             <div className="w-full space-y-1 text-left lg:w-1/2">
-              <Label htmlFor="last_name" text="To" />
-              <input
-                type="text"
-                name="last_name"
-                className="input_field"
-                placeholder="Enter To"
-                pattern="[A-Za-z]{4,20}"
-              />
+              <Select>
+                <label class="w-full ms-2 text-sm font-medium text-gray-900 ">
+                  To
+                </label>
+                <SelectTrigger className="">
+                  <SelectValue placeholder="09:00" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Fruits</SelectLabel>
+                    <SelectItem value="apple">Apple</SelectItem>
+                    <SelectItem value="banana">Banana</SelectItem>
+                    <SelectItem value="blueberry">Blueberry</SelectItem>
+                    <SelectItem value="grapes">Grapes</SelectItem>
+                    <SelectItem value="pineapple">Pineapple</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
             </div>
           </div>
           <Button variant="primary" className="w-full mx-auto">

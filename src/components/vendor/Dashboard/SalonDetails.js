@@ -85,7 +85,7 @@ const SalonDetails = () => {
       <div className="p-3 space-y-4">
         <p className="text-xl font-semibold">Salon Info</p>
         <div className="w-full space-y-1 text-left">
-          <label htmlFor="fname" className="label_text">
+          <label htmlhtmlFor="fname" className="label_text">
             Salon Name*
           </label>
           <input
@@ -158,18 +158,18 @@ const SalonDetails = () => {
         </Dialog> */}
         <div className="w-full space-y-3 lg:w-1/2">
           <div className="flex items-center gap-10">
-            <li class="w-full list-none">
-              <div class="flex items-center">
+            <li className="w-full list-none">
+              <div className="flex items-center">
                 <input
                   id="list-radio-license"
                   type="checkbox"
                   value=""
                   name="list-radio"
-                  class=""
+                  className=""
                 />
                 <label
-                  for="list-radio-license"
-                  class="w-full ms-2 text-sm font-medium text-gray-900 "
+                  htmlFor="list-radio-license"
+                  className="w-full text-sm font-medium text-gray-900 ms-2 "
                 >
                   Monday
                 </label>
@@ -209,18 +209,18 @@ const SalonDetails = () => {
             </div>
           </div>
           <div className="flex items-center gap-10">
-            <li class="w-full list-none">
-              <div class="flex items-center">
+            <li className="w-full list-none">
+              <div className="flex items-center">
                 <input
                   id="list-radio-license"
                   type="checkbox"
                   value=""
                   name="list-radio"
-                  class=""
+                  className=""
                 />
                 <label
-                  for="list-radio-license"
-                  class="w-full ms-2 text-sm font-medium text-gray-900 "
+                  htmlFor="list-radio-license"
+                  className="w-full text-sm font-medium text-gray-900 ms-2 "
                 >
                   Tuesday
                 </label>
@@ -260,18 +260,18 @@ const SalonDetails = () => {
             </div>
           </div>
           <div className="flex items-center gap-10">
-            <li class="w-full list-none">
-              <div class="flex items-center">
+            <li className="w-full list-none">
+              <div className="flex items-center">
                 <input
                   id="list-radio-license"
                   type="checkbox"
                   value=""
                   name="list-radio"
-                  class=""
+                  className=""
                 />
                 <label
-                  for="list-radio-license"
-                  class="w-full ms-2 text-sm font-medium text-gray-900 "
+                  htmlFor="list-radio-license"
+                  className="w-full text-sm font-medium text-gray-900 ms-2 "
                 >
                   Wednesday
                 </label>
@@ -311,18 +311,18 @@ const SalonDetails = () => {
             </div>
           </div>
           <div className="flex items-center gap-10">
-            <li class="w-full list-none">
-              <div class="flex items-center">
+            <li className="w-full list-none">
+              <div className="flex items-center">
                 <input
                   id="list-radio-license"
                   type="checkbox"
                   value=""
                   name="list-radio"
-                  class=""
+                  className=""
                 />
                 <label
-                  for="list-radio-license"
-                  class="w-full ms-2 text-sm font-medium text-gray-900 "
+                  htmlFor="list-radio-license"
+                  className="w-full text-sm font-medium text-gray-900 ms-2 "
                 >
                   Thursday
                 </label>
@@ -362,18 +362,18 @@ const SalonDetails = () => {
             </div>
           </div>
           <div className="flex items-center gap-10">
-            <li class="w-full list-none">
-              <div class="flex items-center">
+            <li className="w-full list-none">
+              <div className="flex items-center">
                 <input
                   id="list-radio-license"
                   type="checkbox"
                   value=""
                   name="list-radio"
-                  class=""
+                  className=""
                 />
                 <label
-                  for="list-radio-license"
-                  class="w-full ms-2 text-sm font-medium text-gray-900 "
+                  htmlFor="list-radio-license"
+                  className="w-full text-sm font-medium text-gray-900 ms-2 "
                 >
                   Friday
                 </label>
@@ -413,18 +413,18 @@ const SalonDetails = () => {
             </div>
           </div>
           <div className="flex items-center gap-10">
-            <li class="w-full list-none">
-              <div class="flex items-center">
+            <li className="w-full list-none">
+              <div className="flex items-center">
                 <input
                   id="list-radio-license"
                   type="checkbox"
                   value=""
                   name="list-radio"
-                  class=""
+                  className=""
                 />
                 <label
-                  for="list-radio-license"
-                  class="w-full ms-2 text-sm font-medium text-gray-900 "
+                  htmlFor="list-radio-license"
+                  className="w-full text-sm font-medium text-gray-900 ms-2 "
                 >
                   Saturday
                 </label>
@@ -464,18 +464,18 @@ const SalonDetails = () => {
             </div>
           </div>
           <div className="flex items-center gap-10">
-            <li class="w-full list-none">
-              <div class="flex items-center">
+            <li className="w-full list-none">
+              <div className="flex items-center">
                 <input
                   id="list-radio-license"
                   type="checkbox"
                   value=""
                   name="list-radio"
-                  class=""
+                  className=""
                 />
                 <label
-                  for="list-radio-license"
-                  class="w-full ms-2 text-sm font-medium text-gray-900 "
+                  htmlFor="list-radio-license"
+                  className="w-full text-sm font-medium text-gray-900 ms-2 "
                 >
                   Sunday
                 </label>
