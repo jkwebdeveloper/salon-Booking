@@ -7,7 +7,6 @@ import { TbCirclePlus } from "react-icons/tb";
 import EditServiceModal from "./Modal/ServicesModal/EditServiceModal";
 import Image from "next/image";
 import { useSelector } from "react-redux";
-
 import {
   Dialog,
   DialogContent,
@@ -89,9 +88,13 @@ const Services = () => {
   };
 
   const deleteGroup = async ({ e, id, sub_categories_id }) => {
-    const resp = await POST.request({ url: '/vendor/delete-vendor-services', form: { id, sub_categories_id }, token: vendor?.api_token });
+    const resp = await POST.request({
+      url: "/vendor/delete-vendor-services",
+      form: { id, sub_categories_id },
+      token: vendor?.api_token,
+    });
     if (resp && resp?.code == 200) {
-      e.target.closest('.serviceBox').remove();
+      e.target.closest(".serviceBox").remove();
     }
   }
 
@@ -155,72 +158,74 @@ const Services = () => {
                     className="object-cover object-center w-full"
                   />
                 </div>
-                <form
-                  className="p-4 space-y-3"
-                  noValidate
-                  onSubmit={(e) => updateVoucher(e)}
-                >
-                  <div className="space-y-3">
-                    <Label htmlFor="first_name" text="Status" />
-                    <div className="flex items-center gap-3">
-                      <li className="list-none">
-                        <div className="flex items-center">
-                          <input
-                            id="active"
-                            type="radio"
-                            value="1"
-                            name="status"
-                            className=""
-                            defaultChecked={voucherData?.status == 1}
-                          />
-                          <label
-                            for="active"
-                            className="text-sm font-medium text-gray-900 ms-2 "
-                          >
-                            Active
-                          </label>
-                        </div>
-                      </li>
-                      <li className="list-none">
-                        <div className="flex items-center">
-                          <input
-                            id="inactive"
-                            type="radio"
-                            value="2"
-                            name="status"
-                            className=""
-                            defaultChecked={voucherData?.status == 2}
-                          />
-                          <label
-                            for="inactive"
-                            className="text-sm font-medium text-gray-900 ms-2 "
-                          >
-                            Inactive
-                          </label>
-                        </div>
-                      </li>
-                      <li className="list-none">
-                        <div className="flex items-center">
-                          <input
-                            id="pending"
-                            type="radio"
-                            value="0"
-                            name="status"
-                            className=""
-                            defaultChecked={voucherData?.status == 0}
-                          />
-                          <label
-                            for="pending"
-                            className="text-sm font-medium text-gray-900 ms-2 "
-                          >
-                            Pending
-                          </label>
-                        </div>
-                      </li>
-                    </div>
-                    <input type="file" name="voucher_image" />
-                    <div className="w-full space-y-1 text-left">
-                      <Label htmlFor="title" text="Title" required={true} />
+                <div className="space-y-2">
+                  <Label htmlFor="first_name" text="Status" />
+                  <div className="flex items-center gap-3">
+                    <li className="list-none">
+                      <div className="flex items-center">
+                        <input
+                          id="list-radio-license"
+                          type="radio"
+                          value=""
+                          name="list-radio"
+                          className=""
+                        />
+                        <label
+                          for="list-radio-license"
+                          className="text-sm font-medium text-gray-900 ms-2 "
+                        >
+                          Active
+                        </label>
+                      </div>
+                    </li>
+                    <li className="list-none">
+                      <div className="flex items-center">
+                        <input
+                          id="list-radio-license"
+                          type="radio"
+                          value=""
+                          name="list-radio"
+                          className=""
+                        />
+                        <label
+                          for="list-radio-license"
+                          className="text-sm font-medium text-gray-900 ms-2 "
+                        >
+                          Inactive
+                        </label>
+                      </div>
+                    </li>
+                    <li className="list-none">
+                      <div className="flex items-center">
+                        <input
+                          id="list-radio-license"
+                          type="radio"
+                          value=""
+                          name="list-radio"
+                          className=""
+                        />
+                        <label
+                          for="list-radio-license"
+                          className="text-sm font-medium text-gray-900 ms-2 "
+                        >
+                          Pending
+                        </label>
+                      </div>
+                    </li>
+                  </div>
+                  <div className="w-full space-y-1 text-left">
+                    <Label htmlFor="first_name" text="Title" />
+                    <input
+                      type="text"
+                      name="first_name"
+                      className="input_field"
+                      placeholder="Enter Title"
+                      pattern="[A-Za-z]{4,20}"
+                    />
+                  </div>
+                  <div className="flex flex-col w-full gap-3 lg:flex-row">
+                    <div className="w-full space-y-1 text-left lg:w-1/2">
+                      <Label htmlFor="first_name" text="Discount Type *" />
                       <input
                         type="text"
                         name="title"
@@ -524,7 +529,10 @@ const Services = () => {
                 </div>
                 {(!vendorServices?.loading &&
                   services.map((service) => {
-                    const group_service_list = Object.groupBy(service?.group_service_list, ({ sub_categories_id }) => sub_categories_id);
+                    const group_service_list = Object.groupBy(
+                      service?.group_service_list,
+                      ({ sub_categories_id }) => sub_categories_id
+                    );
                     return (
                       <div
                         className="w-full space-y-2 bg-white rounded-xl"
@@ -544,46 +552,80 @@ const Services = () => {
                           />
                         </div>
                         <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
-                          {group_service_list && Object.values(group_service_list).map(services => (
-                            (
-                              <div
-                                className="cursor-pointer serviceBox"
-                                key={v4()}
-                              >
-                                <div className="relative w-full">
-                                  <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3" onClick={e => {
-                                    setEditService(true);
-                                    setCurrentEditService({ mainServiceID: service.id, sub_categories_id: services[0]?.sub_categories_id, serviceGroupID: services[0]?.service_group_id, service: services });
-                                  }}>
-                                    <div className="flex items-center justify-between">
-                                      <p className="font-semibold text-start">
-                                        {services[0]?.sub_categories?.title}
-                                      </p>
-                                    </div>
-                                    {services.map(service_group => (
-                                      <div className="flex items-center justify-between" key={v4()}>
-                                        <p className="text-sm capitalize">
-                                          {service_group?.service_title}
-                                        </p>
-                                        <p className="text-sm">
-                                          {service_group?.duration == 0.5 ? "30 Min" : service_group?.duration == 1 ? "1 Hour" : service_group?.duration == 1.5 ? "1 Hour 30 Min" : service_group?.duration == 2 ? "2 Hour" : "2 Hour 30 Min"}
-                                        </p>
-                                        <p className="text-sm font-bold">
-                                          {service_group?.price && '£' + service_group?.price}
-                                          {service_group?.sales_price && '£' + service_group?.sales_price}
+                          {group_service_list &&
+                            Object.values(group_service_list).map(
+                              (services) => (
+                                <div
+                                  className="cursor-pointer serviceBox"
+                                  key={v4()}
+                                >
+                                  <div className="relative w-full">
+                                    <div
+                                      className="border border-[#D9D9D9] space-y-4 rounded-lg p-3"
+                                      onClick={(e) => {
+                                        setEditService(true);
+                                        setCurrentEditService({
+                                          mainServiceID: service.id,
+                                          sub_categories_id:
+                                            services[0]?.sub_categories_id,
+                                          serviceGroupID:
+                                            services[0]?.service_group_id,
+                                          service: services,
+                                        });
+                                      }}
+                                    >
+                                      <div className="flex items-center justify-between">
+                                        <p className="font-semibold text-start">
+                                          {services[0]?.sub_categories?.title}
                                         </p>
                                       </div>
-                                    ))}
+                                      {services.map((service_group) => (
+                                        <div
+                                          className="flex items-center justify-between"
+                                          key={v4()}
+                                        >
+                                          <p className="text-sm capitalize">
+                                            {service_group?.service_title}
+                                          </p>
+                                          <p className="text-sm">
+                                            {service_group?.duration == 0.5
+                                              ? "30 Min"
+                                              : service_group?.duration == 1
+                                                ? "1 Hour"
+                                                : service_group?.duration == 1.5
+                                                  ? "1 Hour 30 Min"
+                                                  : service_group?.duration == 2
+                                                    ? "2 Hour"
+                                                    : "2 Hour 30 Min"}
+                                          </p>
+                                          <p className="text-sm font-bold">
+                                            {service_group?.price &&
+                                              "£" + service_group?.price}
+                                            {service_group?.sales_price &&
+                                              "£" + service_group?.sales_price}
+                                          </p>
+                                        </div>
+                                      ))}
+                                    </div>
+                                    <RiDeleteBin5Line
+                                      className="text-[#FF0000] absolute top-[1rem] right-[1rem] z-20 cursor-pointer"
+                                      onClick={(e) =>
+                                        deleteGroup({
+                                          e: e,
+                                          id: services[0]?.service_group_id,
+                                          sub_categories_id:
+                                            services[0]?.sub_categories_id,
+                                        })
+                                      }
+                                    />
+                                    <BsPencilFill className=" text-primary_color absolute top-[1rem] right-[3rem]" />
                                   </div>
-                                  <RiDeleteBin5Line className="text-[#FF0000] absolute top-[1rem] right-[1rem] z-20 cursor-pointer" onClick={e => deleteGroup({ e: e, id: services[0]?.service_group_id, sub_categories_id: services[0]?.sub_categories_id })} />
-                                  <BsPencilFill className=" text-primary_color absolute top-[1rem] right-[3rem]" />
                                 </div>
-                              </div>
-                            )
-                          ))}
+                              )
+                            )}
                         </div>
                       </div>
-                    )
+                    );
                   })) || (
                     <div className="center min-h-[300px] w-full">
                       <Spinner
@@ -614,7 +656,11 @@ const Services = () => {
                 >
                   <DialogContent className="sm:max-w-[1025px]">
                     <DialogTitle>Edit Service</DialogTitle>
-                    <EditServiceModal editServiceData={currentEditService} setEditService={setEditService} setRefreshServices={setRefreshServices} />
+                    <EditServiceModal
+                      editServiceData={currentEditService}
+                      setEditService={setEditService}
+                      setRefreshServices={setRefreshServices}
+                    />
                   </DialogContent>
                 </Dialog>
               </div>
@@ -660,7 +706,10 @@ const Services = () => {
                                 {voucher.title}
                               </td>
                               <td className="px-4 py-4 text-sm">
-                                {(voucher?.discount_type == "percentage" && voucher?.amount + "%") || (voucher?.discount_type == "fixed" && '£' + voucher?.amount) || "N/A"}
+                                £{voucher?.amount || "N/A"}
+                              </td>
+                              <td className="px-4 py-4 text-sm">
+                                {(voucher?.sales_price && '£' + voucher?.sales_price) || "N/A"}
                               </td>
                               <td className="px-4 py-4 text-sm">
                                 {voucher?.expried_at || "N/A"}
@@ -668,8 +717,8 @@ const Services = () => {
                               <td className="px-4 py-4 text-sm ">
                                 <p
                                   className={`${(voucher.status == 0 && "bg-yellow-500") ||
-                                    (voucher.status == 1 && "bg-green-700 text-white") ||
-                                    "bg-red-700 text-white"
+                                    (vendor.status == 1 && "bg-green-700") ||
+                                    "bg-red-700"
                                     } p-2 rounded-full text-center`}
                                 >
                                   {(voucher.status == 0 && "Pending") ||
