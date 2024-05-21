@@ -20,7 +20,7 @@ export const POST = {
     }
     return true;
   },
-  request: async ({ token, form, url, header, formState = null, setFormState }) => {
+  request: async ({ token, form, url, header, formState = null, rawdata = false, setFormState }) => {
     let formData;
     if (form && form.tagName == "FORM") {
       const valideData = await POST.validateForm({ form });
@@ -28,7 +28,7 @@ export const POST = {
 
       formData = new FormData(form);
       for (const key of formData.keys()) formData.get(key).size == 0 && formData.delete(key);
-    } else if (!Array.isArray(form)) {
+    } else if (!Array.isArray(form) && !rawdata) {
       formData = new FormData();
       for (var key in form) formData.append(key, form[key]);
     } else {
