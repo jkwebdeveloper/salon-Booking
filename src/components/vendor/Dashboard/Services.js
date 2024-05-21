@@ -7,7 +7,6 @@ import { TbCirclePlus } from "react-icons/tb";
 import EditServiceModal from "./Modal/ServicesModal/EditServiceModal";
 import Image from "next/image";
 import { useSelector } from "react-redux";
-
 import {
   Dialog,
   DialogContent,
@@ -87,11 +86,15 @@ const Services = () => {
   };
 
   const deleteGroup = async ({ e, id, sub_categories_id }) => {
-    const resp = await POST.request({ url: '/vendor/delete-vendor-services', form: { id, sub_categories_id }, token: vendor?.api_token });
+    const resp = await POST.request({
+      url: "/vendor/delete-vendor-services",
+      form: { id, sub_categories_id },
+      token: vendor?.api_token,
+    });
     if (resp && resp?.code == 200) {
-      e.target.closest('.serviceBox').remove();
+      e.target.closest(".serviceBox").remove();
     }
-  }
+  };
 
   useEffect(() => {
     return setFormState({ loading: false, error: "", success: "" });
@@ -183,6 +186,24 @@ const Services = () => {
                         </label>
                       </div>
                     </li>
+                  </div>
+                  <div className="w-full space-y-1 text-left lg:w-1/2">
+                    {/* <input
+                      type="file"
+                      className="gap-3 mr-0 input_field"
+                      name="photo"
+                    /> */}
+                    <div class="tw-full space-y-1 text-left lg:w-1/2">
+                      <div class="flex xl:gap-4 gap-5 items-center justify-between">
+                        <input
+                          type="file"
+                          name="photo"
+                          id="actual-btn"
+                          hidden=""
+                          class="mx-auto input_field bg-[#C9E5F8] focus:outline-none cursor-pointer  text-primary_color font-medium active:scale-90 transition text-sm  px-5 md:py-3 py-2"
+                        />
+                      </div>
+                    </div>
                   </div>
                   <div className="w-full space-y-1 text-left">
                     <Label htmlFor="first_name" text="Title" />
@@ -444,7 +465,10 @@ const Services = () => {
                 </div>
                 {(!vendorServices?.loading &&
                   services.map((service) => {
-                    const group_service_list = Object.groupBy(service?.group_service_list, ({ sub_categories_id }) => sub_categories_id);
+                    const group_service_list = Object.groupBy(
+                      service?.group_service_list,
+                      ({ sub_categories_id }) => sub_categories_id
+                    );
                     return (
                       <div
                         className="w-full space-y-2 bg-white rounded-xl"
@@ -464,55 +488,89 @@ const Services = () => {
                           />
                         </div>
                         <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
-                          {group_service_list && Object.values(group_service_list).map(services => (
-                            (
-                              <div
-                                className="cursor-pointer serviceBox"
-                                key={v4()}
-                              >
-                                <div className="relative w-full">
-                                  <div className="border border-[#D9D9D9] space-y-4 rounded-lg p-3" onClick={e => {
-                                    setEditService(true);
-                                    setCurrentEditService({ mainServiceID: service.id, sub_categories_id: services[0]?.sub_categories_id, serviceGroupID: services[0]?.service_group_id, service: services });
-                                  }}>
-                                    <div className="flex items-center justify-between">
-                                      <p className="font-semibold text-start">
-                                        {services[0]?.sub_categories?.title}
-                                      </p>
-                                    </div>
-                                    {services.map(service_group => (
-                                      <div className="flex items-center justify-between" key={v4()}>
-                                        <p className="text-sm capitalize">
-                                          {service_group?.service_title}
-                                        </p>
-                                        <p className="text-sm">
-                                          {service_group?.duration == 0.5 ? "30 Min" : service_group?.duration == 1 ? "1 Hour" : service_group?.duration == 1.5 ? "1 Hour 30 Min" : service_group?.duration == 2 ? "2 Hour" : "2 Hour 30 Min"}
-                                        </p>
-                                        <p className="text-sm font-bold">
-                                          {service_group?.price && '£' + service_group?.price}
-                                          {service_group?.sales_price && '£' + service_group?.sales_price}
+                          {group_service_list &&
+                            Object.values(group_service_list).map(
+                              (services) => (
+                                <div
+                                  className="cursor-pointer serviceBox"
+                                  key={v4()}
+                                >
+                                  <div className="relative w-full">
+                                    <div
+                                      className="border border-[#D9D9D9] space-y-4 rounded-lg p-3"
+                                      onClick={(e) => {
+                                        setEditService(true);
+                                        setCurrentEditService({
+                                          mainServiceID: service.id,
+                                          sub_categories_id:
+                                            services[0]?.sub_categories_id,
+                                          serviceGroupID:
+                                            services[0]?.service_group_id,
+                                          service: services,
+                                        });
+                                      }}
+                                    >
+                                      <div className="flex items-center justify-between">
+                                        <p className="font-semibold text-start">
+                                          {services[0]?.sub_categories?.title}
                                         </p>
                                       </div>
-                                    ))}
+                                      {services.map((service_group) => (
+                                        <div
+                                          className="flex items-center justify-between"
+                                          key={v4()}
+                                        >
+                                          <p className="text-sm capitalize">
+                                            {service_group?.service_title}
+                                          </p>
+                                          <p className="text-sm">
+                                            {service_group?.duration == 0.5
+                                              ? "30 Min"
+                                              : service_group?.duration == 1
+                                              ? "1 Hour"
+                                              : service_group?.duration == 1.5
+                                              ? "1 Hour 30 Min"
+                                              : service_group?.duration == 2
+                                              ? "2 Hour"
+                                              : "2 Hour 30 Min"}
+                                          </p>
+                                          <p className="text-sm font-bold">
+                                            {service_group?.price &&
+                                              "£" + service_group?.price}
+                                            {service_group?.sales_price &&
+                                              "£" + service_group?.sales_price}
+                                          </p>
+                                        </div>
+                                      ))}
+                                    </div>
+                                    <RiDeleteBin5Line
+                                      className="text-[#FF0000] absolute top-[1rem] right-[1rem] z-20 cursor-pointer"
+                                      onClick={(e) =>
+                                        deleteGroup({
+                                          e: e,
+                                          id: services[0]?.service_group_id,
+                                          sub_categories_id:
+                                            services[0]?.sub_categories_id,
+                                        })
+                                      }
+                                    />
+                                    <BsPencilFill className=" text-primary_color absolute top-[1rem] right-[3rem]" />
                                   </div>
-                                  <RiDeleteBin5Line className="text-[#FF0000] absolute top-[1rem] right-[1rem] z-20 cursor-pointer" onClick={e => deleteGroup({ e: e, id: services[0]?.service_group_id, sub_categories_id: services[0]?.sub_categories_id })} />
-                                  <BsPencilFill className=" text-primary_color absolute top-[1rem] right-[3rem]" />
                                 </div>
-                              </div>
-                            )
-                          ))}
+                              )
+                            )}
                         </div>
                       </div>
-                    )
+                    );
                   })) || (
-                    <div className="center min-h-[300px] w-full">
-                      <Spinner
-                        show={vendorServices?.loading}
-                        width={50}
-                        height={50}
-                      />
-                    </div>
-                  )}
+                  <div className="center min-h-[300px] w-full">
+                    <Spinner
+                      show={vendorServices?.loading}
+                      width={50}
+                      height={50}
+                    />
+                  </div>
+                )}
                 <Dialog
                   className="w-11/12"
                   open={addService}
@@ -534,7 +592,11 @@ const Services = () => {
                 >
                   <DialogContent className="sm:max-w-[1025px]">
                     <DialogTitle>Edit Service</DialogTitle>
-                    <EditServiceModal editServiceData={currentEditService} setEditService={setEditService} setRefreshServices={setRefreshServices} />
+                    <EditServiceModal
+                      editServiceData={currentEditService}
+                      setEditService={setEditService}
+                      setRefreshServices={setRefreshServices}
+                    />
                   </DialogContent>
                 </Dialog>
               </div>
@@ -587,17 +649,20 @@ const Services = () => {
                                 £{voucher?.amount || "N/A"}
                               </td>
                               <td className="px-4 py-4 text-sm">
-                                {(voucher?.sales_price && '£' + voucher?.sales_price) || "N/A"}
+                                {(voucher?.sales_price &&
+                                  "£" + voucher?.sales_price) ||
+                                  "N/A"}
                               </td>
                               <td className="px-4 py-4 text-sm">
                                 {voucher?.expried_at || "N/A"}
                               </td>
                               <td className="px-4 py-4 text-sm ">
                                 <p
-                                  className={`${(voucher.status == 0 && "bg-yellow-500") ||
+                                  className={`${
+                                    (voucher.status == 0 && "bg-yellow-500") ||
                                     (vendor.status == 1 && "bg-green-700") ||
                                     "bg-red-700"
-                                    } p-2 rounded-full text-center`}
+                                  } p-2 rounded-full text-center`}
                                 >
                                   {(voucher.status == 0 && "Pending") ||
                                     (vendor.status == 1 && "Active") ||
