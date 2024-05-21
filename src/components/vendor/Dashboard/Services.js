@@ -86,16 +86,16 @@ const Services = () => {
     }
   };
 
-  useEffect(() => {
-    return setFormState({ loading: false, error: "", success: "" });
-  }, [addtreatment, treatment, voucher, createVoucher, editVoucher]);
-
   const deleteGroup = async ({ e, id, sub_categories_id }) => {
     const resp = await POST.request({ url: '/vendor/delete-vendor-services', form: { id, sub_categories_id }, token: vendor?.api_token });
     if (resp && resp?.code == 200) {
       e.target.closest('.serviceBox').remove();
     }
   }
+
+  useEffect(() => {
+    return setFormState({ loading: false, error: "", success: "" });
+  }, [addtreatment, treatment, voucher, createVoucher, editVoucher]);
 
   useEffect(() => {
     getServices().then((data) => setServices(data.data));
@@ -467,7 +467,7 @@ const Services = () => {
                           {group_service_list && Object.values(group_service_list).map(services => (
                             (
                               <div
-                                className="serviceBox"
+                                className="cursor-pointer serviceBox"
                                 key={v4()}
                               >
                                 <div className="relative w-full">
@@ -482,7 +482,7 @@ const Services = () => {
                                     </div>
                                     {services.map(service_group => (
                                       <div className="flex items-center justify-between" key={v4()}>
-                                        <p className="text-sm">
+                                        <p className="text-sm capitalize">
                                           {service_group?.service_title}
                                         </p>
                                         <p className="text-sm">
