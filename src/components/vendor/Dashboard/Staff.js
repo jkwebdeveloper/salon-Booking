@@ -1,13 +1,6 @@
 import Button from "@/components/ui/button";
 import { DatePicker } from "@/components/user/Home/FindNearByForm/datepicker";
 import React, { useCallback, useEffect, useState } from "react";
-// import {
-//   Pagination,
-//   PaginationContent,
-//   PaginationItem,
-// } from "@/components/ui/pagination";
-// import { IoIosArrowForward } from "react-icons/io";
-// import { IoIosArrowBack } from "react-icons/io";
 import {
   Dialog,
   DialogContent,
@@ -29,7 +22,7 @@ const Staff = () => {
   const [currentTab, setCurrentTab] = useState("schedule");
   const [loading, setLoading] = useState(true);
   const [editStaff, setEditStaff] = useState("");
-  const [staffs, setStaffs] = useState([]);
+  const [staffsList, setStaffsList] = useState([]);
 
   const changeTab = (tab = "basic") => setCurrentTab(tab);
 
@@ -41,14 +34,14 @@ const Staff = () => {
     });
     setLoading(false);
     if (res && res.code == 200) {
-      setStaffs(res.data);
+      setStaffsList(res.data);
     }
   }, []);
 
   useEffect(() => {
-    currentTab == "staff" && getStaff();
+    (currentTab == "staff" || currentTab == "schedule") && getStaff();
   }, [currentTab]);
-
+  console.log(staffsList);
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
@@ -74,16 +67,6 @@ const Staff = () => {
               <div className="border w-max rounded-md border-[#eae9e9]">
                 <DatePicker />
               </div>
-              {/* <Pagination className="w-0 mx-10">
-                <PaginationContent>
-                  <PaginationItem className="bg-[#FBE4FF] rounded-md p-3">
-                    <IoIosArrowBack />
-                  </PaginationItem>
-                  <PaginationItem className="bg-[#FBE4FF] rounded-md p-3">
-                    <IoIosArrowForward />
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination> */}
             </div>
             <hr />
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -93,79 +76,58 @@ const Staff = () => {
                     <th scope="col" className="px-6 py-3"></th>
                     <th scope="col" className="flex-col px-6 py-3 ">
                       <p className="text-lg">Monday</p>
-                      <p>11.03</p>
                     </th>
                     <th scope="col" className="flex-col px-6 py-3 ">
                       <p className="text-lg">Tuesday</p>
-                      <p>11.03</p>
                     </th>
                     <th scope="col" className="flex-col px-6 py-3 ">
                       <p className="text-lg">Wednesday</p>
-                      <p>12.03</p>
                     </th>
                     <th scope="col" className="flex-col px-6 py-3 ">
                       <p className="text-lg">Thursday</p>
-                      <p>13.03</p>
                     </th>
                     <th scope="col" className="flex-col px-6 py-3 ">
                       <p className="text-lg">Friday</p>
-                      <p>14.03</p>
                     </th>
                     <th scope="col" className="flex-col px-6 py-3 ">
                       <p className="text-lg">Saturday</p>
-                      <p>15.03</p>
                     </th>
                     <th scope="col" className="flex-col px-6 py-3 ">
                       <p className="text-lg">Sunday</p>
-                      <p>16 .03</p>
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <Dialog open={userModal}>
-                      <DialogTrigger
-                        onClick={(e) => setUserModal(true)}
-                        className="text-[#8E8EA1] text-lg"
-                      >
-                        <th
-                          scope="row"
-                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  {staffsList.map((staff, index) => {
+                    return (
+                      <Dialog open={userModal} asChild>
+                        <DialogTrigger
+                          onClick={(e) => setUserModal(true)}
+                          className="text-[#8E8EA1] text-lg"
+                          asChild >
+                          <tr className="bg-white border-b cursor-pointer dark:bg-gray-800 dark:border-gray-700">
+                            <td
+                              scope="row"
+                              className="px-6 py-4 font-medium text-gray-900 capitalize whitespace-nowrap dark:text-white"
+                            >
+                              {staff.first_name} {staff.last_name}
+                            </td>
+                            {vendor?.availability?.map((day, index) => {
+                              return (
+                                <td className="py-4 ">{day?.from_time.slice(0, 5)} - {day.to_time.slice(0, 5)}</td>
+                              )
+                            })}
+                          </tr>
+                        </DialogTrigger>
+                        <DialogContent
+                          close={setUserModal}
+                          className="sm:max-w-[550px]"
                         >
-                          Jullie
-                        </th>
-                      </DialogTrigger>
-                      <DialogContent
-                        close={setUserModal}
-                        className="sm:max-w-[550px]"
-                      >
-                        <UserModal setUserModal={setUserModal} />
-                      </DialogContent>
-                    </Dialog>
-
-                    <td className="py-4 ">10:00 - 18:00</td>
-                    <td className="py-4 ">10:00 - 18:00</td>
-                    <td className="py-4 ">10:00 - 18:00</td>
-                    <td className="py-4 ">10:00 - 18:00</td>
-                    <td className="py-4 ">10:00 - 18:00</td>
-                    <td className="py-4 ">10:00 - 18:00</td>
-                    <td className="py-4 ">10:00 - 18:00</td>
-                  </tr>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th
-                      scope="row"
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                    >
-                      Nuzami
-                    </th>
-                    <td className="py-4 ">10:00 - 18:00</td>
-                    <td className="py-4 ">10:00 - 18:00</td>
-                    <td className="py-4 ">10:00 - 18:00</td>
-                    <td className="py-4 ">10:00 - 18:00</td>
-                    <td className="py-4 ">10:00 - 18:00</td>
-                    <td className="py-4 ">10:00 - 18:00</td>
-                    <td className="py-4 ">10:00 - 18:00</td>
-                  </tr>
+                          <UserModal setUserModal={setUserModal} />
+                        </DialogContent>
+                      </Dialog>
+                    )
+                  })}
                 </tbody>
               </table>
             </div>
@@ -192,8 +154,8 @@ const Staff = () => {
                   <DialogTitle>Add Team Member</DialogTitle>
                   <AddTeam
                     setAddTeam={setAddTeam}
-                    setStaffs={setStaffs}
-                    staffs={staffs}
+                    setStaffsList={setStaffsList}
+                    staffsList={staffsList}
                     setEditStaff={setEditStaff}
                     editStaff={editStaff}
                   />
@@ -203,8 +165,8 @@ const Staff = () => {
             <hr />
             {(loading && <PageLoader />) || (
               <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {(staffs.length > 0 &&
-                  staffs.map((staff, index) => {
+                {(staffsList.length > 0 &&
+                  staffsList.map((staff, index) => {
                     return (
                       <div
                         key={v4()}

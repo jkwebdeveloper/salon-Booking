@@ -16,7 +16,7 @@ import { DatePicker } from "@/components/user/Home/FindNearByForm/datepicker";
 import Schedule from "./Schedule";
 
 const UserModal = () => {
-  const [currentTab, setCurrentTab] = useState("schedule");
+  const [currentTab, setCurrentTab] = useState("action");
   return (
     <div className="w-full space-y-3">
       {currentTab == 'action'

@@ -158,7 +158,7 @@ const Services = () => {
                     className="object-cover object-center w-full"
                   />
                 </div>
-                <div className="space-y-2">
+                <form className="space-y-2">
                   <Label htmlFor="first_name" text="Status" />
                   <div className="flex items-center gap-3">
                     <li className="list-none">

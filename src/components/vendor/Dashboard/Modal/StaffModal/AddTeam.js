@@ -7,13 +7,17 @@ import Label from "@/components/ui/form/label";
 import { POST } from "@/app/api/post";
 import { Error, Spinner } from "@/components";
 import { useSelector } from "react-redux";
+import { useVendorServices } from "@/hooks";
+import { set } from "date-fns";
 
-const AddTeam = ({ setAddTeam, editStaff, staffs, setStaffs, setEditStaff }) => {
+const AddTeam = ({ setAddTeam, editStaff, staffsList, setStaffsList, setEditStaff }) => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);
+  const [getServices, vendorServices] = useVendorServices();
   const [staff, setStaff] = useState(editStaff || {});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [currentTab, setCurrentTab] = useState("basic");
+  const [staffServices, setStaffServices] = useState(staff && staff?.staff_service || []);
 
   const changeTab = (tab = 'basic') => setCurrentTab(tab);
 
@@ -23,8 +27,8 @@ const AddTeam = ({ setAddTeam, editStaff, staffs, setStaffs, setEditStaff }) => 
     const resp = await POST.request({ url: '/vendor/add-new-staffs', form: e.target, token: vendor.api_token });
     setLoading(false);
     if (resp && resp.code == 200) {
-      const newStaffMember = staffs.filter(staff => staff.id != resp.data.id);
-      setStaffs([...newStaffMember, resp.data]);
+      const newStaffMember = staffsList.filter(staff => staff.id != resp.data.id);
+      setStaffsList([...newStaffMember, resp.data]);
       setStaff(resp.data);
       changeTab('services');
     } else {
@@ -38,8 +42,8 @@ const AddTeam = ({ setAddTeam, editStaff, staffs, setStaffs, setEditStaff }) => 
     const resp = await POST.request({ url: '/vendor/update-staffs', form: e.target, token: vendor.api_token });
     setLoading(false);
     if (resp && resp.code == 200) {
-      const newStaffMember = staffs.filter(staff => staff.id != resp.data.id);
-      setStaffs([...newStaffMember, resp.data]);
+      const newStaffMember = staffsList.filter(staff => staff.id != resp.data.id);
+      setStaffsList([...newStaffMember, resp.data]);
       if (!step) {
         setEditStaff('');
         setAddTeam(false);
@@ -58,10 +62,22 @@ const AddTeam = ({ setAddTeam, editStaff, staffs, setStaffs, setEditStaff }) => 
     const res = await POST.request({ url: '/vendor/delete-staffs', form: { staffs_id: staff.id }, token: vendor?.api_token });
     setLoading(false);
     if (res && res.code == 200) {
-      const newStaffMember = staffs.filter(deletedStaff => deletedStaff.id != staff.id);
-      setStaffs(newStaffMember);
+      const newStaffMember = staffsList.filter(deletedStaff => deletedStaff.id != staff.id);
+      setStaffsList(newStaffMember);
       setEditStaff('');
       setAddTeam(false);
+    }
+  };
+
+  const addStaffServices = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const resp = await POST.request({ url: '/vendor/add-staffs-services', form: staffServices, token: vendor.api_token });
+    setLoading(false);
+    if (resp && resp.code == 200) {
+      changeTab('publicProfile');
+    } else {
+      setError(resp.message);
     }
   };
 
@@ -197,8 +213,9 @@ const AddTeam = ({ setAddTeam, editStaff, staffs, setStaffs, setEditStaff }) => 
           {error && <Error error={error} />}
         </form>
       )}
+      {console.log('staffServices', staffServices)}
       {currentTab == 'services' && (
-        <form className="space-y-2" onSubmit={e => updateStaff({ e, step: 'publicProfile' })} noValidate>
+        <form className="space-y-2" onSubmit={e => addStaffServices(e)} noValidate>
           <p className="text-xl text-[#1D1B23] font-semibold">
             What service can be booked for this employee ?
           </p>
@@ -217,324 +234,64 @@ const AddTeam = ({ setAddTeam, editStaff, staffs, setStaffs, setEditStaff }) => 
               </label>
             </div>
           </li>
-          <div className="border space-y-3 rounded-lg border-[#D8DAE5] bg-[#FAFAFA] p-3">
-            <li class="w-full list-none">
-              <div class="flex items-center">
-                <input
-                  id="lMassage"
-                  type="checkbox"
-                  value="Massage"
-                  name="services[]"
-                  class=""
-                />
-                <label
-                  for="Massage"
-                  class="w-full ms-2 text-base font-semibold"
-                >
-                  Massage
-                </label>
+          {vendorServices.loading && <Spinner show={vendorServices.loading} width={50} height={50} />}
+          {!vendorServices.loading && vendorServices.data.map((service, index) => (
+            service.group_service_list.length > 0 && <div className="border space-y-3 rounded-lg border-[#D8DAE5] bg-[#FAFAFA] p-3">
+              <li class="w-full list-none">
+                <div class="flex items-center">
+                  <input
+                    id={service.categories.title}
+                    type="checkbox"
+                    checked={staffServices.filter(serviceCats => serviceCats.categories_id == service.categories.id).length == service?.group_service_list.length && true || false}
+                    onChange={e => {
+                      if (e.target.checked) {
+                        const subcategories = service.group_service_list.map(subcategory => ({ "categories_id": subcategory?.categories_id, "sub_categories_id": subcategory?.id, "staffs_id": staff.id || null }));
+                        setStaffServices([...staffServices, ...subcategories]);
+                      } else {
+                        setStaffServices(staffServices.filter(subcategory => subcategory.categories_id != service.categories.id));
+                      }
+
+                    }}
+                  />
+                  <label
+                    htmlFor={service.categories.title}
+                    class="w-full ms-2 text-base font-semibold"
+                  >
+                    {service.categories.title}
+                  </label>
+                </div>
+              </li>
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {service.group_service_list.map((subcategory, index) => (
+                  <li class="w-full list-none">
+                    <div class="flex items-center">
+                      <input
+                        id={subcategory?.sub_categories?.title}
+                        type="checkbox"
+                        checked={staffServices.find(serviceCats => serviceCats.sub_categories_id == subcategory?.id) && true || false}
+                        onChange={e => {
+                          if (e.target.checked) {
+                            const exists = staffServices.find(serviceCats => serviceCats.sub_categories_id == subcategory?.id);
+                            if (!exists) {
+                              setStaffServices([...staffServices, { "categories_id": subcategory?.categories_id, "sub_categories_id": subcategory?.id, "staffs_id": staff.id || null }]);
+                            }
+                          } else {
+                            setStaffServices(staffServices.filter(serviceCats => serviceCats?.sub_categories_id != subcategory.id));
+                          }
+                        }}
+                      />
+                      <label
+                        htmlFor={subcategory?.sub_categories?.title}
+                        class="w-full ms-2 text-sm font-normal"
+                      >
+                        {subcategory?.sub_categories?.title}
+                      </label>
+                    </div>
+                  </li>
+                ))}
               </div>
-            </li>
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              <li class="w-full list-none">
-                <div class="flex items-center">
-                  <input
-                    id="list-radio-license"
-                    type="checkbox"
-                    value="Acupuncture Massage"
-                    name="services[]"
-                    class=""
-                  />
-                  <label
-                    for="list-radio-license"
-                    class="w-full ms-2 text-sm font-normal"
-                  >
-                    Acupuncture Massage
-                  </label>
-                </div>
-              </li>
-              <li class="w-full list-none">
-                <div class="flex items-center">
-                  <input
-                    id="list-radio-license"
-                    type="checkbox"
-                    value="Aromatherapy Massage"
-                    name="services[]"
-                    class=""
-                  />
-                  <label
-                    for="list-radio-license"
-                    class="w-full ms-2 text-sm font-normal"
-                  >
-                    Aromatherapy Massage
-                  </label>
-                </div>
-              </li>
-              <li class="w-full list-none">
-                <div class="flex items-center">
-                  <input
-                    id="list-radio-license"
-                    type="checkbox"
-                    value="Back, Neck & Shoulders"
-                    name="services[]"
-                    class=""
-                  />
-                  <label
-                    for="list-radio-license"
-                    class="w-full ms-2 text-sm font-normal"
-                  >
-                    Back, Neck & Shoulders
-                  </label>
-                </div>
-              </li>
-              <li class="w-full list-none">
-                <div class="flex items-center">
-                  <input
-                    id="list-radio-license"
-                    type="checkbox"
-                    value="Chair Massage"
-                    name="services[]"
-                    class=""
-                  />
-                  <label
-                    for="list-radio-license"
-                    class="w-full ms-2 text-sm font-normal"
-                  >
-                    Chair Massage
-                  </label>
-                </div>
-              </li>
-              <li class="w-full list-none">
-                <div class="flex items-center">
-                  <input
-                    id="list-radio-license"
-                    type="checkbox"
-                    value="Biodynamic Massage"
-                    name="services[]"
-                    class=""
-                  />
-                  <label
-                    for="list-radio-license"
-                    class="w-full ms-2 text-sm font-normal"
-                  >
-                    Biodynamic Massage
-                  </label>
-                </div>
-              </li>
-              <li class="w-full list-none">
-                <div class="flex items-center">
-                  <input
-                    id="list-radio-license"
-                    type="checkbox"
-                    value="Body Scrub Massage"
-                    name="services[]"
-                    class=""
-                  />
-                  <label
-                    for="list-radio-license"
-                    class="w-full ms-2 text-sm font-normal"
-                  >
-                    Body Scrub Massage
-                  </label>
-                </div>
-              </li>
             </div>
-          </div>
-          <div className="border space-y-3 rounded-lg border-[#D8DAE5] bg-[#FAFAFA] p-3">
-            <li class="w-full list-none">
-              <div class="flex items-center">
-                <input
-                  id="list-radio-license"
-                  type="checkbox"
-                  value="Nail Salons"
-                  name="services[]"
-                  class=""
-                />
-                <label
-                  for="list-radio-license"
-                  class="w-full ms-2 text-base font-semibold"
-                >
-                  Nail Salons
-                </label>
-              </div>
-            </li>
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              <li class="w-full list-none">
-                <div class="flex items-center">
-                  <input
-                    id="list-radio-license"
-                    type="checkbox"
-                    value="Acupuncture Massage"
-                    name="services[]"
-                    class=""
-                  />
-                  <label
-                    for="list-radio-license"
-                    class="w-full ms-2 text-sm font-normal"
-                  >
-                    Acupuncture Massage
-                  </label>
-                </div>
-              </li>
-              <li class="w-full list-none">
-                <div class="flex items-center">
-                  <input
-                    id="list-radio-license"
-                    type="checkbox"
-                    value="Aromatherapy Massage"
-                    name="services[]"
-                    class=""
-                  />
-                  <label
-                    for="list-radio-license"
-                    class="w-full ms-2 text-sm font-normal"
-                  >
-                    Aromatherapy Massage
-                  </label>
-                </div>
-              </li>
-              <li class="w-full list-none">
-                <div class="flex items-center">
-                  <input
-                    id="list-radio-license"
-                    type="checkbox"
-                    value="Back, Neck & Shoulders"
-                    name="services[]"
-                    class=""
-                  />
-                  <label
-                    for="list-radio-license"
-                    class="w-full ms-2 text-sm font-normal"
-                  >
-                    Back, Neck & Shoulders
-                  </label>
-                </div>
-              </li>
-              <li class="w-full list-none">
-                <div class="flex items-center">
-                  <input
-                    id="list-radio-license"
-                    type="checkbox"
-                    value="Chair Massage"
-                    name="services[]"
-                    class=""
-                  />
-                  <label
-                    for="list-radio-license"
-                    class="w-full ms-2 text-sm font-normal"
-                  >
-                    Chair Massage
-                  </label>
-                </div>
-              </li>
-              <li class="w-full list-none">
-                <div class="flex items-center">
-                  <input
-                    id="list-radio-license"
-                    type="checkbox"
-                    value="Biodynamic Massage"
-                    name="services[]"
-                    class=""
-                  />
-                  <label
-                    for="list-radio-license"
-                    class="w-full ms-2 text-sm font-normal"
-                  >
-                    Biodynamic Massage
-                  </label>
-                </div>
-              </li>
-              <li class="w-full list-none">
-                <div class="flex items-center">
-                  <input
-                    id="list-radio-license"
-                    type="checkbox"
-                    value="Body Scrub Massage"
-                    name="services[]"
-                    class=""
-                  />
-                  <label
-                    for="list-radio-license"
-                    class="w-full ms-2 text-sm font-normal"
-                  >
-                    Body Scrub Massage
-                  </label>
-                </div>
-              </li>
-            </div>
-          </div>
-          <div className="border space-y-3 rounded-lg border-[#D8DAE5] bg-[#FAFAFA] p-3">
-            <li class="w-full list-none">
-              <div class="flex items-center">
-                <input
-                  id="list-radio-license"
-                  type="checkbox"
-                  value="Hair Removal"
-                  name="services[]"
-                  class=""
-                />
-                <label
-                  for="list-radio-license"
-                  class="w-full ms-2 text-base font-semibold"
-                >
-                  Hair Removal
-                </label>
-              </div>
-            </li>
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              <li class="w-full list-none">
-                <div class="flex items-center">
-                  <input
-                    id="list-radio-license"
-                    type="checkbox"
-                    value="Acupuncture Massage"
-                    name="services[]"
-                    class=""
-                  />
-                  <label
-                    for="list-radio-license"
-                    class="w-full ms-2 text-sm font-normal"
-                  >
-                    Acupuncture Massage
-                  </label>
-                </div>
-              </li>
-              <li class="w-full list-none">
-                <div class="flex items-center">
-                  <input
-                    id="list-radio-license"
-                    type="checkbox"
-                    value="Aromatherapy Massage"
-                    name="services[]"
-                    class=""
-                  />
-                  <label
-                    for="list-radio-license"
-                    class="w-full ms-2 text-sm font-normal"
-                  >
-                    Aromatherapy Massage
-                  </label>
-                </div>
-              </li>
-              <li class="w-full list-none">
-                <div class="flex items-center">
-                  <input
-                    id="list-radio-license"
-                    type="checkbox"
-                    value="Back, Neck & Shoulders"
-                    name="services[]"
-                    class=""
-                  />
-                  <label
-                    for="list-radio-license"
-                    class="w-full ms-2 text-sm font-normal"
-                  >
-                    Back, Neck & Shoulders
-                  </label>
-                </div>
-              </li>
-            </div>
-          </div>
+          ))}
           <div className="flex items-center gap-3">
             {Object.keys(staff).length > 0 && <input type="hidden" name="staffs id" value={staff.id} />}
             <Button variant="disable" disabled={loading} onClick={e => {
