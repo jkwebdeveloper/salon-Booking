@@ -318,7 +318,7 @@ const Services = () => {
                     </Button>
                     {formState?.error && <Error error={formState?.error} />}
                   </div>
-                </div>
+                </form>
               </div>
             </div>
           </>

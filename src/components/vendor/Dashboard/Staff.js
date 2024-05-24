@@ -100,7 +100,7 @@ const Staff = () => {
                 <tbody>
                   {staffsList.map((staff, index) => {
                     return (
-                      <Dialog open={userModal} asChild>
+                      <Dialog key={v4()} open={userModal} asChild>
                         <DialogTrigger
                           onClick={(e) => setUserModal(true)}
                           className="text-[#8E8EA1] text-lg"
@@ -114,7 +114,7 @@ const Staff = () => {
                             </td>
                             {vendor?.availability?.map((day, index) => {
                               return (
-                                <td className="py-4 ">{day?.from_time.slice(0, 5)} - {day.to_time.slice(0, 5)}</td>
+                                <td key={v4()} className="py-4 ">{day?.from_time.slice(0, 5)} - {day.to_time.slice(0, 5)}</td>
                               )
                             })}
                           </tr>

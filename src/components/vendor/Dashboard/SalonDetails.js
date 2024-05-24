@@ -68,7 +68,7 @@ const SalonDetails = () => {
       <div className="bg-gradient-to-r  p-3 from-[#711F7E99] h-fit to-[#14DBD099] rounded-t-xl">
         <div className="flex items-center gap-3 ">
           {vendorPhotos.length > 0 && vendorPhotos.map((photo) => (
-            <div className="relative top-10 group/photos">
+            <div className="relative top-10 group/photos" key={v4()}>
               <div className="relative rounded-lg p-1 w-[6.5rem] h-[6.5rem] mb-2">
                 <Image
                   src={photo.path}
@@ -83,7 +83,7 @@ const SalonDetails = () => {
             </div>
           ))}
           {salonDetails?.salon_images && salonDetails?.salon_images.map((photo) => (
-            <div className="relative top-10 group/photos">
+            <div className="relative top-10 group/photos" key={v4()}>
               <div className="relative rounded-lg p-1 w-[6.5rem] h-[6.5rem] mb-2">
                 <Image
                   src={process.env.NEXT_PUBLIC_SERVERURL + photo.images}

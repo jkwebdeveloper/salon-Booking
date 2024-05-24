@@ -9,6 +9,7 @@ import { Error, Spinner } from "@/components";
 import { useSelector } from "react-redux";
 import { useVendorServices } from "@/hooks";
 import { set } from "date-fns";
+import { v4 } from "uuid";
 
 const AddTeam = ({ setAddTeam, editStaff, staffsList, setStaffsList, setEditStaff }) => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);
@@ -236,7 +237,7 @@ const AddTeam = ({ setAddTeam, editStaff, staffsList, setStaffsList, setEditStaf
           </li>
           {vendorServices.loading && <Spinner show={vendorServices.loading} width={50} height={50} />}
           {!vendorServices.loading && vendorServices.data.map((service, index) => (
-            service.group_service_list.length > 0 && <div className="border space-y-3 rounded-lg border-[#D8DAE5] bg-[#FAFAFA] p-3">
+            service.group_service_list.length > 0 && <div key={v4()} className="border space-y-3 rounded-lg border-[#D8DAE5] bg-[#FAFAFA] p-3">
               <li class="w-full list-none">
                 <div class="flex items-center">
                   <input
@@ -263,7 +264,7 @@ const AddTeam = ({ setAddTeam, editStaff, staffsList, setStaffsList, setEditStaf
               </li>
               <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {service.group_service_list.map((subcategory, index) => (
-                  <li class="w-full list-none">
+                  <li key={v4()} class="w-full list-none">
                     <div class="flex items-center">
                       <input
                         id={subcategory?.sub_categories?.title}
