@@ -10,6 +10,7 @@ import { DatePicker } from "@/components/user/Home/FindNearByForm/datepicker";
 import { AiOutlineClose } from "react-icons/ai";
 import Button from "@/components/ui/button";
 import Link from "next/link";
+import Customdatepicker from "@/components/user/Home/FindNearByForm/customdatepicker";
 
 const TimeDate = () => {
   return (
@@ -36,6 +37,7 @@ const TimeDate = () => {
           <p className="text-sm">Select start time for your appointment</p>
           <div className="border w-max rounded-md border-[#eae9e9]">
             <DatePicker />
+            {/* <Customdatepicker /> */}
           </div>
         </div>
         <div className="md:w-4/5 w-[90%] mx-auto space-y-5 p-5 h-fit min-h-[350px] z-2">
