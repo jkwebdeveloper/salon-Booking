@@ -123,7 +123,7 @@ const Staff = () => {
                           close={setUserModal}
                           className="sm:max-w-[550px]"
                         >
-                          <UserModal setUserModal={setUserModal} />
+                          <UserModal setUserModal={setUserModal} vendor={vendor} />
                         </DialogContent>
                       </Dialog>
                     )
