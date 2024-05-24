@@ -30,6 +30,8 @@
     "embla-carousel-react": "^8.0.0",
     "indexof": "^0.0.1",
     "jsdom": "^24.0.0",
+    "justifiedGallery": "^3.8.1",
+    "lightgallery": "^2.7.2",
     "next": "14.1.2",
     "rc-time-picker": "^3.7.3",
     "react": "^18",
