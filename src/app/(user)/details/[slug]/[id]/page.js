@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BsTwitterX } from "react-icons/bs";
 import { FaWhatsapp } from "react-icons/fa";
 import { ImFacebook } from "react-icons/im";
@@ -7,7 +7,6 @@ import { LuBookmark } from "react-icons/lu";
 import { FaStar } from "react-icons/fa6";
 import Image from "next/image";
 import Link from "next/link";
-
 import {
   Accordion,
   AccordionContent,
@@ -25,20 +24,22 @@ import DownloadApp from "@/components/user/Home/DownloadApp";
 import Location from "@/components/user/Home/Location";
 import { useParams } from "next/navigation";
 import { POST } from "@/app/api/post";
-import { GET } from "@/app/api/get";
-import {
-  LightGallery,
-  LightgalleryProvider,
-  LightgalleryItem,
-} from "lightgallery/react";
-import lgVideo from "lightgallery/plugins/video";
-import lgZoom from "lightgallery/plugins/zoom";
-// import styles
-import "lightgallery/css/lightgallery.css";
-import "lightgallery/css/lg-zoom.css";
-import "lightgallery/css/lg-thumbnail.css";
+import ImagesModal from "../../imagesModal";
 
 const DetailPage = () => {
+  const images = [
+    "/static/images/Rectangle 7197.png",
+    "/static/images/Rectangle 7198.png",
+    // Add more image paths here
+  ];
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const openModal = (index) => {
+    setCurrentIndex(index);
+    setIsOpen(true);
+  };
   const [salon, setSalon] = React.useState({});
   const params = useParams();
   const { slug, id } = params;
@@ -89,77 +90,85 @@ const DetailPage = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-center gap-3">
-        <LightGallery
-        // onInit={onInit}
-        // speed={500}
-        // plugins={[lgThumbnail, lgZoom]}
-        >
-          {/* <div className="w-[82%] gap-3">
+      {/* <div className="flex items-center gap-3">
+        <div className="w-[80%] gap-3">
+          <Image
+            src="/static/images/Rectangle 7197.png"
+            width={1000}
+            height={700}
+            className="w-full cursor-pointer"
+            alt="Image 1"
+          />
+        </div>
+        <div className="w-[40%]">
+          <div className="grid gap-3">
             <Image
-              src={"/static/images/Rectangle 7197.png"}
-              width={1000}
-              height={700}
+              src="/static/images/Rectangle 7198.png"
+              width={400}
+              height={300}
+              className="w-full cursor-pointer"
+              alt="Image 2"
             />
-          </div>
-
-          <div className="w-[40%] ">
-            <div className="grid gap-3">
-              <Image
-                src={"/static/images/Rectangle 7198.png"}
-                width={400}
-                height={300}
-                className="w-full"
-              />
-              <div className="relative flex items-center justify-center w-full text-center cursor-pointer group">
-                <div className="relative w-full overflow-hidden">
-                  <Image
-                    src={"/static/images/Rectangle 7198.png"}
-                    width={400}
-                    height={300}
-                    className="relative w-full"
-                  />
-                  <div className="absolute z-20 flex items-center justify-center w-full h-full p-10 space-y-3 text-sm text-white opacity-0 2xl:flex-row rounded-xl lg:p-2 bg-black/50 group-hover:bottom-0 group-hover:opacity-100">
-                    <p className="text-3xl font-semibold ">2+</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> */}
-          <div className="flex items-center gap-3">
-            <div className="w-[82%] gap-3">
-              <Image
-                src={"/static/images/Rectangle 7197.png"}
-                width={1000}
-                height={700}
-                className="w-full"
-              />
-            </div>
-            <div className="w-[40%] ">
-              <div className="grid gap-3">
+            <div className="relative flex items-center justify-center w-full text-center cursor-pointer group">
+              <div className="relative w-full overflow-hidden">
                 <Image
-                  src={"/static/images/Rectangle 7198.png"}
+                  src="/static/images/Rectangle 7198.png"
                   width={400}
                   height={300}
-                  className="w-full"
+                  className="relative w-full cursor-pointer"
+                  alt="Image 3"
                 />
-                <div className="relative flex items-center justify-center w-full text-center cursor-pointer group">
-                  <div className="relative w-full overflow-hidden">
-                    <Image
-                      src={"/static/images/Rectangle 7198.png"}
-                      width={400}
-                      height={300}
-                      className="relative w-full"
-                    />
-                    <div className="absolute z-20 flex items-center justify-center w-full h-full p-10 space-y-3 text-sm text-white opacity-0 2xl:flex-row rounded-xl lg:p-2 bg-black/50 group-hover:bottom-0 group-hover:opacity-100">
-                      <p className="text-3xl font-semibold ">2+</p>
-                    </div>
-                  </div>
+                <div className="absolute z-20 flex items-center justify-center w-full h-full p-10 space-y-3 text-sm text-white opacity-0 2xl:flex-row rounded-xl lg:p-2 bg-black/50 group-hover:bottom-0 group-hover:opacity-100">
+                  <p className="text-3xl font-semibold">2+</p>
                 </div>
               </div>
             </div>
           </div>
-        </LightGallery>
+        </div>
+      </div> */}
+      <div className="flex items-center gap-3">
+        <div className="w-[80%] gap-3">
+          <Image
+            src={images[0]}
+            width={1000}
+            height={700}
+            className="w-full cursor-pointer"
+            alt="Image 1"
+            onClick={() => openModal(0)}
+          />
+        </div>
+        <div className="w-[40%]">
+          <div className="grid gap-3">
+            {images.slice(1).map((src, index) => (
+              <div
+                key={index}
+                className="relative flex items-center justify-center w-full text-center cursor-pointer group"
+              >
+                <div className="relative w-full overflow-hidden">
+                  <Image
+                    src={src}
+                    width={400}
+                    height={300}
+                    className="relative w-full cursor-pointer"
+                    alt={`Image ${index + 2}`}
+                    onClick={() => openModal(index + 1)}
+                  />
+                  <div className="absolute z-20 flex items-center justify-center w-full h-full p-10 space-y-3 text-sm text-white opacity-0 2xl:flex-row rounded-xl lg:p-2 bg-black/50 group-hover:bottom-0 group-hover:opacity-100">
+                    <p className="text-3xl font-semibold">{index + 2}+</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        {isOpen && (
+          <ImagesModal
+            images={images}
+            currentIndex={currentIndex}
+            setCurrentIndex={setCurrentIndex}
+            setIsOpen={setIsOpen}
+          />
+        )}
       </div>
       <div className="w-full relative h-[80vh] 2xl:h-[75vh]">
         <div>
