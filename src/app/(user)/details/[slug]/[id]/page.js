@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useEffect } from "react";
 import { BsTwitterX } from "react-icons/bs";
 import { FaWhatsapp } from "react-icons/fa";
@@ -23,7 +23,7 @@ import MeetTeam from "@/components/user/detail/MeetTeam";
 import Featured from "@/components/user/Home/Featured";
 import DownloadApp from "@/components/user/Home/DownloadApp";
 import Location from "@/components/user/Home/Location";
-import { useParams } from 'next/navigation'
+import { useParams } from "next/navigation";
 import { POST } from "@/app/api/post";
 import { GET } from "@/app/api/get";
 
@@ -33,9 +33,12 @@ const DetailPage = () => {
   const { slug, id } = params;
 
   const getDetail = async () => {
-    const resp = await POST.request({ url: `/get-salons-byid`, form: { id: id } });
+    const resp = await POST.request({
+      url: `/get-salons-byid`,
+      form: { id: id },
+    });
     console.log(resp);
-  }
+  };
 
   useEffect(() => {
     getDetail();
@@ -75,25 +78,36 @@ const DetailPage = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-3 mx- md:flex-row md:mb-10">
-        <div className="w-4/5">
+      <div className="flex items-center gap-3">
+        <div className="w-[82%] gap-3">
           <Image
             src={"/static/images/Rectangle 7197.png"}
             width={1000}
-            height={600}
+            height={700}
           />
         </div>
-        <div className="w-1/2 gap-2 ">
-          <Image
-            src={"/static/images/Rectangle 7198.png"}
-            width={400}
-            height={100}
-          />
-          <Image
-            src={"/static/images/Rectangle 7198.png"}
-            width={400}
-            height={200}
-          />
+        <div className="w-[40%] ">
+          <div className="grid gap-3">
+            <Image
+              src={"/static/images/Rectangle 7198.png"}
+              width={400}
+              height={300}
+              className="w-full"
+            />
+            <div className="relative flex items-center justify-center w-full text-center cursor-pointer group">
+              <div className="relative w-full overflow-hidden">
+                <Image
+                  src={"/static/images/Rectangle 7198.png"}
+                  width={400}
+                  height={300}
+                  className="relative w-full"
+                />
+                <div className="absolute z-20 flex items-center justify-center w-full h-full p-10 space-y-3 text-sm text-white opacity-0 2xl:flex-row rounded-xl lg:p-2 bg-black/50 group-hover:bottom-0 group-hover:opacity-100">
+                  <p className="text-3xl font-semibold ">2+</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div className="w-full relative h-[80vh] 2xl:h-[75vh]">
