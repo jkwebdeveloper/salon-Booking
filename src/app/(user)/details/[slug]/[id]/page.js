@@ -1,11 +1,13 @@
-"use client";
-import React from "react";
+'use client'
+import React, { useEffect } from "react";
 import { BsTwitterX } from "react-icons/bs";
 import { FaWhatsapp } from "react-icons/fa";
 import { ImFacebook } from "react-icons/im";
 import { LuBookmark } from "react-icons/lu";
 import { FaStar } from "react-icons/fa6";
 import Image from "next/image";
+import Link from "next/link";
+
 import {
   Accordion,
   AccordionContent,
@@ -21,9 +23,23 @@ import MeetTeam from "@/components/user/detail/MeetTeam";
 import Featured from "@/components/user/Home/Featured";
 import DownloadApp from "@/components/user/Home/DownloadApp";
 import Location from "@/components/user/Home/Location";
-import Link from "next/link";
+import { useParams } from 'next/navigation'
+import { POST } from "@/app/api/post";
+import { GET } from "@/app/api/get";
 
 const DetailPage = () => {
+  const [salon, setSalon] = React.useState({});
+  const params = useParams();
+  const { slug, id } = params;
+
+  const getDetail = async () => {
+    const resp = await POST.request({ url: `/get-salons-byid`, form: { id: id } });
+    console.log(resp);
+  }
+
+  useEffect(() => {
+    getDetail();
+  }, []);
   return (
     <div className="container space-y-6">
       <h1 className="mt-5 text-3xl font-bold">Spa Life & Massage</h1>
@@ -157,7 +173,7 @@ const DetailPage = () => {
                         <div className="flex items-center gap-3">
                           <div>
                             <p className="font-bold">
-                              Sunday Soother Spa Break 
+                              Sunday Soother Spa Break
                               <span className="text-[#808080] font-normal">
                                 (50 Min)
                               </span>
@@ -175,7 +191,7 @@ const DetailPage = () => {
                         <div className="flex items-center gap-3">
                           <div>
                             <p className="font-bold">
-                              Sunday Soother Spa Break 
+                              Sunday Soother Spa Break
                               <span className="text-[#808080] font-normal">
                                 (50 Min)
                               </span>
@@ -210,7 +226,7 @@ const DetailPage = () => {
                         <div className="flex items-center gap-3">
                           <div>
                             <p className="font-bold">
-                              Sunday Soother Spa Break 
+                              Sunday Soother Spa Break
                               <span className="text-[#808080] font-normal">
                                 (50 Min)
                               </span>
@@ -226,7 +242,7 @@ const DetailPage = () => {
                         <div className="flex items-center gap-3">
                           <div>
                             <p className="font-bold">
-                              Sunday Soother Spa Break 
+                              Sunday Soother Spa Break
                               <span className="text-[#808080] font-normal">
                                 (50 Min)
                               </span>
@@ -261,7 +277,7 @@ const DetailPage = () => {
                         <div className="flex items-center gap-3">
                           <div>
                             <p className="font-bold">
-                              Sunday Soother Spa Break 
+                              Sunday Soother Spa Break
                               <span className="text-[#808080] font-normal">
                                 (50 Min)
                               </span>
@@ -277,7 +293,7 @@ const DetailPage = () => {
                         <div className="flex items-center gap-3">
                           <div>
                             <p className="font-bold">
-                              Sunday Soother Spa Break 
+                              Sunday Soother Spa Break
                               <span className="text-[#808080] font-normal">
                                 (50 Min)
                               </span>
