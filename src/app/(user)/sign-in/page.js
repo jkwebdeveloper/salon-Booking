@@ -73,23 +73,25 @@ const Signin = () => {
                     type={showPassword ? "text" : "password"} name="password"
                     className="input_field"
                     placeholder="Enter your Password"
-                    pattern="[a-zA-Z0-9]{3,}"
-                    // pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
+                    // pattern="[a-zA-Z0-9]{3,}"
+                    pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
                     required
                   />
+                  <p className="error max-w-[250px]">Min 8 characters with a mix of letters, numbers & symbols</p>
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
+                    className="absolute top-[1.85em] right-3"
                   >
                     {(showPassword && (
                       <BsEyeFill
                         size={24}
-                        className="absolute mt-[0.1rem] text-gray-400 cursor-pointer top-2/4 right-3"
+                        className="text-gray-400 cursor-pointer"
                       />
                     )) || (
                         <BsEyeSlashFill
                           size={24}
-                          className="absolute mt-[0.1rem] text-gray-400 cursor-pointer top-2/4 right-3"
+                          className="text-gray-400 cursor-pointer"
                         />
                       )}
                   </button>
