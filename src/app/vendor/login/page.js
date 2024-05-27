@@ -80,7 +80,7 @@ const Login = () => {
                   className="input_field"
                   placeholder="Enter your Password"
                   // pattern="[a-zA-Z0-9]{8,}"
-                  pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
+                  // pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
                   required
                 />
                 <p className="error max-w-[250px]">Min 8 characters with a mix of letters, numbers & symbols</p>
