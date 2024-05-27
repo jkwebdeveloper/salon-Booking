@@ -44,7 +44,7 @@ const Register = () => {
               id="salon_name"
               className="input_field"
               placeholder="Salon Name"
-              pattern="[A-Za-z]{4,20}"
+              pattern="^[a-zA-Z0-9\s]{4,}$"
               required
             />
             <p className="error">Min 4 Character Required</p>

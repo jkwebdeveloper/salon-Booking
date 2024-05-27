@@ -68,6 +68,7 @@ const Login = () => {
                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                   required
                 />
+                <p className="error">Enter Valid Email id</p>
               </div>
               <div className="relative w-full space-y-1 text-left">
                 <label htmlFor="country" className="label_text">
@@ -78,24 +79,26 @@ const Login = () => {
                   name="password"
                   className="input_field"
                   placeholder="Enter your Password"
-                  pattern="[a-zA-Z0-9]{3,}"
-                  // pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
+                  // pattern="[a-zA-Z0-9]{8,}"
+                  pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
                   required
                 />
+                <p className="error max-w-[250px]">Min 8 characters with a mix of letters, numbers & symbols</p>
                 <input type="hidden" name="device_type" defaultValue={typeof window != 'undefined' && (/Mobi/i.test(window.navigator.userAgent) && 2) || 1} />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
+                  className="absolute pt-[1.9rem] top-0 right-3"
                 >
                   {(showPassword && (
                     <BsEyeFill
                       size={24}
-                      className="absolute mt-[0.1rem] text-gray-400 cursor-pointer top-2/4 right-3"
+                      className="text-gray-400 cursor-pointer "
                     />
                   )) || (
                       <BsEyeSlashFill
                         size={24}
-                        className="absolute mt-[0.1rem] text-gray-400 cursor-pointer top-2/4 right-3"
+                        className="text-gray-400 cursor-pointer"
                       />
                     )}
                 </button>

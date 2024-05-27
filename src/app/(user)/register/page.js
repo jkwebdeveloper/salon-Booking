@@ -82,7 +82,7 @@ const Register = () => {
                     pattern="[A-Za-z]{4,20}"
                     required
                   />
-                  <p className="error">Min 4 Character Required</p>
+                  <p className="error">Min 4 & No Number and Space</p>
                 </div>
                 <div className="w-full space-y-1 text-left lg:w-1/2">
                   <label htmlFor="lname" className="label_text">
@@ -98,7 +98,7 @@ const Register = () => {
                     pattern="[A-Za-z]{4,20}"
                     required
                   />
-                  <p className="error">Min 4 Character Required</p>
+                  <p className="error">Min 4 & No Number and Space</p>
                 </div>
               </div>
               <div className="flex flex-col w-full gap-3 lg:flex-row">
@@ -147,11 +147,10 @@ const Register = () => {
                     id="password"
                     className="input_field"
                     placeholder="Enter Your Password"
-                    pattern="[A-Za-z0-9]{3,20}"
+                    pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
                     required
                   />
-                  {/* pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$' */}
-                  <p className="error">Password should be min 3 Char</p>
+                  <p className="error max-w-[250px]">Min 8 characters with a mix of letters, numbers & symbols</p>
                   <button
                     type="button"
                     className="absolute top-[1.85em] right-3"
@@ -213,10 +212,10 @@ const Register = () => {
                   id="address"
                   className="input_field"
                   placeholder="Enter your Address"
-                  pattern="[A-Za-z0-9]{3,20}"
+                  pattern="^[a-zA-Z0-9\s]{1,}$"
                   required
                 />
-                <p className="error">Min 3 Character Required</p>
+                <p className="error">Enter Valid Address</p>
               </div>
               <div className="w-full space-y-1 text-left">
                 <label htmlFor="address2" className="label_text">
@@ -243,10 +242,10 @@ const Register = () => {
                     id="city"
                     className="input_field"
                     placeholder="City"
-                    pattern="[A-Za-z]{3,20}"
+                    pattern="[A-Za-z]{1,}"
                     required
                   />
-                  <p className="error">Min 3 Character Required</p>
+                  <p className="error">Enter Valid City</p>
                 </div>
                 <div className="w-full space-y-1 text-left lg:w-1/2">
                   <label htmlFor="postcode" className="label_text">
