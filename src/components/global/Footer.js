@@ -70,7 +70,7 @@ const Footer = () => {
 
   return (
     <div
-      className="container w-full"
+      className="w-full "
       style={{
         backgroundImage: `url('/static/images/footer_bg.png')`,
         backgroundRepeat: "no-repeat",
@@ -78,7 +78,7 @@ const Footer = () => {
         objectFit: "cover",
         loading: "lazy",
         // width: "100%",
-        // height: "100%",
+        height: "",
       }}
     >
       {/* <div className="absolute">
@@ -90,7 +90,7 @@ const Footer = () => {
           className="object-cover w-full h-full "
         />
       </div> */}
-      <div className="px-4 pt-20">
+      <div className="container px-4 pt-20 mx-auto">
         <div className="block md:hidden">
           <div className="space-y-8 text-center">
             <div className="mx-auto">
@@ -216,7 +216,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="grid items-center justify-center px-4 py-5 top-1/4 md:grid-cols-2 lg:grid-cols-4 lg:px-10 md:pt-16">
+      <div className="container grid items-center justify-center px-4 mx-auto xl:py-5 2xl:pt-40 top-1/4 md:grid-cols-2 lg:grid-cols-4 lg:px-10 md:pt-16">
         <div className="hidden space-y-4 text-black md:block">
           <p className="text-base font-semibold uppercase text-primary_color title heading">
             Company
@@ -323,7 +323,7 @@ const Footer = () => {
         </form>
       </div>
       <hr className="w-full mt-4 text-primary_color" />
-      <div className="hidden md:block">
+      <div className="container hidden mx-auto md:block">
         <div className="flex items-center justify-between py-5 mx-2">
           <div>
             <Image
