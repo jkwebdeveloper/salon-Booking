@@ -96,15 +96,18 @@ const Services = () => {
     if (resp && resp?.code == 200) {
       e.target.closest(".serviceBox").remove();
     }
-  }
+  };
 
   const deleteVoucher = async (id) => {
-    const resp = await POST.request({ url: '/vendor/delete-giftvouchers', form: { gift_vouchers_id: id }, token: vendor?.api_token });
+    const resp = await POST.request({
+      url: "/vendor/delete-giftvouchers",
+      form: { gift_vouchers_id: id },
+      token: vendor?.api_token,
+    });
     if (resp && resp?.code == 200) {
       getVouchers();
     }
-
-  }
+  };
 
   const updateVoucher = async (e) => {
     e.preventDefault();
@@ -120,7 +123,7 @@ const Services = () => {
       setEditVoucher(false);
       setVoucher(true);
     }
-  }
+  };
 
   useEffect(() => {
     return setFormState({ loading: false, error: "", success: "" });
@@ -287,7 +290,10 @@ const Services = () => {
                           placeholder="Enter Expires at"
                           pattern="\d{4}-\d{1,2}-\d{1,2}"
                           min={new Date().toISOString().split("T")[0]}
-                          defaultValue={voucherData?.expried_at && voucherData?.expried_at.split(" ")[0]}
+                          defaultValue={
+                            voucherData?.expried_at &&
+                            voucherData?.expried_at.split(" ")[0]
+                          }
                           required
                         />
                         <p className="error">Enter Valid Expiry Date</p>
@@ -515,7 +521,7 @@ const Services = () => {
                       </DialogTrigger>
                       <DialogContent
                         close={setAddtreatment}
-                        className="sm:max-w-[1025px]"
+                        className="sm:max-w-[500px]"
                       >
                         <DialogTitle>Add New Treatment</DialogTitle>
                         <NewTreatmentModal
@@ -591,12 +597,12 @@ const Services = () => {
                                             {service_group?.duration == 0.5
                                               ? "30 Min"
                                               : service_group?.duration == 1
-                                                ? "1 Hour"
-                                                : service_group?.duration == 1.5
-                                                  ? "1 Hour 30 Min"
-                                                  : service_group?.duration == 2
-                                                    ? "2 Hour"
-                                                    : "2 Hour 30 Min"}
+                                              ? "1 Hour"
+                                              : service_group?.duration == 1.5
+                                              ? "1 Hour 30 Min"
+                                              : service_group?.duration == 2
+                                              ? "2 Hour"
+                                              : "2 Hour 30 Min"}
                                           </p>
                                           <p className="text-sm font-bold">
                                             {service_group?.price &&
@@ -627,14 +633,14 @@ const Services = () => {
                       </div>
                     );
                   })) || (
-                    <div className="center min-h-[300px] w-full">
-                      <Spinner
-                        show={vendorServices?.loading}
-                        width={50}
-                        height={50}
-                      />
-                    </div>
-                  )}
+                  <div className="center min-h-[300px] w-full">
+                    <Spinner
+                      show={vendorServices?.loading}
+                      width={50}
+                      height={50}
+                    />
+                  </div>
+                )}
                 <Dialog
                   className="w-11/12"
                   open={addService}
@@ -709,17 +715,20 @@ const Services = () => {
                                 £{voucher?.amount || "N/A"}
                               </td>
                               <td className="px-4 py-4 text-sm">
-                                {(voucher?.sales_price && '£' + voucher?.sales_price) || "N/A"}
+                                {(voucher?.sales_price &&
+                                  "£" + voucher?.sales_price) ||
+                                  "N/A"}
                               </td>
                               <td className="px-4 py-4 text-sm">
                                 {voucher?.expried_at || "N/A"}
                               </td>
                               <td className="px-4 py-4 text-sm ">
                                 <p
-                                  className={`${(voucher.status == 0 && "bg-yellow-500") ||
+                                  className={`${
+                                    (voucher.status == 0 && "bg-yellow-500") ||
                                     (vendor.status == 1 && "bg-green-700") ||
                                     "bg-red-700"
-                                    } p-2 rounded-full text-center`}
+                                  } p-2 rounded-full text-center`}
                                 >
                                   {(voucher.status == 0 && "Pending") ||
                                     (voucher.status == 1 && "Active") ||
@@ -729,12 +738,15 @@ const Services = () => {
                               <td className="flex gap-4 px-4 py-6">
                                 <BsPencilFill
                                   className="text-[#0AADA4] text-xl cursor-pointer"
-                                  onClick={e => {
-                                    handleEditVoucherClick()
-                                    setVoucherData(voucher)
+                                  onClick={(e) => {
+                                    handleEditVoucherClick();
+                                    setVoucherData(voucher);
                                   }}
                                 />
-                                <RiDeleteBin5Line className="text-[rgb(255,0,0)] text-xl cursor-pointer" onClick={e => deleteVoucher(voucher?.id)} />
+                                <RiDeleteBin5Line
+                                  className="text-[rgb(255,0,0)] text-xl cursor-pointer"
+                                  onClick={(e) => deleteVoucher(voucher?.id)}
+                                />
                               </td>
                             </tr>
                           ))}

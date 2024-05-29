@@ -15,7 +15,11 @@ const CustomerModal = ({ setAddCustomer, setCustomers, customers }) => {
   const addCustomer = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const resp = await POST.request({ url: "/vendor/add-new-customer", form: e.target, token: vendor?.api_token });
+    const resp = await POST.request({
+      url: "/vendor/add-new-customer",
+      form: e.target,
+      token: vendor?.api_token,
+    });
     setLoading(false);
     if (resp && resp?.code == 200) {
       setCustomers([resp.data, ...customers]);
@@ -25,7 +29,7 @@ const CustomerModal = ({ setAddCustomer, setCustomers, customers }) => {
     }
   };
   return (
-    <form className="space-y-3" noValidate onSubmit={e => addCustomer(e)}>
+    <form className="space-y-3" noValidate onSubmit={(e) => addCustomer(e)}>
       <div className="flex flex-col w-full gap-3 lg:flex-row">
         <div className="w-full space-y-1 text-left lg:w-1/2">
           <Label htmlFor="first_name" text="First Name" />
@@ -135,12 +139,7 @@ const CustomerModal = ({ setAddCustomer, setCustomers, customers }) => {
           </li>
           <li class="w-full list-none">
             <div class="flex items-center">
-              <input
-                id="pending"
-                type="radio"
-                value="Pending"
-                name="status"
-              />
+              <input id="pending" type="radio" value="Pending" name="status" />
               <label
                 for="pending"
                 class="w-full ms-2 text-sm font-medium text-gray-900 "
@@ -161,13 +160,13 @@ const CustomerModal = ({ setAddCustomer, setCustomers, customers }) => {
           placeholder="Type here..."
         />
       </div>
-      <Button variant="primary" type="submit" className="w-full mx-auto" disabled={loading}>
-        <Spinner
-          show={loading}
-          width="25"
-          height="25"
-          text="Submit"
-        />
+      <Button
+        variant="primary"
+        type="submit"
+        className="flex items-center justify-center w-full mx-auto"
+        disabled={loading}
+      >
+        <Spinner show={loading} width="25" height="25" text="Submit" />
       </Button>
       {error && <Error error={error} />}
     </form>

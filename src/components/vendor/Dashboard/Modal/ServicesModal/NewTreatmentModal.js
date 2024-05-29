@@ -9,50 +9,73 @@ import { useSelector } from "react-redux";
 import useLogout from "@/hooks/uselogout";
 
 const NewTreatmentModal = ({ setAddtreatment, services, setServices }) => {
-  const existingCats = services.map(service => service?.categories_id);
+  const existingCats = services.map((service) => service?.categories_id);
   const [logoutUser] = useLogout();
-  const [formState, setFormState] = React.useState({ loading: false, error: "", success: "" });
+  const [formState, setFormState] = React.useState({
+    loading: false,
+    error: "",
+    success: "",
+  });
   const mainCat = useCategory();
   const vendor = useSelector((state) => state.vendorAuth.vendor);
 
   const addServiceGroup = async (e) => {
     e.preventDefault();
-    const resp = await POST.request({ url: '/vendor/add-service-group', form: e.target, token: vendor?.api_token, formState, setFormState });
+    const resp = await POST.request({
+      url: "/vendor/add-service-group",
+      form: e.target,
+      token: vendor?.api_token,
+      formState,
+      setFormState,
+    });
     if (resp && resp?.code == 200) {
       setAddtreatment(false);
       setServices([...services, resp?.data]);
     } else if (resp && resp?.code == 401) {
-      logoutUser({ api_token: vendor?.api_token, type: 'vendor' });
+      logoutUser({ api_token: vendor?.api_token, type: "vendor" });
     }
-
   };
 
   return (
-    mainCat.loading
-    && <div className="w-full center min-h-[100px]">
-      <Spinner show={mainCat?.loading} width={50} height={50} />
-    </div>
-    || <form className="space-y-3" onSubmit={e => addServiceGroup(e)}>
-      <div className="w-full space-y-1 text-left">
-        <Label htmlFor="first_name" text="Select Treatment" />
-        <select className="w-full p-2 text-black bg-transparent border" name="categories_id">
-          {mainCat.data.map((cat) => (
-            <option key={'maincat' + cat.id} value={cat.id} disabled={existingCats.includes(cat.id)}>
-              {cat.title}
-            </option>
-          ))}
-        </select>
+    (mainCat.loading && (
+      <div className="w-full center min-h-[100px]">
+        <Spinner show={mainCat?.loading} width={50} height={50} />
       </div>
-      <Button type="submit" variant="primary" disabled={formState?.loading}>
-        <Spinner
-          show={formState?.loading}
-          width="25"
-          height="25"
-          text="Save"
-        />
-      </Button>
-      {formState.error && <Error error={formState.error} />}
-    </form>
+    )) || (
+      <form className="space-y-3" onSubmit={(e) => addServiceGroup(e)}>
+        <div className="w-full space-y-1 text-left">
+          <Label htmlFor="first_name" text="Select Treatment" />
+          <select
+            className="w-full p-2 text-black bg-transparent border"
+            name="categories_id"
+          >
+            {mainCat.data.map((cat) => (
+              <option
+                key={"maincat" + cat.id}
+                value={cat.id}
+                disabled={existingCats.includes(cat.id)}
+              >
+                {cat.title}
+              </option>
+            ))}
+          </select>
+        </div>
+        <Button
+          type="submit"
+          variant="primary"
+          className="flex items-center justify-center mx-auto"
+          disabled={formState?.loading}
+        >
+          <Spinner
+            show={formState?.loading}
+            width="25"
+            height="25"
+            text="Save"
+          />
+        </Button>
+        {formState.error && <Error error={formState.error} />}
+      </form>
+    )
   );
 };
 

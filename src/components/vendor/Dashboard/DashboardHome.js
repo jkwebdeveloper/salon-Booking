@@ -15,6 +15,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { IoIosArrowForward } from "react-icons/io";
+import { RiShoppingCart2Line } from "react-icons/ri";
+import { ImUserTie } from "react-icons/im";
 
 const DashBoardHome = () => {
   const [review, setReview] = useState(false);
@@ -97,7 +100,7 @@ const DashBoardHome = () => {
             <div className="bg-gradient-to-r from-[#FE585B] py-8 px-4 rounded-xl to-[#F6819B]">
               <div className="flex items-center justify-between text-white">
                 <div>
-                  <LuUser2 className="bg-[#4f8199] rounded-full text-white text-4xl p-2" />
+                  <RiShoppingCart2Line className="bg-[#4f8199] rounded-full text-white text-4xl p-2" />
                   <p>Total Revenue</p>
                 </div>
                 <div className="">
@@ -108,7 +111,7 @@ const DashBoardHome = () => {
             <div className="bg-gradient-to-r from-[#393C89] py-8 px-4 rounded-xl to-[#389AC1]">
               <div className="flex items-center justify-between text-white">
                 <div>
-                  <LuUser2 className="bg-[#4f8199] rounded-full text-white text-4xl p-2" />
+                  <ImUserTie className="bg-[#4f8199] rounded-full text-white text-4xl p-2" />
                   <p>Employees</p>
                 </div>
                 <div className="">
@@ -119,9 +122,10 @@ const DashBoardHome = () => {
           </div>
           <p className="text-2xl font-semibold">Monthly Revenue Outline</p>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
-            <div className="p-3 bg-white rounded-lg">
-              <div className="space-y-3">
-                <p className="mx-2 font-medium">Monthly Revenue Outline</p>
+            <div className="p-3 space-y-2 bg-white rounded-lg">
+              <div className="flex items-center gap-2 mx-2 font-medium">
+                <p className="">Monthly Revenue Outline </p>
+                <IoIosArrowForward />
               </div>
               <Table>
                 <TableBody>
@@ -144,9 +148,10 @@ const DashBoardHome = () => {
                 </TableBody>
               </Table>
             </div>
-            <div className="p-3 bg-white rounded-lg">
-              <div className="space-y-3">
-                <p className="mx-2 font-medium">Service sales</p>
+            <div className="p-3 space-y-2 bg-white rounded-lg">
+              <div className="flex items-center gap-2 mx-2 font-medium">
+                <p className="">Monthly Revenue Outline </p>
+                <IoIosArrowForward />
               </div>
               <Table>
                 <TableBody>
@@ -169,9 +174,10 @@ const DashBoardHome = () => {
                 </TableBody>
               </Table>
             </div>
-            <div className="p-3 bg-white rounded-lg">
-              <div className="space-y-3">
-                <p className="mx-2 font-medium">Sales By Source</p>
+            <div className="p-3 space-y-2 bg-white rounded-lg">
+              <div className="flex items-center gap-2 mx-2 font-medium">
+                <p className="">Monthly Revenue Outline </p>
+                <IoIosArrowForward />
               </div>
               <Table>
                 <TableBody>

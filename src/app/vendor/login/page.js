@@ -144,11 +144,11 @@ const Login = () => {
                     </Link>
                   </div>
                 </div>
-                <div className="w-full mx-auto space-y-3">
+                <div className="space-y-3">
                   <Button
                     type="submit"
                     variant="primary"
-                    className="w-full"
+                    className="w-full md:w-full"
                     disabled={loading}
                   >
                     <Spinner
@@ -156,6 +156,7 @@ const Login = () => {
                       width="25"
                       height="25"
                       text="Login"
+                      className="w-full"
                     />
                   </Button>
                   {error && <Error error={error} />}
@@ -184,11 +185,13 @@ const Login = () => {
                   </div>
                 </div>
               </div>
+              <p className="text-xs text-[#000D23] text-center">
+                Ready to start working beautifully with Pampertree?
+              </p>
               <p className="text-center">
-                Not a member?{" "}
                 <Link href="/vendor/register">
                   <span className="font-semibold text-primary_color">
-                    Register
+                    Sign up now
                   </span>
                 </Link>
               </p>

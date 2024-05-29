@@ -5,26 +5,38 @@ import { POST } from "@/app/api/post";
 import { useSelector } from "react-redux";
 import { Error, Spinner } from "@/components";
 
-const EditCustomerModal = ({ setEditDialog, setEditCustomer, setCustomers, editCustomer, customers }) => {
+const EditCustomerModal = ({
+  setEditDialog,
+  setEditCustomer,
+  setCustomers,
+  editCustomer,
+  customers,
+}) => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);
   const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState('');
+  const [error, setError] = React.useState("");
 
   const updateCustomer = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const resp = await POST.request({ url: '/vendor/update-customer', form: e.target, token: vendor?.api_token });
+    const resp = await POST.request({
+      url: "/vendor/update-customer",
+      form: e.target,
+      token: vendor?.api_token,
+    });
     setLoading(false);
     if (resp && resp.code == 200) {
-      const oldCustomers = customers.filter((customer) => customer.id !== editCustomer.id);
+      const oldCustomers = customers.filter(
+        (customer) => customer.id !== editCustomer.id
+      );
       setCustomers([resp.data, ...oldCustomers]);
       setEditDialog(false);
-      setEditCustomer('');
+      setEditCustomer("");
     }
   };
 
   return (
-    <form className="space-y-3" onSubmit={e => updateCustomer(e)} noValidate>
+    <form className="space-y-3" onSubmit={(e) => updateCustomer(e)} noValidate>
       <div className="flex flex-col w-full gap-3 lg:flex-row">
         <div className="w-full space-y-1 text-left lg:w-1/2">
           <Label htmlFor="first_name" text="First Name" />
@@ -81,7 +93,11 @@ const EditCustomerModal = ({ setEditDialog, setEditCustomer, setCustomers, editC
       <div className="flex flex-col w-full gap-3 lg:flex-row">
         <div className="w-full space-y-1 text-left lg:w-1/2">
           <Label htmlFor="gender" text="Gender" />
-          <select name="gender" className="bg-white h-9 input_field" defaultValue={editCustomer.gender}>
+          <select
+            name="gender"
+            className="bg-white h-9 input_field"
+            defaultValue={editCustomer.gender}
+          >
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
@@ -135,12 +151,7 @@ const EditCustomerModal = ({ setEditDialog, setEditCustomer, setCustomers, editC
           </li>
           <li class="list-none">
             <div class="flex items-center">
-              <input
-                id="pending"
-                type="radio"
-                value="Pending"
-                name="status"
-              />
+              <input id="pending" type="radio" value="Pending" name="status" />
               <label
                 for="pending"
                 class="w-full ms-2 text-sm font-medium text-gray-900 "
@@ -163,13 +174,13 @@ const EditCustomerModal = ({ setEditDialog, setEditCustomer, setCustomers, editC
         />
       </div>
       <input type="hidden" name="customers_id" value={editCustomer.id} />
-      <Button variant="primary" type="submit" className="w-full mx-auto" disabled={loading}>
-        <Spinner
-          show={loading}
-          width="25"
-          height="25"
-          text="Save"
-        />
+      <Button
+        variant="primary"
+        type="submit"
+        className="flex items-center justify-center w-full mx-auto"
+        disabled={loading}
+      >
+        <Spinner show={loading} width="25" height="25" text="Save" />
       </Button>
       {error && <Error error={error} />}
     </form>
