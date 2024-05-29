@@ -51,7 +51,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .input_field {
-  @apply border focus:border-primary_color disabled:bg-neutral-100 w-full text-[0.8rem] outline-none md:p-2 p-1 rounded-[4px];
+  @apply border focus:border-primary_color disabled:bg-neutral-100 bg-[#FAFAFA] w-full text-[0.8rem] outline-none md:p-3 p-1 rounded-[4px];
 }
 .input_field.icon {
   @apply ps-7;
@@ -88,104 +88,103 @@ body .swiper {
 
 /* Success SVG animation */
 .checkSVG svg .path {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 0;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 0;
 }
 
 .checkSVG svg .circle {
-    -webkit-animation: dash 0.9s ease-in-out;
-    animation: dash 0.9s ease-in-out;
+  -webkit-animation: dash 0.9s ease-in-out;
+  animation: dash 0.9s ease-in-out;
 }
 
 .checkSVG svg .line {
-    stroke-dashoffset: 1000;
-    -webkit-animation: dash 0.9s 0.35s ease-in-out forwards;
-    animation: dash 0.9s 0.35s ease-in-out forwards;
+  stroke-dashoffset: 1000;
+  -webkit-animation: dash 0.9s 0.35s ease-in-out forwards;
+  animation: dash 0.9s 0.35s ease-in-out forwards;
 }
 
 .checkSVG svg .check {
-    stroke-dashoffset: -100;
-    -webkit-animation: dash-check 0.9s 0.35s ease-in-out forwards;
-    animation: dash-check 0.9s 0.35s ease-in-out forwards;
+  stroke-dashoffset: -100;
+  -webkit-animation: dash-check 0.9s 0.35s ease-in-out forwards;
+  animation: dash-check 0.9s 0.35s ease-in-out forwards;
 }
 
 @-webkit-keyframes dash {
-    0% {
-        stroke-dashoffset: 1000;
-    }
+  0% {
+    stroke-dashoffset: 1000;
+  }
 
-    100% {
-        stroke-dashoffset: 0;
-    }
+  100% {
+    stroke-dashoffset: 0;
+  }
 }
 
 @keyframes dash {
-    0% {
-        stroke-dashoffset: 1000;
-    }
+  0% {
+    stroke-dashoffset: 1000;
+  }
 
-    100% {
-        stroke-dashoffset: 0;
-    }
+  100% {
+    stroke-dashoffset: 0;
+  }
 }
 
 @-webkit-keyframes dash-check {
-    0% {
-        stroke-dashoffset: -100;
-    }
+  0% {
+    stroke-dashoffset: -100;
+  }
 
-    100% {
-        stroke-dashoffset: 900;
-    }
+  100% {
+    stroke-dashoffset: 900;
+  }
 }
 
 @keyframes dash-check {
-    0% {
-        stroke-dashoffset: -100;
-    }
+  0% {
+    stroke-dashoffset: -100;
+  }
 
-    100% {
-        stroke-dashoffset: 900;
-    }
+  100% {
+    stroke-dashoffset: 900;
+  }
 }
 
-
-.invalid + label{
+.invalid + label {
   color: red;
 }
-.error{
+.error {
   color: red;
   font-size: 0.75rem;
   display: none;
 }
-.invalid + .error{
+.invalid + .error {
   display: block;
 }
 
-.list-disc ul{
+.list-disc ul {
   list-style-type: disc !important;
   margin-left: 1rem;
 }
 
-.timePicker input{
-  border:0px;
+.timePicker input {
+  border: 0px;
   font-size: inherit;
 }
 
-.timePicker input:focus{
+.timePicker input:focus {
   outline: none;
   box-shadow: none;
 }
 
-.rc-time-picker-panel-inner{
+.rc-time-picker-panel-inner {
   box-shadow: none !important;
 }
-.rc-time-picker-panel-select-option-selected{
+.rc-time-picker-panel-select-option-selected {
   background-color: #711f7e !important;
   color: white !important;
 }
 
-.center{
+.center {
   display: flex;
   justify-content: center;
   align-items: center;

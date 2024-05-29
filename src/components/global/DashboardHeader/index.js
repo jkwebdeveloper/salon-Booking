@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation";
 import useLogout from "@/hooks/uselogout";
 
 const DashBoardHeader = () => {
+  const [active, setActive] = useState("Dashboard");
   const [logoutUser] = useLogout();
   const router = useRouter();
   const vendor = useSelector((state) => state.vendorAuth.vendor);
@@ -122,12 +123,23 @@ const DashBoardHeader = () => {
                 <DropdownMenuContent className="w-56 p-0 mt-2 bg-white ring-1 ring-neutral-200">
                   <DropdownMenuGroup>
                     <DropdownMenuItem className="cursor-pointer hover:bg-primary hover:text-white">
-                      <Link href="/vendor/profile" className="flex items-center w-full gap-2 ">
+                      <Link
+                        href="/vendor/profile"
+                        className="flex items-center w-full gap-2 "
+                      >
                         <TbUserCheck className="text-xl" />
                         Profile
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white" onClick={e => logoutUser({ api_token: vendor?.api_token, type: 'vendor' })}>
+                    <DropdownMenuItem
+                      className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white"
+                      onClick={(e) =>
+                        logoutUser({
+                          api_token: vendor?.api_token,
+                          type: "vendor",
+                        })
+                      }
+                    >
                       <MdLogout className="text-xl text-red-500 hover:text-white" />
                       Logout
                     </DropdownMenuItem>

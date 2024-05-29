@@ -57,6 +57,18 @@ const DashBoardHome = () => {
                   width={200}
                   height={200}
                 />
+                <div className="flex-col space-y-1">
+                  <p className="text-3xl font-semibold">Spa Life & Massage</p>
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2">
+                      <FaStar className="text-[#FFCC00]" />
+                      <FaStar className="text-[#FFCC00]" />
+                      <FaStar className="text-[#FFCC00]" />
+                      <FaStar className="text-[#FFCC00]" />
+                      <FaStar className="text-[#D6D6D6]" />
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className="flex items-center mr-5 gap-7">
                 <div className="space-y-2 text-center">

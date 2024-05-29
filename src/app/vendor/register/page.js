@@ -21,7 +21,10 @@ const Register = () => {
   const registerVendor = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const resp = await POST.request({ url: "/vendor/register", form: e.target });
+    const resp = await POST.request({
+      url: "/vendor/register",
+      form: e.target,
+    });
     setLoading(false);
     if (resp.code == 200 && Object.keys(resp.data).length > 0) {
       setSuccessFull(true);
@@ -29,13 +32,35 @@ const Register = () => {
     } else {
       setError(resp.message);
     }
-  }
+  };
 
   return (
     <div>
-      <Banner title="Enter your details to request a free consultation and demo." />
+      {/* <Banner title="" /> */}
+      <div
+        className={`relative md:min-h-[200px] min-h-[200px] w-full z-[1]`}
+        style={{
+          background: `url(${"/static/images/Pagesbanner.jpg"})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div className="md:min-h-[300px] flex items-center justify-center">
+          <div className="flex-col items-center justify-center mx-auto text-center text-white uppercase">
+            <h1 className="text-2xl font-semibold">
+              Enter your details to request a free consultation and demo.
+            </h1>{" "}
+            <br />
+            <p>“We will get back to you within 24 hours”</p>
+          </div>
+        </div>
+      </div>
       <div className="container relative max-w-[1000px] mx-auto  md:mt-[-3rem] mt-3 md:mb-10 z-[2]">
-        <form className="p-3 space-y-4 bg-white shadow-lg xl:p-8 ring-1 ring-primary/5" noValidate onSubmit={e => registerVendor(e)}>
+        <form
+          className="p-3 space-y-4 bg-white shadow-lg xl:p-8 ring-1 ring-primary/5"
+          noValidate
+          onSubmit={(e) => registerVendor(e)}
+        >
           <div className="w-full space-y-1 text-left">
             <Label htmlFor="salon_name" text="Salon name" required={true} />
             <input
@@ -116,7 +141,11 @@ const Register = () => {
               <p className="error">Postcode should be 6 digit</p>
             </div>
             <div className="w-full space-y-1 text-left lg:w-1/2">
-              <Label htmlFor="type_of_salon" text="What type of salon you have?" required={true} />
+              <Label
+                htmlFor="type_of_salon"
+                text="What type of salon you have?"
+                required={true}
+              />
               <input
                 type="text"
                 id="type_of_salon"
@@ -152,15 +181,19 @@ const Register = () => {
                     className="text-gray-400 cursor-pointer"
                   />
                 )) || (
-                    <BsEyeSlashFill
-                      size={24}
-                      className="text-gray-400 cursor-pointer"
-                    />
-                  )}
+                  <BsEyeSlashFill
+                    size={24}
+                    className="text-gray-400 cursor-pointer"
+                  />
+                )}
               </button>
             </div>
             <div className="relative w-full space-y-1 text-left lg:w-1/2">
-              <Label htmlFor="cpassword" text="Confirm password" required={true} />
+              <Label
+                htmlFor="cpassword"
+                text="Confirm password"
+                required={true}
+              />
               <input
                 type={showConfirmPassword ? "text" : "password"}
                 id="cpassword"
@@ -180,11 +213,11 @@ const Register = () => {
                     className="text-gray-400 cursor-pointer"
                   />
                 )) || (
-                    <BsEyeSlashFill
-                      size={24}
-                      className="text-gray-400 cursor-pointer"
-                    />
-                  )}
+                  <BsEyeSlashFill
+                    size={24}
+                    className="text-gray-400 cursor-pointer"
+                  />
+                )}
               </button>
             </div>
           </div>
@@ -194,7 +227,7 @@ const Register = () => {
               type="checkbox"
               className="accent-primary"
               required
-              defaultChecked={''}
+              defaultChecked={""}
             />
             <label
               htmlFor="aggreement"
@@ -214,9 +247,12 @@ const Register = () => {
               type="checkbox"
               className="accent-primary"
               required
-              defaultChecked={''}
+              defaultChecked={""}
             />
-            <label htmlFor="subscribe" className="w-full text-sm font-medium text-gray-900 ms-2">
+            <label
+              htmlFor="subscribe"
+              className="w-full text-sm font-medium text-gray-900 ms-2"
+            >
               Please tick this box if you would like to receive communications
               to grow your business with expert advice, industry insights, and
               other handy resources – delivered right to your inbox.
@@ -232,13 +268,13 @@ const Register = () => {
               1
             }
           />
-          <Button type="submit" variant="primary" className="w-full px-10" disabled={loading}>
-            <Spinner
-              show={loading}
-              width="25"
-              height="25"
-              text="Submit"
-            />
+          <Button
+            type="submit"
+            variant="primary"
+            className="flex items-center justify-center px-10 mx-auto"
+            disabled={loading}
+          >
+            <Spinner show={loading} width="25" height="25" text="Submit" />
           </Button>
           {error && <Error error={error} />}
           <Dialog open={successfull}>

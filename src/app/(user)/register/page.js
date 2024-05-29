@@ -38,10 +38,10 @@ const Register = () => {
   };
 
   return (
-    <div className="grid w-screen overflow-x-hidden lg:grid-cols-2">
+    <div className="grid overflow-x-hidden lg:grid-cols-2">
       <div className="hidden lg:block bg-[url('/static/images/signin.png')] bg-cover"></div>
       <div className="lg:w-full overflow-x-hidden bg-[#FAFAFA] p-3 relative z-0 min-h-screen">
-        <div className="flex flex-col items-center justify-center h-full space-y-4">
+        <div className="flex flex-col items-center justify-center h-full space-y-4 overflow-x-hidden">
           <div>
             <Link href="/">
               <Image
@@ -54,7 +54,7 @@ const Register = () => {
               />
             </Link>
           </div>
-          <div className="w-full p-4 mx-auto overflow-x-hidden bg-white rounded-lg shadow-md max-w-[35rem]">
+          <div className="p-4 mx-auto overflow-x-hidden bg-white rounded-lg shadow-md max-w-[35rem]">
             <p className="mb-2 text-lg font-semibold">
               Welcome to the{" "}
               <span className="text-primary_color">PamperTree</span>
@@ -147,10 +147,12 @@ const Register = () => {
                     id="password"
                     className="input_field"
                     placeholder="Enter Your Password"
-                    pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
+                    pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
                     required
                   />
-                  <p className="error max-w-[250px]">Min 8 characters with a mix of letters, numbers & symbols</p>
+                  <p className="error max-w-[250px]">
+                    Min 8 characters with a mix of letters, numbers & symbols
+                  </p>
                   <button
                     type="button"
                     className="absolute top-[1.85em] right-3"
@@ -162,11 +164,11 @@ const Register = () => {
                         className="text-gray-400 cursor-pointer"
                       />
                     )) || (
-                        <BsEyeSlashFill
-                          size={24}
-                          className="text-gray-400 cursor-pointer"
-                        />
-                      )}
+                      <BsEyeSlashFill
+                        size={24}
+                        className="text-gray-400 cursor-pointer"
+                      />
+                    )}
                   </button>
                 </div>
                 <div className="relative w-full space-y-1 text-left lg:w-1/2">
@@ -193,18 +195,18 @@ const Register = () => {
                         className="text-gray-400 cursor-pointer"
                       />
                     )) || (
-                        <BsEyeSlashFill
-                          size={24}
-                          className="text-gray-400 cursor-pointer"
-                        />
-                      )}
+                      <BsEyeSlashFill
+                        size={24}
+                        className="text-gray-400 cursor-pointer"
+                      />
+                    )}
                   </button>
                 </div>
               </div>
               <div className="w-full space-y-1 text-left">
                 <label htmlFor="address" className="label_text">
                   {" "}
-                  Address line 1{" "}
+                  Address line 1 (or Company Name){" "}
                 </label>
                 <input
                   type="text"
@@ -220,7 +222,7 @@ const Register = () => {
               <div className="w-full space-y-1 text-left">
                 <label htmlFor="address2" className="label_text">
                   {" "}
-                  Address line 2{" "}
+                  Address line 2 (Landmark){" "}
                 </label>
                 <input
                   type="text"
@@ -326,7 +328,7 @@ const Register = () => {
                   name="list-radio"
                   class=""
                   required
-                  defaultChecked={''}
+                  defaultChecked={""}
                 />
                 <label
                   for="list-radio-license"

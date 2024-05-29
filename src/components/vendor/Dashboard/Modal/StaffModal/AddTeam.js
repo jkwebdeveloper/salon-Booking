@@ -11,27 +11,41 @@ import { useVendorServices } from "@/hooks";
 import { set } from "date-fns";
 import { v4 } from "uuid";
 
-const AddTeam = ({ setAddTeam, editStaff, staffsList, setStaffsList, setEditStaff }) => {
+const AddTeam = ({
+  setAddTeam,
+  editStaff,
+  staffsList,
+  setStaffsList,
+  setEditStaff,
+}) => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);
   const [getServices, vendorServices] = useVendorServices();
   const [staff, setStaff] = useState(editStaff || {});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [currentTab, setCurrentTab] = useState("basic");
-  const [staffServices, setStaffServices] = useState(staff && staff?.staff_service || []);
+  const [staffServices, setStaffServices] = useState(
+    (staff && staff?.staff_service) || []
+  );
 
-  const changeTab = (tab = 'basic') => setCurrentTab(tab);
+  const changeTab = (tab = "basic") => setCurrentTab(tab);
 
   const addStaff = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const resp = await POST.request({ url: '/vendor/add-new-staffs', form: e.target, token: vendor.api_token });
+    const resp = await POST.request({
+      url: "/vendor/add-new-staffs",
+      form: e.target,
+      token: vendor.api_token,
+    });
     setLoading(false);
     if (resp && resp.code == 200) {
-      const newStaffMember = staffsList.filter(staff => staff.id != resp.data.id);
+      const newStaffMember = staffsList.filter(
+        (staff) => staff.id != resp.data.id
+      );
       setStaffsList([...newStaffMember, resp.data]);
       setStaff(resp.data);
-      changeTab('services');
+      changeTab("services");
     } else {
       setError(resp.message);
     }
@@ -40,13 +54,19 @@ const AddTeam = ({ setAddTeam, editStaff, staffsList, setStaffsList, setEditStaf
   const updateStaff = async ({ e, step }) => {
     e.preventDefault();
     setLoading(true);
-    const resp = await POST.request({ url: '/vendor/update-staffs', form: e.target, token: vendor.api_token });
+    const resp = await POST.request({
+      url: "/vendor/update-staffs",
+      form: e.target,
+      token: vendor.api_token,
+    });
     setLoading(false);
     if (resp && resp.code == 200) {
-      const newStaffMember = staffsList.filter(staff => staff.id != resp.data.id);
+      const newStaffMember = staffsList.filter(
+        (staff) => staff.id != resp.data.id
+      );
       setStaffsList([...newStaffMember, resp.data]);
       if (!step) {
-        setEditStaff('');
+        setEditStaff("");
         setAddTeam(false);
         return;
       }
@@ -60,12 +80,18 @@ const AddTeam = ({ setAddTeam, editStaff, staffsList, setStaffsList, setEditStaf
 
   const deleteStaff = async () => {
     setLoading(true);
-    const res = await POST.request({ url: '/vendor/delete-staffs', form: { staffs_id: staff.id }, token: vendor?.api_token });
+    const res = await POST.request({
+      url: "/vendor/delete-staffs",
+      form: { staffs_id: staff.id },
+      token: vendor?.api_token,
+    });
     setLoading(false);
     if (res && res.code == 200) {
-      const newStaffMember = staffsList.filter(deletedStaff => deletedStaff.id != staff.id);
+      const newStaffMember = staffsList.filter(
+        (deletedStaff) => deletedStaff.id != staff.id
+      );
       setStaffsList(newStaffMember);
-      setEditStaff('');
+      setEditStaff("");
       setAddTeam(false);
     }
   };
@@ -73,10 +99,14 @@ const AddTeam = ({ setAddTeam, editStaff, staffsList, setStaffsList, setEditStaf
   const addStaffServices = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const resp = await POST.request({ url: '/vendor/add-staffs-services', form: staffServices, token: vendor.api_token });
+    const resp = await POST.request({
+      url: "/vendor/add-staffs-services",
+      form: staffServices,
+      token: vendor.api_token,
+    });
     setLoading(false);
     if (resp && resp.code == 200) {
-      changeTab('publicProfile');
+      changeTab("publicProfile");
     } else {
       setError(resp.message);
     }
@@ -86,31 +116,42 @@ const AddTeam = ({ setAddTeam, editStaff, staffsList, setStaffsList, setEditStaf
     <div className="space-y-4">
       <div className="flex items-center gap-3">
         <Button
-          variant={(currentTab == 'basic') ? "secondary" : "disable"}
-          onClick={e => changeTab()}
+          variant={currentTab == "basic" ? "secondary" : "disable"}
+          onClick={(e) => changeTab()}
         >
           Basic Info
         </Button>
         <Button
-          variant={currentTab == 'services' ? "secondary" : "disable"}
-          onClick={e => changeTab('services')}
-        // disabled={Object.keys(staff).length == 0}
+          variant={currentTab == "services" ? "secondary" : "disable"}
+          onClick={(e) => changeTab("services")}
+          // disabled={Object.keys(staff).length == 0}
         >
           Services
         </Button>
         <Button
-          variant={currentTab == 'publicProfile' ? "secondary" : "disable"}
-          onClick={e => changeTab('publicProfile')}
-        // disabled={Object.keys(staff).length == 0}
+          variant={currentTab == "publicProfile" ? "secondary" : "disable"}
+          onClick={(e) => changeTab("publicProfile")}
+          // disabled={Object.keys(staff).length == 0}
         >
           Public Profile
         </Button>
       </div>
-      {currentTab == 'basic' && (
-        <form className="space-y-3" onSubmit={e => Object.keys(staff).length > 0 && updateStaff({ e, step: 'services' }) || addStaff(e)} noValidate>
+      {currentTab == "basic" && (
+        <form
+          className="space-y-3"
+          onSubmit={(e) =>
+            (Object.keys(staff).length > 0 &&
+              updateStaff({ e, step: "services" })) ||
+            addStaff(e)
+          }
+          noValidate
+        >
           <div className="border relative border-1 border-[#0AADA4] rounded-full p-1 w-[3.5rem] h-[3.5rem] mb-2">
             <Image
-              src={staff && (process.env.NEXT_PUBLIC_SERVERURL + staff.photo) || '/images/user.png'}
+              src={
+                (staff && process.env.NEXT_PUBLIC_SERVERURL + staff.photo) ||
+                "/images/user.png"
+              }
               alt="profile"
               loading="lazy"
               className="object-cover w-full h-full rounded-full z-1"
@@ -133,7 +174,7 @@ const AddTeam = ({ setAddTeam, editStaff, staffsList, setStaffsList, setEditStaf
                 className="input_field"
                 placeholder="Enter your First name"
                 pattern="[A-Za-z0-9]{3,20}"
-                defaultValue={staff && staff.first_name || ''}
+                defaultValue={(staff && staff.first_name) || ""}
                 required
               />
               <p className="error">Min 3 Character Required</p>
@@ -146,7 +187,7 @@ const AddTeam = ({ setAddTeam, editStaff, staffsList, setStaffsList, setEditStaf
                 className="input_field"
                 placeholder="Enter your Last name"
                 pattern="[A-Za-z0-9]{3,20}"
-                defaultValue={staff && staff.last_name || ''}
+                defaultValue={(staff && staff.last_name) || ""}
                 required
               />
               <p className="error">Min 3 Character Required</p>
@@ -161,7 +202,7 @@ const AddTeam = ({ setAddTeam, editStaff, staffsList, setStaffsList, setEditStaf
                 className="input_field"
                 placeholder="Enter your email"
                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                defaultValue={staff && staff.email || ''}
+                defaultValue={(staff && staff.email) || ""}
                 required
               />
               <p className="error">Enter Valid Email id</p>
@@ -174,7 +215,7 @@ const AddTeam = ({ setAddTeam, editStaff, staffsList, setStaffsList, setEditStaf
                 className="input_field"
                 placeholder="Enter your Phone Number"
                 pattern="[0-9]{10}"
-                defaultValue={staff && staff.mobile || ''}
+                defaultValue={(staff && staff.mobile) || ""}
                 required
               />
               <p className="error">Enter Valid Phone number</p>
@@ -188,45 +229,56 @@ const AddTeam = ({ setAddTeam, editStaff, staffsList, setStaffsList, setEditStaf
                 name="dob"
                 className="w-full input_field sm:max-w-[200px]"
                 placeholder="Enter your Phone Number"
-                defaultValue={staff && staff.dob || ''}
+                defaultValue={(staff && staff.dob) || ""}
                 pattern="\d{4}-\d{1,2}-\d{1,2}"
                 required
               />
               <p className="error">Enter Valid Birth Date</p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            {Object.keys(staff).length > 0 && <input type="hidden" name="staffs id" value={staff.id} />}
-            <Button variant="disable" disabled={loading} onClick={e => {
-              setEditStaff('');
-              setAddTeam(false);
-            }}>Cancel</Button>
-            <Button variant="primary" type="submit" disabled={loading}>
-              <Spinner
-                show={loading}
-                width="25"
-                height="25"
-                text="Save"
-              />
+          <div className="flex items-center justify-center gap-3">
+            {Object.keys(staff).length > 0 && (
+              <input type="hidden" name="staffs id" value={staff.id} />
+            )}
+            <Button
+              variant="disable"
+              disabled={loading}
+              onClick={(e) => {
+                setEditStaff("");
+                setAddTeam(false);
+              }}
+            >
+              Cancel
             </Button>
-            {Object.keys(staff).length > 0 && <Button variant="danger" onClick={e => deleteStaff()} disabled={loading}>Delete</Button>}
+            <Button variant="primary" type="submit" disabled={loading}>
+              <Spinner show={loading} width="25" height="25" text="Save" />
+            </Button>
+            {Object.keys(staff).length > 0 && (
+              <Button
+                variant="danger"
+                onClick={(e) => deleteStaff()}
+                disabled={loading}
+              >
+                Delete
+              </Button>
+            )}
           </div>
           {error && <Error error={error} />}
         </form>
       )}
-      {console.log('staffServices', staffServices)}
-      {currentTab == 'services' && (
-        <form className="space-y-2" onSubmit={e => addStaffServices(e)} noValidate>
+      {console.log("staffServices", staffServices)}
+      {currentTab == "services" && (
+        <form
+          className="space-y-2"
+          onSubmit={(e) => addStaffServices(e)}
+          noValidate
+        >
           <p className="text-xl text-[#1D1B23] font-semibold">
             What service can be booked for this employee ?
           </p>
           <li class="w-full list-none">
             <div class="flex items-center">
-              <input
-                id="list-radio-license"
-                type="checkbox"
-                value=""
-              />
+              <input id="list-radio-license" type="checkbox" value="" />
               <label
                 for="list-radio-license"
                 class="w-full ms-2 text-sm font-medium text-gray-900 "
@@ -235,78 +287,156 @@ const AddTeam = ({ setAddTeam, editStaff, staffsList, setStaffsList, setEditStaf
               </label>
             </div>
           </li>
-          {vendorServices.loading && <Spinner show={vendorServices.loading} width={50} height={50} />}
-          {!vendorServices.loading && vendorServices.data.map((service, index) => (
-            service.group_service_list.length > 0 && <div key={v4()} className="border space-y-3 rounded-lg border-[#D8DAE5] bg-[#FAFAFA] p-3">
-              <li class="w-full list-none">
-                <div class="flex items-center">
-                  <input
-                    id={service.categories.title}
-                    type="checkbox"
-                    checked={staffServices.filter(serviceCats => serviceCats.categories_id == service.categories.id).length == service?.group_service_list.length && true || false}
-                    onChange={e => {
-                      if (e.target.checked) {
-                        const subcategories = service.group_service_list.map(subcategory => ({ "categories_id": subcategory?.categories_id, "sub_categories_id": subcategory?.id, "staffs_id": staff.id || null }));
-                        setStaffServices([...staffServices, ...subcategories]);
-                      } else {
-                        setStaffServices(staffServices.filter(subcategory => subcategory.categories_id != service.categories.id));
-                      }
-
-                    }}
-                  />
-                  <label
-                    htmlFor={service.categories.title}
-                    class="w-full ms-2 text-base font-semibold"
+          {vendorServices.loading && (
+            <Spinner show={vendorServices.loading} width={50} height={50} />
+          )}
+          {!vendorServices.loading &&
+            vendorServices.data.map(
+              (service, index) =>
+                service.group_service_list.length > 0 && (
+                  <div
+                    key={v4()}
+                    className="border space-y-3 rounded-lg border-[#D8DAE5] bg-[#FAFAFA] p-3"
                   >
-                    {service.categories.title}
-                  </label>
-                </div>
-              </li>
-              <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {service.group_service_list.map((subcategory, index) => (
-                  <li key={v4()} class="w-full list-none">
-                    <div class="flex items-center">
-                      <input
-                        id={subcategory?.sub_categories?.title}
-                        type="checkbox"
-                        checked={staffServices.find(serviceCats => serviceCats.sub_categories_id == subcategory?.id) && true || false}
-                        onChange={e => {
-                          if (e.target.checked) {
-                            const exists = staffServices.find(serviceCats => serviceCats.sub_categories_id == subcategory?.id);
-                            if (!exists) {
-                              setStaffServices([...staffServices, { "categories_id": subcategory?.categories_id, "sub_categories_id": subcategory?.id, "staffs_id": staff.id || null }]);
-                            }
-                          } else {
-                            setStaffServices(staffServices.filter(serviceCats => serviceCats?.sub_categories_id != subcategory.id));
+                    <li class="w-full list-none">
+                      <div class="flex items-center">
+                        <input
+                          id={service.categories.title}
+                          type="checkbox"
+                          checked={
+                            (staffServices.filter(
+                              (serviceCats) =>
+                                serviceCats.categories_id ==
+                                service.categories.id
+                            ).length == service?.group_service_list.length &&
+                              true) ||
+                            false
                           }
-                        }}
-                      />
-                      <label
-                        htmlFor={subcategory?.sub_categories?.title}
-                        class="w-full ms-2 text-sm font-normal"
-                      >
-                        {subcategory?.sub_categories?.title}
-                      </label>
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              const subcategories =
+                                service.group_service_list.map(
+                                  (subcategory) => ({
+                                    categories_id: subcategory?.categories_id,
+                                    sub_categories_id: subcategory?.id,
+                                    staffs_id: staff.id || null,
+                                  })
+                                );
+                              setStaffServices([
+                                ...staffServices,
+                                ...subcategories,
+                              ]);
+                            } else {
+                              setStaffServices(
+                                staffServices.filter(
+                                  (subcategory) =>
+                                    subcategory.categories_id !=
+                                    service.categories.id
+                                )
+                              );
+                            }
+                          }}
+                        />
+                        <label
+                          htmlFor={service.categories.title}
+                          class="w-full ms-2 text-base font-semibold"
+                        >
+                          {service.categories.title}
+                        </label>
+                      </div>
+                    </li>
+                    <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                      {service.group_service_list.map((subcategory, index) => (
+                        <li key={v4()} class="w-full list-none">
+                          <div class="flex items-center">
+                            <input
+                              id={subcategory?.sub_categories?.title}
+                              type="checkbox"
+                              checked={
+                                (staffServices.find(
+                                  (serviceCats) =>
+                                    serviceCats.sub_categories_id ==
+                                    subcategory?.id
+                                ) &&
+                                  true) ||
+                                false
+                              }
+                              onChange={(e) => {
+                                if (e.target.checked) {
+                                  const exists = staffServices.find(
+                                    (serviceCats) =>
+                                      serviceCats.sub_categories_id ==
+                                      subcategory?.id
+                                  );
+                                  if (!exists) {
+                                    setStaffServices([
+                                      ...staffServices,
+                                      {
+                                        categories_id:
+                                          subcategory?.categories_id,
+                                        sub_categories_id: subcategory?.id,
+                                        staffs_id: staff.id || null,
+                                      },
+                                    ]);
+                                  }
+                                } else {
+                                  setStaffServices(
+                                    staffServices.filter(
+                                      (serviceCats) =>
+                                        serviceCats?.sub_categories_id !=
+                                        subcategory.id
+                                    )
+                                  );
+                                }
+                              }}
+                            />
+                            <label
+                              htmlFor={subcategory?.sub_categories?.title}
+                              class="w-full ms-2 text-sm font-normal"
+                            >
+                              {subcategory?.sub_categories?.title}
+                            </label>
+                          </div>
+                        </li>
+                      ))}
                     </div>
-                  </li>
-                ))}
-              </div>
-            </div>
-          ))}
-          <div className="flex items-center gap-3">
-            {Object.keys(staff).length > 0 && <input type="hidden" name="staffs id" value={staff.id} />}
-            <Button variant="disable" disabled={loading} onClick={e => {
-              setEditStaff('');
-              setAddTeam(false);
-            }}>Cancel</Button>
-            <Button variant="primary" type="submit">Save</Button>
-            <Button variant="danger" onClick={e => deleteStaff()} disabled={loading}>Delete</Button>
+                  </div>
+                )
+            )}
+          <div className="flex items-center justify-center gap-3">
+            {Object.keys(staff).length > 0 && (
+              <input type="hidden" name="staffs id" value={staff.id} />
+            )}
+            <Button
+              variant="disable"
+              disabled={loading}
+              onClick={(e) => {
+                setEditStaff("");
+                setAddTeam(false);
+              }}
+            >
+              Cancel
+            </Button>
+            <Button variant="primary" type="submit">
+              Save
+            </Button>
+            <Button
+              variant="danger"
+              onClick={(e) => deleteStaff()}
+              disabled={loading}
+            >
+              Delete
+            </Button>
           </div>
         </form>
       )}
-      {currentTab == 'publicProfile' && (
+      {currentTab == "publicProfile" && (
         <>
-          <form className="space-y-4" onSubmit={e => updateStaff({ e, step: '' })} noValidate>
+          <form
+            className="space-y-4"
+            onSubmit={(e) => updateStaff({ e, step: "" })}
+            noValidate
+          >
             <div className="w-full space-y-1 text-left">
               <Label htmlFor="job_title" text="Job Title" />
               <input
@@ -316,7 +446,7 @@ const AddTeam = ({ setAddTeam, editStaff, staffsList, setStaffsList, setEditStaf
                 className="input_field"
                 placeholder="Enter your Job Title"
                 pattern="[A-Za-z0-9]{3,20}"
-                defaultValue={staff && staff.job_title || ''}
+                defaultValue={(staff && staff.job_title) || ""}
                 required
               />
               <p className="error">Min 3 Character Required</p>
@@ -329,24 +459,33 @@ const AddTeam = ({ setAddTeam, editStaff, staffsList, setStaffsList, setEditStaf
                 id="job_bio"
                 className="input_field"
                 placeholder="Enter your Job Bio"
-                defaultValue={staff && staff.job_bio || ''}
+                defaultValue={(staff && staff.job_bio) || ""}
               />
             </div>
-            <div className="flex items-center gap-3">
-              {Object.keys(staff).length > 0 && <input type="hidden" name="staffs id" value={staff.id} />}
-              <Button variant="disable" disabled={loading} onClick={e => {
-                setEditStaff('');
-                setAddTeam(false);
-              }}>Cancel</Button>
-              <Button variant="primary" type="submit" disabled={loading}>
-                <Spinner
-                  show={loading}
-                  width="25"
-                  height="25"
-                  text="Save"
-                />
+            <div className="flex items-center justify-center gap-3">
+              {Object.keys(staff).length > 0 && (
+                <input type="hidden" name="staffs id" value={staff.id} />
+              )}
+              <Button
+                variant="disable"
+                disabled={loading}
+                onClick={(e) => {
+                  setEditStaff("");
+                  setAddTeam(false);
+                }}
+              >
+                Cancel
               </Button>
-              <Button variant="danger" onClick={e => deleteStaff()} disabled={loading}>Delete</Button>
+              <Button variant="primary" type="submit" disabled={loading}>
+                <Spinner show={loading} width="25" height="25" text="Save" />
+              </Button>
+              <Button
+                variant="danger"
+                onClick={(e) => deleteStaff()}
+                disabled={loading}
+              >
+                Delete
+              </Button>
             </div>
             {error && <Error error={error} />}
           </form>
