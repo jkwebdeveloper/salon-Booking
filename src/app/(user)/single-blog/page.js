@@ -18,6 +18,7 @@ const Singleblog = () => {
             height={50}
             alt=""
             loading="lazy"
+            className=""
           />
           <div>
             <p className="font-bold">Admin</p>
@@ -32,7 +33,7 @@ const Singleblog = () => {
               height={400}
               alt="blog"
               loading="lazy"
-              className="object-cover object-center"
+              className="object-cover object-center w-full"
             />
             <div className="space-y-3">
               <p className="text-xl font-bold">Nail Extension - What is it?</p>
@@ -132,7 +133,7 @@ const Singleblog = () => {
             </form>
           </div>
         </div>
-        <Single_blog_slider/>
+        <Single_blog_slider />
       </div>
     </div>
   );
