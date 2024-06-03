@@ -46,31 +46,6 @@ const ChangePass = () => {
         <div className="w-full space-y-1 text-left md:w-1/2">
           <Label htmlFor="password" text="Password" required={true} />
           <input
-<<<<<<< Updated upstream
-            type={showPassword ? "text" : "password"}
-            name="password"
-            id="password"
-            className="input_field"
-            placeholder="Password"
-            pattern="[A-Za-z0-9]{3,20}"
-            required
-          />
-          <p className="error">Password should be min 3 Char</p>
-          <button
-            type="button"
-            className="absolute"
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            {(showPassword && (
-              <BsEyeFill size={24} className="text-gray-400 cursor-pointer" />
-            )) || (
-              <BsEyeSlashFill
-                size={24}
-                className="text-gray-400 cursor-pointer"
-              />
-            )}
-          </button>
-=======
             type="password"
             name="old_password"
             id="old_password"
@@ -95,7 +70,6 @@ const ChangePass = () => {
             required
           />
           <p className="error">{Validation?.password?.msg}</p>
->>>>>>> Stashed changes
         </div>
         <div className="w-full space-y-1 text-left md:w-1/2">
           <Label htmlFor="cpassword" text="Confirm password" required={true} />
@@ -106,50 +80,7 @@ const ChangePass = () => {
             placeholder="Confirm Password"
             required={true}
           />
-<<<<<<< Updated upstream
-          <p className="error">Password not matched</p>
-          <button
-            type="button"
-            className="absolute"
-            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-          >
-            {(showConfirmPassword && (
-              <BsEyeFill size={24} className="text-[#000D23] cursor-pointer" />
-            )) || (
-              <BsEyeSlashFill
-                size={24}
-                className="text-[#000D23] cursor-pointer"
-              />
-            )}
-          </button>
-        </div>
-        <div className="w-full space-y-1 text-left md:w-1/2">
-          <Label htmlFor="cpassword" text="Confirm password" required={true} />
-          <input
-            type={showConfirmPassword ? "text" : "password"}
-            id="cpassword"
-            className="input_field"
-            placeholder="Confirm Password"
-            required={true}
-          />
-          <p className="error">Password not matched</p>
-          <button
-            type="button"
-            className="absolute"
-            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-          >
-            {(showConfirmPassword && (
-              <BsEyeFill size={24} className="text-gray-400 cursor-pointer" />
-            )) || (
-              <BsEyeSlashFill
-                size={24}
-                className="text-gray-400 cursor-pointer"
-              />
-            )}
-          </button>
-=======
           <p className="error">{Validation?.confirmPassword?.msg}</p>
->>>>>>> Stashed changes
         </div>
         <Button type="submit" variant="primary" disabled={loading}>
           <Spinner show={loading} width="35" height="35" text="Change" />
