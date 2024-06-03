@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { v4 } from "uuid";
 import { POST } from "@/app/api/post";
 import { Spinner, Success } from "@/components";
+import Validation from "@/const/validation";
 
 const SalonDetails = () => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);
@@ -128,10 +129,11 @@ const SalonDetails = () => {
             id="fname"
             className="input_field"
             placeholder="Enter your Name"
-            pattern="^[a-zA-Z0-9\s]{1,}$"
+            pattern={Validation?.title?.pattern}
             defaultValue={salonDetails.salon_name}
             required
           />
+          <p className="error">Salon name Required</p>
         </div>
         <div className="flex flex-col w-full gap-3 lg:flex-row">
           <div className="w-full space-y-1 text-left lg:w-1/2">
@@ -144,11 +146,12 @@ const SalonDetails = () => {
               id="email"
               className="input_field"
               placeholder="Enter your Name"
-              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+              pattern={Validation?.email?.pattern}
               required
               defaultValue={salonDetails.email}
               disabled
             />
+            <p className="error">{Validation?.email?.msg}</p>
           </div>
           <div className="w-full space-y-1 text-left lg:w-1/2">
             <label htmlFor="phone_number" className="label_text">
@@ -160,10 +163,11 @@ const SalonDetails = () => {
               id="phone_number"
               className="input_field"
               placeholder="Enter your name"
-              pattern="[0-9]{10}"
+              pattern={Validation?.phone?.pattern}
               required
               defaultValue={salonDetails.phone_number}
             />
+            <p className="error">{Validation?.phone?.msg}</p>
           </div>
         </div>
         <div className="w-full space-y-1 text-left">

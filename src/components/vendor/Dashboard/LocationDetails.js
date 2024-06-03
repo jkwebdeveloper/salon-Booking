@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { POST } from "@/app/api/post";
 import { Error, Spinner, Success } from "@/components";
 import { login } from "@/redux/features/vendorAuthSlice";
+import Validation from "@/const/validation";
 
 const LocationDetails = () => {
   const dispatch = useDispatch();
@@ -33,11 +34,11 @@ const LocationDetails = () => {
             className="input_field"
             placeholder="Street 420, Addington"
             name="address_line_one"
-            pattern="^[a-zA-Z0-9\s]{0,}$"
+            pattern={Validation.address.pattern}
             defaultValue={vendor?.address_line_one || ""}
             required
           />
-          <p className="error">Address Required</p>
+          <p className="error">{Validation?.address?.msg}</p>
         </div>
         <div className="w-full space-y-1 text-left">
           <label htmlFor="country" className="label_text">
@@ -59,11 +60,11 @@ const LocationDetails = () => {
               name="city"
               className="input_field"
               placeholder="Type here..."
-              pattern="^[a-zA-Z0-9\s]{0,}$"
+              pattern={Validation.city.pattern}
               defaultValue={vendor?.city || ""}
               required
             />
-            <p className="error">City Required</p>
+            <p className="error">{Validation?.city?.msg}</p>
           </div>
           <div className="flex-grow">
             <label htmlFor="postcode" className="label_text">
@@ -73,12 +74,12 @@ const LocationDetails = () => {
               name="postcode"
               className="input_field"
               placeholder="Type here..."
-              pattern="[0-9]{6}"
+              pattern={Validation.postcode.pattern}
               maxlength="6"
               required
               defaultValue={vendor?.postcode || ""}
             />
-            <p className="error">Enter valid postcode</p>
+            <p className="error">{Validation?.postcode?.msg}</p>
           </div>
           <div className="flex-grow">
             <label htmlFor="country" className="label_text">
@@ -88,10 +89,11 @@ const LocationDetails = () => {
               name="country"
               className="input_field"
               placeholder="Type here..."
-              pattern="[A-Za-z]{2,20}"
+              pattern={Validation.country.pattern}
               defaultValue={vendor?.country || "UK"}
               required
             />
+            <p className="error">{Validation?.country?.msg}</p>
           </div>
         </div>
         <Button type="submit" variant="primary" disabled={formState?.loading}>

@@ -10,6 +10,7 @@ import Label from "@/components/ui/form/label";
 import { POST } from "@/app/api/post";
 import Spinner from "@/components/ui/spinner";
 import { logout } from "@/redux/features/userAuthSlice";
+import Validation from "@/const/validation";
 
 const ProfileModal = ({ setEditProfile }) => {
   const dispatch = useDispatch();
@@ -52,9 +53,9 @@ const ProfileModal = ({ setEditProfile }) => {
             className="input_field"
             placeholder="Enter First Name"
             defaultValue={user.first_name}
-            pattern="[A-Za-z]{4,20}"
+            pattern={Validation?.firstname?.pattern}
           />
-          <p className="error">Min 4 Character Required</p>
+          <p className="error">{Validation?.firstname?.msg}</p>
         </div>
         <div className="w-full space-y-1 text-left lg:w-1/2">
           <Label htmlFor="last_name" text="Last Name" />
@@ -64,9 +65,9 @@ const ProfileModal = ({ setEditProfile }) => {
             className="input_field"
             placeholder="Enter Last Name"
             defaultValue={user.last_name}
-            pattern="[A-Za-z]{4,20}"
+            pattern={Validation?.lastname?.pattern}
           />
-          <p className="error">Min 4 Character Required</p>
+          <p className="error">{Validation?.lastname?.msg}</p>
         </div>
       </div>
       <div className="w-full space-y-1 text-left">
@@ -77,9 +78,10 @@ const ProfileModal = ({ setEditProfile }) => {
           className="input_field"
           placeholder="Enter your email"
           defaultValue={user.email}
-          pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
+          pattern={Validation?.email?.pattern}
+          disabled
         />
-        <p className="error">Enter Valid Email id</p>
+        <p className="error">{Validation?.email?.msg}</p>
       </div>
       <div className="w-full space-y-1 text-left">
         <Label htmlFor="phone_number" text="Phone Number" />
@@ -89,9 +91,10 @@ const ProfileModal = ({ setEditProfile }) => {
           className="input_field"
           placeholder="Enter your Phone Number"
           defaultValue={user.phone_number}
-          pattern="[0-9]{10}"
+          pattern={Validation?.phone?.pattern}
+          disabled
         />
-        <p className="error">Enter Valid Phone number</p>
+        <p className="error">{Validation?.phone?.msg}</p>
       </div>
       <div className="w-full space-y-1 text-left">
         <Label htmlFor="address_line_one" text="Address line 1" />
@@ -101,9 +104,9 @@ const ProfileModal = ({ setEditProfile }) => {
           className="input_field"
           placeholder="Enter your Address"
           defaultValue={user.address_line_one}
-          pattern="^[a-zA-Z0-9\s]{5,}$"
+          pattern={Validation?.address?.pattern}
         />
-        <p className="error">Min 5 Character Required</p>
+        <p className="error">{Validation?.address?.msg}</p>
       </div>
       <div className="w-full space-y-1 text-left">
         <Label htmlFor="address_line_two" text="Address line 2" />
@@ -124,9 +127,9 @@ const ProfileModal = ({ setEditProfile }) => {
             className="input_field"
             placeholder="Enter your city"
             defaultValue={user.city}
-            pattern="[A-Za-z]{3,20}"
+            pattern={Validation?.city?.pattern}
           />
-          <p className="error">Min 3 Character Required</p>
+          <p className="error">{Validation?.city?.msg}</p>
         </div>
         <div className="w-full space-y-1 text-left lg:w-1/2">
           <Label htmlFor="postcode" text="Postcode" />
@@ -136,10 +139,10 @@ const ProfileModal = ({ setEditProfile }) => {
             className="input_field"
             placeholder="Postcode"
             defaultValue={user.postcode}
-            pattern=".{5,6}[0-9]"
+            pattern={Validation?.postcode?.pattern}
             maxlength="6"
           />
-          <p className="error">Postcode should be 6 digit</p>
+          <p className="error">{Validation?.postcode?.msg}</p>
         </div>
       </div>
       <div className="w-full mt-4">

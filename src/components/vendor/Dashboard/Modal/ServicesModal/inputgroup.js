@@ -7,6 +7,7 @@ import {
     SelectTrigger,
 } from "@/components/ui/select";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import Validation from '@/const/validation';
 
 function InputGroup({ defaultValue, categories_id, service_group_id, sub_categories_id, deleteService = false, index }) {
     const [inputValue, setInputValue] = useState({
@@ -25,12 +26,12 @@ function InputGroup({ defaultValue, categories_id, service_group_id, sub_categor
                 <input type="text"
                     className="input_field"
                     placeholder="Enter your Name"
-                    pattern="^[a-zA-Z0-9\s]{1,}$"
+                    pattern={Validation.title.pattern}
                     defaultValue={defaultValue.service_title}
                     onChange={(e) => setInputValue({ ...inputValue, service_title: e.target.value })}
                     required
                 />
-                <p className="error">Name Required.</p>
+                <p className="error">{Validation?.title?.msg}</p>
             </div>
             <Select
                 value={+inputValue.duration}
@@ -54,26 +55,26 @@ function InputGroup({ defaultValue, categories_id, service_group_id, sub_categor
                     type="number"
                     className="input_field"
                     placeholder="Enter your name"
-                    pattern="[0-9]+([\.,][0-9]+)?"
+                    pattern={Validation.price.pattern}
                     step={0.5}
                     required
                     defaultValue={defaultValue.price || ''}
                     onChange={(e) => setInputValue({ ...inputValue, price: e.target.value })}
                 />
-                <p className="error">Enter Valid Price</p>
+                <p className="error">{Validation?.price?.msg}</p>
             </div>
             <div className="w-full space-y-1 text-left lg:w-1/2">
                 <input
                     type="number"
                     className="input_field"
                     placeholder="Enter your name"
-                    pattern="[0-9]+([\.,][0-9]+)?"
+                    pattern={Validation.saleprice.pattern}
                     step={0.5}
                     required
                     defaultValue={defaultValue.sale_price || ''}
                     onChange={(e) => setInputValue({ ...inputValue, sale_price: e.target.value })}
                 />
-                <p className="error">Enter Valid Sales Price</p>
+                <p className="error">{Validation?.saleprice?.msg}</p>
             </div>
             {deleteService && <RiDeleteBin5Line className="text-[#FF0000] w-8 h-8 cursor-pointer" onClick={e => deleteService({ id: inputValue.id, index })} />}
             <input type="hidden" name="service_group[]" value={JSON.stringify(inputValue)} />

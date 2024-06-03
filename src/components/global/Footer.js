@@ -12,6 +12,7 @@ import Link from "next/link";
 import { Button, Error, Spinner } from "@/components";
 import { POST } from "@/app/api/post";
 import { useRouter } from "next/navigation";
+import Validation from "@/const/validation";
 
 const FooterData = [
   {
@@ -307,9 +308,10 @@ const Footer = () => {
               name="email"
               placeholder="Enter Your Email"
               className="p-2 bg-white rounded-md outline-none md:w-4/5 text-md input_field"
-              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+              pattern={Validation?.email?.pattern}
               required
             />
+            <p className="error">{Validation?.email?.msg}</p>
           </div>
           <Button
             variant="primary"

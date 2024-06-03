@@ -10,6 +10,7 @@ import {
   Dialog,
   DialogContent
 } from "@/components/ui/dialog";
+import Validation from "@/const/validation";
 
 const ForgotPassword = () => {
   const [error, setError] = React.useState("");
@@ -55,9 +56,10 @@ const ForgotPassword = () => {
                   name="email"
                   className="w-full p-2 bg-white border rounded-md input_field"
                   placeholder="Enter your Email"
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                  pattern={Validation?.email?.pattern}
                   required
                 />
+                <p className="error">{Validation?.email?.msg}</p>
                 <div className="w-full space-y-3">
                   <Button variant="primary" className="w-full" type="submit" disabled={loading}>
                     <Spinner

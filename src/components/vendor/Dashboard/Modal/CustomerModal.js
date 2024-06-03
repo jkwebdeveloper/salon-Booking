@@ -5,6 +5,7 @@ import { POST } from "@/app/api/post";
 import { useSelector } from "react-redux";
 import { Error, Spinner } from "@/components";
 import { set } from "date-fns";
+import Validation from "@/const/validation";
 
 const CustomerModal = ({ setAddCustomer, setCustomers, customers }) => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);
@@ -38,10 +39,10 @@ const CustomerModal = ({ setAddCustomer, setCustomers, customers }) => {
             name="first_name"
             className="input_field"
             placeholder="Enter First Name"
-            pattern="[A-Za-z]{4,20}"
+            pattern={Validation.firstname.pattern}
             required
           />
-          <p className="error">Min 4 Character Required</p>
+          <p className="error">{Validation?.firstname?.msg}</p>
         </div>
         <div className="w-full space-y-1 text-left lg:w-1/2">
           <Label htmlFor="last_name" text="Last Name" />
@@ -50,10 +51,10 @@ const CustomerModal = ({ setAddCustomer, setCustomers, customers }) => {
             name="last_name"
             className="input_field"
             placeholder="Enter Last Name"
-            pattern="[A-Za-z]{4,20}"
+            pattern={Validation.lastname.pattern}
             required
           />
-          <p className="error">Min 4 Character Required</p>
+          <p className="error">{Validation?.lastname?.msg}</p>
         </div>
       </div>
       <div className="flex flex-col w-full gap-3 lg:flex-row">
@@ -64,11 +65,11 @@ const CustomerModal = ({ setAddCustomer, setCustomers, customers }) => {
             name="phone_number"
             className="input_field"
             placeholder="Enter Mobile Number"
-            pattern="[0-9]{10}"
+            pattern={Validation.phone.pattern}
             maxLength={10}
             required
           />
-          <p className="error">Enter Valid Phone number</p>
+          <p className="error">{Validation?.phone?.msg}</p>
         </div>
         <div className="w-full space-y-1 text-left lg:w-1/2">
           <Label htmlFor="email" text="E-mail" />
@@ -77,10 +78,10 @@ const CustomerModal = ({ setAddCustomer, setCustomers, customers }) => {
             name="email"
             className="input_field"
             placeholder="Enter E-mail"
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            pattern={Validation.email.pattern}
             required
           />
-          <p className="error">Enter Valid Email id</p>
+          <p className="error">{Validation?.email?.msg}</p>
         </div>
       </div>
       <div className="flex flex-col w-full gap-3 lg:flex-row">

@@ -20,6 +20,7 @@ import { useVendorServices, useCategory } from "@/hooks";
 import { POST } from "@/app/api/post";
 import { GET } from "@/app/api/get";
 import { v4 } from "uuid";
+import Validation from "@/const/validation";
 
 const Services = () => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);
@@ -223,8 +224,9 @@ const Services = () => {
                       name="first_name"
                       className="input_field"
                       placeholder="Enter Title"
-                      pattern="[A-Za-z]{4,20}"
+                      pattern={Validation.firstname.pattern}
                     />
+                    <p className="error">{Validation?.firstname?.msg}</p>
                   </div>
                   <div className="flex flex-col w-full gap-3 lg:flex-row">
                     <div className="w-full space-y-1 text-left lg:w-1/2">
@@ -234,11 +236,11 @@ const Services = () => {
                         name="title"
                         className="input_field"
                         placeholder="Enter Title"
-                        pattern="^[a-zA-Z0-9\s]{1,}$"
+                        pattern={Validation.title.pattern}
                         defaultValue={voucherData?.title}
                         required
                       />
-                      <p className="error">Min 4 Character Required</p>
+                      <p className="error">{Validation?.title?.msg}</p>
                     </div>
                     <div className="flex flex-col w-full gap-3 lg:flex-row">
                       <div className="w-full space-y-1 text-left lg:w-1/2">
@@ -275,7 +277,9 @@ const Services = () => {
                           defaultValue={voucherData?.amount}
                           required
                         />
-                        <p className="error">Enter Valid Amount </p>
+                        <p className="error">
+                          {discountType == "percentage" && "Enter Valid Percentage" || "Enter Valid Amount"}
+                        </p>
                       </div>
                       <div className="w-full space-y-1 text-left lg:w-1/2">
                         <Label
@@ -288,7 +292,7 @@ const Services = () => {
                           name="expried_at"
                           className="input_field"
                           placeholder="Enter Expires at"
-                          pattern="\d{4}-\d{1,2}-\d{1,2}"
+                          pattern={Validation.expirydate.pattern}
                           min={new Date().toISOString().split("T")[0]}
                           defaultValue={
                             voucherData?.expried_at &&
@@ -296,7 +300,7 @@ const Services = () => {
                           }
                           required
                         />
-                        <p className="error">Enter Valid Expiry Date</p>
+                        <p className="error">{Validation?.expirydate?.msg}</p>
                       </div>
                     </div>
                     <Label htmlFor="message" text="Description" />
@@ -408,10 +412,10 @@ const Services = () => {
                       name="title"
                       className="input_field"
                       placeholder="Enter Title"
-                      pattern="^[a-zA-Z0-9\s]{1,}$"
+                      pattern={Validation.title.pattern}
                       required
                     />
-                    <p className="error">Min 4 Character Required</p>
+                    <p className="error">{Validation?.title?.msg}</p>
                   </div>
                   <div className="flex flex-col w-full gap-3 lg:flex-row">
                     <div className="w-full space-y-1 text-left lg:w-1/2">
@@ -446,7 +450,7 @@ const Services = () => {
                         step="0.1"
                         required
                       />
-                      <p className="error">Enter Valid Amount </p>
+                      {discountType == "percentage" && "Enter Valid Percentage" || "Enter Valid Amount"}
                     </div>
                     <div className="w-full space-y-1 text-left lg:w-1/2">
                       <Label
@@ -459,11 +463,11 @@ const Services = () => {
                         name="expried_at"
                         className="input_field"
                         placeholder="Enter Expires at"
-                        pattern="\d{4}-\d{1,2}-\d{1,2}"
+                        pattern={Validation.expirydate.pattern}
                         required
                         min={new Date().toISOString().split("T")[0]}
                       />
-                      <p className="error">Enter Valid Expiry Date</p>
+                      <p className="error">{Validation?.expirydate?.msg}</p>
                     </div>
                   </div>
                   <Label htmlFor="message" text="Description" />
@@ -597,12 +601,12 @@ const Services = () => {
                                             {service_group?.duration == 0.5
                                               ? "30 Min"
                                               : service_group?.duration == 1
-                                              ? "1 Hour"
-                                              : service_group?.duration == 1.5
-                                              ? "1 Hour 30 Min"
-                                              : service_group?.duration == 2
-                                              ? "2 Hour"
-                                              : "2 Hour 30 Min"}
+                                                ? "1 Hour"
+                                                : service_group?.duration == 1.5
+                                                  ? "1 Hour 30 Min"
+                                                  : service_group?.duration == 2
+                                                    ? "2 Hour"
+                                                    : "2 Hour 30 Min"}
                                           </p>
                                           <p className="text-sm font-bold">
                                             {service_group?.price &&
@@ -633,14 +637,14 @@ const Services = () => {
                       </div>
                     );
                   })) || (
-                  <div className="center min-h-[300px] w-full">
-                    <Spinner
-                      show={vendorServices?.loading}
-                      width={50}
-                      height={50}
-                    />
-                  </div>
-                )}
+                    <div className="center min-h-[300px] w-full">
+                      <Spinner
+                        show={vendorServices?.loading}
+                        width={50}
+                        height={50}
+                      />
+                    </div>
+                  )}
                 <Dialog
                   className="w-11/12"
                   open={addService}
@@ -724,11 +728,10 @@ const Services = () => {
                               </td>
                               <td className="px-4 py-4 text-sm ">
                                 <p
-                                  className={`${
-                                    (voucher.status == 0 && "bg-yellow-500") ||
+                                  className={`${(voucher.status == 0 && "bg-yellow-500") ||
                                     (vendor.status == 1 && "bg-green-700") ||
                                     "bg-red-700"
-                                  } p-2 rounded-full text-center`}
+                                    } p-2 rounded-full text-center`}
                                 >
                                   {(voucher.status == 0 && "Pending") ||
                                     (voucher.status == 1 && "Active") ||

@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select"
 import { v4 } from "uuid";
 import { useSelector } from "react-redux";
+import Validation from "@/const/validation";
 
 const EditCardModal = ({ setAddCard, setCards, editCard, cards }) => {
   const user = useSelector(state => state.userAuth.user);
@@ -66,10 +67,10 @@ const EditCardModal = ({ setAddCard, setCards, editCard, cards }) => {
               name="card_holder_name"
               className="input_field"
               placeholder="Your name"
-              pattern="[A-Za-z]{4,20}"
+              pattern={Validation?.cardholder?.pattern}
               defaultValue={editCard?.card_holder_name || ''}
             />
-            <p className="error">Min 4 Character Required</p>
+            <p className="error">{Validation?.cardholder?.msg}</p>
           </div>
           <div className="w-full space-y-1 text-left">
             <label htmlFor="state" className="label_text text-[#000D23] text-sm">
@@ -80,11 +81,11 @@ const EditCardModal = ({ setAddCard, setCards, editCard, cards }) => {
               name="card_number"
               className="input_field"
               placeholder="Card number"
-              pattern="[0-9]{16}"
+              pattern={Validation?.cardnumber?.pattern}
               required
               defaultValue={editCard?.card_number || ''}
             />
-            <p className="error">Enter 16 Digit Card Number</p>
+            <p className="error">{Validation?.cardnumber?.msg}</p>
           </div>
           <div className="flex flex-col w-full gap-3 lg:flex-row">
             <div className="flex-1 w-full space-y-1 text-left">
@@ -140,10 +141,10 @@ const EditCardModal = ({ setAddCard, setCards, editCard, cards }) => {
                 className="input_field"
                 placeholder="MM/YYYY"
                 defaultValue={`${month.value || editCard.expried_on && editCard.expried_on.split('/')[0] || ''}/${year.value || editCard.expried_on && editCard.expried_on.split('/')[1] || ''}`}
-                pattern="\d{1,2}\/\d{2,4}"
+                pattern={Validation?.cardexpiry?.pattern}
                 required
               />
-              <p className="error">Enter Valid Expiry Date</p>
+              <p className="error">{Validation?.cardexpiry?.msg}</p>
             </div>
             <div className="w-full space-y-1 text-left">
               <label htmlFor="state" className="label_text text-[#000D23] text-sm"> CVV </label>
@@ -152,11 +153,11 @@ const EditCardModal = ({ setAddCard, setCards, editCard, cards }) => {
                 name="cvv"
                 className="input_field"
                 placeholder="CVV"
-                pattern="[0-9]{3,}"
+                pattern={Validation?.cvv?.pattern}
                 required
                 defaultValue={editCard?.cvv || ''}
               />
-              <p className="error">Enter Valid CVV</p>
+              <p className="error">{Validation?.cvv?.msg}</p>
             </div>
           </div>
         </div>
@@ -172,11 +173,11 @@ const EditCardModal = ({ setAddCard, setCards, editCard, cards }) => {
                 name="first_name"
                 className="input_field"
                 placeholder="First Name"
-                pattern="[A-Za-z]{4,20}"
+                pattern={Validation?.firstname?.pattern}
                 required
                 defaultValue={editCard?.first_name || ''}
               />
-              <p className="error">Min 4 Character Required</p>
+              <p className="error">{Validation?.firstname?.msg}</p>
             </div>
             <div className="w-full space-y-1 text-left lg:w-1/2">
               <label
@@ -190,11 +191,11 @@ const EditCardModal = ({ setAddCard, setCards, editCard, cards }) => {
                 name="last_name"
                 className="input_field"
                 placeholder="Last Name"
-                pattern="[A-Za-z]{4,20}"
+                pattern={Validation?.lastname?.pattern}
                 required
                 defaultValue={editCard?.last_name || ''}
               />
-              <p className="error">Min 4 Character Required</p>
+              <p className="error">{Validation?.lastname?.msg}</p>
             </div>
           </div>
           <div className="flex flex-col w-full gap-3 lg:flex-row">
@@ -207,11 +208,11 @@ const EditCardModal = ({ setAddCard, setCards, editCard, cards }) => {
                 name="email"
                 className="input_field"
                 placeholder="Email"
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                pattern={Validation?.email?.pattern}
                 required
                 defaultValue={editCard?.email || ''}
               />
-              <p className="error">Enter Valid Email id</p>
+              <p className="error">{Validation?.email?.msg}</p>
             </div>
             <div className="w-full space-y-1 text-left lg:w-1/2">
               <label
@@ -225,12 +226,12 @@ const EditCardModal = ({ setAddCard, setCards, editCard, cards }) => {
                 name="phone"
                 className="input_field"
                 placeholder="Phone"
-                pattern="[0-9]{10}"
+                pattern={Validation?.phone?.pattern}
                 maxLength={10}
                 required
                 defaultValue={editCard?.phone || ''}
               />
-              <p className="error">Enter Valid Phone number</p>
+              <p className="error">{Validation?.phone?.msg}</p>
             </div>
           </div>
           <div className="w-full space-y-1 text-left">
@@ -242,11 +243,11 @@ const EditCardModal = ({ setAddCard, setCards, editCard, cards }) => {
               name="address_line_one"
               className="input_field"
               placeholder="Enter your Address"
-              pattern="^[a-zA-Z0-9\s]{5,}$"
+              pattern={Validation?.address?.pattern}
               required
               defaultValue={editCard?.address_line_one || ''}
             />
-            <p className="error">Min 5 Character Required</p>
+            <p className="error">{Validation?.address?.msg}</p>
           </div>
           <div className="w-full space-y-1 text-left">
             <label htmlFor="country" className="label_text">
@@ -270,11 +271,11 @@ const EditCardModal = ({ setAddCard, setCards, editCard, cards }) => {
                 name="city"
                 className="input_field"
                 placeholder="Enter your city"
-                pattern="[A-Za-z]{3,20}"
+                pattern={Validation?.city?.pattern}
                 required
                 defaultValue={editCard?.city || ''}
               />
-              <p className="error">Min 3 Character Required</p>
+              <p className="error">{Validation?.city?.msg}</p>
             </div>
             <div className="w-full space-y-1 text-left lg:w-1/2">
               <label htmlFor="state" className="label_text">
@@ -285,12 +286,12 @@ const EditCardModal = ({ setAddCard, setCards, editCard, cards }) => {
                 name="postcode"
                 className="input_field"
                 placeholder="Postcode"
-                pattern="[0-9]{6}"
+                pattern={Validation?.postcode?.pattern}
                 maxlength="6"
                 required
                 defaultValue={editCard?.postcode || ''}
               />
-              <p className="error">Postcode should be 6 digit</p>
+              <p className="error">{Validation?.postcode?.msg}</p>
             </div>
           </div>
           <div className="flex flex-col items-stretch justify-start gap-2 pt-3 mx-auto">

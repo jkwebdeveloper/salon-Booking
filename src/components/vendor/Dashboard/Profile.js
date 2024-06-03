@@ -1,6 +1,7 @@
 import { POST } from "@/app/api/post";
 import { Spinner } from "@/components";
 import Button from "@/components/ui/button";
+import Validation from "@/const/validation";
 import { login } from "@/redux/features/vendorAuthSlice";
 import React from "react";
 import { MdModeEditOutline } from "react-icons/md";
@@ -63,11 +64,11 @@ const Profile = () => {
               id="first_name"
               className="input_field"
               placeholder="Enter your Name"
-              pattern="[A-Za-z]{4,20}"
+              pattern={Validation.firstname.pattern}
               defaultValue={vendor?.first_name}
               required
             />
-            <p className="error">Min 4 Character Required</p>
+            <p className="error">{Validation?.firstname?.msg}</p>
           </div>
           <div className="w-full space-y-1 text-left lg:w-1/2">
             <label htmlFor="last_name" className="label_text">
@@ -80,11 +81,11 @@ const Profile = () => {
               id="last_name"
               className="input_field"
               placeholder="Enter your name"
-              pattern="[A-Za-z]{4,20}"
+              pattern={Validation.lastname.pattern}
               defaultValue={vendor?.last_name}
               required
             />
-            <p className="error">Min 4 Character Required</p>
+            <p className="error">{Validation?.lastname?.msg}</p>
           </div>
         </div>
         <div className="flex flex-col w-full gap-3 lg:flex-row">
@@ -111,12 +112,12 @@ const Profile = () => {
               id="phone_number"
               className="input_field"
               placeholder="Enter your name"
-              pattern="[0-9]{10}"
+              pattern={Validation.phone.pattern}
               maxLength={10}
               required
               defaultValue={vendor?.phone_number}
             />
-            <p className="error">Enter Valid Phone number</p>
+            <p className="error">{Validation?.phone?.msg}</p>
           </div>
         </div>
         <Button variant="primary" type="submit" disabled={loading}>

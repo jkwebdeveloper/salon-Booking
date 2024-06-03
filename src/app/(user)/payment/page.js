@@ -4,6 +4,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import Label from "@/components/ui/form/label";
 import Button from "@/components/ui/button";
 import { IoIosLock } from "react-icons/io";
+import Validation from "@/const/validation";
 
 const PaymentMethod = () => {
   return (
@@ -82,8 +83,9 @@ const PaymentMethod = () => {
                     name="last_name"
                     className="input_field"
                     placeholder="Type here..."
-                    pattern="[A-Za-z]{4,20}"
+                    pattern={Validation?.lastname?.pattern}
                   />
+                  <p className="error">{Validation?.lastname?.msg}</p>
                   <Button variant="outline">Apply</Button>
                 </div>
               </div>
@@ -113,9 +115,9 @@ const PaymentMethod = () => {
                   id="fname"
                   className="input_field"
                   placeholder="First Name"
-                  pattern="[A-Za-z]{4,20}"
+                  pattern={Validation?.firstname?.pattern}
                 />
-                <p className="error">Min 4 Character Required</p>
+                <p className="error">{Validation?.firstname?.msg}</p>
               </div>
               <div className="w-full space-y-1 text-left lg:w-1/2">
                 <label htmlFor="lname" className="label_text">
@@ -127,9 +129,9 @@ const PaymentMethod = () => {
                   id="lname"
                   className="input_field"
                   placeholder="Last name"
-                  pattern="[A-Za-z]{4,20}"
+                  pattern={Validation?.lastname?.pattern}
                 />
-                <p className="error">Min 4 Character Required</p>
+                <p className="error">{Validation?.lastname?.msg}</p>
               </div>
             </div>
             <div className="flex flex-col w-full gap-3 lg:flex-row">
@@ -143,9 +145,9 @@ const PaymentMethod = () => {
                   id="email"
                   className="input_field"
                   placeholder="Enter your email"
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                  pattern={Validation?.email?.pattern}
                 />
-                <p className="error">Enter Valid Email id</p>
+                <p className="error">{Validation?.email?.msg}</p>
               </div>
               <div className="w-full space-y-1 text-left lg:w-1/2">
                 <label htmlFor="phone" className="label_text">
@@ -157,10 +159,10 @@ const PaymentMethod = () => {
                   id="phone"
                   className="input_field"
                   placeholder="Enter Your Phone Number"
-                  pattern="[0-9]{10}"
+                  pattern={Validation?.phone?.pattern}
                   maxLength={10}
                 />
-                <p className="error">Enter Valid Phone number</p>
+                <p className="error">{Validation?.phone?.msg}</p>
               </div>
             </div>
             <label htmlFor="phone" className="label_text">
@@ -292,9 +294,9 @@ const PaymentMethod = () => {
                   id="fname"
                   className="input_field"
                   placeholder="Card Number"
-                  pattern="[A-Za-z]{4,20}"
+                  pattern={Validation?.cardnumber?.pattern}
                 />
-                <p className="error">Min 4 Character Required</p>
+                <p className="error">{Validation?.cardnumber?.msg}</p>
               </div>
               <div className="w-full space-y-1 text-left lg:w-1/2">
                 <label htmlFor="lname" className="label_text">

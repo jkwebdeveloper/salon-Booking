@@ -10,6 +10,7 @@ import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { Spinner, Button, Error } from "@/components";
 import { login } from "@/redux/features/userAuthSlice";
 import { POST } from "@/app/api/post";
+import Validation from "@/const/validation";
 
 const Register = () => {
   const [error, setError] = React.useState("");
@@ -79,10 +80,10 @@ const Register = () => {
                     id="fname"
                     className="input_field"
                     placeholder="First Name"
-                    pattern="[A-Za-z]{4,20}"
+                    pattern={Validation?.firstname?.pattern}
                     required
                   />
-                  <p className="error">Min 4 & No Number and Space</p>
+                  <p className="error">{Validation?.firstname?.msg}</p>
                 </div>
                 <div className="w-full space-y-1 text-left lg:w-1/2">
                   <label htmlFor="lname" className="label_text">
@@ -95,10 +96,10 @@ const Register = () => {
                     id="lname"
                     className="input_field"
                     placeholder="Last name"
-                    pattern="[A-Za-z]{4,20}"
+                    pattern={Validation?.lastname?.pattern}
                     required
                   />
-                  <p className="error">Min 4 & No Number and Space</p>
+                  <p className="error">{Validation?.lastname?.msg}</p>
                 </div>
               </div>
               <div className="flex flex-col w-full gap-3 lg:flex-row">
@@ -112,10 +113,10 @@ const Register = () => {
                     id="email"
                     className="input_field"
                     placeholder="Enter your email"
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                    pattern={Validation?.email?.pattern}
                     required
                   />
-                  <p className="error">Enter Valid Email id</p>
+                  <p className="error">{Validation?.email?.msg}</p>
                 </div>
                 <div className="w-full space-y-1 text-left lg:w-1/2">
                   <label htmlFor="phone" className="label_text">
@@ -128,11 +129,11 @@ const Register = () => {
                     id="phone"
                     className="input_field"
                     placeholder="Enter Your Phone Number"
-                    pattern="[0-9]{10}"
+                    pattern={Validation?.phone?.pattern}
                     maxLength={10}
                     required
                   />
-                  <p className="error">Enter Valid Phone number</p>
+                  <p className="error">{Validation?.phone?.msg}</p>
                 </div>
               </div>
               <div className="flex flex-col w-full gap-3 lg:flex-row">
@@ -147,11 +148,11 @@ const Register = () => {
                     id="password"
                     className="input_field"
                     placeholder="Enter Your Password"
-                    pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+                    pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
                     required
                   />
                   <p className="error max-w-[250px]">
-                    Min 8 characters with a mix of letters, numbers & symbols
+                    {Validation?.password?.msg}
                   </p>
                   <button
                     type="button"
@@ -164,11 +165,11 @@ const Register = () => {
                         className="text-gray-400 cursor-pointer"
                       />
                     )) || (
-                      <BsEyeSlashFill
-                        size={24}
-                        className="text-gray-400 cursor-pointer"
-                      />
-                    )}
+                        <BsEyeSlashFill
+                          size={24}
+                          className="text-gray-400 cursor-pointer"
+                        />
+                      )}
                   </button>
                 </div>
                 <div className="relative w-full space-y-1 text-left lg:w-1/2">
@@ -183,7 +184,7 @@ const Register = () => {
                     placeholder="Confirm Your Password"
                     required
                   />
-                  <p className="error">Password not matched</p>
+                  <p className="error">{Validation?.confirmPassword?.msg}</p>
                   <button
                     type="button"
                     className="absolute top-[1.85em] right-3"
@@ -195,11 +196,11 @@ const Register = () => {
                         className="text-gray-400 cursor-pointer"
                       />
                     )) || (
-                      <BsEyeSlashFill
-                        size={24}
-                        className="text-gray-400 cursor-pointer"
-                      />
-                    )}
+                        <BsEyeSlashFill
+                          size={24}
+                          className="text-gray-400 cursor-pointer"
+                        />
+                      )}
                   </button>
                 </div>
               </div>
@@ -214,10 +215,10 @@ const Register = () => {
                   id="address"
                   className="input_field"
                   placeholder="Enter your Address"
-                  pattern="^[a-zA-Z0-9\s]{1,}$"
+                  pattern={Validation?.address?.pattern}
                   required
                 />
-                <p className="error">Enter Valid Address</p>
+                <p className="error">{Validation?.address?.msg}</p>
               </div>
               <div className="w-full space-y-1 text-left">
                 <label htmlFor="address2" className="label_text">
@@ -244,10 +245,10 @@ const Register = () => {
                     id="city"
                     className="input_field"
                     placeholder="City"
-                    pattern="[A-Za-z]{1,}"
+                    pattern={Validation?.city?.pattern}
                     required
                   />
-                  <p className="error">Enter Valid City</p>
+                  <p className="error">{Validation?.city?.msg}</p>
                 </div>
                 <div className="w-full space-y-1 text-left lg:w-1/2">
                   <label htmlFor="postcode" className="label_text">
@@ -260,11 +261,11 @@ const Register = () => {
                     id="postcode"
                     className="input_field"
                     placeholder="Postcode"
-                    pattern="[0-9]{6}"
+                    pattern={Validation?.postcode?.pattern}
                     maxlength="6"
                     required
                   />
-                  <p className="error">Postcode should be 6 digit</p>
+                  <p className="error">{Validation?.postcode?.msg}</p>
                 </div>
               </div>
               <div>

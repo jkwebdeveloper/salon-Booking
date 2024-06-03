@@ -11,6 +11,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import Button from "@/components/ui/button";
 import Link from "next/link";
 import Customdatepicker from "@/components/user/Home/FindNearByForm/customdatepicker";
+import Validation from "@/const/validation";
 
 const TimeDate = () => {
   return (
@@ -152,9 +153,10 @@ const TimeDate = () => {
                 id="fname"
                 className="input_field"
                 placeholder="Full name"
-                pattern="[A-Za-z]{4,20}"
+                pattern={Validation?.firstname?.pattern}
                 required
               />
+              <p className="error">{Validation?.firstname?.msg}</p>
             </div>
             <div className="w-full space-y-1 text-left lg:w-1/2">
               <input
@@ -163,9 +165,10 @@ const TimeDate = () => {
                 id="lname"
                 className="input_field"
                 placeholder="Email"
-                pattern="[A-Za-z]{4,20}"
+                pattern={Validation?.email?.pattern}
                 required
               />
+              <p className="error">{Validation?.email?.msg}</p>
             </div>
           </div>
           <hr />

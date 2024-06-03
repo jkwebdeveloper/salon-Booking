@@ -4,6 +4,7 @@ import Button from "@/components/ui/button";
 import { POST } from "@/app/api/post";
 import { useSelector } from "react-redux";
 import { Error, Spinner } from "@/components";
+import Validation from "@/const/validation";
 
 const EditCustomerModal = ({
   setEditDialog,
@@ -45,10 +46,10 @@ const EditCustomerModal = ({
             name="first_name"
             className="input_field"
             placeholder="Enter First Name"
-            pattern="[A-Za-z]{4,20}"
+            pattern={Validation.firstname.pattern}
             defaultValue={editCustomer.first_name}
           />
-          <p className="error">Min 4 Character Required</p>
+          <p className="error">{Validation?.firstname?.msg}</p>
         </div>
         <div className="w-full space-y-1 text-left lg:w-1/2">
           <Label htmlFor="last_name" text="Last Name" />
@@ -57,10 +58,10 @@ const EditCustomerModal = ({
             name="last_name"
             className="input_field"
             placeholder="Enter Last Name"
-            pattern="[A-Za-z]{4,20}"
+            pattern={Validation.lastname.pattern}
             defaultValue={editCustomer.last_name}
           />
-          <p className="error">Min 4 Character Required</p>
+          <p className="error">{Validation?.lastname?.msg}</p>
         </div>
       </div>
       <div className="flex flex-col w-full gap-3 lg:flex-row">
@@ -71,11 +72,11 @@ const EditCustomerModal = ({
             name="phone_number"
             className="input_field"
             placeholder="Enter Mobile Number"
-            pattern="[0-9]{10}"
+            pattern={Validation.phone.pattern}
             maxLength={10}
             defaultValue={editCustomer.phone_number}
           />
-          <p className="error">Enter Valid Phone number</p>
+          <p className="error">{Validation?.phone?.msg}</p>
         </div>
         <div className="w-full space-y-1 text-left lg:w-1/2">
           <Label htmlFor="email" text="E-mail" />
@@ -84,10 +85,10 @@ const EditCustomerModal = ({
             name="email"
             className="input_field"
             placeholder="Enter E-mail"
-            // pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            pattern={Validation.email.pattern}
             defaultValue={editCustomer.email}
           />
-          <p className="error">Enter Valid Email id</p>
+          <p className="error">{Validation?.email?.msg}</p>
         </div>
       </div>
       <div className="flex flex-col w-full gap-3 lg:flex-row">

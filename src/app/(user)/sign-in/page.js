@@ -14,6 +14,7 @@ import { MdOutlineErrorOutline } from "react-icons/md";
 import { login } from "@/redux/features/userAuthSlice";
 import { POST } from "@/app/api/post";
 import { Spinner, Button, Error } from '@/components';
+import Validation from "@/const/validation";
 
 const Signin = () => {
   const [showPassword, setShowPassword] = React.useState(false),
@@ -61,23 +62,23 @@ const Signin = () => {
                     name="email"
                     className="w-full p-2 bg-white border rounded-md input_field"
                     placeholder="Enter your Email"
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                    pattern={Validation?.email?.pattern}
                     required
                   />
+                  <p className="error max-w-[250px]">{Validation?.email?.msg}</p>
                 </div>
                 <div className="relative w-full space-y-1 text-left">
-                  <label htmlFor="country" className="label_text">
+                  <label htmlFor="password" className="label_text">
                     Password
                   </label>
                   <input
-                    type={showPassword ? "text" : "password"} name="password"
+                    type={showPassword ? "text" : "password"}
+                    name="password"
                     className="input_field"
                     placeholder="Enter your Password"
-                    // pattern="[a-zA-Z0-9]{3,}"
                     pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
-                    required
                   />
-                  <p className="error max-w-[250px]">Min 8 characters with a mix of letters, numbers & symbols</p>
+                  <p className="error max-w-[250px]">{Validation?.password?.msg}</p>
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
@@ -101,10 +102,6 @@ const Signin = () => {
                     defaultValue={typeof window != 'undefined' && (/Mobi/i.test(window.navigator.userAgent) && 2) || 1}
                   />
                 </div>
-                <p className="mb-3 text-xs text-neutral-400">
-                  {" "}
-                  8 characters with a mix of letters, numbers & symbols{" "}
-                </p>
                 <Button variant="primary" className="md:w-full" type="submit" disabled={loading}>
                   <Spinner show={loading} width='35' height='35' text="Login" />
                 </Button>

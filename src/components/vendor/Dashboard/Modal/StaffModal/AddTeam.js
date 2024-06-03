@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { useVendorServices } from "@/hooks";
 import { set } from "date-fns";
 import { v4 } from "uuid";
+import Validation from "@/const/validation";
 
 const AddTeam = ({
   setAddTeam,
@@ -124,14 +125,14 @@ const AddTeam = ({
         <Button
           variant={currentTab == "services" ? "secondary" : "disable"}
           onClick={(e) => changeTab("services")}
-          // disabled={Object.keys(staff).length == 0}
+        // disabled={Object.keys(staff).length == 0}
         >
           Services
         </Button>
         <Button
           variant={currentTab == "publicProfile" ? "secondary" : "disable"}
           onClick={(e) => changeTab("publicProfile")}
-          // disabled={Object.keys(staff).length == 0}
+        // disabled={Object.keys(staff).length == 0}
         >
           Public Profile
         </Button>
@@ -173,11 +174,11 @@ const AddTeam = ({
                 name="first_name"
                 className="input_field"
                 placeholder="Enter your First name"
-                pattern="[A-Za-z0-9]{3,20}"
+                pattern={Validation?.firstname?.pattern}
                 defaultValue={(staff && staff.first_name) || ""}
                 required
               />
-              <p className="error">Min 3 Character Required</p>
+              <p className="error">{Validation?.firstname?.msg}</p>
             </div>
             <div className="w-full space-y-1 text-left lg:w-1/2">
               <Label htmlFor="last_name" text="Last name" />
@@ -186,11 +187,11 @@ const AddTeam = ({
                 name="last_name"
                 className="input_field"
                 placeholder="Enter your Last name"
-                pattern="[A-Za-z0-9]{3,20}"
+                pattern={Validation?.lastname?.pattern}
                 defaultValue={(staff && staff.last_name) || ""}
                 required
               />
-              <p className="error">Min 3 Character Required</p>
+              <p className="error">{Validation?.lastname?.msg}</p>
             </div>
           </div>
           <div className="flex flex-col w-full gap-3 lg:flex-row">
@@ -201,11 +202,11 @@ const AddTeam = ({
                 name="email"
                 className="input_field"
                 placeholder="Enter your email"
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                pattern={Validation?.email?.pattern}
                 defaultValue={(staff && staff.email) || ""}
                 required
               />
-              <p className="error">Enter Valid Email id</p>
+              <p className="error">{Validation?.email?.msg}</p>
             </div>
             <div className="w-full space-y-1 text-left lg:w-1/2">
               <Label htmlFor="mobile" text="Phone Number" />
@@ -214,11 +215,11 @@ const AddTeam = ({
                 name="mobile"
                 className="input_field"
                 placeholder="Enter your Phone Number"
-                pattern="[0-9]{10}"
+                pattern={Validation?.phone?.pattern}
                 defaultValue={(staff && staff.mobile) || ""}
                 required
               />
-              <p className="error">Enter Valid Phone number</p>
+              <p className="error">{Validation?.phone?.msg}</p>
             </div>
           </div>
           <div className="space-y-1 ">
@@ -230,10 +231,10 @@ const AddTeam = ({
                 className="w-full input_field sm:max-w-[200px]"
                 placeholder="Enter your Phone Number"
                 defaultValue={(staff && staff.dob) || ""}
-                pattern="\d{4}-\d{1,2}-\d{1,2}"
+                pattern={Validation?.dob?.pattern}
                 required
               />
-              <p className="error">Enter Valid Birth Date</p>
+              <p className="error">{Validation?.dob?.msg}</p>
             </div>
           </div>
           <div className="flex items-center justify-center gap-3">
@@ -445,11 +446,11 @@ const AddTeam = ({
                 id="job_title"
                 className="input_field"
                 placeholder="Enter your Job Title"
-                pattern="[A-Za-z0-9]{3,20}"
+                pattern={Validation?.title?.pattern}
                 defaultValue={(staff && staff.job_title) || ""}
                 required
               />
-              <p className="error">Min 3 Character Required</p>
+              <p className="error">{Validation?.title?.msg}</p>
             </div>
             <div className="w-full space-y-1 text-left lg:w-1/2">
               <Label htmlFor="job_bio" text="Job Bio" />

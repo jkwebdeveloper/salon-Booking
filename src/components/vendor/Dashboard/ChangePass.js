@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { POST } from "@/app/api/post";
 import { Error, Spinner, Success, Label } from "@/components";
 import Button from "@/components/ui/button";
+import Validation from "@/const/validation";
 
 const ChangePass = () => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);
@@ -45,6 +46,7 @@ const ChangePass = () => {
         <div className="w-full space-y-1 text-left md:w-1/2">
           <Label htmlFor="password" text="Password" required={true} />
           <input
+<<<<<<< Updated upstream
             type={showPassword ? "text" : "password"}
             name="password"
             id="password"
@@ -68,6 +70,32 @@ const ChangePass = () => {
               />
             )}
           </button>
+=======
+            type="password"
+            name="old_password"
+            id="old_password"
+            className="input_field"
+            placeholder="Enter your current password"
+            pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
+            required
+          />
+          <p className="error">Enter valid Pasword</p>
+        </div>
+        <div className="w-full space-y-1 text-left md:w-1/2">
+          <label htmlFor="country" className="label_text">
+            New password
+          </label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            className="input_field"
+            placeholder="Enter your New password"
+            pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
+            required
+          />
+          <p className="error">{Validation?.password?.msg}</p>
+>>>>>>> Stashed changes
         </div>
         <div className="w-full space-y-1 text-left md:w-1/2">
           <Label htmlFor="cpassword" text="Confirm password" required={true} />
@@ -78,6 +106,7 @@ const ChangePass = () => {
             placeholder="Confirm Password"
             required={true}
           />
+<<<<<<< Updated upstream
           <p className="error">Password not matched</p>
           <button
             type="button"
@@ -118,6 +147,9 @@ const ChangePass = () => {
               />
             )}
           </button>
+=======
+          <p className="error">{Validation?.confirmPassword?.msg}</p>
+>>>>>>> Stashed changes
         </div>
         <Button type="submit" variant="primary" disabled={loading}>
           <Spinner show={loading} width="35" height="35" text="Change" />

@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { POST } from "@/app/api/post";
 import { login } from "@/redux/features/vendorAuthSlice";
 import { Error, Spinner, Button } from "@/components";
+import Validation from "@/const/validation";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false),
@@ -85,11 +86,11 @@ const Login = () => {
                     className="input_field"
                     placeholder="Enter your Password"
                     // pattern="[a-zA-Z0-9]{8,}"
-                    // pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
+                    pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
                     required
                   />
                   <p className="error max-w-[250px]">
-                    Min 8 characters with a mix of letters, numbers & symbols
+                    {Validation?.password?.msg}
                   </p>
                   <input
                     type="hidden"
@@ -112,11 +113,11 @@ const Login = () => {
                         className="text-gray-400 cursor-pointer "
                       />
                     )) || (
-                      <BsEyeSlashFill
-                        size={24}
-                        className="text-gray-400 cursor-pointer"
-                      />
-                    )}
+                        <BsEyeSlashFill
+                          size={24}
+                          className="text-gray-400 cursor-pointer"
+                        />
+                      )}
                   </button>
                 </div>
                 <div className="flex items-center justify-between">

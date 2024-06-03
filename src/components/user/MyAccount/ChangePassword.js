@@ -3,6 +3,7 @@ import React from "react";
 import { POST } from "@/app/api/post";
 import { Spinner, Button, Error, Success } from "@/components";
 import { useSelector } from "react-redux";
+import Validation from "@/const/validation";
 
 const ChangePassword = () => {
   const user = useSelector((state) => state.userAuth.user) || '';
@@ -40,11 +41,10 @@ const ChangePassword = () => {
               id="old_password"
               className="input_field"
               placeholder="Enter your current password"
-              pattern="[a-zA-Z0-9]{3,}"
-              // pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'    
+              pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
               required
             />
-            <p className="error">Min 3 Character Required</p>
+            <p className="error">Enter valid password</p>
           </div>
           <div className="w-full space-y-1 text-left md:w-1/2">
             <label htmlFor="country" className="label_text">
@@ -56,11 +56,10 @@ const ChangePassword = () => {
               id="password"
               className="input_field"
               placeholder="Enter your New password"
-              pattern="[a-zA-Z0-9]{3,}"
-              // pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
+              pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
               required
             />
-            <p className="error">Min 3 Character Required</p>
+            <p className="error max-w-[250px]">{Validation?.password?.msg}</p>
           </div>
           <div className="w-full space-y-1 text-left md:w-1/2">
             <label htmlFor="country" className="label_text">
@@ -71,10 +70,9 @@ const ChangePassword = () => {
               className="input_field"
               placeholder="Enter your Confirm password"
               id="cpassword"
-              // pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
               required
             />
-            <p className="error">Password not matched</p>
+            <p className="error">{Validation?.confirmPassword?.msg}</p>
           </div>
           <Button type="submit" variant="primary" disabled={loading}>
             <Spinner show={loading} width='35' height='35' text="Change" />
