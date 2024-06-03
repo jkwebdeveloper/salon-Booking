@@ -1,5 +1,5 @@
-'use client';
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { GoBell } from "react-icons/go";
 import { GrCart } from "react-icons/gr";
 import { IoCaretDown, IoHeartOutline, IoCloseOutline } from "react-icons/io5";
@@ -14,7 +14,12 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 
 import { Button } from "@/components";
-
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,8 +31,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { POST } from "@/app/api/post";
 import useLogout from "@/hooks/uselogout";
+import CustomerModal from "@/components/vendor/Dashboard/Modal/CustomerModal";
 
 function Topbar() {
+  const [customer, setCustomer] = useState(false);
+
   const [logoutUser] = useLogout();
   const user = useSelector((state) => state.userAuth.user) || "";
   return (
@@ -66,19 +74,28 @@ function Topbar() {
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56 p-0 mt-2 bg-white ring-1 ring-neutral-200">
             <DropdownMenuGroup className="px-0">
-              <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white"
-                asChild ><Link href="/my-account">
+              <DropdownMenuItem
+                className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white"
+                asChild
+              >
+                <Link href="/my-account">
                   <TbUserCheck className="text-xl" />
                   Profile
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white" asChild>
+              <DropdownMenuItem
+                className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white"
+                asChild
+              >
                 <Link href="/wishlist">
                   <IoHeartOutline className="text-xl" />
                   Wishlist
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white" asChild>
+              <DropdownMenuItem
+                className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white"
+                asChild
+              >
                 <Link href="/wishlist">
                   <CiStar className="text-xl" />
                   Favourite
@@ -92,13 +109,32 @@ function Topbar() {
                 <LuEye className="text-xl" />
                 Recently viewed
               </DropdownMenuItem>
-              <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white" asChild>
-                <Link href={'/current-offer'}>
+              <DropdownMenuItem
+                className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white"
+                asChild
+              >
+                <Link href={"/current-offer"}>
                   <LuBadgePercent className="text-xl" />
                   Current Offers
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white">
+                {/* <Dialog open={customer}>
+                  <DialogTrigger
+                    onClick={(e) => setCustomer(true)}
+                    className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white"
+                  >
+                    <RiCustomerServiceLine className="text-xl" />
+                    Customer Services
+                  </DialogTrigger>
+                  <DialogContent
+                    close={setCustomer}
+                    className="sm:max-w-[900px]"
+                  >
+                    <DialogTitle>Customer service</DialogTitle>
+                    <CustomerModal setCustomer={setCustomer} />
+                  </DialogContent>
+                </Dialog> */}
                 <RiCustomerServiceLine className="text-xl" />
                 Customer Services
               </DropdownMenuItem>
@@ -123,7 +159,9 @@ function Topbar() {
             <DropdownMenuSeparator />
             <DropdownMenuItem
               className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white"
-              onClick={(e) => logoutUser({ api_token: user?.api_token, type: 'user' })}
+              onClick={(e) =>
+                logoutUser({ api_token: user?.api_token, type: "user" })
+              }
             >
               <MdLogout className="text-xl" />
               Logout

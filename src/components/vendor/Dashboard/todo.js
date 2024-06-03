@@ -26,3 +26,6 @@
 // box siz fix
 // under line
 // dashboard home page proper set
+
+// staff schedule
+// timeing button then open dialog // no box

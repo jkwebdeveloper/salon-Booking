@@ -104,7 +104,8 @@ const Staff = () => {
                         <DialogTrigger
                           onClick={(e) => setUserModal(true)}
                           className="text-[#8E8EA1] text-lg"
-                          asChild >
+                          asChild
+                        >
                           <tr className="bg-white border-b cursor-pointer dark:bg-gray-800 dark:border-gray-700">
                             <td
                               scope="row"
@@ -114,19 +115,25 @@ const Staff = () => {
                             </td>
                             {vendor?.availability?.map((day, index) => {
                               return (
-                                <td key={v4()} className="py-4 ">{day?.from_time.slice(0, 5)} - {day.to_time.slice(0, 5)}</td>
-                              )
+                                <td key={v4()} className="py-4 ">
+                                  {day?.from_time.slice(0, 5)} -{" "}
+                                  {day.to_time.slice(0, 5)}
+                                </td>
+                              );
                             })}
                           </tr>
                         </DialogTrigger>
                         <DialogContent
                           close={setUserModal}
-                          className="sm:max-w-[550px]"
+                          className="sm:max-w-[450px]"
                         >
-                          <UserModal setUserModal={setUserModal} vendor={vendor} />
+                          <UserModal
+                            setUserModal={setUserModal}
+                            vendor={vendor}
+                          />
                         </DialogContent>
                       </Dialog>
-                    )
+                    );
                   })}
                 </tbody>
               </table>

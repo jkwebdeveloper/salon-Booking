@@ -101,6 +101,19 @@ const Register = () => {
             </div>
           </div>
           <div className="w-full space-y-1 text-left">
+            <Label htmlFor="salon_name" text="Surname" required={true} />
+            <input
+              type="text"
+              name="salon_name"
+              id="salon_name"
+              className="input_field"
+              placeholder="Surname"
+              pattern="^[a-zA-Z0-9\s]{4,}$"
+              required
+            />
+            <p className="error">Min 4 Character Required</p>
+          </div>
+          <div className="w-full space-y-1 text-left">
             <Label htmlFor="email" text="Email" required={true} />
             <input
               type="text"
