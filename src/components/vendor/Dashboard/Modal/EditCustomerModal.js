@@ -5,6 +5,7 @@ import { POST } from "@/app/api/post";
 import { useSelector } from "react-redux";
 import { Error, Spinner } from "@/components";
 import Validation from "@/constants/validation";
+import { DatePicker } from "@/components/user/Home/FindNearByForm/datepicker";
 
 const EditCustomerModal = ({
   setEditDialog,
@@ -13,6 +14,7 @@ const EditCustomerModal = ({
   editCustomer,
   customers,
 }) => {
+  const [calendarOpen, setCalendarOpen] = React.useState(false);
   const vendor = useSelector((state) => state.vendorAuth.vendor);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
@@ -105,13 +107,16 @@ const EditCustomerModal = ({
         </div>
         <div className="w-full space-y-1 text-left lg:w-1/2">
           <Label htmlFor="dob" text="Date of Birth" />
-          <input
+          <div className="border z-[99999] flex-grow" onClick={e => setCalendarOpen(true)}>
+            <DatePicker className={'px-3 py-[17px] h-8 rounded-md overflow-hidden'} defaultOpen={calendarOpen} key={calendarOpen} setCalendarOpen={setCalendarOpen} name={'dob'} placeholder="Enter Date of Birth" />
+          </div>
+          {/* <input
             type="date"
             name="dob"
             className="input_field"
             placeholder="Enter Date of Birth"
             defaultValue={editCustomer.dob}
-          />
+          /> */}
         </div>
       </div>
       <div className="space-y-2">

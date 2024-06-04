@@ -24,7 +24,7 @@ const FindNearByForm = () => {
         >
           <SearchInput />
           <div className="flex-grow flex-shrink-0 min-h-[1rem] w-[2px] bg-neutral-400"></div>
-          <DatePicker className="p-3 border border-stone-400" />
+          <DatePicker className="p-3" />
           <div className="flex-grow flex-shrink-0 min-h-[1rem] w-[2px] bg-neutral-400"></div>
           <div className="flex items-center w-full gap-1">
             <IoTimeOutline className="text-xl" />

@@ -173,6 +173,7 @@ const Services = () => {
                           value=""
                           name="list-radio"
                           className=""
+                          defaultChecked={voucherData?.status == 1}
                         />
                         <label
                           for="list-radio-license"
@@ -190,6 +191,7 @@ const Services = () => {
                           value=""
                           name="list-radio"
                           className=""
+                          defaultChecked={voucherData?.status == 2}
                         />
                         <label
                           for="list-radio-license"
@@ -207,6 +209,7 @@ const Services = () => {
                           value=""
                           name="list-radio"
                           className=""
+                          defaultChecked={voucherData?.status == 0}
                         />
                         <label
                           for="list-radio-license"
@@ -450,7 +453,9 @@ const Services = () => {
                         step="0.1"
                         required
                       />
-                      {discountType == "percentage" && "Enter Valid Percentage" || "Enter Valid Amount"}
+                      <p className="error">
+                        {discountType == "percentage" && "Enter Valid Percentage" || "Enter Valid Amount"}
+                      </p>
                     </div>
                     <div className="w-full space-y-1 text-left lg:w-1/2">
                       <Label
@@ -463,7 +468,7 @@ const Services = () => {
                         name="expried_at"
                         className="input_field"
                         placeholder="Enter Expires at"
-                        pattern={Validation.expirydate.pattern}
+                        pattern='\d{4}-\d{1,2}-\d{1,2}'
                         required
                         min={new Date().toISOString().split("T")[0]}
                       />
@@ -729,7 +734,7 @@ const Services = () => {
                               <td className="px-4 py-4 text-sm ">
                                 <p
                                   className={`${(voucher.status == 0 && "bg-yellow-500") ||
-                                    (vendor.status == 1 && "bg-green-700") ||
+                                    (vendor.status == 1 && "bg-green-600 text-white") ||
                                     "bg-red-700"
                                     } p-2 rounded-full text-center`}
                                 >
