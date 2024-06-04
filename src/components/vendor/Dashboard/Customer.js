@@ -224,7 +224,7 @@ const Customer = () => {
               setEditCustomer("");
               setViewCustomer("");
             }}
-            className="sm:max-w-[500px]"
+            className="sm:max-w-[800px]"
           >
             {(editCustomer && <DialogTitle>Edit Customer</DialogTitle>) || (
               <>
