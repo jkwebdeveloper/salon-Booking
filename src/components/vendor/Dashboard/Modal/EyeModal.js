@@ -30,7 +30,7 @@ const EyeModal = ({ hooks, data }) => {
   };
 
   return (
-    <div className="space-y-3">
+    <div className="w-full space-y-3">
       <table className="w-full space-y-3 text-sm text-left">
         <tbody className="w-full space-y-3">
           <tr>
