@@ -41,7 +41,7 @@ const Staff = () => {
   useEffect(() => {
     (currentTab == "staff" || currentTab == "schedule") && getStaff();
   }, [currentTab]);
-  console.log(staffsList);
+
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">

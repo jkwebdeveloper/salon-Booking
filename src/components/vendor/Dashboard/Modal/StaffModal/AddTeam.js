@@ -21,6 +21,7 @@ const AddTeam = ({
 }) => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);
   const [getServices, vendorServices] = useVendorServices();
+  const [userImage, setUserImage] = useState({});
   const [staff, setStaff] = useState(editStaff || {});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -30,6 +31,14 @@ const AddTeam = ({
   );
 
   const changeTab = (tab = "basic") => setCurrentTab(tab);
+
+  const handleFile = (e) => {
+    const allowedType = ['image/jpeg', 'image/x-png', 'image/png', 'image/webp'];
+    if (allowedType.includes(e.target.files[0].type)) {
+      const path = (window.URL || window.webkitURL).createObjectURL(e.target.files[0]);
+      setUserImage({ 'id': v4(), 'path': path, 'data': e.target.files[0] });
+    }
+  }
 
   const addStaff = async (e) => {
     e.preventDefault();
@@ -116,24 +125,13 @@ const AddTeam = ({
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
-        <Button
-          variant={currentTab == "basic" ? "secondary" : "disable"}
-          onClick={(e) => changeTab()}
-        >
+        <Button variant={currentTab == "basic" ? "secondary" : "disable"} onClick={(e) => changeTab()} >
           Basic Info
         </Button>
-        <Button
-          variant={currentTab == "services" ? "secondary" : "disable"}
-          onClick={(e) => changeTab("services")}
-        // disabled={Object.keys(staff).length == 0}
-        >
+        <Button variant={currentTab == "services" ? "secondary" : "disable"} onClick={(e) => changeTab("services")} disabled={Object.keys(staff).length == 0} >
           Services
         </Button>
-        <Button
-          variant={currentTab == "publicProfile" ? "secondary" : "disable"}
-          onClick={(e) => changeTab("publicProfile")}
-        // disabled={Object.keys(staff).length == 0}
-        >
+        <Button variant={currentTab == "publicProfile" ? "secondary" : "disable"} onClick={(e) => changeTab("publicProfile")} disabled={Object.keys(staff).length == 0} >
           Public Profile
         </Button>
       </div>
@@ -147,24 +145,32 @@ const AddTeam = ({
           }
           noValidate
         >
+          {console.log('wefwe', userImage)}
           <div className="border relative border-1 border-[#0AADA4] rounded-full p-1 w-[3.5rem] h-[3.5rem] mb-2">
+            {console.log(staff)}
             <Image
+              // src={
+              //   ((staff && staff?.photo) && process.env.NEXT_PUBLIC_SERVERURL + staff.photo) ||
+              //   "/static/images/user.webp"
+              // }
               src={
-                (staff && process.env.NEXT_PUBLIC_SERVERURL + staff.photo) ||
-                "/images/user.png"
+                userImage?.path || ((staff && staff?.photo) && process.env.NEXT_PUBLIC_SERVERURL + staff?.photo) || '/static/images/user.webp'
               }
               alt="profile"
               loading="lazy"
-              className="object-cover w-full h-full rounded-full z-1"
+              className={`object-cover w-full h-full rounded-full z-1`}
               width={50}
               height={50}
             />
             <input
               type="file"
-              className="absolute top-0 bottom-0 left-0 right-0 mt-2 cursor-pointer rounded-full max-w-[3.5rem] mx-auto opacity-0 z-2"
+              className="absolute top-0 bottom-0 left-0 right-0 mt-2 cursor-pointer rounded-full max-w-[3.5rem] mx-auto opacity-0 z-10"
               name="photo"
+              onChange={e => handleFile(e)}
             />
-            <FaCamera className="absolute top-4 left-4  p-[4px] text-2xl text-white rounded-full bottom-0" />
+            <div className="absolute flex items-center justify-center w-full h-full rounded-full bg-neutral-900/20 top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4">
+              <FaCamera className="p-[4px] text-3xl text-white opacity-70" />
+            </div>
           </div>
           <div className="flex flex-col w-full gap-3 lg:flex-row">
             <div className="w-full space-y-1 text-left lg:w-1/2">
@@ -230,8 +236,8 @@ const AddTeam = ({
                 name="dob"
                 className="w-full input_field sm:max-w-[200px]"
                 placeholder="Enter your Phone Number"
-                defaultValue={(staff && staff.dob) || ""}
-                pattern={Validation?.dob?.pattern}
+                defaultValue={staff?.dob}
+                pattern='\d{4}-\d{1,2}-\d{1,2}'
                 required
               />
               <p className="error">{Validation?.dob?.msg}</p>
@@ -418,16 +424,8 @@ const AddTeam = ({
             >
               Cancel
             </Button>
-            <Button variant="primary" type="submit">
-              Save
-            </Button>
-            <Button
-              variant="danger"
-              onClick={(e) => deleteStaff()}
-              disabled={loading}
-            >
-              Delete
-            </Button>
+            <Button variant="primary" type="submit">Save</Button>
+            <Button variant="danger" onClick={(e) => deleteStaff()} disabled={loading} > Delete </Button>
           </div>
         </form>
       )}
