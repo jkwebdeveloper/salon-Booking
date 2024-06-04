@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { Error, Spinner } from "@/components";
 import { set } from "date-fns";
 import Validation from "@/constants/validation";
+import { DatePicker } from "@/components/user/Home/FindNearByForm/datepicker";
 
 const CustomerModal = ({ setAddCustomer, setCustomers, customers }) => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);
@@ -94,12 +95,13 @@ const CustomerModal = ({ setAddCustomer, setCustomers, customers }) => {
         </div>
         <div className="w-full space-y-1 text-left lg:w-1/2">
           <Label htmlFor="dob" text="Date of Birth" />
-          <input
+          {/* <input
             type="date"
             name="dob"
             className="input_field"
             placeholder="Enter Date of Birth"
-          />
+          /> */}
+          <DatePicker />
         </div>
       </div>
       <div className="space-y-2">
