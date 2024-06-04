@@ -10,7 +10,9 @@ import Validation from "@/constants/validation";
 const ChangePass = () => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);
 
-  const [showPassword, setShowPassword] = useState(false);
+  const [Password, setPassword] = useState(false);
+  const [newPassword, setNewPassword] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -43,44 +45,86 @@ const ChangePass = () => {
         noValidate
         onSubmit={(e) => updatePass(e)}
       >
-        <div className="w-full space-y-1 text-left md:w-1/2">
+        <div className="relative w-full space-y-1 text-left md:w-1/2">
           <Label htmlFor="password" text="Password" required={true} />
           <input
-            type="password"
+            type={Password ? "text" : "password"}
             name="old_password"
             id="old_password"
             className="input_field"
             placeholder="Enter your current password"
-            pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
+            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
             required
           />
           <p className="error">Enter valid Pasword</p>
+          <button
+            type="button"
+            className="absolute top-8 right-3"
+            onClick={() => setPassword(!Password)}
+          >
+            {(Password && (
+              <BsEyeFill size={24} className="text-gray-400 cursor-pointer" />
+            )) || (
+              <BsEyeSlashFill
+                size={24}
+                className="text-gray-400 cursor-pointer"
+              />
+            )}
+          </button>
         </div>
-        <div className="w-full space-y-1 text-left md:w-1/2">
+        <div className="relative w-full space-y-1 text-left md:w-1/2">
           <label htmlFor="country" className="label_text">
             New password
           </label>
           <input
-            type="password"
+            type={newPassword ? "text" : "password"}
             name="password"
             id="password"
-            className="input_field"
+            className="relative input_field"
             placeholder="Enter your New password"
-            pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
+            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
             required
           />
           <p className="error">{Validation?.password?.msg}</p>
+          <button
+            type="button"
+            className="absolute top-8 right-3"
+            onClick={() => setNewPassword(!newPassword)}
+          >
+            {(newPassword && (
+              <BsEyeFill size={24} className="text-gray-400 cursor-pointer" />
+            )) || (
+              <BsEyeSlashFill
+                size={24}
+                className="text-gray-400 cursor-pointer"
+              />
+            )}
+          </button>
         </div>
-        <div className="w-full space-y-1 text-left md:w-1/2">
+        <div className="relative w-full space-y-1 text-left md:w-1/2">
           <Label htmlFor="cpassword" text="Confirm password" required={true} />
           <input
-            type={showConfirmPassword ? "text" : "password"}
+            type={confirmPassword ? "text" : "password"}
             id="cpassword"
             className="input_field"
             placeholder="Confirm Password"
             required={true}
           />
           <p className="error">{Validation?.confirmPassword?.msg}</p>
+          <button
+            type="button"
+            className="absolute top-8 right-3"
+            onClick={() => setConfirmPassword(!confirmPassword)}
+          >
+            {(confirmPassword && (
+              <BsEyeFill size={24} className="text-gray-400 cursor-pointer" />
+            )) || (
+              <BsEyeSlashFill
+                size={24}
+                className="text-gray-400 cursor-pointer"
+              />
+            )}
+          </button>
         </div>
         <Button type="submit" variant="primary" disabled={loading}>
           <Spinner show={loading} width="35" height="35" text="Change" />

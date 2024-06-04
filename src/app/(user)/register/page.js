@@ -102,6 +102,23 @@ const Register = () => {
                   <p className="error">{Validation?.lastname?.msg}</p>
                 </div>
               </div>
+              <div className="w-full space-y-1 text-left">
+                {/* <Label htmlFor="salon_name" text="Surname" required={true} /> */}
+                <label htmlFor="lname" className="label_text">
+                  {" "}
+                  Surname{" "}
+                </label>
+                <input
+                  type="text"
+                  name="salon_name"
+                  id="salon_name"
+                  className="input_field"
+                  placeholder="Surname"
+                  pattern="^[a-zA-Z0-9\s]{4,}$"
+                  required
+                />
+                <p className="error">Min 4 Character Required</p>
+              </div>
               <div className="flex flex-col w-full gap-3 lg:flex-row">
                 <div className="w-full space-y-1 text-left lg:w-1/2">
                   <label htmlFor="email" className="label_text">
@@ -148,7 +165,7 @@ const Register = () => {
                     id="password"
                     className="input_field"
                     placeholder="Enter Your Password"
-                    pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$'
+                    pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
                     required
                   />
                   <p className="error max-w-[250px]">
@@ -165,11 +182,11 @@ const Register = () => {
                         className="text-gray-400 cursor-pointer"
                       />
                     )) || (
-                        <BsEyeSlashFill
-                          size={24}
-                          className="text-gray-400 cursor-pointer"
-                        />
-                      )}
+                      <BsEyeSlashFill
+                        size={24}
+                        className="text-gray-400 cursor-pointer"
+                      />
+                    )}
                   </button>
                 </div>
                 <div className="relative w-full space-y-1 text-left lg:w-1/2">
@@ -196,11 +213,11 @@ const Register = () => {
                         className="text-gray-400 cursor-pointer"
                       />
                     )) || (
-                        <BsEyeSlashFill
-                          size={24}
-                          className="text-gray-400 cursor-pointer"
-                        />
-                      )}
+                      <BsEyeSlashFill
+                        size={24}
+                        className="text-gray-400 cursor-pointer"
+                      />
+                    )}
                   </button>
                 </div>
               </div>

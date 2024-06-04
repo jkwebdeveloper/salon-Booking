@@ -29,6 +29,10 @@ const DashBoardHeader = () => {
   if (!vendor) {
     router.push("/vendor/login");
   }
+
+  const handleLinkClick = (link) => {
+    setActive(link);
+  };
   return (
     <div className="w-full bg-white shadow-md">
       <div className="container border-b ">
@@ -43,43 +47,30 @@ const DashBoardHeader = () => {
             />
           </Link>
           <div className="flex items-center justify-between w-full ">
-            <div className="flex items-center gap-7">
+            <div className="flex items-center gap-10">
               <HiMenuAlt2 className="text-2xl" />
-              <Link href="/vendor/dashboard">
-                <p className="font-semibold cursor-pointer">
-                  <span className="inline-block footer">Dashboard</span>
-                </p>
-              </Link>
-              <Link href="/vendor/planner">
-                <p className="cursor-pointer text-[#666666]">
-                  <span className="inline-block footer">Planner</span>
-                </p>
-              </Link>
-              <Link href="/vendor/customer">
-                <p className="cursor-pointer text-[#666666]">
-                  <span className="inline-block footer">Customers</span>
-                </p>
-              </Link>
-              <Link href="/vendor/staff">
-                <p className="cursor-pointer text-[#666666]">
-                  <span className="inline-block footer">Staff</span>
-                </p>
-              </Link>
-              <Link href="/vendor/service">
-                <p className="cursor-pointer text-[#666666]">
-                  <span className="inline-block footer">Services</span>
-                </p>
-              </Link>
-              <Link href="/vendor/business-report">
-                <p className="cursor-pointer text-[#666666]">
-                  <span className="inline-block footer">Business Report</span>
-                </p>
-              </Link>
-              <Link href="/vendor/wallet">
-                <p className="cursor-pointer text-[#666666]">
-                  <span className="inline-block footer">Wallet</span>
-                </p>
-              </Link>
+              {[
+                { name: "Dashboard", href: "/vendor/dashboard" },
+                { name: "Planner", href: "/vendor/planner" },
+                { name: "Customers", href: "/vendor/customer" },
+                { name: "Staff", href: "/vendor/staff" },
+                { name: "Services", href: "/vendor/service" },
+                { name: "Business Report", href: "/vendor/business-report" },
+                { name: "Wallet", href: "/vendor/wallet" },
+              ].map((link) => (
+                <Link key={link.name} href={link.href}>
+                  <p
+                    onClick={() => handleLinkClick(link.name)}
+                    className={`cursor-pointer ${
+                      active === link.name
+                        ? "text-primary_color font-semibold"
+                        : "text-[#666666] font-normal"
+                    }`}
+                  >
+                    <span className="inline-block footer">{link.name}</span>
+                  </p>
+                </Link>
+              ))}
             </div>
             <div className="flex items-center gap-3">
               {/* Notifications Dropdown Menu */}
