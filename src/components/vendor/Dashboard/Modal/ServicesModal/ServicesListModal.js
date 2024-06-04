@@ -160,7 +160,12 @@ const ServicesListModal = ({ service, setAddService, setRefreshServices }) => {
                       text="Save"
                     />
                   </Button>
-                  <Button variant="disable">Gift Voucher</Button>
+                  <Button
+                    variant="disable"
+                    onClick={() => setAddService(false)}
+                  >
+                    Cancel
+                  </Button>
                   {formState?.error && <Error error={formState?.error} />}
                 </div>
               </>

@@ -100,44 +100,36 @@ const Staff = () => {
                 <tbody>
                   {staffsList.map((staff, index) => {
                     return (
-                      <Dialog key={v4()} open={userModal} asChild>
-                        <DialogTrigger
-                          onClick={(e) => setUserModal(true)}
-                          className="text-[#8E8EA1] text-lg"
-                          asChild
+                      <tr className="bg-white border-b cursor-pointer dark:bg-gray-800 dark:border-gray-700">
+                        <td
+                          scope="row"
+                          className="px-6 py-4 font-medium text-gray-900 capitalize whitespace-nowrap dark:text-white"
                         >
-                          <tr className="bg-white border-b cursor-pointer dark:bg-gray-800 dark:border-gray-700">
+                          {staff.first_name} {staff.last_name}
+                        </td>
+                        {vendor?.availability?.map((day, index) => {
+                          return (
                             <td
-                              scope="row"
-                              className="px-6 py-4 font-medium text-gray-900 capitalize whitespace-nowrap dark:text-white"
+                              key={v4()}
+                              className="py-4 "
+                              onClick={(e) => setUserModal(true)}
                             >
-                              {staff.first_name} {staff.last_name}
+                              {day?.from_time.slice(0, 5)} -{" "}
+                              {day.to_time.slice(0, 5)}
                             </td>
-                            {vendor?.availability?.map((day, index) => {
-                              return (
-                                <td key={v4()} className="py-4 ">
-                                  {day?.from_time.slice(0, 5)} -{" "}
-                                  {day.to_time.slice(0, 5)}
-                                </td>
-                              );
-                            })}
-                          </tr>
-                        </DialogTrigger>
-                        <DialogContent
-                          close={setUserModal}
-                          className="sm:max-w-[450px]"
-                        >
-                          <UserModal
-                            setUserModal={setUserModal}
-                            vendor={vendor}
-                          />
-                        </DialogContent>
-                      </Dialog>
+                          );
+                        })}
+                      </tr>
                     );
                   })}
                 </tbody>
               </table>
             </div>
+            <Dialog open={userModal}>
+              <DialogContent close={setUserModal} className="sm:max-w-[450px]">
+                <UserModal setUserModal={setUserModal} vendor={vendor} />
+              </DialogContent>
+            </Dialog>
           </>
         )}
         {currentTab == "staff" && (
