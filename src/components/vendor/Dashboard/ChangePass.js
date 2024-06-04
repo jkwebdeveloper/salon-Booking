@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { POST } from "@/app/api/post";
 import { Error, Spinner, Success, Label } from "@/components";
 import Button from "@/components/ui/button";
-import Validation from "@/const/validation";
+import Validation from "@/constants/validation";
 
 const ChangePass = () => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);

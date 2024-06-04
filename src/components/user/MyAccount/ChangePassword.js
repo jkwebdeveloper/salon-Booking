@@ -3,7 +3,7 @@ import React from "react";
 import { POST } from "@/app/api/post";
 import { Spinner, Button, Error, Success } from "@/components";
 import { useSelector } from "react-redux";
-import Validation from "@/const/validation";
+import Validation from "@/constants/validation";
 
 const ChangePassword = () => {
   const user = useSelector((state) => state.userAuth.user) || '';

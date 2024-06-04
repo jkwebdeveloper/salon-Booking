@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { POST } from "@/app/api/post";
 import { login } from "@/redux/features/vendorAuthSlice";
 import { Error, Spinner, Button } from "@/components";
-import Validation from "@/const/validation";
+import Validation from "@/constants/validation";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false),

@@ -4,7 +4,7 @@ import Button from "@/components/ui/button";
 import { POST } from "@/app/api/post";
 import { useSelector } from "react-redux";
 import { Error, Spinner } from "@/components";
-import Validation from "@/const/validation";
+import Validation from "@/constants/validation";
 
 const EditCustomerModal = ({
   setEditDialog,

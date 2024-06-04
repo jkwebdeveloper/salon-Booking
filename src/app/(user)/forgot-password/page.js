@@ -10,7 +10,7 @@ import {
   Dialog,
   DialogContent
 } from "@/components/ui/dialog";
-import Validation from "@/const/validation";
+import Validation from "@/constants/validation";
 
 const ForgotPassword = () => {
   const [loading, setLoading] = React.useState(false);

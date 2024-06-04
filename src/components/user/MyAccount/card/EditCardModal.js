@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select"
 import { v4 } from "uuid";
 import { useSelector } from "react-redux";
-import Validation from "@/const/validation";
+import Validation from "@/constants/validation";
 
 const EditCardModal = ({ setAddCard, setCards, editCard, cards }) => {
   const user = useSelector(state => state.userAuth.user);

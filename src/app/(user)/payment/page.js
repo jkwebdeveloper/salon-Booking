@@ -4,7 +4,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import Label from "@/components/ui/form/label";
 import Button from "@/components/ui/button";
 import { IoIosLock } from "react-icons/io";
-import Validation from "@/const/validation";
+import Validation from "@/constants/validation";
 
 const PaymentMethod = () => {
   return (

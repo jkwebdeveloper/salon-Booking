@@ -10,7 +10,7 @@ import Label from "@/components/ui/form/label";
 import { POST } from "@/app/api/post";
 import Spinner from "@/components/ui/spinner";
 import { logout } from "@/redux/features/userAuthSlice";
-import Validation from "@/const/validation";
+import Validation from "@/constants/validation";
 
 const ProfileModal = ({ setEditProfile }) => {
   const dispatch = useDispatch();

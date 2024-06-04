@@ -1,7 +1,7 @@
 import { POST } from "@/app/api/post";
 import { Spinner } from "@/components";
 import Button from "@/components/ui/button";
-import Validation from "@/const/validation";
+import Validation from "@/constants/validation";
 import { login } from "@/redux/features/vendorAuthSlice";
 import React from "react";
 import { MdModeEditOutline } from "react-icons/md";

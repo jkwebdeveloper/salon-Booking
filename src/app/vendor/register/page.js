@@ -8,7 +8,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { POST } from "@/app/api/post";
 import { useDispatch } from "react-redux";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
-import Validation from "@/const/validation";
+import Validation from "@/constants/validation";
 
 const Register = () => {
   const dispatch = useDispatch();

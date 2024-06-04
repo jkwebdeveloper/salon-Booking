@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 import { v4 } from "uuid";
 import { POST } from "@/app/api/post";
 import { Spinner, Success } from "@/components";
-import Validation from "@/const/validation";
+import Validation from "@/constants/validation";
 
 const SalonDetails = () => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);

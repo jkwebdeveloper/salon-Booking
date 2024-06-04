@@ -14,7 +14,7 @@ import { MdOutlineErrorOutline } from "react-icons/md";
 import { login } from "@/redux/features/userAuthSlice";
 import { POST } from "@/app/api/post";
 import { Spinner, Button, Error } from '@/components';
-import Validation from "@/const/validation";
+import Validation from "@/constants/validation";
 
 const Signin = () => {
   const [showPassword, setShowPassword] = React.useState(false),

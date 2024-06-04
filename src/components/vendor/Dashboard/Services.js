@@ -20,7 +20,7 @@ import { useVendorServices, useCategory } from "@/hooks";
 import { POST } from "@/app/api/post";
 import { GET } from "@/app/api/get";
 import { v4 } from "uuid";
-import Validation from "@/const/validation";
+import Validation from "@/constants/validation";
 
 const Services = () => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);

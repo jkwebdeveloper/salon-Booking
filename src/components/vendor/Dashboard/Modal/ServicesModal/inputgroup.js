@@ -7,7 +7,7 @@ import {
     SelectTrigger,
 } from "@/components/ui/select";
 import { RiDeleteBin5Line } from "react-icons/ri";
-import Validation from '@/const/validation';
+import Validation from '@/constants/validation';
 
 function InputGroup({ defaultValue, categories_id, service_group_id, sub_categories_id, deleteService = false, index }) {
     const [inputValue, setInputValue] = useState({

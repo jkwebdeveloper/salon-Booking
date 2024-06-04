@@ -11,7 +11,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import Button from "@/components/ui/button";
 import Link from "next/link";
 import Customdatepicker from "@/components/user/Home/FindNearByForm/customdatepicker";
-import Validation from "@/const/validation";
+import Validation from "@/constants/validation";
 
 const TimeDate = () => {
   return (

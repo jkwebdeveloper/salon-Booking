@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { useVendorServices } from "@/hooks";
 import { set } from "date-fns";
 import { v4 } from "uuid";
-import Validation from "@/const/validation";
+import Validation from "@/constants/validation";
 
 const AddTeam = ({
   setAddTeam,

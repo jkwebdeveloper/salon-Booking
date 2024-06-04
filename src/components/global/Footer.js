@@ -12,7 +12,7 @@ import Link from "next/link";
 import { Button, Error, Spinner } from "@/components";
 import { POST } from "@/app/api/post";
 import { useRouter } from "next/navigation";
-import Validation from "@/const/validation";
+import Validation from "@/constants/validation";
 
 const FooterData = [
   {

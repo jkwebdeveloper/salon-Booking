@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { POST } from "@/app/api/post";
 import { Error, Spinner, Success } from "@/components";
 import { login } from "@/redux/features/vendorAuthSlice";
-import Validation from "@/const/validation";
+import Validation from "@/constants/validation";
 
 const LocationDetails = () => {
   const dispatch = useDispatch();

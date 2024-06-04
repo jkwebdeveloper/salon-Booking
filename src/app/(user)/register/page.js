@@ -10,7 +10,7 @@ import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { Spinner, Button, Error } from "@/components";
 import { login } from "@/redux/features/userAuthSlice";
 import { POST } from "@/app/api/post";
-import Validation from "@/const/validation";
+import Validation from "@/constants/validation";
 
 const Register = () => {
   const [error, setError] = React.useState("");

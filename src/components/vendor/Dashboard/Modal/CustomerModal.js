@@ -5,7 +5,7 @@ import { POST } from "@/app/api/post";
 import { useSelector } from "react-redux";
 import { Error, Spinner } from "@/components";
 import { set } from "date-fns";
-import Validation from "@/const/validation";
+import Validation from "@/constants/validation";
 
 const CustomerModal = ({ setAddCustomer, setCustomers, customers }) => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);

@@ -25,9 +25,11 @@ export const POST = {
     if (form && form.tagName == "FORM") {
       const valideData = await POST.validateForm({ form });
       if (!valideData) return false;
-
       formData = new FormData(form);
       for (const key of formData.keys()) formData.get(key).size == 0 && formData.delete(key);
+      [...form.querySelectorAll('.invalid')].forEach((input) => {
+        input.classList.remove("border-red-500", "text-red-500", 'invalid');
+      });
     } else if (!Array.isArray(form) && !rawdata) {
       formData = new FormData();
       for (var key in form) formData.append(key, form[key]);
