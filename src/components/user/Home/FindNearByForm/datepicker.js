@@ -13,9 +13,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-export function DatePicker() {
+export function DatePicker({ className, name, placeholder, defaultOpen = false, setCalendarOpen }) {
   const [date, setDate] = React.useState();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(defaultOpen);
   function dateToLocalISO(date) {
     return new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000)
       .toISOString()
@@ -26,18 +26,18 @@ export function DatePicker() {
   }
   return (
     <>
-      <Popover open={open}>
+      <Popover open={open} onOpenChange={e => setCalendarOpen && setCalendarOpen(e)}>
         <PopoverTrigger asChild>
           <Button
             variant={"ghost"}
             className={cn(
               "justify-start text-left font-normal border-0 shadow-none px-4 min-w-[220px]",
-              !date && "text-neutral-400"
+              !date && "text-neutral-400", className
             )}
             onClick={() => setOpen(!open)}
           >
             <CalendarIcon className="w-4 h-4 mr-2" />
-            {date ? format(date, "PPP") : <span>Pick a date</span>}
+            {date ? format(date, "PPP") : <span>{placeholder || 'Pick a date'}</span>}
           </Button>
         </PopoverTrigger>
         <PopoverContent
@@ -65,7 +65,7 @@ export function DatePicker() {
       </Popover>
       <input
         type="hidden"
-        name="date"
+        name={name || "date"}
         defaultValue={date && dateToLocalISO(new Date(date))}
       />
     </>

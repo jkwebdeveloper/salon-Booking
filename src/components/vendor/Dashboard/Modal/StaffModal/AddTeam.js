@@ -145,9 +145,7 @@ const AddTeam = ({
           }
           noValidate
         >
-          {console.log('wefwe', userImage)}
           <div className="border relative border-1 border-[#0AADA4] rounded-full p-1 w-[3.5rem] h-[3.5rem] mb-2">
-            {console.log(staff)}
             <Image
               // src={
               //   ((staff && staff?.photo) && process.env.NEXT_PUBLIC_SERVERURL + staff.photo) ||
@@ -273,7 +271,6 @@ const AddTeam = ({
           {error && <Error error={error} />}
         </form>
       )}
-      {console.log("staffServices", staffServices)}
       {currentTab == "services" && (
         <form
           className="space-y-2"
