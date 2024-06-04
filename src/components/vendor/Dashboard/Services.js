@@ -21,6 +21,7 @@ import { POST } from "@/app/api/post";
 import { GET } from "@/app/api/get";
 import { v4 } from "uuid";
 import Validation from "@/constants/validation";
+import { DatePicker } from "@/components/user/Home/FindNearByForm/datepicker";
 
 const Services = () => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);
@@ -38,6 +39,7 @@ const Services = () => {
   const [currentService, setCurrentService] = useState(null);
   const [addtreatment, setAddtreatment] = useState(false);
   const [treatment, setTreatment] = useState(true);
+  const [calendarOpen, setCalendarOpen] = React.useState(false);
 
   const [createVoucher, setCreateVoucher] = useState(false);
   const [discountType, setDiscountType] = useState("percentage");
@@ -149,7 +151,10 @@ const Services = () => {
                   <p className="text-2xl font-semibold">Edit Voucher</p>
                   <IoMdClose
                     className="text-2xl cursor-pointer"
-                    onClick={() => setEditVoucher(false)}
+                    onClick={() => {
+                      setEditVoucher(false);
+                      handleVoucherClick();
+                    }}
                   />
                 </div>
                 <div className="relative">
@@ -162,7 +167,7 @@ const Services = () => {
                     className="object-cover object-center w-full"
                   />
                 </div>
-                <form className="space-y-2">
+                {/* <form className="space-y-2">
                   <Label htmlFor="first_name" text="Status" />
                   <div className="flex items-center gap-3">
                     <li className="list-none">
@@ -281,7 +286,9 @@ const Services = () => {
                           required
                         />
                         <p className="error">
-                          {discountType == "percentage" && "Enter Valid Percentage" || "Enter Valid Amount"}
+                          {(discountType == "percentage" &&
+                            "Enter Valid Percentage") ||
+                            "Enter Valid Amount"}
                         </p>
                       </div>
                       <div className="w-full space-y-1 text-left lg:w-1/2">
@@ -331,7 +338,180 @@ const Services = () => {
                     </Button>
                     {formState?.error && <Error error={formState?.error} />}
                   </div>
-                </form>
+                </form> */}
+                <div className="space-y-3">
+                  <Label htmlFor="first_name" text="Status" />
+                  <div className="flex items-center gap-3">
+                    <li className="list-none">
+                      <div className="flex items-center">
+                        <input
+                          id="active"
+                          type="radio"
+                          value="1"
+                          name="status"
+                          className=""
+                        />
+                        <label
+                          for="active"
+                          className="text-sm font-medium text-gray-900 ms-2 "
+                        >
+                          Active
+                        </label>
+                      </div>
+                    </li>
+                    <li className="list-none">
+                      <div className="flex items-center">
+                        <input
+                          id="inactive"
+                          type="radio"
+                          value="2"
+                          name="status"
+                          className=""
+                        />
+                        <label
+                          for="inactive"
+                          className="text-sm font-medium text-gray-900 ms-2 "
+                        >
+                          Inactive
+                        </label>
+                      </div>
+                    </li>
+                    <li className="list-none">
+                      <div className="flex items-center">
+                        <input
+                          id="pending"
+                          type="radio"
+                          value="0"
+                          name="status"
+                          className=""
+                          defaultChecked={true}
+                        />
+                        <label
+                          for="pending"
+                          className="text-sm font-medium text-gray-900 ms-2 "
+                        >
+                          Pending
+                        </label>
+                      </div>
+                    </li>
+                  </div>
+                  <input type="file" name="voucher_image" />
+                  <div className="w-full space-y-1 text-left">
+                    <Label htmlFor="title" text="Title" required={true} />
+                    <input
+                      type="text"
+                      name="title"
+                      className="input_field"
+                      placeholder="Enter Title"
+                      pattern={Validation.title.pattern}
+                      required
+                    />
+                    <p className="error">{Validation?.title?.msg}</p>
+                  </div>
+                  <div className="flex flex-col w-full gap-3 lg:flex-row">
+                    <div className="w-full space-y-1 text-left lg:w-1/2">
+                      <Label
+                        htmlFor="first_name"
+                        text="Discount Type"
+                        required={true}
+                      />
+                      <select
+                        className="w-full p-2 bg-transparent border rounded-md"
+                        required
+                        name="discount_type"
+                        onChange={(e) => setDiscountType(e.target.value)}
+                      >
+                        <option value="percentage">Percentage</option>
+                        <option value="fixed">Fixed</option>
+                      </select>
+                    </div>
+                    <div className="w-full space-y-1 text-left lg:w-1/2">
+                      <Label htmlFor="amount" text="Amount" required={true} />
+                      <input
+                        type="text"
+                        name="amount"
+                        className="input_field"
+                        placeholder="Enter Amount *"
+                        pattern={
+                          discountType == "percentage"
+                            ? "[0-9]{0,2}"
+                            : "[0-9]{1,}"
+                        }
+                        maxLength={discountType == "percentage" ? 2 : ""}
+                        step="0.1"
+                        required
+                      />
+                      <p className="error">
+                        {(discountType == "percentage" &&
+                          "Enter Valid Percentage") ||
+                          "Enter Valid Amount"}
+                      </p>
+                    </div>
+                    {/* <div className="w-full space-y-1 text-left lg:w-1/2">
+                      <Label
+                        htmlFor="expried_at"
+                        text="Expires at"
+                        required={true}
+                      />
+                      <input
+                        type="date"
+                        name="expried_at"
+                        className="input_field"
+                        placeholder="Enter Expires at"
+                        pattern='\d{4}-\d{1,2}-\d{1,2}'
+                        required
+                        min={new Date().toISOString().split("T")[0]}
+                      />
+                      <p className="error">{Validation?.expirydate?.msg}</p>
+                    </div> */}
+                    <div className="w-full space-y-1 text-left lg:w-1/2">
+                      <Label htmlFor="dob" text="Date of Birth" />
+                      <div
+                        className="border z-[99999] flex-grow"
+                        onClick={(e) => setCalendarOpen(true)}
+                      >
+                        <DatePicker
+                          className={
+                            "px-3 py-[17px] h-8 rounded-md overflow-hidden"
+                          }
+                          defaultOpen={calendarOpen}
+                          key={calendarOpen}
+                          setCalendarOpen={setCalendarOpen}
+                          name={"dob"}
+                          placeholder="Enter Date of Birth"
+                        />
+                      </div>
+                      {/* <input
+            type="date"
+            name="dob"
+            className="input_field"
+            placeholder="Enter Date of Birth"
+            defaultValue={editCustomer.dob}
+          /> */}
+                    </div>
+                  </div>
+                  <Label htmlFor="message" text="Description" />
+                  <textarea
+                    id="message"
+                    rows="4"
+                    name="description"
+                    className="input_field"
+                    placeholder="Write your thoughts here..."
+                  ></textarea>
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    disabled={formState?.loading}
+                  >
+                    <Spinner
+                      show={formState?.loading}
+                      width="25"
+                      height="25"
+                      text="Create"
+                    />
+                  </Button>
+                  {formState?.error && <Error error={formState?.error} />}
+                </div>
               </div>
             </div>
           </>
@@ -454,10 +634,12 @@ const Services = () => {
                         required
                       />
                       <p className="error">
-                        {discountType == "percentage" && "Enter Valid Percentage" || "Enter Valid Amount"}
+                        {(discountType == "percentage" &&
+                          "Enter Valid Percentage") ||
+                          "Enter Valid Amount"}
                       </p>
                     </div>
-                    <div className="w-full space-y-1 text-left lg:w-1/2">
+                    {/* <div className="w-full space-y-1 text-left lg:w-1/2">
                       <Label
                         htmlFor="expried_at"
                         text="Expires at"
@@ -473,6 +655,31 @@ const Services = () => {
                         min={new Date().toISOString().split("T")[0]}
                       />
                       <p className="error">{Validation?.expirydate?.msg}</p>
+                    </div> */}
+                    <div className="w-full space-y-1 text-left lg:w-1/2">
+                      <Label htmlFor="dob" text="Date of Birth" />
+                      <div
+                        className="border z-[99999] flex-grow"
+                        onClick={(e) => setCalendarOpen(true)}
+                      >
+                        <DatePicker
+                          className={
+                            "px-3 py-[17px] h-8 rounded-md overflow-hidden"
+                          }
+                          defaultOpen={calendarOpen}
+                          key={calendarOpen}
+                          setCalendarOpen={setCalendarOpen}
+                          name={"dob"}
+                          placeholder="Enter Date of Birth"
+                        />
+                      </div>
+                      {/* <input
+            type="date"
+            name="dob"
+            className="input_field"
+            placeholder="Enter Date of Birth"
+            defaultValue={editCustomer.dob}
+          /> */}
                     </div>
                   </div>
                   <Label htmlFor="message" text="Description" />
@@ -502,20 +709,22 @@ const Services = () => {
           </>
         ) : (
           <>
-            <div className="flex items-center gap-3">
-              <Button
-                variant={treatment ? "primary" : "disable"}
-                onClick={handleTreatmentClick}
-              >
-                Treatments
-              </Button>
-              <Button
-                variant={voucher ? "primary" : "disable"}
-                onClick={handleVoucherClick}
-              >
-                Gift Voucher
-              </Button>
-            </div>
+            {editVoucher ? null : (
+              <div className="flex items-center gap-3">
+                <Button
+                  variant={treatment ? "primary" : "disable"}
+                  onClick={handleTreatmentClick}
+                >
+                  Treatments
+                </Button>
+                <Button
+                  variant={voucher ? "primary" : "disable"}
+                  onClick={handleVoucherClick}
+                >
+                  Gift Voucher
+                </Button>
+              </div>
+            )}
             {treatment && (
               <div className="w-full p-4 space-y-5 bg-white rounded-xl">
                 <div className="flex justify-between gap-5">
@@ -606,12 +815,12 @@ const Services = () => {
                                             {service_group?.duration == 0.5
                                               ? "30 Min"
                                               : service_group?.duration == 1
-                                                ? "1 Hour"
-                                                : service_group?.duration == 1.5
-                                                  ? "1 Hour 30 Min"
-                                                  : service_group?.duration == 2
-                                                    ? "2 Hour"
-                                                    : "2 Hour 30 Min"}
+                                              ? "1 Hour"
+                                              : service_group?.duration == 1.5
+                                              ? "1 Hour 30 Min"
+                                              : service_group?.duration == 2
+                                              ? "2 Hour"
+                                              : "2 Hour 30 Min"}
                                           </p>
                                           <p className="text-sm font-bold">
                                             {service_group?.price &&
@@ -642,14 +851,14 @@ const Services = () => {
                       </div>
                     );
                   })) || (
-                    <div className="center min-h-[300px] w-full">
-                      <Spinner
-                        show={vendorServices?.loading}
-                        width={50}
-                        height={50}
-                      />
-                    </div>
-                  )}
+                  <div className="center min-h-[300px] w-full">
+                    <Spinner
+                      show={vendorServices?.loading}
+                      width={50}
+                      height={50}
+                    />
+                  </div>
+                )}
                 <Dialog
                   className="w-11/12"
                   open={addService}
@@ -733,10 +942,12 @@ const Services = () => {
                               </td>
                               <td className="px-4 py-4 text-sm ">
                                 <p
-                                  className={`${(voucher.status == 0 && "bg-yellow-500") ||
-                                    (vendor.status == 1 && "bg-green-600 text-white") ||
+                                  className={`${
+                                    (voucher.status == 0 && "bg-yellow-500") ||
+                                    (vendor.status == 1 &&
+                                      "bg-green-600 text-white") ||
                                     "bg-red-700"
-                                    } p-2 rounded-full text-center`}
+                                  } p-2 rounded-full text-center`}
                                 >
                                   {(voucher.status == 0 && "Pending") ||
                                     (voucher.status == 1 && "Active") ||

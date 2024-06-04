@@ -19,12 +19,18 @@ import Button from "@/components/ui/button";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import useLogout from "@/hooks/uselogout";
+import { useDispatch } from "react-redux";
+import { setSidebar } from "@/redux/features/sidebarSlice";
 
 const DashBoardHeader = () => {
   const [active, setActive] = useState("Dashboard");
+  const [openSidebar, setOpenSidebar] = useState(true);
   const [logoutUser] = useLogout();
   const router = useRouter();
   const vendor = useSelector((state) => state.vendorAuth.vendor);
+  const { sidebar } = useSelector((state) => state.sidebarAuth.sidebar);
+
+  const dispatch = useDispatch();
 
   if (!vendor) {
     router.push("/vendor/login");
@@ -32,6 +38,22 @@ const DashBoardHeader = () => {
 
   const handleLinkClick = (link) => {
     setActive(link);
+  };
+
+  const sidebarHandler = () => {
+    if (sidebar) {
+      dispatch(
+        setSidebar({
+          sidebar: false,
+        })
+      );
+    } else {
+      dispatch(
+        setSidebar({
+          sidebar: true,
+        })
+      );
+    }
   };
   return (
     <div className="w-full bg-white shadow-md">
@@ -48,7 +70,10 @@ const DashBoardHeader = () => {
           </Link>
           <div className="flex items-center justify-between w-full ">
             <div className="flex items-center gap-10">
-              <HiMenuAlt2 className="text-2xl" />
+              <HiMenuAlt2
+                className="text-2xl cursor-pointer"
+                onClick={() => sidebarHandler()}
+              />
               {[
                 { name: "Dashboard", href: "/vendor/dashboard" },
                 { name: "Planner", href: "/vendor/planner" },

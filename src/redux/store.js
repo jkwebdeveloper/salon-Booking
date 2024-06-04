@@ -13,6 +13,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "@/redux/storage";
+import { sidebarAuth } from "./features/sidebarSlice";
 
 const persistConfig = {
   key: "root",
@@ -24,6 +25,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   userAuth: userAuth.reducer,
   vendorAuth: vendorAuth.reducer,
+  sidebarAuth: sidebarAuth.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
