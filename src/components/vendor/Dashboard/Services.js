@@ -167,7 +167,7 @@ const Services = () => {
                     className="object-cover object-center w-full"
                   />
                 </div>
-                {/* <form className="space-y-2">
+                <form className="space-y-2">
                   <Label htmlFor="first_name" text="Status" />
                   <div className="flex items-center gap-3">
                     <li className="list-none">
@@ -338,7 +338,7 @@ const Services = () => {
                     </Button>
                     {formState?.error && <Error error={formState?.error} />}
                   </div>
-                </form> */}
+                </form>
                 <div className="space-y-3">
                   <Label htmlFor="first_name" text="Status" />
                   <div className="flex items-center gap-3">
