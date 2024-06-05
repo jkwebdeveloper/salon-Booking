@@ -14,12 +14,11 @@ const DashBoard = () => {
           <Sidebar />
         </div>
       ) : null}
-
       <div
         className={
           sidebar
             ? ` md:w-4/5 w-[90%] mx-auto space-y-5 h-fit min-h-[350px] p-5 bg-[#f4f2f2]`
-            : `w-full container mx-auto p-5`
+            : `w-full container bg-[#f4f2f2] mx-auto p-5`
         }
       >
         <DashBoardHome />

@@ -21,10 +21,12 @@ import { useRouter } from "next/navigation";
 import useLogout from "@/hooks/uselogout";
 import { useDispatch } from "react-redux";
 import { setSidebar } from "@/redux/features/sidebarSlice";
+import DashboardMobilemenu from "./Mobilemenu";
 
 const DashBoardHeader = () => {
   const [active, setActive] = useState("Dashboard");
   const [openSidebar, setOpenSidebar] = useState(true);
+  const [openMobilemenu, setOpenMobileMenu] = useState(true);
   const [logoutUser] = useLogout();
   const router = useRouter();
   const vendor = useSelector((state) => state.vendorAuth.vendor);
@@ -166,6 +168,10 @@ const DashBoardHeader = () => {
           </div>
         </div>
       </div>
+      {/* <DashboardMobilemenu
+        openMobilemenu={openMobilemenu}
+        setOpenMobileMenu={setOpenMobileMenu}
+      /> */}
     </div>
   );
 };

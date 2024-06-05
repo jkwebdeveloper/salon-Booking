@@ -10,14 +10,25 @@ import {
 } from "@/components/ui/dialog";
 import PlannerModal from "@/components/vendor/Dashboard/Modal/PlannerModal";
 import Sidebar from "@/components/global/DashboardHeader/Sidebar";
+import { useSelector } from "react-redux";
+
 const Planner = () => {
+  const { sidebar } = useSelector((state) => state.sidebarAuth.sidebar);
   const [appointmentModal, setAppointmentModal] = useState(false);
   return (
     <div className="flex items-start">
-      <div className="h-fit min-h-[350px] md:block hidden md:w-[35%] lg:w-[20%] w-[90%] space-y-5 p-5 bg-white">
-        <Sidebar />
-      </div>
-      <div className="md:w-4/5 w-[90%] mx-auto space-y-5 h-fit min-h-[350px] p-5 bg-[#f4f2f2]">
+      {sidebar ? (
+        <div className="h-fit min-h-[350px] md:block hidden md:w-[35%] lg:w-[20%] w-[90%] space-y-5 p-5 bg-white">
+          <Sidebar />
+        </div>
+      ) : null}
+      <div
+        className={
+          sidebar
+            ? `md:w-4/5 w-[90%] mx-auto space-y-5 h-fit min-h-[350px] p-5 bg-[#f4f2f2]`
+            : `w-full mx-auto space-y-5 h-fit min-h-[350px] p-5 bg-[#f4f2f2]`
+        }
+      >
         <div className="flex items-center justify-between">
           <p className="text-2xl font-semibold">Customers</p>
           <div className="flex items-center gap-4">

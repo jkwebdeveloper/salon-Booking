@@ -119,6 +119,17 @@ const DashBoardHome = () => {
                 </div>
               </div>
             </div>
+            <div className="bg-gradient-to-r from-[#393C89] py-8 px-4 rounded-xl to-[#389AC1]">
+              <div className="flex items-center justify-between text-white">
+                <div>
+                  <ImUserTie className="bg-[#4f8199] rounded-full text-white text-4xl p-2" />
+                  <p>Employees</p>
+                </div>
+                <div className="">
+                  <p className="text-4xl font-semibold">2</p>
+                </div>
+              </div>
+            </div>
           </div>
           <p className="text-2xl font-semibold">Monthly Revenue Outline</p>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
