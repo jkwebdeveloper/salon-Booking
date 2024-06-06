@@ -319,7 +319,162 @@ const AddTeam = ({
           onSubmit={(e) => addStaffServices(e)}
           noValidate
         >
-          Add Code here
+          <p className="text-xl text-[#1D1B23] font-semibold">
+            What service can be booked for this employee ?
+          </p>
+          <li class="w-full list-none">
+            <div class="flex items-center">
+              <input id="list-radio-license" type="checkbox" value="" />
+              <label
+                for="list-radio-license"
+                class="w-full ms-2 text-sm font-medium text-gray-900 "
+              >
+                All Services
+              </label>
+            </div>
+          </li>
+          {vendorServices.loading && (
+            <Spinner show={vendorServices.loading} width={50} height={50} />
+          )}
+          {!vendorServices.loading &&
+            vendorServices.data.map(
+              (service, index) =>
+                service.group_service_list.length > 0 && (
+                  <div
+                    key={v4()}
+                    className="border space-y-3 rounded-lg border-[#D8DAE5] bg-[#FAFAFA] p-3"
+                  >
+                    <li class="w-full list-none">
+                      <div class="flex items-center">
+                        <input
+                          id={service.categories.title}
+                          type="checkbox"
+                          checked={
+                            (staffServices.filter(
+                              (serviceCats) =>
+                                serviceCats.categories_id ==
+                                service.categories.id
+                            ).length == service?.group_service_list.length &&
+                              true) ||
+                            false
+                          }
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              const subcategories =
+                                service.group_service_list.map(
+                                  (subcategory) => ({
+                                    categories_id: subcategory?.categories_id,
+                                    sub_categories_id: subcategory?.id,
+                                    staffs_id: staff.id || null,
+                                  })
+                                );
+                              setStaffServices([
+                                ...staffServices,
+                                ...subcategories,
+                              ]);
+                            } else {
+                              setStaffServices(
+                                staffServices.filter(
+                                  (subcategory) =>
+                                    subcategory.categories_id !=
+                                    service.categories.id
+                                )
+                              );
+                            }
+                          }}
+                        />
+                        <label
+                          htmlFor={service.categories.title}
+                          class="w-full ms-2 text-base font-semibold"
+                        >
+                          {service.categories.title}
+                        </label>
+                      </div>
+                    </li>
+                    <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                      {service.group_service_list.map((subcategory, index) => (
+                        <li key={v4()} class="w-full list-none">
+                          <div class="flex items-center">
+                            <input
+                              id={subcategory?.sub_categories?.title}
+                              type="checkbox"
+                              checked={
+                                (staffServices.find(
+                                  (serviceCats) =>
+                                    serviceCats.sub_categories_id ==
+                                    subcategory?.id
+                                ) &&
+                                  true) ||
+                                false
+                              }
+                              onChange={(e) => {
+                                if (e.target.checked) {
+                                  const exists = staffServices.find(
+                                    (serviceCats) =>
+                                      serviceCats.sub_categories_id ==
+                                      subcategory?.id
+                                  );
+                                  if (!exists) {
+                                    setStaffServices([
+                                      ...staffServices,
+                                      {
+                                        categories_id:
+                                          subcategory?.categories_id,
+                                        sub_categories_id: subcategory?.id,
+                                        staffs_id: staff.id || null,
+                                      },
+                                    ]);
+                                  }
+                                } else {
+                                  setStaffServices(
+                                    staffServices.filter(
+                                      (serviceCats) =>
+                                        serviceCats?.sub_categories_id !=
+                                        subcategory.id
+                                    )
+                                  );
+                                }
+                              }}
+                            />
+                            <label
+                              htmlFor={subcategory?.sub_categories?.title}
+                              class="w-full ms-2 text-sm font-normal"
+                            >
+                              {subcategory?.sub_categories?.title}
+                            </label>
+                          </div>
+                        </li>
+                      ))}
+                    </div>
+                  </div>
+                )
+            )}
+          <div className="flex items-center justify-center gap-3">
+            {Object.keys(staff).length > 0 && (
+              <input type="hidden" name="staffs id" value={staff.id} />
+            )}
+            <Button
+              variant="disable"
+              disabled={loading}
+              onClick={(e) => {
+                setEditStaff("");
+                setAddTeam(false);
+              }}
+            >
+              Cancel
+            </Button>
+            <Button variant="primary" type="submit">
+              Save
+            </Button>
+            <Button
+              variant="danger"
+              onClick={(e) => deleteStaff()}
+              disabled={loading}
+            >
+              {" "}
+              Delete{" "}
+            </Button>
+          </div>
         </form>
       )}
       {currentTab == "publicProfile" && (
