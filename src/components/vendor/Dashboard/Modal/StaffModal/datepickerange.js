@@ -67,7 +67,6 @@ export function DatePickerRange({
             defaultMonth={date?.from}
             required
             disabled={new Date()}
-            hidden={isPastDate}
             onSelect={(date) => {
               setDate(date);
               setOpen(!open);
