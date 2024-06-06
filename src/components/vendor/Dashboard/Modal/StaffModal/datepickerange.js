@@ -13,7 +13,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-export function DatePicker({
+export function DatePickerRange({
   className,
   name,
   placeholder,
@@ -47,8 +47,17 @@ export function DatePicker({
             onClick={() => setOpen(!open)}
           >
             <CalendarIcon className="w-4 h-4 mr-2" />
-            {date ? (
+            {/* {date ? (
               format(date, "PPP")
+            ) : (
+              <span>{placeholder || "Pick a date"}</span>
+            )} */}
+            {date?.from ? (
+              date.to ? (
+                format(date, "PPP")
+              ) : (
+                format(date.from, "PPP")
+              )
             ) : (
               <span>{placeholder || "Pick a date"}</span>
             )}
@@ -63,8 +72,9 @@ export function DatePicker({
             fromDate={new Date()}
             showOutsideDays
             fixedWeeks
-            mode="single"
+            mode="range"
             selected={date}
+            defaultMonth={date?.from}
             required
             disabled={new Date()}
             hidden={isPastDate}

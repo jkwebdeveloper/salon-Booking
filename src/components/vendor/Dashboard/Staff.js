@@ -14,6 +14,7 @@ import { GET } from "@/app/api/get";
 import { PageLoader } from "@/components";
 import { v4 } from "uuid";
 import Image from "next/image";
+import { DatePickerRange } from "./Modal/StaffModal/datepickerange";
 
 const Staff = () => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);
@@ -65,7 +66,7 @@ const Staff = () => {
             <p className="text-2xl font-semibold">Staff Schedule</p>
             <div className="flex items-end justify-between">
               <div className="border w-max rounded-md border-[#eae9e9]">
-                <DatePicker />
+                <DatePickerRange />
               </div>
             </div>
             <hr />

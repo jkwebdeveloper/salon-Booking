@@ -11,6 +11,7 @@ import { useVendorServices } from "@/hooks";
 import { set } from "date-fns";
 import { v4 } from "uuid";
 import Validation from "@/constants/validation";
+import { DatePicker } from "@/components/user/Home/FindNearByForm/datepicker";
 
 const AddTeam = ({
   setAddTeam,
@@ -21,6 +22,7 @@ const AddTeam = ({
 }) => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);
   const [getServices, vendorServices] = useVendorServices();
+  const [calendarOpen, setCalendarOpen] = React.useState(false);
   const [userImage, setUserImage] = useState({});
   const [staff, setStaff] = useState(editStaff || {});
   const [error, setError] = useState(null);
@@ -33,12 +35,19 @@ const AddTeam = ({
   const changeTab = (tab = "basic") => setCurrentTab(tab);
 
   const handleFile = (e) => {
-    const allowedType = ['image/jpeg', 'image/x-png', 'image/png', 'image/webp'];
+    const allowedType = [
+      "image/jpeg",
+      "image/x-png",
+      "image/png",
+      "image/webp",
+    ];
     if (allowedType.includes(e.target.files[0].type)) {
-      const path = (window.URL || window.webkitURL).createObjectURL(e.target.files[0]);
-      setUserImage({ 'id': v4(), 'path': path, 'data': e.target.files[0] });
+      const path = (window.URL || window.webkitURL).createObjectURL(
+        e.target.files[0]
+      );
+      setUserImage({ id: v4(), path: path, data: e.target.files[0] });
     }
-  }
+  };
 
   const addStaff = async (e) => {
     e.preventDefault();
@@ -125,13 +134,24 @@ const AddTeam = ({
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
-        <Button variant={currentTab == "basic" ? "secondary" : "disable"} onClick={(e) => changeTab()} >
+        <Button
+          variant={currentTab == "basic" ? "secondary" : "disable"}
+          onClick={(e) => changeTab()}
+        >
           Basic Info
         </Button>
-        <Button variant={currentTab == "services" ? "secondary" : "disable"} onClick={(e) => changeTab("services")} disabled={Object.keys(staff).length == 0} >
+        <Button
+          variant={currentTab == "services" ? "secondary" : "disable"}
+          onClick={(e) => changeTab("services")}
+          disabled={Object.keys(staff).length == 0}
+        >
           Services
         </Button>
-        <Button variant={currentTab == "publicProfile" ? "secondary" : "disable"} onClick={(e) => changeTab("publicProfile")} disabled={Object.keys(staff).length == 0} >
+        <Button
+          variant={currentTab == "publicProfile" ? "secondary" : "disable"}
+          onClick={(e) => changeTab("publicProfile")}
+          disabled={Object.keys(staff).length == 0}
+        >
           Public Profile
         </Button>
       </div>
@@ -152,7 +172,11 @@ const AddTeam = ({
               //   "/static/images/user.webp"
               // }
               src={
-                userImage?.path || ((staff && staff?.photo) && process.env.NEXT_PUBLIC_SERVERURL + staff?.photo) || '/static/images/user.webp'
+                userImage?.path ||
+                (staff &&
+                  staff?.photo &&
+                  process.env.NEXT_PUBLIC_SERVERURL + staff?.photo) ||
+                "/static/images/user.webp"
               }
               alt="profile"
               loading="lazy"
@@ -164,7 +188,7 @@ const AddTeam = ({
               type="file"
               className="absolute top-0 bottom-0 left-0 right-0 mt-2 cursor-pointer rounded-full max-w-[3.5rem] mx-auto opacity-0 z-10"
               name="photo"
-              onChange={e => handleFile(e)}
+              onChange={(e) => handleFile(e)}
             />
             <div className="absolute flex items-center justify-center w-full h-full rounded-full bg-neutral-900/20 top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4">
               <FaCamera className="p-[4px] text-3xl text-white opacity-70" />
@@ -226,7 +250,7 @@ const AddTeam = ({
               <p className="error">{Validation?.phone?.msg}</p>
             </div>
           </div>
-          <div className="space-y-1 ">
+          {/* <div className="space-y-1 ">
             <Label htmlFor="dob" text="Date of Birth" />
             <div className="w-full rounded-md border-[#eae9e9] dateField">
               <input
@@ -237,6 +261,24 @@ const AddTeam = ({
                 defaultValue={staff?.dob}
                 pattern='\d{4}-\d{1,2}-\d{1,2}'
                 required
+              />
+              <p className="error">{Validation?.dob?.msg}</p>
+            </div>
+          </div> */}
+          <div className="w-full space-y-1 text-left lg:w-1/2">
+            <Label htmlFor="dob" text="Date of Birth" />
+            <div
+              className="border rounded-sm z-[99999] flex-grow"
+              onClick={(e) => setCalendarOpen(true)}
+            >
+              <DatePicker
+                className={"px-3 py-[17px] h-8 rounded-md overflow-hidden"}
+                defaultOpen={calendarOpen}
+                key={calendarOpen}
+                setCalendarOpen={setCalendarOpen}
+                name={"dob"}
+                defaultValue={staff?.dob}
+                placeholder="Enter Date of Birth"
               />
               <p className="error">{Validation?.dob?.msg}</p>
             </div>
@@ -421,8 +463,17 @@ const AddTeam = ({
             >
               Cancel
             </Button>
-            <Button variant="primary" type="submit">Save</Button>
-            <Button variant="danger" onClick={(e) => deleteStaff()} disabled={loading} > Delete </Button>
+            <Button variant="primary" type="submit">
+              Save
+            </Button>
+            <Button
+              variant="danger"
+              onClick={(e) => deleteStaff()}
+              disabled={loading}
+            >
+              {" "}
+              Delete{" "}
+            </Button>
           </div>
         </form>
       )}
