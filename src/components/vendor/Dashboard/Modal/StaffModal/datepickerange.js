@@ -20,16 +20,12 @@ export function DatePickerRange({
   defaultOpen = false,
   setCalendarOpen,
 }) {
-  const [date, setDate] = React.useState();
+  const [date, setDate] = React.useState({
+    from: new Date(),
+    to: new Date(),
+  });
   const [open, setOpen] = React.useState(defaultOpen);
-  function dateToLocalISO(date) {
-    return new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000)
-      .toISOString()
-      .slice(0, 10);
-  }
-  function isPastDate(date) {
-    // return differenceInCalendarDays(date, new Date()) < 0;
-  }
+
   return (
     <>
       <Popover
@@ -47,20 +43,14 @@ export function DatePickerRange({
             onClick={() => setOpen(!open)}
           >
             <CalendarIcon className="w-4 h-4 mr-2" />
-            {/* {date ? (
-              format(date, "PPP")
-            ) : (
-              <span>{placeholder || "Pick a date"}</span>
-            )} */}
             {date?.from ? (
-              date.to ? (
-                format(date, "PPP")
-              ) : (
-                format(date.from, "PPP")
-              )
-            ) : (
-              <span>{placeholder || "Pick a date"}</span>
-            )}
+              date.to ?
+                <>
+                  {format(date.from, "LLL dd, y")} -{" "}
+                  {format(date.to, "LLL dd, y")}
+                </>
+                : format(date.from, "LLL dd, y")
+            ) : <span>Pick a date</span>}
           </Button>
         </PopoverTrigger>
         <PopoverContent
@@ -78,7 +68,6 @@ export function DatePickerRange({
             required
             disabled={new Date()}
             hidden={isPastDate}
-            // onSelect={(date) => { setDate(new Date(date).toISOString().slice(0, 10)); setOpen(!open) }} // setDate(date)
             onSelect={(date) => {
               setDate(date);
               setOpen(!open);
@@ -87,11 +76,11 @@ export function DatePickerRange({
           />
         </PopoverContent>
       </Popover>
-      <input
+      {/* <input
         type="hidden"
         name={name || "date"}
         defaultValue={date && dateToLocalISO(new Date(date))}
-      />
+      /> */}
     </>
   );
 }
