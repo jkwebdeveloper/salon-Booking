@@ -143,7 +143,7 @@ const AddTeam = ({
         <Button
           variant={currentTab == "services" ? "secondary" : "disable"}
           onClick={(e) => changeTab("services")}
-          disabled={Object.keys(staff).length == 0}
+          // disabled={Object.keys(staff).length == 0}
         >
           Services
         </Button>
@@ -319,7 +319,293 @@ const AddTeam = ({
           onSubmit={(e) => addStaffServices(e)}
           noValidate
         >
-          Add Code here
+          <p className="font-semibold">
+            What service can be booked for this employee ?
+          </p>
+          <div className="flex items-center">
+            <input
+              id="aggreement"
+              type="checkbox"
+              className="accent-primary"
+              required
+              defaultChecked={""}
+            />
+            <label
+              htmlFor="aggreement"
+              className="w-full text-sm font-medium text-gray-900 ms-2 "
+            >
+              All Services
+            </label>
+          </div>
+          <div className="w-full space-y-2 overflow-auto max-h-[22rem] rounded-md border border-[#D8DAE5] bg-[#FAFAFA] p-2">
+            <p className="font-semibold">Massage</p>
+            <div className="grid items-start grid-cols-1 gap-3 xl:grid-cols-2">
+              <div className="w-full bg-[white] border border-[#D9D9D9] rounded-md space-y-2 p-2">
+                <p className="font-semibold">Couple Massage</p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <input
+                      id="aggreement"
+                      type="checkbox"
+                      className="accent-primary"
+                      required
+                      defaultChecked={""}
+                    />
+                    <label
+                      htmlFor="aggreement"
+                      className="w-full text-sm font-medium text-gray-900 ms-2 "
+                    >
+                      Couples Massage for 2 hours
+                    </label>
+                  </div>
+                  <p className="text-sm">02 h</p>
+                  <p className="text-sm font-semibold">£349</p>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <input
+                      id="aggreement"
+                      type="checkbox"
+                      className="accent-primary"
+                      required
+                      defaultChecked={""}
+                    />
+                    <label
+                      htmlFor="aggreement"
+                      className="w-full text-sm font-medium text-gray-900 ms-2 "
+                    >
+                      Couples Massage for 1 hours
+                    </label>
+                  </div>
+                  <p className="text-sm">01 h</p>
+                  <p className="text-sm font-semibold">£249</p>
+                </div>
+              </div>
+              <div className="w-full bg-[white] border border-[#D9D9D9] rounded-md space-y-2 p-2">
+                <p className="font-semibold">Swedish Massage</p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <input
+                      id="aggreement"
+                      type="checkbox"
+                      className="accent-primary"
+                      required
+                      defaultChecked={""}
+                    />
+                    <label
+                      htmlFor="aggreement"
+                      className="w-full text-sm font-medium text-gray-900 ms-2 "
+                    >
+                      Swedish Massage
+                    </label>
+                  </div>
+                  <p className="text-sm">02 h</p>
+                  <p className="text-sm font-semibold">£349</p>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <input
+                      id="aggreement"
+                      type="checkbox"
+                      className="accent-primary"
+                      required
+                      defaultChecked={""}
+                    />
+                    <label
+                      htmlFor="aggreement"
+                      className="w-full text-sm font-medium text-gray-900 ms-2 "
+                    >
+                      Swedish Massage
+                    </label>
+                  </div>
+                  <p className="text-sm">01 h</p>
+                  <p className="text-sm font-semibold">£249</p>
+                </div>
+              </div>
+              <div className="w-full bg-[white] border border-[#D9D9D9] rounded-md space-y-2 p-2">
+                <p className="font-semibold">Biodynamic Massage</p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <input
+                      id="aggreement"
+                      type="checkbox"
+                      className="accent-primary"
+                      required
+                      defaultChecked={""}
+                    />
+                    <label
+                      htmlFor="aggreement"
+                      className="w-full text-sm font-medium text-gray-900 ms-2 "
+                    >
+                      Biodynamic Massage
+                    </label>
+                  </div>
+                  <p className="text-sm">02 h</p>
+                  <p className="text-sm font-semibold">£349</p>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <input
+                      id="aggreement"
+                      type="checkbox"
+                      className="accent-primary"
+                      required
+                      defaultChecked={""}
+                    />
+                    <label
+                      htmlFor="aggreement"
+                      className="w-full text-sm font-medium text-gray-900 ms-2 "
+                    >
+                      Biodynamic Massage
+                    </label>
+                  </div>
+                  <p className="text-sm">01 h</p>
+                  <p className="text-sm font-semibold">£249</p>
+                </div>
+              </div>
+            </div>
+            <p className="font-semibold">Massage</p>
+            <div className="grid items-start grid-cols-1 gap-3 xl:grid-cols-2">
+              <div className="w-full bg-[white] border border-[#D9D9D9] rounded-md space-y-2 p-2">
+                <p className="font-semibold">Couple Massage</p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <input
+                      id="aggreement"
+                      type="checkbox"
+                      className="accent-primary"
+                      required
+                      defaultChecked={""}
+                    />
+                    <label
+                      htmlFor="aggreement"
+                      className="w-full text-sm font-medium text-gray-900 ms-2 "
+                    >
+                      Couples Massage for 2 hours
+                    </label>
+                  </div>
+                  <p className="text-sm">02 h</p>
+                  <p className="text-sm font-semibold">£349</p>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <input
+                      id="aggreement"
+                      type="checkbox"
+                      className="accent-primary"
+                      required
+                      defaultChecked={""}
+                    />
+                    <label
+                      htmlFor="aggreement"
+                      className="w-full text-sm font-medium text-gray-900 ms-2 "
+                    >
+                      Couples Massage for 1 hours
+                    </label>
+                  </div>
+                  <p className="text-sm">01 h</p>
+                  <p className="text-sm font-semibold">£249</p>
+                </div>
+              </div>
+              <div className="w-full bg-[white] border border-[#D9D9D9] rounded-md space-y-2 p-2">
+                <p className="font-semibold">Swedish Massage</p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <input
+                      id="aggreement"
+                      type="checkbox"
+                      className="accent-primary"
+                      required
+                      defaultChecked={""}
+                    />
+                    <label
+                      htmlFor="aggreement"
+                      className="w-full text-sm font-medium text-gray-900 ms-2 "
+                    >
+                      Swedish Massage
+                    </label>
+                  </div>
+                  <p className="text-sm">02 h</p>
+                  <p className="text-sm font-semibold">£349</p>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <input
+                      id="aggreement"
+                      type="checkbox"
+                      className="accent-primary"
+                      required
+                      defaultChecked={""}
+                    />
+                    <label
+                      htmlFor="aggreement"
+                      className="w-full text-sm font-medium text-gray-900 ms-2 "
+                    >
+                      Swedish Massage
+                    </label>
+                  </div>
+                  <p className="text-sm">01 h</p>
+                  <p className="text-sm font-semibold">£249</p>
+                </div>
+              </div>
+              <div className="w-full bg-[white] border border-[#D9D9D9] rounded-md space-y-2 p-2">
+                <p className="font-semibold">Biodynamic Massage</p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <input
+                      id="aggreement"
+                      type="checkbox"
+                      className="accent-primary"
+                      required
+                      defaultChecked={""}
+                    />
+                    <label
+                      htmlFor="aggreement"
+                      className="w-full text-sm font-medium text-gray-900 ms-2 "
+                    >
+                      Biodynamic Massage
+                    </label>
+                  </div>
+                  <p className="text-sm">02 h</p>
+                  <p className="text-sm font-semibold">£349</p>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <input
+                      id="aggreement"
+                      type="checkbox"
+                      className="accent-primary"
+                      required
+                      defaultChecked={""}
+                    />
+                    <label
+                      htmlFor="aggreement"
+                      className="w-full text-sm font-medium text-gray-900 ms-2 "
+                    >
+                      Biodynamic Massage
+                    </label>
+                  </div>
+                  <p className="text-sm">01 h</p>
+                  <p className="text-sm font-semibold">£249</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex items-center justify-center gap-3 pt-10">
+            <Button
+              variant="disable"
+              disabled={loading}
+              onClick={(e) => {
+                setEditStaff("");
+                setAddTeam(false);
+              }}
+            >
+              Cancel
+            </Button>
+            <Button variant="primary" type="submit" disabled={loading}>
+              <Spinner show={loading} width="25" height="25" text="Save" />
+            </Button>
+          </div>
         </form>
       )}
       {currentTab == "publicProfile" && (
