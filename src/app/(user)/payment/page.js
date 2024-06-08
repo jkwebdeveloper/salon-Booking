@@ -192,10 +192,10 @@ const PaymentMethod = () => {
                       type="radio"
                       value=""
                       name="list-radio"
-                      class=""
+                      className=""
                     />
                     <div>
-                      <p>Pay with card</p>
+                      <p className="text-sm">Pay with card</p>
                       <p className="text-[#666666] text-sm">Pay in advance</p>
                     </div>
                   </div>

@@ -15,10 +15,28 @@ const Sidebar = () => {
           <p className="text-[#717579] text-lg">Alerts</p>
         </div>
       </Link>
+      <Link href="/vendor/subscription">
+        <div className="flex items-center gap-5 pb-3 ">
+          <PiBellSimpleRingingFill className="text-[#717579] text-2xl" />
+          <p className="text-[#717579] text-lg">Subscription</p>
+        </div>
+      </Link>
+      <Link href="/vendor/featured-deals">
+        <div className="flex items-center gap-5 pb-3 ">
+          <PiBellSimpleRingingFill className="text-[#717579] text-2xl" />
+          <p className="text-[#717579] text-lg">Featured & Deals</p>
+        </div>
+      </Link>
       <Link href="/vendor/salon-details">
         <div className="flex items-center gap-5 pb-3">
           <BiSolidDetail className="text-[#717579] text-2xl" />
           <p className="text-[#717579] text-lg">Salon Details</p>
+        </div>
+      </Link>
+      <Link href="/vendor/working-hours">
+        <div className="flex items-center gap-5 pb-3">
+          <BiSolidDetail className="text-[#717579] text-2xl" />
+          <p className="text-[#717579] text-lg">Working hours</p>
         </div>
       </Link>
       <Link href="/vendor/loaction-detail">

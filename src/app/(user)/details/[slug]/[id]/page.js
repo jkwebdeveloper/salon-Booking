@@ -228,10 +228,15 @@ const DetailPage = () => {
               <div className="p-4 space-y-3">
                 <Accordion type="single" collapsible className="w-full">
                   <AccordionItem value="item-1">
-                    <AccordionTrigger>
-                      <div className="flex items-center justify-between">
+                    <AccordionTrigger className="hover:no-underline">
+                      <div className="flex items-center justify-between w-full gap-3">
                         <div>
-                          <p>Couples Massage</p>
+                          <div className="flex items-center gap-2">
+                            <p>Couples Massage</p>
+                            <button className="bg-gradient-to-r py-1 text-white px-4 rounded-full from-[#FFB905] to-[#E44B42]">
+                              Featured
+                            </button>
+                          </div>
                           <div className="flex items-center gap-2">
                             <p>2 hr</p>
                             <p className="text-[#0AADA4]">Show Details</p>
@@ -244,7 +249,7 @@ const DetailPage = () => {
                     </AccordionTrigger>
                     <AccordionContent>
                       <div className="bg-[#FAFAFA] space-y-3 p-3 border rounded-lg border-[#E0E0E0]">
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-10">
                           <div>
                             <p className="font-bold">
                               Sunday Soother Spa Break
@@ -262,7 +267,7 @@ const DetailPage = () => {
                           </Link>
                         </div>
                         <hr />
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-10">
                           <div>
                             <p className="font-bold">
                               Sunday Soother Spa Break
@@ -281,8 +286,8 @@ const DetailPage = () => {
                     </AccordionContent>
                   </AccordionItem>
                   <AccordionItem value="item-2">
-                    <AccordionTrigger>
-                      <div className="flex items-center justify-between">
+                    <AccordionTrigger className="hover:no-underline">
+                      <div className="flex items-center justify-between w-full gap-3">
                         <div>
                           <p>Couples Massage</p>
                           <div className="flex items-center gap-2">
@@ -332,8 +337,8 @@ const DetailPage = () => {
                     </AccordionContent>
                   </AccordionItem>
                   <AccordionItem value="item-3">
-                    <AccordionTrigger>
-                      <div className="flex items-center justify-between">
+                    <AccordionTrigger className="hover:no-underline">
+                      <div className="flex items-center justify-between w-full gap-3">
                         <div>
                           <p>Couples Massage</p>
                           <div className="flex items-center gap-2">
