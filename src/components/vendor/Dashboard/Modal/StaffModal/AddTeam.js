@@ -1,5 +1,5 @@
 import Button from "@/components/ui/button";
-import React, { useState } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import { FaCamera } from "react-icons/fa";
 
 import Image from "next/image";
@@ -8,7 +8,6 @@ import { POST } from "@/app/api/post";
 import { Error, Spinner } from "@/components";
 import { useSelector } from "react-redux";
 import { useVendorServices } from "@/hooks";
-import { set } from "date-fns";
 import { v4 } from "uuid";
 import Validation from "@/constants/validation";
 import { DatePicker } from "@/components/user/Home/FindNearByForm/datepicker";
@@ -28,23 +27,23 @@ const AddTeam = ({
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [currentTab, setCurrentTab] = useState("basic");
-  const [staffServices, setStaffServices] = useState(
-    (staff && staff?.staff_service) || []
-  );
+  const [staffServices, setStaffServices] = useState([]); //(staff && staff?.staff_service) || []
+  console.log("staffServices", staff?.staff_service);
+  const [selected, setSelected] = useState([]);
 
   const changeTab = (tab = "basic") => setCurrentTab(tab);
 
+  const changeSelectService = (e) => {
+    const checked = document.querySelectorAll('.serviceList input[type="checkbox"]:checked');
+    const checkBoxes = document.querySelectorAll('.serviceList input[type="checkbox"]');
+    if (checked.length == checkBoxes.length) document.querySelector('#selectAll').checked = true;
+    else document.querySelector('#selectAll').checked = false;
+  };
+
   const handleFile = (e) => {
-    const allowedType = [
-      "image/jpeg",
-      "image/x-png",
-      "image/png",
-      "image/webp",
-    ];
+    const allowedType = ["image/jpeg", "image/x-png", "image/png", "image/webp"];
     if (allowedType.includes(e.target.files[0].type)) {
-      const path = (window.URL || window.webkitURL).createObjectURL(
-        e.target.files[0]
-      );
+      const path = (window.URL || window.webkitURL).createObjectURL(e.target.files[0]);
       setUserImage({ id: v4(), path: path, data: e.target.files[0] });
     }
   };
@@ -119,7 +118,7 @@ const AddTeam = ({
     e.preventDefault();
     setLoading(true);
     const resp = await POST.request({
-      url: "/vendor/add-staffs-services",
+      url: "/vendor/add-or-update-staffs-services",
       form: staffServices,
       token: vendor.api_token,
     });
@@ -143,7 +142,7 @@ const AddTeam = ({
         <Button
           variant={currentTab == "services" ? "secondary" : "disable"}
           onClick={(e) => changeTab("services")}
-          // disabled={Object.keys(staff).length == 0}
+        // disabled={Object.keys(staff).length == 0}
         >
           Services
         </Button>
@@ -313,6 +312,7 @@ const AddTeam = ({
           {error && <Error error={error} />}
         </form>
       )}
+      {console.log("staffServices", selected)}
       {currentTab == "services" && (
         <form
           className="space-y-2"
@@ -324,272 +324,75 @@ const AddTeam = ({
           </p>
           <div className="flex items-center">
             <input
-              id="aggreement"
+              id="selectAll"
               type="checkbox"
               className="accent-primary"
-              required
-              defaultChecked={""}
+              defaultChecked={!vendorServices?.loading && vendorServices.length == vendorServices?.data.map(service => service.group_service_list.map(group => group.id)).flat().length}
+              onChange={e => {
+                if (e.target.checked) {
+                  setStaffServices(vendorServices?.data.map(service => service.group_service_list.map(group => ({
+                    vendors_service_id: group.id, categories_id: service.categories_id,
+                    sub_categories_id: group?.sub_categories?.id, staffs_id: staff.id,
+                  }))).flat());
+                } else {
+                  setStaffServices([]);
+                }
+              }}
             />
             <label
-              htmlFor="aggreement"
+              htmlFor="selectAll"
               className="w-full text-sm font-medium text-gray-900 ms-2 "
             >
               All Services
             </label>
           </div>
-          <div className="w-full space-y-2 overflow-auto max-h-[22rem] rounded-md border border-[#D8DAE5] bg-[#FAFAFA] p-2">
-            <p className="font-semibold">Massage</p>
-            <div className="grid items-start grid-cols-1 gap-3 xl:grid-cols-2">
-              <div className="w-full bg-[white] border border-[#D9D9D9] rounded-md space-y-2 p-2">
-                <p className="font-semibold">Couple Massage</p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <input
-                      id="aggreement"
-                      type="checkbox"
-                      className="accent-primary"
-                      required
-                      defaultChecked={""}
-                    />
-                    <label
-                      htmlFor="aggreement"
-                      className="w-full text-sm font-medium text-gray-900 ms-2 "
-                    >
-                      Couples Massage for 2 hours
-                    </label>
+          <div className="w-full serviceList space-y-2 overflow-auto max-h-[22rem] rounded-md border border-[#D8DAE5] bg-[#FAFAFA] p-2">
+            {vendorServices?.loading && <Spinner show={true} width={40} height={40} />}
+            {!vendorServices?.loading && vendorServices?.data.map((service) => (
+              service?.group_service_list.length > 0
+              && <Fragment key={v4()}>
+                <p className="font-semibold">{service?.categories?.title}</p>
+                <div className="grid items-start grid-cols-1 gap-3 xl:grid-cols-2">
+                  <div className="w-full bg-[white] border border-[#D9D9D9] rounded-md space-y-2 p-2">
+                    <p className="text-sm font-semibold">{service?.group_service_list[0]?.sub_categories?.title}</p>
+                    {service?.group_service_list.map((group) => (
+                      <Fragment key={v4()}>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <input
+                              id={group?.service_title.replace(/\s/g, "")}
+                              type="checkbox"
+                              className="accent-primary"
+                              required
+                              defaultChecked={staffServices.some(service => service.vendors_service_id == group.id)}
+                              onChange={e => {
+                                if (e.target.checked) {
+                                  setStaffServices([...staffServices, {
+                                    vendors_service_id: group.id, categories_id: service.categories_id,
+                                    sub_categories_id: group?.sub_categories?.id, staffs_id: staff.id,
+                                  }])
+                                } else {
+                                  setStaffServices(staffServices.filter(service => service.vendors_service_id != group.id));
+                                }
+                                changeSelectService(e);
+                              }}
+                            />
+                            <label
+                              htmlFor={group?.service_title.replace(/\s/g, "")}
+                              className="w-full text-sm font-medium text-gray-900 ms-2 "
+                            >
+                              {group?.service_title}
+                            </label>
+                          </div>
+                          <p className="text-sm">{+group?.duration * 60} Min</p>
+                          <p className="text-sm font-semibold">£{group?.price}</p>
+                        </div>
+                      </Fragment>
+                    ))}
                   </div>
-                  <p className="text-sm">02 h</p>
-                  <p className="text-sm font-semibold">£349</p>
                 </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <input
-                      id="aggreement"
-                      type="checkbox"
-                      className="accent-primary"
-                      required
-                      defaultChecked={""}
-                    />
-                    <label
-                      htmlFor="aggreement"
-                      className="w-full text-sm font-medium text-gray-900 ms-2 "
-                    >
-                      Couples Massage for 1 hours
-                    </label>
-                  </div>
-                  <p className="text-sm">01 h</p>
-                  <p className="text-sm font-semibold">£249</p>
-                </div>
-              </div>
-              <div className="w-full bg-[white] border border-[#D9D9D9] rounded-md space-y-2 p-2">
-                <p className="font-semibold">Swedish Massage</p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <input
-                      id="aggreement"
-                      type="checkbox"
-                      className="accent-primary"
-                      required
-                      defaultChecked={""}
-                    />
-                    <label
-                      htmlFor="aggreement"
-                      className="w-full text-sm font-medium text-gray-900 ms-2 "
-                    >
-                      Swedish Massage
-                    </label>
-                  </div>
-                  <p className="text-sm">02 h</p>
-                  <p className="text-sm font-semibold">£349</p>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <input
-                      id="aggreement"
-                      type="checkbox"
-                      className="accent-primary"
-                      required
-                      defaultChecked={""}
-                    />
-                    <label
-                      htmlFor="aggreement"
-                      className="w-full text-sm font-medium text-gray-900 ms-2 "
-                    >
-                      Swedish Massage
-                    </label>
-                  </div>
-                  <p className="text-sm">01 h</p>
-                  <p className="text-sm font-semibold">£249</p>
-                </div>
-              </div>
-              <div className="w-full bg-[white] border border-[#D9D9D9] rounded-md space-y-2 p-2">
-                <p className="font-semibold">Biodynamic Massage</p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <input
-                      id="aggreement"
-                      type="checkbox"
-                      className="accent-primary"
-                      required
-                      defaultChecked={""}
-                    />
-                    <label
-                      htmlFor="aggreement"
-                      className="w-full text-sm font-medium text-gray-900 ms-2 "
-                    >
-                      Biodynamic Massage
-                    </label>
-                  </div>
-                  <p className="text-sm">02 h</p>
-                  <p className="text-sm font-semibold">£349</p>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <input
-                      id="aggreement"
-                      type="checkbox"
-                      className="accent-primary"
-                      required
-                      defaultChecked={""}
-                    />
-                    <label
-                      htmlFor="aggreement"
-                      className="w-full text-sm font-medium text-gray-900 ms-2 "
-                    >
-                      Biodynamic Massage
-                    </label>
-                  </div>
-                  <p className="text-sm">01 h</p>
-                  <p className="text-sm font-semibold">£249</p>
-                </div>
-              </div>
-            </div>
-            <p className="font-semibold">Massage</p>
-            <div className="grid items-start grid-cols-1 gap-3 xl:grid-cols-2">
-              <div className="w-full bg-[white] border border-[#D9D9D9] rounded-md space-y-2 p-2">
-                <p className="font-semibold">Couple Massage</p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <input
-                      id="aggreement"
-                      type="checkbox"
-                      className="accent-primary"
-                      required
-                      defaultChecked={""}
-                    />
-                    <label
-                      htmlFor="aggreement"
-                      className="w-full text-sm font-medium text-gray-900 ms-2 "
-                    >
-                      Couples Massage for 2 hours
-                    </label>
-                  </div>
-                  <p className="text-sm">02 h</p>
-                  <p className="text-sm font-semibold">£349</p>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <input
-                      id="aggreement"
-                      type="checkbox"
-                      className="accent-primary"
-                      required
-                      defaultChecked={""}
-                    />
-                    <label
-                      htmlFor="aggreement"
-                      className="w-full text-sm font-medium text-gray-900 ms-2 "
-                    >
-                      Couples Massage for 1 hours
-                    </label>
-                  </div>
-                  <p className="text-sm">01 h</p>
-                  <p className="text-sm font-semibold">£249</p>
-                </div>
-              </div>
-              <div className="w-full bg-[white] border border-[#D9D9D9] rounded-md space-y-2 p-2">
-                <p className="font-semibold">Swedish Massage</p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <input
-                      id="aggreement"
-                      type="checkbox"
-                      className="accent-primary"
-                      required
-                      defaultChecked={""}
-                    />
-                    <label
-                      htmlFor="aggreement"
-                      className="w-full text-sm font-medium text-gray-900 ms-2 "
-                    >
-                      Swedish Massage
-                    </label>
-                  </div>
-                  <p className="text-sm">02 h</p>
-                  <p className="text-sm font-semibold">£349</p>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <input
-                      id="aggreement"
-                      type="checkbox"
-                      className="accent-primary"
-                      required
-                      defaultChecked={""}
-                    />
-                    <label
-                      htmlFor="aggreement"
-                      className="w-full text-sm font-medium text-gray-900 ms-2 "
-                    >
-                      Swedish Massage
-                    </label>
-                  </div>
-                  <p className="text-sm">01 h</p>
-                  <p className="text-sm font-semibold">£249</p>
-                </div>
-              </div>
-              <div className="w-full bg-[white] border border-[#D9D9D9] rounded-md space-y-2 p-2">
-                <p className="font-semibold">Biodynamic Massage</p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <input
-                      id="aggreement"
-                      type="checkbox"
-                      className="accent-primary"
-                      required
-                      defaultChecked={""}
-                    />
-                    <label
-                      htmlFor="aggreement"
-                      className="w-full text-sm font-medium text-gray-900 ms-2 "
-                    >
-                      Biodynamic Massage
-                    </label>
-                  </div>
-                  <p className="text-sm">02 h</p>
-                  <p className="text-sm font-semibold">£349</p>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <input
-                      id="aggreement"
-                      type="checkbox"
-                      className="accent-primary"
-                      required
-                      defaultChecked={""}
-                    />
-                    <label
-                      htmlFor="aggreement"
-                      className="w-full text-sm font-medium text-gray-900 ms-2 "
-                    >
-                      Biodynamic Massage
-                    </label>
-                  </div>
-                  <p className="text-sm">01 h</p>
-                  <p className="text-sm font-semibold">£249</p>
-                </div>
-              </div>
-            </div>
+              </Fragment>
+            ))}
           </div>
           <div className="flex items-center justify-center gap-3 pt-10">
             <Button

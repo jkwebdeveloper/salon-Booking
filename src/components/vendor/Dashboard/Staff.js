@@ -179,6 +179,7 @@ const Staff = () => {
                           <div className="flex items-center justify-center w-16 h-16 mx-auto overflow-hidden bg-green-300 rounded-full">
                             {(staff.photo && (
                               <Image
+                                alt="staff photo"
                                 src={
                                   process.env.NEXT_PUBLIC_SERVERURL +
                                   staff.photo

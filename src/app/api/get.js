@@ -19,6 +19,15 @@ export const GET = {
       const { data } = await axios.get(serverURL + url, { headers: requestHeader });
       return data;
     } catch (error) {
+      if (error?.response && error?.response?.data?.code === 401) {
+        if (url.includes('/vendor/')) {
+          localStorage.clear();
+          window.location.href = '/vendor/login';
+        } else {
+          localStorage.clear();
+          window.location.href = '/login';
+        }
+      }
       console.log(error);
       return null;
     }
