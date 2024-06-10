@@ -1,5 +1,5 @@
 import Sidebar from "@/components/global/DashboardHeader/Sidebar";
-import Alertsetting from "@/components/vendor/Dashboard/AlertSetting";
+import SubScription from "@/components/vendor/Dashboard/SubScription";
 import React from "react";
 
 const Subscription = () => {
@@ -9,7 +9,7 @@ const Subscription = () => {
         <Sidebar />
       </div>
       <div className="md:w-4/5 w-[90%] mx-auto space-y-5 h-fit min-h-[350px] p-5 bg-[#f4f2f2]">
-        <Alertsetting />
+        <SubScription />
       </div>
     </div>
   );
