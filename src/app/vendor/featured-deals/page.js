@@ -1,3 +1,4 @@
+'use client'
 import Sidebar from "@/components/global/DashboardHeader/Sidebar";
 import Alertsetting from "@/components/vendor/Dashboard/AlertSetting";
 import React from "react";

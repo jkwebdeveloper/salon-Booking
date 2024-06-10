@@ -189,3 +189,24 @@ body .swiper {
   justify-content: center;
   align-items: center;
 }
+
+.calander .rdp-caption_dropdowns{
+  display: flex;
+  gap:0.5rem;
+}
+.calander .rdp-caption_dropdowns .rdp-vhidden{
+  display: none !important;
+}
+
+.calander .rdp-caption_dropdowns div[class*='rdp-dropdown'] > div{
+  display: none;
+}
+.calander .rdp-caption_dropdowns select{
+  background-color: transparent;
+  border-radius:2px;
+  border:1px solid rgb(178, 178, 178);
+  padding: 2px 5px;
+  max-height: 400px;
+  min-width: 100px;
+  font-size: 0.8rem !important;
+}
