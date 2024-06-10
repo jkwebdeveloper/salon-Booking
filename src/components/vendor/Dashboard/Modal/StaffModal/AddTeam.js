@@ -11,6 +11,7 @@ import { useVendorServices } from "@/hooks";
 import { v4 } from "uuid";
 import Validation from "@/constants/validation";
 import { DatePicker } from "@/components/user/Home/FindNearByForm/datepicker";
+import { set } from "date-fns";
 
 const AddTeam = ({
   setAddTeam,
@@ -28,7 +29,7 @@ const AddTeam = ({
   const [loading, setLoading] = useState(false);
   const [currentTab, setCurrentTab] = useState("basic");
   const [staffServices, setStaffServices] = useState([]); //(staff && staff?.staff_service) || []
-  console.log("staffServices", staff?.staff_service);
+  const [birthDate, setBirthDate] = useState(staff?.dob || "");
   const [selected, setSelected] = useState([]);
 
   const changeTab = (tab = "basic") => setCurrentTab(tab);
@@ -166,10 +167,6 @@ const AddTeam = ({
         >
           <div className="border relative border-1 border-[#0AADA4] rounded-full p-1 w-[3.5rem] h-[3.5rem] mb-2">
             <Image
-              // src={
-              //   ((staff && staff?.photo) && process.env.NEXT_PUBLIC_SERVERURL + staff.photo) ||
-              //   "/static/images/user.webp"
-              // }
               src={
                 userImage?.path ||
                 (staff &&
@@ -194,6 +191,19 @@ const AddTeam = ({
             </div>
           </div>
           <div className="flex flex-col w-full gap-3 lg:flex-row">
+            <div className="w-full space-y-1 text-left lg:w-1/2">
+              <Label htmlFor="sur_name" text="Surname" className={'tracking-wide'} />
+              <input
+                type="text"
+                name="sur_name"
+                className="input_field"
+                placeholder="Enter your Surname"
+                pattern={Validation?.surname?.pattern}
+                defaultValue={(staff && staff.first_name) || ""}
+                required
+              />
+              <p className="error">{Validation?.surname?.msg}</p>
+            </div>
             <div className="w-full space-y-1 text-left lg:w-1/2">
               <Label htmlFor="first_name" text="First name" />
               <input
@@ -222,7 +232,7 @@ const AddTeam = ({
             </div>
           </div>
           <div className="flex flex-col w-full gap-3 lg:flex-row">
-            <div className="w-full space-y-1 text-left lg:w-1/2">
+            <div className="w-full space-y-1 text-left lg:w-1/3">
               <Label htmlFor="email" text="Email" />
               <input
                 type="email"
@@ -235,7 +245,7 @@ const AddTeam = ({
               />
               <p className="error">{Validation?.email?.msg}</p>
             </div>
-            <div className="w-full space-y-1 text-left lg:w-1/2">
+            <div className="w-full space-y-1 text-left lg:w-1/3">
               <Label htmlFor="mobile" text="Phone Number" />
               <input
                 type="text"
@@ -248,41 +258,33 @@ const AddTeam = ({
               />
               <p className="error">{Validation?.phone?.msg}</p>
             </div>
-          </div>
-          {/* <div className="space-y-1 ">
-            <Label htmlFor="dob" text="Date of Birth" />
-            <div className="w-full rounded-md border-[#eae9e9] dateField">
-              <input
-                type="date"
-                name="dob"
-                className="w-full input_field sm:max-w-[200px]"
-                placeholder="Enter your Phone Number"
-                defaultValue={staff?.dob}
-                pattern='\d{4}-\d{1,2}-\d{1,2}'
-                required
-              />
-              <p className="error">{Validation?.dob?.msg}</p>
-            </div>
-          </div> */}
-          <div className="w-full space-y-1 text-left lg:w-1/2">
-            <Label htmlFor="dob" text="Date of Birth" />
-            <div
-              className="border rounded-sm z-[99999] flex-grow"
-              onClick={(e) => setCalendarOpen(true)}
-            >
-              <DatePicker
-                className={"px-3 py-[17px] h-8 rounded-md overflow-hidden"}
-                defaultOpen={calendarOpen}
-                key={calendarOpen}
-                setCalendarOpen={setCalendarOpen}
-                name={"dob"}
-                defaultValue={staff?.dob}
-                placeholder="Enter Date of Birth"
-              />
-              <p className="error">{Validation?.dob?.msg}</p>
+            <div className="w-full space-y-1 text-left lg:w-1/3">
+              <Label htmlFor="dob" text="Date of Birth" />
+              <div
+                className="border rounded-sm z-[99999] flex-grow"
+                onClick={(e) => setCalendarOpen(true)}
+              >
+                <DatePicker
+                  className={"px-3 py-[17px] h-8 rounded-md overflow-hidden"}
+                  defaultOpen={calendarOpen}
+                  onSelect={(date) => setBirthDate(date)}
+                  setCalendarOpen={setCalendarOpen}
+                  key={calendarOpen}
+                  name={"dob"}
+                  maxDate={new Date()}
+                  defaultValue={birthDate}
+                  placeholder="Enter Date of Birth"
+                  yearSelection
+                  disabledDays={{ after: new Date() }}
+                />
+                <p className="error">{Validation?.dob?.msg}</p>
+              </div>
             </div>
           </div>
-          <div className="flex items-center justify-center gap-3">
+          <div className="flex items-center justify-start gap-3">
+            <Button variant="primary" type="submit" disabled={loading}>
+              <Spinner show={loading} width="25" height="25" text="Save" />
+            </Button>
             {Object.keys(staff).length > 0 && (
               <input type="hidden" name="staffs id" value={staff.id} />
             )}
@@ -295,9 +297,6 @@ const AddTeam = ({
               }}
             >
               Cancel
-            </Button>
-            <Button variant="primary" type="submit" disabled={loading}>
-              <Spinner show={loading} width="25" height="25" text="Save" />
             </Button>
             {Object.keys(staff).length > 0 && (
               <Button

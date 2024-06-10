@@ -1,4 +1,8 @@
 const Validation = {
+    surname: {
+        msg: 'Surname is Required',
+        pattern: '[A-Za-z]{2,}',
+    },
     firstname: {
         msg: 'First Name is Required',
         pattern: '[A-Za-z]{2,}',

@@ -19,9 +19,16 @@ export function DatePicker({
   placeholder,
   defaultOpen = false,
   setCalendarOpen,
+  yearSelection,
+  defaultValue,
+  disabledDays,
+  maxDate,
+  onSelect,
 }) {
-  const [date, setDate] = React.useState();
+  const [date, setDate] = React.useState(defaultValue);
   const [open, setOpen] = React.useState(defaultOpen);
+  console.log("date", defaultValue, date)
+
   function dateToLocalISO(date) {
     return new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000)
       .toISOString()
@@ -60,18 +67,26 @@ export function DatePicker({
           onInteractOutside={(e) => setOpen(!open)}
         >
           <Calendar
-            fromDate={new Date()}
+            // fromDate={new Date()}
+            captionLayout={yearSelection ? "dropdown-buttons" : ""}
+            fromYear={yearSelection && 1980}
+            toYear={yearSelection && 2024}
             showOutsideDays
             fixedWeeks
             mode="single"
             selected={date}
             required
-            disabled={new Date()}
-            hidden={isPastDate}
-            // onSelect={(date) => { setDate(new Date(date).toISOString().slice(0, 10)); setOpen(!open) }} // setDate(date)
+            disabled={disabledDays}
             onSelect={(date) => {
-              setDate(date);
-              setOpen(!open);
+              if (onSelect) {
+                setDate(date);
+                onSelect(date)
+                setOpen(!open);
+              }
+              else {
+                setDate(date);
+                setOpen(!open);
+              }
             }}
             initialFocus
           />
