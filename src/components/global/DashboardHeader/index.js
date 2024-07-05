@@ -82,6 +82,7 @@ const DashBoardHeader = () => {
                 { name: "Customers", href: "/vendor/customer" },
                 { name: "Staff", href: "/vendor/staff" },
                 { name: "Services", href: "/vendor/service" },
+                { name: "Product", href: "/vendor/product" },
                 { name: "Business Report", href: "/vendor/business-report" },
                 { name: "Wallet", href: "/vendor/wallet" },
               ].map((link) => (
