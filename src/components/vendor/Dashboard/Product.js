@@ -194,16 +194,19 @@ const Product = () => {
               <thead className="border-b-2 whitespace-nowrap">
                 <tr>
                   <th className="px-6 py-3 text-sm font-semibold text-left">
-                    Product
+                    Supplier name
                   </th>
                   <th className="px-6 py-3 text-sm font-semibold text-left">
-                    Supplier
+                    Contact person
                   </th>
                   <th className="px-6 py-3 text-sm font-semibold text-left">
-                    Price
+                    Phone
                   </th>
                   <th className="px-6 py-3 text-sm font-semibold text-left">
-                    Stock
+                    Email
+                  </th>
+                  <th className="px-6 py-3 text-sm font-semibold text-left">
+                    Assigned products
                   </th>
                   <th className="px-6 py-3 text-sm font-semibold text-left">
                     Action
@@ -212,14 +215,11 @@ const Product = () => {
               </thead>
               <tbody className="border-b-2 whitespace-nowrap">
                 <tr className="">
-                  <td className="px-6 py-4 text-sm">Face wash</td>
-                  <td className="px-6 py-4 text-sm">Distributor 1</td>
-                  <td className="px-6 py-4 text-sm">£5.00</td>
-                  <td className="px-6 py-4 text-sm">
-                    <p className="border border-[#D9D9D9] w-[35px] rounded-md p-2">
-                      23
-                    </p>
-                  </td>
+                  <td className="px-6 py-4 text-sm">FedEx</td>
+                  <td className="px-6 py-4 text-sm">Travis Head</td>
+                  <td className="px-6 py-4 text-sm">123467894</td>
+                  <td className="px-6 py-4 text-sm">loremipsum@mail.com</td>
+                  <td className="px-6 py-4 text-sm text-center">2</td>
                   <td className="flex gap-4 px-6 py-4">
                     {/* <Button
                       variant="icon"
