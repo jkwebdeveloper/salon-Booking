@@ -1,5 +1,5 @@
 import Button from "@/components/ui/button";
-import React, { Fragment, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { FaCamera } from "react-icons/fa";
 
 import Image from "next/image";
@@ -28,7 +28,7 @@ const AddTeam = ({
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [currentTab, setCurrentTab] = useState("basic");
-  const [staffServices, setStaffServices] = useState([]); //(staff && staff?.staff_service) || []
+  const [staffServices, setStaffServices] = useState((staff && staff?.staff_service) || []); //(staff && staff?.staff_service) || []
   const [birthDate, setBirthDate] = useState(staff?.dob || "");
   const [selected, setSelected] = useState([]);
 
@@ -115,6 +115,22 @@ const AddTeam = ({
     }
   };
 
+  const setPublicProfile = async ({ e, step }) => {
+    e.preventDefault();
+    setLoading(true);
+    const resp = await POST.request({
+      url: "/vendor/set-public-staffs-profile",
+      form: e.target,
+      token: vendor.api_token,
+    });
+    setLoading(false);
+    if (resp && resp.code == 200) {
+      setEditStaff("");
+      setAddTeam(false);
+    } else {
+      setError(resp.message);
+    }
+  };
   const addStaffServices = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -131,6 +147,9 @@ const AddTeam = ({
     }
   };
 
+  useEffect(() => {
+    setError(null);
+  }, [currentTab]);
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
@@ -143,7 +162,7 @@ const AddTeam = ({
         <Button
           variant={currentTab == "services" ? "secondary" : "disable"}
           onClick={(e) => changeTab("services")}
-        // disabled={Object.keys(staff).length == 0}
+          disabled={Object.keys(staff).length == 0}
         >
           Services
         </Button>
@@ -311,7 +330,6 @@ const AddTeam = ({
           {error && <Error error={error} />}
         </form>
       )}
-      {console.log("staffServices", selected)}
       {currentTab == "services" && (
         <form
           className="space-y-2"
@@ -322,6 +340,7 @@ const AddTeam = ({
             What service can be booked for this employee ?
           </p>
           <div className="flex items-center">
+            { }
             <input
               id="selectAll"
               type="checkbox"
@@ -346,52 +365,58 @@ const AddTeam = ({
             </label>
           </div>
           <div className="w-full serviceList space-y-2 overflow-auto max-h-[22rem] rounded-md border border-[#D8DAE5] bg-[#FAFAFA] p-2">
+            {console.log(editStaff)}
             {vendorServices?.loading && <Spinner show={true} width={40} height={40} />}
-            {!vendorServices?.loading && vendorServices?.data.map((service) => (
-              service?.group_service_list.length > 0
-              && <Fragment key={v4()}>
-                <p className="font-semibold">{service?.categories?.title}</p>
-                <div className="grid items-start grid-cols-1 gap-3 xl:grid-cols-2">
-                  <div className="w-full bg-[white] border border-[#D9D9D9] rounded-md space-y-2 p-2">
-                    <p className="text-sm font-semibold">{service?.group_service_list[0]?.sub_categories?.title}</p>
-                    {service?.group_service_list.map((group) => (
-                      <Fragment key={v4()}>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center">
-                            <input
-                              id={group?.service_title.replace(/\s/g, "")}
-                              type="checkbox"
-                              className="accent-primary"
-                              required
-                              defaultChecked={staffServices.some(service => service.vendors_service_id == group.id)}
-                              onChange={e => {
-                                if (e.target.checked) {
-                                  setStaffServices([...staffServices, {
-                                    vendors_service_id: group.id, categories_id: service.categories_id,
-                                    sub_categories_id: group?.sub_categories?.id, staffs_id: staff.id,
-                                  }])
-                                } else {
-                                  setStaffServices(staffServices.filter(service => service.vendors_service_id != group.id));
-                                }
-                                changeSelectService(e);
-                              }}
-                            />
-                            <label
-                              htmlFor={group?.service_title.replace(/\s/g, "")}
-                              className="w-full text-sm font-medium text-gray-900 ms-2 "
-                            >
-                              {group?.service_title}
-                            </label>
-                          </div>
-                          <p className="text-sm">{+group?.duration * 60} Min</p>
-                          <p className="text-sm font-semibold">£{group?.price}</p>
+            {!vendorServices?.loading && vendorServices?.data.map((service) => {
+              const services = Object.groupBy(service?.group_service_list, ({ sub_categories_id }) => sub_categories_id);
+              return Object.keys(services).length > 0
+                && <Fragment key={v4()}>
+                  <p className="font-semibold">{service?.categories?.title}</p>
+                  <div className="grid items-start grid-cols-1 gap-3 xl:grid-cols-2">
+                    {Object.keys(services).map((key) => {
+                      return (
+                        <div className="w-full bg-[white] border border-[#D9D9D9] rounded-md space-y-2 p-2">
+                          <p className="text-sm font-semibold">{services[key][0]?.sub_categories?.title}</p>
+                          {services[key].map((group) => (
+                            <Fragment key={v4()}>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center">
+                                  <input
+                                    id={group?.service_title.replace(/\s/g, "")}
+                                    type="checkbox"
+                                    className="accent-primary"
+                                    required
+                                    defaultChecked={staffServices.some(service => service.vendors_service_id == group.id)}
+                                    onChange={e => {
+                                      if (e.target.checked) {
+                                        setStaffServices([...staffServices, {
+                                          vendors_service_id: group.id, categories_id: service.categories_id,
+                                          sub_categories_id: group?.sub_categories?.id, staffs_id: staff.id,
+                                        }])
+                                      } else {
+                                        setStaffServices(staffServices.filter(service => service.vendors_service_id != group.id));
+                                      }
+                                      changeSelectService(e);
+                                    }}
+                                  />
+                                  <label
+                                    htmlFor={group?.service_title.replace(/\s/g, "")}
+                                    className="w-full text-sm font-medium text-gray-900 ms-2 "
+                                  >
+                                    {group?.service_title}
+                                  </label>
+                                </div>
+                                <p className="text-sm">{+group?.duration * 60} Min</p>
+                                <p className="text-sm font-semibold">£{group?.price}</p>
+                              </div>
+                            </Fragment>
+                          ))}
                         </div>
-                      </Fragment>
-                    ))}
+                      )
+                    })}
                   </div>
-                </div>
-              </Fragment>
-            ))}
+                </Fragment>
+            })}
           </div>
           <div className="flex items-center justify-center gap-3 pt-10">
             <Button
@@ -414,7 +439,7 @@ const AddTeam = ({
         <>
           <form
             className="space-y-4"
-            onSubmit={(e) => updateStaff({ e, step: "" })}
+            onSubmit={(e) => setPublicProfile({ e, step: "" })}
             noValidate
           >
             <div className="w-full space-y-1 text-left">
