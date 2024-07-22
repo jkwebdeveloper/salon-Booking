@@ -1,6 +1,6 @@
 "use client";
 import { Banner, Error, Label, Spinner } from "@/components";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Button from "@/components/ui/button";
 import SuccessfullModal from "./SuccessfullModal";
@@ -32,6 +32,24 @@ const Register = () => {
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const [currentTab, setCurrentTab] = useState("Business");
   const [selectedDays, setSelectedDays] = useState({});
+  const deviceType = (typeof window != "undefined" && /Mobi/i.test(window.navigator.userAgent) && 2) || 1;
+  const [formData, setFormData] = useState({
+    salon_name: "",
+    first_name: "",
+    last_name: "",
+    sur_name: "",
+    email: "",
+    phone_number: "",
+    Address: "",
+    city: "",
+    country: "",
+    postcode: "",
+    type_of_salon: "",
+    password: "",
+    cpassword: "",
+    is_agree_terms: "",
+    device_type: deviceType,
+  });
 
   // const changeTab = (tab = "basic") => setCurrentTab(tab);
   const [activeTab, setActiveTab] = useState("Business");
@@ -44,15 +62,18 @@ const Register = () => {
     setActiveTab(tab);
   };
 
-  const registerVendor = async (e) => {
+  const RegisterVendor = async (e) => {
     e.preventDefault();
     setLoading(true);
+    const oldData = localStorage.getItem("new_vendor") && JSON.parse(localStorage.getItem("new_vendor")) || null;
     const resp = await POST.request({
-      url: "/vendor/register",
+      url: oldData && "/vendor/update-profile" || "/vendor/register",
       form: e.target,
+      token: oldData && oldData.api_token || null,
     });
     setLoading(false);
     if (resp.code == 200 && Object.keys(resp.data).length > 0) {
+      localStorage.setItem("new_vendor", JSON.stringify(resp.data));
       if (currentTab == "Business") {
         changeTab("Shopworking");
         return;
@@ -64,12 +85,44 @@ const Register = () => {
     }
   };
 
-  const updateVendorTime = async (e) => {
+  const updateHours = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-    console.log(formData);
+    const isValid = [];
+    Object.keys(selectedDays).map(day => {
+      (!selectedDays[day]?.from_time || !selectedDays[day]?.to_time) && isValid.push(day);
+    });
+    if (isValid.length == 0) {
+      const oldData = localStorage.getItem("new_vendor") && JSON.parse(localStorage.getItem("new_vendor")) || null;
+      const hoursData = {};
+      new Array(weekDays.length).fill(0).map((_, i) => {
+        const day = weekDays[i];
+        (!selectedDays[day]) && (hoursData[day.slice(0, 3)] = { status: 0 })
+          || (hoursData[day.slice(0, 3)] = selectedDays[day]);
+      });
+      setLoading(true);
+      const resp = await POST.request({
+        url: "/vendor/set-vendor-availability",
+        form: hoursData,
+        token: oldData && oldData.api_token || null,
+        rawdata: true,
+      });
+      if (resp.code == 200) {
+        changeTab("Business");
+        setFormData({}); // Clear form data
+        localStorage.removeItem("new_vendor");
+        setSuccessFull(true);
+      }
+      else {
+        setError(resp.message);
+      }
+      setLoading(false);
+      console.log(resp);
+    }
   };
 
+  useEffect(() => {
+    setFormData({ ...formData, device_type: deviceType });
+  }, [deviceType]);
   return (
     <div>
       {/* <Banner title="" /> */}
@@ -143,7 +196,7 @@ const Register = () => {
             <form
               className="space-y-4"
               noValidate
-              onSubmit={(e) => registerVendor(e)}
+              onSubmit={(e) => RegisterVendor(e)}
             >
               <div className="w-full space-y-1 text-left">
                 <Label htmlFor="salon_name" text="Salon name" required />
@@ -155,6 +208,8 @@ const Register = () => {
                   placeholder="Salon Name"
                   pattern={Validation?.title?.pattern}
                   required={true}
+                  onChange={(e) => setFormData({ ...formData, salon_name: e.target.value })}
+                  defaultValue={formData?.salon_name}
                 />
                 <p className="error">Salon name Required</p>
               </div>
@@ -172,6 +227,8 @@ const Register = () => {
                     placeholder="Enter First Name"
                     pattern={Validation?.firstname?.pattern}
                     required={true}
+                    onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
+                    defaultValue={formData?.first_name}
                   />
                   <p className="error">{Validation?.firstname?.msg}</p>
                 </div>
@@ -184,6 +241,8 @@ const Register = () => {
                     placeholder="Enter Last Name"
                     pattern={Validation?.lastname?.pattern}
                     required={true}
+                    onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
+                    defaultValue={formData?.last_name}
                   />
                   <p className="error">{Validation?.lastname?.msg}</p>
                 </div>
@@ -198,6 +257,8 @@ const Register = () => {
                   placeholder="Surname"
                   pattern={Validation?.surname?.pattern}
                   required={true}
+                  onChange={(e) => setFormData({ ...formData, sur_name: e.target.value })}
+                  defaultValue={formData?.sur_name}
                 />
                 <p className="error">{Validation?.surname?.msg}</p>
               </div>
@@ -210,6 +271,8 @@ const Register = () => {
                   placeholder="Email"
                   pattern={Validation?.email?.pattern}
                   required={true}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  defaultValue={formData?.email}
                 />
                 <p className="error">{Validation?.email?.msg}</p>
               </div>
@@ -227,6 +290,8 @@ const Register = () => {
                   pattern={Validation?.phone?.pattern}
                   maxLength={10}
                   required={true}
+                  onChange={(e) => setFormData({ ...formData, phone_number: e.target.value })}
+                  defaultValue={formData?.phone_number}
                 />
                 <p className="error">{Validation?.phone?.msg}</p>
               </div>
@@ -240,18 +305,26 @@ const Register = () => {
                   // pattern={Validation?.phone?.pattern}
                   maxLength={10}
                   required={true}
+                  onChange={(e) => setFormData({ ...formData, Address: e.target.value })}
+                  defaultValue={formData?.Address}
                 />
                 {/* <p className="error">{Validation?.phone?.msg}</p> */}
               </div>
               <div className="flex flex-col w-full gap-3 lg:flex-row">
                 <div className="w-full space-y-1 text-left lg:w-1/2">
                   <Label htmlFor="City" text="City" required />
-                  <input type="text" name="city" id="City" className="input_field" placeholder="City" pattern={Validation?.city?.pattern} required />
+                  <input type="text" name="city" id="City" className="input_field" placeholder="City" pattern={Validation?.city?.pattern} required
+                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                    defaultValue={formData?.city}
+                  />
                   <p className="error">{Validation?.city?.msg}</p>
                 </div>
                 <div className="w-full space-y-1 text-left lg:w-1/2">
                   <Label htmlFor="Country" text="Country" required />
-                  <input type="text" name="country" id="Country" className="input_field" placeholder="Country" pattern={Validation?.country?.pattern} required />
+                  <input type="text" name="country" id="Country" className="input_field" placeholder="Country" pattern={Validation?.country?.pattern} required
+                    onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+                    defaultValue={formData?.country}
+                  />
                   <p className="error">{Validation?.country?.msg}</p>
                 </div>
               </div>
@@ -271,6 +344,8 @@ const Register = () => {
                     pattern={Validation?.postcode?.pattern}
                     maxlength="6"
                     required={true}
+                    onChange={(e) => setFormData({ ...formData, postcode: e.target.value })}
+                    defaultValue={formData?.postcode}
                   />
                   <p className="error">{Validation?.postcode?.msg}</p>
                 </div>
@@ -281,11 +356,11 @@ const Register = () => {
                     required
                   />
                   <Select onValueChange={e => {
-                    setSalonType(e)
-                    document.querySelector('input[name="type_of_salon"]').classList.remove('invalid', 'border-red-500', 'text-red-500')
+                    document.querySelector('input[name="type_of_salon"]').classList.remove('invalid', 'border-red-500', 'text-red-500');
+                    setFormData({ ...formData, type_of_salon: e });
                   }}>
                     <SelectTrigger>
-                      {salonType && mainCat?.data?.filter(c => c.id == salonType)[0]?.title || <SelectValue placeholder="Select a Salon Type" />}
+                      {formData?.type_of_salon && mainCat?.data?.filter(c => c.id == formData?.type_of_salon)[0]?.title || <SelectValue placeholder="Select a Salon Type" />}
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
@@ -300,7 +375,7 @@ const Register = () => {
                     type="hidden"
                     name="type_of_salon"
                     className="input_field"
-                    defaultValue={salonType}
+                    defaultValue={formData?.type_of_salon}
                     pattern='[0-9]{1,}'
                     required={true}
                   />
@@ -318,6 +393,8 @@ const Register = () => {
                     placeholder="Password"
                     pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
                     required
+                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                    defaultValue={formData?.password}
                   />
                   <p className="error">{Validation?.password?.msg}</p>
                   <button
@@ -350,6 +427,8 @@ const Register = () => {
                     className="input_field"
                     placeholder="Confirm Password"
                     required
+                    onChange={(e) => setFormData({ ...formData, cpassword: e.target.value })}
+                    defaultValue={formData?.cpassword}
                   />
                   <p className="error">Password not matched</p>
                   <button
@@ -378,7 +457,9 @@ const Register = () => {
                   name="is_agree_terms"
                   className="accent-primary"
                   required
-                  value={1}
+                  onChange={(e) => setFormData({ ...formData, is_agree_terms: e.target.checked ? 1 : 0 })}
+                  defaultChecked={formData?.is_agree_terms == 1 && true || false}
+                  defaultValue={formData?.is_agree_terms}
                 />
                 <label
                   htmlFor="aggreement"
@@ -413,12 +494,7 @@ const Register = () => {
               <input
                 type="hidden"
                 name="device_type"
-                value={
-                  (typeof window != "undefined" &&
-                    /Mobi/i.test(window.navigator.userAgent) &&
-                    2) ||
-                  1
-                }
+                defaultValue={deviceType}
               />
               <Button
                 type="submit"
@@ -446,7 +522,7 @@ const Register = () => {
           <>
             {/* Shop working hours start */}
             <p className="text-xl font-semibold">Shop working hours</p>
-            <form onSubmit={e => updateVendorTime(e)}>
+            <form onSubmit={e => updateHours(e)}>
               <div className="w-full space-y-3">
                 <div className="w-full space-y-3 lg:w-1/2">
                   {weekDays.map((day) => {
@@ -462,7 +538,7 @@ const Register = () => {
                               onChange={(e) => {
                                 if (e.target.checked) {
                                   e.target.nextElementSibling.value = '1';
-                                  setSelectedDays({ ...selectedDays, [day]: { from: '', to: '' } })
+                                  setSelectedDays({ ...selectedDays, [day]: { from_time: '', to_time: '', status: 1 } })
                                 } else {
                                   e.target.nextElementSibling.value = '0';
                                   const newDays = selectedDays;
@@ -481,9 +557,9 @@ const Register = () => {
                           </div>
                         </li>
                         <div className="flex items-center gap-3">
-                          <Select name={day.slice(0, 3) + '[from_time]'} onValueChange={e => setSelectedDays({ ...selectedDays, [day]: { ...selectedDays[day], from: e } })}>
-                            <SelectTrigger className={`text-black min-w-[90px] ${selectedDays[day] && (selectedDays[day].from && 'text-black' || 'text-red-500')}`}>
-                              {selectedDays[day] && (selectedDays[day].from || 'From') || 'From'}
+                          <Select name={day.slice(0, 3) + '[from_time]'} onValueChange={e => setSelectedDays({ ...selectedDays, [day]: { ...selectedDays[day], from_time: e } })}>
+                            <SelectTrigger className={`text-black min-w-[90px] ${selectedDays[day] && (selectedDays[day].from_time && 'text-black' || 'text-red-500')}`}>
+                              {selectedDays[day] && (selectedDays[day].from_time || 'From') || 'From'}
                             </SelectTrigger>
                             <SelectContent>
                               <SelectGroup>
@@ -493,9 +569,9 @@ const Register = () => {
                               </SelectGroup>
                             </SelectContent>
                           </Select>
-                          <Select onValueChange={e => setSelectedDays({ ...selectedDays, [day]: { ...selectedDays[day], to: e } })}>
-                            <SelectTrigger className={`text-black min-w-[90px] ${selectedDays[day] && (selectedDays[day].to && 'text-black' || 'text-red-500')}`}>
-                              {selectedDays[day] && (selectedDays[day].to || 'To') || 'To'}
+                          <Select onValueChange={e => setSelectedDays({ ...selectedDays, [day]: { ...selectedDays[day], to_time: e } })}>
+                            <SelectTrigger className={`text-black min-w-[90px] ${selectedDays[day] && (selectedDays[day].to_time && 'text-black' || 'text-red-500')}`}>
+                              {selectedDays[day] && (selectedDays[day].to_time || 'To') || 'To'}
                             </SelectTrigger>
                             <SelectContent>
                               <SelectGroup>
@@ -512,13 +588,14 @@ const Register = () => {
                 </div>
               </div>
               <div className="flex items-center justify-center w-full gap-4 pt-5 mx-auto">
-                <Button variant="disable" className="flex items-center uppercase" onClick={e => changeTab("Business")}>
+                <Button variant="disable" className="flex items-center uppercase" onClick={e => changeTab("Business")} disabled={loading}>
                   Back
                 </Button>
-                <Button variant="primary" type="submit" className="flex items-center uppercase">
-                  Finish
+                <Button variant="primary" type="submit" className="flex items-center uppercase" disabled={loading}>
+                  <Spinner show={loading} width="25" height="25" text="Finish" />
                 </Button>
               </div>
+              {error && <Error error={error} />}
             </form>
             {/* Shop working hours end */}
           </>
