@@ -18,24 +18,32 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useCategory } from "@/hooks";
+import { v4 } from "uuid";
 
 const Register = () => {
   const dispatch = useDispatch();
-
+  const mainCat = useCategory();
   const [successfull, setSuccessFull] = useState(false);
+  const [salonType, setSalonType] = useState("");
   const [error, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const [currentTab, setCurrentTab] = useState("Business");
+  const [selectedDays, setSelectedDays] = useState({});
 
   // const changeTab = (tab = "basic") => setCurrentTab(tab);
   const [activeTab, setActiveTab] = useState("Business");
+
+  const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  const timeing = ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"];
 
   const changeTab = (tab) => {
     setCurrentTab(tab);
     setActiveTab(tab);
   };
+
   const registerVendor = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -45,11 +53,21 @@ const Register = () => {
     });
     setLoading(false);
     if (resp.code == 200 && Object.keys(resp.data).length > 0) {
-      setSuccessFull(true);
-      e.target.reset();
+      if (currentTab == "Business") {
+        changeTab("Shopworking");
+        return;
+      } else {
+        setSuccessFull(true);
+      }
     } else {
       setError(resp.message);
     }
+  };
+
+  const updateVendorTime = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    console.log(formData);
   };
 
   return (
@@ -81,16 +99,14 @@ const Register = () => {
               1
             </p> */}
             <p
-              className={`rounded-full w-8 h-8 flex justify-center items-center ${
-                activeTab === "Business" ? "bg-[#0AADA4]" : "bg-[#B8B8B8]"
-              } text-white`}
+              className={`rounded-full w-8 h-8 flex justify-center items-center ${activeTab === "Business" ? "bg-[#0AADA4]" : "bg-[#B8B8B8]"
+                } text-white`}
             >
               1
             </p>
             <p
-              className={`text-sm ${
-                activeTab === "Business" ? "font-bold" : "text-[#8D8D8D]"
-              }`}
+              className={`text-sm ${activeTab === "Business" ? "font-bold" : "text-[#8D8D8D]"
+                }`}
             >
               Business Information
             </p>
@@ -106,16 +122,14 @@ const Register = () => {
             </p>
             <p className="text-sm text-[#8D8D8D]">Shop working hours</p> */}
             <p
-              className={`rounded-full w-8 h-8 flex justify-center items-center ${
-                activeTab === "Shopworking" ? "bg-[#0AADA4]" : "bg-[#B8B8B8]"
-              } text-white`}
+              className={`rounded-full w-8 h-8 flex justify-center items-center ${activeTab === "Shopworking" ? "bg-[#0AADA4]" : "bg-[#B8B8B8]"
+                } text-white`}
             >
               2
             </p>
             <p
-              className={`text-sm ${
-                activeTab === "Shopworking" ? "font-bold" : "text-[#8D8D8D]"
-              }`}
+              className={`text-sm ${activeTab === "Shopworking" ? "font-bold" : "text-[#8D8D8D]"
+                }`}
             >
               Shop working hours
             </p>
@@ -132,7 +146,7 @@ const Register = () => {
               onSubmit={(e) => registerVendor(e)}
             >
               <div className="w-full space-y-1 text-left">
-                <Label htmlFor="salon_name" text="Salon name" required={true} />
+                <Label htmlFor="salon_name" text="Salon name" required />
                 <input
                   type="text"
                   name="salon_name"
@@ -140,7 +154,7 @@ const Register = () => {
                   className="input_field"
                   placeholder="Salon Name"
                   pattern={Validation?.title?.pattern}
-                  required
+                  required={true}
                 />
                 <p className="error">Salon name Required</p>
               </div>
@@ -149,7 +163,7 @@ const Register = () => {
                   <Label
                     htmlFor="first_name"
                     text="First Name"
-                    required={true}
+                    required
                   />
                   <input
                     type="text"
@@ -157,45 +171,45 @@ const Register = () => {
                     className="input_field"
                     placeholder="Enter First Name"
                     pattern={Validation?.firstname?.pattern}
-                    required
+                    required={true}
                   />
                   <p className="error">{Validation?.firstname?.msg}</p>
                 </div>
                 <div className="w-full space-y-1 text-left lg:w-1/2">
-                  <Label htmlFor="last_name" text="Last Name" required={true} />
+                  <Label htmlFor="last_name" text="Last Name" required />
                   <input
                     type="text"
                     name="last_name"
                     className="input_field"
                     placeholder="Enter Last Name"
                     pattern={Validation?.lastname?.pattern}
-                    required
+                    required={true}
                   />
                   <p className="error">{Validation?.lastname?.msg}</p>
                 </div>
               </div>
               <div className="w-full space-y-1 text-left">
-                <Label htmlFor="salon_name" text="Surname" required={true} />
+                <Label htmlFor="sur_name" text="Surname" required />
                 <input
                   type="text"
-                  name="salon_name"
-                  id="salon_name"
+                  name="sur_name"
+                  id="sur_name"
                   className="input_field"
                   placeholder="Surname"
-                  pattern="^[a-zA-Z0-9\s]{4,}$"
-                  required
+                  pattern={Validation?.surname?.pattern}
+                  required={true}
                 />
-                <p className="error">Min 4 Character Required</p>
+                <p className="error">{Validation?.surname?.msg}</p>
               </div>
               <div className="w-full space-y-1 text-left">
-                <Label htmlFor="email" text="Email" required={true} />
+                <Label htmlFor="email" text="Email" required />
                 <input
                   type="text"
                   name="email"
                   className="input_field"
                   placeholder="Email"
                   pattern={Validation?.email?.pattern}
-                  required
+                  required={true}
                 />
                 <p className="error">{Validation?.email?.msg}</p>
               </div>
@@ -203,7 +217,7 @@ const Register = () => {
                 <Label
                   htmlFor="phone_number"
                   text="Phone number"
-                  required={true}
+                  required
                 />
                 <input
                   type="text"
@@ -212,12 +226,12 @@ const Register = () => {
                   placeholder="Phone Number"
                   pattern={Validation?.phone?.pattern}
                   maxLength={10}
-                  required
+                  required={true}
                 />
                 <p className="error">{Validation?.phone?.msg}</p>
               </div>
               <div className="w-full space-y-1 text-left">
-                <Label htmlFor="Address" text="Address" required={true} />
+                <Label htmlFor="Address" text="Address" />
                 <input
                   type="text"
                   name="Address"
@@ -225,48 +239,20 @@ const Register = () => {
                   placeholder="Address"
                   // pattern={Validation?.phone?.pattern}
                   maxLength={10}
-                  required
+                  required={true}
                 />
                 {/* <p className="error">{Validation?.phone?.msg}</p> */}
               </div>
               <div className="flex flex-col w-full gap-3 lg:flex-row">
                 <div className="w-full space-y-1 text-left lg:w-1/2">
-                  <Label htmlFor="City" text="City" required={true} />
-                  <Select>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a fruit" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Fruits</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                        <SelectItem value="blueberry">Blueberry</SelectItem>
-                        <SelectItem value="grapes">Grapes</SelectItem>
-                        <SelectItem value="pineapple">Pineapple</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                  {/* <p className="error">{Validation?.postcode?.msg}</p> */}
+                  <Label htmlFor="City" text="City" required />
+                  <input type="text" name="city" id="City" className="input_field" placeholder="City" pattern={Validation?.city?.pattern} required />
+                  <p className="error">{Validation?.city?.msg}</p>
                 </div>
                 <div className="w-full space-y-1 text-left lg:w-1/2">
-                  <Label htmlFor="City" text="City" required={true} />
-                  <Select>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a fruit" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Fruits</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                        <SelectItem value="blueberry">Blueberry</SelectItem>
-                        <SelectItem value="grapes">Grapes</SelectItem>
-                        <SelectItem value="pineapple">Pineapple</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                  {/* <p className="error">{Validation?.postcode?.msg}</p> */}
+                  <Label htmlFor="Country" text="Country" required />
+                  <input type="text" name="country" id="Country" className="input_field" placeholder="Country" pattern={Validation?.country?.pattern} required />
+                  <p className="error">{Validation?.country?.msg}</p>
                 </div>
               </div>
               <div className="flex flex-col w-full gap-3 lg:flex-row">
@@ -274,7 +260,7 @@ const Register = () => {
                   <Label
                     htmlFor="postcode"
                     text="Salon Postcode"
-                    required={true}
+                    required
                   />
                   <input
                     type="text"
@@ -284,7 +270,7 @@ const Register = () => {
                     placeholder="Salon Postcode"
                     pattern={Validation?.postcode?.pattern}
                     maxlength="6"
-                    required
+                    required={true}
                   />
                   <p className="error">{Validation?.postcode?.msg}</p>
                 </div>
@@ -292,29 +278,38 @@ const Register = () => {
                   <Label
                     htmlFor="type_of_salon"
                     text="What type of salon you have?"
-                    required={true}
+                    required
                   />
-                  <Select>
+                  <Select onValueChange={e => {
+                    setSalonType(e)
+                    document.querySelector('input[name="type_of_salon"]').classList.remove('invalid', 'border-red-500', 'text-red-500')
+                  }}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select a fruit" />
+                      {salonType && mainCat?.data?.filter(c => c.id == salonType)[0]?.title || <SelectValue placeholder="Select a Salon Type" />}
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectLabel>Fruits</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                        <SelectItem value="blueberry">Blueberry</SelectItem>
-                        <SelectItem value="grapes">Grapes</SelectItem>
-                        <SelectItem value="pineapple">Pineapple</SelectItem>
+                        <SelectLabel>Type</SelectLabel>
+                        {mainCat.data?.map((cat) => (
+                          <SelectItem value={cat?.id}>{cat?.title}</SelectItem>
+                        ))}
                       </SelectGroup>
                     </SelectContent>
                   </Select>
+                  <input
+                    type="hidden"
+                    name="type_of_salon"
+                    className="input_field"
+                    defaultValue={salonType}
+                    pattern='[0-9]{1,}'
+                    required={true}
+                  />
                   <p className="error">Salon Type Required</p>
                 </div>
               </div>
               <div className="flex flex-col w-full gap-3 lg:flex-row">
                 <div className="relative w-full space-y-1 text-left lg:w-1/2">
-                  <Label htmlFor="password" text="Password" required={true} />
+                  <Label htmlFor="password" text="Password" required />
                   <input
                     type={showPassword ? "text" : "password"}
                     name="password"
@@ -336,25 +331,25 @@ const Register = () => {
                         className="text-gray-400 cursor-pointer"
                       />
                     )) || (
-                      <BsEyeSlashFill
-                        size={24}
-                        className="text-gray-400 cursor-pointer"
-                      />
-                    )}
+                        <BsEyeSlashFill
+                          size={24}
+                          className="text-gray-400 cursor-pointer"
+                        />
+                      )}
                   </button>
                 </div>
                 <div className="relative w-full space-y-1 text-left lg:w-1/2">
                   <Label
                     htmlFor="cpassword"
                     text="Confirm password"
-                    required={true}
+                    required
                   />
                   <input
                     type={showConfirmPassword ? "text" : "password"}
                     id="cpassword"
                     className="input_field"
                     placeholder="Confirm Password"
-                    required={true}
+                    required
                   />
                   <p className="error">Password not matched</p>
                   <button
@@ -368,11 +363,11 @@ const Register = () => {
                         className="text-gray-400 cursor-pointer"
                       />
                     )) || (
-                      <BsEyeSlashFill
-                        size={24}
-                        className="text-gray-400 cursor-pointer"
-                      />
-                    )}
+                        <BsEyeSlashFill
+                          size={24}
+                          className="text-gray-400 cursor-pointer"
+                        />
+                      )}
                   </button>
                 </div>
               </div>
@@ -380,9 +375,10 @@ const Register = () => {
                 <input
                   id="aggreement"
                   type="checkbox"
+                  name="is_agree_terms"
                   className="accent-primary"
                   required
-                  defaultChecked={""}
+                  value={1}
                 />
                 <label
                   htmlFor="aggreement"
@@ -450,394 +446,80 @@ const Register = () => {
           <>
             {/* Shop working hours start */}
             <p className="text-xl font-semibold">Shop working hours</p>
-            <div className="w-full space-y-3">
-              <div className="flex items-center justify-between">
-                <li className="w-full list-none">
-                  <div className="flex items-center gap-3">
-                    <input
-                      id="monday"
-                      type="checkbox"
-                      className="hidden peer accent-[#0AADA4]"
-                    />
-                    <label
-                      htmlFor="monday"
-                      className="relative flex items-center justify-center p-0.5 peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-5 h-5 cursor-pointer bg-[#0AADA4] border border-gray-400 rounded overflow-hidden"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-full fill-white"
-                        viewBox="0 0 520 520"
-                      >
-                        <path
-                          d="M79.423 240.755a47.529 47.529 0 0 0-36.737 77.522l120.73 147.894a43.136 43.136 0 0 0 36.066 16.009c14.654-.787 27.884-8.626 36.319-21.515L486.588 56.773a6.13 6.13 0 0 1 .128-.2c2.353-3.613 1.59-10.773-3.267-15.271a13.321 13.321 0 0 0-19.362 1.343q-.135.166-.278.327L210.887 328.736a10.961 10.961 0 0 1-15.585.843l-83.94-76.386a47.319 47.319 0 0 0-31.939-12.438z"
-                          data-name="7-Check"
-                          data-original="#000000"
-                        />
-                      </svg>
-                    </label>
-                    Monday
-                  </div>
-                </li>
-                <div className="flex items-center w-full gap-4">
-                  <Select>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="09:00" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Fruits</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                  <Select>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="23:30" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Fruits</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
+            <form onSubmit={e => updateVendorTime(e)}>
+              <div className="w-full space-y-3">
+                <div className="w-full space-y-3 lg:w-1/2">
+                  {weekDays.map((day) => {
+                    return (
+                      <div className="flex items-center gap-10" key={v4()}>
+                        <li className="w-full list-none">
+                          <div className="flex items-center">
+                            <input
+                              id={day}
+                              type="checkbox"
+                              className="w-5 h-5 accent-green-600"
+                              checked={selectedDays[day] ? true : false}
+                              onChange={(e) => {
+                                if (e.target.checked) {
+                                  e.target.nextElementSibling.value = '1';
+                                  setSelectedDays({ ...selectedDays, [day]: { from: '', to: '' } })
+                                } else {
+                                  e.target.nextElementSibling.value = '0';
+                                  const newDays = selectedDays;
+                                  delete newDays[day];
+                                  setSelectedDays({ ...newDays });
+                                }
+                              }}
+                            />
+                            <input type="hidden" name={day.slice(0, 3) + '[status]'} value={0} onChange={e => { return }} />
+                            <label
+                              htmlFor={day}
+                              className="w-full text-sm font-medium text-gray-900 ms-2 "
+                            >
+                              {day}
+                            </label>
+                          </div>
+                        </li>
+                        <div className="flex items-center gap-3">
+                          <Select name={day.slice(0, 3) + '[from_time]'} onValueChange={e => setSelectedDays({ ...selectedDays, [day]: { ...selectedDays[day], from: e } })}>
+                            <SelectTrigger className={`text-black min-w-[90px] ${selectedDays[day] && (selectedDays[day].from && 'text-black' || 'text-red-500')}`}>
+                              {selectedDays[day] && (selectedDays[day].from || 'From') || 'From'}
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                {timeing.map((time) => (
+                                  <SelectItem key={v4()} value={time}>{time}</SelectItem>
+                                ))}
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                          <Select onValueChange={e => setSelectedDays({ ...selectedDays, [day]: { ...selectedDays[day], to: e } })}>
+                            <SelectTrigger className={`text-black min-w-[90px] ${selectedDays[day] && (selectedDays[day].to && 'text-black' || 'text-red-500')}`}>
+                              {selectedDays[day] && (selectedDays[day].to || 'To') || 'To'}
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                {timeing.map((time) => (
+                                  <SelectItem key={v4()} value={time}>{time}</SelectItem>
+                                ))}
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
-              <div className="flex items-center justify-between">
-                <li className="w-full list-none">
-                  <div className="flex items-center gap-3">
-                    <input
-                      id="tue"
-                      type="checkbox"
-                      className="hidden peer accent-[#0AADA4]"
-                    />
-                    <label
-                      htmlFor="tue"
-                      className="relative flex items-center justify-center p-0.5 peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-5 h-5 cursor-pointer bg-[#0AADA4] border border-gray-400 rounded overflow-hidden"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-full fill-white"
-                        viewBox="0 0 520 520"
-                      >
-                        <path
-                          d="M79.423 240.755a47.529 47.529 0 0 0-36.737 77.522l120.73 147.894a43.136 43.136 0 0 0 36.066 16.009c14.654-.787 27.884-8.626 36.319-21.515L486.588 56.773a6.13 6.13 0 0 1 .128-.2c2.353-3.613 1.59-10.773-3.267-15.271a13.321 13.321 0 0 0-19.362 1.343q-.135.166-.278.327L210.887 328.736a10.961 10.961 0 0 1-15.585.843l-83.94-76.386a47.319 47.319 0 0 0-31.939-12.438z"
-                          data-name="7-Check"
-                          data-original="#000000"
-                        />
-                      </svg>
-                    </label>
-                    Tuesday
-                  </div>
-                </li>
-                <div className="flex items-center w-full gap-4">
-                  <Select>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="09:00" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Fruits</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                  <Select>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="23:30" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Fruits</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </div>
+              <div className="flex items-center justify-center w-full gap-4 pt-5 mx-auto">
+                <Button variant="disable" className="flex items-center uppercase" onClick={e => changeTab("Business")}>
+                  Back
+                </Button>
+                <Button variant="primary" type="submit" className="flex items-center uppercase">
+                  Finish
+                </Button>
               </div>
-              <div className="flex items-center justify-between">
-                <li className="w-full list-none">
-                  <div className="flex items-center gap-3">
-                    <input
-                      id="Wednesday"
-                      type="checkbox"
-                      className="hidden peer accent-[#0AADA4]"
-                    />
-                    <label
-                      htmlFor="Wednesday"
-                      className="relative flex items-center justify-center p-0.5 peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-5 h-5 cursor-pointer bg-[#0AADA4] border border-gray-400 rounded overflow-hidden"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-full fill-white"
-                        viewBox="0 0 520 520"
-                      >
-                        <path
-                          d="M79.423 240.755a47.529 47.529 0 0 0-36.737 77.522l120.73 147.894a43.136 43.136 0 0 0 36.066 16.009c14.654-.787 27.884-8.626 36.319-21.515L486.588 56.773a6.13 6.13 0 0 1 .128-.2c2.353-3.613 1.59-10.773-3.267-15.271a13.321 13.321 0 0 0-19.362 1.343q-.135.166-.278.327L210.887 328.736a10.961 10.961 0 0 1-15.585.843l-83.94-76.386a47.319 47.319 0 0 0-31.939-12.438z"
-                          data-name="7-Check"
-                          data-original="#000000"
-                        />
-                      </svg>
-                    </label>
-                    Wednesday
-                  </div>
-                </li>
-                <div className="flex items-center w-full gap-4">
-                  <Select>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="09:00" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Fruits</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                  <Select>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="23:30" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Fruits</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <li className="w-full list-none">
-                  <div className="flex items-center gap-3">
-                    <input
-                      id="Thursday"
-                      type="checkbox"
-                      className="hidden peer accent-[#0AADA4]"
-                    />
-                    <label
-                      htmlFor="Thursday"
-                      className="relative flex items-center justify-center p-0.5 peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-5 h-5 cursor-pointer bg-[#0AADA4] border border-gray-400 rounded overflow-hidden"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-full fill-white"
-                        viewBox="0 0 520 520"
-                      >
-                        <path
-                          d="M79.423 240.755a47.529 47.529 0 0 0-36.737 77.522l120.73 147.894a43.136 43.136 0 0 0 36.066 16.009c14.654-.787 27.884-8.626 36.319-21.515L486.588 56.773a6.13 6.13 0 0 1 .128-.2c2.353-3.613 1.59-10.773-3.267-15.271a13.321 13.321 0 0 0-19.362 1.343q-.135.166-.278.327L210.887 328.736a10.961 10.961 0 0 1-15.585.843l-83.94-76.386a47.319 47.319 0 0 0-31.939-12.438z"
-                          data-name="7-Check"
-                          data-original="#000000"
-                        />
-                      </svg>
-                    </label>
-                    Thursday
-                  </div>
-                </li>
-                <div className="flex items-center w-full gap-4">
-                  <Select>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="09:00" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Fruits</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                  <Select>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="23:30" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Fruits</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <li className="w-full list-none">
-                  <div className="flex items-center gap-3">
-                    <input
-                      id="Friday"
-                      type="checkbox"
-                      className="hidden peer accent-[#0AADA4]"
-                    />
-                    <label
-                      htmlFor="Friday"
-                      className="relative flex items-center justify-center p-0.5 peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-5 h-5 cursor-pointer bg-[#0AADA4] border border-gray-400 rounded overflow-hidden"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-full fill-white"
-                        viewBox="0 0 520 520"
-                      >
-                        <path
-                          d="M79.423 240.755a47.529 47.529 0 0 0-36.737 77.522l120.73 147.894a43.136 43.136 0 0 0 36.066 16.009c14.654-.787 27.884-8.626 36.319-21.515L486.588 56.773a6.13 6.13 0 0 1 .128-.2c2.353-3.613 1.59-10.773-3.267-15.271a13.321 13.321 0 0 0-19.362 1.343q-.135.166-.278.327L210.887 328.736a10.961 10.961 0 0 1-15.585.843l-83.94-76.386a47.319 47.319 0 0 0-31.939-12.438z"
-                          data-name="7-Check"
-                          data-original="#000000"
-                        />
-                      </svg>
-                    </label>
-                    Friday
-                  </div>
-                </li>
-                <div className="flex items-center w-full gap-4">
-                  <Select>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="09:00" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Fruits</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                  <Select>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="23:30" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Fruits</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <li className="w-full list-none">
-                  <div className="flex items-center gap-3">
-                    <input
-                      id="Saturday"
-                      type="checkbox"
-                      className="hidden peer accent-[#0AADA4]"
-                    />
-                    <label
-                      htmlFor="Saturday"
-                      className="relative flex items-center justify-center p-0.5 peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-5 h-5 cursor-pointer bg-[#0AADA4] border border-gray-400 rounded overflow-hidden"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-full fill-white"
-                        viewBox="0 0 520 520"
-                      >
-                        <path
-                          d="M79.423 240.755a47.529 47.529 0 0 0-36.737 77.522l120.73 147.894a43.136 43.136 0 0 0 36.066 16.009c14.654-.787 27.884-8.626 36.319-21.515L486.588 56.773a6.13 6.13 0 0 1 .128-.2c2.353-3.613 1.59-10.773-3.267-15.271a13.321 13.321 0 0 0-19.362 1.343q-.135.166-.278.327L210.887 328.736a10.961 10.961 0 0 1-15.585.843l-83.94-76.386a47.319 47.319 0 0 0-31.939-12.438z"
-                          data-name="7-Check"
-                          data-original="#000000"
-                        />
-                      </svg>
-                    </label>
-                    Saturday
-                  </div>
-                </li>
-                <div className="flex items-center w-full gap-4">
-                  <Select>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="09:00" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Fruits</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                  <Select>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="23:30" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Fruits</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <li className="w-full list-none">
-                  <div className="flex items-center gap-3">
-                    <input
-                      id="Sunday"
-                      type="checkbox"
-                      className="hidden peer accent-[#0AADA4]"
-                    />
-                    <label
-                      htmlFor="Sunday"
-                      className="relative flex items-center justify-center p-0.5 peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-5 h-5 cursor-pointer bg-[#0AADA4] border border-gray-400 rounded overflow-hidden"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-full fill-white"
-                        viewBox="0 0 520 520"
-                      >
-                        <path
-                          d="M79.423 240.755a47.529 47.529 0 0 0-36.737 77.522l120.73 147.894a43.136 43.136 0 0 0 36.066 16.009c14.654-.787 27.884-8.626 36.319-21.515L486.588 56.773a6.13 6.13 0 0 1 .128-.2c2.353-3.613 1.59-10.773-3.267-15.271a13.321 13.321 0 0 0-19.362 1.343q-.135.166-.278.327L210.887 328.736a10.961 10.961 0 0 1-15.585.843l-83.94-76.386a47.319 47.319 0 0 0-31.939-12.438z"
-                          data-name="7-Check"
-                          data-original="#000000"
-                        />
-                      </svg>
-                    </label>
-                    Sunday
-                  </div>
-                </li>
-                <div className="flex items-center w-full gap-4">
-                  <Select>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="09:00" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Fruits</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                  <Select>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="23:30" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Fruits</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-            </div>
-            <div className="flex items-center justify-center w-full gap-4 pt-5 mx-auto">
-              <Button variant="disable" className="flex items-center uppercase">
-                Back
-              </Button>
-              <Button variant="primary" className="flex items-center uppercase">
-                Finish
-              </Button>
-            </div>
+            </form>
             {/* Shop working hours end */}
           </>
         )}

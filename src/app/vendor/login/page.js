@@ -63,7 +63,7 @@ const Login = () => {
                 onSubmit={(e) => vendorLogin(e)}
               >
                 <div className="space-y-1 text-left ">
-                  <label htmlFor="country" className="label_text">
+                  <label htmlFor="email" className="label_text">
                     Email Id
                   </label>
                   <input
@@ -77,7 +77,7 @@ const Login = () => {
                   <p className="error">Enter Valid Email id</p>
                 </div>
                 <div className="relative w-full space-y-1 text-left">
-                  <label htmlFor="country" className="label_text">
+                  <label htmlFor="password" className="label_text">
                     Password
                   </label>
                   <input
