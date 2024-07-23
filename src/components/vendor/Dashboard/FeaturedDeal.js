@@ -1,8 +1,10 @@
 import Button from '@/components/ui/button';
 import React, { useState } from 'react';
-
+import LimitReachedModal from './Modal/Featured-dealModal/LimitReachedModal';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 const FeaturedDealSection = () => {
     const [currentTab, setCurrentTab] = useState('featured');
+    const [limitReachedDialog, setLimitReachedDialog] = useState(false);
 
     const changeTab = (tab = 'basic') => setCurrentTab(tab);
     return (
@@ -36,12 +38,25 @@ const FeaturedDealSection = () => {
                                 </p>
                             </div>
 
-                            {/* <Dialog open={userModal}>
-                                <DialogContent close={setUserModal} className="sm:max-w-[450px]">
-                                    <UserModal setUserModal={setUserModal} vendor={vendor} />
+                            <Dialog open={limitReachedDialog}>
+                                <DialogTrigger
+                                    onClick={e => setLimitReachedDialog(true)}
+                                    className="flex items-center h-8 px-6 py-5 text-sm font-medium text-white uppercase transition rounded-full focus:outline-none bg-primary hover:bg-primary-hover active:scale-90"
+                                >
+                                    + Add New
+                                </DialogTrigger>
+                                <DialogContent
+                                    close={setLimitReachedDialog}
+                                    className="sm:max-w-[450px]"
+                                >
+                                    <LimitReachedModal
+                                        setLimitReachedDialog={
+                                            setLimitReachedDialog
+                                        }
+                                    />
                                 </DialogContent>
-                                </Dialog> */}
-                            <Button variant="primary">+ Add new</Button>
+                            </Dialog>
+                            {/* <Button variant="primary">+ Add new</Button> */}
                         </div>
                         <hr />
                         <div className="space-y-2">
