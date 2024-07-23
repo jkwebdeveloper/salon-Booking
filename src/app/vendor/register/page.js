@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/select";
 import { useCategory } from "@/hooks";
 import { v4 } from "uuid";
+import converttomin from "@/constants/converttomin";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -564,7 +565,9 @@ const Register = () => {
                             <SelectContent>
                               <SelectGroup>
                                 {timeing.map((time) => (
-                                  <SelectItem key={v4()} value={time}>{time}</SelectItem>
+                                  <SelectItem key={v4()} value={time} disabled={selectedDays[day] && +(converttomin(time)) >= +(converttomin(selectedDays[day].to_time || '24:00')) || false}>
+                                    {time}
+                                  </SelectItem>
                                 ))}
                               </SelectGroup>
                             </SelectContent>
@@ -576,7 +579,9 @@ const Register = () => {
                             <SelectContent>
                               <SelectGroup>
                                 {timeing.map((time) => (
-                                  <SelectItem key={v4()} value={time}>{time}</SelectItem>
+                                  <SelectItem key={v4()} value={time} disabled={selectedDays[day] && +(converttomin(time)) <= +(converttomin(selectedDays[day].from_time || '24:00')) || false}>
+                                    {time}
+                                  </SelectItem>
                                 ))}
                               </SelectGroup>
                             </SelectContent>

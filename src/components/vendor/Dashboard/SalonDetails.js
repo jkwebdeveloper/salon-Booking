@@ -182,7 +182,7 @@ const SalonDetails = () => {
             placeholder="Write your thoughts here..."
           ></textarea>
         </div>
-        <div className="w-full space-y-3 lg:w-1/2" key={salonDetails?.availability}>
+        {/* <div className="w-full space-y-3 lg:w-1/2" key={salonDetails?.availability}>
           {weekDays.map((day) => {
             const fromTime = salonDetails?.availability && salonDetails?.availability.length > 0 && salonDetails?.availability.filter((item) => item.day == day.slice(0, 3))[0]?.from_time.slice(0, 5);
             const toTime = salonDetails?.availability && salonDetails?.availability.length > 0 && salonDetails?.availability.filter((item) => item.day == day.slice(0, 3))[0]?.to_time.slice(0, 5);
@@ -237,7 +237,7 @@ const SalonDetails = () => {
               </div>
             )
           })}
-        </div>
+        </div> */}
         <p className="text-xl font-semibold">Social Profiles</p>
         <div className="w-full space-y-1 text-left">
           <label htmlFor="facebook_link" className="label_text">

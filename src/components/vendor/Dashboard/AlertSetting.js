@@ -38,9 +38,10 @@ const Alertsetting = () => {
         <p className="text-xl font-semibold">Push notification</p>
         <li class="w-full list-none">
           <div class="flex items-center gap-3">
-            {/* <input
+            <input
               id="sms"
               type="checkbox"
+              className="hidden peer"
               onChange={(e) =>
                 e.target.checked
                   ? (e.target.nextElementSibling.value = 1)
@@ -49,27 +50,9 @@ const Alertsetting = () => {
               defaultChecked={vendor?.is_sms_notification == 1 ? true : false}
             />
             <input
-              type="checkbox"
+              type="hidden"
               name="is_sms_notification"
-              className="hidden peer"
               value={vendor?.is_sms_notification || 0}
-            />
-            <label
-              htmlFor="sms"
-              class="w-full ms-2 text-sm font-medium text-gray-900 "
-            >
-              Notification via SMS
-            </label> */}
-            <input
-              id="sms"
-              type="checkbox"
-              className="hidden peer"
-              onChange={(e) =>
-                e.target.checked
-                  ? (e.target.nextElementSibling.value = 1)
-                  : (e.target.nextElementSibling.value = 0)
-              }
-              defaultChecked={vendor?.is_sms_notification == 1 ? true : false}
             />
             <label
               htmlFor="sms"
@@ -92,9 +75,10 @@ const Alertsetting = () => {
         </li>
         <li class="w-full list-none">
           <div class="flex items-center gap-3">
-            {/* <input
+            <input
               id="email"
               type="checkbox"
+              className="hidden peer"
               onChange={(e) =>
                 e.target.checked
                   ? (e.target.nextElementSibling.value = 1)
@@ -106,23 +90,6 @@ const Alertsetting = () => {
               type="hidden"
               name="is_email_notification"
               value={vendor?.is_email_notification || 0}
-            />
-            <label
-              htmlFor="email"
-              class="w-full ms-2 text-sm font-medium text-gray-900 "
-            >
-              Notification via Email
-            </label> */}
-            <input
-              id="email"
-              type="checkbox"
-              className="hidden peer"
-              onChange={(e) =>
-                e.target.checked
-                  ? (e.target.nextElementSibling.value = 1)
-                  : (e.target.nextElementSibling.value = 0)
-              }
-              defaultChecked={vendor?.is_sms_notification == 1 ? true : false}
             />
             <label
               htmlFor="email"
