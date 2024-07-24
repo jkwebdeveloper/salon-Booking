@@ -244,10 +244,10 @@ const AddBlock = ({ i, screenSize, timeSlots = '00:00', member, day }) => {
             <Tooltip className="wrapper" onOpenChange={e => {
                 [...document.querySelectorAll('.addTime')].forEach((app) => { app.classList.remove('left', 'right') });
                 setTimeout(() => {
-                    const tooltip = document.querySelector('#tooltip_content');
+                    const tooltip = document.querySelector('.addTime.active + div > #tooltip_content');
                     if (tooltip) {
                         const tooltipPos = tooltip.getAttribute('data-side');
-                        const tooltipDivContent = document.querySelector('div[data-state="delayed-open"]');
+                        const tooltipDivContent = document.querySelector('div[data-state="open"]') || document.querySelector('div[data-state="delayed-open"]');
                         tooltipDivContent && tooltipDivContent.classList.add(tooltipPos);
                     }
                 }, 200);
@@ -317,7 +317,7 @@ const AppointmentCard = ({ screenSize, appointment, appointmentDuration, i, inde
                 e ? document.querySelector(`.megaCalander_header`).style.setProperty('z-index', 10, 'important') : document.querySelector(`.megaCalander_header`).style.setProperty('z-index', 99, 'important');
                 [...document.querySelectorAll('.appointment')].forEach((app) => { app.classList.remove('left', 'right') });
                 setTimeout(() => {
-                    const tooltip = document.querySelector('#tooltip_content');
+                    const tooltip = document.querySelector('div[data-state="delayed-open"] + div > #tooltip_content') || document.querySelector(' #tooltip_content');
                     if (tooltip) {
                         const tooltipPos = tooltip.getAttribute('data-side');
                         const tooltipDivContent = document.querySelector('div[data-state="delayed-open"]');
@@ -344,7 +344,7 @@ const AppointmentCard = ({ screenSize, appointment, appointmentDuration, i, inde
                         <span className='absolute right -right-4 top-2/4 -translate-y-2/4 w-10 h-10 carrow z-[99999]'></span>
                     </div>
                 </TooltipTrigger>
-                <TooltipContent id="tooltip_content" side={screenSize[0] <= 1280 && 'center' || 'right'} sideOffset={5} ideOffset={0} className="p-0 w-[270px] rounded-xl shadow-[0_0_100px_rgba(0,0,0,0.21)]">
+                <TooltipContent id="tooltip_content" side={screenSize[0] <= 1280 && 'center' || 'right'} sideOffset={5} className="p-0 w-[270px] rounded-xl shadow-[0_0_100px_rgba(0,0,0,0.21)]">
                     <AppointmentDetails appointment={appointment} appointmentDuration={appointmentDuration} />
                 </TooltipContent>
             </Tooltip>
