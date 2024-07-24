@@ -19,9 +19,9 @@ const ReviewNewModal = () => {
                     </div>
                     <div className="space-y-2">
                         <p className="text-[#656565]">
-                            Lorem Ipsum is simply dummy text of the printing and
+                            {`Lorem Ipsum is simply dummy text of the printing and
                             typeset industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s.
+                            industry's standard dummy text ever since the 1500s.`}
                         </p>
                         <p>06/06/2024 | Employee: Nuzami</p>
                     </div>
