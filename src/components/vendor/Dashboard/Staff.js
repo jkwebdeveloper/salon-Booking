@@ -15,6 +15,7 @@ import { PageLoader } from '@/components';
 import { v4 } from 'uuid';
 import Image from 'next/image';
 import { DatePickerRange } from './Modal/StaffModal/datepickerange';
+import { format, addDays } from 'date-fns';
 
 const Staff = () => {
     const vendor = useSelector(state => state.vendorAuth.vendor);
@@ -25,23 +26,50 @@ const Staff = () => {
     const [editStaff, setEditStaff] = useState('');
     const [staffsList, setStaffsList] = useState([]);
 
+    const [dateRange, setDateRange] = useState({
+        from: new Date(),
+        to: new Date(),
+    });
+
     const changeTab = (tab = 'basic') => setCurrentTab(tab);
 
-    const getStaff = useCallback(async () => {
-        setLoading(true);
-        const res = await GET.request({
-            url: '/vendor/get-all-staffs',
-            token: vendor?.api_token,
-        });
-        setLoading(false);
-        if (res && res.code == 200) {
-            setStaffsList(res.data);
-        }
-    }, []);
+    const handleDateChange = range => {
+        setDateRange(range);
+    };
 
-    useEffect(() => {
-        (currentTab == 'staff' || currentTab == 'schedule') && getStaff();
-    }, [currentTab]);
+    const renderDateHeaders = () => {
+        const headers = [];
+        for (let i = 0; i < 7; i++) {
+            const date = addDays(dateRange.from, i);
+            headers.push(
+                <th
+                    key={i}
+                    scope="col"
+                    className="flex-col px-6 py-3 text-center"
+                >
+                    <p className="text-lg">{format(date, 'EEEE')}</p>
+                    <p className="mx-auto">{format(date, 'dd.MM')}</p>
+                </th>
+            );
+        }
+        return headers;
+    };
+
+    // const getStaff = useCallback(async () => {
+    //     setLoading(true);
+    //     const res = await GET.request({
+    //         url: '/vendor/get-all-staffs',
+    //         token: vendor?.api_token,
+    //     });
+    //     setLoading(false);
+    //     if (res && res.code == 200) {
+    //         setStaffsList(res.data);
+    //     }
+    // }, []);
+
+    // useEffect(() => {
+    //     (currentTab == 'staff' || currentTab == 'schedule') && getStaff();
+    // }, [currentTab]);
 
     return (
         <div className="space-y-4">
@@ -66,7 +94,9 @@ const Staff = () => {
                         <p className="text-2xl font-semibold">Staff Schedule</p>
                         <div className="flex items-end justify-between">
                             <div className="border w-max rounded-md border-[#eae9e9]">
-                                <DatePickerRange />
+                                <DatePickerRange
+                                    onDateChange={handleDateChange}
+                                />
                             </div>
                         </div>
                         <hr />
@@ -78,55 +108,7 @@ const Staff = () => {
                                             scope="col"
                                             className="px-6 py-3"
                                         ></th>
-                                        <th
-                                            scope="col"
-                                            className="flex-col px-6 py-3 text-center "
-                                        >
-                                            <p className="text-lg">Monday</p>
-                                            <p className="mx-auto">12.03</p>
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            className="flex-col px-6 py-3 text-center"
-                                        >
-                                            <p className="text-lg">Tuesday</p>
-                                            <p className="mx-auto">13.03</p>
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            className="flex-col px-6 py-3 text-center"
-                                        >
-                                            <p className="text-lg">Wednesday</p>
-                                            <p className="mx-auto">15.03</p>
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            className="flex-col px-6 py-3 text-center"
-                                        >
-                                            <p className="text-lg">Thursday</p>
-                                            <p className="mx-auto">11.03</p>
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            className="flex-col px-6 py-3 text-center"
-                                        >
-                                            <p className="text-lg">Friday</p>
-                                            <p className="mx-auto">16.03</p>
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            className="flex-col px-6 py-3 text-center"
-                                        >
-                                            <p className="text-lg">Saturday</p>
-                                            <p className="mx-auto">17.03</p>
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            className="flex-col px-6 py-3 text-center"
-                                        >
-                                            <p className="text-lg">Sunday</p>
-                                            <p className="mx-auto">18.03</p>
-                                        </th>
+                                        {renderDateHeaders()}
                                     </tr>
                                 </thead>
                                 <tbody>
