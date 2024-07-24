@@ -19,7 +19,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-const BusinessReport = () => {
+const Report = () => {
   const [saleDetails, setSaleDetails] = useState(false);
   return (
     <>
@@ -510,4 +510,4 @@ const BusinessReport = () => {
   );
 };
 
-export default BusinessReport;
+export default Report;

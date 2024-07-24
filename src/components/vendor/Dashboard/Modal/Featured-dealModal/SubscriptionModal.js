@@ -19,7 +19,7 @@ const SubscriptionModal = () => {
                 No Subscription !
             </p>
             <p className="text-[#1D1B23]">
-                You don't have any active subscription subscribe to continue
+                {`You don't have any active subscription subscribe to continue`}
             </p>
             <Button variant="primary">Explore plans</Button>
         </div>

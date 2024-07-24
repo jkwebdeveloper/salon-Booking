@@ -1,12 +1,31 @@
 'use client';
+import { GET } from '@/app/api/get';
 import Button from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { MdOutlineLock } from 'react-icons/md';
+import { useSelector } from 'react-redux';
+import { v4 } from 'uuid';
 
 const SubScription = () => {
-    const [checkOut, setCheckOut] = useState(false);
+    const vendor = useSelector(state => state?.vendorAuth?.vendor);
+    console.log(vendor);
+    const [checkOut, setCheckOut] = React.useState(false);
+    const [loading, setLoading] = React.useState(false);
+    const [plans, setPlans] = React.useState([]);
+
+    const getSubscriptionPlan = async () => {
+        const resp = await GET.request({ url: '/vendor/get-subscription-plans', token: vendor?.api_token });
+        if (resp && resp?.code == 200) {
+            setPlans(resp?.data);
+        }
+    }
+
+    useEffect(() => {
+        getSubscriptionPlan();
+    }, [])
     return (
         <div className="space-y-4">
             {checkOut ? (
@@ -217,51 +236,27 @@ const SubScription = () => {
                         </div>
                         <p className="text-xl font-medium">Upgrade your plan</p>
                         <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                            <div className="border-[#B195F6] rounded-xl border py-5 px-7 flex-col text-center space-y-3 items-center bg-[#EDE9F8]">
-                                <p className="font-semibold text-[30px]">
-                                    Basic
-                                </p>
-                                <p className="text-4xl font-bold bg-[#DDD5F2] rounded-lg p-3">
-                                    $99.00
-                                </p>
-                                <p>
-                                    2 Featured service <br /> For 1 month
-                                </p>
-                                <button
-                                    className="bg-[#4C21B9] w-full rounded-full text-white px-3 py-2 focus:outline-none capitalize  font-medium  active:scale-90 transition text-sm"
-                                    onClick={() => setCheckOut(true)}
-                                >
-                                    Buy now
-                                </button>
-                            </div>
-                            <div className="border-[#9FBCFF] rounded-xl border py-5 px-7 flex-col text-center space-y-3 items-center bg-[#E7EDFB]">
-                                <p className="font-semibold text-[30px]">
-                                    Advance
-                                </p>
-                                <p className="text-4xl font-bold bg-[#D1DDF7] rounded-lg p-3">
-                                    $49.00
-                                </p>
-                                <p>
-                                    2 Featured service <br /> For 1 month
-                                </p>
-                                <button className="bg-[#0F4CD8] w-full rounded-full text-white px-3 py-2 focus:outline-none capitalize  font-medium  active:scale-90 transition text-sm">
-                                    Buy now
-                                </button>
-                            </div>
-                            <div className="border-[#A3F3C8] rounded-xl border py-5 px-7 flex-col text-center space-y-3 items-center bg-[#E8F7EF]">
-                                <p className="font-semibold text-[30px]">
-                                    Super
-                                </p>
-                                <p className="text-4xl font-bold bg-[#D3F0E0] rounded-lg p-3">
-                                    $49.00
-                                </p>
-                                <p>
-                                    2 Featured service <br /> For 1 month
-                                </p>
-                                <button className="bg-[#17AF5C] w-full rounded-full text-white px-3 py-2 focus:outline-none capitalize  font-medium  active:scale-90 transition text-sm">
-                                    Buy now
-                                </button>
-                            </div>
+                            {plans.map((plan, i) => {
+                                return (
+                                    <div key={v4()} className={cn(`rounded-xl border py-5 px-7 flex-col text-center space-y-3 items-center bg-opacity-10 border-orange-50`, i == 0 && "border-[#4C21B9] bg-[#4C21B9]" || i == 1 && "border-[#0F4CD8] bg-[#0F4CD8]" || i == 2 && "border-[#17AF5C] bg-[#17AF5C]")}>
+                                        <p className="font-semibold text-[30px]">
+                                            {plan?.name}
+                                        </p>
+                                        <p className={`text-4xl font-bold bg-[#DDD5F2] rounded-lg p-3`}>
+                                            £{plan?.price}
+                                        </p>
+                                        <p>
+                                            {plan?.no_of_services} Featured service <br /> For 1 {plan?.validity}
+                                        </p>
+                                        <button
+                                            className={`bg-[#4C21B9] w-full rounded-full text-white px-3 py-2 focus:outline-none capitalize  font-medium  active:scale-90 transition text-sm`}
+                                            onClick={() => setCheckOut(true)}
+                                        >
+                                            Buy now
+                                        </button>
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
                 </>

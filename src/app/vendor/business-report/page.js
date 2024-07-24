@@ -1,12 +1,12 @@
 "use client";
 import Sidebar from "@/components/global/DashboardHeader/Sidebar";
 import React from "react";
-import BusinessReport from "@/components/vendor/Dashboard/Report";
+import Report from "@/components/vendor/Dashboard/Report";
 import { useSelector } from "react-redux";
 
-const businessReport = () => {
-  const { sidebar } = useSelector((state) => state.sidebarAuth.sidebar);
-
+const BusinessReport = () => {
+  const sidebar = useSelector(state => state.sidebarAuth.sidebar);
+  console.log(sidebar);
   return (
     <div className="flex items-start">
       {sidebar ? (
@@ -21,10 +21,10 @@ const businessReport = () => {
             : `w-full container bg-[#f4f2f2] mx-auto p-5`
         }
       >
-        <BusinessReport />
+        <Report />
       </div>
     </div>
   );
 };
 
-export default businessReport;
+export default BusinessReport;

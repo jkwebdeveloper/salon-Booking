@@ -375,7 +375,7 @@ const AddTeam = ({
                   <div className="grid items-start grid-cols-1 gap-3 xl:grid-cols-2">
                     {Object.keys(services).map((key) => {
                       return (
-                        <div className="w-full bg-[white] border border-[#D9D9D9] rounded-md space-y-2 p-2">
+                        <div key={v4()} className="w-full bg-[white] border border-[#D9D9D9] rounded-md space-y-2 p-2">
                           <p className="text-sm font-semibold">{services[key][0]?.sub_categories?.title}</p>
                           {services[key].map((group) => (
                             <Fragment key={v4()}>

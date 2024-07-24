@@ -367,7 +367,7 @@ const Register = () => {
                       <SelectGroup>
                         <SelectLabel>Type</SelectLabel>
                         {mainCat.data?.map((cat) => (
-                          <SelectItem value={cat?.id}>{cat?.title}</SelectItem>
+                          <SelectItem key={v4()} value={cat?.id}>{cat?.title}</SelectItem>
                         ))}
                       </SelectGroup>
                     </SelectContent>

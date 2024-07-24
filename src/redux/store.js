@@ -18,7 +18,7 @@ import { sidebarAuth } from "./features/sidebarSlice";
 const persistConfig = {
   key: "root",
   storage, //Error : storage is imported from 'redux-persist/lib/storage'
-  whitelist: ["userAuth", "vendorAuth"], // only auth will be persisted
+  whitelist: ["userAuth", "vendorAuth", "sidebarAuth"], // only auth will be persisted
   version: 1,
 };
 
