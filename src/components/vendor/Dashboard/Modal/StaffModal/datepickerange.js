@@ -20,6 +20,7 @@ export function DatePickerRange({
     defaultOpen = false,
     setCalendarOpen,
     onDateChange, // New prop
+    mode = "single"
 }) {
     const [date, setDate] = React.useState({
         from: new Date(),
@@ -42,12 +43,13 @@ export function DatePickerRange({
     // };
 
     const handleSelect = selectedDate => {
-        const start = startOfWeek(selectedDate, { weekStartsOn: 1 });
-        const end = endOfWeek(selectedDate, { weekStartsOn: 1 });
+        const startofWeek = startOfWeek(selectedDate, { weekStartsOn: 0 });
+        const start = startOfWeek(startofWeek, { weekStartsOn: 0 });
+        const end = endOfWeek(startofWeek, { weekStartsOn: 0 });
         const newDateRange = { from: start, to: end };
         setDate(newDateRange);
         onDateChange && onDateChange(newDateRange);
-        setOpen(false);
+        // setOpen(false);
     };
 
     return (
@@ -93,12 +95,13 @@ export function DatePickerRange({
                         fromDate={new Date()}
                         showOutsideDays
                         fixedWeeks
-                        mode="single"
-                        selected={date.from}
+                        mode={'single'}
+                        selected={mode == 'range' && date}
                         defaultMonth={date?.from}
-                        required
                         onSelect={handleSelect}
+                        numberOfMonths={1}
                         initialFocus
+                        required
                     />
                 </PopoverContent>
             </Popover>

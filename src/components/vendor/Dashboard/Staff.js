@@ -15,7 +15,7 @@ import { PageLoader } from '@/components';
 import { v4 } from 'uuid';
 import Image from 'next/image';
 import { DatePickerRange } from './Modal/StaffModal/datepickerange';
-import { format, addDays } from 'date-fns';
+import { format, addDays, startOfWeek } from 'date-fns';
 
 const Staff = () => {
     const vendor = useSelector(state => state.vendorAuth.vendor);
@@ -39,8 +39,9 @@ const Staff = () => {
 
     const renderDateHeaders = () => {
         const headers = [];
+        const start = startOfWeek(dateRange.from, { weekStartsOn: 0 });
         for (let i = 0; i < 7; i++) {
-            const date = addDays(dateRange.from, i);
+            const date = addDays(start, i);
             headers.push(
                 <th
                     key={i}
@@ -96,6 +97,7 @@ const Staff = () => {
                             <div className="border w-max rounded-md border-[#eae9e9]">
                                 <DatePickerRange
                                     onDateChange={handleDateChange}
+                                    mode='range'
                                 />
                             </div>
                         </div>
@@ -222,10 +224,10 @@ const Staff = () => {
                                                                 height={100}
                                                             />
                                                         )) || (
-                                                            <p className="text-xl text-white ">
-                                                                NS
-                                                            </p>
-                                                        )}
+                                                                <p className="text-xl text-white ">
+                                                                    NS
+                                                                </p>
+                                                            )}
                                                     </div>
                                                     <p className="text-xl">
                                                         {staff?.first_name}{' '}
