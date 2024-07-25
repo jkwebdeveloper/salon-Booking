@@ -447,23 +447,6 @@ const Services = () => {
                           "Enter Valid Amount"}
                       </p>
                     </div>
-                    {/* <div className="w-full space-y-1 text-left lg:w-1/2">
-                      <Label
-                        htmlFor="expried_at"
-                        text="Expires at"
-                        required={true}
-                      />
-                      <input
-                        type="date"
-                        name="expried_at"
-                        className="input_field"
-                        placeholder="Enter Expires at"
-                        pattern='\d{4}-\d{1,2}-\d{1,2}'
-                        required
-                        min={new Date().toISOString().split("T")[0]}
-                      />
-                      <p className="error">{Validation?.expirydate?.msg}</p>
-                    </div> */}
                     <div className="w-full space-y-1 text-left lg:w-1/2">
                       <Label htmlFor="dob" text="Date of Birth" />
                       <div
@@ -481,13 +464,6 @@ const Services = () => {
                           placeholder="Enter Date of Birth"
                         />
                       </div>
-                      {/* <input
-            type="date"
-            name="dob"
-            className="input_field"
-            placeholder="Enter Date of Birth"
-            defaultValue={editCustomer.dob}
-          /> */}
                     </div>
                   </div>
                   <Label htmlFor="message" text="Description" />
@@ -815,12 +791,12 @@ const Services = () => {
                                             {service_group?.duration == 0.5
                                               ? "30 Min"
                                               : service_group?.duration == 1
-                                              ? "1 Hour"
-                                              : service_group?.duration == 1.5
-                                              ? "1 Hour 30 Min"
-                                              : service_group?.duration == 2
-                                              ? "2 Hour"
-                                              : "2 Hour 30 Min"}
+                                                ? "1 Hour"
+                                                : service_group?.duration == 1.5
+                                                  ? "1 Hour 30 Min"
+                                                  : service_group?.duration == 2
+                                                    ? "2 Hour"
+                                                    : "2 Hour 30 Min"}
                                           </p>
                                           <p className="text-sm font-bold">
                                             {service_group?.price &&
@@ -851,14 +827,14 @@ const Services = () => {
                       </div>
                     );
                   })) || (
-                  <div className="center min-h-[300px] w-full">
-                    <Spinner
-                      show={vendorServices?.loading}
-                      width={50}
-                      height={50}
-                    />
-                  </div>
-                )}
+                    <div className="center min-h-[300px] w-full">
+                      <Spinner
+                        show={vendorServices?.loading}
+                        width={50}
+                        height={50}
+                      />
+                    </div>
+                  )}
                 <Dialog
                   className="w-11/12"
                   open={addService}
@@ -942,12 +918,11 @@ const Services = () => {
                               </td>
                               <td className="px-4 py-4 text-sm ">
                                 <p
-                                  className={`${
-                                    (voucher.status == 0 && "bg-yellow-500") ||
+                                  className={`${(voucher.status == 0 && "bg-yellow-500") ||
                                     (vendor.status == 1 &&
                                       "bg-green-600 text-white") ||
                                     "bg-red-700"
-                                  } p-2 rounded-full text-center`}
+                                    } p-2 rounded-full text-center`}
                                 >
                                   {(voucher.status == 0 && "Pending") ||
                                     (voucher.status == 1 && "Active") ||

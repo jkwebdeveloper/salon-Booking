@@ -92,12 +92,13 @@ const EditServiceModal = ({ editServiceData, setEditService, setRefreshServices 
           deleteService={deleteService}
         />
       ))}
-      <p
-        className="underline text-[#0AADA4] font-semibold text-right cursor-pointer"
+      <Button
+        variant="link"
+        className="underline text-[#0AADA4] font-semibold text-right cursor-pointer w-max block py-0 ms-auto"
         onClick={() => addPricingInput()}
       >
         Add more pricing
-      </p>
+      </Button>
       <div className="flex items-center justify-center gap-3">
         <Button variant="disable">Cancel</Button>
         <Button variant="primary" type="submit" disabled={formState.loading}>
