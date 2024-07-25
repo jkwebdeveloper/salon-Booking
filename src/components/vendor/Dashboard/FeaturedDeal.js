@@ -123,7 +123,7 @@ const FeaturedDealSection = () => {
                                                         ({ sub_categories_id }) => sub_categories_id
                                                     );
                                                     return (
-                                                        <div
+                                                        Object.keys(group_service_list).length && <div
                                                             className="w-full space-y-2 bg-white rounded-xl"
                                                             key={v4()}
                                                         >
@@ -131,14 +131,6 @@ const FeaturedDealSection = () => {
                                                                 <p className="text-xl font-semibold">
                                                                     {service?.categories?.title}
                                                                 </p>
-                                                                {/* Add Service Group Dialog */}
-                                                                <TbCirclePlus
-                                                                    className="text-[#0AADA4] cursor-pointer"
-                                                                    onClick={(e) => {
-                                                                        setAddService(true);
-                                                                        setCurrentService(service);
-                                                                    }}
-                                                                />
                                                             </div>
                                                             <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
                                                                 {group_service_list &&
@@ -213,7 +205,7 @@ const FeaturedDealSection = () => {
                                                                         )
                                                                     )}
                                                             </div>
-                                                        </div>
+                                                        </div> || ''
                                                     );
                                                 })) || (
                                                     <div className="center min-h-[300px] w-full">
