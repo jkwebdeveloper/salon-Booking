@@ -96,6 +96,22 @@ const Validation = {
         msg: 'Enter valid Sale Price',
         pattern: '[0-9]+([.,][0-9]+)?',
     },
+    product_name: {
+        msg: 'Product Name is Required',
+        pattern: '^[a-zA-Z]{1,}( [a-zA-Z]+)*$',
+    },
+    unit_price: {
+        msg: 'Unit Price is Required',
+        pattern: '[0-9]+([.,][0-9]+)?',
+    },
+    quantity: {
+        msg: 'Quantity is Required',
+        pattern: '[0-9]{1,}',
+    },
+    description: {
+        msg: 'Description is Required',
+        pattern: '^[a-zA-Z]{1,}',
+    },
 };
 
 export default Validation;

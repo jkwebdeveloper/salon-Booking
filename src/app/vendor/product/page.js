@@ -1,6 +1,6 @@
 "use client";
 import Sidebar from "@/components/global/DashboardHeader/Sidebar";
-import Product from "@/components/vendor/Dashboard/Product";
+import Product from "@/components/vendor/Dashboard/Product/";
 import React from "react";
 import { useSelector } from "react-redux";
 

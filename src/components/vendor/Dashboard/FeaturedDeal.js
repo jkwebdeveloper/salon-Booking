@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { v4 } from 'uuid';
-import { BsPencilFill } from "react-icons/bs";
-import { RiDeleteBin5Line } from "react-icons/ri";
-import { TbCirclePlus } from "react-icons/tb";
+
 
 import LimitReachedModal from './Modal/Featured-dealModal/LimitReachedModal';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
@@ -14,10 +10,6 @@ import { useVendorServices } from '@/hooks';
 import { Spinner, Button } from '@/components';
 
 const FeaturedDealSection = () => {
-    const vendor = useSelector((state) => state.vendorAuth.vendor);
-    const [getServices, vendorServices] = useVendorServices();
-    const [refreshServices, setRefreshServices] = useState(v4());
-    const [services, setServices] = useState([]);
     const [currentTab, setCurrentTab] = useState('featured');
     const [limitReachedDialog, setLimitReachedDialog] = useState(false);
     const [subscriptionDialog, setsubscriptionDialog] = useState(false);
@@ -25,15 +17,6 @@ const FeaturedDealSection = () => {
     const [showCreateService, setShowCreateService] = useState(false);
 
     const changeTab = (tab = 'basic') => setCurrentTab(tab);
-
-    useEffect(() => {
-        getServices().then((data) => setServices(data.data));
-    }, [refreshServices]);
-
-    useEffect(() => {
-        setServices(vendorServices?.data);
-    }, [vendorServices?.loading]);
-
     return (
         <>
             {!showCreateService && (
@@ -116,7 +99,7 @@ const FeaturedDealSection = () => {
                                         </div>
                                         <hr />
                                         <div className="space-y-2">
-                                            {(!vendorServices?.loading &&
+                                            {/* {(!vendorServices?.loading &&
                                                 services.map((service) => {
                                                     const group_service_list = Object.groupBy(
                                                         service?.group_service_list,
@@ -215,8 +198,8 @@ const FeaturedDealSection = () => {
                                                             height={50}
                                                         />
                                                     </div>
-                                                )}
-                                            {/* <p className="text-xl font-semibold">
+                                                )} */}
+                                            <p className="text-xl font-semibold">
                                                 Massage
                                             </p>
                                             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
@@ -265,7 +248,7 @@ const FeaturedDealSection = () => {
                                                         </p>
                                                     </div>
                                                 </div>
-                                            </div> */}
+                                            </div>
                                         </div>
                                     </>
                                 )}

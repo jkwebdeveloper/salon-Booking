@@ -365,7 +365,6 @@ const AddTeam = ({
             </label>
           </div>
           <div className="w-full serviceList space-y-2 overflow-auto max-h-[22rem] rounded-md border border-[#D8DAE5] bg-[#FAFAFA] p-2">
-            {console.log(editStaff)}
             {vendorServices?.loading && <Spinner show={true} width={40} height={40} />}
             {!vendorServices?.loading && vendorServices?.data.map((service) => {
               const services = Object.groupBy(service?.group_service_list, ({ sub_categories_id }) => sub_categories_id);

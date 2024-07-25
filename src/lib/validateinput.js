@@ -9,6 +9,8 @@ const validateInput = async (form) => {
             if (!pattern.test(formElements[i].value) || (formElements[i]?.validity?.valueMissing || formElements[i]?.validity?.patternMismatch)) {
                 invalidInputs.push(formElements[i]);
             }
+        } else if (formElements[i].required && formElements[i].value === '') {
+            invalidInputs.push(formElements[i]);
         } else if (formElements[i].type == 'checkbox' && formElements[i].required && formElements[i].checked === false) {
             invalidInputs.push(formElements[i]);
         } else if (formElements[i].type == 'date' && formElements[i].required && formElements[i].value === '') {
