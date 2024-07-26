@@ -100,6 +100,14 @@ const Validation = {
         msg: 'Product Name is Required',
         pattern: '^[a-zA-Z]{1,}( [a-zA-Z]+)*$',
     },
+    supplier_name: {
+        msg: 'Supplier Name is Required',
+        pattern: '^[a-zA-Z]{1,}( [a-zA-Z]+)*$',
+    },
+    contact_person: {
+        msg: 'Contact Person is Required',
+        pattern: '^[a-zA-Z]{1,}( [a-zA-Z]+)*$',
+    },
     unit_price: {
         msg: 'Unit Price is Required',
         pattern: '[0-9]+([.,][0-9]+)?',

@@ -25,6 +25,7 @@ import { Spinner, PageLoader, Button } from "@/components";
 import { POST } from '@/app/api/post';
 import { useSelector } from 'react-redux';
 import { set } from 'date-fns';
+import Image from 'next/image';
 
 function ProductList() {
     const vendor = useSelector((state) => state.vendorAuth.vendor);
@@ -104,7 +105,7 @@ function ProductList() {
                             {products?.data?.products?.map((product, index) => (
                                 <tr className="">
                                     <td className="px-6 py-4 text-sm capitalize">{product?.name}</td>
-                                    <td className="px-6 py-4 text-sm capitalize">{product?.supplier || 'N/A'}</td>
+                                    <td className="px-6 py-4 text-sm capitalize">{product?.supplier?.supplier_name || 'N/A'}</td>
                                     <td className="px-6 py-4 text-sm">£{product?.price}</td>
                                     <td className="px-6 py-4 text-sm">
                                         <p className="border border-[#D9D9D9] w-max min-w-8 px-1 h-8 rounded-md p-2 flex items-center justify-center">
@@ -162,14 +163,13 @@ function ProductList() {
                                     return (
                                         <PaginationItem key={i}>
                                             <PaginationLink
-                                                className={'!w-6 !h-6 p-0 hover:bg-primary hover:text-white'}
-                                                isActive={currentPage.value === i + 1 || totalPage == 1}
+                                                className={`!w-6 !h-6 p-0 hover:bg-primary hover:text-white ${currentPage.value == i + 1 && 'pointer-events-none'} ${currentPage.changing && currentPage.value == i + 1 && 'bg-[url("/static/icons/ring.svg")]' || ''}`}
+                                                isActive={(currentPage?.changing && currentPage.value || currentPage.value === i + 1) || totalPage == 1}
                                                 onClick={e => {
                                                     setCurrentPage({ changing: true, value: i + 1 });
                                                 }}
                                             >
-                                                {/* {i + 1} */}
-                                                {currentPage.changing == true && currentPage.value == i + 1 && <PageLoader show={true} width={20} height={20} /> || i + 1}
+                                                {i + 1}
                                             </PaginationLink>
                                         </PaginationItem>
                                     )
@@ -180,8 +180,8 @@ function ProductList() {
                                     return (
                                         <PaginationItem key={i}>
                                             <PaginationLink
-                                                className={'!w-6 !h-6 p-0 hover:bg-primary hover:text-white'}
-                                                isActive={currentPage.value === i + 1}
+                                                className={`!w-6 !h-6 p-0 hover:bg-primary hover:text-white ${currentPage.value == i + 1 && 'pointer-events-none'} ${currentPage.changing && currentPage.value == i + 1 && 'bg-[url("/static/icons/ring.svg")]' || ''}`}
+                                                isActive={(currentPage?.changing && currentPage.value || currentPage.value === i + 1) || totalPage == 1}
                                                 onClick={e => {
                                                     setCurrentPage({ changing: true, value: i + 1 });
                                                 }}

@@ -16,7 +16,7 @@ import Orders from "@/components/vendor/Dashboard/Product/orders";
 const Product = () => {
     const [editDialog, setEditDialog] = useState(false);
     const [addDialog, setAddDialog] = useState(false);
-    const [currentTab, setCurrentTab] = useState("orders");
+    const [currentTab, setCurrentTab] = useState("products");
     const [productModal, setProductModal] = useState(false);
 
     return (

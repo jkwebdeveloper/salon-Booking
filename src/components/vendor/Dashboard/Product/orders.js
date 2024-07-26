@@ -1,35 +1,18 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
 import {
     Dialog,
     DialogContent,
     DialogTrigger,
     DialogTitle,
 } from "@/components/ui/dialog";
-import {
-    Pagination,
-    PaginationContent,
-    PaginationEllipsis,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-} from "@/components/ui/pagination";
-import useProductList from '@/hooks/useProductlist';
 import Button from "@/components/ui/button";
 import { BsPencilFill } from "react-icons/bs";
 import { IoTrashSharp } from "react-icons/io5";
 import OrderModal from "@/components/vendor/Dashboard/Modal/ProductModal/OrderModal";
 
 function Orders() {
-    const vendor = useSelector((state) => state.vendorAuth.vendor);
-    const [currentPage, setCurrentPage] = React.useState({ changing: false, value: 1 });
-    const [products, setProducts, getProducts] = useProductList({ page: currentPage.value });
-    const [totalPage, setTotalPage] = React.useState(1);
-    const [showNumberofBtn, setShowNumberofBtn] = React.useState(5);
     const [editDialog, setEditDialog] = React.useState(false);
     const [addDialog, setAddDialog] = React.useState(false);
-    const [editSupplier, setEditSupplier] = React.useState(null);
     return (
         <>
             <>
@@ -50,8 +33,6 @@ function Orders() {
                             <hr />
                             <OrderModal
                                 setAddDialog={setAddDialog}
-                            // setCustomers={setCustomers}
-                            // customers={customers}
                             />
                         </DialogContent>
                     </Dialog>
