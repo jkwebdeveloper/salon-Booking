@@ -26,6 +26,7 @@ import { POST } from '@/app/api/post';
 import { useSelector } from 'react-redux';
 import { set } from 'date-fns';
 import Image from 'next/image';
+import { v4 } from 'uuid';
 
 function ProductList() {
     const vendor = useSelector((state) => state.vendorAuth.vendor);
@@ -103,7 +104,7 @@ function ProductList() {
                         </thead>
                         <tbody className="border-b-2 whitespace-nowrap">
                             {products?.data?.products?.map((product, index) => (
-                                <tr className="">
+                                <tr key={v4()} className="">
                                     <td className="px-6 py-4 text-sm capitalize">{product?.name}</td>
                                     <td className="px-6 py-4 text-sm capitalize">{product?.supplier?.supplier_name || 'N/A'}</td>
                                     <td className="px-6 py-4 text-sm">£{product?.price}</td>

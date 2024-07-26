@@ -16,6 +16,9 @@ import {
 } from "@/components/ui/pagination";
 
 import { Spinner, PageLoader, Button, Error } from "@/components";
+import { GET } from "@/app/api/get";
+import { set } from "date-fns";
+import { v4 } from "uuid";
 
 
 const SupplierNewAddModal = ({ setAddDialog, editSupplier, getSuppliers, activePage }) => {
@@ -25,7 +28,9 @@ const SupplierNewAddModal = ({ setAddDialog, editSupplier, getSuppliers, activeP
   const [showNumberofBtn, setShowNumberofBtn] = React.useState(5);
   const [products, setProducts, getProducts] = useProductList({ page: currentPage.value });
   const [activeTab, setActiveTab] = useState("supplierInfo");
-  const [supplier, setSupplier] = useState(editSupplier || null);
+  const [supplier, setSupplier] = useState(null);
+  const [productList, setProductList] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [formState, setFormState] = React.useState({
     loading: false,
     error: "",
@@ -54,6 +59,22 @@ const SupplierNewAddModal = ({ setAddDialog, editSupplier, getSuppliers, activeP
       getSuppliers({ page: activePage.value });
     }
   }
+
+  const getCurrentSupplier = async () => {
+    const resp = await GET.request({ url: `/vendor/get-supplier-details?supplier_id=${editSupplier?.id}`, token: vendor?.api_token });
+    if (resp && resp?.code == 200) {
+      setSupplier(resp.data?.supplier);
+      let prevProducts = resp.data?.products.filter(product => product?.is_selected);
+      prevProducts = prevProducts.map(product => product?.id);
+      setSelectedProducts(prevProducts);
+    }
+  }
+
+  useEffect(() => {
+    if (editSupplier) {
+      getCurrentSupplier();
+    }
+  }, [editSupplier]);
 
   useEffect(() => {
     setTotalPage(products?.data?.total_pages || 1);
@@ -160,13 +181,13 @@ const SupplierNewAddModal = ({ setAddDialog, editSupplier, getSuppliers, activeP
       {supplier && activeTab == 'assignedProducts' && (
         <form className="space-y-3">
           {!products?.loading && products?.data?.products?.map((product, index) => (
-            <li className="w-full pb-2 list-none border-b">
+            <li key={v4()} className="w-full pb-2 list-none border-b">
               <div className="flex items-center gap-3 capitalize">
                 <input
                   id={'product' + product?.id}
                   type="checkbox"
                   className="w-4 h-4 text-white border-none peer accent-teal-600"
-                  defaultChecked={selectedProducts.includes(product?.id)}
+                  defaultChecked={selectedProducts.includes(+product?.id)}
                   onChange={e => {
                     if (e.target.checked) {
                       setSelectedProducts([...selectedProducts, product?.id]);

@@ -1,5 +1,5 @@
 import { POST } from "@/app/api/post";
-import { Spinner } from "@/components";
+import { Error, Spinner } from "@/components";
 import Button from "@/components/ui/button";
 import Label from "@/components/ui/form/label";
 import React, { useEffect } from "react";

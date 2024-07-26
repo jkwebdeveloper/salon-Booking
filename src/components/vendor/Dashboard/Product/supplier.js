@@ -24,6 +24,7 @@ import { useSelector } from 'react-redux';
 import { PageLoader, Spinner } from '@/components';
 import useSupplierList from '@/hooks/useSupplierlist';
 import { POST } from '@/app/api/post';
+import { v4 } from 'uuid';
 
 
 function Supplier() {
@@ -49,7 +50,7 @@ function Supplier() {
                 <p className="text-2xl font-semibold">Suppliers</p>
                 <Dialog open={addDialog}>
                     <DialogTrigger
-                        onClick={(e) => setAddDialog(true)}
+                        onClick={(e) => { setEditSupplier(null); setAddDialog(true) }}
                         className="flex items-center h-8 px-6 py-5 text-sm font-medium text-white uppercase transition rounded-full focus:outline-none bg-primary hover:bg-primary-hover active:scale-90"
                     >
                         + Add New
@@ -61,9 +62,9 @@ function Supplier() {
                         <DialogTitle>Supplier details</DialogTitle>
                         <SupplierNewAddModal
                             setAddDialog={setAddDialog}
-                            editSupplier={editSupplier}
                             getSuppliers={getSuppliers}
                             activePage={currentPage}
+                            editSupplier={editSupplier}
                         />
                     </DialogContent>
                 </Dialog>
@@ -94,9 +95,8 @@ function Supplier() {
                             </tr>
                         </thead>
                         <tbody className="border-b-2 whitespace-nowrap">
-                            {console.log(suppliers)}
                             {suppliers?.data?.suppliers?.map(({ id, supplier_name, contact_persion, phone, email, products }, index) => (
-                                <tr className="">
+                                <tr key={v4()} className="">
                                     <td className="px-6 py-4 text-sm capitalize">{supplier_name || 'N/A'}</td>
                                     <td className="px-6 py-4 text-sm capitalize">{contact_persion || 'N/A'}</td>
                                     <td className="px-6 py-4 text-sm capitalize">{phone || 'N/A'}</td>
