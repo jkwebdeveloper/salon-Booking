@@ -113,6 +113,9 @@ const Planner = () => {
             : `w-full mx-auto space-y-5 h-fit min-h-[350px] p-5 bg-[#f4f2f2]`
         }
       >
+        <div>
+          Add Here
+        </div>
         <div className='relative z-30 flex flex-wrap items-center justify-between gap-4 megaCalander_header'>
           <div className='flex flex-wrap gap-3'>
             <DatePickerWithRange dateRange={dateRange} setDateRange={setDateRange}
