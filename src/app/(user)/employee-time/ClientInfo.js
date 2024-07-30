@@ -3,7 +3,7 @@ import Button from '@/components/ui/button';
 import Image from 'next/image';
 import React from 'react';
 
-const ClientInfo = () => {
+const ClientInfo = ({ handleContinue }) => {
     return (
         <div className="container flex flex-col min-h-[55dvh] gap-4 px-1 md:flex-row md:px-28 relative md:mb-10">
             <div className="md:w-[60%] w-[90%] mx-auto space-y-5 rounded-md shadow-lg h-fit min-h-[350px] p-4 bg-white">
@@ -111,7 +111,10 @@ const ClientInfo = () => {
                     <button className="w-full border-[1px] py-2 rounded-full  border-[#CCCCCC] bg-background shadow-sm hover:bg-primary hover:text-white">
                         Back
                     </button>
-                    <button className="w-full focus:outline-none py-3 rounded-full capitalize bg-[#711F7E] hover:bg-[#BF27D7] text-white font-medium  active:scale-90 transition text-sm">
+                    <button
+                        className="w-full focus:outline-none py-3 rounded-full capitalize bg-[#711F7E] hover:bg-[#BF27D7] text-white font-medium  active:scale-90 transition text-sm"
+                        onClick={handleContinue}
+                    >
                         Continue
                     </button>
                 </div>

@@ -4,7 +4,7 @@ import React from 'react';
 import { BsInfoCircleFill } from 'react-icons/bs';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 
-const Product = () => {
+const Product = ({ handleContinue, handleBack }) => {
     return (
         <div className="container flex flex-col min-h-[55dvh] gap-4 px-1 md:flex-row md:px-28 relative md:mb-10">
             <div className="md:w-[60%] w-[90%] mx-auto space-y-5 rounded-md shadow-lg h-fit min-h-[350px] p-4 bg-white">
@@ -14,9 +14,9 @@ const Product = () => {
                 <table className="w-full overflow-x-auto border-collapse">
                     <thead>
                         <tr className="border-b">
-                            <th className="text-left p-2">Name</th>
-                            <th className="text-left p-2">Quantity</th>
-                            <th className="text-left p-2">Price</th>
+                            <th className="p-2 text-left">Name</th>
+                            <th className="p-2 text-left">Quantity</th>
+                            <th className="p-2 text-left">Price</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -35,7 +35,7 @@ const Product = () => {
                                     </div>
                                 </div>
                             </td>
-                            <td className="p-2 flex items-center">
+                            <td className="flex items-center p-2">
                                 <div className="flex items-center mt-2 justify-center gap-4 border border-[#e3e3e3] rounded-md">
                                     <button className="hover:bg-[#d8d8d8] text-center hover:text-black w-full p-2">
                                         <FaMinus className="text-[#A3A1A1] text-center hover:text-black" />
@@ -68,7 +68,7 @@ const Product = () => {
                                     </div>
                                 </div>
                             </td>
-                            <td className="p-2 flex items-center">
+                            <td className="flex items-center p-2">
                                 <div className="flex items-center mt-2 justify-center gap-4 border border-[#e3e3e3] rounded-md">
                                     <button className="hover:bg-[#d8d8d8] text-center hover:text-black w-full p-2">
                                         <FaMinus className="text-[#A3A1A1] text-center hover:text-black" />
@@ -134,10 +134,16 @@ const Product = () => {
                     <p>£15</p>
                 </div>
                 <div className="flex items-center justify-center w-full gap-3">
-                    <button className="w-full border-[1px] py-2 rounded-full  border-[#CCCCCC] bg-background shadow-sm hover:bg-primary hover:text-white">
+                    <button
+                        className="w-full border-[1px] py-2 rounded-full  border-[#CCCCCC] bg-background shadow-sm hover:bg-primary hover:text-white"
+                        onClick={handleBack}
+                    >
                         Back
                     </button>
-                    <button className="w-full focus:outline-none py-3 rounded-full capitalize bg-[#711F7E] hover:bg-[#BF27D7] text-white font-medium  active:scale-90 transition text-sm">
+                    <button
+                        className="w-full focus:outline-none py-3 rounded-full capitalize bg-[#711F7E] hover:bg-[#BF27D7] text-white font-medium  active:scale-90 transition text-sm"
+                        onClick={handleContinue}
+                    >
                         Continue
                     </button>
                 </div>

@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/dialog';
 import SelectStaffModal from './SelectStaffModal';
 
-const Time = () => {
+const Time = ({ handleContinue, handleBack }) => {
     const [addStaff, setAddStaff] = useState(false);
 
     return (
@@ -84,10 +84,16 @@ const Time = () => {
                     <p>£15</p>
                 </div>
                 <div className="flex items-center justify-center w-full gap-3">
-                    <button className="w-full border-[1px] py-2 rounded-full  border-[#CCCCCC] bg-background shadow-sm hover:bg-primary hover:text-white">
+                    <button
+                        className="w-full border-[1px] py-2 rounded-full  border-[#CCCCCC] bg-background shadow-sm hover:bg-primary hover:text-white"
+                        onClick={handleBack}
+                    >
                         Back
                     </button>
-                    <button className="w-full focus:outline-none py-3 rounded-full capitalize bg-[#711F7E] hover:bg-[#BF27D7] text-white font-medium  active:scale-90 transition text-sm">
+                    <button
+                        className="w-full focus:outline-none py-3 rounded-full capitalize bg-[#711F7E] hover:bg-[#BF27D7] text-white font-medium  active:scale-90 transition text-sm"
+                        onClick={handleContinue}
+                    >
                         Continue
                     </button>
                 </div>

@@ -17,18 +17,6 @@ const PlannerModal = () => {
     return (
         <div className="w-full space-y-4">
             <div className="rounded-full slide-controls bg-[#EBEBEB]">
-                {/* <button
-                    for="login"
-                    class="slide login bg-[#0AADA4] text-white rounded-full"
-                >
-                    Appointment
-                </button>
-                <button
-                    for="signup"
-                    class="slide signup bg-[#EBEBEB] rounded-full"
-                >
-                    Block
-                </button> */}
                 <button
                     onClick={() => setActiveTab('appointment')}
                     className={`slide login rounded-full ${
