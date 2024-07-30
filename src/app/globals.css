@@ -3,223 +3,222 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-  }
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 0 0% 3.9%;
+    }
 }
 
 html,
 body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .debug,
 .debug * {
-  box-shadow: 0 0 0 1px red !important;
+    box-shadow: 0 0 0 1px red !important;
 }
 
 body::-webkit-scrollbar {
-  width: 8px;
-  height: 10px;
-  border-radius: 10px;
-  scrollbar-width: none;
+    width: 8px;
+    height: 10px;
+    border-radius: 10px;
+    scrollbar-width: none;
 }
 
 body::-webkit-scrollbar-track {
-  border-radius: 10px;
-  background: transparent;
+    border-radius: 10px;
+    background: transparent;
 }
 
 body::-webkit-scrollbar-thumb {
-  background: #711f7e;
-  border-radius: 10px;
+    background: #711f7e;
+    border-radius: 10px;
 }
 
 .outline_button {
-  @apply focus:outline-none border border-[#711F7E] text-black font-medium rounded-full active:scale-90 transition text-sm md:px-10 px-3 md:py-3 py-2;
+    @apply focus:outline-none border border-[#711F7E] text-black font-medium rounded-full active:scale-90 transition text-sm md:px-10 px-3 md:py-3 py-2;
 }
 
 .disable_button {
-  @apply focus:outline-none uppercase bg-[#E6E6E6] text-black font-medium rounded-full active:scale-90 transition text-sm px-8 py-3;
+    @apply focus:outline-none uppercase bg-[#E6E6E6] text-black font-medium rounded-full active:scale-90 transition text-sm px-8 py-3;
 }
 
 .label_text {
-  @apply text-[0.75rem] font-medium text-neutral-400;
+    @apply text-[0.75rem] font-medium text-neutral-400;
 }
 
 .input_field {
-  @apply border focus:border-primary_color disabled:bg-neutral-100 bg-[#ffffff] w-full text-[0.8rem] outline-none md:p-2 p-1 rounded-[4px];
+    @apply border focus:border-primary_color disabled:bg-neutral-100 bg-[#ffffff] w-full text-[0.8rem] outline-none md:p-2 p-1 rounded-[4px];
 }
 .input_field.icon {
-  @apply ps-7;
+    @apply ps-7;
 }
 
 .title:after,
 .heading:after {
-  background: #711f7e;
-  content: "";
-  display: block;
-  height: 3px;
-  width: 60px;
-  margin-top: 7px;
+    background: #711f7e;
+    content: '';
+    display: block;
+    height: 3px;
+    width: 60px;
+    margin-top: 7px;
 }
 
 .footer:after {
-  background: none repeat scroll 0 0 transparent;
-  content: "";
-  display: block;
-  height: 2px;
-  background: #711f7e;
-  transition: width 0.2s ease 0s, left 0.2s ease 0s;
-  width: 0;
+    background: none repeat scroll 0 0 transparent;
+    content: '';
+    display: block;
+    height: 2px;
+    background: #711f7e;
+    transition: width 0.2s ease 0s, left 0.2s ease 0s;
+    width: 0;
 }
 
 .footer:hover:after {
-  width: 100%;
-  left: 0;
+    width: 100%;
+    left: 0;
 }
 /* Swiper Slider */
 body .swiper {
-  padding-bottom: 3rem !important;
+    padding-bottom: 3rem !important;
 }
 
 /* Success SVG animation */
 .checkSVG svg .path {
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 0;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 0;
 }
 
 .checkSVG svg .circle {
-  -webkit-animation: dash 0.9s ease-in-out;
-  animation: dash 0.9s ease-in-out;
+    -webkit-animation: dash 0.9s ease-in-out;
+    animation: dash 0.9s ease-in-out;
 }
 
 .checkSVG svg .line {
-  stroke-dashoffset: 1000;
-  -webkit-animation: dash 0.9s 0.35s ease-in-out forwards;
-  animation: dash 0.9s 0.35s ease-in-out forwards;
+    stroke-dashoffset: 1000;
+    -webkit-animation: dash 0.9s 0.35s ease-in-out forwards;
+    animation: dash 0.9s 0.35s ease-in-out forwards;
 }
 
 .checkSVG svg .check {
-  stroke-dashoffset: -100;
-  -webkit-animation: dash-check 0.9s 0.35s ease-in-out forwards;
-  animation: dash-check 0.9s 0.35s ease-in-out forwards;
+    stroke-dashoffset: -100;
+    -webkit-animation: dash-check 0.9s 0.35s ease-in-out forwards;
+    animation: dash-check 0.9s 0.35s ease-in-out forwards;
 }
 
 @-webkit-keyframes dash {
-  0% {
-    stroke-dashoffset: 1000;
-  }
+    0% {
+        stroke-dashoffset: 1000;
+    }
 
-  100% {
-    stroke-dashoffset: 0;
-  }
+    100% {
+        stroke-dashoffset: 0;
+    }
 }
 
 @keyframes dash {
-  0% {
-    stroke-dashoffset: 1000;
-  }
+    0% {
+        stroke-dashoffset: 1000;
+    }
 
-  100% {
-    stroke-dashoffset: 0;
-  }
+    100% {
+        stroke-dashoffset: 0;
+    }
 }
 
 @-webkit-keyframes dash-check {
-  0% {
-    stroke-dashoffset: -100;
-  }
+    0% {
+        stroke-dashoffset: -100;
+    }
 
-  100% {
-    stroke-dashoffset: 900;
-  }
+    100% {
+        stroke-dashoffset: 900;
+    }
 }
 
 @keyframes dash-check {
-  0% {
-    stroke-dashoffset: -100;
-  }
+    0% {
+        stroke-dashoffset: -100;
+    }
 
-  100% {
-    stroke-dashoffset: 900;
-  }
+    100% {
+        stroke-dashoffset: 900;
+    }
 }
 
 .invalid + label {
-  color: red;
+    color: red;
 }
 .error {
-  color: red;
-  font-size: 0.75rem;
-  display: none;
+    color: red;
+    font-size: 0.75rem;
+    display: none;
 }
 .invalid + .error {
-  display: block;
+    display: block;
 }
 
 .list-disc ul {
-  list-style-type: disc !important;
-  margin-left: 1rem;
+    list-style-type: disc !important;
+    margin-left: 1rem;
 }
 
 .timePicker input {
-  border: 0px;
-  font-size: inherit;
+    border: 0px;
+    font-size: inherit;
 }
 
 .timePicker input:focus {
-  outline: none;
-  box-shadow: none;
+    outline: none;
+    box-shadow: none;
 }
 
 .rc-time-picker-panel-inner {
-  box-shadow: none !important;
+    box-shadow: none !important;
 }
 .rc-time-picker-panel-select-option-selected {
-  background-color: #711f7e !important;
-  color: white !important;
+    background-color: #711f7e !important;
+    color: white !important;
 }
 
 .center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.calander .rdp-caption_dropdowns{
-  display: flex;
-  gap:0.5rem;
+.calander .rdp-caption_dropdowns {
+    display: flex;
+    gap: 0.5rem;
 }
-.calander .rdp-caption_dropdowns .rdp-vhidden{
-  display: none !important;
-}
-
-.calander .rdp-caption_dropdowns div[class*='rdp-dropdown'] > div{
-  display: none;
-}
-.calander .rdp-caption_dropdowns select{
-  background-color: transparent;
-  border-radius:2px;
-  border:1px solid rgb(178, 178, 178);
-  padding: 2px 5px;
-  max-height: 400px;
-  min-width: 100px;
-  font-size: 0.8rem !important;
+.calander .rdp-caption_dropdowns .rdp-vhidden {
+    display: none !important;
 }
 
+.calander .rdp-caption_dropdowns div[class*='rdp-dropdown'] > div {
+    display: none;
+}
+.calander .rdp-caption_dropdowns select {
+    background-color: transparent;
+    border-radius: 2px;
+    border: 1px solid rgb(178, 178, 178);
+    padding: 2px 5px;
+    max-height: 400px;
+    min-width: 100px;
+    font-size: 0.8rem !important;
+}
 
 /* Mega Calander */
-.carrow{
-  background: url("data:image/svg+xml,%3Csvg stroke='currentColor' fill='currentColor' stroke-width='0' viewBox='0 0 24 24' height='200px' width='200px' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m4.431 12.822 13 9A1 1 0 0 0 19 21V3a1 1 0 0 0-1.569-.823l-13 9a1.003 1.003 0 0 0 0 1.645z' style='fill: white;'%3E%3C/path%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-size: contain;
-  opacity: 0;
-  /* visibility: hidden; */
-  transition: all 0.2s;
+.carrow {
+    background: url("data:image/svg+xml,%3Csvg stroke='currentColor' fill='currentColor' stroke-width='0' viewBox='0 0 24 24' height='200px' width='200px' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m4.431 12.822 13 9A1 1 0 0 0 19 21V3a1 1 0 0 0-1.569-.823l-13 9a1.003 1.003 0 0 0 0 1.645z' style='fill: white;'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0;
+    /* visibility: hidden; */
+    transition: all 0.2s;
 }
 
 /* div[data-state*="open"].left .arrow.left,
@@ -230,58 +229,88 @@ div[data-state*="open"].right .arrow.right{
 } */
 
 div.left .carrow.left,
-div.right .carrow.right{
-  opacity: 1;
-  visibility: visible;
-  transition: all 0.1s;
+div.right .carrow.right {
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.1s;
 }
 
-.appointmentDetails:active{
-  max-height: 60px;
+.appointmentDetails:active {
+    max-height: 60px;
 }
-.appointmentDetails:active{
-  opacity: 0.5;
+.appointmentDetails:active {
+    opacity: 0.5;
 }
-.appointmentDetails.pending:active *{
-  opacity: 0;
-}
-
-.timebox.active::after{
-  content: attr(data-newtime);
-  position: absolute;
-  inset: 0;
-  z-index: 999999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color:rgb(0, 0, 0);
-  font-size: 1.5rem;
-  font-weight: bold;
+.appointmentDetails.pending:active * {
+    opacity: 0;
 }
 
-.appointment+div{
-  transition: top 0.2s ease;
+.timebox.active::after {
+    content: attr(data-newtime);
+    position: absolute;
+    inset: 0;
+    z-index: 999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(0, 0, 0);
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
-.addTime.active{
-  background:#a855f7;
-  border-radius: 5px;
-  overflow: hidden;
+.appointment + div {
+    transition: top 0.2s ease;
 }
-.booktime{
-  opacity: 0;
-  color: white;
+
+.addTime.active {
+    background: #a855f7;
+    border-radius: 5px;
+    overflow: hidden;
 }
-.addTime+div[data-radix-popper-content-wrapper=""]{
-  display: none !important;
+.booktime {
+    opacity: 0;
+    color: white;
 }
-.addTime.active+div[data-radix-popper-content-wrapper=""]{
-  display: block !important;
+.addTime + div[data-radix-popper-content-wrapper=''] {
+    display: none !important;
 }
-.addTime.active .booktime{
-  opacity: 1;
+.addTime.active + div[data-radix-popper-content-wrapper=''] {
+    display: block !important;
 }
-.appointmentDetails{
-  -ms-touch-action: none;
-touch-action: none;
+.addTime.active .booktime {
+    opacity: 1;
 }
+.appointmentDetails {
+    -ms-touch-action: none;
+    touch-action: none;
+}
+.slide-controls {
+    position: relative;
+    display: flex;
+    height: 50px;
+    width: 50%;
+    overflow: hidden;
+    margin: 30px 0 10px 0;
+    /* justify-content: space-between; */
+    /* border: 1px solid lightgrey; */
+    /* border-radius: 100%; */
+    margin: 0 auto;
+}
+/* #login:checked ~ label.login {
+    cursor: default;
+    user-select: none;
+} */
+.slide-controls .slide {
+    height: 100%;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 48px;
+    cursor: pointer;
+    z-index: 1;
+    transition: all 0.6s ease;
+}
+/* #signup:checked ~ label.signup {
+    color: #000;
+} */
