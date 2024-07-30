@@ -115,7 +115,10 @@ const BookingList = () => {
                                         >
                                             <IoEyeSharp className="text-[#EA2C6D] text-xl" />
                                         </DialogTrigger>
-                                        <DialogContent close={setBookingModal}>
+                                        <DialogContent
+                                            close={setBookingModal}
+                                            className="sm:max-w-[500px]"
+                                        >
                                             <DialogTitle>
                                                 Booking Info
                                             </DialogTitle>

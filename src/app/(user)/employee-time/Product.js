@@ -1,6 +1,8 @@
 import Button from '@/components/ui/button';
 import Image from 'next/image';
 import React from 'react';
+import { BsInfoCircleFill } from 'react-icons/bs';
+import { FaMinus, FaPlus } from 'react-icons/fa';
 
 const Product = () => {
     return (
@@ -9,6 +11,84 @@ const Product = () => {
                 <p className="text-3xl font-bold">
                     Would you like to buy product?
                 </p>
+                <table className="w-full overflow-x-auto border-collapse">
+                    <thead>
+                        <tr className="border-b">
+                            <th className="text-left p-2">Name</th>
+                            <th className="text-left p-2">Quantity</th>
+                            <th className="text-left p-2">Price</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr className="border-b">
+                            <td className="p-2">
+                                <div className="flex-col items-center">
+                                    <p className="mr-2">
+                                        CeraVe Face wash (200 ml)
+                                    </p>
+                                    <div className="flex items-center gap-2">
+                                        <BsInfoCircleFill className="text-[#666666]" />
+                                        <p className="text-[#666666] cursor-pointer">
+                                            More info
+                                        </p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td className="p-2 flex items-center">
+                                <div className="flex items-center mt-2 justify-center gap-4 border border-[#e3e3e3] rounded-md">
+                                    <button className="hover:bg-[#d8d8d8] text-center hover:text-black w-full p-2">
+                                        <FaMinus className="text-[#A3A1A1] text-center hover:text-black" />
+                                    </button>
+                                    <h1 className="w-full">4</h1>
+                                    <button className="hover:bg-[#d8d8d8] w-full hover:text-black p-2">
+                                        <FaPlus className="text-[#A3A1A1] hover:text-black" />
+                                    </button>
+                                </div>
+                            </td>
+                            <td className="p-2">£5.00</td>
+                            <td className="p-2">
+                                {/* <button className="px-4 py-1 text-red-500 border border-red-500 rounded">
+                                    Remove
+                                </button> */}
+                                <Button variant="danger">Remove</Button>
+                            </td>
+                        </tr>
+                        <tr className="border-b">
+                            <td className="p-2">
+                                <div className="flex-col items-center">
+                                    <p className="mr-2">
+                                        CeraVe Face wash (200 ml)
+                                    </p>
+                                    <div className="flex items-center gap-2">
+                                        <BsInfoCircleFill className="text-[#666666]" />
+                                        <p className="text-[#666666] cursor-pointer">
+                                            More info
+                                        </p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td className="p-2 flex items-center">
+                                <div className="flex items-center mt-2 justify-center gap-4 border border-[#e3e3e3] rounded-md">
+                                    <button className="hover:bg-[#d8d8d8] text-center hover:text-black w-full p-2">
+                                        <FaMinus className="text-[#A3A1A1] text-center hover:text-black" />
+                                    </button>
+                                    <h1 className="w-full">4</h1>
+                                    <button className="hover:bg-[#d8d8d8] w-full hover:text-black p-2">
+                                        <FaPlus className="text-[#A3A1A1] hover:text-black" />
+                                    </button>
+                                </div>
+                            </td>
+                            <td className="p-2">£5.00</td>
+                            <td className="p-2">
+                                {/* <button className="px-4 py-1 text-red-500 border border-red-500 rounded">
+                                    Remove
+                                </button> */}
+                                <Button variant="outline">Add</Button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div className="shadow-lg rounded-md h-fit min-h-[350px] md:w-[40%] lg:w-[35%] w-[90%] mx-auto space-y-5 p-4 bg-white">
                 <div className="flex items-start gap-2">

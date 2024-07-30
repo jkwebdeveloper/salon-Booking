@@ -49,21 +49,75 @@ const BookingModal = () => {
                 </TableBody>
             </Table> */}
             <div className="overflow-x-auto">
-                <table>
-                    <thead>
-                        <tr>
-                            <th className="px-4 py-3 text-sm font-semibold text-left">
-                                S.N.
-                            </th>
-                            <th className="px-4 py-3 text-sm font-semibold text-left">
-                                Customer Name
-                            </th>
+                <table className="w-full">
+                    <tbody className="whitespace-nowrap">
+                        <tr className="border-b-2">
+                            <td className="px-4 py-4 text-base text-[#4D4D4D] font-semibold">
+                                ORDER NO:
+                            </td>
+                            <td className="px-4 py-4 text-sm text-[#4D4D4D]">
+                                02
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td className="px-4 py-4 text-sm">1</td>
-                            <td className="px-4 py-4 text-sm">Jason Bully</td>
+                        <tr className="border-b-2">
+                            <td className="px-4 py-4 text-base text-[#4D4D4D] font-semibold">
+                                Name:
+                            </td>
+                            <td className="px-4 py-4 text-sm text-[#4D4D4D]">
+                                Jason Bully
+                            </td>
+                        </tr>
+                        <tr className="border-b-2">
+                            <td className="px-4 py-4 text-base text-[#4D4D4D] font-semibold">
+                                Contact No:
+                            </td>
+                            <td className="px-4 py-4 text-sm text-[#4D4D4D]">
+                                +1 2345678932
+                            </td>
+                        </tr>
+                        <tr className="border-b-2">
+                            <td className="px-4 py-4 text-base text-[#4D4D4D] font-semibold">
+                                Email:
+                            </td>
+                            <td className="px-4 py-4 text-sm text-[#4D4D4D]">
+                                lorem@mail.com
+                            </td>
+                        </tr>
+                        <tr className="border-b-2">
+                            <td className="px-4 py-4 text-base text-[#4D4D4D] font-semibold">
+                                Date & Time:
+                            </td>
+                            <td className="px-4 py-4 text-sm text-[#4D4D4D]">
+                                09/03/2024, 11:00
+                            </td>
+                        </tr>
+                        <tr className="border-b-2">
+                            <td className="px-4 py-4 text-base text-[#4D4D4D] font-semibold">
+                                Payment:
+                            </td>
+                            <td className="px-4 py-4 text-sm text-[#4D4D4D]">
+                                £349
+                            </td>
+                        </tr>
+                        <tr className="border-b-2">
+                            <td className="px-4 py-4 text-base text-[#4D4D4D] font-semibold">
+                                Services:
+                            </td>
+                            <td className="px-4 py-4 text-sm text-[#4D4D4D]">
+                                Swedish Massage
+                            </td>
+                        </tr>
+                        <tr className="border-b-2">
+                            <td className="px-4 py-4 text-base text-[#4D4D4D] font-semibold">
+                                Status:
+                            </td>
+                            <td className="px-4 py-4  text-sm text-[#4D4D4D]">
+                                <select className="bg-[#FAFAFA] border border-[#D8DAE5] rounded-md p-2 w-full focus:outline-none ">
+                                    <option>Approved</option>
+                                    <option>Approved</option>
+                                    <option>Cancelled</option>
+                                </select>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
