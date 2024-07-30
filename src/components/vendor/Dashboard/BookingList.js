@@ -23,7 +23,7 @@ import {
 const BookingList = () => {
     const [bookingModal, setBookingModal] = useState(false);
     return (
-        <div className="space-y-4 bg-[#F7F7F7] p-4">
+        <div className="space-y-4 bg-[#F7F7F7] w-full p-4">
             <div className="flex items-center justify-between">
                 <p className="text-2xl font-semibold">Booking List</p>
                 <DropdownMenu>
