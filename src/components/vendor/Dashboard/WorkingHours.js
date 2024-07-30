@@ -12,13 +12,16 @@ import {
 } from '@/components/ui/select';
 import { v4 } from 'uuid'
 import converttomin from '@/constants/converttomin';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Error, Spinner, Success } from "@/components";
 import { POST } from '@/app/api/post';
 import { GET } from '@/app/api/get';
+import { login } from "@/redux/features/vendorAuthSlice";
 
 const WorkingHours = () => {
+    const dispatch = useDispatch();
     const vendor = useSelector(state => state?.vendorAuth?.vendor);
+    console.log(vendor);
     const [loading, setLoading] = React.useState(false);
     const [formState, setFormState] = React.useState({
         loading: false,
@@ -51,7 +54,7 @@ const WorkingHours = () => {
                 setFormState,
             });
             if (resp.code == 200) {
-
+                getVendorHours();
             }
         }
     }
@@ -63,7 +66,8 @@ const WorkingHours = () => {
         if (resp && resp.code == 200) {
             const salonTime = {};
             resp?.data.map(t => t?.status && (salonTime[weekDays.filter(w => w.slice(0, 3) == t.day)[0]] = { from_time: t?.from_time.slice(0, 5), to_time: t?.to_time.slice(0, 5), status: t?.status }));
-            setSelectedDays(salonTime)
+            setSelectedDays(salonTime);
+            dispatch(login({ ...vendor, availability: resp?.data }));
         }
     }
     useEffect(() => {

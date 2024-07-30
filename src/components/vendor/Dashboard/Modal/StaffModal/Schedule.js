@@ -1,4 +1,6 @@
-import React from "react";
+'use client'
+import React, { useEffect } from 'react';
+import Button from '@/components/ui/button';
 import {
   Select,
   SelectContent,
@@ -7,419 +9,180 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Button } from "@/components";
+} from '@/components/ui/select';
+import { v4 } from 'uuid'
+import converttomin from '@/constants/converttomin';
+import { useSelector } from 'react-redux';
+import { Error, Spinner, Success } from "@/components";
+import { POST } from '@/app/api/post';
+import { GET } from '@/app/api/get';
+import { format } from 'date-fns';
 
-const Schedule = ({ vendor }) => {
-  const weekDays = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
-  const timeing = [
-    "09:00",
-    "09:30",
-    "10:00",
-    "10:30",
-    "11:00",
-    "11:30",
-    "12:00",
-    "12:30",
-    "13:00",
-    "13:30",
-    "14:00",
-    "14:30",
-    "15:00",
-    "15:30",
-    "16:00",
-    "16:30",
-    "17:00",
-    "17:30",
-    "18:00",
-    "18:30",
-    "19:00",
-    "19:30",
-    "20:00",
-    "20:30",
-    "21:00",
-    "21:30",
-    "22:00",
-    "22:30",
-    "23:00",
-    "23:30",
-  ];
+const Schedule = ({ staff, day, close, staffsSchedule, setStaffsSchedule, dateRange }) => {
+  const vendor = useSelector(state => state?.vendorAuth?.vendor);
+  const [loading, setLoading] = React.useState(false);
+  const [formState, setFormState] = React.useState({
+    loading: false,
+    error: "",
+    success: "",
+  });
+  const [selectedDays, setSelectedDays] = React.useState({});
+
+  const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  const timeing = ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"];
+
+  const vendorAvailability = vendor?.availability?.map(t => {
+    const startTime = t?.from_time && t?.from_time.slice(0, 5) || '09:00';
+    const endTime = t?.to_time && t?.to_time.slice(0, 5) || '23:30';
+    const startingIndex = timeing.indexOf(startTime);
+    const endingIndex = timeing.indexOf(endTime);
+    return { day: t?.day, dayTime: timeing.slice(startingIndex, endingIndex + 1), status: t?.status }
+  });
+  const daysTimeing = Object.groupBy(vendorAvailability, ({ day }) => day);
+
+  const updateWorkingHour = async (e) => {
+    e.preventDefault();
+    const isValid = [];
+    Object.keys(selectedDays).map(day => {
+      (!selectedDays[day]?.from_time || !selectedDays[day]?.to_time) && isValid.push(day);
+    });
+    if (isValid.length == 0) {
+      const hoursData = {};
+      new Array(weekDays.length).fill(0).map((_, i) => {
+        const day = weekDays[i];
+        (!selectedDays[day]) && (hoursData[day.slice(0, 3)] = { from_time: null, to_time: null, status: 0 })
+          || (hoursData[day.slice(0, 3)] = selectedDays[day]);
+      });
+      const resp = await POST.request({
+        url: "/vendor/add-schedule-staffs",
+        form: { staffs_id: staff?.id, ...hoursData, from_date: format(dateRange.from, 'yyyy-MM-dd'), to_date: format(dateRange.to, 'yyyy-MM-dd') },
+        token: vendor?.api_token,
+        rawdata: true,
+        formState,
+        setFormState,
+      });
+      if (resp.code == 200) {
+        // const newStaffsSchedule = staffsSchedule.map(s => s.id == staff?.id ? {
+        //   ...s, schedule: s.schedule.map(s => {
+        //     const { from_time, to_time, type } = resp.data.filter(t => t.day == s.day)[0];
+        //     return ({ ...s, from_time, to_time, type })
+        //   })
+        // } : s);
+        // console.log('newStaffsSchedule', newStaffsSchedule);
+        console.log(resp.data)
+        setStaffsSchedule(resp?.data);
+        close();
+      }
+    }
+  }
+
+  const getVendorHours = async () => {
+    setLoading(true);
+    const resp = await GET.request({ url: '/vendor/get-vendor-open-hours', token: vendor?.api_token });
+    setLoading(false);
+    if (resp && resp.code == 200) {
+      const salonTime = {};
+      resp?.data.map(t => t?.status && (salonTime[weekDays.filter(w => w.slice(0, 3) == t.day)[0]] = { from_time: t?.from_time.slice(0, 5), to_time: t?.to_time.slice(0, 5), status: t?.status }));
+      setSelectedDays(salonTime)
+    }
+  }
+  useEffect(() => {
+    getVendorHours();
+  }, [])
   return (
-    <>
-      <div className="w-full space-y-3 lg:w-1/2">
-        <div className="flex items-center gap-10">
-          <li className="w-full list-none">
-            <div className="flex items-center">
-              <input
-                id="list-radio-license"
-                type="checkbox"
-                value=""
-                name="list-radio"
-                className=""
-              />
-              <label
-                htmlFor="list-radio-license"
-                className="w-full text-sm font-medium text-gray-900 ms-2 "
-              >
-                Monday
-              </label>
-            </div>
-          </li>
-          <div className="flex items-center gap-3">
-            <Select>
-              <SelectTrigger className="">
-                <SelectValue placeholder="09:00" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-            <Select>
-              <SelectTrigger className="">
-                <SelectValue placeholder="23:30" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+    <div className="space-y-4">
+      <p className="text-2xl font-semibold">New Schedule</p>
+      <div className="w-full p-3 space-y-4 bg-white rounded-xl">
+        <form className="relative space-y-3 w-max" onSubmit={e => updateWorkingHour(e)}>
+          <div className={`w-full space-y-3 lg:w-1/2 ${loading && 'opacity-10'}`}>
+            {weekDays.map((day) => {
+              const timeing = daysTimeing[day.slice(0, 3)][0]?.status == 1 && daysTimeing[day.slice(0, 3)][0]?.dayTime || [];
+              return (
+                timeing.length &&
+                <div className="flex items-center gap-10" key={v4()}>
+                  <li className="w-full list-none">
+                    <div className="flex items-center">
+                      <input
+                        id={day}
+                        type="checkbox"
+                        className="w-5 h-5 accent-green-600"
+                        checked={selectedDays[day] ? true : false}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            e.target.nextElementSibling.value = '1';
+                            setSelectedDays({ ...selectedDays, [day]: { from_time: '', to_time: '', status: 1 } })
+                          } else {
+                            e.target.nextElementSibling.value = '0';
+                            const newDays = selectedDays;
+                            delete newDays[day];
+                            setSelectedDays({ ...newDays });
+                          }
+                        }}
+                      />
+                      <input type="hidden" name={day.slice(0, 3) + '[status]'} value={0} onChange={e => { return }} />
+                      <label
+                        htmlFor={day}
+                        className="w-full text-sm font-medium text-gray-900 ms-2 min-w-[80px]"
+                      >
+                        {day}
+                      </label>
+                    </div>
+                  </li>
+                  <div className="flex items-center gap-3">
+                    <Select name={day.slice(0, 3) + '[from_time]'} onValueChange={e => setSelectedDays({ ...selectedDays, [day]: { ...selectedDays[day], from_time: e } })}>
+                      <SelectTrigger className={`text-black min-w-[90px] ${selectedDays[day] && (selectedDays[day].from_time && 'text-black' || 'text-red-500')}`}>
+                        {selectedDays[day] && (selectedDays[day].from_time || 'From') || 'From'}
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {timeing.map((time) => (
+                            <SelectItem key={v4()} value={time} disabled={selectedDays[day] && +(converttomin(time)) >= +(converttomin(selectedDays[day].to_time || '24:00')) || false}>
+                              {time}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                    <Select onValueChange={e => setSelectedDays({ ...selectedDays, [day]: { ...selectedDays[day], to_time: e } })}>
+                      <SelectTrigger className={`text-black min-w-[90px] ${selectedDays[day] && (selectedDays[day].to_time && 'text-black' || 'text-red-500')}`}>
+                        {selectedDays[day] && (selectedDays[day].to_time || 'To') || 'To'}
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {timeing.map((time) => (
+                            <SelectItem key={v4()} value={time} disabled={selectedDays[day] && +(converttomin(time)) <= +(converttomin(selectedDays[day].from_time || '24:00')) || false}>
+                              {time}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                || ''
+              )
+            })}
           </div>
-        </div>
-        <div className="flex items-center gap-10">
-          <li className="w-full list-none">
-            <div className="flex items-center">
-              <input
-                id="list-radio-license"
-                type="checkbox"
-                value=""
-                name="list-radio"
-                className=""
-              />
-              <label
-                htmlFor="list-radio-license"
-                className="w-full text-sm font-medium text-gray-900 ms-2 "
-              >
-                Tuesday
-              </label>
-            </div>
-          </li>
-          <div className="flex items-center gap-3">
-            <Select>
-              <SelectTrigger className="">
-                <SelectValue placeholder="09:00" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-            <Select>
-              <SelectTrigger className="">
-                <SelectValue placeholder="23:30" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-        <div className="flex items-center gap-10">
-          <li className="w-full list-none">
-            <div className="flex items-center">
-              <input
-                id="list-radio-license"
-                type="checkbox"
-                value=""
-                name="list-radio"
-                className=""
-              />
-              <label
-                htmlFor="list-radio-license"
-                className="w-full text-sm font-medium text-gray-900 ms-2 "
-              >
-                Wednesday
-              </label>
-            </div>
-          </li>
-          <div className="flex items-center gap-3">
-            <Select>
-              <SelectTrigger className="">
-                <SelectValue placeholder="09:00" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-            <Select>
-              <SelectTrigger className="">
-                <SelectValue placeholder="23:30" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-        <div className="flex items-center gap-10">
-          <li className="w-full list-none">
-            <div className="flex items-center">
-              <input
-                id="list-radio-license"
-                type="checkbox"
-                value=""
-                name="list-radio"
-                className=""
-              />
-              <label
-                htmlFor="list-radio-license"
-                className="w-full text-sm font-medium text-gray-900 ms-2 "
-              >
-                Thursday
-              </label>
-            </div>
-          </li>
-          <div className="flex items-center gap-3">
-            <Select>
-              <SelectTrigger className="">
-                <SelectValue placeholder="09:00" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-            <Select>
-              <SelectTrigger className="">
-                <SelectValue placeholder="23:30" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-        <div className="flex items-center gap-10">
-          <li className="w-full list-none">
-            <div className="flex items-center">
-              <input
-                id="list-radio-license"
-                type="checkbox"
-                value=""
-                name="list-radio"
-                className=""
-              />
-              <label
-                htmlFor="list-radio-license"
-                className="w-full text-sm font-medium text-gray-900 ms-2 "
-              >
-                Friday
-              </label>
-            </div>
-          </li>
-          <div className="flex items-center gap-3">
-            <Select>
-              <SelectTrigger className="">
-                <SelectValue placeholder="09:00" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-            <Select>
-              <SelectTrigger className="">
-                <SelectValue placeholder="23:30" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-        <div className="flex items-center gap-10">
-          <li className="w-full list-none">
-            <div className="flex items-center">
-              <input
-                id="list-radio-license"
-                type="checkbox"
-                value=""
-                name="list-radio"
-                className=""
-              />
-              <label
-                htmlFor="list-radio-license"
-                className="w-full text-sm font-medium text-gray-900 ms-2 "
-              >
-                Saturday
-              </label>
-            </div>
-          </li>
-          <div className="flex items-center gap-3">
-            <Select>
-              <SelectTrigger className="">
-                <SelectValue placeholder="09:00" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-            <Select>
-              <SelectTrigger className="">
-                <SelectValue placeholder="23:30" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-        <div className="flex items-center gap-10">
-          <li className="w-full list-none">
-            <div className="flex items-center">
-              <input
-                id="list-radio-license"
-                type="checkbox"
-                value=""
-                name="list-radio"
-                className=""
-              />
-              <label
-                htmlFor="list-radio-license"
-                className="w-full text-sm font-medium text-gray-900 ms-2 "
-              >
-                Sunday
-              </label>
-            </div>
-          </li>
-          <div className="flex items-center gap-3">
-            <Select>
-              <SelectTrigger className="">
-                <SelectValue placeholder="09:00" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-            <Select>
-              <SelectTrigger className="">
-                <SelectValue placeholder="23:30" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
+          <Button type="submit" variant="primary" className={`uppercase ${loading && 'opacity-10'}`} disabled={formState?.loading}>
+            <Spinner
+              show={formState?.loading}
+              width="25"
+              height="25"
+              text="Update"
+            />
+          </Button>
+          {loading && <div className='absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4'>
+            <Spinner
+              show={true}
+              width={50}
+              height={50}
+            />
+          </div>}
+          {formState?.error && <Error error={formState?.error} />}
+          {formState?.success && <Success message={formState?.success} />}
+        </form>
       </div>
-      <Button
-        variant="primary"
-        className="flex items-center justify-center w-full mx-auto"
-      >
-        Save
-      </Button>
-    </>
+    </div>
   );
 };
 
