@@ -17,15 +17,13 @@ export function DatePickerRange({
     className,
     name,
     placeholder,
+    date,
+    setDate,
     defaultOpen = false,
     setCalendarOpen,
     onDateChange, // New prop
     mode = "single"
 }) {
-    const [date, setDate] = React.useState({
-        from: new Date(),
-        to: new Date(),
-    });
     const [open, setOpen] = React.useState(defaultOpen);
 
     // const handleSelect = (selectedDate) => {

@@ -150,6 +150,7 @@ const AddTeam = ({
   useEffect(() => {
     setError(null);
   }, [currentTab]);
+
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
@@ -176,7 +177,7 @@ const AddTeam = ({
       </div>
       {currentTab == "basic" && (
         <form
-          className="space-y-3"
+          className="z-10 space-y-3"
           onSubmit={(e) =>
             (Object.keys(staff).length > 0 &&
               updateStaff({ e, step: "services" })) ||
@@ -280,13 +281,16 @@ const AddTeam = ({
             <div className="w-full space-y-1 text-left lg:w-1/3">
               <Label htmlFor="dob" text="Date of Birth" />
               <div
-                className="border rounded-sm z-[99999] flex-grow"
+                className="flex-grow border rounded-sm"
                 onClick={(e) => setCalendarOpen(true)}
               >
                 <DatePicker
-                  className={"px-3 py-[17px] h-8 rounded-md overflow-hidden"}
+                  className={"px-3 py-[17px] h-8 rounded-md"}
                   defaultOpen={calendarOpen}
-                  onSelect={(date) => setBirthDate(date)}
+                  onSelect={(date) => {
+                    setBirthDate(date);
+                    console.log(date);
+                  }}
                   setCalendarOpen={setCalendarOpen}
                   key={calendarOpen}
                   name={"dob"}

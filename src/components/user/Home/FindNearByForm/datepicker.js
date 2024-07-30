@@ -62,7 +62,7 @@ export function DatePicker({
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className="w-auto p-0 bg-white"
+          className="w-auto p-0 bg-white !pointer-events-auto"
           align="start"
           onInteractOutside={(e) => setOpen(!open)}
         >

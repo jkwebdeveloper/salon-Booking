@@ -1,12 +1,11 @@
 "use client";
 import Sidebar from "@/components/global/DashboardHeader/Sidebar";
-import Staff from "@/components/vendor/Dashboard/Staff";
+import Staff from "@/components/vendor/Dashboard/Staff/";
 import React from "react";
 import { useSelector } from "react-redux";
 
 const StaffPage = () => {
   const { sidebar } = useSelector((state) => state.sidebarAuth.sidebar);
-
   return (
     <div className="flex items-start">
       {sidebar ? (

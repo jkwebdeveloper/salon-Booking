@@ -41,6 +41,7 @@ import BookingList from '@/components/vendor/Dashboard/BookingList';
 const Planner = () => {
     const { sidebar } = useSelector(state => state.sidebarAuth.sidebar);
     const [appointmentModal, setAppointmentModal] = useState(false);
+    const [dropdown, setDropdown] = useState(false);
     const [scheduleType, setScheduleType] = React.useState('single'); // single | range
     const [currentStaff, setCurrentStaff] = React.useState('');
     const [shortDate, setShortDate] = React.useState({ from: '', to: '' });
@@ -220,57 +221,37 @@ const Planner = () => {
                     <div className="flex items-center justify-between">
                         <p className="text-2xl font-semibold">Planner</p>
                         <div className="flex items-center gap-3">
-                            <Dialog open={appointmentModal}>
-                                <DropdownMenu>
-                                    <DropdownMenuTrigger>
-                                        <Button
-                                            variant="outline"
-                                            className="flex items-center gap-3"
-                                        >
-                                            Create new <BiSolidDownArrow />
-                                        </Button>
-                                    </DropdownMenuTrigger>
-                                    <DropdownMenuContent className="w-56 p-0 mt-2 bg-white ring-1 ring-neutral-200">
-                                        <DropdownMenuGroup>
-                                            <DropdownMenuItem
-                                                onClick={e =>
-                                                    setAppointmentModal(true)
-                                                }
-                                            >
-                                                <DialogTrigger
-                                                    // onClick={e =>
-                                                    //     setAppointmentModal(
-                                                    //         true
-                                                    //     )
-                                                    // }
-                                                    className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white"
-                                                >
-                                                    Add Appointment
-                                                </DialogTrigger>
-                                            </DropdownMenuItem>
-
-                                            {/* <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white">
-                                            Add Appointment
-                                        </DropdownMenuItem> */}
-                                            <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white">
-                                                Add Block
-                                            </DropdownMenuItem>
-                                        </DropdownMenuGroup>
-                                    </DropdownMenuContent>
-                                </DropdownMenu>
+                            <DropdownMenu open={dropdown} onOpenChange={e => setDropdown(e)}>
+                                <DropdownMenuTrigger>
+                                    <Button
+                                        variant="outline"
+                                        className="flex items-center gap-3"
+                                    >
+                                        Create new <BiSolidDownArrow />
+                                    </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent className="w-56 p-0 mt-2 bg-white ring-1 ring-neutral-200">
+                                    <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white"
+                                        onSelect={e => setTimeout(() => setAppointmentModal(true), 200)}
+                                    >
+                                        Add Appointment
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white"
+                                        onSelect={e => setTimeout(() => setAppointmentModal(true), 200)}
+                                    >
+                                        Add Block
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                            <Dialog open={!dropdown && appointmentModal}>
                                 <DialogContent close={setAppointmentModal}>
                                     <PlannerModal
-                                        setAppointmentModal={
-                                            setAppointmentModal
-                                        }
+                                        setAppointmentModal={setAppointmentModal}
                                     />
                                 </DialogContent>
                             </Dialog>
                             <Button variant="outline">Sell Product</Button>
-                            <Button
-                                variant="primary"
-                                onClick={() => setBookingList(true)}
-                            >
+                            <Button variant="primary" onClick={() => setBookingList(true)} >
                                 Booking list
                             </Button>
                         </div>
