@@ -26,12 +26,12 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     const resp = await POST.request({ url: "/vendor/login", form: e.target });
-    setLoading(false);
     if (resp) {
       if (resp.status != "Error" && Object.keys(resp.data).length > 0) {
         dispatch(login(resp.data));
         return;
       }
+      setLoading(false);
       setError(resp.message);
     }
   };

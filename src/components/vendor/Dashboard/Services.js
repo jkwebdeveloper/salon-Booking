@@ -47,16 +47,20 @@ const Services = () => {
     const [voucher, setVoucher] = useState(false);
     const [editVoucher, setEditVoucher] = useState(false);
     const [voucherData, setVoucherData] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const getVouchers = async () => {
+        setLoading(true);
         const resp = await GET.request({
             url: '/vendor/get-all-giftvouchers',
             token: vendor?.api_token,
         });
+        setLoading(false);
         resp && resp.code == 200
             ? setVoucherList(resp.data)
             : setVoucherList([]);
     };
+
     const [currentTab, setCurrentTab] = 'service';
     const handleTreatmentClick = () => {
         setTreatment(true);
@@ -317,13 +321,13 @@ const Services = () => {
                                                     placeholder="Enter Amount *"
                                                     pattern={
                                                         discountType ==
-                                                        'percentage'
+                                                            'percentage'
                                                             ? '[0-9]{0,2}'
                                                             : '[0-9]{1,}'
                                                     }
                                                     maxLength={
                                                         discountType ==
-                                                        'percentage'
+                                                            'percentage'
                                                             ? 2
                                                             : ''
                                                     }
@@ -946,26 +950,26 @@ const Services = () => {
                                                                                     </p>
                                                                                     <p className="text-sm">
                                                                                         {service_group?.duration ==
-                                                                                        0.5
+                                                                                            0.5
                                                                                             ? '30 Min'
                                                                                             : service_group?.duration ==
-                                                                                              1
-                                                                                            ? '1 Hour'
-                                                                                            : service_group?.duration ==
-                                                                                              1.5
-                                                                                            ? '1 Hour 30 Min'
-                                                                                            : service_group?.duration ==
-                                                                                              2
-                                                                                            ? '2 Hour'
-                                                                                            : '2 Hour 30 Min'}
+                                                                                                1
+                                                                                                ? '1 Hour'
+                                                                                                : service_group?.duration ==
+                                                                                                    1.5
+                                                                                                    ? '1 Hour 30 Min'
+                                                                                                    : service_group?.duration ==
+                                                                                                        2
+                                                                                                        ? '2 Hour'
+                                                                                                        : '2 Hour 30 Min'}
                                                                                     </p>
                                                                                     <p className="text-sm font-bold">
                                                                                         {service_group?.price &&
                                                                                             '£' +
-                                                                                                service_group?.price}
+                                                                                            service_group?.price}
                                                                                         {service_group?.sales_price &&
                                                                                             '£' +
-                                                                                                service_group?.sales_price}
+                                                                                            service_group?.sales_price}
                                                                                     </p>
                                                                                 </div>
                                                                             )
@@ -994,14 +998,14 @@ const Services = () => {
                                             </div>
                                         );
                                     })) || (
-                                    <div className="center min-h-[300px] w-full">
-                                        <Spinner
-                                            show={vendorServices?.loading}
-                                            width={50}
-                                            height={50}
-                                        />
-                                    </div>
-                                )}
+                                        <div className="center min-h-[300px] w-full">
+                                            <Spinner
+                                                show={vendorServices?.loading}
+                                                width={50}
+                                                height={50}
+                                            />
+                                        </div>
+                                    )}
                                 <Dialog
                                     className="w-11/12"
                                     open={addService}
@@ -1051,8 +1055,8 @@ const Services = () => {
                                 </div>
                                 <div className="w-full p-4 space-y-3 bg-white rounded-xl">
                                     <div className="overflow-x-auto">
-                                        {voucherList && (
-                                            <table className="min-w-full font-[sans-serif]">
+                                        {!loading && voucherList.length
+                                            && <table className="min-w-full font-[sans-serif]">
                                                 <thead className="border-b-2 whitespace-nowrap">
                                                     <tr>
                                                         <th className="px-4 py-3 text-sm font-semibold text-left">
@@ -1092,7 +1096,7 @@ const Services = () => {
                                                                 <td className="px-4 py-4 text-sm">
                                                                     {(voucher?.sales_price &&
                                                                         '£' +
-                                                                            voucher?.sales_price) ||
+                                                                        voucher?.sales_price) ||
                                                                         'N/A'}
                                                                 </td>
                                                                 <td className="px-4 py-4 text-sm">
@@ -1101,15 +1105,14 @@ const Services = () => {
                                                                 </td>
                                                                 <td className="px-4 py-4 text-sm ">
                                                                     <p
-                                                                        className={`${
-                                                                            (voucher.status ==
-                                                                                0 &&
-                                                                                'bg-yellow-500') ||
+                                                                        className={`${(voucher.status ==
+                                                                            0 &&
+                                                                            'bg-yellow-500') ||
                                                                             (vendor.status ==
                                                                                 1 &&
                                                                                 'bg-green-600 text-white') ||
                                                                             'bg-red-700'
-                                                                        } p-2 rounded-full text-center`}
+                                                                            } p-2 rounded-full text-center`}
                                                                     >
                                                                         {(voucher.status ==
                                                                             0 &&
@@ -1144,16 +1147,15 @@ const Services = () => {
                                                     )}
                                                 </tbody>
                                             </table>
-                                        )}
-                                        {!voucherList && (
-                                            <div className="w-full min-h-[300px] center">
+                                            || loading && <div className="w-full min-h-[300px] center">
                                                 <Spinner
                                                     show={true}
                                                     width={50}
                                                     height={50}
                                                 />
-                                            </div>
-                                        )}
+                                            </div> || <div className="w-full min-h-[300px] center">
+                                                <p>No Voucher Found</p>
+                                            </div>}
                                     </div>
                                 </div>
                             </>

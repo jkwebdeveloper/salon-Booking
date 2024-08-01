@@ -16,7 +16,7 @@ const StaffPage = () => {
       <div
         className={
           sidebar
-            ? ` md:w-4/5 w-[90%] mx-auto space-y-5 h-fit min-h-[350px] p-5 bg-[#f4f2f2]`
+            ? ` md:w-4/5 w-[90%] mx-auto space-y-5 h-fit min-h-[200px] p-5 bg-[#f4f2f2]`
             : `w-full container bg-[#f4f2f2] mx-auto p-5`
         }
       >

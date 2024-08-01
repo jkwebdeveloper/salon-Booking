@@ -14,8 +14,11 @@ import {
 import EditCustomerModal from "./Modal/EditCustomerModal";
 import EyeModal from "./Modal/EyeModal";
 import { GET } from "@/app/api/get";
-import { PageLoader } from "@/components";
+import { Error, PageLoader, Spinner } from "@/components";
 import { v4 } from "uuid";
+import Image from "next/image";
+import { IoIosCloseCircle } from "react-icons/io";
+import { POST } from "@/app/api/post";
 
 const Customer = () => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);
@@ -25,6 +28,14 @@ const Customer = () => {
   const [viewCustomer, setViewCustomer] = useState("");
   const [customers, setCustomers] = useState("");
   const [loading, setLoading] = useState(false);
+  const [importExport, setImportExport] = useState({ export: false, import: false });
+  const [selectedFile, setSelectedFile] = useState({ file: null });
+  const [importUser, setImportUser] = useState(false);
+  const [formState, setFormState] = React.useState({
+    loading: false,
+    error: "",
+    success: "",
+  });
 
   const getCustomers = useCallback(async () => {
     setLoading(true);
@@ -37,6 +48,40 @@ const Customer = () => {
       setCustomers(resp.data);
     }
   }, []);
+
+  const exportCustomers = useCallback(async (e) => {
+    setImportExport({ ...importExport, export: true });
+    const resp = await GET.request({ url: '/vendor/export-customer', token: vendor?.api_token });
+    setImportExport({ ...importExport, export: false })
+    if (resp && resp.code == 200 && resp?.data?.file_path) {
+      window.open(resp?.data?.file_path, '_blank');
+    }
+  }, []);
+
+  const importCustomer = async (e) => {
+    const resp = await POST.request({
+      url: '/vendor/import-customer',
+      token: vendor?.api_token,
+      header: {
+        'Content-Type': 'multipart/form-data'
+      },
+      form: { file: selectedFile },
+      rowdata: true,
+      formState,
+      setFormState
+    });
+    if (resp && resp.code == 200 && resp?.data?.file_path) {
+
+    }
+  }
+  console.log(selectedFile);
+  const handleFileChange = (e) => {
+    const allowedFiles = ["xls", "xlsx", "csv"];
+    if (!allowedFiles.includes(e.target.files[0].name.split('.').pop())) {
+      return;
+    }
+    setSelectedFile(e.target.files[0]);
+  }
 
   useEffect(() => {
     getCustomers();
@@ -62,9 +107,56 @@ const Customer = () => {
               />
             </DialogContent>
           </Dialog>
-
-          <Button variant="secondary">Export</Button>
-          <Button variant="outline">Import</Button>
+          <Dialog open={importUser}>
+            <DialogContent close={e => {
+              setImportUser(false);
+              setSelectedFile(null);
+              setFormState({ loading: false, error: "", success: "" });
+            }} className="sm:max-w-[300px] p-3">
+              <DialogTitle className="mt-0.5">Select File</DialogTitle>
+              <div className="space-y-2">
+                {selectedFile
+                  && <div className="mx-auto mb-3 space-y-2 text-center">
+                    <div className="relative w-[150px] h-[150px] mx-auto">
+                      <Image src="/static/images/excel.png" width="150" height="150" alt="Excel File" className="p-10 w-full h-full mx-auto shadow-sm aspect-square bg-zinc-50 border-[1px] border-neutral-300 rounded-xl" />
+                      <IoIosCloseCircle className="absolute text-2xl cursor-pointer top-1 right-1 text-primary" onClick={e => setSelectedFile(null)} />
+                    </div>
+                    <p className="mb-2 text-sm text-gray-500 capitalize">{selectedFile.name}</p>
+                  </div>
+                  || <div className="relative flex items-center justify-center min-h-[150px] border-neutral-300 shadow-sm border-[1px] rounded-md flex-item-center">
+                    <input type="file" className="absolute inset-0 w-full opacity-0 cursor-pointer" accept=".xls,.xlsx,.csv" onChange={e => {
+                      handleFileChange(e);
+                    }} />
+                    <div className="space-y-1 text-center">
+                      <p className="text-md text-primary">Select File To Import</p>
+                      <p className="text-sm text-neutral-400">Supported File Format .xls, xlsx, csv</p>
+                    </div>
+                  </div>}
+                <Button variant="primary" size="md" className="w-full py-2 md:w-full" onClick={e => importCustomer(e)} disabled={formState?.loading}>
+                  <Spinner
+                    show={formState?.loading}
+                    width="25"
+                    height="25"
+                    text="Upload"
+                  />
+                </Button>
+                {formState?.error && <Error error={formState?.error} />}
+              </div>
+            </DialogContent>
+          </Dialog>
+          <Button variant="secondary" type="button" onClick={e => exportCustomers(e)} disabled={importExport.export}>
+            <Spinner
+              show={importExport.export}
+              width="25"
+              height="25"
+              text="Export"
+            />
+          </Button>
+          <Button variant="outline" onClick={e => {
+            setSelectedFile(null);
+            setFormState({ loading: false, error: "", success: "" });
+            setImportUser(true);
+          }}>Import</Button>
         </div>
       </div>
       <div className="overflow-x-auto bg-white rounded-lg">
@@ -241,16 +333,16 @@ const Customer = () => {
                 customers={customers}
               />
             )) || (
-              <EyeModal
-                hooks={{
-                  setEditDialog,
-                  setViewCustomer,
-                  setCustomers,
-                  setEditCustomer,
-                }}
-                data={{ viewCustomer, customers }}
-              />
-            )}
+                <EyeModal
+                  hooks={{
+                    setEditDialog,
+                    setViewCustomer,
+                    setCustomers,
+                    setEditCustomer,
+                  }}
+                  data={{ viewCustomer, customers }}
+                />
+              )}
           </DialogContent>
         </Dialog>
       </div>
