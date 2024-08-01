@@ -82,12 +82,13 @@ const Billing = ({ handleContinue, handleBack }) => {
                     </div>
                 </form>
             </div>
-            <div className="shadow-lg rounded-md h-fit min-h-[350px] md:w-[40%] lg:w-[35%] w-[90%] mx-auto space-y-5 p-4 bg-white">
+            <div className="shadow-lg rounded-md h-fit min-h-fit relative md:w-[40%] w-[90%] mx-auto space-y-5 p-4 bg-white">
                 <div className="flex items-start gap-2">
                     <Image
-                        src={'/static/images/spa_life.png'}
+                        src={'/static/images/booking.png'}
                         loading="lazy"
                         alt="Hero Banner"
+                        objectFit="cover"
                         className="object-cover h-full"
                         width={50}
                         height={80}
@@ -119,13 +120,30 @@ const Billing = ({ handleContinue, handleBack }) => {
                     </div>
                 </div>
                 <div className="flex items-center justify-between">
+                    <p className="">Client 1</p>
+                    <div className="flex items-center gap-2">
+                        <p>Nuzami</p>
+                        <Button className="bg-[#0AADA4] text-white rounded-md">
+                            Edit
+                        </Button>
+                    </div>
+                </div>
+                <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                         <p>Face wash</p>
                         <p>x 3</p>
                     </div>
                     <p>£15</p>
                 </div>
-                <div className="flex items-center justify-center w-full gap-3">
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                        <p>Face wash</p>
+                        <p>x 3</p>
+                    </div>
+                    <p>£15</p>
+                </div>
+
+                <div className="relative bottom-0 left-0 flex items-center justify-center w-full gap-3">
                     <button
                         className="w-full border-[1px] py-2 rounded-full  border-[#CCCCCC] bg-background shadow-sm hover:bg-primary hover:text-white"
                         onClick={handleBack}

@@ -1,18 +1,27 @@
 import Button from '@/components/ui/button';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import { BsInfoCircleFill } from 'react-icons/bs';
 import { FaMinus, FaPlus } from 'react-icons/fa';
+import {
+    Dialog,
+    DialogContent,
+    DialogTrigger,
+    DialogTitle,
+} from '@/components/ui/dialog';
+import MoreInfoModal from './MoreInfoModal';
 
 const Product = ({ handleContinue, handleBack }) => {
+    const [moreInfo, setmoreInfo] = useState(false);
+
     return (
         <div className="container flex flex-col min-h-[55dvh] gap-4 px-1 md:flex-row md:px-28 relative md:mb-10">
             <div className="md:w-[60%] w-[90%] mx-auto space-y-5 rounded-md shadow-lg h-fit min-h-[350px] p-4 bg-white">
                 <p className="text-3xl font-bold">
                     Would you like to buy product?
                 </p>
-                <table className="w-full overflow-x-auto border-collapse">
-                    <thead>
+                <table className="w-full space-y-4 overflow-x-auto border-collapse">
+                    <thead className="space-y-4">
                         <tr className="border-b">
                             <th className="p-2 text-left">Name</th>
                             <th className="p-2 text-left">Quantity</th>
@@ -20,8 +29,8 @@ const Product = ({ handleContinue, handleBack }) => {
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr className="border-b">
+                    <tbody className="space-y-4">
+                        <tr className="border-b ">
                             <td className="p-2">
                                 <div className="flex-col items-center">
                                     <p className="mr-2">
@@ -29,9 +38,31 @@ const Product = ({ handleContinue, handleBack }) => {
                                     </p>
                                     <div className="flex items-center gap-2">
                                         <BsInfoCircleFill className="text-[#666666]" />
-                                        <p className="text-[#666666] cursor-pointer">
+                                        <Dialog
+                                            open={moreInfo}
+                                            className="w-1/2"
+                                        >
+                                            <DialogTrigger
+                                                onClick={e => setmoreInfo(true)}
+                                                className="text-[#666666] cursor-pointer"
+                                            >
+                                                More info
+                                            </DialogTrigger>
+                                            <DialogContent
+                                                close={setmoreInfo}
+                                                className="sm:max-w-[750px]"
+                                            >
+                                                <DialogTitle className="text-3xl font-bold">
+                                                    CeraVe Face wash (200 ml)
+                                                </DialogTitle>
+                                                <MoreInfoModal
+                                                    setmoreInfo={setmoreInfo}
+                                                />
+                                            </DialogContent>
+                                        </Dialog>
+                                        {/* <p className="text-[#666666] cursor-pointer">
                                             More info
-                                        </p>
+                                        </p> */}
                                     </div>
                                 </div>
                             </td>
@@ -51,7 +82,9 @@ const Product = ({ handleContinue, handleBack }) => {
                                 {/* <button className="px-4 py-1 text-red-500 border border-red-500 rounded">
                                     Remove
                                 </button> */}
-                                <Button variant="danger">Remove</Button>
+                                <Button variant="danger" className="w-full">
+                                    Remove
+                                </Button>
                             </td>
                         </tr>
                         <tr className="border-b">
@@ -81,23 +114,24 @@ const Product = ({ handleContinue, handleBack }) => {
                             </td>
                             <td className="p-2">£5.00</td>
                             <td className="p-2">
-                                {/* <button className="px-4 py-1 text-red-500 border border-red-500 rounded">
-                                    Remove
-                                </button> */}
-                                <Button variant="outline">Add</Button>
+                                <button className=" w-full py-2 border-[1px] rounded-full border-primary bg-background shadow-sm hover:bg-primary hover:text-white">
+                                    Add
+                                </button>
+                                {/* <Button variant="outline">Add</Button> */}
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div className="shadow-lg rounded-md h-fit min-h-[350px] md:w-[40%] lg:w-[35%] w-[90%] mx-auto space-y-5 p-4 bg-white">
+            <div className="shadow-lg rounded-md md:w-[40%] p-4 space-y-4 w-[90%] mx-auto bg-white flex flex-col min-h-[350px]">
                 <div className="flex items-start gap-2">
                     <Image
-                        src={'/static/images/spa_life.png'}
+                        src={'/static/images/booking.png'}
                         loading="lazy"
                         alt="Hero Banner"
+                        objectFit="cover"
                         className="object-cover h-full"
-                        width={50}
+                        width={60}
                         height={80}
                     />
                     <div>
@@ -107,33 +141,50 @@ const Product = ({ handleContinue, handleBack }) => {
                         </p>
                     </div>
                 </div>
-                <div className="flex items-start justify-between">
-                    <div className="space-y-2">
-                        <p className="text-sm font-medium">
-                            New Couples Massage
-                        </p>
-                        <p className="text-sm ">1 hour</p>
+                <div className="flex-grow space-y-4">
+                    <div className="flex items-start justify-between">
+                        <div className="space-y-2">
+                            <p className="text-sm font-medium">
+                                New Couples Massage
+                            </p>
+                            <p className="text-sm ">1 hour</p>
+                        </div>
+                        <p className="text-sm font-medium">£349</p>
                     </div>
-                    <p className="text-sm font-medium">£349</p>
-                </div>
-
-                <div className="flex items-center justify-between">
-                    <p className="">Client 1</p>
-                    <div className="flex items-center gap-2">
-                        <p>Nuzami</p>
-                        <Button className="bg-[#0AADA4] text-white rounded-md">
-                            Edit
-                        </Button>
+                    <div className="flex items-center justify-between">
+                        <p className="">Client 1</p>
+                        <div className="flex items-center gap-2">
+                            <p>Nuzami</p>
+                            <Button className="bg-[#0AADA4] text-white rounded-md">
+                                Edit
+                            </Button>
+                        </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                        <p className="">Client 1</p>
+                        <div className="flex items-center gap-2">
+                            <p>Nuzami</p>
+                            <Button className="bg-[#0AADA4] text-white rounded-md">
+                                Edit
+                            </Button>
+                        </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                            <p>Face wash</p>
+                            <p>x 3</p>
+                        </div>
+                        <p>£15</p>
+                    </div>
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                            <p>Face wash</p>
+                            <p>x 3</p>
+                        </div>
+                        <p>£15</p>
                     </div>
                 </div>
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                        <p>Face wash</p>
-                        <p>x 3</p>
-                    </div>
-                    <p>£15</p>
-                </div>
-                <div className="flex items-center justify-center w-full gap-3">
+                <div className="flex items-center justify-center w-full gap-3 mt-auto">
                     <button
                         className="w-full border-[1px] py-2 rounded-full  border-[#CCCCCC] bg-background shadow-sm hover:bg-primary hover:text-white"
                         onClick={handleBack}

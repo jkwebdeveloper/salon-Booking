@@ -6,6 +6,7 @@ import Button from '@/components/ui/button';
 import { IoIosLock } from 'react-icons/io';
 import Validation from '@/constants/validation';
 import Link from 'next/link';
+import { SiMinutemailer } from 'react-icons/si';
 
 const PaymentMethod = () => {
     return (
@@ -14,15 +15,30 @@ const PaymentMethod = () => {
                 <div className="h-fit space-y-3 py-5 min-h-[350px] md:w-[40%] lg:w-[35%] w-[90%]">
                     <p className="text-2xl font-semibold">Overview</p>
                     <div className="z-[2] overflow-hidden shadow-lg rounded-xl ring-1 ring-primary/10 w-full">
-                        <div className="relative">
+                        <div className="relative w-full">
                             <Image
                                 src={'/static/images/payment.png'}
-                                alt=""
+                                alt="Background Image"
                                 loading="lazy"
                                 width={400}
                                 height={300}
                                 className="object-cover object-center w-full "
                             />
+                            <div className="absolute inset-0 flex flex-col items-center justify-center p-5 space-y-2 text-center rounded-md bg-gradient-to-r from-purple-800 to-purple-600 bg-opacity-70">
+                                <p className="text-2xl font-semibold text-white">
+                                    Spa Life & Massage
+                                </p>
+                                <div className="flex items-center gap-2">
+                                    <SiMinutemailer className="text-sm text-white" />
+                                    <p className="text-sm text-white">
+                                        Street 420, Addington, London, EH1 1AE,
+                                        UK
+                                    </p>
+                                </div>
+                                <p className="text-white underline">
+                                    Edit services
+                                </p>
+                            </div>
                         </div>
                         <div className="p-3 space-y-3">
                             <div className="space-y-2">

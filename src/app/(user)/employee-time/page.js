@@ -157,7 +157,7 @@ const TimeDate = () => {
         //     </div>
         // </div>
         <div className="bg-[#FAFAFA] w-full">
-            <div className="container w-full">
+            <div className="container w-full xl:px-20">
                 <div className="flex items-center justify-center w-full gap-4 py-7">
                     {['Client', 'Time', 'Product', 'Billing'].map(
                         (tab, index) => (
