@@ -4,6 +4,7 @@ import ClientInfo from './ClientInfo';
 import Time from './Time';
 import Product from './Product';
 import Billing from './Billing';
+import Basketpage from './Basket';
 // import {
 //   Accordion,
 //   AccordionContent,
@@ -31,6 +32,7 @@ const TimeDate = () => {
         if (currentTab === 'Client') changeTab('Time');
         else if (currentTab === 'Time') changeTab('Product');
         else if (currentTab === 'Product') changeTab('Billing');
+        // else if (currentTab === 'Billing') changeTab('basket');
     };
 
     const handleBack = () => {
@@ -205,6 +207,9 @@ const TimeDate = () => {
                 {currentTab === 'Billing' && (
                     <Billing handleBack={handleBack} />
                 )}
+                {/* {currentTab === 'basket' && (
+                    <Basketpage handleContinue={handleContinue} />
+                )} */}
             </div>
         </div>
     );

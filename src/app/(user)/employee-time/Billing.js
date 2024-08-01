@@ -1,6 +1,7 @@
 import Button from '@/components/ui/button';
 import Label from '@/components/ui/form/label';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 const Billing = ({ handleContinue, handleBack }) => {
@@ -131,12 +132,14 @@ const Billing = ({ handleContinue, handleBack }) => {
                     >
                         Back
                     </button>
-                    <button
-                        className="w-full focus:outline-none py-3 rounded-full capitalize bg-[#711F7E] hover:bg-[#BF27D7] text-white font-medium  active:scale-90 transition text-sm"
-                        onClick={handleContinue}
-                    >
-                        Continue
-                    </button>
+                    <Link href="/my-basket" className="w-full">
+                        <button
+                            className="w-full focus:outline-none py-3 rounded-full capitalize bg-[#711F7E] hover:bg-[#BF27D7] text-white font-medium  active:scale-90 transition text-sm"
+                            onClick={handleContinue}
+                        >
+                            Continue
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>
