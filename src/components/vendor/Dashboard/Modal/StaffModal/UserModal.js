@@ -23,6 +23,7 @@ import converttomin from "@/constants/converttomin";
 
 const UserModal = ({ editDay, close, staffsSchedule, setStaffsSchedule, dateRange }) => {
   const { day, staff } = editDay || {};
+  console.log(day?.date);
   const currentTime = staff?.schedule && staff?.schedule.filter(s => s.day == day?.day)[0] || {};
   const vendor = useSelector(state => state?.vendorAuth?.vendor);
   const [selectedDays, setSelectedDays] = React.useState({});
@@ -55,6 +56,10 @@ const UserModal = ({ editDay, close, staffsSchedule, setStaffsSchedule, dateRang
       close();
       return;
     }
+    if (dayStatus == 'Day Off') {
+      addTimeOff({ date: day?.date, e });
+      return;
+    }
     const data = {
       staffs_id: staff?.id,
       day: day?.day,
@@ -71,15 +76,15 @@ const UserModal = ({ editDay, close, staffsSchedule, setStaffsSchedule, dateRang
     }
   };
 
-  const addTimeOff = async (e) => {
-    e.preventDefault();
+  const addTimeOff = async ({ date, e }) => {
+    e && e.preventDefault();
     const resp = await POST.request({
       url: '/vendor/add-time-off',
       form: {
         staffs_id: staff?.id,
         day: day?.day,
-        from: timeOff.from,
-        to: timeOff.to,
+        from: date && (date && date.split('-').reverse().join('-')) || timeOff.from,
+        to: date && (date && date.split('-').reverse().join('-')) || timeOff.to,
         from_date: format(dateRange.from, 'yyyy-MM-dd'),
         to_date: format(dateRange.to, 'yyyy-MM-dd'),
       },
@@ -249,7 +254,7 @@ const UserModal = ({ editDay, close, staffsSchedule, setStaffsSchedule, dateRang
           <Button
             variant="primary"
             className="flex items-center justify-center w-full mx-auto"
-            onClick={e => addTimeOff(e)}
+            onClick={e => addTimeOff({ e })}
             disabled={formState?.loading}
           >
             <Spinner
