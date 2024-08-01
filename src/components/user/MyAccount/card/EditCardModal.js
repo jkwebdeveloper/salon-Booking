@@ -26,7 +26,7 @@ const EditCardModal = ({ setAddCard, setCards, editCard, cards }) => {
   const currentMonth = new Date().getMonth() + 1;
   const currentYear = new Date().getFullYear();
   const years = Array.from(new Array(10), (val, index) => currentYear + index);
-  const months = Array.from(new Array(12), (val, index) => index + 1);
+  const months = Array.from(new Array(12), (val, index) => index < 9 ? `0${index + 1}` : `${index + 1}`);
 
   const addCard = async (e) => {
     e.preventDefault();
@@ -141,7 +141,7 @@ const EditCardModal = ({ setAddCard, setCards, editCard, cards }) => {
                 className="input_field"
                 placeholder="MM/YYYY"
                 defaultValue={`${month.value || editCard.expried_on && editCard.expried_on.split('/')[0] || ''}/${year.value || editCard.expried_on && editCard.expried_on.split('/')[1] || ''}`}
-                pattern={Validation?.cardexpiry?.pattern}
+                pattern="/\d{1,2}\/\d{2,4}/"
                 required
               />
               <p className="error">{Validation?.cardexpiry?.msg}</p>

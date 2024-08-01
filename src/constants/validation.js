@@ -66,7 +66,7 @@ const Validation = {
     },
     cardexpiry: {
         msg: 'Valid Expiry Date Required',
-        pattern: 'd{1,2}/d{2,4}',
+        pattern: '\w{1,2}\/\w{2,4}',
     },
     expirydate: {
         msg: 'Valid Expiry Date Required',

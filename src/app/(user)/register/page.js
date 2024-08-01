@@ -29,11 +29,11 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
     const resp = await POST.request({ url: "/register", form: e.target });
-    setLoading(false);
     if (resp.code == 200 && Object.keys(resp.data).length > 0) {
       dispatch(login(resp.data));
       router.push("/");
     } else {
+      setLoading(false);
       setError(resp.message);
     }
   };
@@ -182,11 +182,11 @@ const Register = () => {
                         className="text-gray-400 cursor-pointer"
                       />
                     )) || (
-                      <BsEyeSlashFill
-                        size={24}
-                        className="text-gray-400 cursor-pointer"
-                      />
-                    )}
+                        <BsEyeSlashFill
+                          size={24}
+                          className="text-gray-400 cursor-pointer"
+                        />
+                      )}
                   </button>
                 </div>
                 <div className="relative w-full space-y-1 text-left lg:w-1/2">
@@ -213,11 +213,11 @@ const Register = () => {
                         className="text-gray-400 cursor-pointer"
                       />
                     )) || (
-                      <BsEyeSlashFill
-                        size={24}
-                        className="text-gray-400 cursor-pointer"
-                      />
-                    )}
+                        <BsEyeSlashFill
+                          size={24}
+                          className="text-gray-400 cursor-pointer"
+                        />
+                      )}
                   </button>
                 </div>
               </div>
@@ -343,10 +343,10 @@ const Register = () => {
                   id="list-radio-license"
                   type="checkbox"
                   value=""
+                  onChange={e => e.target.checked ? e.target.value = "true" : e.target.value = ""}
                   name="list-radio"
                   class=""
                   required
-                  defaultChecked={""}
                 />
                 <label
                   for="list-radio-license"

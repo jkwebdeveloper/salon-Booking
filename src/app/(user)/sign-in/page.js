@@ -28,14 +28,12 @@ const Signin = () => {
     e.preventDefault();
     setLoading(true);
     const resp = await POST.request({ url: "/login", form: e.target });
-    setLoading(false);
-    if (resp) {
-      if (resp.status != 'Error' && Object.keys(resp.data).length > 0) {
-        dispatch(login(resp.data));
-        return;
-      }
-      setError(resp.message);
+    if (resp && resp.status != 'Error' && Object.keys(resp.data).length > 0) {
+      dispatch(login(resp.data));
+      return;
     }
+    setLoading(false);
+    setError(resp.message);
   };
 
   useEffect(() => {
