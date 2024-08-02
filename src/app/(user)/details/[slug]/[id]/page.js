@@ -25,6 +25,13 @@ import Location from '@/components/user/Home/Location';
 import { useParams } from 'next/navigation';
 import { POST } from '@/app/api/post';
 import ImagesModal from '../../imagesModal';
+import {
+    Dialog,
+    DialogContent,
+    DialogTrigger,
+    DialogTitle,
+} from '@/components/ui/dialog';
+import Modal from './Modal';
 
 const DetailPage = () => {
     const images = [
@@ -35,6 +42,7 @@ const DetailPage = () => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [moreInfo, setmoreInfo] = useState(false);
 
     const openModal = index => {
         setCurrentIndex(index);
@@ -239,21 +247,60 @@ const DetailPage = () => {
                                                 <div>
                                                     <div className="flex items-center gap-2">
                                                         <p>Couples Massage</p>
-                                                        <p className="text-[#0AADA4]">
+                                                        <Dialog
+                                                            open={moreInfo}
+                                                            className="w-1/2"
+                                                        >
+                                                            <DialogTrigger
+                                                                onClick={e =>
+                                                                    setmoreInfo(
+                                                                        true
+                                                                    )
+                                                                }
+                                                                className="text-sm text-[#0AADA4]"
+                                                            >
+                                                                Show Details
+                                                            </DialogTrigger>
+                                                            <DialogContent
+                                                                close={
+                                                                    setmoreInfo
+                                                                }
+                                                                className="sm:max-w-[750px]"
+                                                            >
+                                                                <DialogTitle className="text-3xl font-bold">
+                                                                    Couples
+                                                                    Massage
+                                                                </DialogTitle>
+                                                                <Modal
+                                                                    setmoreInfo={
+                                                                        setmoreInfo
+                                                                    }
+                                                                />
+                                                            </DialogContent>
+                                                        </Dialog>
+                                                        {/* <p className="text-[#0AADA4]">
                                                             Show Details
-                                                        </p>
+                                                        </p> */}
                                                     </div>
                                                     <div className="flex items-center gap-2">
                                                         <p>Spa Massage</p>
                                                         <p>(2 hr)</p>
                                                     </div>
                                                 </div>
-                                                <Button
-                                                    variant="primary"
-                                                    className="mr-3"
-                                                >
-                                                    Book Now
-                                                </Button>
+                                                <div className="flex items-center gap-3">
+                                                    <Button
+                                                        variant="primary"
+                                                        className="mr-3"
+                                                    >
+                                                        Replace Dialog
+                                                    </Button>
+                                                    <Button
+                                                        variant="primary"
+                                                        className="mr-3"
+                                                    >
+                                                        Book Now
+                                                    </Button>
+                                                </div>
                                             </div>
                                         </AccordionTrigger>
                                         <AccordionContent>
