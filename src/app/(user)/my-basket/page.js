@@ -1,10 +1,20 @@
+'use client';
 import Button from '@/components/ui/button';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { BsFillPencilFill } from 'react-icons/bs';
 import { CgClose } from 'react-icons/cg';
+import {
+    Dialog,
+    DialogContent,
+    DialogTrigger,
+    DialogTitle,
+} from '@/components/ui/dialog';
+import MoreInfoModal from '../employee-time/MoreInfoModal';
 
 const Basketpage = () => {
+    const [moreInfo, setmoreInfo] = useState(false);
+
     return (
         <div className="bg-[#FAFAFA] w-full space-y-11">
             <div className="container w-full px-10 py-10 space-y-4 2xl:px-20">
@@ -132,9 +142,28 @@ const Basketpage = () => {
                         <div className="flex items-center justify-between ">
                             <div className="flex items-center gap-3">
                                 <p className="font-semibold">Sports Massage</p>
-                                <p className="text-sm text-[#0AADA4]">
+                                <Dialog open={moreInfo} className="w-1/2">
+                                    <DialogTrigger
+                                        onClick={e => setmoreInfo(true)}
+                                        className="text-sm text-[#0AADA4]"
+                                    >
+                                        Show Details
+                                    </DialogTrigger>
+                                    <DialogContent
+                                        close={setmoreInfo}
+                                        className="sm:max-w-[750px]"
+                                    >
+                                        <DialogTitle className="text-3xl font-bold">
+                                            CeraVe Face wash (200 ml)
+                                        </DialogTitle>
+                                        <MoreInfoModal
+                                            setmoreInfo={setmoreInfo}
+                                        />
+                                    </DialogContent>
+                                </Dialog>
+                                {/* <p className="text-sm text-[#0AADA4]">
                                     Show Details
-                                </p>
+                                </p> */}
                             </div>
                             <div className="flex items-center gap-3">
                                 <p className="font-semibold text-primary_color">
