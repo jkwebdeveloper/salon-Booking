@@ -141,7 +141,7 @@ const EditCardModal = ({ setAddCard, setCards, editCard, cards }) => {
                 className="input_field"
                 placeholder="MM/YYYY"
                 defaultValue={`${month.value || editCard.expried_on && editCard.expried_on.split('/')[0] || ''}/${year.value || editCard.expried_on && editCard.expried_on.split('/')[1] || ''}`}
-                pattern="/\d{1,2}\/\d{2,4}/"
+                pattern="\w{1,2}\/\w{2,4}"
                 required
               />
               <p className="error">{Validation?.cardexpiry?.msg}</p>
