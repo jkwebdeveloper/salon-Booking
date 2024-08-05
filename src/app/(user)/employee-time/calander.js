@@ -90,14 +90,14 @@ function MiniCalander() {
                     ))}
                 </Tabs>
             </div>
-            <div className="min-h-[100vh]">
+            {/* <div className="min-h-[100vh]">
                 <div className="mt-3 text-center">
                     Time : {selectedTime?.time}
                     <br />
                     Seats :{' '}
                     {selectedTime?.seats && selectedTime?.seats + ' Available'}
                 </div>
-            </div>
+            </div> */}
         </>
     );
 }
