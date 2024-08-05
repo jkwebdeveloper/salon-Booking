@@ -5,7 +5,7 @@ import { FaStar } from 'react-icons/fa';
 const ReviewNewModal = () => {
     return (
         <div className="w-full space-y-3">
-            <div className="grid items-start grid-cols-2 gap-10">
+            <div className="grid items-start grid-cols-2 gap-2 md:gap-10">
                 <div className="space-y-3">
                     <div className="space-y-2">
                         <div className="flex items-center gap-2">
@@ -18,7 +18,7 @@ const ReviewNewModal = () => {
                         <p>Ellen McLaughlin</p>
                     </div>
                     <div className="space-y-2">
-                        <p className="text-[#656565]">
+                        <p className="text-[#656565] md:text-base text-sm">
                             {`Lorem Ipsum is simply dummy text of the printing and
                             typeset industry. Lorem Ipsum has been the
                             industry's standard dummy text ever since the 1500s.`}

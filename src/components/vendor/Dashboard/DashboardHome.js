@@ -59,7 +59,7 @@ const DashBoardHome = () => {
             {stats && (
                 <>
                     <div className="w-full bg-white rounded-xl">
-                        <div className="flex items-center justify-between">
+                        <div className="flex-col items-center justify-between lg:flex">
                             <div className="flex items-center gap-4">
                                 <Image
                                     src={'/static/images/review.png'}
@@ -69,7 +69,7 @@ const DashBoardHome = () => {
                                     height={200}
                                 />
                                 <div className="flex-col space-y-1">
-                                    <p className="text-3xl font-semibold">
+                                    <p className="text-lg font-semibold md:text-3xl">
                                         Spa Life & Massage
                                     </p>
                                     <div className="flex items-center gap-3">
@@ -83,7 +83,7 @@ const DashBoardHome = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex items-center mr-5 gap-7">
+                            <div className="flex items-center p-3 mr-5 md:p-0 gap-7">
                                 <div className="space-y-2 text-center">
                                     <FaEye className="mx-auto text-xl text-primary_color" />
                                     <p>PamperTree View</p>
@@ -247,7 +247,7 @@ const DashBoardHome = () => {
             {review && (
                 <div className="space-y-4">
                     <p className="text-2xl font-semibold">Customer Reviews</p>
-                    <div className="flex items-start gap-5">
+                    <div className="flex-col items-start gap-5 lg:flex">
                         <div className="p-8 bg-white rounded-lg">
                             <div className="flex items-center gap-3">
                                 <p className="text-5xl font-semibold">4.0</p>
@@ -260,7 +260,7 @@ const DashBoardHome = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex flex-col gap-2">
+                        <div className="flex flex-col gap-2 mt-5 lg:mt-0">
                             <div className="px-4 py-3 bg-white rounded-lg">
                                 <div className="flex items-center gap-3">
                                     <p className="text-xl font-semibold">
@@ -275,7 +275,7 @@ const DashBoardHome = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="px-4 py-3 bg-white rounded-lg">
+                            <div className="px-4 py-3 mt-5 bg-white rounded-lg lg:mt-0">
                                 <div className="flex items-center gap-3">
                                     <p className="text-xl font-semibold">
                                         Cleanliness
@@ -290,7 +290,7 @@ const DashBoardHome = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="px-4 py-3 bg-white rounded-lg">
+                        <div className="px-4 py-3 mt-5 bg-white rounded-lg lg:mt-0">
                             <div className="flex items-center gap-3">
                                 <p className="text-xl font-semibold">Staff</p>
                                 <div className="flex items-center gap-2">
