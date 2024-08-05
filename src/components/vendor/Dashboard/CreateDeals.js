@@ -3,22 +3,63 @@ import { useVendorServices } from '@/hooks';
 import { useSelector } from 'react-redux';
 import { Error, Spinner, Button } from '@/components';
 import { v4 } from 'uuid';
+import { POST } from '@/app/api/post';
 
-const CreateDeals = ({ onClose }) => {
+const CreateDeals = ({ onClose, maxAllowed }) => {
     const [plan, setPlan] = React.useState({ services: 2, deals: 3 });
     const vendor = useSelector(state => state.vendorAuth.vendor);
     const [getServices, vendorServices] = useVendorServices();
     const [selectedServices, setSelectedServices] = React.useState([]);
+    const [formState, setFormState] = React.useState({
+        loading: false,
+        error: '',
+        success: '',
+    });
+
+
+    const addDeals = async () => {
+        if (selectedServices.length <= maxAllowed.deals) {
+            const resp = await POST.request({ url: '/vendor/add-services-to-deals-list', form: selectedServices, rawdata: true, token: vendor.api_token, formState, setFormState });
+            if (resp && resp.code === 200) {
+                onClose();
+            }
+        }
+    }
+
+    useEffect(() => {
+        const prevSelectedServices = [];
+        vendorServices?.data.map(service => {
+            if (service?.group_service_list?.length) {
+                service?.group_service_list.map(group => {
+                    if (group?.is_deals == 1) {
+                        prevSelectedServices.push({
+                            vendors_service_id: group.id,
+                            is_deals: 1,
+                        });
+                    }
+                });
+            }
+        });
+        setSelectedServices(prevSelectedServices);
+    }, [vendorServices?.loading]);
 
     return (
         <div className="w-full p-4 space-y-3 bg-white rounded-xl">
             <div className="flex items-center justify-between">
                 <p className="text-2xl font-semibold">Create deals</p>
+                {console.log(selectedServices)}
                 <div className="flex items-center gap-3">
                     <Button variant="disable" onClick={onClose}>
                         Cancel
                     </Button>
-                    <Button variant="primary">Save</Button>
+                    <Button variant="primary" onClick={e => addDeals()} disabled={formState?.loading || selectedServices.length > maxAllowed.deals}>
+                        <Spinner
+                            show={formState?.loading}
+                            width="25"
+                            height="25"
+                            text="Save"
+                        />
+                    </Button>
                 </div>
             </div>
             <div className="space-y-2">
@@ -97,7 +138,7 @@ const CreateDeals = ({ onClose }) => {
                                                                                             {
                                                                                                 vendors_service_id:
                                                                                                     group.id,
-                                                                                                is_feature: 1,
+                                                                                                is_deals: 1,
                                                                                             },
                                                                                         ]
                                                                                     );

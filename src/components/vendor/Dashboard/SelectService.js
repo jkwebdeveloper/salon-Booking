@@ -5,18 +5,42 @@ import { Error, Spinner, Button } from '@/components';
 import { v4 } from 'uuid';
 import { POST } from '@/app/api/post';
 
-const SelectService = ({ onClose }) => {
+const SelectService = ({ onClose, maxAllowed }) => {
     const [plan, setPlan] = React.useState({ services: 2, deals: 3 });
     const vendor = useSelector(state => state.vendorAuth.vendor);
     const [getServices, vendorServices] = useVendorServices();
     const [selectedServices, setSelectedServices] = React.useState([]);
+    const [formState, setFormState] = React.useState({
+        loading: false,
+        error: '',
+        success: '',
+    });
 
     const addFeaturedServices = async () => {
-        const resp = await POST.request({ url: '/vendor/add-services-to-feature-list', form: selectedServices, rawdata: true, token: vendor.api_token });
-        if (resp && resp.code === 200) {
-            onClose();
+        if (selectedServices.length <= maxAllowed.service) {
+            const resp = await POST.request({ url: '/vendor/add-services-to-feature-list', form: selectedServices, rawdata: true, token: vendor.api_token, formState, setFormState });
+            if (resp && resp.code === 200) {
+                onClose();
+            }
         }
     }
+
+    useEffect(() => {
+        const prevSelectedServices = [];
+        vendorServices?.data.map(service => {
+            if (service?.group_service_list?.length) {
+                service?.group_service_list.map(group => {
+                    if (group?.is_feature == 1) {
+                        prevSelectedServices.push({
+                            vendors_service_id: group.id,
+                            is_feature: 1,
+                        });
+                    }
+                });
+            }
+        });
+        setSelectedServices(prevSelectedServices);
+    }, [vendorServices?.loading]);
 
     return (
         <div className="w-full p-4 space-y-3 bg-white rounded-xl">
@@ -26,9 +50,14 @@ const SelectService = ({ onClose }) => {
                     <Button variant="disable" onClick={onClose}>
                         Cancel
                     </Button>
-                    <Button variant="primary" onClick={
-                        e => addFeaturedServices()
-                    }>Save</Button>
+                    <Button variant="primary" onClick={e => addFeaturedServices()} disabled={formState?.loading || selectedServices.length > maxAllowed.service}>
+                        <Spinner
+                            show={formState?.loading}
+                            width="25"
+                            height="25"
+                            text="Save"
+                        />
+                    </Button>
                 </div>
             </div>
             <div className="space-y-2">
