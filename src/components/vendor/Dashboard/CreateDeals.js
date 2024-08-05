@@ -68,7 +68,7 @@ const CreateDeals = ({ onClose }) => {
                                                                             required
                                                                             disabled={
                                                                                 selectedServices.length >=
-                                                                                    plan.services &&
+                                                                                plan.services &&
                                                                                 !selectedServices.some(
                                                                                     service =>
                                                                                         service.vendors_service_id ==
@@ -117,7 +117,7 @@ const CreateDeals = ({ onClose }) => {
                                                                                 /\s/g,
                                                                                 ''
                                                                             )}
-                                                                            className="w-full text-sm font-medium text-gray-900 ms-2 "
+                                                                            className="w-full text-sm font-medium text-gray-900 capitalize ms-2"
                                                                         >
                                                                             {
                                                                                 group?.service_title

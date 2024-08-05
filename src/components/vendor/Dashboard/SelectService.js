@@ -3,12 +3,20 @@ import { useVendorServices } from '@/hooks';
 import { useSelector } from 'react-redux';
 import { Error, Spinner, Button } from '@/components';
 import { v4 } from 'uuid';
+import { POST } from '@/app/api/post';
 
 const SelectService = ({ onClose }) => {
     const [plan, setPlan] = React.useState({ services: 2, deals: 3 });
     const vendor = useSelector(state => state.vendorAuth.vendor);
     const [getServices, vendorServices] = useVendorServices();
     const [selectedServices, setSelectedServices] = React.useState([]);
+
+    const addFeaturedServices = async () => {
+        const resp = await POST.request({ url: '/vendor/add-services-to-feature-list', form: selectedServices, rawdata: true, token: vendor.api_token });
+        if (resp && resp.code === 200) {
+            onClose();
+        }
+    }
 
     return (
         <div className="w-full p-4 space-y-3 bg-white rounded-xl">
@@ -18,7 +26,9 @@ const SelectService = ({ onClose }) => {
                     <Button variant="disable" onClick={onClose}>
                         Cancel
                     </Button>
-                    <Button variant="primary">Save</Button>
+                    <Button variant="primary" onClick={
+                        e => addFeaturedServices()
+                    }>Save</Button>
                 </div>
             </div>
             <div className="space-y-2">
