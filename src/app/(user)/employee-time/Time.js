@@ -9,14 +9,15 @@ import {
     DialogTitle,
 } from '@/components/ui/dialog';
 import SelectStaffModal from './SelectStaffModal';
+import MiniCalander from './calander';
 
 const Time = ({ handleContinue, handleBack }) => {
     const [addStaff, setAddStaff] = useState(false);
-
     return (
         <div className="container flex flex-col min-h-[55dvh] gap-4 px-1 md:flex-row md:px-28 relative md:mb-10">
             <div className="md:w-[60%] w-[90%] mx-auto space-y-5 rounded-md shadow-lg h-fit min-h-[350px] p-4 bg-white">
                 <p className="text-3xl font-bold">Date & Time</p>
+                <MiniCalander />
             </div>
             <div className="shadow-lg rounded-md md:w-[40%] p-4 space-y-4 w-[90%] mx-auto bg-white flex flex-col min-h-[350px]">
                 <div className="flex items-start gap-2">
