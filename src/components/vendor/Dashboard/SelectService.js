@@ -44,7 +44,7 @@ const SelectService = ({ onClose }) => {
                                                     key={v4()}
                                                     className="w-full bg-[white] border border-[#D9D9D9] rounded-md space-y-2 p-2"
                                                 >
-                                                    <p className="text-sm font-semibold">
+                                                    <p className="text-sm font-semibold capitalize">
                                                         {
                                                             services[key][0]
                                                                 ?.sub_categories
@@ -68,7 +68,7 @@ const SelectService = ({ onClose }) => {
                                                                             required
                                                                             disabled={
                                                                                 selectedServices.length >=
-                                                                                    plan.services &&
+                                                                                plan.services &&
                                                                                 !selectedServices.some(
                                                                                     service =>
                                                                                         service.vendors_service_id ==
@@ -117,7 +117,7 @@ const SelectService = ({ onClose }) => {
                                                                                 /\s/g,
                                                                                 ''
                                                                             )}
-                                                                            className="w-full text-sm font-medium text-gray-900 ms-2 "
+                                                                            className="w-full text-sm font-medium text-gray-900 capitalize ms-2"
                                                                         >
                                                                             {
                                                                                 group?.service_title
