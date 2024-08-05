@@ -26,6 +26,7 @@ import { Spinner } from '@/components';
 import CreateOrder from './createorder';
 import { GET } from '@/app/api/get';
 import { POST } from '@/app/api/post';
+import { v4 } from 'uuid';
 
 const EditOrder = ({ setEditOrder, activePage, getOrders, editOrder }) => {
      const { id, supplier } = editOrder;
@@ -133,7 +134,7 @@ const EditOrder = ({ setEditOrder, activePage, getOrders, editOrder }) => {
                                    </thead>
                                    <tbody className="border-b-2 whitespace-nowrap">
                                         {orderDetails?.details.length && orderDetails?.details.map((item, index) => (
-                                             <tr className="w-full">
+                                             <tr key={v4()} className="w-full">
                                                   <td className="px-6 py-4 text-sm capitalize">
                                                        {item?.products?.name}
                                                   </td>

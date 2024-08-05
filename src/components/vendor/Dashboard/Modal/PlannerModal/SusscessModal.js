@@ -1,3 +1,4 @@
+import { Button } from '@/components';
 import React from 'react';
 import { AiFillWarning } from 'react-icons/ai';
 
