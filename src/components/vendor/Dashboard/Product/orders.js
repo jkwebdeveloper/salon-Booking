@@ -21,7 +21,7 @@ import OrderModal from '@/components/vendor/Dashboard/Modal/ProductModal/OrderMo
 import { GET } from '@/app/api/get';
 import { useSelector } from 'react-redux';
 import { v4 } from 'uuid';
-import useOrders from '@/hooks/useOrders';
+import useOrders from '@/hooks/useorders';
 import { Spinner } from '@/components';
 import EditOrder from '@/components/vendor/Dashboard/Modal/ProductModal/EditOrder';
 
