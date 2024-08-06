@@ -559,7 +559,6 @@ const Services = () => {
                                                     setCalendarOpen(true)
                                                 }
                                             >
-                                                wwefw
                                                 <DatePicker
                                                     className={
                                                         'px-3 py-[17px] h-8 rounded-md overflow-hidden'
