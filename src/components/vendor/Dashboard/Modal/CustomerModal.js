@@ -118,55 +118,6 @@ const CustomerModal = ({ setAddCustomer, setCustomers, customers }) => {
           </div>
         </div>
       </div>
-      <div className="space-y-2">
-        <Label htmlFor="first_name" text="Status" />
-        <div className="flex items-center justify-start">
-          <li class="w-full list-none">
-            <div class="flex items-center">
-              <input
-                type="radio"
-                value="Active"
-                id="active"
-                name="status"
-                defaultChecked
-              />
-              <label
-                for="active"
-                class="w-full ms-2 text-sm font-medium text-gray-900 "
-              >
-                Active
-              </label>
-            </div>
-          </li>
-          <li class="w-full list-none">
-            <div class="flex items-center">
-              <input
-                id="inactive"
-                type="radio"
-                value="Inactive"
-                name="status"
-              />
-              <label
-                for="inactive"
-                class="w-full ms-2 text-sm font-medium text-gray-900 "
-              >
-                Inactive
-              </label>
-            </div>
-          </li>
-          <li class="w-full list-none">
-            <div class="flex items-center">
-              <input id="pending" type="radio" value="Pending" name="status" />
-              <label
-                for="pending"
-                class="w-full ms-2 text-sm font-medium text-gray-900 "
-              >
-                Pending
-              </label>
-            </div>
-          </li>
-        </div>
-      </div>
       <div className="w-full space-y-1 text-left">
         <Label htmlFor="comments" text="Comment" />
         <textarea

@@ -129,58 +129,6 @@ const EditCustomerModal = ({
           </div>
         </div>
       </div>
-      <div className="space-y-2">
-        <Label htmlFor="first_name" text="Status" />
-        <div className="flex flex-wrap items-center justify-start gap-5">
-          <li class="list-none">
-            <div class="flex items-center">
-              <input
-                type="radio"
-                value={1}
-                id="active"
-                name="status"
-                defaultChecked={editCustomer.status === 1}
-              />
-              <label
-                for="active"
-                class="w-full ms-2 text-sm font-medium text-gray-900 "
-              >
-                Active
-              </label>
-            </div>
-          </li>
-          <li class="list-none">
-            <div class="flex items-center">
-              <input
-                id="inactive"
-                type="radio"
-                value={2}
-                name="status"
-                defaultChecked={editCustomer.status === 2}
-              />
-              <label
-                for="inactive"
-                class="w-full ms-2 text-sm font-medium text-gray-900 "
-              >
-                Inactive
-              </label>
-            </div>
-          </li>
-          <li class="list-none">
-            <div class="flex items-center">
-              <input id="pending" type="radio" value={0} name="status"
-                defaultChecked={editCustomer.status === 0}
-              />
-              <label
-                for="pending"
-                class="w-full ms-2 text-sm font-medium text-gray-900 "
-              >
-                Pending
-              </label>
-            </div>
-          </li>
-        </div>
-      </div>
       <div className="w-full space-y-1 text-left">
         <Label htmlFor="comments" text="Comment" />
         <textarea
@@ -199,7 +147,7 @@ const EditCustomerModal = ({
         className="flex items-center justify-center w-full mx-auto"
         disabled={loading}
       >
-        <Spinner show={loading} width="25" height="25" text="Save" />
+        <Spinner show={loading} width="25" height="25" text="Update" />
       </Button>
       {error && <Error error={error} />}
     </form>
