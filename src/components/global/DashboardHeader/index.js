@@ -21,14 +21,14 @@ import { useRouter } from 'next/navigation';
 import useLogout from '@/hooks/uselogout';
 import { useDispatch } from 'react-redux';
 import { setSidebar } from '@/redux/features/sidebarSlice';
-import DashboardMobilemenu from './Mobilemenu';
 import MobileMenu from './Mobilemenu';
 import { BiMenuAltRight } from 'react-icons/bi';
+import MobileSidebar from './MobileSidebar';
 
 const DashBoardHeader = () => {
     const [active, setActive] = useState('Dashboard');
     const [openSidebar, setOpenSidebar] = useState(true);
-    const [openMobilemenu, setOpenMobileMenu] = useState(true);
+    const [openMobileSidebar, setOpenMobileSidebar] = useState(false);
     const [openDashboardMenu, setOpenDashboardMenu] = useState(false);
     const [logoutUser] = useLogout();
     const router = useRouter();
@@ -211,6 +211,11 @@ const DashBoardHeader = () => {
                                 height={150}
                             />
                         </Link>
+                        <div className='block lg:hidden'>
+                            <Button 
+                            variant="outline"
+                            className="uppercase" onClick={() => setOpenMobileSidebar(true)}>settings</Button>
+                        </div>
                         <div className="block lg:hidden">
                             <div className="flex items-center gap-2">
                                 <div className="">
@@ -223,9 +228,14 @@ const DashBoardHeader = () => {
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
                 {/* Mobile menu */}
+                <MobileSidebar
+                openMobileSidebar={openMobileSidebar}
+                setOpenMobileSidebar={setOpenMobileSidebar}
+                />
                 <MobileMenu
                     openDashboardMenu={openDashboardMenu}
                     setOpenDashboardMenu={setOpenDashboardMenu}

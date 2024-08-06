@@ -59,7 +59,7 @@ const DashBoardHome = () => {
             {stats && (
                 <>
                     <div className="w-full bg-white rounded-xl">
-                        <div className="items-center justify-between md:flex felx-col ">
+                        <div className="flex flex-col items-center justify-between md:flex-row ">
                             <div className="flex items-center gap-4">
                                 <Image
                                     src={'/static/images/review.png'}
@@ -247,7 +247,7 @@ const DashBoardHome = () => {
             {review && (
                 <div className="space-y-4">
                     <p className="text-2xl font-semibold">Customer Reviews</p>
-                    <div className="flex-col items-start gap-5 lg:flex">
+                    <div className="flex flex-col items-start gap-5 lg:flex-row">
                         <div className="p-8 bg-white rounded-lg">
                             <div className="flex items-center gap-3">
                                 <p className="text-5xl font-semibold">4.0</p>
