@@ -146,7 +146,7 @@ const EditOrder = ({ setEditOrder, activePage, getOrders, editOrder }) => {
                                    </tbody>
                               </table>
                               <div className="flex items-center gap-3">
-                                   {orderDetails?.status != 'Delivered' &&
+                                   {(orderDetails?.status != 'Delivered' && orderDetails?.status != 'Cancelled') &&
                                         <>
                                              <Button variant="primary" disabled={formState?.loading} onClick={e => {
                                                   updateOrderStatus({ status: 'Delivered' });

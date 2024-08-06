@@ -559,6 +559,7 @@ const Services = () => {
                                                     setCalendarOpen(true)
                                                 }
                                             >
+                                                wwefw
                                                 <DatePicker
                                                     className={
                                                         'px-3 py-[17px] h-8 rounded-md overflow-hidden'
@@ -569,7 +570,7 @@ const Services = () => {
                                                         setCalendarOpen
                                                     }
                                                     minDate={new Date()}
-                                                    name={'dob'}
+                                                    name={'expried_at'}
                                                     disabledDays={'before'}
                                                     placeholder="Enter Date of Birth"
                                                 />
@@ -776,7 +777,7 @@ const Services = () => {
                                                     setCalendarOpen={
                                                         setCalendarOpen
                                                     }
-                                                    name={'dob'}
+                                                    name={'expried_at'}
                                                     disabledDays={'before'}
                                                     placeholder="Enter Date of Birth"
                                                 />

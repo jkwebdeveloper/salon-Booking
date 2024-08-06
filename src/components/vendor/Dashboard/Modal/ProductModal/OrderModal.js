@@ -57,7 +57,7 @@ const OrderModal = ({ setAddDialog, activePage }) => {
                     {suppliers?.loading && <div className='min-h-[200px] flex items-center justify-center'> <Spinner show={suppliers?.loading} width={40} height={40} /> </div>
                         || <>
                             {suppliers?.data && suppliers?.data?.suppliers.map((supplier, i) => (
-                                <>
+                                supplier?.products_count ? <>
                                     <div
                                         className="flex items-center justify-between w-full cursor-pointer"
                                         onClick={() => setCurrentSupplier(supplier)}
@@ -69,7 +69,7 @@ const OrderModal = ({ setAddDialog, activePage }) => {
                                         <IoIosArrowForward />
                                     </div>
                                     <hr />
-                                </>
+                                </> : null
                             ))}
                             <Pagination className={'pt-3 relative'}>
                                 <PaginationContent className={suppliers
