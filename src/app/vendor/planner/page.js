@@ -343,6 +343,7 @@ const Planner = () => {
                         </div>
                         <div className="flex flex-wrap w-full gap-2 lg:w-auto">
                             <Select
+                                defaultValue='single'
                                 onValueChange={e => {
                                     setScheduleType(e);
                                     setCurrentStaff(memebers[0]);
