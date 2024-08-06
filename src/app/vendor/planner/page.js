@@ -205,7 +205,7 @@ const Planner = () => {
     return (
         <div className="flex items-start">
             {sidebar ? (
-                <div className="h-fit min-h-[350px] md:block hidden md:w-[35%] lg:w-[20%] w-[90%] space-y-5 p-5 bg-white">
+                <div className="h-fit min-h-[350px] lg:block hidden md:w-[35%] lg:w-[20%] w-[90%] space-y-5 p-5 bg-white">
                     <Sidebar />
                 </div>
             ) : null}
@@ -215,13 +215,13 @@ const Planner = () => {
                 <div
                     className={
                         sidebar
-                            ? `md:w-4/5 w-[90%] mx-auto space-y-5 h-fit min-h-[350px] p-5 bg-[#f4f2f2]`
+                            ? `lg:w-4/5 w-full mx-auto space-y-5 h-fit min-h-[350px] p-5 bg-[#f4f2f2]`
                             : `w-full mx-auto space-y-5 h-fit min-h-[350px] p-5 bg-[#f4f2f2]`
                     }
                 >
                     <div className="flex flex-col justify-between space-y-3 lg:items-center lg:flex-row">
                         <p className="text-2xl font-semibold">Planner</p>
-                        <div className="flex flex-col gap-3 lg:items-center lg:flex-row">
+                        <div className="flex flex-col gap-3 md:items-center md:flex-row">
                             <DropdownMenu
                                 open={dropdown}
                                 onOpenChange={e => setDropdown(e)}
