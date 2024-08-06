@@ -568,7 +568,9 @@ const Services = () => {
                                                     setCalendarOpen={
                                                         setCalendarOpen
                                                     }
+                                                    minDate={new Date()}
                                                     name={'dob'}
+                                                    disabledDays={'before'}
                                                     placeholder="Enter Date of Birth"
                                                 />
                                             </div>
@@ -775,6 +777,7 @@ const Services = () => {
                                                         setCalendarOpen
                                                     }
                                                     name={'dob'}
+                                                    disabledDays={'before'}
                                                     placeholder="Enter Date of Birth"
                                                 />
                                             </div>

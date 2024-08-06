@@ -18,6 +18,7 @@ const EditCustomerModal = ({
   const vendor = useSelector((state) => state.vendorAuth.vendor);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
+  const [birthDate, setBirthDate] = React.useState(null);
 
   const updateCustomer = async (e) => {
     e.preventDefault();
@@ -120,11 +121,10 @@ const EditCustomerModal = ({
               setCalendarOpen={setCalendarOpen}
               key={calendarOpen}
               name={"dob"}
-              maxDate={new Date()}
-              defaultValue={new Date(editCustomer.dob)}
+              defaultValue={birthDate || editCustomer.dob}
               placeholder="Enter Date of Birth"
               yearSelection
-              disabledDays={{ after: new Date() }}
+              disabledDays={'after'}
             />
           </div>
         </div>

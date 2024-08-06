@@ -22,12 +22,10 @@ export function DatePicker({
   yearSelection,
   defaultValue,
   disabledDays,
-  maxDate,
   onSelect,
 }) {
-  const [date, setDate] = React.useState(defaultValue);
+  const [date, setDate] = React.useState(defaultValue && new Date(defaultValue) || new Date());
   const [open, setOpen] = React.useState(defaultOpen);
-  console.log("date", defaultValue, date)
 
   function dateToLocalISO(date) {
     return new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000)
@@ -61,25 +59,34 @@ export function DatePicker({
             )}
           </Button>
         </PopoverTrigger>
+        {console.log(date)}
         <PopoverContent
           className="w-auto p-0 bg-white !pointer-events-auto"
           align="start"
           onInteractOutside={(e) => setOpen(!open)}
         >
           <Calendar
+            defaultMonth={defaultValue && new Date(defaultValue) || date}
             captionLayout={yearSelection ? "dropdown-buttons" : ""}
             fromYear={yearSelection && 1980}
             toYear={yearSelection && 2024}
             showOutsideDays
-            fixedWeeks
+            // fixedWeeks
             mode="single"
-            selected={date}
+            selected={defaultValue && new Date(defaultValue) || date}
             required
-            disabled={disabledDays}
+            disabled={disabledDays == 'before' && [
+              new Date(),
+              { daysOfWeek: [0, 6] },
+              { before: new Date() }
+            ] || disabledDays == 'after' && [
+              { daysOfWeek: [0, 6] },
+              { after: new Date() }
+            ]}
             onSelect={(date) => {
               if (onSelect) {
-                setDate(date);
                 onSelect(date)
+                setDate(date);
                 setOpen(!open);
               }
               else {

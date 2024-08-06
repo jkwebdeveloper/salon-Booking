@@ -108,12 +108,12 @@ const CustomerModal = ({ setAddCustomer, setCustomers, customers }) => {
                 setBirthDate(date);
               }}
               setCalendarOpen={setCalendarOpen}
+              defaultValue={new Date(birthDate) || new Date()}
               key={calendarOpen}
               name={"dob"}
-              maxDate={new Date()}
+              disabledDays={'after'}
               placeholder="Enter Date of Birth"
               yearSelection
-              disabledDays={{ after: new Date() }}
             />
           </div>
         </div>
