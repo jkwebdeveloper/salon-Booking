@@ -59,7 +59,7 @@ const DashBoardHome = () => {
             {stats && (
                 <>
                     <div className="w-full bg-white rounded-xl">
-                        <div className="flex-col items-center justify-between lg:flex">
+                        <div className="items-center justify-between md:flex felx-col ">
                             <div className="flex items-center gap-4">
                                 <Image
                                     src={'/static/images/review.png'}
