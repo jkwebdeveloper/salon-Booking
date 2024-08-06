@@ -219,9 +219,9 @@ const Planner = () => {
                             : `w-full mx-auto space-y-5 h-fit min-h-[350px] p-5 bg-[#f4f2f2]`
                     }
                 >
-                    <div className="flex-col items-center justify-between lg:flex">
+                    <div className="flex flex-col justify-between space-y-3 lg:items-center lg:flex-row">
                         <p className="text-2xl font-semibold">Planner</p>
-                        <div className="flex-col items-center gap-3 lg:flex">
+                        <div className="flex flex-col gap-3 lg:items-center lg:flex-row">
                             <DropdownMenu
                                 open={dropdown}
                                 onOpenChange={e => setDropdown(e)}

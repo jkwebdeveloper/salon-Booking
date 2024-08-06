@@ -25,22 +25,28 @@ const SubScription = () => {
 
     const getSubscriptionPlan = async () => {
         setLoading(true);
-        const resp = await GET.request({ url: '/vendor/get-subscription-plans', token: vendor?.api_token });
+        const resp = await GET.request({
+            url: '/vendor/get-subscription-plans',
+            token: vendor?.api_token,
+        });
         setLoading(false);
         console.log(resp);
         if (resp && resp?.code == 200) {
             setPlans(prev => ({ ...prev, available: resp?.data }));
         }
-    }
+    };
 
     const getActivePlan = async () => {
         setLoading(true);
-        const resp = await GET.request({ url: '/vendor/get-active-subscription-plans', token: vendor?.api_token });
+        const resp = await GET.request({
+            url: '/vendor/get-active-subscription-plans',
+            token: vendor?.api_token,
+        });
         setLoading(false);
         if (resp && resp?.code == 200) {
             setPlans(prev => ({ ...prev, active: resp?.data[0] }));
         }
-    }
+    };
 
     const handleCheckOut = async () => {
         if (!checkOut?.id || !payment?.type) return;
@@ -48,13 +54,19 @@ const SubScription = () => {
             plan_id: checkOut?.id,
             payment_method: payment?.type,
             transaction_id: '1234567890',
-        }
-        const resp = await POST.request({ url: '/vendor/buy-subscription-plans', form, token: vendor?.api_token, formState, setFormState });
+        };
+        const resp = await POST.request({
+            url: '/vendor/buy-subscription-plans',
+            form,
+            token: vendor?.api_token,
+            formState,
+            setFormState,
+        });
         if (resp && resp?.code == 200) {
             setCheckOut(null);
             getSubscriptionPlan();
         }
-    }
+    };
 
     useEffect(() => {
         getActivePlan().then(s => {
@@ -91,7 +103,13 @@ const SubScription = () => {
                                             value=""
                                             name="list-radio"
                                             className=""
-                                            onChange={(e) => e.target.checked ? setPayment({ type: 'card' }) : null}
+                                            onChange={e =>
+                                                e.target.checked
+                                                    ? setPayment({
+                                                          type: 'card',
+                                                      })
+                                                    : null
+                                            }
                                         />
                                         <div>
                                             <p className="text-sm">
@@ -143,7 +161,13 @@ const SubScription = () => {
                                             value=""
                                             name="list-radio"
                                             class=""
-                                            onChange={(e) => e.target.checked ? setPayment({ type: 'paypal' }) : null}
+                                            onChange={e =>
+                                                e.target.checked
+                                                    ? setPayment({
+                                                          type: 'paypal',
+                                                      })
+                                                    : null
+                                            }
                                         />
                                         <div>
                                             <p>Pay with PayPal</p>
@@ -175,7 +199,13 @@ const SubScription = () => {
                                             value=""
                                             name="list-radio"
                                             class=""
-                                            onChange={(e) => e.target.checked ? setPayment({ type: 'wallet' }) : null}
+                                            onChange={e =>
+                                                e.target.checked
+                                                    ? setPayment({
+                                                          type: 'wallet',
+                                                      })
+                                                    : null
+                                            }
                                         />
                                         <div>
                                             <p>Pay with wallet balance</p>
@@ -244,72 +274,115 @@ const SubScription = () => {
                                 </p>
                             </div>
                         </div>
-                        <Button variant="primary" type="button" onClick={e => handleCheckOut(e)} disabled={formState?.loading}>
+                        <Button
+                            variant="primary"
+                            type="button"
+                            onClick={e => handleCheckOut(e)}
+                            disabled={formState?.loading}
+                        >
                             <Spinner
                                 show={formState?.loading}
                                 width="25"
                                 height="25"
                                 text="Pay Now"
                             />
-                            {formState?.error && <Error error={formState?.error} />}
+                            {formState?.error && (
+                                <Error error={formState?.error} />
+                            )}
                         </Button>
                     </div>
                 </>
+            ) : loading ? (
+                <PageLoader />
             ) : (
-                loading
-                    ? <PageLoader />
-                    : <>
-                        <p className="text-2xl font-semibold">Subscription</p>
-                        <div className="w-full p-3 space-y-4 bg-white rounded-xl">
-                            {(plans?.available && !plans?.active) ? <p className="text-xl font-medium">Activate Plan</p> : null}
-                            {plans?.active ? <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+                <>
+                    <p className="text-2xl font-semibold">Subscription</p>
+                    <div className="w-full p-3 space-y-4 bg-white rounded-xl">
+                        {plans?.available ? (
+                            <p className="text-xl font-medium">Activate Plan</p>
+                        ) : null}
+                        {plans?.active ? (
+                            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
                                 <div className="border-[#B195F6] rounded-xl border py-5 px-7 flex-col space-y-2 items-center bg-[#EDE9F8]">
                                     <p className="font-semibold text-[30px]">
                                         {plans?.active?.name}
                                     </p>
                                     <div className="flex items-center gap-3">
                                         <p>Status : </p>
-                                        <button className={`rounded-full text-white px-3 py-1 focus:outline-none capitalize  font-medium  active:scale-90 transition text-sm ${plans?.active?.is_active ? 'bg-[#6ACE52]' : 'bg-red-500'}`}>
-                                            {plans?.active?.is_active ? 'Active' : 'Expired'}
+                                        <button
+                                            className={`rounded-full text-white px-3 py-1 focus:outline-none capitalize  font-medium  active:scale-90 transition text-sm ${
+                                                plans?.active?.is_active
+                                                    ? 'bg-[#6ACE52]'
+                                                    : 'bg-red-500'
+                                            }`}
+                                        >
+                                            {plans?.active?.is_active
+                                                ? 'Active'
+                                                : 'Expired'}
                                         </button>
                                     </div>
-                                    {plans?.active?.is_active ? <div className="flex items-center gap-3">
-                                        <p>Expires : </p>
-                                        <p>{plans?.active?.expired_date}</p>
-                                    </div> : null}
+                                    {plans?.active?.is_active ? (
+                                        <div className="flex items-center gap-3">
+                                            <p>Expires : </p>
+                                            <p>{plans?.active?.expired_date}</p>
+                                        </div>
+                                    ) : null}
                                     <div className="flex items-center gap-3">
                                         <p>Featured : </p>
-                                        <p>{plans?.active?.no_of_services} / 2</p>
+                                        <p>
+                                            {plans?.active?.no_of_services} / 2
+                                        </p>
                                     </div>
                                 </div>
-                            </div> : null}
-                            {(plans?.available && !plans?.active) ? <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                                {/* <p className="text-xl font-medium">Upgrade your plan</p> */}
+                            </div>
+                        ) : null}
+                        {plans?.available ? (
+                            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                                <p className="text-xl font-medium">
+                                    Upgrade your plan
+                                </p>
                                 {plans?.available.map((plan, i) => {
                                     return (
-                                        <div key={v4()} className={cn(`rounded-xl border py-5 px-7 flex-col text-center space-y-3 items-center bg-opacity-10 border-orange-50`, i == 0 && "border-[#4C21B9] bg-[#4C21B9]" || i == 1 && "border-[#0F4CD8] bg-[#0F4CD8]" || i == 2 && "border-[#17AF5C] bg-[#17AF5C]")}>
+                                        <div
+                                            key={v4()}
+                                            className={cn(
+                                                `rounded-xl border py-5 px-7 flex-col text-center space-y-3 items-center bg-opacity-10 border-orange-50`,
+                                                (i == 0 &&
+                                                    'border-[#4C21B9] bg-[#4C21B9]') ||
+                                                    (i == 1 &&
+                                                        'border-[#0F4CD8] bg-[#0F4CD8]') ||
+                                                    (i == 2 &&
+                                                        'border-[#17AF5C] bg-[#17AF5C]')
+                                            )}
+                                        >
                                             <p className="font-semibold text-[30px]">
                                                 {plan?.name}
                                             </p>
-                                            <p className={`text-4xl font-bold bg-[#DDD5F2] rounded-lg p-3`}>
+                                            <p
+                                                className={`text-4xl font-bold bg-[#DDD5F2] rounded-lg p-3`}
+                                            >
                                                 £{plan?.price}
                                             </p>
                                             <p>
-                                                {plan?.no_of_services} Featured service <br /> For 1 {plan?.validity}
+                                                {plan?.no_of_services} Featured
+                                                service <br /> For 1{' '}
+                                                {plan?.validity}
                                             </p>
                                             <button
                                                 className={`bg-[#4C21B9] w-full rounded-full text-white px-3 py-2 focus:outline-none capitalize  font-medium  active:scale-90 transition text-sm`}
-                                                onClick={() => setCheckOut(plan)}
+                                                onClick={() =>
+                                                    setCheckOut(plan)
+                                                }
                                             >
                                                 Buy now
                                             </button>
                                         </div>
-                                    )
+                                    );
                                 })}
-                            </div> : null}
-                        </div>
-                    </>
-
+                            </div>
+                        ) : null}
+                    </div>
+                </>
             )}
         </div>
     );
