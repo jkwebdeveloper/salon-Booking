@@ -114,19 +114,19 @@ const EditCustomerModal = ({
             <DatePicker
               className={"px-3 py-[17px] h-8 rounded-md overflow-hidden"}
               defaultOpen={calendarOpen}
-              key={calendarOpen}
+              onSelect={(date) => {
+                setBirthDate(date);
+              }}
               setCalendarOpen={setCalendarOpen}
+              key={calendarOpen}
               name={"dob"}
+              maxDate={new Date()}
+              defaultValue={new Date(editCustomer.dob)}
               placeholder="Enter Date of Birth"
+              yearSelection
+              disabledDays={{ after: new Date() }}
             />
           </div>
-          {/* <input
-            type="date"
-            name="dob"
-            className="input_field"
-            placeholder="Enter Date of Birth"
-            defaultValue={editCustomer.dob}
-          /> */}
         </div>
       </div>
       <div className="space-y-2">
@@ -136,10 +136,10 @@ const EditCustomerModal = ({
             <div class="flex items-center">
               <input
                 type="radio"
-                value="Active"
+                value={1}
                 id="active"
                 name="status"
-                defaultChecked
+                defaultChecked={editCustomer.status === 1}
               />
               <label
                 for="active"
@@ -154,8 +154,9 @@ const EditCustomerModal = ({
               <input
                 id="inactive"
                 type="radio"
-                value="Inactive"
+                value={2}
                 name="status"
+                defaultChecked={editCustomer.status === 2}
               />
               <label
                 for="inactive"
@@ -167,7 +168,9 @@ const EditCustomerModal = ({
           </li>
           <li class="list-none">
             <div class="flex items-center">
-              <input id="pending" type="radio" value="Pending" name="status" />
+              <input id="pending" type="radio" value={0} name="status"
+                defaultChecked={editCustomer.status === 0}
+              />
               <label
                 for="pending"
                 class="w-full ms-2 text-sm font-medium text-gray-900 "

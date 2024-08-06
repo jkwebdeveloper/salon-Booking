@@ -10,7 +10,7 @@ import { DatePicker } from "@/components/user/Home/FindNearByForm/datepicker";
 
 const CustomerModal = ({ setAddCustomer, setCustomers, customers }) => {
   const [calendarOpen, setCalendarOpen] = React.useState(false);
-
+  const [birthDate, setBirthDate] = React.useState(new Date());
   const vendor = useSelector((state) => state.vendorAuth.vendor);
 
   const [loading, setLoading] = React.useState(false);
@@ -104,19 +104,18 @@ const CustomerModal = ({ setAddCustomer, setCustomers, customers }) => {
             <DatePicker
               className={"px-3 py-[17px] h-8 rounded-md overflow-hidden"}
               defaultOpen={calendarOpen}
-              key={calendarOpen}
+              onSelect={(date) => {
+                setBirthDate(date);
+              }}
               setCalendarOpen={setCalendarOpen}
+              key={calendarOpen}
               name={"dob"}
+              maxDate={new Date()}
               placeholder="Enter Date of Birth"
+              yearSelection
+              disabledDays={{ after: new Date() }}
             />
           </div>
-          {/* <input
-            type="date"
-            name="dob"
-            className="input_field"
-            placeholder="Enter Date of Birth"
-            defaultValue={editCustomer.dob}
-          /> */}
         </div>
       </div>
       <div className="space-y-2">

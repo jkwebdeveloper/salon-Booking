@@ -67,7 +67,6 @@ export function DatePicker({
           onInteractOutside={(e) => setOpen(!open)}
         >
           <Calendar
-            // fromDate={new Date()}
             captionLayout={yearSelection ? "dropdown-buttons" : ""}
             fromYear={yearSelection && 1980}
             toYear={yearSelection && 2024}

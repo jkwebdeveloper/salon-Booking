@@ -27,8 +27,9 @@ const SubScription = () => {
         setLoading(true);
         const resp = await GET.request({ url: '/vendor/get-subscription-plans', token: vendor?.api_token });
         setLoading(false);
+        console.log(resp);
         if (resp && resp?.code == 200) {
-            setPlans(prev => ({ ...prev, available: resp?.data?.available }));
+            setPlans(prev => ({ ...prev, available: resp?.data }));
         }
     }
 
@@ -260,7 +261,7 @@ const SubScription = () => {
                     : <>
                         <p className="text-2xl font-semibold">Subscription</p>
                         <div className="w-full p-3 space-y-4 bg-white rounded-xl">
-                            {plans?.available ? <p className="text-xl font-medium">Activate Plan</p> : null}
+                            {(plans?.available && !plans?.active) ? <p className="text-xl font-medium">Activate Plan</p> : null}
                             {plans?.active ? <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
                                 <div className="border-[#B195F6] rounded-xl border py-5 px-7 flex-col space-y-2 items-center bg-[#EDE9F8]">
                                     <p className="font-semibold text-[30px]">
@@ -282,8 +283,8 @@ const SubScription = () => {
                                     </div>
                                 </div>
                             </div> : null}
-                            {plans?.available ? <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                                <p className="text-xl font-medium">Upgrade your plan</p>
+                            {(plans?.available && !plans?.active) ? <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                                {/* <p className="text-xl font-medium">Upgrade your plan</p> */}
                                 {plans?.available.map((plan, i) => {
                                     return (
                                         <div key={v4()} className={cn(`rounded-xl border py-5 px-7 flex-col text-center space-y-3 items-center bg-opacity-10 border-orange-50`, i == 0 && "border-[#4C21B9] bg-[#4C21B9]" || i == 1 && "border-[#0F4CD8] bg-[#0F4CD8]" || i == 2 && "border-[#17AF5C] bg-[#17AF5C]")}>
