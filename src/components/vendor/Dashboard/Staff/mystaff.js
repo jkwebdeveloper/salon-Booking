@@ -88,10 +88,10 @@ function MyStaff() {
                                                     height={100}
                                                 />
                                             )) || (
-                                                <p className="text-xl text-white ">
-                                                    NS
-                                                </p>
-                                            )}
+                                                    <p className="text-xl text-white ">
+                                                        NS
+                                                    </p>
+                                                )}
                                         </div>
                                         <p className="text-xl capitalize">
                                             {staff?.first_name}{' '}
@@ -109,10 +109,12 @@ function MyStaff() {
                                     </div>
                                 </div>
                             );
-                        })) ||
-                        'Staff Member Not Found'}
+                        })) || null}
                 </div>
             )}
+            {!loading && !staffsList.length ? <div className='min-h-[200px] w-full flex items-center justify-center'>
+                There are No Staff Available. Please Add.
+            </div> : null}
         </>
     );
 }

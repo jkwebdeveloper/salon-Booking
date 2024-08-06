@@ -154,26 +154,26 @@ const Customer = () => {
                                         </p>
                                     </div>
                                 )) || (
-                                    <div className="relative flex items-center justify-center min-h-[150px] border-neutral-300 shadow-sm border-[1px] rounded-md flex-item-center">
-                                        <input
-                                            type="file"
-                                            className="absolute inset-0 w-full opacity-0 cursor-pointer"
-                                            accept=".xls,.xlsx,.csv"
-                                            onChange={e => {
-                                                handleFileChange(e);
-                                            }}
-                                        />
-                                        <div className="space-y-1 text-center">
-                                            <p className="text-md text-primary">
-                                                Select File To Import
-                                            </p>
-                                            <p className="text-sm text-neutral-400">
-                                                Supported File Format .xls,
-                                                xlsx, csv
-                                            </p>
+                                        <div className="relative flex items-center justify-center min-h-[150px] border-neutral-300 shadow-sm border-[1px] rounded-md flex-item-center">
+                                            <input
+                                                type="file"
+                                                className="absolute inset-0 w-full opacity-0 cursor-pointer"
+                                                accept=".xls,.xlsx,.csv"
+                                                onChange={e => {
+                                                    handleFileChange(e);
+                                                }}
+                                            />
+                                            <div className="space-y-1 text-center">
+                                                <p className="text-md text-primary">
+                                                    Select File To Import
+                                                </p>
+                                                <p className="text-sm text-neutral-400">
+                                                    Supported File Format .xls,
+                                                    xlsx, csv
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                )}
+                                    )}
                                 <Button
                                     variant="primary"
                                     size="md"
@@ -226,8 +226,8 @@ const Customer = () => {
             <div className="overflow-x-auto bg-white rounded-lg">
                 {(loading && <PageLoader />) ||
                     (customers?.length == 0 && (
-                        <p className="px-2 py-10 text-center">
-                            No customers found
+                        <p className="px-2 py-10 text-center min-h-[200px] flex items-center justify-center">
+                            There are No Customers Available. Please Add.
                         </p>
                     )) || (
                         <table className="min-w-full rounded-lg font-[sans-serif]">
@@ -402,11 +402,11 @@ const Customer = () => {
                         {(editCustomer && (
                             <DialogTitle>Edit Customer</DialogTitle>
                         )) || (
-                            <>
-                                <DialogTitle>John Adam</DialogTitle>
-                                <hr />
-                            </>
-                        )}
+                                <>
+                                    <DialogTitle>John Adam</DialogTitle>
+                                    <hr />
+                                </>
+                            )}
                         {(editCustomer && (
                             <EditCustomerModal
                                 setEditDialog={setEditDialog}
@@ -416,16 +416,16 @@ const Customer = () => {
                                 customers={customers}
                             />
                         )) || (
-                            <EyeModal
-                                hooks={{
-                                    setEditDialog,
-                                    setViewCustomer,
-                                    setCustomers,
-                                    setEditCustomer,
-                                }}
-                                data={{ viewCustomer, customers }}
-                            />
-                        )}
+                                <EyeModal
+                                    hooks={{
+                                        setEditDialog,
+                                        setViewCustomer,
+                                        setCustomers,
+                                        setEditCustomer,
+                                    }}
+                                    data={{ viewCustomer, customers }}
+                                />
+                            )}
                     </DialogContent>
                 </Dialog>
             </div>

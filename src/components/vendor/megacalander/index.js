@@ -269,8 +269,8 @@ const AddBlock = ({ i, screenSize, timeSlots = '00:00', member, day }) => {
                         <p className='text-lg font-semibold'>{member}</p>
                         <p className='font-medium text-md'>{formattedDate} {time}</p>
                     </div>
-                    <Button size="sm" className="w-full gap-2 text-white bg-purple-500 rounded-full"><FaRegCalendarPlus className='text-md' /> Add Booking Slot</Button>
-                    <Button size="sm" className="w-full gap-2 text-white bg-purple-500 rounded-full"><FaRegCalendarTimes className='text-md' /> Add Block Time</Button>
+                    <Button size="sm" className="w-full gap-2 text-white bg-[#756977] rounded-full"><FaRegCalendarPlus className='text-md' /> Add Booking Slot</Button>
+                    <Button size="sm" className="w-full gap-2 text-white bg-[#756977] rounded-full"><FaRegCalendarTimes className='text-md' /> Add Block Time</Button>
                 </TooltipContent>
             </Tooltip>
         </TooltipProvider >
@@ -291,8 +291,8 @@ const AddBlock = ({ i, screenSize, timeSlots = '00:00', member, day }) => {
                         <p className='text-lg font-semibold'>{member}</p>
                         <p className='font-medium text-md'>{formattedDate} {time}</p>
                     </div>
-                    <Button className="w-full gap-2 text-white bg-purple-500 rounded-full h-7"><FaRegCalendarPlus className='text-md' /> Add Booking Slot</Button>
-                    <Button className="w-full gap-2 text-white bg-purple-500 rounded-full h-7"><FaRegCalendarTimes className='text-md' /> Add Block Time</Button>
+                    <Button className="w-full gap-2 text-white bg-[#756977] rounded-full h-7"><FaRegCalendarPlus className='text-md' /> Add Booking Slot</Button>
+                    <Button className="w-full gap-2 text-white bg-[#756977] rounded-full h-7"><FaRegCalendarTimes className='text-md' /> Add Block Time</Button>
                 </DrawerHeader>
                 <DrawerFooter>
                     <DrawerClose>

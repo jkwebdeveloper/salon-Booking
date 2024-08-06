@@ -99,7 +99,7 @@ const Staff = () => {
                </div>
                <div className="w-full p-4 space-y-3 bg-white rounded-xl">
                     {currentTab == 'schedule' && (
-                         <>
+                         !loading && staffsSchedule?.length ? <>
                               <p className="text-2xl font-semibold">Staff Schedule</p>
                               <div className="flex items-end justify-between">
                                    <div className="border w-max rounded-md border-[#eae9e9]">
@@ -193,7 +193,9 @@ const Staff = () => {
                                         />
                                    </DialogContent>
                               </Dialog>
-                         </>
+                         </> : <div className='min-h-[200px] w-full flex items-center justify-center'>
+                              There are No Staff Available. Please Add.
+                         </div>
                     )}
                     {currentTab == 'staff' && <MyStaff />}
                </div>
