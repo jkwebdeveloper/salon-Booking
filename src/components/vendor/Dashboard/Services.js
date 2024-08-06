@@ -869,6 +869,9 @@ const Services = () => {
                                         </Dialog>
                                     </div>
                                 </div>
+                                {!vendorServices?.loading && !vendorServices?.length ? <div className={"min-h-[200px] flex items-center justify-center"}>
+                                    There are no treatments available. Please add.
+                                </div> : null}
                                 {(!vendorServices?.loading &&
                                     services.map(service => {
                                         const group_service_list =

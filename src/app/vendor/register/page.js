@@ -31,6 +31,7 @@ const Register = () => {
     const [loading, setLoading] = React.useState(false);
     const [showPassword, setShowPassword] = React.useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+    const [registeredVendor, setRegisteredVendor] = useState({});
     const [currentTab, setCurrentTab] = useState('Business');
     const [selectedDays, setSelectedDays] = useState({});
     const deviceType =
@@ -122,6 +123,7 @@ const Register = () => {
         if (resp.code == 200 && Object.keys(resp.data).length > 0) {
             localStorage.setItem('new_vendor', JSON.stringify(resp.data));
             if (currentTab == 'Business') {
+                setRegisteredVendor(resp.data);
                 changeTab('Shopworking');
                 return;
             } else {
@@ -149,7 +151,7 @@ const Register = () => {
                 const day = weekDays[i];
                 (!selectedDays[day] &&
                     (hoursData[day.slice(0, 3)] = { status: 0 })) ||
-                    (hoursData[day.slice(0, 3)] = selectedDays[day]);
+                    (hoursData[day.slice(0, 3)] = { ...selectedDays[day], status: 1 });
             });
             setLoading(true);
             const resp = await POST.request({
@@ -234,8 +236,8 @@ const Register = () => {
                         <hr className="w-20 h-px my-4 bg-gray-200 border-0 dark:bg-gray-700" />
                     </div>
                     <div
-                        className="flex items-center gap-3 cursor-pointer"
-                        onClick={e => changeTab('Shopworking')}
+                        className="flex items-center gap-3 pointer-events-none"
+                    // onClick={e => changeTab('Shopworking')}
                     >
                         {/* <p className="rounded-full w-8 h-8 flex justify-center items-center bg-[#B8B8B8] text-white">
               2
