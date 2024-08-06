@@ -28,14 +28,23 @@ const Report = () => {
                     <>
                         {/* Sales per Month section */}
 
-                        <div className="flex items-center justify-between">
-                            <p className="text-2xl font-semibold">
-                                Sales per Month
-                            </p>
-                            <div className="flex items-center gap-3">
+                        <div className="flex flex-col justify-between w-auto space-y-3 lg:space-y-0 lg:items-center lg:flex-row">
+                            <div className="flex justify-between gap-4 lg:items-center">
+                                <p className="text-lg font-semibold md:text-2xl">
+                                    Sales per Month
+                                </p>
+                                <IoMdClose
+                                    className="block text-2xl cursor-pointer lg:hidden"
+                                    onClick={() => setSaleDetails(false)}
+                                />
+                            </div>
+                            <div className="flex flex-col items-center gap-3 lg:flex-row ">
                                 <DropdownMenu>
                                     <DropdownMenuTrigger>
-                                        <Button variant="primary">
+                                        <Button
+                                            variant="primary"
+                                            className="w-full lg:w-auto"
+                                        >
                                             04/01/2023 - 02/29/2024
                                         </Button>
                                     </DropdownMenuTrigger>
@@ -69,7 +78,7 @@ const Report = () => {
                                 <Button variant="secondary">Print</Button>
                                 <Button variant="outline">Download</Button>
                                 <IoMdClose
-                                    className="text-2xl cursor-pointer"
+                                    className="hidden text-2xl cursor-pointer lg:block"
                                     onClick={() => setSaleDetails(false)}
                                 />
                             </div>
@@ -253,7 +262,9 @@ const Report = () => {
                     </>
                 ) : (
                     <>
-                        <p className="text-2xl font-semibold">Customers</p>
+                        <p className="text-lg font-semibold md:text-2xl">
+                            Customers
+                        </p>
                         <div className="w-full p-4 space-y-3 bg-white rounded-xl">
                             <p className="text-2xl font-semibold">Index</p>
                             <p>
@@ -262,7 +273,7 @@ const Report = () => {
                                 details.
                             </p>
                             <hr />
-                            <div className="flex items-center gap-3">
+                            <div className="flex flex-col items-center gap-3 md:flex-row">
                                 <Button
                                     variant="primary"
                                     onClick={() => setSaleDetails(true)}
@@ -283,7 +294,7 @@ const Report = () => {
                                 to explain and interpret them easily.
                             </p>
                             <hr />
-                            <div className="flex items-center gap-1">
+                            <div className="grid items-center grid-cols-1 gap-1 md:grid-cols-2 lg:grid-cols-6">
                                 <Button variant="primary" className="text-xs">
                                     Trading Summary
                                 </Button>
