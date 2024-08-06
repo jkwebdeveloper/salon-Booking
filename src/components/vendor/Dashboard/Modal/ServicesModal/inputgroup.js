@@ -28,7 +28,7 @@ function InputGroup({
     sale_price: defaultValue?.sale_price || 0,
   });
   return (
-    <div className="flex flex-col items-center w-full gap-3 lg:flex-row">
+    <div className="flex flex-col items-start w-full gap-3 lg:flex-row">
       <div className="w-full space-y-1 text-left lg:w-1/2">
         <input
           type="text"
@@ -53,12 +53,12 @@ function InputGroup({
           {+inputValue.duration === 0.5
             ? "30 Min"
             : +inputValue.duration === 1
-            ? "1 Hour"
-            : +inputValue.duration === 1.5
-            ? "1 Hour 30 Min"
-            : +inputValue.duration === 2
-            ? "2 Hour"
-            : "2 Hour 30 Min"}
+              ? "1 Hour"
+              : +inputValue.duration === 1.5
+                ? "1 Hour 30 Min"
+                : +inputValue.duration === 2
+                  ? "2 Hour"
+                  : "2 Hour 30 Min"}
         </SelectTrigger>
         <SelectContent className="bg-white">
           <SelectGroup>
@@ -74,7 +74,7 @@ function InputGroup({
         <input
           type="number"
           className="input_field"
-          placeholder="Select"
+          placeholder="Enter Price"
           pattern={Validation.price.pattern}
           step={0.5}
           required
@@ -89,7 +89,7 @@ function InputGroup({
         <input
           type="number"
           className="input_field"
-          placeholder="Select"
+          placeholder="Enter Sales Price"
           pattern={Validation.saleprice.pattern}
           step={0.5}
           required

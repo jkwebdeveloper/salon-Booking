@@ -62,6 +62,7 @@ const Services = () => {
     };
 
     const [currentTab, setCurrentTab] = 'service';
+
     const handleTreatmentClick = () => {
         setTreatment(true);
         setVoucher(false);

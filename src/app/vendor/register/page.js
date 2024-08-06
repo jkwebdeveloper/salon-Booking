@@ -557,11 +557,11 @@ const Register = () => {
                                         </SelectTrigger>
                                         <SelectContent>
                                             <SelectGroup>
-                                                <SelectLabel>Type</SelectLabel>
                                                 {mainCat.data?.map(cat => (
                                                     <SelectItem
                                                         key={v4()}
                                                         value={cat?.id}
+                                                        className={`hover:!bg-opacity-10 hover:!bg-primary ${formData?.type_of_salon == cat?.id ? "!bg-primary !bg-opacity-10" : null}`}
                                                     >
                                                         {cat?.title}
                                                     </SelectItem>
