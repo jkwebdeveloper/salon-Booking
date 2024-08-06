@@ -95,7 +95,7 @@ const Vouchers = () => {
             their comfort zone and book an Away Day, hot air ballooning perhaps,
             or zorbing. How they spend their gift voucher is up to them, so this
             takes all the stress about finding the ideal present away from you,
-            because you have found the gift that cannot fail to please. There is
+            because you have found the gift that cannot fail to please. There are
             plenty of time for them to browse the PamperTree website and be
             inspired by the range of things to do, products to purchase, or
             treatments to indulge in, because the PamperTree Voucher lasts for a
@@ -223,8 +223,8 @@ const Vouchers = () => {
                     defaultValue={[50]}
                     max={100}
                     step={1}
-                    // className={cn("w-[60%]", className)}
-                    // {...props}
+                  // className={cn("w-[60%]", className)}
+                  // {...props}
                   />
                 </AccordionContent>
               </AccordionItem>

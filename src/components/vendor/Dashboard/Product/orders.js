@@ -187,7 +187,7 @@ function Orders() {
                             </Pagination>
                         </>
                         || <div className='absolute flex items-center justify-center w-full top-2/4 -translate-y-2/4'>
-                            {orders?.loading && <Spinner show={true} width={40} height={40} /> || <p>There is No Orders.</p>}
+                            {orders?.loading && <Spinner show={true} width={40} height={40} /> || <p>There are No Orders.</p>}
                         </div>
                     }
                 </div>

@@ -55,7 +55,7 @@ const PamperTeam = () => {
             <p className="text-justify xl:text-left">
               You may be looking for a regular treatment, a new salon, a treat,
               or even a short break, PamperTree brings you the solutions –
-              effortlessly! There is a world of treatments for pampering such as
+              effortlessly! There are a world of treatments for pampering such as
               beauty makeovers, nails, brows and lashes and for the remedial
               therapies that you may need from time...
             </p>

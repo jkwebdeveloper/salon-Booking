@@ -201,7 +201,7 @@ function ProductList() {
                         </Pagination>
                     </>
                     || <div className='absolute flex items-center justify-center w-full top-2/4 -translate-y-2/4'>
-                        {products?.loading && <Spinner show={true} width={40} height={40} /> || <p>There is No Products.</p>}
+                        {products?.loading && <Spinner show={true} width={40} height={40} /> || <p>There are No Products.</p>}
                     </div>
                 }
             </div>

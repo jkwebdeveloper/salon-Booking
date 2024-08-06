@@ -188,7 +188,7 @@ function Supplier() {
                         </Pagination>
                     </>
                     || <div className='absolute flex items-center justify-center w-full top-2/4 -translate-y-2/4'>
-                        {suppliers?.loading && <Spinner show={true} width={40} height={40} /> || <p>There is No Suppliers.</p>}
+                        {suppliers?.loading && <Spinner show={true} width={40} height={40} /> || <p>There are No Suppliers.</p>}
                     </div>
                 }
             </div>
