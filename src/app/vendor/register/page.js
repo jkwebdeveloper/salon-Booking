@@ -175,10 +175,10 @@ const Register = () => {
     }, [deviceType]);
 
     useEffect(() => {
-        const registerData = localStorage.getItem('registerData');
-        if (registerData) {
-            setFormData(JSON.parse(registerData));
-        }
+        // const registerData = localStorage.getItem('registerData');
+        // if (registerData) {
+        //     setFormData(JSON.parse(registerData));
+        // }
     }, []);
 
     useEffect(() => {
@@ -438,7 +438,7 @@ const Register = () => {
                                     }
                                     defaultValue={formData?.Address}
                                 />
-                                {/* <p className="error">{Validation?.phone?.msg}</p> */}
+                                <p className="error">{Validation?.address?.msg}</p>
                             </div>
                             <div className="flex flex-col w-full gap-3 lg:flex-row">
                                 <div className="w-full space-y-1 text-left lg:w-1/2">
