@@ -33,6 +33,8 @@ const Login = () => {
       }
       setLoading(false);
       setError(resp.message);
+    } else {
+      setLoading(false);
     }
   };
 

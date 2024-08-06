@@ -4,12 +4,21 @@ import { CiLocationOn } from "react-icons/ci";
 
 import { Button, SearchInput, TimePickerInput } from "@/components";
 import { DatePicker } from "./datepicker";
+import { POST } from "@/app/api/post";
 
 const FindNearByForm = () => {
-  const searchNearyBy = (e) => {
+  const [formItems, setFormItems] = React.useState({
+    categories: "",
+    date: "",
+    time: "",
+    lat: "",
+    long: "",
+  });
+  const searchNearyBy = async (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
-    console.log("searching nearby");
+    console.log(form);
+    // const resp = await POST.request({ url:'/find-near-by-services', form });
   };
   return (
     <div className="relative flex items-center justify-center w-full">
@@ -28,12 +37,6 @@ const FindNearByForm = () => {
           <div className="flex-grow flex-shrink-0 min-h-[1rem] w-[2px] bg-neutral-400"></div>
           <div className="flex items-center w-full gap-1">
             <IoTimeOutline className="text-xl" />
-            {/* <input
-              datepicker="true"
-              type="time"
-              placeholder="Select time"
-              className="w-full outline-none "
-            /> */}
             <TimePickerInput />
           </div>
           <span className="bg-opacity-40 bg-gray-400 lg:h-6 lg:w-[1px] w-full h-[1px] "></span>

@@ -31,6 +31,7 @@ const AddTeam = ({
   const [staffServices, setStaffServices] = useState((staff && staff?.staff_service) || []); //(staff && staff?.staff_service) || []
   const [birthDate, setBirthDate] = useState(staff?.dob || "");
   const [selected, setSelected] = useState([]);
+  const [formData, setFormData] = useState({});
 
   const changeTab = (tab = "basic") => setCurrentTab(tab);
 
@@ -141,6 +142,14 @@ const AddTeam = ({
     });
     setLoading(false);
     if (resp && resp.code == 200) {
+      setStaffsList(prev => {
+        return prev.map((staff) => {
+          if (staff.id == resp.data.id) {
+            return resp.data;
+          }
+          return staff;
+        });
+      });
       changeTab("publicProfile");
     } else {
       setError(resp.message);
@@ -219,7 +228,8 @@ const AddTeam = ({
                 className="input_field"
                 placeholder="Enter your Surname"
                 pattern={Validation?.surname?.pattern}
-                defaultValue={(staff && staff.first_name) || ""}
+                defaultValue={formData?.sur_name || (staff && staff.first_name) || ""}
+                onChange={(e) => setFormData({ ...formData, sur_name: e.target.value })}
                 required
               />
               <p className="error">{Validation?.surname?.msg}</p>
@@ -232,7 +242,8 @@ const AddTeam = ({
                 className="input_field"
                 placeholder="Enter your First name"
                 pattern={Validation?.firstname?.pattern}
-                defaultValue={(staff && staff.first_name) || ""}
+                defaultValue={formData?.first_name || (staff && staff.first_name) || ""}
+                onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
                 required
               />
               <p className="error">{Validation?.firstname?.msg}</p>
@@ -245,7 +256,8 @@ const AddTeam = ({
                 className="input_field"
                 placeholder="Enter your Last name"
                 pattern={Validation?.lastname?.pattern}
-                defaultValue={(staff && staff.last_name) || ""}
+                defaultValue={formData?.last_name || (staff && staff.last_name) || ""}
+                onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
                 required
               />
               <p className="error">{Validation?.lastname?.msg}</p>
@@ -260,7 +272,8 @@ const AddTeam = ({
                 className="input_field"
                 placeholder="Enter your email"
                 pattern={Validation?.email?.pattern}
-                defaultValue={(staff && staff.email) || ""}
+                defaultValue={formData?.email || (staff && staff.email) || ""}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 required
               />
               <p className="error">{Validation?.email?.msg}</p>
@@ -273,7 +286,8 @@ const AddTeam = ({
                 className="input_field"
                 placeholder="Enter your Phone Number"
                 pattern={Validation?.phone?.pattern}
-                defaultValue={(staff && staff.mobile) || ""}
+                defaultValue={formData?.mobile || (staff && staff.mobile) || ""}
+                onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
                 required
               />
               <p className="error">{Validation?.phone?.msg}</p>
@@ -288,14 +302,14 @@ const AddTeam = ({
                   className={"px-3 py-[17px] h-8 rounded-md"}
                   defaultOpen={calendarOpen}
                   onSelect={(date) => {
+                    setFormData({ ...formData, dob: date });
                     setBirthDate(date);
-                    console.log(date);
                   }}
                   setCalendarOpen={setCalendarOpen}
                   key={calendarOpen}
                   name={"dob"}
                   maxDate={new Date()}
-                  defaultValue={birthDate}
+                  defaultValue={formData?.dob || birthDate}
                   placeholder="Enter Date of Birth"
                   yearSelection
                   disabledDays={{ after: new Date() }}
@@ -344,12 +358,11 @@ const AddTeam = ({
             What service can be booked for this employee ?
           </p>
           <div className="flex items-center">
-            { }
             <input
               id="selectAll"
               type="checkbox"
               className="accent-primary"
-              defaultChecked={!vendorServices?.loading && vendorServices.length == vendorServices?.data.map(service => service.group_service_list.map(group => group.id)).flat().length}
+              defaultChecked={!vendorServices?.loading && staffServices.length == vendorServices?.data.map(service => service.group_service_list.map(group => group.id)).flat().length}
               onChange={e => {
                 if (e.target.checked) {
                   setStaffServices(vendorServices?.data.map(service => service.group_service_list.map(group => ({
@@ -445,7 +458,7 @@ const AddTeam = ({
             onSubmit={(e) => setPublicProfile({ e, step: "" })}
             noValidate
           >
-            <div className="w-full space-y-1 text-left">
+            <div className="w-full space-y-1 text-left ">
               <Label htmlFor="job_title" text="Job Title" />
               <input
                 type="text"
@@ -454,12 +467,13 @@ const AddTeam = ({
                 className="input_field"
                 placeholder="Enter your Job Title"
                 pattern={Validation?.title?.pattern}
-                defaultValue={(staff && staff.job_title) || ""}
+                defaultValue={formData?.job_title || (staff && staff.job_title) || ""}
+                onChange={(e) => setFormData({ ...formData, job_title: e.target.value })}
                 required
               />
               <p className="error">{Validation?.title?.msg}</p>
             </div>
-            <div className="w-full space-y-1 text-left lg:w-1/2">
+            <div className="w-full space-y-1 text-left">
               <Label htmlFor="job_bio" text="Job Bio" />
               <input
                 type="text"
@@ -467,7 +481,8 @@ const AddTeam = ({
                 id="job_bio"
                 className="input_field"
                 placeholder="Enter your Job Bio"
-                defaultValue={(staff && staff.job_bio) || ""}
+                defaultValue={formData?.job_bio || (staff && staff.job_bio) || ""}
+                onChange={(e) => setFormData({ ...formData, job_bio: e.target.value })}
               />
             </div>
             <div className="flex items-center justify-center gap-3">

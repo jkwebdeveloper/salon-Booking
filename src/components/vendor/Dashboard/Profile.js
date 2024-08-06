@@ -1,5 +1,5 @@
 import { POST } from "@/app/api/post";
-import { Spinner } from "@/components";
+import { Error, Spinner, Success } from "@/components";
 import Button from "@/components/ui/button";
 import Validation from "@/constants/validation";
 import { login } from "@/redux/features/vendorAuthSlice";
@@ -10,20 +10,24 @@ import { useDispatch, useSelector } from "react-redux";
 const Profile = () => {
   const [successfull, setSuccessFull] = React.useState(false);
   const [error, setError] = React.useState("");
-  const [loading, setLoading] = React.useState(false);
+  const [formState, setFormState] = React.useState({
+    loading: false,
+    error: '',
+    success: '',
+  });
   const [updated, setUpdated] = React.useState(false);
   const dispatch = useDispatch();
   const vendor = useSelector((state) => state.vendorAuth.vendor);
 
   const updateVendor = async (e) => {
     e.preventDefault();
-    setLoading(true);
     const resp = await POST.request({
       url: "/vendor/update-profile",
       form: e.target,
       token: vendor?.api_token,
+      formState,
+      setFormState
     });
-    setLoading(false);
     if (resp.code == 200 && Object.keys(resp.data).length > 0) {
       setUpdated(true);
       dispatch(login(resp.data));
@@ -120,14 +124,16 @@ const Profile = () => {
             <p className="error">{Validation?.phone?.msg}</p>
           </div>
         </div>
-        <Button variant="primary" type="submit" disabled={loading}>
+        <Button variant="primary" type="submit" disabled={formState?.loading}>
           <Spinner
-            show={loading}
+            show={formState?.loading}
             width="25"
             height="25"
-            text={(updated && "Updated") || "Update"}
+            text={"Update"}
           />
         </Button>
+        {formState?.error && <Error error={formState?.error} />}
+        {formState?.success && <Success message={formState?.success} />}
       </form>
     </div>
   );

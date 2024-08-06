@@ -167,13 +167,23 @@ const Register = () => {
                 setError(resp.message);
             }
             setLoading(false);
-            console.log(resp);
         }
     };
 
     useEffect(() => {
         setFormData({ ...formData, device_type: deviceType });
     }, [deviceType]);
+
+    useEffect(() => {
+        const registerData = localStorage.getItem('registerData');
+        if (registerData) {
+            setFormData(JSON.parse(registerData));
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('registerData', JSON.stringify(formData));
+    }, [formData]);
     return (
         <div>
             {/* <Banner title="" /> */}
@@ -205,20 +215,18 @@ const Register = () => {
               1
             </p> */}
                         <p
-                            className={`rounded-full w-8 h-8 flex justify-center items-center ${
-                                activeTab === 'Business'
-                                    ? 'bg-[#0AADA4]'
-                                    : 'bg-[#B8B8B8]'
-                            } text-white`}
+                            className={`rounded-full w-8 h-8 flex justify-center items-center ${activeTab === 'Business'
+                                ? 'bg-[#0AADA4]'
+                                : 'bg-[#B8B8B8]'
+                                } text-white`}
                         >
                             1
                         </p>
                         <p
-                            className={`text-sm ${
-                                activeTab === 'Business'
-                                    ? 'font-bold'
-                                    : 'text-[#8D8D8D]'
-                            }`}
+                            className={`text-sm ${activeTab === 'Business'
+                                ? 'font-bold'
+                                : 'text-[#8D8D8D]'
+                                }`}
                         >
                             Business Information
                         </p>
@@ -234,20 +242,18 @@ const Register = () => {
             </p>
             <p className="text-sm text-[#8D8D8D]">Shop working hours</p> */}
                         <p
-                            className={`rounded-full w-8 h-8 flex justify-center items-center ${
-                                activeTab === 'Shopworking'
-                                    ? 'bg-[#0AADA4]'
-                                    : 'bg-[#B8B8B8]'
-                            } text-white`}
+                            className={`rounded-full w-8 h-8 flex justify-center items-center ${activeTab === 'Shopworking'
+                                ? 'bg-[#0AADA4]'
+                                : 'bg-[#B8B8B8]'
+                                } text-white`}
                         >
                             2
                         </p>
                         <p
-                            className={`text-sm ${
-                                activeTab === 'Shopworking'
-                                    ? 'font-bold'
-                                    : 'text-[#8D8D8D]'
-                            }`}
+                            className={`text-sm ${activeTab === 'Shopworking'
+                                ? 'font-bold'
+                                : 'text-[#8D8D8D]'
+                                }`}
                         >
                             Shop working hours
                         </p>
@@ -546,8 +552,8 @@ const Register = () => {
                                                         c.id ==
                                                         formData?.type_of_salon
                                                 )[0]?.title) || (
-                                                <SelectValue placeholder="Select a Salon Type" />
-                                            )}
+                                                    <SelectValue placeholder="Select a Salon Type" />
+                                                )}
                                         </SelectTrigger>
                                         <SelectContent>
                                             <SelectGroup>
@@ -615,11 +621,11 @@ const Register = () => {
                                                 className="text-gray-400 cursor-pointer"
                                             />
                                         )) || (
-                                            <BsEyeSlashFill
-                                                size={24}
-                                                className="text-gray-400 cursor-pointer"
-                                            />
-                                        )}
+                                                <BsEyeSlashFill
+                                                    size={24}
+                                                    className="text-gray-400 cursor-pointer"
+                                                />
+                                            )}
                                     </button>
                                 </div>
                                 <div className="relative w-full space-y-1 text-left lg:w-1/2">
@@ -664,11 +670,11 @@ const Register = () => {
                                                 className="text-gray-400 cursor-pointer"
                                             />
                                         )) || (
-                                            <BsEyeSlashFill
-                                                size={24}
-                                                className="text-gray-400 cursor-pointer"
-                                            />
-                                        )}
+                                                <BsEyeSlashFill
+                                                    size={24}
+                                                    className="text-gray-400 cursor-pointer"
+                                                />
+                                            )}
                                     </button>
                                 </div>
                             </div>
@@ -856,7 +862,7 @@ const Register = () => {
                                                                 ...selectedDays,
                                                                 [day]: {
                                                                     ...selectedDays[
-                                                                        day
+                                                                    day
                                                                     ],
                                                                     from_time:
                                                                         e,
@@ -865,16 +871,15 @@ const Register = () => {
                                                         }
                                                     >
                                                         <SelectTrigger
-                                                            className={`text-black min-w-[90px] ${
-                                                                selectedDays[
-                                                                    day
-                                                                ] &&
+                                                            className={`text-black min-w-[90px] ${selectedDays[
+                                                                day
+                                                            ] &&
                                                                 ((selectedDays[
                                                                     day
                                                                 ].from_time &&
                                                                     'text-black') ||
                                                                     'text-red-500')
-                                                            }`}
+                                                                }`}
                                                         >
                                                             {(selectedDays[
                                                                 day
@@ -901,13 +906,13 @@ const Register = () => {
                                                                                     +converttomin(
                                                                                         time
                                                                                     ) >=
-                                                                                        +converttomin(
-                                                                                            selectedDays[
-                                                                                                day
-                                                                                            ]
-                                                                                                .to_time ||
-                                                                                                '24:00'
-                                                                                        )) ||
+                                                                                    +converttomin(
+                                                                                        selectedDays[
+                                                                                            day
+                                                                                        ]
+                                                                                            .to_time ||
+                                                                                        '24:00'
+                                                                                    )) ||
                                                                                 false
                                                                             }
                                                                         >
@@ -926,7 +931,7 @@ const Register = () => {
                                                                 ...selectedDays,
                                                                 [day]: {
                                                                     ...selectedDays[
-                                                                        day
+                                                                    day
                                                                     ],
                                                                     to_time: e,
                                                                 },
@@ -934,16 +939,15 @@ const Register = () => {
                                                         }
                                                     >
                                                         <SelectTrigger
-                                                            className={`text-black min-w-[90px] ${
-                                                                selectedDays[
-                                                                    day
-                                                                ] &&
+                                                            className={`text-black min-w-[90px] ${selectedDays[
+                                                                day
+                                                            ] &&
                                                                 ((selectedDays[
                                                                     day
                                                                 ].to_time &&
                                                                     'text-black') ||
                                                                     'text-red-500')
-                                                            }`}
+                                                                }`}
                                                         >
                                                             {(selectedDays[
                                                                 day
@@ -970,13 +974,13 @@ const Register = () => {
                                                                                     +converttomin(
                                                                                         time
                                                                                     ) <=
-                                                                                        +converttomin(
-                                                                                            selectedDays[
-                                                                                                day
-                                                                                            ]
-                                                                                                .from_time ||
-                                                                                                '24:00'
-                                                                                        )) ||
+                                                                                    +converttomin(
+                                                                                        selectedDays[
+                                                                                            day
+                                                                                        ]
+                                                                                            .from_time ||
+                                                                                        '24:00'
+                                                                                    )) ||
                                                                                 false
                                                                             }
                                                                         >
