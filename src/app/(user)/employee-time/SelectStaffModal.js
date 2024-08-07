@@ -4,10 +4,10 @@ import React from 'react';
 const SelectStaffModal = () => {
     return (
         <div className="w-full space-y-3">
-            <p className="text-[#0AADA4]">
+            <p className="text-[#0AADA4] lg:text-base text-sm">
                 Select professional for couple massage
             </p>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 md:grid-cols-2">
                 {/* <div className="bg-white px-4 py-4 space-y-3 flex-col items-center justify-center rounded-md hover:bg-[#F4E9FF] p-3 hover:border-primary border-[1px] border-[#E6E6E6]">
                     <Image
                         src={'/static/images/spa_life.png'}
@@ -24,7 +24,7 @@ const SelectStaffModal = () => {
                         src={'/static/images/23.png'}
                         loading="lazy"
                         alt="Hero Banner"
-                        className="object-cover h-full mx-auto"
+                        className="object-cover mx-auto"
                         width={80}
                         height={80}
                     />
@@ -35,7 +35,7 @@ const SelectStaffModal = () => {
                         src={'/static/images/23.png'}
                         loading="lazy"
                         alt="Hero Banner"
-                        className="object-cover h-full mx-auto"
+                        className="object-cover mx-auto"
                         width={80}
                         height={80}
                     />
@@ -46,7 +46,7 @@ const SelectStaffModal = () => {
                         src={'/static/images/23.png'}
                         loading="lazy"
                         alt="Hero Banner"
-                        className="object-cover h-full mx-auto"
+                        className="object-cover mx-auto"
                         width={80}
                         height={80}
                     />
@@ -57,7 +57,7 @@ const SelectStaffModal = () => {
                         src={'/static/images/23.png'}
                         loading="lazy"
                         alt="Hero Banner"
-                        className="object-cover h-full mx-auto"
+                        className="object-cover mx-auto"
                         width={80}
                         height={80}
                     />
@@ -68,7 +68,7 @@ const SelectStaffModal = () => {
                         src={'/static/images/23.png'}
                         loading="lazy"
                         alt="Hero Banner"
-                        className="object-cover h-full mx-auto"
+                        className="object-cover mx-auto"
                         width={80}
                         height={80}
                     />

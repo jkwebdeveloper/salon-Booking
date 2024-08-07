@@ -524,7 +524,7 @@ const DetailPage = () => {
             <div>
                 <OurWork />
             </div> */}
-            <div className="relative w-full h-auto min-h-screen">
+            <div className="relative w-full h-auto">
     <div className="absolute inset-0">
         <Image
             src={'/static/images/banner.jpg'}
@@ -537,7 +537,7 @@ const DetailPage = () => {
     </div>
     <div className="relative z-10 w-full p-4 space-y-3 md:p-8">
         <p className="mt-4 text-xl font-semibold md:text-2xl">Services</p>
-        <div className="flex flex-col lg:flex-row gap-4 min-h-[55dvh] md:mb-10">
+        <div className="flex flex-col gap-4 lg:flex-row min-h-auto md:mb-10">
             <div className="shadow-lg rounded-md bg-white h-fit w-full lg:w-[25%] mx-auto space-y-5 z-2 min-h-[350px]">
             <div className="p-4 space-y-3">
                                 <div className="flex items-center justify-between">

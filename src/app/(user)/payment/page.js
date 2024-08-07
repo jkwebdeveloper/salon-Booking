@@ -132,7 +132,7 @@ const PaymentMethod = () => {
                             <hr />
                             <div className="w-full space-y-1 text-left ">
                                 <Label htmlFor="last_name" text="Promo code" />
-                                <div className="flex items-center gap-3">
+                                <div className="flex flex-col items-center gap-3 md:flex-row">
                                     <input
                                         type="text"
                                         name="last_name"

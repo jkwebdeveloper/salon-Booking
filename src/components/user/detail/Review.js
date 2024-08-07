@@ -58,7 +58,7 @@ const Review = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col min-h-[55dvh] gap-4 md:flex-row md:mb-10">
+      <div className="flex flex-col gap-4 min-h-auto md:flex-row md:mb-10">
         <div className="border border-[#e0e0e0] rounded-md h-fit min-h-[350px] md:w-[40%] lg:w-[25%] w-[95%] mx-auto space-y-5 p-4 bg-white">
           <p>Filter by rating</p>
           <div className="flex items-center gap-2">

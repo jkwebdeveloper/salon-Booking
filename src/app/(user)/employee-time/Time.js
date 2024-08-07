@@ -15,7 +15,7 @@ const Time = ({ handleContinue, handleBack }) => {
     const [addStaff, setAddStaff] = useState(false);
     return (
         <div className="container relative flex flex-col gap-4 px-0 lg:flex-row lg:px-28 md:mb-10">
-            <div className="lg:w-[60%] w-full mx-auto space-y-5 rounded-md shadow-lg h-fit p-4 bg-white">
+            <div className="lg:w-[60%] w-full mx-auto space-y-5 rounded-md shadow-lg p-4 bg-white">
                 <p className="text-lg font-bold lg:text-3xl">Date & Time</p>
                 <MiniCalander />
             </div>
@@ -61,7 +61,7 @@ const Time = ({ handleContinue, handleBack }) => {
                                 close={setAddStaff}
                                 className="sm:max-w-[600px]"
                             >
-                                <DialogTitle className="text-3xl font-bold">
+                                <DialogTitle className="text-lg font-bold lg:text-3xl">
                                     Select professional
                                 </DialogTitle>
                                 <SelectStaffModal setAddStaff={setAddStaff} />
