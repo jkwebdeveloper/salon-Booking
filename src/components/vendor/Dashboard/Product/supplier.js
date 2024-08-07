@@ -90,9 +90,10 @@ function Supplier() {
                 </Dialog>
             </div>
             <div className="overflow-x-auto bg-white min-h-[200px] relative rounded-lg">
-                {(!suppliers?.loading &&
+                {console.log(suppliers)}
+                {((!suppliers?.loading &&
                     suppliers?.data &&
-                    suppliers?.data?.suppliers?.length > 0 && (
+                    suppliers?.data?.suppliers?.length > 0) && (
                         <>
                             <table className="min-w-full rounded-lg font-[sans-serif]">
                                 <thead className="border-b-2 whitespace-nowrap">
@@ -183,20 +184,133 @@ function Supplier() {
                             </table>
                             <Pagination className={'py-3 relative'}>
                                 <PaginationContent
-                                    className={
-                                        suppliers?.loading && 'opacity-0'
-                                    }
-                                })}
-                                <PaginationItem className="p-0 !w-6 !h-6">
-                                    <PaginationNext className={`${currentPage.value != totalPage && 'text-primary bg-neutral-100' || 'bg-neutral-100 opacity-80 cursor-not-allowed p-0'} !w-full !h-full`} onClick={e => currentPage.value != totalPage && setCurrentPage({ changing: true, value: currentPage.value + 1 })} />
-                                </PaginationItem>
-                            </PaginationContent>
-                        </Pagination>
-                    </>
-                    || <div className='absolute flex items-center justify-center w-full top-2/4 -translate-y-2/4'>
-                        {suppliers?.loading && <Spinner show={true} width={40} height={40} /> || <p>There are No Suppliers.</p>}
-                    </div>
-                )}
+                                    className={suppliers?.loading && 'opacity-0'}
+                                >
+                                    <PaginationItem className="p-0 !w-6 !h-6">
+                                        <PaginationPrevious
+                                            className={`${(currentPage.value != 1 &&
+                                                'text-primary bg-neutral-100') ||
+                                                'bg-neutral-100 opacity-50 cursor-not-allowed p-0'
+                                                } !w-full !h-full`}
+                                            onClick={e =>
+                                                currentPage.value != 1 &&
+                                                setCurrentPage({
+                                                    changing: true,
+                                                    value:
+                                                        currentPage.value - 1,
+                                                })
+                                            }
+                                        />
+                                    </PaginationItem>
+                                    {Array.from(
+                                        { length: totalPage },
+                                        (_, i) => {
+                                            const start =
+                                                currentPage.value -
+                                                Math.floor(showNumberofBtn / 2);
+                                            if (
+                                                currentPage.value <=
+                                                Math.floor(showNumberofBtn / 2)
+                                            ) {
+                                                if (i < showNumberofBtn) {
+                                                    return (
+                                                        <PaginationItem key={i}>
+                                                            <PaginationLink
+                                                                className={`!w-6 !h-6 p-0 hover:bg-primary hover:text-white ${currentPage.value ==
+                                                                    i + 1 &&
+                                                                    'pointer-events-none'
+                                                                    } ${(currentPage.changing &&
+                                                                        currentPage.value ==
+                                                                        i +
+                                                                        1 &&
+                                                                        'bg-[url("/static/icons/ring.svg")]') ||
+                                                                    ''
+                                                                    }`}
+                                                                isActive={
+                                                                    (currentPage?.changing &&
+                                                                        currentPage.value) ||
+                                                                    currentPage.value ===
+                                                                    i + 1 ||
+                                                                    totalPage ==
+                                                                    1
+                                                                }
+                                                                onClick={e => {
+                                                                    setCurrentPage(
+                                                                        {
+                                                                            changing: true,
+                                                                            value:
+                                                                                i +
+                                                                                1,
+                                                                        }
+                                                                    );
+                                                                }}
+                                                            >
+                                                                {i + 1}
+                                                            </PaginationLink>
+                                                        </PaginationItem>
+                                                    );
+                                                }
+                                            } else if (
+                                                currentPage.value >
+                                                Math.floor(showNumberofBtn / 2)
+                                            ) {
+                                                if (
+                                                    i >= start &&
+                                                    i < start + showNumberofBtn
+                                                ) {
+                                                    return (
+                                                        <PaginationItem key={i}>
+                                                            <PaginationLink
+                                                                className={`!w-6 !h-6 p-0 hover:bg-primary hover:text-white ${currentPage.value ==
+                                                                    i + 1 &&
+                                                                    'pointer-events-none'
+                                                                    } ${(currentPage.changing &&
+                                                                        currentPage.value ==
+                                                                        i +
+                                                                        1 &&
+                                                                        'bg-[url("/static/icons/ring.svg")]') ||
+                                                                    ''
+                                                                    }`}
+                                                                isActive={
+                                                                    (currentPage?.changing &&
+                                                                        currentPage.value) ||
+                                                                    currentPage.value ===
+                                                                    i + 1 ||
+                                                                    totalPage ==
+                                                                    1
+                                                                }
+                                                                onClick={e => {
+                                                                    setCurrentPage(
+                                                                        {
+                                                                            changing: true,
+                                                                            value:
+                                                                                i +
+                                                                                1,
+                                                                        }
+                                                                    );
+                                                                }}
+                                                            >
+                                                                {i + 1}
+                                                            </PaginationLink>
+                                                        </PaginationItem>
+                                                    );
+                                                }
+                                            }
+                                        }
+                                    )}
+                                    <PaginationItem className="p-0 !w-6 !h-6">
+                                        <PaginationNext className={`${currentPage.value != totalPage && 'text-primary bg-neutral-100' || 'bg-neutral-100 opacity-80 cursor-not-allowed p-0'} !w-full !h-full`} onClick={e => currentPage.value != totalPage && setCurrentPage({ changing: true, value: currentPage.value + 1 })} />
+                                    </PaginationItem>
+                                </PaginationContent>
+                            </Pagination>
+                        </>
+                        || null
+                    )) || null}
+
+                {suppliers?.loading && <PageLoader />}
+                {!suppliers?.loading && suppliers?.data.suppliers.length == 0 ? <div className='absolute flex items-center justify-center w-full top-2/4 -translate-y-2/4'>
+                    {<p>There are No Suppliers.</p>}
+                </div> : null}
             </div>
         </>
     );

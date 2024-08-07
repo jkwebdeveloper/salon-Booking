@@ -78,66 +78,66 @@ function Orders() {
                 <div className="overflow-x-auto relative bg-white min-h-[200px] rounded-lg">
                     {(!orders?.loading &&
                         orders?.data &&
-                        orders?.data?.orders?.length > 0 && (
-                            <>
-                                <table className="min-w-full rounded-lg font-[sans-serif]">
-                                    <thead className="border-b-2 whitespace-nowrap">
-                                        <tr>
-                                            <th className="px-6 py-3 text-sm font-semibold text-left">
-                                                Supplier
-                                            </th>
-                                            <th className="px-6 py-3 text-sm font-semibold text-left">
-                                                Date ordered
-                                            </th>
-                                            <th className="px-6 py-3 text-sm font-semibold text-left">
-                                                Items ordered
-                                            </th>
-                                            <th className="px-6 py-3 text-sm font-semibold text-left">
-                                                Status
-                                            </th>
-                                            <th className="px-6 py-3 text-sm font-semibold text-left">
-                                                Action
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="border-b-2 whitespace-nowrap">
-                                        {!orders.loading &&
-                                            orders?.data?.orders.map(
-                                                (order, index) => (
-                                                    <tr className="" key={v4()}>
-                                                        <td className="px-6 py-4 text-sm capitalize">
-                                                            {
-                                                                order?.supplier
-                                                                    ?.supplier_name
-                                                            }
-                                                        </td>
-                                                        <td className="px-6 py-4 text-sm">
-                                                            {order.date_ordered}
-                                                        </td>
-                                                        <td className="px-6 py-4 text-sm">
-                                                            {
-                                                                order?.items_ordered
-                                                            }
-                                                        </td>
-                                                        <td className="px-2 py-4 text-sm ">
-                                                            <p className="bg-[#0AADA4] p-2 text-white rounded-full text-center">
-                                                                {order.status}
-                                                            </p>
-                                                        </td>
-                                                        <td className="flex gap-4 px-6 py-4">
-                                                            <Button
-                                                                variant="icon"
-                                                                size="icon"
-                                                                className="px-0"
-                                                                onClick={e => {
-                                                                    setEditOrder(
-                                                                        order
-                                                                    );
-                                                                }}
-                                                            >
-                                                                <BsPencilFill className="text-[#0AADA4] text-xl" />
-                                                            </Button>
-                                                            {/* <Button
+                        orders?.data?.orders?.length > 0 &&
+                        <>
+                            <table className="min-w-full rounded-lg font-[sans-serif]">
+                                <thead className="border-b-2 whitespace-nowrap">
+                                    <tr>
+                                        <th className="px-6 py-3 text-sm font-semibold text-left">
+                                            Supplier
+                                        </th>
+                                        <th className="px-6 py-3 text-sm font-semibold text-left">
+                                            Date ordered
+                                        </th>
+                                        <th className="px-6 py-3 text-sm font-semibold text-left">
+                                            Items ordered
+                                        </th>
+                                        <th className="px-6 py-3 text-sm font-semibold text-left">
+                                            Status
+                                        </th>
+                                        <th className="px-6 py-3 text-sm font-semibold text-left">
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody className="border-b-2 whitespace-nowrap">
+                                    {!orders.loading &&
+                                        orders?.data?.orders.map(
+                                            (order, index) => (
+                                                <tr className="" key={v4()}>
+                                                    <td className="px-6 py-4 text-sm capitalize">
+                                                        {
+                                                            order?.supplier
+                                                                ?.supplier_name
+                                                        }
+                                                    </td>
+                                                    <td className="px-6 py-4 text-sm">
+                                                        {order.date_ordered}
+                                                    </td>
+                                                    <td className="px-6 py-4 text-sm">
+                                                        {
+                                                            order?.items_ordered
+                                                        }
+                                                    </td>
+                                                    <td className="px-2 py-4 text-sm ">
+                                                        <p className="bg-[#0AADA4] p-2 text-white rounded-full text-center">
+                                                            {order.status}
+                                                        </p>
+                                                    </td>
+                                                    <td className="flex gap-4 px-6 py-4">
+                                                        <Button
+                                                            variant="icon"
+                                                            size="icon"
+                                                            className="px-0"
+                                                            onClick={e => {
+                                                                setEditOrder(
+                                                                    order
+                                                                );
+                                                            }}
+                                                        >
+                                                            <BsPencilFill className="text-[#0AADA4] text-xl" />
+                                                        </Button>
+                                                        {/* <Button
                                                     variant="icon"
                                                     size="icon"
                                                     className="px-0"
@@ -147,168 +147,162 @@ function Orders() {
                                                 >
                                                     <IoTrashSharp className="text-[#EA2C6D] text-xl" />
                                                 </Button> */}
-                                                        </td>
-                                                    </tr>
-                                                )
-                                            )}
-                                    </tbody>
-                                </table>
-                                <Dialog open={(editOrder && true) || false}>
-                                    <DialogContent
-                                        close={e => setEditOrder(false)}
-                                        className="sm:max-w-[550px]"
-                                    >
-                                        <EditOrder
-                                            editOrder={editOrder}
-                                            getOrders={getOrders}
-                                            setEditOrder={e =>
-                                                setEditOrder(false)
-                                            }
-                                            activePage={currentPage?.value}
-                                        />
-                                    </DialogContent>
-                                </Dialog>
-                                <Pagination className={'py-3 relative'}>
-                                    <PaginationContent
-                                        className={
-                                            orders?.loading && 'opacity-0'
+                                                    </td>
+                                                </tr>
+                                            )
+                                        )}
+                                </tbody>
+                            </table>
+                            <Dialog open={(editOrder && true) || false}>
+                                <DialogContent
+                                    close={e => setEditOrder(false)}
+                                    className="sm:max-w-[550px]"
+                                >
+                                    <EditOrder
+                                        editOrder={editOrder}
+                                        getOrders={getOrders}
+                                        setEditOrder={e =>
+                                            setEditOrder(false)
                                         }
-                                    >
-                                        <PaginationItem className="p-0 !w-6 !h-6">
-                                            <PaginationPrevious
-                                                className={`${
-                                                    (currentPage.value != 1 &&
-                                                        'text-primary bg-neutral-100') ||
-                                                    'bg-neutral-100 opacity-50 cursor-not-allowed p-0'
+                                        activePage={currentPage?.value}
+                                    />
+                                </DialogContent>
+                            </Dialog>
+                            <Pagination className={'py-3 relative'}>
+                                <PaginationContent
+                                    className={
+                                        orders?.loading && 'opacity-0'
+                                    }
+                                >
+                                    <PaginationItem className="p-0 !w-6 !h-6">
+                                        <PaginationPrevious
+                                            className={`${(currentPage.value != 1 &&
+                                                    'text-primary bg-neutral-100') ||
+                                                'bg-neutral-100 opacity-50 cursor-not-allowed p-0'
                                                 } !w-full !h-full`}
-                                                onClick={e =>
-                                                    currentPage.value != 1 &&
-                                                    setCurrentPage({
-                                                        changing: true,
-                                                        value:
-                                                            currentPage.value -
-                                                            1,
-                                                    })
-                                                }
-                                            />
-                                        </PaginationItem>
-                                        {Array.from(
-                                            { length: totalPage },
-                                            (_, i) => {
-                                                const start =
-                                                    currentPage.value -
-                                                    Math.floor(
-                                                        showNumberofBtn / 2
+                                            onClick={e =>
+                                                currentPage.value != 1 &&
+                                                setCurrentPage({
+                                                    changing: true,
+                                                    value:
+                                                        currentPage.value -
+                                                        1,
+                                                })
+                                            }
+                                        />
+                                    </PaginationItem>
+                                    {Array.from(
+                                        { length: totalPage },
+                                        (_, i) => {
+                                            const start =
+                                                currentPage.value -
+                                                Math.floor(
+                                                    showNumberofBtn / 2
+                                                );
+                                            if (
+                                                currentPage.value <=
+                                                Math.floor(
+                                                    showNumberofBtn / 2
+                                                )
+                                            ) {
+                                                if (i < showNumberofBtn) {
+                                                    return (
+                                                        <PaginationItem
+                                                            key={i}
+                                                        >
+                                                            <PaginationLink
+                                                                className={`!w-6 !h-6 p-0 hover:bg-primary hover:text-white ${currentPage.value ==
+                                                                    i +
+                                                                    1 &&
+                                                                    'pointer-events-none'
+                                                                    } ${(currentPage.changing &&
+                                                                        currentPage.value ==
+                                                                        i +
+                                                                        1 &&
+                                                                        'bg-[url("/static/icons/ring.svg")]') ||
+                                                                    ''
+                                                                    }`}
+                                                                isActive={
+                                                                    (currentPage?.changing &&
+                                                                        currentPage.value) ||
+                                                                    currentPage.value ===
+                                                                    i +
+                                                                    1 ||
+                                                                    totalPage ==
+                                                                    1
+                                                                }
+                                                                onClick={e => {
+                                                                    setCurrentPage(
+                                                                        {
+                                                                            changing: true,
+                                                                            value:
+                                                                                i +
+                                                                                1,
+                                                                        }
+                                                                    );
+                                                                }}
+                                                            >
+                                                                {i + 1}
+                                                            </PaginationLink>
+                                                        </PaginationItem>
                                                     );
+                                                }
+                                            } else if (
+                                                currentPage.value >
+                                                Math.floor(
+                                                    showNumberofBtn / 2
+                                                )
+                                            ) {
                                                 if (
-                                                    currentPage.value <=
-                                                    Math.floor(
-                                                        showNumberofBtn / 2
-                                                    )
+                                                    i >= start &&
+                                                    i <
+                                                    start +
+                                                    showNumberofBtn
                                                 ) {
-                                                    if (i < showNumberofBtn) {
-                                                        return (
-                                                            <PaginationItem
-                                                                key={i}
-                                                            >
-                                                                <PaginationLink
-                                                                    className={`!w-6 !h-6 p-0 hover:bg-primary hover:text-white ${
+                                                    return (
+                                                        <PaginationItem
+                                                            key={i}
+                                                        >
+                                                            <PaginationLink
+                                                                className={`!w-6 !h-6 p-0 hover:bg-primary hover:text-white ${currentPage.value ==
+                                                                    i +
+                                                                    1 &&
+                                                                    'pointer-events-none'
+                                                                    } ${(currentPage.changing &&
                                                                         currentPage.value ==
-                                                                            i +
-                                                                                1 &&
-                                                                        'pointer-events-none'
-                                                                    } ${
-                                                                        (currentPage.changing &&
-                                                                            currentPage.value ==
-                                                                                i +
-                                                                                    1 &&
-                                                                            'bg-[url("/static/icons/ring.svg")]') ||
-                                                                        ''
+                                                                        i +
+                                                                        1 &&
+                                                                        'bg-[url("/static/icons/ring.svg")]') ||
+                                                                    ''
                                                                     }`}
-                                                                    isActive={
-                                                                        (currentPage?.changing &&
-                                                                            currentPage.value) ||
-                                                                        currentPage.value ===
-                                                                            i +
-                                                                                1 ||
-                                                                        totalPage ==
-                                                                            1
-                                                                    }
-                                                                    onClick={e => {
-                                                                        setCurrentPage(
-                                                                            {
-                                                                                changing: true,
-                                                                                value:
-                                                                                    i +
-                                                                                    1,
-                                                                            }
-                                                                        );
-                                                                    }}
-                                                                >
-                                                                    {i + 1}
-                                                                </PaginationLink>
-                                                            </PaginationItem>
-                                                        );
-                                                    }
-                                                } else if (
-                                                    currentPage.value >
-                                                    Math.floor(
-                                                        showNumberofBtn / 2
-                                                    )
-                                                ) {
-                                                    if (
-                                                        i >= start &&
-                                                        i <
-                                                            start +
-                                                                showNumberofBtn
-                                                    ) {
-                                                        return (
-                                                            <PaginationItem
-                                                                key={i}
+                                                                isActive={
+                                                                    (currentPage?.changing &&
+                                                                        currentPage.value) ||
+                                                                    currentPage.value ===
+                                                                    i +
+                                                                    1 ||
+                                                                    totalPage ==
+                                                                    1
+                                                                }
+                                                                onClick={e => {
+                                                                    setCurrentPage(
+                                                                        {
+                                                                            changing: true,
+                                                                            value:
+                                                                                i +
+                                                                                1,
+                                                                        }
+                                                                    );
+                                                                }}
                                                             >
-                                                                <PaginationLink
-                                                                    className={`!w-6 !h-6 p-0 hover:bg-primary hover:text-white ${
-                                                                        currentPage.value ==
-                                                                            i +
-                                                                                1 &&
-                                                                        'pointer-events-none'
-                                                                    } ${
-                                                                        (currentPage.changing &&
-                                                                            currentPage.value ==
-                                                                                i +
-                                                                                    1 &&
-                                                                            'bg-[url("/static/icons/ring.svg")]') ||
-                                                                        ''
-                                                                    }`}
-                                                                    isActive={
-                                                                        (currentPage?.changing &&
-                                                                            currentPage.value) ||
-                                                                        currentPage.value ===
-                                                                            i +
-                                                                                1 ||
-                                                                        totalPage ==
-                                                                            1
-                                                                    }
-                                                                    onClick={e => {
-                                                                        setCurrentPage(
-                                                                            {
-                                                                                changing: true,
-                                                                                value:
-                                                                                    i +
-                                                                                    1,
-                                                                            }
-                                                                        );
-                                                                    }}
-                                                                >
-                                                                    {i + 1}
-                                                                </PaginationLink>
-                                                            </PaginationItem>
-                                                        );
-                                                    }
+                                                                {i + 1}
+                                                            </PaginationLink>
+                                                        </PaginationItem>
+                                                    );
                                                 }
                                             }
                                         }
-                                    })}
+                                    )}
                                     <PaginationItem className="p-0 !w-6 !h-6">
                                         <PaginationNext className={`${currentPage.value != totalPage && 'text-primary bg-neutral-100' || 'bg-neutral-100 opacity-80 cursor-not-allowed p-0'} !w-full !h-full`} onClick={e => currentPage.value != totalPage && setCurrentPage({ changing: true, value: currentPage.value + 1 })} />
                                     </PaginationItem>

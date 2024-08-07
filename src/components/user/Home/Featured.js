@@ -33,7 +33,7 @@ const Featured = () => {
   }, []);
 
   return (
-    <div className="w-full space-y-4">
+    featuredVendor?.length ? <div className="w-full space-y-4">
       <p className="text-2xl font-semibold text-black uppercase title heading">
         Near by <span className="text-primary_color">Featured salons</span>
       </p>
@@ -70,14 +70,14 @@ const Featured = () => {
             },
           }}
         >
-          {featuredVendor.map((vendor, index) => (
+          {featuredVendor.length ? featuredVendor.map((vendor, index) => (
             <SwiperSlide key={v4()}>
               <Vendor vendor={vendor} />
             </SwiperSlide>
-          ))}
+          )) : null}
         </Swiper>
       </div>
-    </div>
+    </div> : null
   );
 };
 

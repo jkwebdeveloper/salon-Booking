@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import Button from "@/components/ui/button";
-import { format } from "date-fns";
+import { addDays, format } from "date-fns";
 
 function DatePickerWithRange({ className, dateRange, setDateRange, scheduleType }) {
     return (
