@@ -180,13 +180,13 @@ const DetailPage = () => {
                     />
                 )}
             </div>
-            <div className="w-full relative h-[80vh] 2xl:h-[75vh]">
-                <div>
+            {/* <div className="w-full relative min-h-screen h-auto 2xl:h-[75vh]">
+                <div className="absolute inset-0">
                     <Image
                         src={'/static/images/banner.jpg'}
                         loading="lazy"
                         alt="Hero Banner"
-                        className="absolute object-cover w-full h-full"
+                        className="object-cover w-full h-full"
                         width={1920}
                         height={1080}
                     />
@@ -278,9 +278,7 @@ const DetailPage = () => {
                                                                 />
                                                             </DialogContent>
                                                         </Dialog>
-                                                        {/* <p className="text-[#0AADA4]">
-                                                            Show Details
-                                                        </p> */}
+                                                        
                                                     </div>
                                                     <div className="flex items-center gap-2">
                                                         <p>Spa Massage</p>
@@ -525,7 +523,320 @@ const DetailPage = () => {
             </div>
             <div>
                 <OurWork />
+            </div> */}
+            <div className="relative w-full h-auto min-h-screen">
+    <div className="absolute inset-0">
+        <Image
+            src={'/static/images/banner.jpg'}
+            loading="lazy"
+            alt="Hero Banner"
+            className="object-cover w-full h-full"
+            width={1920}
+            height={1080}
+        />
+    </div>
+    <div className="relative z-10 w-full p-4 space-y-3 md:p-8">
+        <p className="mt-4 text-xl font-semibold md:text-2xl">Services</p>
+        <div className="flex flex-col lg:flex-row gap-4 min-h-[55dvh] md:mb-10">
+            <div className="shadow-lg rounded-md bg-white h-fit w-full lg:w-[25%] mx-auto space-y-5 z-2 min-h-[350px]">
+            <div className="p-4 space-y-3">
+                                <div className="flex items-center justify-between">
+                                    <p>All Services</p>
+                                    <p>(408)</p>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <p>Nail Salons</p>
+                                    <p>(408)</p>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <p>Hair Salons</p>
+                                    <p>(4)</p>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <p>Massage Therapies</p>
+                                    <p>(78)</p>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <p>Spa Days</p>
+                                    <p>(12)</p>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <p>Brows and Lashes</p>
+                                    <p>(24)</p>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <p>Hair Removal</p>
+                                    <p>(408)</p>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <p>Short Breaks</p>
+                                    <p>(30)</p>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <p>Body Treatments</p>
+                                    <p>(8)</p>
+                                </div>
+                            </div>
             </div>
+            <div className="shadow-lg rounded-md bg-white h-fit w-full lg:w-4/5 mx-auto space-y-5 z-2 min-h-[350px]">
+                <div className="p-4 space-y-3">
+                    <Accordion type="single" collapsible className="w-full">
+                        {/* Accordion Items */}
+                        <AccordionItem value="item-1">
+                            <AccordionTrigger className="hover:no-underline">
+                                <div className="flex flex-col items-center justify-between w-full gap-4 md:flex-row">
+                                    <div>
+                                        <div className="flex items-center gap-2">
+                                            <p>Couples Massage</p>
+                                            <Dialog open={moreInfo} className="w-1/2">
+                                                <DialogTrigger
+                                                    onClick={e => setmoreInfo(true)}
+                                                    className="text-sm text-[#0AADA4]"
+                                                >
+                                                    Show Details
+                                                </DialogTrigger>
+                                                <DialogContent
+                                                    close={setmoreInfo}
+                                                    className="sm:max-w-[750px]"
+                                                >
+                                                    <DialogTitle className="text-3xl font-bold">
+                                                        Couples Massage
+                                                    </DialogTitle>
+                                                    <Modal setmoreInfo={setmoreInfo} />
+                                                </DialogContent>
+                                            </Dialog>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <p>Spa Massage</p>
+                                            <p>(2 hr)</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <Button variant="primary" className="mr-3">
+                                            Replace Dialog
+                                        </Button>
+                                        <Button variant="primary" className="mr-3">
+                                            Book Now
+                                        </Button>
+                                    </div>
+                                </div>
+                            </AccordionTrigger>
+                            <AccordionContent>
+                                <div className="bg-[#FAFAFA] space-y-3 p-3 border rounded-lg border-[#E0E0E0]">
+                                    <div className="flex items-center justify-between gap-10">
+                                        <div>
+                                            <p className="font-bold">
+                                                Sunday Soother Spa Break
+                                                <span className="text-[#808080] font-normal">
+                                                    (50 Min)
+                                                </span>
+                                            </p>
+                                            <p className="text-primary_color">
+                                                £199{' '}
+                                                <span>£299 </span>{' '}
+                                                <span className="text-[#29AD17]">
+                                                    30% OFF
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <Link href="/employee-time">
+                                            <Button variant="primary" className="mr-3">
+                                                Book Now
+                                            </Button>
+                                        </Link>
+                                    </div>
+                                    <hr />
+                                    <div className="flex items-center justify-between gap-10">
+                                        <div>
+                                            <p className="font-bold">
+                                                Sunday Soother Spa Break
+                                                <span className="text-[#808080] font-normal">
+                                                    (50 Min)
+                                                </span>
+                                            </p>
+                                            <p className="text-primary_color">
+                                                £199{' '}
+                                                <span>£299 </span>{' '}
+                                                <span className="text-[#29AD17]">
+                                                    30% OFF
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <Button variant="primary" className="mr-3">
+                                            Book Now
+                                        </Button>
+                                    </div>
+                                </div>
+                            </AccordionContent>
+                        </AccordionItem>
+                        <AccordionItem value="item-2">
+                                        <AccordionTrigger className="hover:no-underline">
+                                            <div className="flex flex-col items-center justify-between w-full gap-4 md:flex-row">
+                                                <div>
+                                                    <div className="flex gap-2 lg:items-center">
+                                                        <p>Couples Massage</p>
+                                                        <p className="text-[#0AADA4]">
+                                                            Show Details
+                                                        </p>
+                                                    </div>
+                                                    <div className="flex items-center gap-2">
+                                                        <p>Spa Massage</p>
+                                                        <p>(2 hr)</p>
+                                                    </div>
+                                                </div>
+                                                <Button
+                                                    variant="primary"
+                                                    className="mr-3"
+                                                >
+                                                    Book Now
+                                                </Button>
+                                            </div>
+                                        </AccordionTrigger>
+                                        <AccordionContent>
+                                            <div className="bg-[#FAFAFA] space-y-3 p-3 border rounded-lg border-[#E0E0E0]">
+                                                <div className="flex items-center justify-between gap-10">
+                                                    <div>
+                                                        <p className="font-bold">
+                                                            Sunday Soother Spa
+                                                            Break
+                                                            <span className="text-[#808080] font-normal">
+                                                                (50 Min)
+                                                            </span>
+                                                        </p>
+                                                        <p className="text-primary_color">
+                                                            £199{' '}
+                                                            <span>£299 </span>{' '}
+                                                            <span className="text-[#29AD17]">
+                                                                30% OFF
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                    <Link href="/employee-time">
+                                                        <Button
+                                                            variant="primary"
+                                                            className="mr-3"
+                                                        >
+                                                            Book Now
+                                                        </Button>
+                                                    </Link>
+                                                </div>
+                                                <hr />
+                                                <div className="flex items-center justify-between gap-10">
+                                                    <div>
+                                                        <p className="font-bold">
+                                                            Sunday Soother Spa
+                                                            Break
+                                                            <span className="text-[#808080] font-normal">
+                                                                (50 Min)
+                                                            </span>
+                                                        </p>
+                                                        <p className="text-primary_color">
+                                                            £199{' '}
+                                                            <span>£299 </span>{' '}
+                                                            <span className="text-[#29AD17]">
+                                                                30% OFF
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                    <Button
+                                                        variant="primary"
+                                                        className="mr-3"
+                                                    >
+                                                        Book Now
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                        </AccordionContent>
+                                    </AccordionItem>
+                                    <AccordionItem value="item-3">
+                                        <AccordionTrigger className="hover:no-underline">
+                                            <div className="flex flex-col items-center justify-between w-full gap-4 md:flex-row">
+                                                <div>
+                                                    <div className="flex items-center gap-2">
+                                                        <p>Couples Massage</p>
+                                                        <p className="text-[#0AADA4]">
+                                                            Show Details
+                                                        </p>
+                                                    </div>
+                                                    <div className="flex items-center gap-2">
+                                                        <p>Spa Massage</p>
+                                                        <p>(2 hr)</p>
+                                                    </div>
+                                                </div>
+                                                <Button
+                                                    variant="primary"
+                                                    className="mr-3"
+                                                >
+                                                    Book Now
+                                                </Button>
+                                            </div>
+                                        </AccordionTrigger>
+                                        <AccordionContent>
+                                            <div className="bg-[#FAFAFA] space-y-3 p-3 border rounded-lg border-[#E0E0E0]">
+                                                <div className="flex items-center justify-between gap-10">
+                                                    <div>
+                                                        <p className="font-bold">
+                                                            Sunday Soother Spa
+                                                            Break
+                                                            <span className="text-[#808080] font-normal">
+                                                                (50 Min)
+                                                            </span>
+                                                        </p>
+                                                        <p className="text-primary_color">
+                                                            £199{' '}
+                                                            <span>£299 </span>{' '}
+                                                            <span className="text-[#29AD17]">
+                                                                30% OFF
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                    <Link href="/employee-time">
+                                                        <Button
+                                                            variant="primary"
+                                                            className="mr-3"
+                                                        >
+                                                            Book Now
+                                                        </Button>
+                                                    </Link>
+                                                </div>
+                                                <hr />
+                                                <div className="flex items-center justify-between gap-10">
+                                                    <div>
+                                                        <p className="font-bold">
+                                                            Sunday Soother Spa
+                                                            Break
+                                                            <span className="text-[#808080] font-normal">
+                                                                (50 Min)
+                                                            </span>
+                                                        </p>
+                                                        <p className="text-primary_color">
+                                                            £199{' '}
+                                                            <span>£299 </span>{' '}
+                                                            <span className="text-[#29AD17]">
+                                                                30% OFF
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                    <Button
+                                                        variant="primary"
+                                                        className="mr-3"
+                                                    >
+                                                        Book Now
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                        </AccordionContent>
+                                    </AccordionItem>
+                    </Accordion>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <OurWork />
+</div>
+
             <div>
                 <LookingFor />
             </div>

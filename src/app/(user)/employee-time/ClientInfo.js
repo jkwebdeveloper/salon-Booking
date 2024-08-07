@@ -5,9 +5,9 @@ import React from 'react';
 
 const ClientInfo = ({ handleContinue }) => {
     return (
-        <div className="container relative flex flex-col gap-4 px-1 md:flex-row md:px-28 md:mb-10">
-            <div className="md:w-[60%] w-[90%] mx-auto space-y-5 rounded-md shadow-lg h-fit min-h-[350px] p-4 bg-white">
-                <p className="text-3xl font-bold">Client Booking Information</p>
+        <div className="container relative flex flex-col gap-4 px-0 lg:flex-row lg:px-28 md:mb-10">
+            <div className="lg:w-[60%] w-full mx-auto space-y-5 rounded-md shadow-lg h-fit min-h-[350px] p-4 bg-white">
+                <p className="text-lg font-bold lg:text-3xl">Client Booking Information</p>
                 <form className="space-y-4">
                     <div className="w-full space-y-1 text-left">
                         <Label htmlFor="Client" text="Client name 1" required />
@@ -59,7 +59,7 @@ const ClientInfo = ({ handleContinue }) => {
                     </div>
                 </form>
             </div>
-            <div className="shadow-lg rounded-md md:w-[40%] p-4 space-y-4 w-[90%] mx-auto bg-white flex flex-col min-h-[350px]">
+            <div className="shadow-lg rounded-md lg:w-[40%] p-4 space-y-4 w-full mx-auto bg-white flex flex-col min-h-[350px]">
                 <div className="flex items-start gap-2">
                     <Image
                         src={'/static/images/booking.png'}
@@ -71,7 +71,7 @@ const ClientInfo = ({ handleContinue }) => {
                         height={80}
                     />
                     <div>
-                        <p className="text-lg font-bold">Spa Life & Massage</p>
+                        <p className="text-base font-bold lg:text-lg">Spa Life & Massage</p>
                         <p className="text-sm">
                             Street 420, Addington, London, EH1 1AE, UK
                         </p>

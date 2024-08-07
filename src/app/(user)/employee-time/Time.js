@@ -14,12 +14,12 @@ import MiniCalander from './calander';
 const Time = ({ handleContinue, handleBack }) => {
     const [addStaff, setAddStaff] = useState(false);
     return (
-        <div className="container relative flex flex-col gap-4 px-1 md:flex-row md:px-28 md:mb-10">
-            <div className="md:w-[60%] w-[90%] mx-auto space-y-5 rounded-md shadow-lg h-fit p-4 bg-white">
-                <p className="text-3xl font-bold">Date & Time</p>
+        <div className="container relative flex flex-col gap-4 px-0 lg:flex-row lg:px-28 md:mb-10">
+            <div className="lg:w-[60%] w-full mx-auto space-y-5 rounded-md shadow-lg h-fit p-4 bg-white">
+                <p className="text-lg font-bold lg:text-3xl">Date & Time</p>
                 <MiniCalander />
             </div>
-            <div className="shadow-lg rounded-md md:w-[40%] p-4 space-y-4 w-[90%] mx-auto bg-white flex flex-col">
+            <div className="shadow-lg rounded-md lg:w-[40%] p-4 space-y-4 w-full mx-auto bg-white flex flex-col">
                 <div className="flex items-start gap-2">
                     <Image
                         src={'/static/images/booking.png'}
@@ -49,7 +49,7 @@ const Time = ({ handleContinue, handleBack }) => {
                     </div>
 
                     <div className="flex items-center justify-between">
-                        <p className="">Client 1</p>
+                        <p className="text-sm md:text-base">Client 1</p>
                         <Dialog open={addStaff} className="w-1/2">
                             <DialogTrigger
                                 onClick={e => setAddStaff(true)}

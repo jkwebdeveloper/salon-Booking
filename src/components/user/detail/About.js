@@ -10,9 +10,9 @@ import {
 
 const About = () => {
   return (
-    <div className="w-full py-6 space-y-8 bg-[#FAFAFA]">
-      <div className="flex justify-between items-center">
-        <p className="text-2xl font-semibold text-black uppercase title heading">
+    <div className="w-full py-6 space-y-8 p-3 bg-[#FAFAFA]">
+      <div className="flex flex-col justify-between gap-4 text-left lg:items-center md:flex-row">
+        <p className="text-lg font-semibold text-black uppercase lg:text-2xl title heading">
           About <span className="text-primary_color">Spa Life & Massage</span>
         </p>
         <div className="flex items-center gap-3">
@@ -68,7 +68,7 @@ const About = () => {
             </TableBody>
           </Table>
         </div>
-        <div className="space-y-3 mx-auto">
+        <div className="mx-auto space-y-3">
           <Image src={"/static/images/map.png"} width={500} height={500} />
         </div>
       </div>

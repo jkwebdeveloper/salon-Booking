@@ -6,9 +6,9 @@ import React from 'react';
 
 const Billing = ({ handleContinue, handleBack }) => {
     return (
-        <div className="container flex flex-col min-h-[55dvh] gap-4 px-1 md:flex-row md:px-28 relative md:mb-10">
-            <div className="md:w-[60%] w-[90%] mx-auto space-y-5 rounded-md shadow-lg h-fit min-h-[350px] p-4 bg-white">
-                <p className="text-3xl font-bold">Billing Address</p>
+        <div className="container flex flex-col min-h-[55dvh] gap-4 px-1 lg:flex-row md:px-28 relative md:mb-10">
+            <div className="lg:w-[60%] w-full mx-auto space-y-5 rounded-md shadow-lg h-fit min-h-[350px] p-4 bg-white">
+                <p className="text-sm font-bold lg:text-3xl">Billing Address</p>
                 <form className="space-y-4">
                     <div className="flex flex-col w-full gap-3 lg:flex-row">
                         <div className="w-full space-y-1 text-left lg:w-1/2">
@@ -82,7 +82,7 @@ const Billing = ({ handleContinue, handleBack }) => {
                     </div>
                 </form>
             </div>
-            <div className="shadow-lg rounded-md h-fit min-h-fit relative md:w-[40%] w-[90%] mx-auto space-y-5 p-4 bg-white">
+            <div className="shadow-lg rounded-md h-fit min-h-fit relative lg:w-[40%] w-full mx-auto space-y-5 p-4 bg-white">
                 <div className="flex items-start gap-2">
                     <Image
                         src={'/static/images/booking.png'}
@@ -111,18 +111,18 @@ const Billing = ({ handleContinue, handleBack }) => {
                 </div>
 
                 <div className="flex items-center justify-between">
-                    <p className="">Client 1</p>
+                    <p className="text-sm md:text-base">Client 1</p>
                     <div className="flex items-center gap-2">
-                        <p>Nuzami</p>
+                        <p className='text-sm md:text-base'>Nuzami</p>
                         <Button className="bg-[#0AADA4] text-white rounded-md">
                             Edit
                         </Button>
                     </div>
                 </div>
                 <div className="flex items-center justify-between">
-                    <p className="">Client 1</p>
+                    <p className="text-sm md:text-base">Client 1</p>
                     <div className="flex items-center gap-2">
-                        <p>Nuzami</p>
+                        <p className='text-sm md:text-base'>Nuzami</p>
                         <Button className="bg-[#0AADA4] text-white rounded-md">
                             Edit
                         </Button>
@@ -130,17 +130,17 @@ const Billing = ({ handleContinue, handleBack }) => {
                 </div>
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                        <p>Face wash</p>
-                        <p>x 3</p>
+                        <p className='text-sm md:text-base'>Face wash</p>
+                        <p className='text-sm md:text-base'>x 3</p>
                     </div>
                     <p>£15</p>
                 </div>
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                        <p>Face wash</p>
-                        <p>x 3</p>
+                        <p className='text-sm md:text-base'>Face wash</p>
+                        <p className='text-sm md:text-base'>x 3</p>
                     </div>
-                    <p>£15</p>
+                    <p className='text-sm md:text-base'>£15</p>
                 </div>
 
                 <div className="relative bottom-0 left-0 flex items-center justify-center w-full gap-3">

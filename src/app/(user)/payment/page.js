@@ -11,8 +11,8 @@ import { SiMinutemailer } from 'react-icons/si';
 const PaymentMethod = () => {
     return (
         <div className="bg-[#F8F8FA] space-y-5">
-            <div className="container space-y-5 flex flex-col min-h-[55dvh] gap-4 px-1 md:flex-row md:px-5 md:mb-10">
-                <div className="h-fit space-y-3 py-5 min-h-[350px] md:w-[40%] lg:w-[35%] w-[90%]">
+            <div className="container mx-auto space-y-5 flex flex-col min-h-[55dvh] gap-4 px-2 lg:flex-row lg:px-5 md:mb-10">
+                <div className="h-fit space-y-3 py-5 min-h-[350px] lg:w-[35%] w-full">
                     <p className="text-2xl font-semibold">Overview</p>
                     <div className="z-[2] overflow-hidden shadow-lg rounded-xl ring-1 ring-primary/10 w-full">
                         <div className="relative w-full">
@@ -100,18 +100,18 @@ const PaymentMethod = () => {
                                 <p className="font-medium">£394.00</p>
                             </div>
                             <hr />
-                            <li class="w-full list-none">
-                                <div class="flex items-center">
+                            <li className="w-full list-none">
+                                <div className="flex items-center">
                                     <input
                                         id="list-radio-license"
                                         type="checkbox"
                                         value=""
                                         name="list-radio"
-                                        class=""
+                                        className=""
                                     />
                                     <label
                                         for="list-radio-license"
-                                        class="w-full ms-2 text-sm font-medium text-gray-900 "
+                                        className="w-full text-sm font-medium text-gray-900 ms-2 "
                                     >
                                         Pay with wallet
                                     </label>
@@ -149,15 +149,15 @@ const PaymentMethod = () => {
                         </div>
                     </div>
                 </div>
-                <div className="md:w-[95%] w-[90%] mx-auto space-y-5 h-fit min-h-[350px] z-2 ">
+                <div className="lg:w-[95%] w-full mx-auto space-y-5 h-fit min-h-[350px] z-2 ">
                     <div className="flex items-center gap-2">
-                        <p className="text-2xl font-semibold">
+                        <p className="text-lg font-semibold lg:text-2xl">
                             Secure checkout
                         </p>
-                        <IoIosLock className="text-2xl" />
+                        <IoIosLock className="text-lg lg:text-2xl" />
                     </div>
                     <div className="p-3 space-y-3 bg-white shadow-lg rounded-xl">
-                        <p className="text-xl">Your Details</p>
+                        <p className="text-base lg:text-xl">Your Details</p>
 
                         <hr />
                         <div className="flex flex-col w-full gap-3 lg:flex-row">
@@ -238,16 +238,16 @@ const PaymentMethod = () => {
                             className="input_field"
                             placeholder="Type here"
                         ></textarea>
-                        <p className="text-xl">Payment Information</p>
-                        <p className="text-[#29AD17]">
+                        <p className="text-base lg:text-xl">Payment Information</p>
+                        <p className="text-[#29AD17] lg:text-base text-sm">
                             All payments are securely processed{' '}
                         </p>
                         <hr />
-                        <p className="text-[#EA2C6D]">
+                        <p className="text-[#EA2C6D] lg:text-base text-sm">
                             {`Pay for your Pampertree in advance so that you won't have to
               handle cash at the venue.`}
                         </p>
-                        <div className="flex items-center w-full gap-2">
+                        <div className="flex flex-col items-center w-full gap-2 lg:flex-row">
                             <div className="flex w-full py-5 px-2 items-center border border-bg-[#E6E6E6] rounded-lg bg-[#FAFAFA] gap-2">
                                 <div className="flex items-center justify-between gap-4">
                                     <div className="flex items-center gap-3">
@@ -307,7 +307,7 @@ const PaymentMethod = () => {
                                             type="radio"
                                             value=""
                                             name="list-radio"
-                                            class=""
+                                            className=""
                                         />
                                         <div>
                                             <p>Pay with PayPal</p>
@@ -338,7 +338,7 @@ const PaymentMethod = () => {
                                             type="radio"
                                             value=""
                                             name="list-radio"
-                                            class=""
+                                            className=""
                                         />
                                         <div>
                                             <p>Pay with wallet balance</p>
@@ -358,7 +358,7 @@ const PaymentMethod = () => {
                                 </div>
                             </div>
                         </div>
-                        <p className="text-xl">Card details</p>
+                        <p className="text-base lg:text-xl">Card details</p>
                         <div className="flex flex-col w-full gap-3 lg:flex-row">
                             <div className="w-full space-y-1 text-left lg:w-1/2">
                                 <label htmlFor="fname" className="label_text">
@@ -425,24 +425,24 @@ const PaymentMethod = () => {
                                 </p>
                             </div>
                         </div>
-                        <li class="w-full list-none">
-                            <div class="flex items-center">
+                        <li className="w-full list-none">
+                            <div className="flex items-center">
                                 <input
                                     id="list-radio-license"
                                     type="checkbox"
                                     value=""
                                     name="list-radio"
-                                    class=""
+                                    className=""
                                 />
                                 <label
                                     for="list-radio-license"
-                                    class="w-full ms-2 text-sm font-medium text-gray-900 "
+                                    className="w-full text-sm font-medium text-gray-900 ms-2 "
                                 >
                                     Save this card details for future purchases
                                 </label>
                             </div>
                         </li>
-                        <p>
+                        <p className='text-sm lg:text-base'>
                             By continuing you agree to our{' '}
                             <span className="font-semibold">
                                 Booking Terms.
