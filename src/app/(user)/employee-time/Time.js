@@ -14,7 +14,7 @@ import MiniCalander from './calander';
 const Time = ({ handleContinue, handleBack }) => {
     const [addStaff, setAddStaff] = useState(false);
     return (
-        <div className="container relative flex flex-col gap-4 px-0 lg:flex-row lg:px-28 md:mb-10">
+        <div className="container relative flex flex-col items-start gap-4 px-0 lg:flex-row lg:px-28 md:mb-10">
             <div className="lg:w-[60%] w-full mx-auto space-y-5 rounded-md shadow-lg p-4 bg-white">
                 <p className="text-lg font-bold lg:text-3xl">Date & Time</p>
                 <MiniCalander />

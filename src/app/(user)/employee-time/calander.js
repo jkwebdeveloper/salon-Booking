@@ -33,7 +33,7 @@ function MiniCalander() {
 
     return (
         <>
-            <div className="max-w-[500px] mx-auto mt-20 border rounded-md">
+            <div className="w-full mx-auto rounded-md">
                 <Calendar
                     mode="single"
                     selected={selectedDate}
