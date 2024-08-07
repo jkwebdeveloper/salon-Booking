@@ -129,7 +129,7 @@ const SalonDetails = () => {
             onSubmit={e => updateVendor(e)}
         >
             <div className="bg-gradient-to-r  p-3 from-[#711F7E99] h-fit to-[#14DBD099] rounded-t-xl">
-                <div className="flex items-center gap-3 ">
+                <div className="grid items-center justify-center grid-cols-2 md:grid-cols-4 lg:grid-cols-8">
                     {vendorPhotos.length > 0 &&
                         vendorPhotos.map(photo => (
                             <div
@@ -142,8 +142,8 @@ const SalonDetails = () => {
                                         alt="profile"
                                         loading="lazy"
                                         className="object-cover w-full h-full z-1"
-                                        width={150}
-                                        height={150}
+                                        width={200}
+                                        height={200}
                                     />
                                     <Button
                                         variant="primary"
@@ -164,7 +164,7 @@ const SalonDetails = () => {
                     {salonDetails?.salon_images &&
                         salonDetails?.salon_images.map(photo => (
                             <div
-                                className="relative top-10 group/photos"
+                                className="relative flex items-center justify-center top-10 group/photos"
                                 key={v4()}
                             >
                                 <div className="relative rounded-lg p-1 w-[6.5rem] h-[6.5rem] mb-2">
@@ -176,8 +176,8 @@ const SalonDetails = () => {
                                         alt="profile"
                                         loading="lazy"
                                         className="object-cover w-full h-full z-1"
-                                        width={150}
-                                        height={150}
+                                        width={200}
+                                        height={200}
                                     />
                                     <Button
                                         variant="primary"
@@ -195,7 +195,7 @@ const SalonDetails = () => {
                                 </div>
                             </div>
                         ))}
-                    <div className="relative top-10 group/photos">
+                    <div className="relative flex items-center justify-center top-10 group/photos">
                         <div className="relative rounded-lg bg-white ring-1 flex items-center justify-center p-1 w-[6.5rem] h-[6.5rem] mb-2">
                             <input
                                 type="file"
