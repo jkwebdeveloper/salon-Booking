@@ -32,7 +32,6 @@ function SearchInput({ formItems, setFormItems }) {
                             onClick={e => { setOpen(true); setTimeout(() => e.target.focus(), 100) }} />
                     </div>
                 </DropdownMenuTrigger>
-                {console.log(formItems)}
                 {!mainCat?.loading && mainCat?.data?.length ? <DropdownMenuContent onInteractOutside={({ target }) => !target.closest('.comboBox') && setOpen(!open)} className="w-56 px-2 py-3 mt-3 bg-white ring-1 ring-neutral-200">
                     <label className="font-semibold text-md ps-3">Popular Treatments</label>
                     <DropdownMenuGroup className='px-0 mt-2'>

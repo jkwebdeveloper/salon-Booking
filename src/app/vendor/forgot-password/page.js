@@ -22,7 +22,6 @@ const ForgotPassword = () => {
     setLoading(true);
     const resp = await POST.request({ url: "/vendor/forgot-password", form: e.target });
     setLoading(false);
-    console.log(resp);
     if (resp.code === 200) {
       setResetPass(true);
     } else {

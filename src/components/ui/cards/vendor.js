@@ -54,9 +54,7 @@ function Vendor({ vendor }) {
                                             className="object-cover w-full h-full aspect-video"
                                         />
                                     </CarouselItem>
-
                                 ))}
-
                             </CarouselContent>
                             <CarouselPrevious variant="icon" className="h-5 p-0 min-w-5 bg-[rgba(0,0,0,0.4)] text-white backdrop-blur-md font-bold ring-1 ring-neutral-400" />
                             <CarouselNext variant="icon" className="h-5 p-0 min-w-5 bg-[rgba(0,0,0,0.4)] text-white backdrop-blur-md font-bold ring-1 ring-neutral-400" />
@@ -148,7 +146,7 @@ function Vendor({ vendor }) {
                         </div>
                         <div className="flex items-center gap-3">
                             <Button variant="primary" asChild>
-                                <Link href={'/details/span-massage/2'}> Book Now</Link>
+                                <Link href={`/details/span-massage/${vendor?.id}`}> Book Now</Link>
                             </Button>
                             <Dialog>
                                 <DialogTrigger>

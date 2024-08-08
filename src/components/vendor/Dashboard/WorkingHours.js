@@ -21,7 +21,6 @@ import { login } from "@/redux/features/vendorAuthSlice";
 const WorkingHours = () => {
     const dispatch = useDispatch();
     const vendor = useSelector(state => state?.vendorAuth?.vendor);
-    console.log(vendor);
     const [loading, setLoading] = React.useState(false);
     const [formState, setFormState] = React.useState({
         loading: false,
@@ -76,7 +75,6 @@ const WorkingHours = () => {
     return (
         <div className="space-y-4">
             <p className="text-2xl font-semibold">Shop working hours</p>
-            {console.log(selectedDays)}
             <div className="w-full p-3 space-y-4 bg-white rounded-xl">
                 <form className="relative space-y-3 w-max" onSubmit={e => updateWorkingHour(e)}>
                     <div className={`w-full space-y-3 lg:w-1/2 ${loading && 'opacity-10'}`}>

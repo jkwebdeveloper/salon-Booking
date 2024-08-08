@@ -11,7 +11,6 @@ const ServicesListModal = ({ service, setAddService, setRefreshServices }) => {
   const existingServices = service.group_service_list.map(
     (item) => item.sub_categories_id
   );
-  console.log(existingServices, "existingServices");
   const vendor = useSelector((state) => state.vendorAuth.vendor);
   const subCategories = useSubCategory({ id: service?.categories_id });
   const [selectedCategory, setSelectedCategory] = useState([]);

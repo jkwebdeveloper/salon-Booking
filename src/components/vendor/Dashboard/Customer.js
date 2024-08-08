@@ -79,7 +79,6 @@ const Customer = () => {
         if (resp && resp.code == 200 && resp?.data?.file_path) {
         }
     };
-    console.log(selectedFile);
     const handleFileChange = e => {
         const allowedFiles = ['xls', 'xlsx', 'csv'];
         if (!allowedFiles.includes(e.target.files[0].name.split('.').pop())) {

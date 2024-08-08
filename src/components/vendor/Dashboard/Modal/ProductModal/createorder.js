@@ -25,7 +25,6 @@ function CreateOrder({ supplier, setAddDialog, activePage }) {
           const resp = await GET.request({ url: `/vendor/get-supplier-products?supplier_id=${supplier?.id}`, token: vendor?.api_token });
           setLoading(false);
           if (resp && resp.code == 200) {
-               console.log(resp.data);
                setSupplierProducts(resp.data);
           }
      }

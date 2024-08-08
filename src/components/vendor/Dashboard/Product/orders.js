@@ -74,7 +74,6 @@ function Orders() {
                         </DialogContent>
                     </Dialog>
                 </div>
-                {console.log('orders', orders)}
                 <div className="overflow-x-auto relative bg-white min-h-[200px] rounded-lg">
                     {(!orders?.loading &&
                         orders?.data &&

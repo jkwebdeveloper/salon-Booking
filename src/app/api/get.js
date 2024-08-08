@@ -28,7 +28,6 @@ export const GET = {
           window.location.href = '/login';
         }
       }
-      console.log(error);
       return null;
     }
   },

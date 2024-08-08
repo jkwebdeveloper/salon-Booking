@@ -59,7 +59,6 @@ export function DatePicker({
             )}
           </Button>
         </PopoverTrigger>
-        {console.log(date)}
         <PopoverContent
           className="w-auto p-0 bg-white !pointer-events-auto"
           align="start"

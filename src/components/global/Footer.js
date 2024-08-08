@@ -47,7 +47,6 @@ const Footer = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const toggle = (i) => {
-    // console.log(i)
     if (footerMenu === i) {
       return setfooterMenu(false);
     }

@@ -120,7 +120,6 @@ const SelectService = ({ onClose, maxAllowed }) => {
                                                                                     group.id
                                                                             )}
                                                                             onChange={e => {
-                                                                                console.log(
                                                                                     e
                                                                                         .target
                                                                                         .checked

@@ -47,7 +47,6 @@ const CreateDeals = ({ onClose, maxAllowed }) => {
         <div className="w-full p-4 space-y-3 bg-white rounded-xl">
             <div className="flex items-center justify-between">
                 <p className="text-2xl font-semibold">Create deals</p>
-                {console.log(selectedServices)}
                 <div className="flex items-center gap-3">
                     <Button variant="disable" onClick={onClose}>
                         Cancel
@@ -122,7 +121,6 @@ const CreateDeals = ({ onClose, maxAllowed }) => {
                                                                                     group.id
                                                                             )}
                                                                             onChange={e => {
-                                                                                console.log(
                                                                                     e
                                                                                         .target
                                                                                         .checked

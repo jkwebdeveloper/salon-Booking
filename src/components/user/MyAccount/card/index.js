@@ -69,7 +69,6 @@ const Card = () => {
         <div className="grid items-center justify-center grid-cols-1 gap-5 py-5 lg:grid-cols-2">
           {cards.length > 0 && cards.map(card => (
             <div key={v4()} className="px-3 py-5 space-y-3 bg-white rounded-lg shadow-md ring-1 ring-neutral-200/70">
-              {console.log(card)}
               <h1 className="text-2xl font-semibold uppercase">{card?.first_name} {card?.last_name}</h1>
               <div className="flex items-center justify-start gap-7">
                 <p className="text-sm">{'**** **** **** ' + card?.card_number.slice(12, 16)}</p>

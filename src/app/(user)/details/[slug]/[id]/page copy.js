@@ -47,7 +47,6 @@ const DetailPage = () => {
   return (
     <div className="container space-y-6">
       {console.clear()}
-      {console.log(salon?.service_group)}
       <h1 className="mt-5 text-3xl font-bold">{salon?.salon_name}</h1>
       <div className="flex flex-col items-start justify-between gap-2 lg:flex-row lg:items-center">
         <div className="flex flex-col items-start gap-3 md:flex-row lg:items-center">

@@ -92,7 +92,6 @@ function ProductList() {
                     </DialogContent>
                 </Dialog>
             </div>
-            {console.log(products?.data)}
             <div className="overflow-x-auto bg-white min-h-[200px] relative rounded-lg">
                 {(!products?.loading &&
                     products?.data &&

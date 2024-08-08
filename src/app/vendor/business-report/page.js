@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 
 const BusinessReport = () => {
     const sidebar = useSelector(state => state.sidebarAuth.sidebar);
-    console.log(sidebar);
     return (
         <div className="flex items-start">
             {sidebar ? (

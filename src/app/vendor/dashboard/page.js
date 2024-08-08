@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 
 const DashBoard = () => {
     const { sidebar } = useSelector(state => state.sidebarAuth.sidebar);
-    console.log(sidebar, 'sidebarrrr');
     return (
         <div className="flex items-start">
             {sidebar ? (

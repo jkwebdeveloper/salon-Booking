@@ -68,8 +68,6 @@ const Schedule = ({ staff, day, close, staffsSchedule, setStaffsSchedule, dateRa
         //     return ({ ...s, from_time, to_time, type })
         //   })
         // } : s);
-        // console.log('newStaffsSchedule', newStaffsSchedule);
-        console.log(resp.data)
         setStaffsSchedule(resp?.data);
         close();
       }

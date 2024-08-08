@@ -90,7 +90,6 @@ function Supplier() {
                 </Dialog>
             </div>
             <div className="overflow-x-auto bg-white min-h-[200px] relative rounded-lg">
-                {console.log(suppliers)}
                 {((!suppliers?.loading &&
                     suppliers?.data &&
                     suppliers?.data?.suppliers?.length > 0) && (

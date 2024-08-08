@@ -30,7 +30,6 @@ const SubScription = () => {
             token: vendor?.api_token,
         });
         setLoading(false);
-        console.log(resp);
         if (resp && resp?.code == 200) {
             setPlans(prev => ({ ...prev, available: resp?.data }));
         }

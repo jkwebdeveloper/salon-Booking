@@ -57,7 +57,6 @@ const DetailPage = () => {
             url: `/get-salons-byid`,
             form: { id: id },
         });
-        console.log(resp);
     };
 
     useEffect(() => {

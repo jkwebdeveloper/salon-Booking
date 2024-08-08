@@ -23,7 +23,6 @@ import converttomin from "@/constants/converttomin";
 
 const UserModal = ({ editDay, close, staffsSchedule, setStaffsSchedule, dateRange }) => {
   const { day, staff } = editDay || {};
-  console.log(day?.date);
   const currentTime = staff?.schedule && staff?.schedule.filter(s => s.day == day?.day)[0] || {};
   const vendor = useSelector(state => state?.vendorAuth?.vendor);
   const [selectedDays, setSelectedDays] = React.useState({});
@@ -228,7 +227,6 @@ const UserModal = ({ editDay, close, staffsSchedule, setStaffsSchedule, dateRang
             </div>
           </div>
           <div className="flex flex-col w-full gap-3 lg:flex-row">
-            {console.log(timeOff)}
             <div className="w-full">
               <input
                 datepicker

@@ -35,7 +35,6 @@ const EditServiceModal = ({ editServiceData, setEditService, setRefreshServices 
   };
 
   const deleteService = async ({ id, index }) => {
-    console.log(id);
     const newPricingInputs = pricingInputs2.filter((_, i) => i !== index);
     setPricingInputs2([...newPricingInputs]);
     if (id) {
@@ -80,7 +79,6 @@ const EditServiceModal = ({ editServiceData, setEditService, setRefreshServices 
           />
         </div>
       </div>
-      {console.log(pricingInputs2)}
       {pricingInputs2.map((input, index) => (
         <Inputgroup
           key={index}
