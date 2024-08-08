@@ -77,10 +77,10 @@ const WorkingHours = () => {
             <p className="text-2xl font-semibold">Shop working hours</p>
             <div className="w-full p-3 space-y-4 bg-white rounded-xl">
                 <form className="relative space-y-3 w-max" onSubmit={e => updateWorkingHour(e)}>
-                    <div className={`w-full space-y-3 lg:w-1/2 ${loading && 'opacity-10'}`}>
+                    <div className={`w-full space-y-3 sm:w-[90%] lg:w-1/2 ${loading && 'opacity-10'}`}>
                         {weekDays.map((day) => {
                             return (
-                                <div className="flex items-center gap-10" key={v4()}>
+                                <div className="flex items-center gap-5 md:gap-10" key={v4()}>
                                     <li className="w-full list-none">
                                         <div className="flex items-center">
                                             <input
