@@ -78,7 +78,7 @@ const ServicesListModal = ({ service, setAddService, setRefreshServices }) => {
   return (
     <div className="space-y-3">
       {(!subCategories.loading && subCategories.data.length > 0 && (
-        <div className="flex items-start w-full h-full md:gap-10">
+        <div className="flex flex-col items-start w-full h-full gap-5 md:flex-row md:gap-10">
           <div className="space-y-3">
             {subCategories.data.map((subCategory) => {
               return (
@@ -106,7 +106,7 @@ const ServicesListModal = ({ service, setAddService, setRefreshServices }) => {
             })}
           </div>
           <form
-            className="flex flex-col flex-grow h-full space-y-3"
+            className="flex flex-col flex-grow w-full h-full space-y-3 md:w-auto"
             noValidate
             onSubmit={(e) => addService(e)}
           >

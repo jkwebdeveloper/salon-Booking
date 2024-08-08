@@ -4,3 +4,5 @@ Pemding Vendor Task :-
     2) Product page :-
     3) 
     
+
+    Responsive : footer input
