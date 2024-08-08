@@ -175,6 +175,7 @@ const Register = () => {
     useEffect(() => {
         setError('');
     }, [currentTab]);
+
     useEffect(() => {
         setFormData({ ...formData, device_type: deviceType });
     }, [deviceType]);

@@ -4,26 +4,26 @@ import Profile from "@/components/vendor/Dashboard/Profile";
 import React from "react";
 import { useSelector } from "react-redux";
 
-const page = () => {
-  const { sidebar } = useSelector(state => state.sidebarAuth.sidebar);
+const ProfilePage = () => {
+  const { sidebar } = useSelector(state => state.sidebarAuth.sidebar) || false;
 
   return (
     <div className="flex items-start">
-     {sidebar ? (
-      <div className="h-fit min-h-[350px] lg:block hidden lg:w-[20%] w-full space-y-5 p-5 bg-white">
-        <Sidebar />
-      </div>
+      {sidebar ? (
+        <div className="h-fit min-h-[350px] lg:block hidden lg:w-[20%] w-full space-y-5 p-5 bg-white">
+          <Sidebar />
+        </div>
 
       ) : null}
       <div className={
-                    sidebar
-                        ? ` lg:w-4/5 w-full mx-auto space-y-5 h-fit min-h-[350px] p-5 bg-[#f4f2f2]`
-                        : `w-full container bg-[#f4f2f2] mx-auto p-5`
-                }>
+        sidebar
+          ? ` lg:w-4/5 w-full mx-auto space-y-5 h-fit min-h-[350px] p-5 bg-[#f4f2f2]`
+          : `w-full container bg-[#f4f2f2] mx-auto p-5`
+      }>
         <Profile />
       </div>
     </div>
   );
 };
 
-export default page;
+export default ProfilePage;
