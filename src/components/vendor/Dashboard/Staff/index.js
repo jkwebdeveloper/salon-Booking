@@ -19,7 +19,7 @@ import { PageLoader } from '@/components';
 
 const Staff = () => {
      const vendor = useSelector(state => state.vendorAuth.vendor);
-     const vendorOpen = vendor?.availability.filter(item => item.status == 1).map(item => item.day);
+     const vendorOpen = vendor?.availability && vendor?.availability.filter(item => item.status == 1).map(item => item.day) || [];
      const [loading, setLoading] = useState(true);
      const [userModal, setUserModal] = useState(false);
      const [editDay, setEditDay] = useState({});
