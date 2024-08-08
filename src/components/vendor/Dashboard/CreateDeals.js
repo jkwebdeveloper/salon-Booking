@@ -85,11 +85,7 @@ const CreateDeals = ({ onClose, maxAllowed }) => {
                                                     className="w-full bg-[white] border border-[#D9D9D9] rounded-md space-y-2 p-2"
                                                 >
                                                     <p className="text-sm font-semibold">
-                                                        {
-                                                            services[key][0]
-                                                                ?.sub_categories
-                                                                ?.title
-                                                        }
+                                                        {services[key][0]?.sub_categories?.title}
                                                     </p>
                                                     {services[key].map(
                                                         group => (
@@ -99,10 +95,7 @@ const CreateDeals = ({ onClose, maxAllowed }) => {
                                                                 <div className="flex items-center justify-between">
                                                                     <div className="flex items-center">
                                                                         <input
-                                                                            id={group?.service_title.replace(
-                                                                                /\s/g,
-                                                                                ''
-                                                                            )}
+                                                                            id={group?.service_title.replace(/\s/g, '')}
                                                                             type="checkbox"
                                                                             className="accent-primary"
                                                                             required
@@ -121,15 +114,7 @@ const CreateDeals = ({ onClose, maxAllowed }) => {
                                                                                     group.id
                                                                             )}
                                                                             onChange={e => {
-                                                                                    e
-                                                                                        .target
-                                                                                        .checked
-                                                                                );
-                                                                                if (
-                                                                                    e
-                                                                                        .target
-                                                                                        .checked
-                                                                                ) {
+                                                                                if (e.target.checked) {
                                                                                     setSelectedServices(
                                                                                         [
                                                                                             ...selectedServices,
@@ -139,7 +124,7 @@ const CreateDeals = ({ onClose, maxAllowed }) => {
                                                                                                 is_deals: 1,
                                                                                             },
                                                                                         ]
-                                                                                    );
+                                                                                    )
                                                                                 } else {
                                                                                     setSelectedServices(
                                                                                         selectedServices.filter(
@@ -147,32 +132,23 @@ const CreateDeals = ({ onClose, maxAllowed }) => {
                                                                                                 service.vendors_service_id !=
                                                                                                 group.id
                                                                                         )
-                                                                                    );
+                                                                                    )
                                                                                 }
                                                                             }}
                                                                         />
                                                                         <label
-                                                                            htmlFor={group?.service_title.replace(
-                                                                                /\s/g,
-                                                                                ''
-                                                                            )}
+                                                                            htmlFor={group?.service_title.replace(/\s/g, '')}
                                                                             className="w-full text-sm font-medium text-gray-900 capitalize ms-2"
                                                                         >
-                                                                            {
-                                                                                group?.service_title
-                                                                            }
+                                                                            {group?.service_title}
                                                                         </label>
                                                                     </div>
                                                                     <p className="text-sm">
-                                                                        {+group?.duration *
-                                                                            60}{' '}
+                                                                        {+group?.duration * 60}{' '}
                                                                         Min
                                                                     </p>
                                                                     <p className="text-sm font-semibold">
-                                                                        £
-                                                                        {
-                                                                            group?.price
-                                                                        }
+                                                                        £{group?.price}
                                                                     </p>
                                                                 </div>
                                                             </Fragment>

@@ -98,10 +98,7 @@ const SelectService = ({ onClose, maxAllowed }) => {
                                                                 <div className="flex items-center justify-between">
                                                                     <div className="flex items-center">
                                                                         <input
-                                                                            id={group?.service_title.replace(
-                                                                                /\s/g,
-                                                                                ''
-                                                                            )}
+                                                                            id={group?.service_title.replace(/\s/g, '')}
                                                                             type="checkbox"
                                                                             className="accent-primary"
                                                                             required
@@ -120,10 +117,6 @@ const SelectService = ({ onClose, maxAllowed }) => {
                                                                                     group.id
                                                                             )}
                                                                             onChange={e => {
-                                                                                    e
-                                                                                        .target
-                                                                                        .checked
-                                                                                );
                                                                                 if (
                                                                                     e
                                                                                         .target

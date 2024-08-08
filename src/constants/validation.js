@@ -50,7 +50,11 @@ const Validation = {
     },
     address: {
         msg: 'Address is Required',
-        pattern: '^[a-zA-Z]{1,}( [a-zA-Z]+)*$',
+        pattern: '.+',
+    },
+    salon_type: {
+        msg: 'Address is Required',
+        pattern: '.+',
     },
     postcode: {
         msg: 'Postcode should be 6 digit',
@@ -78,7 +82,7 @@ const Validation = {
     },
     title: {
         msg: 'Title is Required',
-        pattern: '^[a-zA-Z]{1,}( [a-zA-Z]+)*$',
+        pattern: '.+',
     },
     amount: {
         msg: 'Enter valid Amount',

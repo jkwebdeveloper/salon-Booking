@@ -173,6 +173,9 @@ const Register = () => {
     };
 
     useEffect(() => {
+        setError('');
+    }, [currentTab]);
+    useEffect(() => {
         setFormData({ ...formData, device_type: deviceType });
     }, [deviceType]);
 
@@ -426,11 +429,10 @@ const Register = () => {
                                 <Label htmlFor="Address" text="Address" />
                                 <input
                                     type="text"
-                                    name="Address"
+                                    name="address_line_one"
                                     className="input_field"
                                     placeholder="Address"
-                                    // pattern={Validation?.phone?.pattern}
-                                    maxLength={10}
+                                    pattern={Validation?.address?.pattern}
                                     required={true}
                                     onChange={e =>
                                         setFormData({
@@ -549,21 +551,16 @@ const Register = () => {
                                     >
                                         <SelectTrigger>
                                             {(formData?.type_of_salon &&
-                                                mainCat?.data?.filter(
-                                                    c =>
-                                                        c.id ==
-                                                        formData?.type_of_salon
-                                                )[0]?.title) || (
-                                                    <SelectValue placeholder="Select a Salon Type" />
-                                                )}
+                                                mainCat?.data?.filter(c => c.title == formData?.type_of_salon)[0]?.title)
+                                                || (<SelectValue placeholder="Select a Salon Type" />)}
                                         </SelectTrigger>
                                         <SelectContent>
                                             <SelectGroup>
                                                 {mainCat.data?.map(cat => (
                                                     <SelectItem
                                                         key={v4()}
-                                                        value={cat?.id}
-                                                        className={`hover:!bg-opacity-10 hover:!bg-primary ${formData?.type_of_salon == cat?.id ? "!bg-primary !bg-opacity-10" : null}`}
+                                                        value={cat?.title}
+                                                        className={`hover:!bg-opacity-10 hover:!bg-primary ${formData?.type_of_salon == cat?.title ? "!bg-primary !bg-opacity-10" : null}`}
                                                     >
                                                         {cat?.title}
                                                     </SelectItem>
@@ -576,7 +573,7 @@ const Register = () => {
                                         name="type_of_salon"
                                         className="input_field"
                                         defaultValue={formData?.type_of_salon}
-                                        pattern="[0-9]{1,}"
+                                        pattern={Validation?.salon_type?.pattern}
                                         required={true}
                                     />
                                     <p className="error">Salon Type Required</p>
