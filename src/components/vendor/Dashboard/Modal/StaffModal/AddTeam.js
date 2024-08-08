@@ -398,7 +398,7 @@ const AddTeam = ({
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center">
                                   <input
-                                    id={group?.service_title.replace(/\s/g, "")}
+                                    id={(group?.service_title + group.id).replace(/\s/g, "")}
                                     type="checkbox"
                                     className="accent-primary"
                                     required
@@ -416,7 +416,7 @@ const AddTeam = ({
                                     }}
                                   />
                                   <label
-                                    htmlFor={group?.service_title.replace(/\s/g, "")}
+                                    htmlFor={(group?.service_title + group.id).replace(/\s/g, "")}
                                     className="w-full text-sm font-medium text-gray-900 ms-2 "
                                   >
                                     {group?.service_title}

@@ -53,7 +53,7 @@ function MyStaff() {
                         }}
                         className="sm:max-w-[1150px]"
                     >
-                        <DialogTitle>Add Team Member</DialogTitle>
+                        <DialogTitle>{editStaff ? 'Edit Team Member' : 'Add Team Member'}</DialogTitle>
                         <AddTeam
                             setAddTeam={setAddTeam}
                             setStaffsList={setStaffsList}
