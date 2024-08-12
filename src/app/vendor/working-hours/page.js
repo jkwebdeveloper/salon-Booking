@@ -18,8 +18,8 @@ const WrkingHours = () => {
       ) : null}
             <div className={
                     sidebar
-                        ? ` lg:w-4/5 w-full mx-auto space-y-5 h-fit min-h-[350px] p-5 bg-[#f4f2f2]`
-                        : `w-full container bg-[#f4f2f2] mx-auto p-5`
+                        ? ` lg:w-4/5 w-full mx-auto space-y-5 h-fit min-h-[350px] md:p-5 p-2 bg-[#f4f2f2]`
+                        : `w-full container bg-[#f4f2f2] mx-auto md:p-5 p-2`
                 }>
                 <WorkingHours />
             </div>
