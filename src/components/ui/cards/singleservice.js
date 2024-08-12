@@ -111,7 +111,8 @@ function SingleService({ item }) {
                             </Dialog>
 
                             <Button variant="primary" className="flex-1 px-0" asChild>
-                                <Link href={'/details/span-massage/2'}><GrCart className="text-base text-white" /> Book Now</Link>
+                                {/* <Link href={'/details/span-massage/2'}><GrCart className="text-base text-white" /> Book Now</Link> */}
+                                <Link href={'/details/old'}><GrCart className="text-base text-white" /> Book Now</Link>
                             </Button>
                         </div>
                     </div>

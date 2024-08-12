@@ -60,7 +60,7 @@ const DetailPage = () => {
      };
 
      useEffect(() => {
-          getDetail();
+          // getDetail();
      }, []);
      return (
           <div className="container space-y-6">
