@@ -1,4 +1,4 @@
-'use client';
+// 'use client';
 import validateInput from "@/lib/validateinput";
 import axios from "axios";
 let serverURL = process.env.NEXT_PUBLIC_APIURL;
