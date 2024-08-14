@@ -28,7 +28,7 @@ const Header = () => {
     };
 }, []);
   return (
-    <div className={`bg-white duration-300 transition-all text-black w-full ${sticky &&
+    <div className={`bg-white duration-300 z-50 transition-all text-black w-full ${sticky &&
       'z-50 top-0 duration-300 transition-all fixed shadow-2xl'
       }`}>
       <div className="container border-b md:flex md:justify-between md:items-center" id="topMenu">

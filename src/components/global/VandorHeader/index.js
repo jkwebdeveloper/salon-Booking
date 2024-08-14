@@ -31,7 +31,7 @@ const VandorHeader = () => {
 
     return (
         <>
-            <div className={`bg-white hidden shadow-md lg:block duration-300 transition-all text-black w-full ${sticky &&
+            <div className={`bg-white hidden z-50 shadow-md lg:block duration-300 transition-all text-black w-full ${sticky &&
                 'z-50 top-0 duration-300 transition-all fixed shadow-2xl'
                 }`}>
                 <div className="container border-b ">
