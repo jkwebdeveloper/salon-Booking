@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import MobileMenu from "@/components/global/Header/mobilemenu";
 import DesktopMenu from "@/components/global/Header/desktopmenu";
@@ -12,8 +12,25 @@ import Topbar from "@/components/global/Header/topbar";
 
 const Header = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
+  const [sticky, setSticky] = useState(false);
+
+
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 80) {
+            setSticky(true);
+        } else {
+            setSticky(false);
+        }
+    });
+    return () => {
+        window.removeEventListener('scroll', () => { });
+    };
+}, []);
   return (
-    <div className="w-full bg-white shadow-md">
+    <div className={`bg-white duration-300 transition-all text-black w-full ${sticky &&
+      'z-50 top-0 duration-300 transition-all fixed shadow-2xl'
+      }`}>
       <div className="container border-b md:flex md:justify-between md:items-center" id="topMenu">
         <div className="flex items-center justify-between py-2 xl:justify-start md:gap-6">
           <div>

@@ -1,7 +1,8 @@
+'use client';
 import Button from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { MdLocationPin } from 'react-icons/md';
 import { BiMenuAltRight } from 'react-icons/bi';
@@ -11,10 +12,28 @@ import { AiOutlineClose } from 'react-icons/ai';
 
 const VandorHeader = () => {
     const [openVenderSidebar, setOpenVenderSidebar] = useState(false);
+    const [sticky, setSticky] = useState(false);
+
     const vendor = useSelector(state => state.vendorAuth.vendor);
+
+    useEffect(() => {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                setSticky(true);
+            } else {
+                setSticky(false);
+            }
+        });
+        return () => {
+            window.removeEventListener('scroll', () => { });
+        };
+    }, []);
+
     return (
         <>
-            <div className="hidden w-full bg-white shadow-md lg:block">
+            <div className={`bg-white hidden shadow-md lg:block duration-300 transition-all text-black w-full ${sticky &&
+                'z-50 top-0 duration-300 transition-all fixed shadow-2xl'
+                }`}>
                 <div className="container border-b ">
                     <div className="flex items-center justify-between py-2 md:gap-6">
                         <div className="flex items-center gap-4">
