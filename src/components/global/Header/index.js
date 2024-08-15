@@ -41,8 +41,8 @@ const Header = () => {
     };
   }, []);
   return (
-    <div className={`bg-white duration-300 z-50 transition-all text-black w-full ${sticky &&
-      'z-50 top-0 duration-300 transition-all fixed shadow-2xl'
+    <div className={`bg-white duration-300 z-[100] transition-all text-black w-full ${sticky &&
+      'z-[100] top-0 duration-300 transition-all fixed shadow-2xl'
       }`}>
       <div className="container border-b lg:flex lg:justify-between lg:items-center" id="topMenu">
         <div className="flex items-center justify-between py-2 xl:justify-start lg:gap-6">

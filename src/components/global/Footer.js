@@ -192,24 +192,37 @@ const Footer = () => {
                 )}
               </div>
             ))}
-            <div className="space-y-3">
-              <p className="text-lg font-semibold text-center text-primary_color">
+            <p className="text-base font-semibold text-left uppercase text-primary_color title heading">
                 Join Our Newsletter
               </p>
-              <div className="flex mx-auto bg-white rounded-full shadow-lg">
+            <form
+              className="block space-y-4 text-black md:hidden"
+              noValidate
+              onSubmit={(e) => subscribe(e)}
+            >
+              
+              <div className="space-y-2">
+                <p className="text-left">Your Email</p>
                 <input
                   type="email"
+                  name="email"
                   placeholder="Enter Your Email"
-                  className="w-full rounded-full outline-none mx-9"
+                  className="p-2 bg-white rounded-md outline-none md:w-4/5 text-md input_field"
+                  pattern={Validation?.email?.pattern}
+                  required
                 />
-                <button
-                  type="button"
-                  className="w-full px-4 transition primary_button hover:bg-blue_button/80 active:scale-90"
-                >
-                  Subscribe
-                </button>
+                <p className="error">{Validation?.email?.msg}</p>
               </div>
-            </div>
+              <Button
+                variant="primary"
+                type="submit"
+                disabled={loading}
+                className="min-w-[150px]"
+              >
+                <Spinner show={loading} width="25" height="25" text="Subscribe" />
+              </Button>
+              {error && <Error error={error} />}
+            </form>
             <div>
               <p>© 2024 PamperTree Ltd. All Rights Reserved.</p>
             </div>

@@ -15,7 +15,7 @@ function MobileMenu({ openSidebar = false, setOpenSidebar }) {
   return (
     <>
       <div
-        className={`xl:hidden bg-white p-3 space-y-4  text-black absolute top-0 -left-0 z-50 min-h-screen min-w-[100%] ${
+        className={`xl:hidden bg-white p-3 space-y-4  text-black absolute top-0 -left-0 z-[100] min-h-screen min-w-[100%] ${
           openSidebar ? "translate-x-0" : "-translate-x-full"
         } transition duration-300 ease-linear`}
       >

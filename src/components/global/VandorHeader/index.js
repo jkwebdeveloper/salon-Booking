@@ -31,8 +31,8 @@ const VandorHeader = () => {
 
     return (
         <>
-            <div className={`bg-white  z-50 shadow-md  duration-300 transition-all text-black w-full ${sticky &&
-                'z-50 top-0 duration-300 transition-all fixed shadow-2xl'
+            <div className={`bg-white  z-[100] shadow-md  duration-300 transition-all text-black w-full ${sticky &&
+                'z-[100] top-0 duration-300 transition-all fixed shadow-2xl'
                 }`}>
                 <div className="container border-b ">
                     <div className="flex items-center justify-between py-2 md:gap-6">
@@ -115,7 +115,7 @@ const VandorHeader = () => {
                     </ul>
                 </div>
                 <div
-                className={`lg:hidden block bg-white p-3 space-y-4  text-black absolute top-0 -left-0 z-50 min-h-screen min-w-[100%] ${
+                className={`lg:hidden block bg-white p-3 space-y-4  text-black absolute top-0 -left-0 z-[100] min-h-screen min-w-[100%] ${
                     openVenderSidebar ? 'translate-x-0' : '-translate-x-full'
                 } transition duration-300 ease-linear`}
             >

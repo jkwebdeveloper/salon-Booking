@@ -76,8 +76,8 @@ const DashBoardHeader = () => {
     }, []);
 
     return (
-        <div className={`bg-white duration-300 shadow-md z-50 transition-all text-black w-full ${sticky &&
-            'z-50 top-0 duration-300 transition-all fixed shadow-2xl'
+        <div className={`bg-white duration-300 shadow-md z-[100] transition-all text-black w-full ${sticky &&
+            'z-[100] top-0 duration-300 transition-all fixed shadow-2xl'
             }`}>
             <div className="container border-b ">
                 <div className="hidden lg:block">
