@@ -28,7 +28,7 @@ function MobileMenu({ openDashboardMenu = false, setOpenDashboardMenu }) {
     return (
         <>
             <div
-                className={`xl:hidden bg-white p-3 space-y-8 px-10  text-black absolute top-0 -left-0 z-50 min-h-screen min-w-[100%] ${
+                className={`xl:hidden bg-white p-3 space-y-8 px-10  text-black absolute top-0 -left-0 z-[100] min-h-screen min-w-[100%] ${
                     openDashboardMenu ? 'translate-x-0' : '-translate-x-full'
                 } transition duration-300 ease-linear`}
             >
@@ -50,8 +50,8 @@ function MobileMenu({ openDashboardMenu = false, setOpenDashboardMenu }) {
                     </div>
                 </div>
                 <hr />
-                <div className="flex-col items-center justify-between w-full">
-                    <div className="items-center gap-10 space-y-4 ">
+                <div className="flex-col items-center justify-between w-full space-y-4">
+                    <div className="items-center gap-10 space-y-10 ">
                         {/* <HiMenuAlt2
                             className="text-2xl cursor-pointer"
                             onClick={() => sidebarHandler()}

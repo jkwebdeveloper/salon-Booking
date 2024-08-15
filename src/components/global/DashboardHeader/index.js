@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { HiMenuAlt2 } from 'react-icons/hi';
@@ -30,6 +30,7 @@ const DashBoardHeader = () => {
     const [openSidebar, setOpenSidebar] = useState(true);
     const [openMobileSidebar, setOpenMobileSidebar] = useState(false);
     const [openDashboardMenu, setOpenDashboardMenu] = useState(false);
+    const [sticky, setSticky] = useState(false);
     const [logoutUser] = useLogout();
     const router = useRouter();
     const vendor = useSelector(state => state.vendorAuth.vendor);
@@ -60,8 +61,24 @@ const DashBoardHeader = () => {
             );
         }
     };
+
+    useEffect(() => {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                setSticky(true);
+            } else {
+                setSticky(false);
+            }
+        });
+        return () => {
+            window.removeEventListener('scroll', () => { });
+        };
+    }, []);
+
     return (
-        <div className="w-full bg-white shadow-md">
+        <div className={`bg-white duration-300 shadow-md z-[100] transition-all text-black w-full ${sticky &&
+            'z-[100] top-0 duration-300 transition-all fixed shadow-2xl'
+            }`}>
             <div className="container border-b ">
                 <div className="hidden lg:block">
                     <div className="flex items-center gap-24 py-2 ">
@@ -113,11 +130,10 @@ const DashBoardHeader = () => {
                                             onClick={() =>
                                                 handleLinkClick(link.name)
                                             }
-                                            className={`cursor-pointer ${
-                                                active === link.name
+                                            className={`cursor-pointer ${active === link.name
                                                     ? 'text-primary_color font-semibold'
                                                     : 'text-[#666666] font-normal'
-                                            }`}
+                                                }`}
                                         >
                                             <span className="inline-block footer">
                                                 {link.name}
@@ -212,9 +228,9 @@ const DashBoardHeader = () => {
                             />
                         </Link>
                         <div className='block lg:hidden'>
-                            <Button 
-                            variant="outline"
-                            className="uppercase" onClick={() => setOpenMobileSidebar(true)}>settings</Button>
+                            <Button
+                                variant="outline"
+                                className="uppercase" onClick={() => setOpenMobileSidebar(true)}>settings</Button>
                         </div>
                         <div className="block lg:hidden">
                             <div className="flex items-center gap-2">
@@ -228,13 +244,13 @@ const DashBoardHeader = () => {
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
                 {/* Mobile menu */}
                 <MobileSidebar
-                openMobileSidebar={openMobileSidebar}
-                setOpenMobileSidebar={setOpenMobileSidebar}
+                    openMobileSidebar={openMobileSidebar}
+                    setOpenMobileSidebar={setOpenMobileSidebar}
                 />
                 <MobileMenu
                     openDashboardMenu={openDashboardMenu}

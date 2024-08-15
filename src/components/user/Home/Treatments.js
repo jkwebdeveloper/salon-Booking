@@ -83,10 +83,10 @@ const Treatments = () => {
               alt=""
               className="relative object-cover w-full h-full"
             />
-            <p className="absolute text-2xl top-[78%] text-center font-bold text-white">
+            <p className="absolute md:text-2xl text-lg lg:top-[78%] md:top-[73%] top-[66%] text-center font-bold text-white">
               {item?.title}
             </p>
-            <p className="absolute top-[88%] text-center text-white">
+            <p className="absolute md:top-[88%] top-[83%] text-center text-white">
               {item?.des}
             </p>
           </Link>

@@ -17,11 +17,11 @@ function SearchInput({ formItems, setFormItems }) {
     const [open, setOpen] = React.useState(false);
     const searchRef = React.useRef(null);
     return (
-        <div className='relative flex items-center gap-2 comboBox'>
+        <div className='relative flex items-center w-full gap-2 comboBox'>
             <DropdownMenu open={open} modal={false}>
                 <DropdownMenuTrigger>
                     <div className='flex items-center gap-2 leading-0'>
-                        <MagnifyingGlassIcon className='text-2xl' />
+                        <MagnifyingGlassIcon className='text-3xl' />
                         <input type="text" className=' text-sm min-w-[230px] z-30 pointer-events-auto focus:outline-none' placeholder="Select a treatment"
                             defaultValue={formItems?.categories || ''}
                             onInput={({ target }) => {

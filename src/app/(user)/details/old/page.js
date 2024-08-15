@@ -622,7 +622,7 @@ const DetailPage = () => {
                                                   </AccordionTrigger>
                                                   <AccordionContent>
                                                        <div className="bg-[#FAFAFA] space-y-3 p-3 border rounded-lg border-[#E0E0E0]">
-                                                            <div className="flex items-center justify-between gap-10">
+                                                            <div className="flex flex-col items-center justify-between gap-10 md:flex-row">
                                                                  <div>
                                                                       <p className="font-bold">
                                                                            Sunday Soother Spa Break
@@ -645,7 +645,7 @@ const DetailPage = () => {
                                                                  </Link>
                                                             </div>
                                                             <hr />
-                                                            <div className="flex items-center justify-between gap-10">
+                                                            <div className="flex flex-col items-center justify-between gap-10 md:flex-row">
                                                                  <div>
                                                                       <p className="font-bold">
                                                                            Sunday Soother Spa Break

@@ -5,7 +5,7 @@ import { FaStar } from 'react-icons/fa';
 const ReviewNewModal = () => {
     return (
         <div className="w-full space-y-3">
-            <div className="grid items-start grid-cols-2 gap-2 md:gap-10">
+            <div className="grid items-start grid-cols-1 gap-2 md:grid-cols-2 md:gap-10">
                 <div className="space-y-3">
                     <div className="space-y-2">
                         <div className="flex items-center gap-2">
