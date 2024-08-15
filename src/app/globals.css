@@ -47,7 +47,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .label_text {
-    @apply text-[0.75rem] font-medium text-neutral-400;
+    @apply text-[0.90rem] font-medium text-neutral-400;
 }
 
 .input_field {
