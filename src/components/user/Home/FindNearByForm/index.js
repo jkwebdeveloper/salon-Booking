@@ -34,9 +34,9 @@ const FindNearByForm = () => {
           onSubmit={(e) => searchNearyBy(e)}
         >
           <SearchInput formItems={formItems} setFormItems={setFormItems} />
-          <div className="flex-grow flex-shrink-0 min-h-[1rem] w-[2px] bg-neutral-400"></div>
-          <DatePicker className="p-3" onSelect={e => setFormItems({ ...formItems, date: format(e, 'yyyy-MM-dd') })} />
-          <div className="flex-grow flex-shrink-0 min-h-[1rem] w-[2px] bg-neutral-400"></div>
+          <div className="flex-grow lg:block hidden flex-shrink-0 min-h-[1rem] w-[2px] bg-neutral-400"></div>
+          <DatePicker className="w-full" onSelect={e => setFormItems({ ...formItems, date: format(e, 'yyyy-MM-dd') })} />
+          <div className="flex-grow lg:block hidden flex-shrink-0 min-h-[1rem] w-[2px] bg-neutral-400"></div>
           <div className="flex items-center w-full gap-1">
             <IoTimeOutline className="text-xl" />
             <TimePickerInput />

@@ -31,7 +31,7 @@ const VandorHeader = () => {
 
     return (
         <>
-            <div className={`bg-white hidden z-50 shadow-md lg:block duration-300 transition-all text-black w-full ${sticky &&
+            <div className={`bg-white  z-50 shadow-md  duration-300 transition-all text-black w-full ${sticky &&
                 'z-50 top-0 duration-300 transition-all fixed shadow-2xl'
                 }`}>
                 <div className="container border-b ">
@@ -46,20 +46,21 @@ const VandorHeader = () => {
                                     height={150}
                                 />
                             </Link>
-                            <div className="flex items-center gap-6">
-                                <Button
-                                    type="button"
-                                    variant="outline"
-                                    size="sm"
-                                    className="uppercase ps-3 group"
-                                >
-                                    <MdLocationPin className="text-lg transition-all text-primary_color group-hover:text-white" />{' '}
-                                    Download pampertree app
-                                </Button>
-                                <div className="block xl:hidden">
-                                    <BiMenuAltRight className="text-2xl cursor-pointer text-primary_color" />
+                            <div className='hidden lg:block'>
+
+                                <div className="flex items-center gap-6">
+                                    <Button
+                                        type="button"
+                                        variant="outline"
+                                        size="sm"
+                                        className="uppercase ps-3 group"
+                                    >
+                                        <MdLocationPin className="text-lg transition-all text-primary_color group-hover:text-white" />{' '}
+                                        Download pampertree app
+                                    </Button>
                                 </div>
                             </div>
+
                         </div>
                         {!vendor && (
                             <p>
@@ -71,25 +72,30 @@ const VandorHeader = () => {
                                 </Link>{' '}
                             </p>
                         )}
-                        <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            className="uppercase"
-                            asChild
-                        >
-                            <Link
-                                href={
-                                    (vendor && '/vendor/dashboard') ||
-                                    '/vendor/register'
-                                }
+                        <div className='flex items-center gap-3'>
+                            <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                className="uppercase"
+                                asChild
                             >
-                                {(vendor && 'Dashboard') || 'Become a partner'}
-                            </Link>
-                        </Button>
+                                <Link
+                                    href={
+                                        (vendor && '/vendor/dashboard') ||
+                                        '/vendor/register'
+                                    }
+                                >
+                                    {(vendor && 'Dashboard') || 'Become a partner'}
+                                </Link>
+                            </Button>
+                            <div className="block lg:hidden" onClick={() => setOpenVenderSidebar(true)}>
+                                <BiMenuAltRight className="text-2xl cursor-pointer text-primary_color" />
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div className="flex items-center justify-center ">
+                <div className="flex items-center justify-center hidden lg:block">
                     <ul className="flex items-center justify-center gap-5 uppercase">
                         <li className="px-3 py-3 font-medium cursor-pointer hover:text-white hover:bg-primary">
                             Sell online
@@ -108,9 +114,8 @@ const VandorHeader = () => {
                         </li>
                     </ul>
                 </div>
-            </div>
-            <div
-                className={`xl:hidden bg-white p-3 space-y-4  text-black absolute top-0 -left-0 z-50 min-h-screen min-w-[100%] ${
+                <div
+                className={`lg:hidden block bg-white p-3 space-y-4  text-black absolute top-0 -left-0 z-50 min-h-screen min-w-[100%] ${
                     openVenderSidebar ? 'translate-x-0' : '-translate-x-full'
                 } transition duration-300 ease-linear`}
             >
@@ -132,14 +137,30 @@ const VandorHeader = () => {
                     </div>
                 </div>
                 <div className="flex items-center justify-between">
-                    <p>Profile</p>
+                    <p> Sell online</p>
                     <IoIosArrowForward className="text-lg" />
                 </div>
                 <hr className="w-full" />
                 <div className="flex items-center justify-between">
-                    <p>Profile</p>
+                    <p>Features</p>
                     <IoIosArrowForward className="text-lg" />
                 </div>
+                <hr className="w-full" />
+                <div className="flex items-center justify-between">
+                    <p>solutions</p>
+                    <IoIosArrowForward className="text-lg" />
+                </div>
+                <hr className="w-full" />
+                <div className="flex items-center justify-between">
+                    <p>Fees & Pricing</p>
+                    <IoIosArrowForward className="text-lg" />
+                </div>
+                <hr className="w-full" />
+                <div className="flex items-center justify-between">
+                    <p>How it works</p>
+                    <IoIosArrowForward className="text-lg" />
+                </div>
+            </div>
             </div>
             {openVenderSidebar && (
                 <div
