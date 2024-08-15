@@ -8,7 +8,7 @@ const Basketpage = () => {
                     My basket
                 </p>
                 <div className="p-4 space-y-5 bg-white rounded-md shadow-lg xl:px-40">
-                    <table  className="w-full overflow-x-auto text-left">
+                    <table className="w-full overflow-x-auto text-left">
                         <thead>
                             <tr className="border-b">
                                 <th className="pb-2">Name</th>

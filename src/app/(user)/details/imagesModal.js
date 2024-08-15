@@ -36,7 +36,7 @@ const ImagesModal = ({ images, currentIndex, setCurrentIndex, setIsOpen }) => {
             width={1000}
             height={700}
             className="w-full"
-            alt={`Image ${currentIndex + 1}`}
+            alt={`Salon Image ${currentIndex + 1}`}
           />
           <button className="p-2 text-2xl font-bold" onClick={showNextImage}>
             <IoIosArrowForward className="text-2xl text-white" />

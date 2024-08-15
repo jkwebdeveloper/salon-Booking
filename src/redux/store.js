@@ -14,11 +14,12 @@ import {
 } from "redux-persist";
 import storage from "@/redux/storage";
 import { sidebarAuth } from "./features/sidebarSlice";
+import { Cart } from "./features/cartSlice";
 
 const persistConfig = {
   key: "root",
   storage, //Error : storage is imported from 'redux-persist/lib/storage'
-  whitelist: ["userAuth", "vendorAuth", "sidebarAuth"], // only auth will be persisted
+  whitelist: ["userAuth", "vendorAuth", "sidebarAuth", "Cart"], // only auth will be persisted
   version: 1,
 };
 
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   userAuth: userAuth.reducer,
   vendorAuth: vendorAuth.reducer,
   sidebarAuth: sidebarAuth.reducer,
+  Cart: Cart.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

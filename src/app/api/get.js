@@ -25,7 +25,7 @@ export const GET = {
           window.location.href = '/vendor/login';
         } else {
           localStorage.clear();
-          window.location.href = '/login';
+          window.location.href = '/sign-in';
         }
       }
       return null;

@@ -1,26 +1,40 @@
 import React from "react";
 import { IoTimeOutline } from "react-icons/io5";
 import { CiLocationOn } from "react-icons/ci";
-
 import { Button, SearchInput, TimePickerInput } from "@/components";
 import { DatePicker } from "./datepicker";
 import { format } from "date-fns";
+import Location from "@/components/user/Home/FindNearByForm/location";
+import { useRouter } from "next/navigation";
 
-const FindNearByForm = () => {
-
-  const [formItems, setFormItems] = React.useState({
+const FindNearByForm = ({ formData }) => {
+  const router = useRouter();
+  const initialFormItems = formData || {
     categories: "",
-    search: "",
     date: format(new Date(), 'yyyy-MM-dd'),
     lat: "",
     long: "",
-  });
+    time: "",
+    address: "",
+  }
+
+  const [formItems, setFormItems] = React.useState(initialFormItems);
   const searchNearyBy = async (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
     const time = form.get("Hour");
-    const url = `/find-near-by-services?categories=${formItems.categories}&date=${formItems.date}&time=${time}&lat=${formItems.lat || null}&long=${formItems.long || null}`;
-    // const resp = await POST.request({ url:'/find-near-by-services', form });
+    const url = new URL(window.location.origin + '/service/search');
+    const urlFields = {};
+    Object.keys(formItems).forEach((key) => {
+      if (formItems[key]) {
+        urlFields[key] = formItems[key];
+      }
+    });
+    if (time) {
+      urlFields.time = time;
+    }
+    url.search = new URLSearchParams(urlFields).toString();
+    router.push(url.toString());
   };
   return (
     <div className="relative flex items-center justify-center w-full">
@@ -35,21 +49,14 @@ const FindNearByForm = () => {
         >
           <SearchInput formItems={formItems} setFormItems={setFormItems} />
           <div className="flex-grow flex-shrink-0 min-h-[1rem] w-[2px] bg-neutral-400"></div>
-          <DatePicker className="p-3" onSelect={e => setFormItems({ ...formItems, date: format(e, 'yyyy-MM-dd') })} />
+          <DatePicker className="p-3" defaultValue={new Date(formItems?.date)} onSelect={e => setFormItems({ ...formItems, date: format(e, 'yyyy-MM-dd') })} />
           <div className="flex-grow flex-shrink-0 min-h-[1rem] w-[2px] bg-neutral-400"></div>
           <div className="flex items-center w-full gap-1">
             <IoTimeOutline className="text-xl" />
-            <TimePickerInput />
+            <TimePickerInput defaultValue={formItems?.time} />
           </div>
           <span className="bg-opacity-40 bg-gray-400 lg:h-6 lg:w-[1px] w-full h-[1px] "></span>
-          <div className="flex items-center w-full gap-3">
-            <CiLocationOn className="text-2xl" />
-            <input
-              type="text"
-              placeholder="Search locations"
-              className="outline-none"
-            />
-          </div>
+          <Location formItems={formItems} setFormItems={setFormItems} />
           <Button type="submit" variant="primary">
             Search
           </Button>

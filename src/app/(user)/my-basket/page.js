@@ -10,9 +10,12 @@ import {
     DialogTrigger,
     DialogTitle,
 } from '@/components/ui/dialog';
-import MoreInfoModal from '../employee-time/MoreInfoModal';
+import MoreInfoModal from '../book-service/MoreInfoModal';
+import { useSelector } from 'react-redux';
+import { Basket } from '@/components/ui/skelton/basket';
 
 const Basketpage = () => {
+    const cart = useSelector((state) => state.Cart.cart);
     const [moreInfo, setmoreInfo] = useState(false);
 
     return (
@@ -35,94 +38,52 @@ const Basketpage = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr className="">
-                                    <td className="py-2 text-sm lg:text-base">
-                                        New Couples Massage{' '}
-                                        <span className="text-gray-500">
-                                            (1 hr)
-                                        </span>
-                                    </td>
-                                    <td className="py-2 text-sm lg:text-base">
-                                        John Adam, Goldie Adam
-                                    </td>
-                                    <td className="py-2 text-sm lg:text-base">Nuzami, Kevin</td>
-                                    <td className="py-2 text-sm lg:text-base">
-                                        09:00 AM, 16 May 2024
-                                    </td>
-                                    <td className="py-2 text-[#E50C58] lg:text-base text-sm">
-                                        Save for later
-                                    </td>
-                                    <td className="py-2 text-sm font-semibold text-primary_color lg:text-base">
-                                        £349.00
-                                    </td>
-                                    <td className="flex items-center gap-2 py-2">
-                                        <BsFillPencilFill className="lg:text-2xl text-sm text-[#0AADA4]" />
-                                        <CgClose className="text-sm lg:text-2xl" />
-                                    </td>
-                                </tr>
-                                <tr className="">
-                                    <td className="py-2 text-sm lg:text-base">
-                                        Face wash{' '}
-                                        <span className="text-gray-500">
-                                            x 3
-                                        </span>
-                                    </td>
-                                    <td className="py-2"></td>
-                                    <td className="py-2"></td>
-                                    <td className="py-2"></td>
-                                    <td className="py-2"></td>
-                                    <td className="py-2 text-sm font-semibold text-primary_color lg:text-base">
-                                        £15.00
-                                    </td>
-                                </tr>
-                                <tr className="border-b">
-                                    <td className="py-2 text-sm lg:text-base">
-                                        Hair oil{' '}
-                                        <span className="text-sm text-gray-500 lg:text-base">
-                                            x 1
-                                        </span>
-                                    </td>
-                                    <td className="py-2"></td>
-                                    <td className="py-2"></td>
-                                    <td className="py-2"></td>
-                                    <td className="py-2"></td>
-                                    <td className="py-2 text-sm font-semibold text-primary_color lg:text-base">
-                                        £4.00
-                                    </td>
-                                </tr>
-                                <tr className="">
-                                    <td className="py-2 text-sm lg:text-base">
-                                        Sunday Soother Spa Break{' '}
-                                        <span className="text-gray-500">
-                                            (30 min)
-                                        </span>
-                                    </td>
-                                    <td className="py-2 text-sm lg:text-base">John Adam</td>
-                                    <td className="py-2 text-sm lg:text-base">Nuzami</td>
-                                    <td className="py-2 text-sm lg:text-base">
-                                        10:00 AM, 16 May 2024
-                                    </td>
-                                    <td className="py-2 text-[#E50C58] lg:text-base text-sm">
-                                        Save for later
-                                    </td>
-                                    <td className="py-2 text-sm font-semibold text-primary_color lg:text-base">
-                                        £25.00
-                                    </td>
-                                    <td className="flex items-center gap-2 py-2">
-                                        <BsFillPencilFill className="lg:text-2xl text-sm text-[#0AADA4] " />
-                                        <CgClose className="text-sm lg:text-2xl" />
-                                    </td>
-                                </tr>
+                                {cart?.bookings_services ? cart?.bookings_services?.map((item, index) => (
+                                    <tr className="">
+                                        <td className="py-2 text-sm lg:text-base">
+                                            {item?.vendors_service_info?.service_title}
+                                            <span className="text-gray-500 ms-1">
+                                                ({+item?.vendors_service_info?.duration * 60} Min)
+                                            </span>
+                                        </td>
+                                        <td className="py-2 text-sm lg:text-base">
+                                            {item?.client || 'N/A'}
+                                        </td>
+                                        <td className="py-2 text-sm lg:text-base">
+                                            {item?.staff || 'N/A'}
+                                        </td>
+                                        <td className="py-2 text-sm lg:text-base">
+                                            {item?.dateTime || 'N/A'}
+                                        </td>
+                                        <td className="py-2 text-[#E50C58] lg:text-base text-sm">
+                                            Save for later
+                                        </td>
+                                        <td className="py-2 text-sm font-semibold text-primary_color lg:text-base">
+                                            £{item?.vendors_service_info?.sale_price || item?.vendors_service_info?.price}
+                                        </td>
+                                        <td className="flex items-center gap-2 py-2">
+                                            {/* <BsFillPencilFill className="lg:text-2xl text-sm text-[#0AADA4]" /> */}
+                                            <CgClose className="text-sm lg:text-2xl" />
+                                        </td>
+                                    </tr>
+                                )) : null}
                             </tbody>
                         </table>
                     </div>
+                    {/* <div className='space-y-4'>
+                        <Basket />
+                        <Basket />
+                        <Basket />
+                    </div> */}
                     <div className="mt-auto space-y-4">
                         <div className="text-lg font-semibold text-right">
-                            Order Total: £393.00
+                            Order Total: £{cart?.total_cart_amount}
                         </div>
                         <div className="flex justify-end space-x-2">
-                            <Button variant="secondary">
-                                + Add another service
+                            <Button variant="secondary" asChild>
+                                <Link href={"/details" + "/salon-name/" + cart?.vendors_info.id}>
+                                    + Add another service
+                                </Link>
                             </Button>
                             <Link href="/payment">
                                 <Button variant="primary">

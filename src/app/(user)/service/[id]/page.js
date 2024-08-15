@@ -1,6 +1,6 @@
 'use client';
 import { Button, CardMultiServices, Herosection } from "@/components";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -10,11 +10,43 @@ import {
 import { Slider } from "@/components/ui/slider";
 import PopularSalon from "@/components/user/Home/PopularSalon";
 import Vendor from "@/components/ui/cards/vendor";
+import { useRouter } from "next/navigation";
+import { POST } from "@/app/api/post";
+import { GET } from "@/app/api/get";
 
-const ServiceListing = () => {
+const ServiceListing = ({ searchParams, params }) => {
+  const router = useRouter();
+
+  const searchSalon = async ({ page = 1, limit = 10 }) => {
+    console.log('searching');
+    const formData = {
+      "date": searchParams.date,
+      "time": searchParams.time,
+      "lat": searchParams.lat,
+      "long": searchParams.long,
+      "sort_by": "price_asc",
+      "categories": "massage",
+      "min_price": 10,
+      "max_price": 3000,
+      "is_deal": "",
+      "is_feature": "",
+      "page": page,
+      "limit": limit
+    }
+    const urlParams = new URLSearchParams(formData).toString();
+    const resp = await GET.request({ url: '/find-near-by-services?' + urlParams, form: { ...searchParams, page, limit } });
+    console.log(resp);
+  };
+
+  useEffect(() => {
+    if (params && params?.id == 'search') {
+      searchSalon({ page: 1, limit: 10 });
+    }
+  }, [params]);
+
   return (
     <div className="mb-20 space-y-8">
-      <Herosection />
+      <Herosection formData={searchParams} />
       <div className="container space-y-8">
         <p className="text-2xl font-semibold text-black uppercase title heading">
           Search result{" "}

@@ -7,10 +7,21 @@ import {
   TableCell,
   TableRow,
 } from "@/components/ui/table";
+import convertto12 from "@/lib/convertto12";
 
-const About = () => {
+const About = ({ data }) => {
+  const { about_salon, address_line_one, availability, address_line_two } = data;
+  const days = {
+    "Mon": "Monday",
+    "Tue": "Tuesday",
+    "Wed": "Wednesday",
+    "Thu": "Thursday",
+    "Fri": "Friday",
+    "Sat": "Saturday",
+    "Sun": "Sunday",
+  }
   return (
-    <div className="w-full py-6 space-y-8 p-3 bg-[#FAFAFA]">
+    <div className="container w-full p-3 py-6 space-y-8">
       <div className="flex flex-col justify-between gap-4 text-left lg:items-center md:flex-row">
         <p className="text-lg font-semibold text-black uppercase lg:text-2xl title heading">
           About <span className="text-primary_color">Spa Life & Massage</span>
@@ -19,57 +30,33 @@ const About = () => {
           <div className="bg-[#7f52861a] p-1 rounded-full">
             <MdLocationPin className="text-sm text-primary_color" />
           </div>
-          <p>Street 420, Addington, London, EH1 1AE, UK</p>
+          <p>{address_line_one}</p>
         </div>
       </div>
-      <div className="grid items-center grid-cols-1 xl:grid-cols-2 lg:gap-0">
+      <div className="grid items-start grid-cols-1 xl:grid-cols-2 lg:gap-10">
         <div className="space-y-3">
-          <p>His & Hairs Hair Salon, for your next cut and style.</p>
-          <p>
-            This Accrington salon is nestled away on Henry Street and has a menu
-            offering a comprehensive selection of professional services. Enjoy
-            everything from cuts and styling to balayage and freehand color
-            techniques. Open to men and women of all ages, the expert team truly
-            cares, helping to ensure top results every time. Using only the best
-            products from leading brands like Fudge and Olaplex, book today and
-            get that stunning long-lasting style you’ve been longing for. There
-            is even free parking nearby. His & Hairs, for the hair you need.
-          </p>
+          {about_salon}
           <Table>
             <TableBody>
-              <TableRow>
-                <TableCell className="font-medium">Monday</TableCell>
-                <TableCell>09:00 AM - 11:30 PM</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="font-medium">Tuesday</TableCell>
-                <TableCell>09:00 AM - 11:30 PM</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="font-medium">Wednesday</TableCell>
-                <TableCell>09:00 AM - 11:30 PM</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="font-medium">Thursday</TableCell>
-                <TableCell>09:00 AM - 11:30 PM</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="font-medium">Friday</TableCell>
-                <TableCell>09:00 AM - 11:30 PM</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="font-medium">Saturday</TableCell>
-                <TableCell>09:00 AM - 11:30 PM</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="font-medium">Sunday</TableCell>
-                <TableCell>Closed</TableCell>
-              </TableRow>
+              {availability.length && availability.map((item, index) => {
+                const open = item?.status === 1 ? item.from_time.slice(0, 5) : '';
+                const close = item?.status === 1 ? item.to_time.slice(0, 5) : '';
+                return (
+                  <TableRow>
+                    <TableCell className="font-medium">
+                      {days[item.day]}
+                    </TableCell>
+                    <TableCell>
+                      {item?.status === 0 ? 'Closed' : convertto12(open) + ' - ' + convertto12(close)}
+                    </TableCell>
+                  </TableRow>
+                )
+              }) || ''}
             </TableBody>
           </Table>
         </div>
-        <div className="mx-auto space-y-3">
-          <Image src={"/static/images/map.png"} width={500} height={500} />
+        <div className="w-full h-full mx-auto space-y-3">
+          <Image src={"/static/images/map.png"} width={500} height={500} className="object-cover w-full h-full rounded-xl" />
         </div>
       </div>
     </div>

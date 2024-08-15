@@ -13,8 +13,10 @@ const EditServiceModal = ({ editServiceData, setEditService, setRefreshServices 
     error: "",
     success: "",
   });
+  const [serviceDescription, setServiceDescription] = useState({});
 
   const { mainServiceID, serviceGroupID, sub_categories_id, service = [] } = editServiceData || {};
+  console.log('editServiceData', editServiceData);
   const inputValues = service.map((item) => {
     return {
       service_title: item.service_title,
@@ -22,6 +24,7 @@ const EditServiceModal = ({ editServiceData, setEditService, setRefreshServices 
       price: item.price,
       sale_price: item.sale_price,
       id: item.id || 0,
+      description: item.description,
     };
   });
 
@@ -48,7 +51,9 @@ const EditServiceModal = ({ editServiceData, setEditService, setRefreshServices 
     const data = new FormData(e.target);
     let formData = [];
     for (let [key, value] of data.entries()) {
-      formData.push(JSON.parse(value));
+      const cValue = JSON.parse(value)?.sub_categories_id;
+      const finalValue = { ...JSON.parse(value), description: serviceDescription[cValue] };
+      formData.push(finalValue);
     }
     const valideData = await POST.validateForm({ form: e.target });
     if (valideData) {
@@ -97,6 +102,7 @@ const EditServiceModal = ({ editServiceData, setEditService, setRefreshServices 
       >
         Add more pricing
       </Button>
+      <textarea placeholder="Service Description" className="input_field" rows={5} defaultValue={inputValues?.length ? inputValues[0]?.description : ''} onInput={e => setServiceDescription({ ...serviceDescription, [sub_categories_id]: e.target.value })} />
       <div className="flex items-center justify-center gap-3">
         <Button variant="disable">Cancel</Button>
         <Button variant="primary" type="submit" disabled={formState.loading}>

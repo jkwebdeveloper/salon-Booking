@@ -23,10 +23,10 @@ function SearchInput({ formItems, setFormItems }) {
                     <div className='flex items-center gap-2 leading-0'>
                         <MagnifyingGlassIcon className='text-2xl' />
                         <input type="text" className=' text-sm min-w-[230px] z-30 pointer-events-auto focus:outline-none' placeholder="Select a treatment"
-                            defaultValue={searchText && searchText || ''}
+                            defaultValue={formItems?.categories || ''}
                             onInput={({ target }) => {
                                 setSearchText(target.value);
-                                setFormItems({ ...formItems, search: target.value });
+                                setFormItems({ ...formItems, categories: target.value });
                             }}
                             ref={searchRef}
                             onClick={e => { setOpen(true); setTimeout(() => e.target.focus(), 100) }} />
@@ -43,8 +43,7 @@ function SearchInput({ formItems, setFormItems }) {
                                     onSelect={({ target }) => {
                                         searchRef.current.value = target.textContent;
                                         setOpen(false);
-                                        setFormItems({ ...formItems, categories: item.id });
-                                        setFormItems({ ...formItems, search: item.title });
+                                        setFormItems({ ...formItems, categories: item.title });
                                     }}
                                 >
                                     {item.icon ? <span className='text-xl'>{item.icon}</span> : null}

@@ -20,7 +20,7 @@ import { v4 } from "uuid";
 
 const QuickView = ({ vendor, services }) => {
     const { id, salon_name, type_of_salon, address_line_one, address_line_two, whtsup_link, facebook_link, twitter_link, about_salon, salon_images = [] } = vendor || {};
-    const lowestPriceService = services.sort((a, b) => a.price - b.price)[0];
+    const lowestPriceService = services?.length && services.sort((a, b) => a.price - b.price)[0] || [];
     return (
         <div className="space-y-5">
             <div className="grid flex-col gap-1 p-3 text-left xl:grid-cols-2">

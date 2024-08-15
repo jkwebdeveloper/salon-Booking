@@ -100,13 +100,13 @@ function SingleService({ item }) {
                         <div className="flex flex-col items-center w-full gap-3 md:flex-row">
                             <Dialog>
                                 <DialogTrigger asChild>
-                                    <Button variant="secondary" className="flex-1 px-0">
+                                    <Button variant="secondary" className="flex-1 px-0" disabled>
                                         <IoIosEye className="text-base text-white" />{" "}
                                         Quick view
                                     </Button>
                                 </DialogTrigger>
                                 <DialogContent className="sm:max-w-[825px]">
-                                    <QuickView />
+                                    {/* <QuickView /> */}
                                 </DialogContent>
                             </Dialog>
 

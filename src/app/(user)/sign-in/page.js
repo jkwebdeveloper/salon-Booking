@@ -15,6 +15,8 @@ import { login } from "@/redux/features/userAuthSlice";
 import { POST } from "@/app/api/post";
 import { Spinner, Button, Error } from '@/components';
 import Validation from "@/constants/validation";
+import { GET } from "@/app/api/get";
+import { Add_To_Cart } from "@/redux/features/cartSlice";
 
 const Signin = () => {
   const [showPassword, setShowPassword] = React.useState(false),
@@ -24,11 +26,19 @@ const Signin = () => {
     [loading, setLoading] = React.useState(false),
     [error, setError] = React.useState("");
 
+  const getUserBasket = async ({ token }) => {
+    const resp = await GET.request({ url: '/get-bascket', token });
+    if (resp && resp.code == 200) {
+      dispatch(Add_To_Cart(resp?.data));
+    }
+  };
+
   const userSignin = async (e) => {
     e.preventDefault();
     setLoading(true);
     const resp = await POST.request({ url: "/login", form: e.target });
     if (resp && resp.status != 'Error' && Object.keys(resp.data).length > 0) {
+      getUserBasket({ token: resp.data.api_token });
       dispatch(login(resp.data));
       return;
     }

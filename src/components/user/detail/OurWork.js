@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/carousel";
 import Image from "next/image";
 
-const OurWork = () => {
+const OurWork = ({ salon_images }) => {
   return (
     <div className="w-full space-y-6">
       <p className="text-2xl font-semibold text-black uppercase title heading">
@@ -21,34 +21,19 @@ const OurWork = () => {
         className="w-full"
       >
         <CarouselContent>
-          <CarouselItem className="md:basis-1/2 lg:basis-1/4">
-            <Image
-              src={"/static/images/Rectangle 375 (1).png"}
-              width={500}
-              height={500}
-            />
-          </CarouselItem>
-          <CarouselItem className="md:basis-1/2 lg:basis-1/4">
-            <Image
-              src={"/static/images/Rectangle 375 (1).png"}
-              width={500}
-              height={500}
-            />
-          </CarouselItem>
-          <CarouselItem className="md:basis-1/2 lg:basis-1/4">
-            <Image
-              src={"/static/images/Rectangle 375 (1).png"}
-              width={500}
-              height={500}
-            />
-          </CarouselItem>
-          <CarouselItem className="md:basis-1/2 lg:basis-1/4">
-            <Image
-              src={"/static/images/Rectangle 375 (1).png"}
-              width={500}
-              height={500}
-            />
-          </CarouselItem>
+          {salon_images.map((image, i) => {
+            return (
+              <CarouselItem className="md:basis-1/2 lg:basis-1/4">
+                <Image
+                  src={process.env.NEXT_PUBLIC_SERVERURL + image?.images}
+                  width={500}
+                  height={500}
+                  className="aspect-[1/0.7] object-cover rounded-2xl"
+                  alt="Image 1"
+                />
+              </CarouselItem>
+            )
+          })}
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />

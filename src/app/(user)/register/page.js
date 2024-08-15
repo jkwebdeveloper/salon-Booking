@@ -342,10 +342,10 @@ const Register = () => {
                 <input
                   id="list-radio-license"
                   type="checkbox"
-                  value=""
-                  onChange={e => e.target.checked ? e.target.value = "true" : e.target.value = ""}
-                  name="list-radio"
-                  class=""
+                  defaultValue=""
+                  onInput={e => e.target.checked ? e.target.value = "true" : e.target.value = ""}
+                  // name="list-radio"
+                  // class=""
                   required
                 />
                 <label

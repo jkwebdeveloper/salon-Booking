@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { GoBell } from "react-icons/go";
-import { GrCart } from "react-icons/gr";
 import { IoCaretDown, IoHeartOutline, IoCloseOutline } from "react-icons/io5";
 import { CiStar } from "react-icons/ci";
 import { LuBadgePercent, LuBookmark, LuEye, LuUser2 } from "react-icons/lu";
@@ -32,6 +31,7 @@ import {
 import { POST } from "@/app/api/post";
 import useLogout from "@/hooks/uselogout";
 import CustomerModal from "@/components/vendor/Dashboard/Modal/CustomerModal";
+import MiniCart from "@/components/global/Header/minicart";
 
 function Topbar() {
   const [customer, setCustomer] = useState(false);
@@ -170,78 +170,7 @@ function Topbar() {
         </DropdownMenu>
       )}
       {/* Cart Dropdown Menu */}
-      <DropdownMenu>
-        <DropdownMenuTrigger className="focus-visible:outline-none">
-          <Button
-            type="button"
-            parent={true}
-            variant="ghost"
-            size="icon"
-            className="uppercase"
-          >
-            <GrCart className="text-xl cursor-pointer text-primary_color" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-full mt-2 -translate-x-1 bg-white ring-1 ring-neutral-200">
-          <DropdownMenuLabel className="text-primary_color">
-            My basket
-          </DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuGroup>
-            <DropdownMenuItem className="flex items-center justify-between">
-              <div className="">
-                <p className="font-semibold">Sports Massage</p>
-                <p className="text-xs">10 Mins</p>
-              </div>
-              <div className="flex items-center gap-1">
-                <p className="text-primary_color">£25.00</p>
-                <IoCloseOutline className="text-sm " />
-              </div>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="flex items-center justify-between">
-              <div className="">
-                <p className="font-semibold">Swedish Massage</p>
-                <p className="text-xs">15 Mins</p>
-              </div>
-              <div className="flex items-center gap-1">
-                <p className="text-primary_color">£20.00</p>
-                <IoCloseOutline className="text-sm" />
-              </div>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="flex items-center justify-between">
-              <div className="">
-                <p className="font-semibold">Couples Massage</p>
-                <p className="text-xs">2 hr</p>
-              </div>
-              <div className="flex items-center gap-1">
-                <p className="text-primary_color">£349.00</p>
-                <IoCloseOutline className="text-sm" />
-              </div>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="flex items-center justify-between">
-              <div className="">
-                <p className="font-semibold">Total:</p>
-              </div>
-              <div className="">
-                <p className="font-semibold text-primary_color">$394.00</p>
-              </div>
-            </DropdownMenuItem>
-            <DropdownMenuItem className="flex items-center justify-between gap-4">
-              <Button
-                type="button"
-                // className="uppercase transition-all outline_button hover:bg-primary_color hover:text-white"
-                variant="primary"
-              >
-                + Add more
-              </Button>
-              <Button variant="primary">Go to checkout</Button>
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <MiniCart />
       {/* Notifications Dropdown Menu */}
       {user && (
         <DropdownMenu>

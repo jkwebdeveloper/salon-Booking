@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import Image from "next/image";
 import { MdLocationPin } from "react-icons/md";
 import { FaStar, FaWhatsapp } from "react-icons/fa";
@@ -120,7 +120,7 @@ function Vendor({ vendor }) {
             </div>
             <hr className="w-full mt-4" />
             {services.slice(0, 2)?.map((service) => (
-                <>
+                <Fragment key={v4()}>
                     <div className="flex flex-col justify-between p-3 text-left xl:flex-row xl:items-center">
                         <div className="">
                             <p className="flex gap-1 font-semibold capitalize">
@@ -149,7 +149,7 @@ function Vendor({ vendor }) {
                                 <Link href={`/details/span-massage/${vendor?.id}`}> Book Now</Link>
                             </Button>
                             <Dialog>
-                                <DialogTrigger>
+                                <DialogTrigger asChild>
                                     <Button variant="secondary">Quick view</Button>
                                 </DialogTrigger>
                                 <DialogContent className="sm:max-w-[825px]">
@@ -159,7 +159,7 @@ function Vendor({ vendor }) {
                         </div>
                     </div>
                     <hr className="w-full" />
-                </>
+                </Fragment>
             ))}
         </div>
     )

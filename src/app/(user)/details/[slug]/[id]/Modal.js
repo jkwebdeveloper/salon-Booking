@@ -3,37 +3,21 @@ import React from 'react';
 import { AiFillWarning } from 'react-icons/ai';
 import { FaStar } from 'react-icons/fa';
 
-const Modal = () => {
+const Modal = ({ moreInfo }) => {
+    const lowestPrice = moreInfo ? Math.min(...moreInfo.map((item) => item.sale_price || item.price)) : 0;
     return (
         <div className="w-full space-y-3">
-            <p className=" text-[#656565]">2 services</p>
-            <p className="text-primary_color font-bold text-2xl">From £25</p>
-            <div className="space-y-2">
-                <p className="font-semibold">About this service</p>
-                <p className="text-[#656565] text-sm">
-                    This treatment is not suitable for pregnant people.
-                </p>
-                <p className="text-[#656565] text-sm">
-                    This indulgent massage uses gently warmed basalt stones to
-                    allow your therapist to work deeper into the areas of
-                    concern.
-                </p>
-                <ul className="ml-5">
-                    <li className="list-disc text-[#656565] text-sm">
-                        First, during an initial consultation, your therapist
-                        does a postural analysis and asks about any muscles that
-                        require special attention.
-                    </li>
-                    <li className="list-disc text-[#656565] text-sm">
-                        Then your therapist leaves the room to allow you to
-                        undress with complete privacy.
-                    </li>
-                    <li className="list-disc text-[#656565] text-sm">
-                        Once you are ready, your therapist begins by placing the
-                        warmed stones on specific trigger points on your body.
-                    </li>
-                </ul>
-            </div>
+            <p className=" text-[#656565]">{moreInfo?.length} services</p>
+            <p className="text-2xl font-bold text-primary_color">From £{lowestPrice}</p>
+            {moreInfo[0]?.description
+                ? <div className="space-y-2">
+                    <h2 className="font-semibold">About this service</h2>
+                    <p className="text-[#656565] text-sm">
+                        {moreInfo[0]?.description}
+                    </p>
+                </div>
+                : null
+            }
             <p className="font-semibold">Service rating</p>
             <div className="flex items-center gap-3">
                 <p className="text-[56px] font-semibold">4.0</p>

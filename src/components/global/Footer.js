@@ -70,7 +70,7 @@ const Footer = () => {
 
   return (
     <div
-      className="w-full "
+      className="w-full"
       style={{
         backgroundImage: `url('/static/images/footer_bg.png')`,
         backgroundRepeat: "no-repeat",
@@ -78,7 +78,6 @@ const Footer = () => {
         objectFit: "cover",
         loading: "lazy",
         // width: "100%",
-        height: "",
       }}
     >
       {/* <div className="absolute">

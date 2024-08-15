@@ -14,6 +14,7 @@ const ServicesListModal = ({ service, setAddService, setRefreshServices }) => {
   const vendor = useSelector((state) => state.vendorAuth.vendor);
   const subCategories = useSubCategory({ id: service?.categories_id });
   const [selectedCategory, setSelectedCategory] = useState([]);
+  const [serviceDescription, setServiceDescription] = useState({});
   const [formState, setFormState] = React.useState({
     loading: false,
     error: "",
@@ -44,12 +45,12 @@ const ServicesListModal = ({ service, setAddService, setRefreshServices }) => {
   const addServiceItems = (e, subCategory) => {
     e.target.checked
       ? setSelectedCategory((prev) => [
-          ...prev,
-          { id: subCategory.id, name: subCategory.title, defaultInputs },
-        ])
+        ...prev,
+        { id: subCategory.id, name: subCategory.title, defaultInputs },
+      ])
       : setSelectedCategory((prev) =>
-          prev.filter((category) => category.id !== subCategory.id)
-        );
+        prev.filter((category) => category.id !== subCategory.id)
+      );
   };
 
   const addService = async (e) => {
@@ -57,7 +58,9 @@ const ServicesListModal = ({ service, setAddService, setRefreshServices }) => {
     const data = new FormData(e.target);
     let formData = [];
     for (let [key, value] of data.entries()) {
-      formData.push(JSON.parse(value));
+      const cValue = JSON.parse(value)?.sub_categories_id;
+      const finalValue = { ...JSON.parse(value), description: serviceDescription[cValue] };
+      formData.push(finalValue);
     }
     const valideData = await POST.validateForm({ form: e.target });
     if (valideData) {
@@ -115,60 +118,61 @@ const ServicesListModal = ({ service, setAddService, setRefreshServices }) => {
                 Select a service to Add Details
               </div>
             )) || (
-              <>
-                <div className="flex-grow flex-shrink-0 space-y-4">
-                  {selectedCategory.map((category, index) => {
-                    return (
-                      <div
-                        className="flex flex-col gap-4 p-4 border rounded-xl"
-                        key={index}
-                      >
-                        <p>{category.name}</p>
-                        {category.defaultInputs.map((group, i) => {
-                          return (
-                            <InputGroup
-                              key={i}
-                              defaultValue={group}
-                              service_group_id={service.id}
-                              categories_id={service?.categories_id}
-                              sub_categories_id={category.id}
-                            />
-                          );
-                        })}
-                        <Button
-                          variant="link"
-                          className="border-b border-[#0AADA4]  text-[#0AADA4] font-semibold text-right cursor-pointer p-0 ms-auto block h-6 rounded-none hover:no-underline"
-                          onClick={() => repeatInput(index)}
+                <>
+                  <div className="flex-grow flex-shrink-0 space-y-4">
+                    {selectedCategory.map((category, index) => {
+                      return (
+                        <div
+                          className="flex flex-col gap-4 p-4 border rounded-xl"
+                          key={index}
                         >
-                          Add more pricing
-                        </Button>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className="flex items-center justify-between gap-3 mx-auto">
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    disabled={formState.loading}
-                  >
-                    <Spinner
-                      show={formState.loading}
-                      width="25"
-                      height="25"
-                      text="Save"
-                    />
-                  </Button>
-                  <Button
-                    variant="disable"
-                    onClick={() => setAddService(false)}
-                  >
-                    Cancel
-                  </Button>
-                  {formState?.error && <Error error={formState?.error} />}
-                </div>
-              </>
-            )}
+                          <p>{category.name}</p>
+                          {category.defaultInputs.map((group, i) => {
+                            return (
+                              <InputGroup
+                                key={i}
+                                defaultValue={group}
+                                service_group_id={service.id}
+                                categories_id={service?.categories_id}
+                                sub_categories_id={category.id}
+                              />
+                            );
+                          })}
+                          <Button
+                            variant="link"
+                            className="border-b border-[#0AADA4]  text-[#0AADA4] font-semibold text-right cursor-pointer p-0 ms-auto block h-6 rounded-none hover:no-underline"
+                            onClick={() => repeatInput(index)}
+                          >
+                            Add more pricing
+                          </Button>
+                          <textarea placeholder="Service Description" className="input_field" rows={5} onInput={e => setServiceDescription({ ...serviceDescription, [category?.id]: e.target.value })} />
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <div className="flex items-center justify-between gap-3 mx-auto">
+                    <Button
+                      variant="primary"
+                      type="submit"
+                      disabled={formState.loading}
+                    >
+                      <Spinner
+                        show={formState.loading}
+                        width="25"
+                        height="25"
+                        text="Save"
+                      />
+                    </Button>
+                    <Button
+                      variant="disable"
+                      onClick={() => setAddService(false)}
+                    >
+                      Cancel
+                    </Button>
+                    {formState?.error && <Error error={formState?.error} />}
+                  </div>
+                </>
+              )}
           </form>
         </div>
       )) ||
