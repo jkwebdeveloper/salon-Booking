@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { v4 } from 'uuid';
 
 const Billing = ({ handleContinue, handleBack }) => {
     const dispatch = useDispatch();
@@ -128,7 +129,7 @@ const Billing = ({ handleContinue, handleBack }) => {
                 <div className="flex-grow space-y-4">
                     <div className="flex-grow space-y-4">
                         {cart?.bookings_services ? cart?.bookings_services?.map((item, index) => (
-                            <div className="flex items-start justify-between pb-2 border-b-[2px]">
+                            <div key={v4()} className="flex items-start justify-between pb-2 border-b-[2px]">
                                 <div>
                                     <p className="text-sm font-semibold text-neutral-600">{item?.vendors_service_info?.service_title}</p>
                                     <p className="text-sm">{+item?.vendors_service_info?.duration * 60} Min</p>
@@ -136,7 +137,7 @@ const Billing = ({ handleContinue, handleBack }) => {
                                 <div className='flex flex-col gap-2'>
                                     {cart?.bookings_clients?.map((client, index) => (
                                         item?.staffs_id
-                                            ? <div className='flex flex-col items-end justify-center gap-1.5'>
+                                            ? <div key={v4()} className='flex flex-col items-end justify-center gap-1.5'>
                                                 {item?.is_couples_massage == 1 ? <span className='capitalize'>{client?.name}</span> : ''}
                                                 <span className='text-sm leading-4'>{item?.staff_info?.sur_name + ' ' + item?.staff_info?.first_name + ' ' + item?.staff_info?.last_name}</span>
                                                 <Button
@@ -148,6 +149,7 @@ const Billing = ({ handleContinue, handleBack }) => {
                                                 </Button>
                                             </div>
                                             : <Button
+                                                key={v4()}
                                                 size="sm"
                                                 onClick={e => getAvailableStaff({ id: item?.vendors_service_info?.id, service: item, bookings_client: client })}
                                                 className="bg-transparent shadow-none ring-1 ring-neutral-300 text-neutral-500 rounded-md hover:bg-[#F4E9FF] px-2 py-0 h-6 hover:border-primary disabled:opacity-30"
@@ -161,7 +163,7 @@ const Billing = ({ handleContinue, handleBack }) => {
                         )) : ''}
                     </div>
                     {cart?.bookings_products && cart?.bookings_products.map((product, index) => (
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between" key={v4()}>
                             <div className="flex items-center gap-2">
                                 <p className='text-sm md:text-base'>{product?.products_info[0]?.name}</p>
                                 <p className='text-sm md:text-base'>x {product?.qty}</p>

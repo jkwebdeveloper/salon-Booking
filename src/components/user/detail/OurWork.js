@@ -7,6 +7,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
+import { v4 } from "uuid";
 
 const OurWork = ({ salon_images }) => {
   return (
@@ -23,7 +24,7 @@ const OurWork = ({ salon_images }) => {
         <CarouselContent>
           {salon_images.map((image, i) => {
             return (
-              <CarouselItem className="md:basis-1/2 lg:basis-1/4">
+              <CarouselItem key={v4()} className="md:basis-1/2 lg:basis-1/4">
                 <Image
                   src={process.env.NEXT_PUBLIC_SERVERURL + image?.images}
                   width={500}

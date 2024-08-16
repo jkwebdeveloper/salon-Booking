@@ -6,6 +6,7 @@ import { Add_To_Cart } from '@/redux/features/cartSlice';
 import Image from 'next/image';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { v4 } from 'uuid';
 
 const ClientInfo = ({ handleContinue }) => {
     const dispatch = useDispatch();
@@ -138,7 +139,7 @@ const ClientInfo = ({ handleContinue }) => {
                 </div>
                 <div className="flex-grow space-y-4">
                     {cart?.bookings_services ? cart?.bookings_services?.map((item, index) => (
-                        <div className="flex items-start justify-between pb-2 border-b-[2px]">
+                        <div key={v4()} className="flex items-start justify-between pb-2 border-b-[2px]">
                             <div className="space-y-1">
                                 <p className="text-sm font-semibold text-neutral-600">
                                     {item?.vendors_service_info?.service_title}

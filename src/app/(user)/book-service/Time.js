@@ -16,6 +16,7 @@ import { format, set } from 'date-fns';
 import { GET } from '@/app/api/get';
 import convertto24 from '@/lib/convertto24';
 import { Error } from '@/components';
+import { v4 } from 'uuid';
 
 const Time = ({ handleContinue, handleBack }) => {
     const user = useSelector((state) => state.userAuth.user);
@@ -84,7 +85,7 @@ const Time = ({ handleContinue, handleBack }) => {
                 </div>
                 <div className="flex-grow space-y-4">
                     {cart?.bookings_services ? cart?.bookings_services?.map((item, index) => (
-                        <div className="flex items-start justify-between pb-2 border-b-[2px]">
+                        <div key={v4()} className="flex items-start justify-between pb-2 border-b-[2px]">
                             <div>
                                 <p className="text-sm font-semibold text-neutral-600">{item?.vendors_service_info?.service_title}</p>
                                 <p className="text-sm">{+item?.vendors_service_info?.duration * 60} Min</p>
@@ -92,7 +93,7 @@ const Time = ({ handleContinue, handleBack }) => {
                             <div className='flex flex-col gap-2'>
                                 {cart?.bookings_clients?.map((client, index) => (
                                     item?.staffs_id
-                                        ? <div className='flex flex-col items-end justify-center gap-1.5'>
+                                        ? <div key={v4()} className='flex flex-col items-end justify-center gap-1.5'>
                                             {item?.is_couples_massage == 1 ? <span className='capitalize'>{client?.name}</span> : ''}
                                             <span className='text-sm leading-4'>{item?.staff_info?.sur_name + ' ' + item?.staff_info?.first_name + ' ' + item?.staff_info?.last_name}</span>
                                             <Button
@@ -104,6 +105,7 @@ const Time = ({ handleContinue, handleBack }) => {
                                             </Button>
                                         </div>
                                         : <Button
+                                            key={v4()}
                                             size="sm"
                                             onClick={e => getAvailableStaff({ id: item?.vendors_service_info?.id, service: item, bookings_client: client })}
                                             className="bg-transparent shadow-none ring-1 ring-neutral-300 text-neutral-500 rounded-md hover:bg-[#F4E9FF] px-2 py-0 h-6 hover:border-primary disabled:opacity-30"

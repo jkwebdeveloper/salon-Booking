@@ -8,6 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import convertto12 from "@/lib/convertto12";
+import { v4 } from "uuid";
 
 const About = ({ data }) => {
   const { about_salon, address_line_one, availability, address_line_two } = data;
@@ -42,7 +43,7 @@ const About = ({ data }) => {
                 const open = item?.status === 1 ? item.from_time.slice(0, 5) : '';
                 const close = item?.status === 1 ? item.to_time.slice(0, 5) : '';
                 return (
-                  <TableRow>
+                  <TableRow key={v4()}>
                     <TableCell className="font-medium">
                       {days[item.day]}
                     </TableCell>

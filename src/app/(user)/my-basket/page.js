@@ -13,6 +13,7 @@ import {
 import MoreInfoModal from '../book-service/MoreInfoModal';
 import { useSelector } from 'react-redux';
 import { Basket } from '@/components/ui/skelton/basket';
+import { v4 } from 'uuid';
 
 const Basketpage = () => {
     const cart = useSelector((state) => state.Cart.cart);
@@ -40,7 +41,7 @@ const Basketpage = () => {
                                 </thead>
                                 <tbody>
                                     {cart?.bookings_services ? cart?.bookings_services?.map((item, index) => (
-                                        <tr className="">
+                                        <tr key={v4()} className="">
                                             <td className="py-2 text-sm lg:text-base">
                                                 {item?.vendors_service_info?.service_title}
                                                 <span className="text-gray-500 ms-1">

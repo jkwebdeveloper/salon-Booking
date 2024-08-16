@@ -16,6 +16,7 @@ import { GET } from '@/app/api/get';
 import { set } from 'date-fns';
 import { CartProduct } from '@/components/ui/skelton/cartproduct';
 import { Add_To_Cart } from '@/redux/features/cartSlice';
+import { v4 } from 'uuid';
 
 const Product = ({ handleContinue, handleBack }) => {
     const dispatch = useDispatch();
@@ -100,7 +101,7 @@ const Product = ({ handleContinue, handleBack }) => {
                                     const isUpdated = cart?.bookings_products.filter(products => products?.products_info[0]?.id == product.id)[0]?.updated;
                                     const isProductSelected = cart?.bookings_products.filter(products => products?.products_info[0]?.id == product.id).length != 0;
                                     return (
-                                        <tr className="border-b">
+                                        <tr key={v4()} className="border-b">
                                             <td className="p-2 w-[40%]">
                                                 <div className="flex-col items-center">
                                                     <p className="mr-2 text-md">{product?.name}</p>
@@ -215,7 +216,7 @@ const Product = ({ handleContinue, handleBack }) => {
                 <div className="flex-grow space-y-4">
                     <div className="flex-grow space-y-4">
                         {cart?.bookings_services ? cart?.bookings_services?.map((item, index) => (
-                            <div className="flex items-start justify-between pb-2 border-b-[2px]">
+                            <div key={v4()} className="flex items-start justify-between pb-2 border-b-[2px]">
                                 <div>
                                     <p className="text-sm font-semibold text-neutral-600">{item?.vendors_service_info?.service_title}</p>
                                     <p className="text-sm">{+item?.vendors_service_info?.duration * 60} Min</p>
@@ -223,7 +224,7 @@ const Product = ({ handleContinue, handleBack }) => {
                                 <div className='flex flex-col gap-2'>
                                     {cart?.bookings_clients?.map((client, index) => (
                                         item?.staffs_id
-                                            ? <div className='flex flex-col items-end justify-center gap-1.5'>
+                                            ? <div key={v4()} className='flex flex-col items-end justify-center gap-1.5'>
                                                 {item?.is_couples_massage == 1 ? <span className='capitalize'>{client?.name}</span> : ''}
                                                 <span className='text-sm leading-4'>{item?.staff_info?.sur_name + ' ' + item?.staff_info?.first_name + ' ' + item?.staff_info?.last_name}</span>
                                                 <Button
@@ -235,6 +236,7 @@ const Product = ({ handleContinue, handleBack }) => {
                                                 </Button>
                                             </div>
                                             : <Button
+                                                key={v4()}
                                                 size="sm"
                                                 onClick={e => getAvailableStaff({ id: item?.vendors_service_info?.id, service: item, bookings_client: client })}
                                                 className="bg-transparent shadow-none ring-1 ring-neutral-300 text-neutral-500 rounded-md hover:bg-[#F4E9FF] px-2 py-0 h-6 hover:border-primary disabled:opacity-30"
@@ -248,7 +250,7 @@ const Product = ({ handleContinue, handleBack }) => {
                         )) : ''}
                     </div>
                     {cart?.bookings_products && cart?.bookings_products.map((product, index) => (
-                        <div className="flex items-center justify-between">
+                        <div key={v4()} className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                                 <p className='text-sm md:text-base'>{product?.products_info[0]?.name}</p>
                                 <p className='text-sm md:text-base'>x {product?.qty}</p>
