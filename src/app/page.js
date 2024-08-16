@@ -25,7 +25,7 @@ export default function Home() {
                 <Treatments />
                 <Gifts />
                 <Location />
-                <Groupon />
+                {/* <Groupon /> */}
                 {/* <PamperTeam /> */}
                 {/* <Offers /> */}
                 <PopularSalon />

@@ -1,5 +1,5 @@
 'use client';
-import React, { Fragment } from 'react'
+import React, { Fragment } from 'react';
 import {
      Accordion,
      AccordionContent,
@@ -8,21 +8,17 @@ import {
 } from '@/components/ui/accordion';
 import {
      Dialog,
-     DialogContent,
-     DialogTrigger,
-     DialogTitle,
+     DialogContent, DialogTitle
 } from '@/components/ui/dialog';
 import Button from '@/components/ui/button';
-import Link from 'next/link';
-import Modal from '@/app/(user)/details/[slug]/[id]/Modal';
 import { v4 } from 'uuid';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from '@/lib/utils';
 import { Spinner } from '@/components';
 import { POST } from '@/app/api/post';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { Add_To_Cart } from '@/redux/features/cartSlice';
+import QuickView from '@/components/global/QuickView';
 
 function Services({ data }) {
      const dispatch = useDispatch();
@@ -153,10 +149,10 @@ function Services({ data }) {
                                    close={e => setmoreInfo(null)}
                                    className="sm:max-w-[750px]"
                               >
-                                   <DialogTitle className="text-3xl font-bold">
+                                   <DialogTitle className="text-2xl font-bold">
                                         {moreInfo ? moreInfo[0]?.sub_categories?.title : null}
                                    </DialogTitle>
-                                   {moreInfo ? <Modal moreInfo={moreInfo} setmoreInfo={e => setmoreInfo(null)} /> : null}
+                                   {moreInfo ? <QuickView moreInfo={moreInfo} setmoreInfo={e => setmoreInfo(null)} /> : null}
                               </DialogContent>
                          </Dialog>
                     </div>

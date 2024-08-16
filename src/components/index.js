@@ -45,10 +45,9 @@ const PamperTeam = dynamic(() => import("@/components/user/Home/PamperTeam"), {
 const Offers = dynamic(() => import("@/components/user/Home/Offers"), {
   loading: () => loader,
 });
-const PopularSalon = dynamic(
-  () => import("@/components/user/Home/PopularSalon"),
-  { loading: () => loader }
-);
+const PopularSalon = dynamic(() => import("@/components/user/Home/PopularSalon"), {
+  loading: () => loader
+});
 const DownloadApp = dynamic(
   () => import("@/components/user/Home/DownloadApp"),
   { loading: () => loader }

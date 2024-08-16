@@ -182,7 +182,7 @@ function Topbar() {
               size="icon"
               className="uppercase"
             >
-              <GoBell className="text-xl cursor-pointer text-primary_color" />
+              <GoBell className="text-2xl cursor-pointer text-primary_color" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-full mt-2 -translate-x-1 bg-white ring-1 ring-neutral-200">

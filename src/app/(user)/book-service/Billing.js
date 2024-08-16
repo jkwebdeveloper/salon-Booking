@@ -15,14 +15,16 @@ const Billing = ({ handleContinue, handleBack }) => {
     const router = useRouter();
     const cart = useSelector((state) => state.Cart.cart);
     const user = useSelector((state) => state.userAuth.user) || '';
-    // const defaultData = cart?.bookings_clients && {
-    //     client1: cart?.bookings_clients[0]?.name,
-    //     client2: cart?.bookings_clients[1]?.name,
-    //     phone1: cart?.bookings_clients[0]?.phone,
-    //     phone2: cart?.bookings_clients[1]?.phone
-    // } || { client1: '', client2: '', phone1: '', phone2: '' };
+    const defaultData = cart?.bookings_clients && {
+        first_name: cart?.billing_address?.billing_first_name,
+        last_name: cart?.billing_address?.billing_last_name,
+        email: cart?.billing_address?.billing_email,
+        address_line_one: cart?.billing_address?.billing_address_line_one,
+        city: cart?.billing_address?.billing_city,
+        postcode: cart?.billing_address?.billing_postcode,
+    } || { first_name: '', last_name: '', email: '', address_line_one: '', city: '', postcode: '' };
 
-    const [formData, setFormData] = React.useState({ first_name: '', last_name: '', email: '', address: '', city: '', postcode: '' });
+    const [formData, setFormData] = React.useState(defaultData);
     const [formState, setFormState] = React.useState({
         loading: false,
         error: '',
@@ -42,7 +44,7 @@ const Billing = ({ handleContinue, handleBack }) => {
     }
     return (
         <div className="container relative max-w-[1200px] flex flex-col gap-4 px-0 lg:flex-row lg:px-28 md:pb-40 md:-mb-20">
-            <div className="lg:w-[60%] w-full mx-auto space-y-5 rounded-md shadow-lg h-fit min-h-[350px] p-4 bg-white">
+            <div className="lg:w-[60%] w-full mx-auto space-y-5 rounded-xl shadow-lg h-fit min-h-[350px] p-4 bg-white">
                 <p className="text-sm font-bold lg:text-2xl">Billing Address</p>
                 <form className="space-y-4" ref={form}>
                     <div className="flex flex-col w-full gap-3 lg:flex-row">
@@ -50,6 +52,7 @@ const Billing = ({ handleContinue, handleBack }) => {
                             <Label htmlFor="first_name" text="First Name" required />
                             <input type="text" name="first_name" className="input_field" placeholder="Enter First Name"
                                 pattern={Validation?.firstname?.pattern}
+                                defaultValue={formData?.first_name}
                                 onInput={(e) => setFormData({ ...formData, first_name: e.target.value })}
                             />
                             <p className="error">{Validation?.firstname.msg}</p>
@@ -58,6 +61,7 @@ const Billing = ({ handleContinue, handleBack }) => {
                             <Label htmlFor="last_name" text="Last Name" required />
                             <input type="text" name="last_name" className="input_field" placeholder="Enter Last Name"
                                 onInput={(e) => setFormData({ ...formData, last_name: e.target.value })}
+                                defaultValue={formData?.last_name}
                                 pattern={Validation?.lastname?.pattern}
                             />
                             <p className="error">{Validation?.lastname.msg}</p>
@@ -67,6 +71,7 @@ const Billing = ({ handleContinue, handleBack }) => {
                         <Label htmlFor="email" text="Email" required />
                         <input type="text" name="email" id="email" className="input_field" placeholder="Email"
                             onInput={(e) => setFormData({ ...formData, email: e.target.value })}
+                            defaultValue={formData?.email}
                             pattern={Validation?.email?.pattern}
                         />
                         <p className="error">{Validation?.email.msg}</p>
@@ -75,8 +80,8 @@ const Billing = ({ handleContinue, handleBack }) => {
                         <Label htmlFor="Address" text="Address" required />
                         <input type="text" id="Address" name="address_line_one" className="input_field" placeholder="Address"
                             onInput={(e) => setFormData({ ...formData, address_line_one: e.target.value })}
+                            defaultValue={formData?.address_line_one}
                             pattern={Validation?.address?.pattern}
-                        // pattern={Validation?.phone?.pattern}
                         />
                         <p className="error">{Validation?.address.msg}</p>
                     </div>
@@ -85,6 +90,7 @@ const Billing = ({ handleContinue, handleBack }) => {
                             <Label htmlFor="City" text="City" required />
                             <input type="text" name="city" id="City" className="input_field" placeholder="City"
                                 onInput={(e) => setFormData({ ...formData, city: e.target.value })}
+                                defaultValue={formData?.city}
                                 pattern={Validation?.city?.pattern}
                             />
                             <p className="error">{Validation?.city.msg}</p>
@@ -94,6 +100,7 @@ const Billing = ({ handleContinue, handleBack }) => {
                             <input
                                 type="text" name="postcode" id="Postcode" className="input_field" placeholder="Postcode"
                                 onInput={(e) => setFormData({ ...formData, postcode: e.target.value })}
+                                defaultValue={formData?.postcode}
                                 pattern={Validation?.postcode?.pattern}
                             />
                             <p className="error">{Validation?.postcode.msg}</p>
@@ -101,7 +108,7 @@ const Billing = ({ handleContinue, handleBack }) => {
                     </div>
                 </form>
             </div>
-            <div className="shadow-lg rounded-md h-fit min-h-fit relative lg:w-[40%] w-full mx-auto space-y-5 p-4 bg-white">
+            <div className="shadow-lg rounded-xl h-fit min-h-fit relative lg:w-[40%] w-full mx-auto space-y-5 p-4 bg-white">
                 <div className="flex items-center gap-2">
                     <Image
                         src={'/static/images/booking.png'}
@@ -121,46 +128,48 @@ const Billing = ({ handleContinue, handleBack }) => {
                 <div className="flex-grow space-y-4">
                     <div className="flex-grow space-y-4">
                         {cart?.bookings_services ? cart?.bookings_services?.map((item, index) => (
-                            <div className="flex items-start justify-between">
-                                <div className="space-y-1">
-                                    <p className="text-sm font-semibold text-neutral-600">
-                                        {item?.vendors_service_info?.service_title}
-                                    </p>
+                            <div className="flex items-start justify-between pb-2 border-b-[2px]">
+                                <div>
+                                    <p className="text-sm font-semibold text-neutral-600">{item?.vendors_service_info?.service_title}</p>
                                     <p className="text-sm">{+item?.vendors_service_info?.duration * 60} Min</p>
                                 </div>
-                                <p className="text-sm font-semibold text-neutral-600">£{item?.vendors_service_info?.sale_price || item?.vendors_service_info?.price}</p>
+                                <div className='flex flex-col gap-2'>
+                                    {cart?.bookings_clients?.map((client, index) => (
+                                        item?.staffs_id
+                                            ? <div className='flex flex-col items-end justify-center gap-1.5'>
+                                                {item?.is_couples_massage == 1 ? <span className='capitalize'>{client?.name}</span> : ''}
+                                                <span className='text-sm leading-4'>{item?.staff_info?.sur_name + ' ' + item?.staff_info?.first_name + ' ' + item?.staff_info?.last_name}</span>
+                                                <Button
+                                                    size="sm"
+                                                    onClick={e => getAvailableStaff({ id: item?.vendors_service_info?.id, service: item, bookings_client: client })}
+                                                    className="h-6 px-2 py-0 text-white bg-teal-500 rounded-md shadow-none hover:bg-teal-700"
+                                                >
+                                                    Edit Staff
+                                                </Button>
+                                            </div>
+                                            : <Button
+                                                size="sm"
+                                                onClick={e => getAvailableStaff({ id: item?.vendors_service_info?.id, service: item, bookings_client: client })}
+                                                className="bg-transparent shadow-none ring-1 ring-neutral-300 text-neutral-500 rounded-md hover:bg-[#F4E9FF] px-2 py-0 h-6 hover:border-primary disabled:opacity-30"
+                                                disabled={!selectedTime}
+                                            >
+                                                + Add staff
+                                            </Button>
+                                    ))}
+                                </div>
                             </div>
-                        )) : null}
-                    </div>
-                    <div className="flex items-center justify-between">
-                        <p className="text-sm md:text-base">Client 1</p>
-                        <div className="flex items-center gap-2">
-                            <p className='text-sm md:text-base'>Nuzami</p>
-                            <Button className="bg-[#0AADA4] text-white rounded-md">
-                                Edit
-                            </Button>
-                        </div>
-                    </div>
-                    <div className="flex items-center justify-between">
-                        <p className="text-sm md:text-base">Client 1</p>
-                        <div className="flex items-center gap-2">
-                            <p className='text-sm md:text-base'>Nuzami</p>
-                            <Button className="bg-[#0AADA4] text-white rounded-md">
-                                Edit
-                            </Button>
-                        </div>
+                        )) : ''}
                     </div>
                     {cart?.bookings_products && cart?.bookings_products.map((product, index) => (
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
-                                <p className='text-sm md:text-base'>{product?.name}</p>
+                                <p className='text-sm md:text-base'>{product?.products_info[0]?.name}</p>
                                 <p className='text-sm md:text-base'>x {product?.qty}</p>
                             </div>
-                            <p className='text-sm md:text-base'>£{product?.price}</p>
+                            <p className='text-sm md:text-base'>£{product?.total_price}</p>
                         </div>
                     ))}
                 </div>
-
                 <div className="flex items-center justify-center w-full gap-3 mt-auto">
                     <Button variant="outline" className="md:w-full border-[1px] py-5 rounded-full border-[#CCCCCC] bg-background shadow-sm hover:bg-primary hover:text-white" onClick={e => handleBack()}>
                         Back

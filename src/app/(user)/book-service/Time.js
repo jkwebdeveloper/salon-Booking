@@ -60,6 +60,7 @@ const Time = ({ handleContinue, handleBack }) => {
 
     return (
         <div className="container relative max-w-[1200px] flex flex-col items-start gap-4 px-0 lg:flex-row lg:px-28 md:pb-40 md:-mb-20">
+            {console.log('cart', cart)}
             <div className="lg:w-[60%] w-full mx-auto space-y-5 rounded-xl shadow-lg p-4 bg-white">
                 <p className="text-lg font-bold lg:text-2xl">Date & Time</p>
                 <MiniCalander data={{ selectedDate, setSelectedDate, selectedTime, setSelectedTime, timeingData, setTimeingData }} />
@@ -83,7 +84,7 @@ const Time = ({ handleContinue, handleBack }) => {
                 </div>
                 <div className="flex-grow space-y-4">
                     {cart?.bookings_services ? cart?.bookings_services?.map((item, index) => (
-                        <div className="flex items-start justify-between">
+                        <div className="flex items-start justify-between pb-2 border-b-[2px]">
                             <div>
                                 <p className="text-sm font-semibold text-neutral-600">{item?.vendors_service_info?.service_title}</p>
                                 <p className="text-sm">{+item?.vendors_service_info?.duration * 60} Min</p>
@@ -91,8 +92,9 @@ const Time = ({ handleContinue, handleBack }) => {
                             <div className='flex flex-col gap-2'>
                                 {cart?.bookings_clients?.map((client, index) => (
                                     item?.staffs_id
-                                        ? <div className='flex items-center gap-2'>
+                                        ? <div className='flex flex-col items-end justify-center gap-1.5'>
                                             {item?.is_couples_massage == 1 ? <span className='capitalize'>{client?.name}</span> : ''}
+                                            <span className='text-sm leading-4'>{item?.staff_info?.sur_name + ' ' + item?.staff_info?.first_name + ' ' + item?.staff_info?.last_name}</span>
                                             <Button
                                                 size="sm"
                                                 onClick={e => getAvailableStaff({ id: item?.vendors_service_info?.id, service: item, bookings_client: client })}

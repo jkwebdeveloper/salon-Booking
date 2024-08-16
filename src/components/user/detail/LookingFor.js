@@ -37,6 +37,7 @@ const ImagesData = [
 ];
 import useCategory from "@/hooks/usecategory";
 import { Spinner } from "@/components";
+import Link from "next/link";
 
 const LookingFor = () => {
   const mainCat = useCategory();
@@ -59,7 +60,8 @@ const LookingFor = () => {
           <CarouselContent>
             {mainCat.data.map((item) => (
               <CarouselItem key={v4()} className="md:basis-1/2 lg:basis-1/4">
-                <div
+                <Link
+                  href={`/service/${item?.slug_url}`}
                   key={v4()}
                   className="relative flex items-center justify-center text-center cursor-pointer"
                 >
@@ -77,7 +79,7 @@ const LookingFor = () => {
                   <p className="absolute uppercase top-[87%] text-center text-white">
                     {(item?.services_count) || 0} Listings
                   </p>
-                </div>
+                </Link>
               </CarouselItem>
             ))}
           </CarouselContent>

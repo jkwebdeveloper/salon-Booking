@@ -7,11 +7,12 @@ import { format } from "date-fns";
 import Location from "@/components/user/Home/FindNearByForm/location";
 import { useRouter } from "next/navigation";
 
-const FindNearByForm = ({ formData }) => {
+const FindNearByForm = ({ formData = {} }) => {
   const router = useRouter();
-  const initialFormItems = formData || {
-    categories: "",
-    date: format(new Date(), 'yyyy-MM-dd'),
+  const initialFormItems = Object.keys(formData)?.length && formData || {
+    categories: [],
+    "search_terms": "",
+    date: '',
     lat: "",
     long: "",
     time: "",
@@ -19,6 +20,7 @@ const FindNearByForm = ({ formData }) => {
   }
 
   const [formItems, setFormItems] = React.useState(initialFormItems);
+
   const searchNearyBy = async (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
@@ -26,7 +28,7 @@ const FindNearByForm = ({ formData }) => {
     const url = new URL(window.location.origin + '/service/search');
     const urlFields = {};
     Object.keys(formItems).forEach((key) => {
-      if (formItems[key]) {
+      if ((key != 'categories' && formItems[key]) || (key == 'categories' && formItems[key].length)) {
         urlFields[key] = formItems[key];
       }
     });
@@ -49,7 +51,7 @@ const FindNearByForm = ({ formData }) => {
         >
           <SearchInput formItems={formItems} setFormItems={setFormItems} />
           <div className="flex-grow flex-shrink-0 min-h-[1rem] w-[2px] bg-neutral-400"></div>
-          <DatePicker className="p-3" defaultValue={new Date(formItems?.date)} onSelect={e => setFormItems({ ...formItems, date: format(e, 'yyyy-MM-dd') })} />
+          <DatePicker className="p-3" defaultValue={formItems?.date ? new Date(formItems?.date) : new Date()} onSelect={e => setFormItems({ ...formItems, date: format(e, 'yyyy-MM-dd') })} />
           <div className="flex-grow flex-shrink-0 min-h-[1rem] w-[2px] bg-neutral-400"></div>
           <div className="flex items-center w-full gap-1">
             <IoTimeOutline className="text-xl" />

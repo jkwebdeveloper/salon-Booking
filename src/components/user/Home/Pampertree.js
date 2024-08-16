@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { v4 } from "uuid";
 
 import {
@@ -10,59 +10,28 @@ import {
 } from "@/components/ui/carousel";
 
 import SingleService from "@/components/ui/cards/singleservice";
-
-const boxData = [
-  {
-    id: 1,
-    image: "/static/images/spa_life.png",
-    title: "Spa Life & Massage",
-    titleoption: "(Couple Massage)",
-    location: "Barnack, Cambridge 181.2 miles",
-    rating: "4.0",
-  },
-  {
-    id: 2,
-    image: "/static/images/spa_life.png",
-    title: "Spa Life & Massage",
-    titleoption: "(Couple Massage)",
-    location: "Barnack, Cambridge 181.2 miles",
-    rating: "4.0",
-  },
-  {
-    id: 3,
-    image: "/static/images/spa_life.png",
-    title: "Spa Life & Massage",
-    titleoption: "(Couple Massage)",
-    location: "Barnack, Cambridge 181.2 miles",
-    rating: "4.0",
-  },
-  {
-    id: 4,
-    image: "/static/images/spa_life.png",
-    title: "Spa Life & Massage",
-    titleoption: "(Couple Massage)",
-    location: "Barnack, Cambridge 181.2 miles",
-    rating: "4.0",
-  },
-  {
-    id: 5,
-    image: "/static/images/spa_life.png",
-    title: "Spa Life & Massage",
-    titleoption: "(Couple Massage)",
-    location: "Barnack, Cambridge 181.2 miles",
-    rating: "4.0",
-  },
-  {
-    id: 6,
-    image: "/static/images/spa_life.png",
-    title: "Spa Life & Massage",
-    titleoption: "(Couple Massage)",
-    location: "Barnack, Cambridge 181.2 miles",
-    rating: "4.0",
-  },
-];
+import { GET } from "@/app/api/get";
 
 function Pampertree() {
+  const [deals, setDeals] = useState([]);
+
+  const getDealsService = async () => {
+    const form = {
+      "is_deal": 1,
+      "page": 1,
+      "limit": 10
+    }
+    const urlParams = new URLSearchParams(form).toString();
+    const resp = await GET.request({ url: `/find-near-by-services?` + urlParams });
+    if (resp && resp.code == 200) {
+      setDeals(resp.data?.listing)
+    }
+  };
+
+  useEffect(() => {
+    getDealsService();
+  }, []);
+
   return (
     <div className="w-full space-y-4">
       <p className="text-2xl font-semibold text-black uppercase title heading">
@@ -76,14 +45,26 @@ function Pampertree() {
         className="w-full"
       >
         <CarouselContent>
-          {boxData.map((item) => (
-            <CarouselItem key={v4()} className="md:basis-1/2 lg:basis-1/4">
-              <SingleService item={item} />
-            </CarouselItem>
-          ))}
+          {deals.map((deal) => {
+            const salonName = deal?.salon_name || '';
+            const salonImage = deal?.salon_images ? deal?.salon_images[0] : "";
+            const salonAddress = (deal?.address_line_one || '') + ' ' + (deal?.address_line_two || '') + ' ' + deal?.city + ' ' + deal?.country;
+            const salonID = deal?.id;
+            const whtsup_link = deal?.whtsup_link;
+            const facebook_link = deal?.facebook_link;
+            const twitter_link = deal?.twitter_link;
+            const instagram_link = deal?.instagram_link;
+            return (
+              salonName && salonImage ? deal?.services?.length && deal?.services.map((service) => {
+                return (
+                  <CarouselItem key={v4()} className="md:basis-1/2 lg:basis-1/4">
+                    <SingleService service={{ ...service, salonName, salonImage, salonAddress, salonID, whtsup_link, facebook_link, twitter_link, instagram_link }} />
+                  </CarouselItem> || null
+                )
+              }) : null
+            )
+          })}
         </CarouselContent>
-        {/* <CarouselPrevious />
-        <CarouselNext /> */}
         <CarouselDots className="mx-auto mt-3" />
       </Carousel>
     </div>

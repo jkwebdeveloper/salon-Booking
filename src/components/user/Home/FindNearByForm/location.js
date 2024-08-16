@@ -31,9 +31,14 @@ const Location = ({ setFormItems, formItems }) => {
                          // ref={inputRef}
                          style={{ color: "black" }}
                          className="border-none input_field"
-                         value={value?.text || formItems?.address}
+                         value={value?.text}
                          placeholder="Search locations"
                          onChange={(evt) => {
+                              if (!evt.target.value.length) {
+                                   setValue({ text: '', selected: false });
+                                   setFormItems({ ...formItems, address: '', lat: '', long: '' });
+                                   return;
+                              }
                               getPlacePredictions({ input: evt.target.value });
                               setValue({ text: evt.target.value, selected: false });
                          }}

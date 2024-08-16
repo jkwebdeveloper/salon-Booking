@@ -22,7 +22,7 @@ function MiniCart() {
      const dispatch = useDispatch();
      const user = useSelector((state) => state.userAuth.user);
      const cart = useSelector((state) => state.Cart.cart) || '';
-     // const [isOpen, setIsOpen] = React.useState(false);
+     const [open, setOpen] = React.useState(false);
 
      const emptyCart = async () => {
           const resp = await POST.request({ url: '/empty-bascket', token: user?.api_token });
@@ -42,20 +42,25 @@ function MiniCart() {
           }
      }
      return (
-          <DropdownMenu>
-               <DropdownMenuTrigger className="focus-visible:outline-none">
+          <DropdownMenu open={open}>
+               <DropdownMenuTrigger className="relative focus-visible:outline-none">
                     <Button
                          type="button"
-                         parent={true}
+                         // parent={true}
                          variant="ghost"
                          size="icon"
-                         className="uppercase"
-                    // onClick={() => setIsOpen(!isOpen)}
+                         className="relative uppercase"
+                         onClick={() => setOpen(!open)}
                     >
-                         <GrCart className="text-xl cursor-pointer text-primary_color" />
+                         {cart?.bookings_services?.length ?
+                              <span className='absolute w-5 h-5 text-white rounded-full -top-1 -right-2 bg-primary'>
+                                   {cart?.bookings_services?.length}
+                              </span> : null
+                         }
+                         <GrCart className="text-2xl cursor-pointer text-primary_color" />
                     </Button>
                </DropdownMenuTrigger>
-               <DropdownMenuContent className="w-full min-w-[200px] mt-2 -translate-x-1 bg-white ring-1 ring-neutral-200">
+               <DropdownMenuContent onInteractOutside={e => setOpen(false)} className="w-full min-w-[200px] mt-2 -translate-x-1 bg-white ring-1 ring-neutral-200">
                     <DropdownMenuLabel className="text-primary_color">
                          My basket
                     </DropdownMenuLabel>
@@ -84,13 +89,13 @@ function MiniCart() {
                                    variant="primary"
                                    className="md:w-full"
                                    asChild
-                              // onClick={() => setIsOpen(false)}
+                                   onClick={e => setOpen(false)}
                               >
                                    <Link href={"/details" + "/salon-name/" + cart?.vendors_info.id}>
                                         + Add more
                                    </Link>
                               </Button>
-                              <Button variant="primary" className="md:w-full" asChild>
+                              <Button variant="primary" className="md:w-full" asChild onClick={e => setOpen(false)}>
                                    <Link href="/book-service">
                                         Go to checkout
                                    </Link>
