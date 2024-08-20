@@ -16,7 +16,7 @@ const ServiceListing = ({ searchParams, params }) => {
   const [salons, setSalons] = React.useState({ data: [], loading: true });
   const [filter, setFilter] = React.useState({ categories: [], price: [], rating: 0 });
 
-  const searchSalon = async ({ page = 1, limit = 10 }) => {
+  const searchSalon = async ({ categories, page = 1, limit = 10 }) => {
     const formData = {
       "sort_by": "price_asc",
       "min_price": 10,
@@ -30,9 +30,12 @@ const ServiceListing = ({ searchParams, params }) => {
     searchParams?.long && (formData.long = searchParams.long);
     searchParams?.categories && (formData.categories = searchParams.categories);
     searchParams?.search_terms && (formData.search_terms = searchParams.search_terms);
+    categories && (formData.categories = categories);
+    console.log(formData);
+    // formData.categories = `[${formData.categories.join(',')}]`;
 
-    const urlParams = new URLSearchParams(formData).toString();
-    const resp = await GET.request({ url: '/find-near-by-services?' + urlParams });
+    // const urlParams = new URLSearchParams(formData).toString();
+    const resp = await GET.request({ url: '/find-near-by-services', params: formData });
     if (resp && resp?.code == 200) {
       console.log(resp.data.listing);
       setSalons({ data: resp.data.listing, loading: false });
@@ -43,10 +46,15 @@ const ServiceListing = ({ searchParams, params }) => {
   };
 
   useEffect(() => {
+    console.log(searchParams);
     if (params && params?.slug == 'search') {
       searchSalon({ page: 1, limit: 10 });
     } else {
-      searchSalon({ page: 1, limit: 10 });
+      const findParams = { page: 1, limit: 10 };
+      if (params?.id) {
+        findParams.categories = [params.id];
+      }
+      searchSalon(findParams);
     }
   }, [params]);
 

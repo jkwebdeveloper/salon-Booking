@@ -230,7 +230,7 @@ export default function DesktopMenu({ theme, themeMode }) {
         {!mainCat?.loading && mainCat.data?.map((navItem, index) => {
           return (
             <Link
-              href={'/service/' + (navItem.slug_url || '#')}
+              href={'/service/' + ((navItem.slug_url || '#') + '/' + navItem?.id)}
               className="px-3 py-3 font-medium hover:text-white hover:bg-primary"
               key={v4()}
             >
