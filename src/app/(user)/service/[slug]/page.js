@@ -14,6 +14,7 @@ import Spinner from "@/components/ui/spinner";
 const ServiceListing = ({ searchParams, params }) => {
   const router = useRouter();
   const [salons, setSalons] = React.useState({ data: [], loading: true });
+  const [filter, setFilter] = React.useState({ categories: [], price: [], rating: 0 });
 
   const searchSalon = async ({ page = 1, limit = 10 }) => {
     const formData = {
@@ -44,6 +45,8 @@ const ServiceListing = ({ searchParams, params }) => {
   useEffect(() => {
     if (params && params?.slug == 'search') {
       searchSalon({ page: 1, limit: 10 });
+    } else {
+      searchSalon({ page: 1, limit: 10 });
     }
   }, [params]);
 
@@ -55,7 +58,7 @@ const ServiceListing = ({ searchParams, params }) => {
           Search result{" "} <span className="text-primary_color">Massage Services</span>
         </p>
         <div className="flex flex-col min-h-[55dvh] xl:gap-10 gap-3 md:flex-row md:mb-10">
-          <Filter />
+          <Filter filter={filter} setFilter={setFilter} />
           <div className="md:w-4/5 w-[90%] mx-auto space-y-5 h-fit min-h-[350px]">
             <div className="grid items-center grid-cols-1 gap-4 xl:grid-cols-2">
               {salons?.loading && <Spinner />}

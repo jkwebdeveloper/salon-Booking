@@ -58,7 +58,7 @@ function Vendor({ vendor, services = [] }) {
                             <CarouselPrevious variant="icon" className="h-5 p-0 min-w-5 bg-[rgba(0,0,0,0.4)] text-white backdrop-blur-md font-bold ring-1 ring-neutral-400" />
                             <CarouselNext variant="icon" className="h-5 p-0 min-w-5 bg-[rgba(0,0,0,0.4)] text-white backdrop-blur-md font-bold ring-1 ring-neutral-400" />
                         </Carousel>
-                        || <Image src={"/static/images/placeholder.jpg"} height={500} width={500} alt="moon" loading="lazy" className="object-cover w-full h-full aspect-video" />
+                        || <Image src={"/static/images/placeholder.jpg"} height={500} width={500} alt="moon" loading="lazy" className="object-cover w-full h-full aspect-[1.35/1] rounded-md" />
                     }
                 </div>
                 <div className="flex flex-col gap-2">
@@ -66,7 +66,7 @@ function Vendor({ vendor, services = [] }) {
                     <p className="text-primary_color">{type_of_salon}</p>
                     <div className="flex items-center gap-3">
                         <span className="bg-[#7f52861a] p-1 rounded-full"><MdLocationPin className="text-lg text-primary_color" /></span>
-                        <span className="text-sm">
+                        <span className="text-sm line-clamp-2">
                             {address_line_one && address_line_one || address_line_two && '' || '-'}
                             {address_line_two && ' ' + address_line_two || ''}
 

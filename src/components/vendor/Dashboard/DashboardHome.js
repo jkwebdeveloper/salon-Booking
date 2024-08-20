@@ -26,6 +26,7 @@ import { RiShoppingCart2Line } from 'react-icons/ri';
 import { ImUserTie } from 'react-icons/im';
 import ReviewNewModal from './Modal/ReviewModal';
 
+const rating = 3;
 const DashBoardHome = () => {
     const [reviewDialog, setReviewDialog] = useState(false);
     const [review, setReview] = useState(false);
@@ -74,11 +75,13 @@ const DashBoardHome = () => {
                                     </p>
                                     <div className="flex items-center gap-3">
                                         <div className="flex items-center gap-2">
-                                            <FaStar className="text-[#FFCC00]" />
-                                            <FaStar className="text-[#FFCC00]" />
-                                            <FaStar className="text-[#FFCC00]" />
-                                            <FaStar className="text-[#FFCC00]" />
-                                            <FaStar className="text-[#D6D6D6]" />
+                                            {new Array(5).fill(0).map((_, i) => (
+                                                i < rating ? (
+                                                    <FaStar key={i} className="text-[#FFCC00]" />
+                                                ) : (
+                                                    <FaStar key={i} className="text-[#D6D6D6]" />
+                                                )
+                                            ))}
                                         </div>
                                     </div>
                                 </div>
