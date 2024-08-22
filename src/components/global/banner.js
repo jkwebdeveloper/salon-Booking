@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 
 const Banner = ({ title, background, resp }) => {
-    console.log('Banner', resp)
+    console.log('Bannerdd', resp)
     return (
         <div className={`relative md:min-h-[200px] min-h-[200px] w-full z-[1]`} style={{ background: `url(${background || "/static/images/Pagesbanner.jpg"})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
             {title && <div className="md:min-h-[300px] flex items-center justify-center">
