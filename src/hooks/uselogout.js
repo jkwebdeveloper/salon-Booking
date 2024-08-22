@@ -1,4 +1,5 @@
 import { POST } from '@/app/api/post';
+import { Add_To_Cart } from '@/redux/features/cartSlice';
 import { logout } from '@/redux/features/userAuthSlice';
 import { logout as logoutVendor } from '@/redux/features/vendorAuthSlice';
 import { useRouter } from 'next/navigation';
@@ -16,6 +17,7 @@ function useLogout() {
             const resp = await POST.request({ url: type == 'vendor' && "/vendor/logout" || "/logout", token: api_token });
             dispatch(logout());
             dispatch(logoutVendor());
+            dispatch(Add_To_Cart({}));
             router.push(redirectURL);
         }
     }

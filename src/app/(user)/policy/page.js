@@ -13,6 +13,7 @@ const Policy = async () => {
   return (
     <div className="space-y-4 ">
       <Banner
+        resp={resp}
         title="PRIVACY POLICY"
         background={"/static/images/Terms-conditions.jpg"}
       />

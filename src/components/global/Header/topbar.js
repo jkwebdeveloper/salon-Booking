@@ -72,7 +72,7 @@ function Topbar() {
               <IoCaretDown />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56 p-0 mt-2 bg-white ring-1 ring-neutral-200">
+          <DropdownMenuContent className="w-56 z-[999] p-0 mt-2 bg-white ring-1 ring-neutral-200">
             <DropdownMenuGroup className="px-0">
               <DropdownMenuItem
                 className="flex items-center gap-2 cursor-pointer hover:bg-primary hover:text-white"
@@ -169,40 +169,42 @@ function Topbar() {
           </DropdownMenuContent>
         </DropdownMenu>
       )}
-      {/* Cart Dropdown Menu */}
-      <MiniCart />
       {/* Notifications Dropdown Menu */}
       {user && (
-        <DropdownMenu>
-          <DropdownMenuTrigger className="focus-visible:outline-none">
-            <Button
-              type="button"
-              parent={true}
-              variant="ghost"
-              size="icon"
-              className="uppercase"
-            >
-              <GoBell className="text-2xl cursor-pointer text-primary_color" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-full mt-2 -translate-x-1 bg-white ring-1 ring-neutral-200">
-            <DropdownMenuLabel className="text-primary_color">
-              Notifications
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <div className="hover:bg-[#F2E3F4]">
-                  <p className="font-semibold">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry.
-                  </p>
-                  <p className="text-xs">10 Mins</p>
-                </div>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <>
+          {/* Cart Dropdown Menu */}
+          <MiniCart />
+          <DropdownMenu>
+            <DropdownMenuTrigger className="focus-visible:outline-none">
+              <Button
+                type="button"
+                parent={true}
+                variant="ghost"
+                size="icon"
+                className="uppercase"
+              >
+                <GoBell className="text-2xl cursor-pointer text-primary_color" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-full mt-2 -translate-x-1 bg-white ring-1 ring-neutral-200">
+              <DropdownMenuLabel className="text-primary_color">
+                Notifications
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem>
+                  <div className="hover:bg-[#F2E3F4]">
+                    <p className="font-semibold">
+                      Lorem Ipsum is simply dummy text of the printing and
+                      typesetting industry.
+                    </p>
+                    <p className="text-xs">10 Mins</p>
+                  </div>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </>
       )}
     </>
   );

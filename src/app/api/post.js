@@ -56,7 +56,7 @@ export const POST = {
       );
       return data;
     } catch (error) {
-      const { data } = error.response;
+      const { data } = error.response || { data: { message: 'Something Went Wrong!' } };
       formState && ((data?.code) && setFormState({ ...formState, loading: false, error: data?.message, ffew: 'wefwe' }));
       return data;
     }

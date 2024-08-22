@@ -22,18 +22,16 @@ import { Button } from "@/components";
 import QuickView from "@/components/global/QuickView";
 import Link from "next/link";
 
-function SingleService({ service }) {
-    const { salonName, service_title, salonImage, salonAddress, sale_price, price, duration, salonID, whtsup_link, facebook_link, twitter_link, instagram_link } = service || {};
-    const [isFavourite, setIsFavourite] = useState(false);
+function SingleService({ service, addToFavorite }) {
+    const { id, salonName, service_title, salonImage, salonAddress, sale_price, price, duration, salonID, whtsup_link, facebook_link, twitter_link, instagram_link, isFavourite } = service || {};
     return (
         <div className="relative w-full mb-2 space-y-4">
-            <div
-                onClick={() => setIsFavourite(!isFavourite)}
-                className={`absolute top-3 right-3 ${isFavourite ? "bg-red-500" : "bg-neutral-50"} rounded-full p-2 cursor-pointer`}
-            >
-                {isFavourite ? <RiHeartFill className="text-xl text-white" /> : <IoHeartOutline className="text-xl text-neutral-400" />}
-            </div>
             <div className="mx-1 overflow-hidden bg-white shadow-lg rounded-xl">
+                <div className={`absolute top-3 right-3 w-10 h-10 ${isFavourite ? "bg-red-500" : "bg-neutral-50"} rounded-full`}>
+                    {isFavourite
+                        ? <RiHeartFill className="w-full h-full p-2 text-white cursor-pointer" onClick={e => addToFavorite({ id, type: "remove" })} />
+                        : <IoHeartOutline className="w-full h-full p-2 cursor-pointer text-neutral-400" onClick={e => addToFavorite({ id, type: "add" })} />}
+                </div>
                 <Image
                     src={(salonImage && salonImage?.images) ? process.env.NEXT_PUBLIC_SERVERURL + salonImage?.images : "/static/images/spa_life.png"}
                     alt={service_title}

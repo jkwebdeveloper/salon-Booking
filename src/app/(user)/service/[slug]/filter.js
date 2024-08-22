@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import { Slider } from "@/components/ui/slider";
 import { useCategory } from '@/hooks';
+import { v4 } from 'uuid';
 
 const sortBy = [{
      value: 'recommended',
@@ -41,7 +42,7 @@ function Filter({ filter, setFilter }) {
                               <p>Sort by</p>
                          </AccordionTrigger>
                          {sortBy.map((sortByItem, index) => (
-                              <AccordionContent>
+                              <AccordionContent key={v4()}>
                                    <li class="w-full list-none">
                                         <div class="flex items-center">
                                              <input
@@ -83,11 +84,10 @@ function Filter({ filter, setFilter }) {
                     <AccordionItem value="item-3">
                          <AccordionTrigger asChild className="cursor-pointer">
                               Treatments
-                              {console.log(filter)}
                          </AccordionTrigger>
                          {!mainCat?.loading && mainCat.data?.map((navItem, index) => {
                               return (
-                                   <AccordionContent>
+                                   <AccordionContent key={v4()}>
                                         <li class="w-full list-none">
                                              <div class="flex items-center">
                                                   <input

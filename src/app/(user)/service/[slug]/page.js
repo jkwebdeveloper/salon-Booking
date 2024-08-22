@@ -1,60 +1,34 @@
 'use client';
-import { Herosection } from "@/components";
 import React, { useEffect } from "react";
-
-
-import PopularSalon from "@/components/user/Home/PopularSalon";
-import Vendor from "@/components/ui/cards/vendor";
 import { useRouter } from "next/navigation";
-import { GET } from "@/app/api/get";
+
+import { Herosection } from "@/components";
+import Vendor from "@/components/ui/cards/vendor";
 import Filter from "./filter";
-import { set } from "date-fns";
 import Spinner from "@/components/ui/spinner";
-import { POST } from "@/app/api/post";
+import FindNearByServices from "@/hooks/findnearbyservices";
 
 const ServiceListing = ({ searchParams, params }) => {
-  const router = useRouter();
-  const [salons, setSalons] = React.useState({ data: [], loading: true });
+  const [services, setServices, getNearByServices] = FindNearByServices();
   const [filter, setFilter] = React.useState({ categories: [], price: [], rating: 0 });
 
   const searchSalon = async ({ categories, page = 1, limit = 10 }) => {
+    let data = { ...searchParams };
     const formData = {
       "sort_by": "price_asc",
       "min_price": 10,
       "max_price": 3000,
-      "page": page,
-      "limit": limit
     };
-    searchParams?.date && (formData.date = searchParams.date);
-    searchParams?.time && (formData.time = searchParams.time);
-    searchParams?.lat && (formData.lat = searchParams.lat);
-    searchParams?.long && (formData.long = searchParams.long);
-    searchParams?.categories && (formData.categories = [searchParams.categories].map(cat => +cat));
-    searchParams?.search_terms && (formData.search_terms = searchParams.search_terms);
-    console.log('categories',);
-    categories && (formData.categories = categories.map(cat => +cat));
-
-    const resp = await POST.request({ url: '/find-near-by-services', form: formData, rawdata: true });
-    if (resp && resp?.code == 200) {
-      console.log(resp.data.listing);
-      setSalons({ data: resp.data.listing, loading: false });
-    } else {
-      setSalons({ data: [], loading: false });
-      console.log(resp);
+    if (data?.categories) {
+      (formData.categories = [data?.categories].map(cat => +cat));
+      delete data.categories
     }
+    categories && (formData.categories = categories.map(cat => +cat));
+    getNearByServices({ ...formData, ...data, page, limit });
   };
 
   useEffect(() => {
-    console.log(searchParams);
-    if (params && params?.slug == 'search') {
-      searchSalon({ page: 1, limit: 10 });
-    } else {
-      const findParams = { page: 1, limit: 10 };
-      if (params?.id) {
-        findParams.categories = [params.id];
-      }
-      searchSalon(findParams);
-    }
+    searchSalon({ page: 1, limit: 10, categories: params?.id ? [params?.id] : null });
   }, [params]);
 
   return (
@@ -68,12 +42,12 @@ const ServiceListing = ({ searchParams, params }) => {
           <Filter filter={filter} setFilter={setFilter} />
           <div className="md:w-4/5 w-[90%] mx-auto space-y-5 h-fit min-h-[350px]">
             <div className="grid items-center grid-cols-1 gap-4 xl:grid-cols-2">
-              {salons?.loading && <Spinner />}
-              {salons.data?.length ? salons.data.map((vendor, index) => {
+              {services?.loading && <Spinner />}
+              {services?.data?.listing ? services?.data?.listing.map((vendor, index) => {
                 return (
                   (vendor?.services?.length) ? <Vendor vendor={vendor} services={vendor?.services} /> : null
                 )
-              }) : !salons?.loading && <p className="text-lg text-gray-500 text-start">No salon found</p> || ''}
+              }) : !services?.loading && <p className="text-lg text-gray-500 text-start">No salon found</p> || ''}
             </div>
           </div>
         </div>

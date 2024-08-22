@@ -60,7 +60,7 @@ function MiniCart() {
                          <GrCart className="text-2xl cursor-pointer text-primary_color" />
                     </Button>
                </DropdownMenuTrigger>
-               <DropdownMenuContent onInteractOutside={e => setOpen(false)} className="w-full min-w-[200px] mt-2 -translate-x-1 bg-white ring-1 ring-neutral-200">
+               <DropdownMenuContent onInteractOutside={e => setOpen(false)} className="w-full min-w-[200px] z-[999] mt-2 -translate-x-1 bg-white ring-1 ring-neutral-200">
                     <DropdownMenuLabel className="text-primary_color">
                          My basket
                     </DropdownMenuLabel>
