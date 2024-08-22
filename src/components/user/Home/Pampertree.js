@@ -11,6 +11,7 @@ import {
 
 import SingleService from "@/components/ui/cards/singleservice";
 import { GET } from "@/app/api/get";
+import { POST } from "@/app/api/post";
 
 function Pampertree() {
   const [deals, setDeals] = useState([]);
@@ -21,8 +22,7 @@ function Pampertree() {
       "page": 1,
       "limit": 10
     }
-    const urlParams = new URLSearchParams(form).toString();
-    const resp = await GET.request({ url: `/find-near-by-services?` + urlParams });
+    const resp = await POST.request({ url: `/find-near-by-services`, form: form });
     if (resp && resp.code == 200) {
       setDeals(resp.data?.listing)
     }

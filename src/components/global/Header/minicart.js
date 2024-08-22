@@ -91,7 +91,7 @@ function MiniCart() {
                                    asChild
                                    onClick={e => setOpen(false)}
                               >
-                                   <Link href={"/details" + "/salon-name/" + cart?.vendors_info.id}>
+                                   <Link href={"/details" + cart?.vendors_info.id}>
                                         + Add more
                                    </Link>
                               </Button>

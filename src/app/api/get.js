@@ -3,7 +3,7 @@ import axios from "axios";
 let serverURL = process.env.NEXT_PUBLIC_APIURL;
 
 export const GET = {
-  request: async ({ url, token = "", method, params }) => {
+  request: async ({ url, token = "", method }) => {
     let requestHeader = {
       "Cache-Control": "no-cache",
       Pragma: "no-cache",
@@ -16,7 +16,7 @@ export const GET = {
       };
     }
     try {
-      const { data } = await axios.get(serverURL + url, { headers: requestHeader, params: params });
+      const { data } = await axios.get(serverURL + url, { headers: requestHeader });
       return data;
     } catch (error) {
       if (error?.response && error?.response?.data?.code === 401) {

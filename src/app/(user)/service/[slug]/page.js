@@ -10,6 +10,7 @@ import { GET } from "@/app/api/get";
 import Filter from "./filter";
 import { set } from "date-fns";
 import Spinner from "@/components/ui/spinner";
+import { POST } from "@/app/api/post";
 
 const ServiceListing = ({ searchParams, params }) => {
   const router = useRouter();
@@ -28,14 +29,12 @@ const ServiceListing = ({ searchParams, params }) => {
     searchParams?.time && (formData.time = searchParams.time);
     searchParams?.lat && (formData.lat = searchParams.lat);
     searchParams?.long && (formData.long = searchParams.long);
-    searchParams?.categories && (formData.categories = searchParams.categories);
+    searchParams?.categories && (formData.categories = [searchParams.categories].map(cat => +cat));
     searchParams?.search_terms && (formData.search_terms = searchParams.search_terms);
-    categories && (formData.categories = categories);
-    console.log(formData);
-    // formData.categories = `[${formData.categories.join(',')}]`;
+    console.log('categories',);
+    categories && (formData.categories = categories.map(cat => +cat));
 
-    // const urlParams = new URLSearchParams(formData).toString();
-    const resp = await GET.request({ url: '/find-near-by-services', params: formData });
+    const resp = await POST.request({ url: '/find-near-by-services', form: formData, rawdata: true });
     if (resp && resp?.code == 200) {
       console.log(resp.data.listing);
       setSalons({ data: resp.data.listing, loading: false });
